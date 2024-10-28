@@ -1,5 +1,5 @@
 ---
-title: "Paper Title Number 4"
+title: "Inclusive Business for Sustainable Development: A literature review"
 collection: publications
 category: conferences
 permalink: /publication/2024-02-17-paper-title-number-4
