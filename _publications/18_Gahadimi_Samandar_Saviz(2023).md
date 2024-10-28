@@ -1,17 +1,18 @@
 ---
-title: "Labour Market Landscape for Economics Graduates in Canada"
+title: "Grassroots Innovations and Innovators: The Case of Iran"
 collection: publications
 category: manuscripts
-permalink: /publication/2024-03-01-labour-market-landscape
-excerpt: 'Analysis of the job market for economics graduates in Canada.'
-date: 2025-03-01
-venue: 'Canadian Public Policy'
+permalink:  /publication/2023-innovation-iran
+excerpt: 'This paper examines grassroots innovations in Iran'
+date: 2023
+venue: 'Journal of Innovation and Development'
 slidesurl: ''
-paperurl: ''
-citation: 'Samandar Ali Eshtehardi, M.  "Labour Market Landscape for Economics Graduates in Canada." <i>Canadian Public Policy</i>, forthcomming March 2025.'
+paperurl: 'https://doi.org/10.1080/2157930X.2023.2233208'
+citation: 'Ghadimi, A., Samandar Ali Eshtehardi, M., Saviz, M., Mahdad, M. (2023). "Grassroots Innovations and Innovators: The Case of Iran." <i>Journal of Innovation and Development</i>. 1-24.'
 ---
 
-**Abstract**—This study investigates the demands and skill requirements within the Canadian job market for economics graduates, utilizing web scraping and Natural Language Processing (NLP) techniques. Key regional hubs identified are Ontario (Toronto), Quebec (Montreal), and Alberta (Calgary). Microsoft Office Suite, particularly Microsoft Excel, is the most prevalent software requirement. Beyond software, economics graduates are expected to have a wide range of technical skills, including data management, advanced modeling, programming (Python, SQL), and presentation/documentation (PowerPoint, report writing). Soft skills such as communication, teamwork, and analytical skills are also highly sought after, emphasizing the importance of collaboration and problem-solving in the field. These findings underscore the need for economics graduates to adapt their skill development to regional needs. Overall, this study provides actionable insights for stakeholders, including educators and policymakers, to align educational programs and workforce development strategies with the evolving demands of the Canadian job market.
+**ABSTRACT**
 
+Grassroots innovations (GIs) are considered alternative pathways of innovation that better match sustainable development goals. The study aims to better understand the nature of GIs in the context of a developing country, Iran. It introduces a novel dataset of GIs in Iran. It employs a descriptive analysis and K-mean cluster analysis on Multiple correspondence analysis (MCA) to investigate (1) the state of the art of GIs in the country, and if any patterns can be detected in the characteristics of GIs. The result indicates the majority of Iranian grassroots innovators are males living in urban areas. The provinces Fars and South-Khorasan accommodate together about 40% of the innovators, while Tehran (Iran’s capital) is ranked fourth after Hamadan Province. The study highlights the differences between the country’s GI and patent activities. The result of clustering analysis on MCA indicates the patterns of grassroots innovation in the context of Iran by detecting three clusters.
 
-**Keywords**— Economics Graduates, Job Web Scraping, Labor Market Analysis
+**KEYWORDS**: Grassroots innovationgrassroots innovatorsIranclustering analysismultiple correspondence analysis
