@@ -1,14 +1,19 @@
 ---
-title: "Paper Title Number 2"
+title: "Grassroots Innovations and Innovators: The Case of Iran"
 collection: publications
 category: manuscripts
-permalink: /publication/2010-10-01-paper-title-number-2
-excerpt: 'This paper is about the number 2. The number 3 is left for future work.'
-date: 2010-10-01
-venue: 'Journal 1'
-slidesurl: 'http://academicpages.github.io/files/slides2.pdf'
-paperurl: 'http://academicpages.github.io/files/paper2.pdf'
-citation: 'Your Name, You. (2010). &quot;Paper Title Number 2.&quot; <i>Journal 1</i>. 1(2).'
+permalink: /publication/2023-innovation-iran
+excerpt: 'This paper examines grassroots innovations in Iran..'
+date: 2023
+venue: 'Journal of Innovation and Development'
+slidesurl: ''
+paperurl: '[http://academicpages.github.io/files/paper2.pdf](https://doi.org/10.1080/2157930X.2023.2233208)'
+citation: 'Ghadimi, A., Samandar Ali Eshtehardi, M., Saviz, M., Mahdad, M. (2023). "Grassroots Innovations and Innovators: The Case of Iran." <i>Journal of Innovation and Development</i>. 1-24.'
 ---
 
-The contents above will be part of a list of publications, if the user clicks the link for the publication than the contents of section will be rendered as a full page, allowing you to provide more information about the paper for the reader. When publications are displayed as a single page, the contents of the above "citation" field will automatically be included below this section in a smaller font.
+**ABSTRACT**
+
+Grassroots innovations (GIs) are considered alternative pathways of innovation that better match sustainable development goals. The study aims to better understand the nature of GIs in the context of a developing country, Iran. It introduces a novel dataset of GIs in Iran. It employs a descriptive analysis and K-mean cluster analysis on Multiple correspondence analysis (MCA) to investigate (1) the state of the art of GIs in the country, and if any patterns can be detected in the characteristics of GIs. The result indicates the majority of Iranian grassroots innovators are males living in urban areas. The provinces Fars and South-Khorasan accommodate together about 40% of the innovators, while Tehran (Iran’s capital) is ranked fourth after Hamadan Province. The study highlights the differences between the country’s GI and patent activities. The result of clustering analysis on MCA indicates the patterns of grassroots innovation in the context of Iran by detecting three clusters.
+
+
+**KEYWORDS**: Grassroots innovationgrassroots innovatorsIranclustering analysismultiple correspondence analysis
