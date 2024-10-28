@@ -1,36 +1,130 @@
----
-layout: archive
-title: "Publications"
-permalink: /publications/
-author_profile: true
----
 
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-{% endif %}
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .publication {
+            margin-bottom: 20px;
+        }
+        .refereed-journal {
+            margin-bottom: 10px;
+        }
+        .author-bold {
+            font-weight: bold;
+        }
+        .journal-italic {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
 
-{% include base_path %}
+<div class="container">
+    <h1><a href="index.html" style="text-decoration: none; color: inherit;">Research Publications: </a></h1>
 
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
-      {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
-      {% include archive-single.html %}
-    {% endfor %}
-  {% endfor %}
-{% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
-  {% endfor %}
-{% endif %}
+    <h2>Chapters in Books</h2>
+    <div class="publication">
+        <div class="refereed-journal"><span class="title">Molazade, M</span>, <span class="author-bold">Samandar Ali Eshtehardi, M.</span>, <span class="title">Hafezi, R.</span> (2024) Sustainable Fashion and Circular Economy: Historical Trends and Future Orientations. In A. Stefanakis, & K. Tsagarakis, <span class="journal-italic">Circular Economy and Sustainable Development: a necessary nexus for a sustainable future</span>, Springer. <a href="https://link.springer.com/book/9783031660061#about-this-book">Link</a>.</div>
+    </div>
+
+    <h2>Articles in Refereed Journals</h2>
+    <div class="publication">
+        <div class="refereed-journal"><span class="author-bold">Samandar Ali Eshtehardi, M.</span>, Labour Market Landscape for Economics Graduates in Canada, <span class="journal-italic">Canadian Public Policy</span>, Forthcoming March 2024.</div>
+        <div class="refereed-journal"><span class="title">Ghadimi, A.</span>, <span class="author-bold">Samandar Ali Eshtehardi, M.</span>, <span class="title">Saviz, M.</span>, <span class="title">Mahdad, M.</span>, (2023) Grassroots Innovations and innovators: the case of Iran, <span class="journal-italic">Journal of Innovation and Development</span>, 1-24. DOI: <a href="https://doi.org/10.1080/2157930X.2023.2233208">https://doi.org/10.1080/2157930X.2023.2233208</a></div>
+
+
+        <div class="refereed-journal"><span class="author-bold">Samandar Ali Eshtehardi, M.</span>, <span class="title">Goodarzi, M.</span>, <span class="title">Ghorbani, M.H.</span>, (2022) Strategies to fulfil the mission of education in the entrepreneurial university: a framework synthesis and focus group study, Strategic Studies of Public Policy, 12(44), 108-162.(In Persian) DOI: <a href="https://doi.org/10.22034/SSPP.2022.556123.3233">10.22034/SSPP.2022.556123.3233</a>.</div>
+        <div class="refereed-journal"><span class="author-bold">Samandar Ali Eshtehardi, M.</span>, (2022) Structural-interpretative modelling of strategies for achieving the mission of education in an entrepreneurial and community-oriented university, <span class="journal-italic"> Quarterly Journal of Research and Planning in Higher Education</span>, 28(3), 33-64.(In Persian) DOI: <a href="https://journal.irphe.ac.ir/article_703054.html?lang=en">10.52547/IRPHE.28.2.33</a>.</div>
+
+        <div class="refereed-journal"><span class="title">Shahmoradi, B. </span>, <span class="title">Adineh A. </span>, <span class="author-bold">Samandar Ali Eshtehardi, M.</span>,  & <span class="title">Afshari Z.</span>(2022) Examine the complexity of Iran’s Petrochemical Industry and its Future Opportunities, <span class="journal-italic"> qjerp</span>, 29 (100) :255-288 (In Persian) DOI: <a href="http://qjerp.ir/article-1-2869-en.html">http://qjerp.ir/article-1-2869-en.html</a>.</div>
+
+        
+        <div class="refereed-journal"><span class="title">Bagheri, S. K.</span>, <span class="title">Goodarzi, M.</span>, <span class="author-bold">Samandar Ali Eshtehardi, M.</span>, (2021). Popularity of Patent Commercialization Policies: Iran as a Case, , <span class="journal-italic">World Patent Information</span>, 66. DOI: <a href="https://doi.org/10.1016/j.wpi.2021.102063">https://doi.org/10.1016/j.wpi.2021.102063</a></div>
+
+        <div class="refereed-journal"><span class="title">Bozorgi, S. H. R.</span>, <span class="author-bold">Samandar Ali Eshtehardi, M.</span>, & <span class="title">Lotfiheravi, M.</span> (2021). Innovative Marketing: A literature Review. , <span class="journal-italic">Popularization of Science</span>, 12(2), 107-136.(In Persian) DOI: <a href="https://doi.org/10.22034/popsci.2022.304368.1123">10.22034/popsci.2022.304368.1123</a>.</div>
+   
+        
+        <div class="refereed-journal"><span class="title">Azimi. N.,</span>, <span class="author-bold">Samandar Ali Eshtehardi, M.</span>, & <span class="title">FakhrMosavi, E.</span>. The Efficiency of the National Innovation System of Iran and Selected Countries, <span class="journal-italic">SQJER</span>, 21(2), pp. 117-149. (In Persian) DOI: <a href="http://ecor.modares.ac.ir/article-18-45954-en.html">http://ecor.modares.ac.ir/article-18-45954-en.html</a>.</div>
+
+        <div class="refereed-journal"><span class="title">Mansourifar, L.</span>, <span class="author-bold">Samandar Ali Eshtehardi, M.</span>,  (2021) Responsible Innovation: Characteristics, Challenges and Implementing Mechanisms, <span class="journal-italic">Rahyaft</span>, 31(1), 43-58 (In Persian) DOI: <a href="http://ecor.modares.ac.ir/article-18-45954-en.html">http://ecor.modares.ac.ir/article-18-45954-en.html</a>.</div>
+
+        <div class="refereed-journal"><span class="title">Shahmoradi, B. </span><span class="author-bold">Samandar Ali Eshtehardi, M.</span>, (2021). Identifying the development path of technological capabilities of Iran using economic complexity approach  , <span class="journal-italic"> Iranian Journal of Economic Research</span>,  26(86), 44-72. (In Persian) DOI: <a href="https://doi.org/10.22054/ijer.2020.41813.755"> doi: 10.22054/ijer.2020.41813.755</a>.</div>
+
+        <div class="refereed-journal"><span class="author-bold">Samandar Ali Eshtehardi, M.</span>, <span class="title">Goodarzi, M.</span>, (2021)  Awards to Entrepreneurship and Engagement in Higher Education  , <span class="journal-italic">Science and Technology Policy Letters</span>,11(4), 98-114 (In Persian) DOI: <a href="https://stpl.ristip.sharif.ir/article_22371.html?lang=en">20.1001.1.24767220.1400.11.4.5.9</a>.</div>
+
+        
+        <div class="refereed-journal"><span class="author-bold">Samandar Ali Eshtehardi, M.</span>, & <span class="title">Goodarzi, M.</span> (2020). Improving the Iranian Industrial Property System (IPS): A comparative case study of Iran and South Korea. , <span class="journal-italic">World Patent Information</span>, 63, 101991. DOI: <a href="https://doi.org/10.1016/j.wpi.2020.101991">10.1016/j.wpi.2020.101991</a></div>
+        <div class="refereed-journal"><span class="title">Janavi, E.</span>, <span class="title">Mansourzadeh, M. J.</span>, class="author-bold">Samandar Ali Eshtehardi, M.</span>. (2020). A methodology for developing scientific diversification strategy of countries.  , <span class="journal-italic">Scientometrics</span>, 1-36. DOI: <a href="https://doi.org/10.1007/s11192-020-03685-1">10.1007/s11192-020-03685-1</a></div>
+        
+        <div class="refereed-journal"><span class="title">Shahmoradi, B. </span>, <span class="author-bold">Samandar Ali Eshtehardi, M.</span>,  (2018)  Investigating the Status of Iran's Technological Competitiveness in the Region, Based on the Economic Complexity Approach, <span class="journal-italic"> Journal of Science & Technology Policy</span>, 10(1), 29-38. (In Persian)  URL: <a href="https://jstp.nrisp.ac.ir/article_13663.html">10.22034/jstp.2018.10.1.539421</a>.</div>
+
+        
+        <div class="refereed-journal"><span class="title">Bagheri, S.</span>; <span class="title">Raoufi, P.</span>; <span class="author-bold">Samandar Ali Eshtehardi, M.</span>; <span class="title">Shaverdy, S.</span>; <span class="title">Ramezani, B.</span> & <span class="title">Mardani, A.</span> (2018) Using the crowd for business model innovation: the case of Digikala  , <span class="journal-italic">The journal of R&D Management</span>, DOI: <a href="https://doi.org/10.1111/radm.12353">10.1111/radm.12353</a></div>
+        <div class="refereed-journal"><span class="author-bold">Samandar Ali Eshtehardi, M.</span>, <span class="title">Bagheri, S.K.</span> & <span class="title">Di Minin, A.</span> (2016). Regional Innovative Behaviour: Evidence from Iran , <span class="journal-italic"> Technological Forecasting & Social Change Journal</span>, DOI: <a href="https://doi.org/10.1016/J.TECHFORE.2016.02.011">10.1016/J.TECHFORE.2016.02.011</a></div>
+        <div class="refereed-journal"><span class="title">Bagheri, S. K.</span>; <span class="author-bold">Samandar Ali Eshtehardi, M.</span>. & <span class="title">Goodarzi, M.</span> (2015). Innovative activities in Iran: A first glance , <span class="journal-italic"> World Patent Information</span>, 42, 28-34. DOI: <a href="https://doi.org/10.1016/j.wpi.2015.05.003">10.1016/j.wpi.2015.05.003</a></div>
+
+        <div class="refereed-journal"><span class="title">Bagheri, S.</span>;  <span class="author-bold">Samandar Ali Eshtehardi, M.</span>; </span> (2013) An Analytical Look at the Geographically Distribution of Patented Inventions in Iran  , <span class="journal-italic">Journal of Science & Technology Policy</span>, Volume 5, Number 3. , DOI: <a href="http://jstp.nrisp.ac.ir/article_12878.html">http://jstp.nrisp.ac.ir/article_12878.html</a></div>
+
+
+        
+    </div>    
+
+
+    <h2>Working Paper</h2>
+    <div class="publication">
+        <div class="refereed-journal"><span class="title">Samandar Ali Eshtehardi, M.</span>,<span class="title">Bagheri, S.</span>;(2015) Gender Gap in Patenting Activities: Evidence from Iran (No. 2015/22), Laboratory of Economics and Management (LEM), Sant'Anna School of Advanced Studies, Pisa, Italy, 2015. Link: <a href="https://www.econstor.eu/handle/10419/119866">https://www.econstor.eu/handle/10419/119866</a></div>
+    </div>
+
+    <h2>Conference Presentation</h2>
+    <div class="publication">
+        <div class="refereed-journal"><span class="title">The 11th international and 15th national Conference on Management of Technology, 8th &9th December 2021. Article presented: Inclusive Business for Sustainable Development: A literature review, (With Goodarzi, Mehdi; Aziminejad, Zahra; Nikoudel, Moghan; Yousefi; Amiri, Fateme) </div>
+        <div class="refereed-journal"><span class="title">  The conference of science, Technology and Economic Complexity, 13 October 2020. Article Presented: Strategies to increase the efficiency of the national innovation system in the shadow of economic complexity: focusing on Iran, (With Azimi, N.)  </div>
+        <div class="refereed-journal"><span class="title">  The 3rd national conference of entrepreneurship, Sharif University, 7 January 2020, article presented:  The Governance and Leadership in Entrepreneurial University: Case of Iran. (With Goodarzi, M.; Ghorbani, M. & Fakhrmosavi, E.)  </div>
+        <div class="refereed-journal"><span class="title"> International Conference on Resilient Economy, Managing of Uncertainty and vulnerability- 13th December 2017 (Tehran, Iran) - article presented: What can Iran learn from the Asia's pioneers Industrial Property Systems? (With Goodarzi, M., Raghfar, H.)   </div>
+        <div class="refereed-journal"><span class="title"> Research Week, Economics Department of Allame Tabatabai University- 19 December 2016(Tehran, Iran) - article presented:  New digital markets and investment priorities in Iran (With Moshiri, S.)   </div>
+        <div class="refereed-journal"><span class="title"> The 6th International and 10th National Conference on Management of Technology- December 2016. (Tehran, Iran)- Article presented: Crowdsourcing for Business Model Innovation: The case of Digikala. (With Bagheri, S., Raoufi, P., M., Shaverdy, S., Ramezani, B., & Mardani, A.)   </div>
+        <div class="refereed-journal"><span class="title">  The 5th International and 9th National Conference on Management of Technology- 16th & 17th December, 2015 (Tehran, Iran) - article presented:  Iran's Economic, Knowledge and Technology Performance: A Comparative Analysis with the Regional Competitors, (with Goodarzi, M.)  </div>
+        <div class="refereed-journal"><span class="title">  A series of meetings on the status of resistance economy in Iranian cultural discourse- 29 December 2016- Speech Topic: Cultural Barriers Entrepreneurial Women in Resistance Economics.  </div>
+        <div class="refereed-journal"><span class="title">  The 5th international and 9th national Conference on Management of Technology- 16th & 17th December, 2015 (Tehran, Iran)- article presented: An Estimation of Regional Knowledge Production Function: Evidence from Iran. (With: Bagheri, S., & Di Minin, A.)  </div>
+        <div class="refereed-journal"><span class="title">  Mini-Workshop on Patents & Economic Development, 31 October 2013 (Pisa, Itay) - article presented: Geographical determinants of innovation: evidence from Iran. (With: Bagheri, S.K.)  </div>
+        <div class="refereed-journal"><span class="title">  Florence Workshop on Behavioural and Experimental Economics- May 2-3-4, 2013 (Florence, Italy).  </div>
+        
+    </div>
+</div>
+
+</body>
+</html>
 
 
 
