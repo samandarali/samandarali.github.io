@@ -8,7 +8,7 @@ modified: 2016-06-06
 {% include toc %}
 # Kaggle
 
-##[Health Conditions by Age Category](https://www.kaggle.com/code/mojgansamandar/health-conditions-by-age-category)
+## [Health Conditions by Age Category](https://www.kaggle.com/code/mojgansamandar/health-conditions-by-age-category)
 
 This award-winning notebook provides a detailed analysis of health conditions using Python, emphasizing comprehensive preprocessing, visualizations, and advanced dimensionality reduction techniques. The analysis categorizes health conditions, introducing a new variable to identify individuals without any diseases. It explores health condition distributions across age groups and uncovers patterns of co-occurrence among multiple diseases. Multiple Correspondence Analysis (MCA) is used to reveal relationships between health conditions and self-reported health statuses, with the resulting visualizations showcasing contributions of each condition to overall health perception. Custom-colored scatter plots enhance clarity in representing these associations, highlighting key conditions such as heart disease, diabetes, and depression, which correlate strongly with fair or poor health status, while conditions like cancer show a more neutral impact. This approach offers valuable insights for public health studies and decision-making, with associations captured through MCA contributing to a deeper understanding of complex health data.
 
