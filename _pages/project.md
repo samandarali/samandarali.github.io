@@ -10,6 +10,9 @@ modified: 2016-06-06
 
 ##[Health Conditions by Age Category](https://www.kaggle.com/code/mojgansamandar/health-conditions-by-age-category)
 
+This award-winning notebook provides a detailed analysis of health conditions using Python, emphasizing comprehensive preprocessing, visualizations, and advanced dimensionality reduction techniques. The analysis categorizes health conditions, introducing a new variable to identify individuals without any diseases. It explores health condition distributions across age groups and uncovers patterns of co-occurrence among multiple diseases. Multiple Correspondence Analysis (MCA) is used to reveal relationships between health conditions and self-reported health statuses, with the resulting visualizations showcasing contributions of each condition to overall health perception. Custom-colored scatter plots enhance clarity in representing these associations, highlighting key conditions such as heart disease, diabetes, and depression, which correlate strongly with fair or poor health status, while conditions like cancer show a more neutral impact. This approach offers valuable insights for public health studies and decision-making, with associations captured through MCA contributing to a deeper understanding of complex health data.
+
+
 
 ## [Predicting Property Sale Prices: A Lasso Regression Analysis](https://www.kaggle.com/code/mojgansamandar/predicting-property-sale-prices)
 This notebook focuses on predicting property sale prices in Ames by preprocessing data, encoding categorical features, and using a Lasso regression model. The data undergoes cleaning, including handling missing values and encoding ordinal variables based on quality ratings. Dummy variables are created to standardize categorical features across the training and test sets. The final model is trained on the processed data and used to predict property prices in the test set, generating results for submission.
