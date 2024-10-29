@@ -8,7 +8,7 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "Mojgan Samandar A. E. | Homepage" # / Site Title
+title                    : " Homepage" # / Site Title Mojgan Samandar A. E. | 
 title_separator          : "-"
 name                     : &name "Mojgan Samandar A. E."
 description              : &description "personal description"
