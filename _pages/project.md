@@ -7,24 +7,10 @@ modified: 2016-06-06
 {% include base_path %}
 {% include toc %}
 
-## Privacy Policy
+## [Predicting Property Sale Prices: A Lasso Regression Analysis](https://www.kaggle.com/code/mojgansamandar/predicting-property-sale-prices)
+This notebook focuses on predicting property sale prices in Ames by preprocessing data, encoding categorical features, and using a Lasso regression model. The data undergoes cleaning, including handling missing values and encoding ordinal variables based on quality ratings. Dummy variables are created to standardize categorical features across the training and test sets. The final model is trained on the processed data and used to predict property prices in the test set, generating results for submission.
 
-The privacy of my visitors is extremely important. This Privacy Policy outlines the types of personal information that is received and collected and how it is used.
 
-First and foremost, I will never share your email address or any other personal information to anyone without your direct consent.
-
-### Log Files
-
-Like many other websites, this site uses log files to help learn about when, from where, and how often traffic flows to this site. The information in these log files include:
-
-* Internet Protocol addresses (IP)
-* Types of browser
-* Internet Service Provider (ISP)
-* Date and time stamp
-* Referring and exit pages
-* Number of clicks
-
-All of this information is not linked to anything that is personally identifiable.
 
 ### Cookies and Web Beacons
 
