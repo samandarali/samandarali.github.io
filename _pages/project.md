@@ -16,6 +16,8 @@ This notebook focuses on predicting property sale prices in Ames by preprocessin
 ¶
 In this study, our objective is to investigate real estate prices in Canada for the year 2023. To achieve this, we utilize the "Housing Price & Real Estate - 2023" dataset, which can be found on Kaggle at this link. The dataset comprises {{ observation_count }} listings, encompassing eight key variables: Address, Price, Description, Place, Beds, Bath, Sq.Ft, and Website. We'll begin by exploring the dataset using univariate visualization techniques in part one, followed by multivariate analysis in part two.
 
+
+#R Shiny App
 ## [MySiontometrics App]()
 
 
