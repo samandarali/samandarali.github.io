@@ -6,7 +6,8 @@
 
 main:
   - title: "Publications"
-    url: /research/
+    url: /_pages/research.md/
+
 
   # - title: "Talks"
   #   url: /talks/    
