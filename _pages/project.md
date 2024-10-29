@@ -8,6 +8,9 @@ modified: 2016-06-06
 {% include toc %}
 # Kaggle
 
+##[Health Conditions by Age Category](https://www.kaggle.com/code/mojgansamandar/health-conditions-by-age-category)
+
+
 ## [Predicting Property Sale Prices: A Lasso Regression Analysis](https://www.kaggle.com/code/mojgansamandar/predicting-property-sale-prices)
 This notebook focuses on predicting property sale prices in Ames by preprocessing data, encoding categorical features, and using a Lasso regression model. The data undergoes cleaning, including handling missing values and encoding ordinal variables based on quality ratings. Dummy variables are created to standardize categorical features across the training and test sets. The final model is trained on the processed data and used to predict property prices in the test set, generating results for submission.
 
