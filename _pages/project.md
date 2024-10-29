@@ -1,5 +1,5 @@
 ---
-permalink: /terms/
+permalink: /project/
 title: "Terms and Privacy Policy"
 modified: 2016-06-06
 ---
