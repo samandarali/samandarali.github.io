@@ -15,8 +15,8 @@ main:
   - title: "Teaching"
     url: /Teaching_Supervision/    
     
-  - title: "Portfolio"
-    url: /portfolio/
+  # - title: "Portfolio"
+  #   url: /portfolio/
         
   # - title: "Blog Posts"
   #   url: /year-archive/
