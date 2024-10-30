@@ -46,7 +46,7 @@ redirect_from:
   
   Thesis: A solution for moral hazard in cooperative companies
   
-  Supervisor: [Hossein Raghfar] (https://www.linkedin.com/in/hossein-raghfar-71449254/)
+  Supervisor: [Hossein Raghfar](https://www.linkedin.com/in/hossein-raghfar-71449254/)
   
   Skills: Matlab, Game theory, Simulation.
 
