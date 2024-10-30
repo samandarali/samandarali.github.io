@@ -50,9 +50,9 @@ redirect_from:
   
    **skills**: Matlab, Game theory, Simulation.
 
-*	B.S.c in Business Economics,
+*	B.S.c in Business Economics,July 2003 (GPA:90)
   
-  **Allame Tabatabi Universiyt**, Tehran, Iran| July 2003 (GPA:90)
+  **Allame Tabatabi Universiyt**, Tehran, Iran
 
 Certificates
 ======
