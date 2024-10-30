@@ -19,7 +19,7 @@ Skills: Python, Microsoft Excel, JSON, NLM .
 *	Ph.D. in Economics
 Scuola Superiore Sant'Anna di Pisa, Pisa, Italy | May 2015
 Thesis: Essays in Economics of Innovation
-Supervisor: 
+Supervisor: (Alessandro Nuvolari)[https://www.santannapisa.it/en/alessandro-nuvolari]
 skills: Stata, R, QGIS, ,applied econometric models include spatial analysis, regression analysis, logit, and probit models.
 
 
