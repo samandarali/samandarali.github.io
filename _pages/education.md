@@ -39,7 +39,8 @@ Skills: Matlab, Game theory, Simulation.
 *	B.S.c in Business Economics, 
 Allame Tabatabi Universiyt, Tehran, Iran| July 2003 (GPA:90)
 
-**** Certifications
+Certificates
+======
 
 * Adapting Behavior in a Fundamentally Uncertain World, IMPRS Uncertainty School, Max Planck Institute of Economics, Jena, Germany, Jan 2011
 * Time Series Analysis, CIDE (Interuniversity Centre of Econometrics), University of Torino, Bertinoro, Italy, Jan 2012
