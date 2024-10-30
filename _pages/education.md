@@ -23,11 +23,11 @@ Trent University , Peterborough, Canada May 2024 (GPA: 91.33)
   
   Scuola Superiore Sant'Anna di Pisa, Pisa, Italy , May 2015
 
-  Thesis: Essays in Economics of Innovation
+  **Thesis**: Essays in Economics of Innovation
  	
-  Supervisor: [Alessandro Nuvolari](https://www.santannapisa.it/en/alessandro-nuvolari)
+  **Supervisor**: [Alessandro Nuvolari](https://www.santannapisa.it/en/alessandro-nuvolari)
   
-  skills: Stata, R, QGIS, ,applied econometric models include spatial analysis, regression analysis, logit, and probit models.
+  **skills**: Stata, R, QGIS, ,applied econometric models include spatial analysis, regression analysis, logit, and probit models.
 
 
 ###	M.Sc. in Industrial Economics
