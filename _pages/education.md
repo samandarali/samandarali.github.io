@@ -11,7 +11,7 @@ redirect_from:
 
 ****
 
-##	M.Sc. in Big Data Analytics,
+###	M.Sc. in Big Data Analytics,
 
 Trent University , Peterborough, Canada May 2024 (GPA: 91.33)   
  	
@@ -19,7 +19,7 @@ Trent University , Peterborough, Canada May 2024 (GPA: 91.33)
   
   Skills: Python, Microsoft Excel, JSON, NLM .
 
-##	Ph.D. in Economics
+###	Ph.D. in Economics
   
   Scuola Superiore Sant'Anna di Pisa, Pisa, Italy , May 2015
 
@@ -30,7 +30,7 @@ Trent University , Peterborough, Canada May 2024 (GPA: 91.33)
   skills: Stata, R, QGIS, ,applied econometric models include spatial analysis, regression analysis, logit, and probit models.
 
 
-##	M.Sc. in Industrial Economics
+###	M.Sc. in Industrial Economics
   
   Gothenburg University, Gothenburg, Sweden , May 2011 (GPA: 95)
   
@@ -41,19 +41,20 @@ Trent University , Peterborough, Canada May 2024 (GPA: 91.33)
    skills: Stata, Finance, Performance Analysis, Panel Data, Logit and Probit Model.
 
 
-*	M.Sc. in Economics, Dec 2006 (GPA: 83.85)
+###	M.Sc. in Economics
   
-  **Alzahra University**, Tehran, Iran
+  Alzahra University, Tehran, Iran, Dec 2006 (GPA: 83.85)
   
-  **Thesis**: A solution for moral hazard in cooperative companies
+  Thesis: A solution for moral hazard in cooperative companies
   
-  **Supervisor**: [Hossein Raghfar](https://www.linkedin.com/in/hossein-raghfar-71449254/)
+  Supervisor: [Hossein Raghfar](https://www.linkedin.com/in/hossein-raghfar-71449254/)
   
-   **skills**: Matlab, Game theory, Simulation.
+   skills: Matlab, Game theory, Simulation.
+   
 
-*	B.S.c in Business Economics,July 2003 (GPA:90)
+###	B.S.c in Business Economics
   
-  **Allame Tabatabi Universiyt**, Tehran, Iran
+  Allame Tabatabi Universiyt, Tehran, Iran,July 2003 (GPA:90)
 
 Certificates
 ======
