@@ -12,7 +12,7 @@ redirect_from:
 ****
 
 *	M.Sc. in Big Data Analytics,
-*	
+  
   Trent University, Peterborough, Canada | May 2024 (GPA: 91.33)
  	
   Project: Labor Market Landscape for Economics Graduates in Canada
