@@ -11,16 +11,16 @@ redirect_from:
 
 ****
 
-*	M.Sc. in Big Data Analytics,
+*	M.Sc. in Big Data Analytics,| May 2024 (GPA: 91.33)
   
-  Trent University, Peterborough, Canada | May 2024 (GPA: 91.33)
+  Trent University, Peterborough, Canada 
  	
   Project: Labor Market Landscape for Economics Graduates in Canada
   
   Skills: Python, Microsoft Excel, JSON, NLM .
 
-*	Ph.D. in Economics
-  Scuola Superiore Sant'Anna di Pisa, Pisa, Italy | May 2015
+*	Ph.D. in Economics| May 2015
+  Scuola Superiore Sant'Anna di Pisa, Pisa, Italy 
 
   Thesis: Essays in Economics of Innovation
  	
@@ -29,9 +29,9 @@ redirect_from:
   skills: Stata, R, QGIS, ,applied econometric models include spatial analysis, regression analysis, logit, and probit models.
 
 
-*	M.Sc. in Industrial Economics
+*	M.Sc. in Industrial Economics| May 2011 (GPA: 95)
   
-  Gothenburg University, Gothenburg, Sweden | May 2011 (GPA: 95)
+  Gothenburg University, Gothenburg, Sweden 
   
   Thesis: Corporate Governance and Default Risk
   
@@ -40,9 +40,9 @@ redirect_from:
   skills: Stata, Finance, Performance Analysis, Panel Data, Logit and Probit Model.
 
 
-*	M.Sc. in Economics,
+*	M.Sc. in Economics,| Dec 2006 (GPA: 83.85)
   
-  Alzahra University, Tehran, Iran| Dec 2006 (GPA: 83.85)
+  Alzahra University, Tehran, Iran
   
   Thesis: A solution for moral hazard in cooperative companies
   
