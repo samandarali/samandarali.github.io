@@ -15,6 +15,7 @@ redirect_from:
 
 Trent University , Peterborough, Canada May 2024 (GPA: 91.33)   
 **Project**: Labor Market Landscape for Economics Graduates in Canada
+
 **Skills**: Python, Microsoft Excel, JSON, NLM .
 
 ###	Ph.D. in Economics
