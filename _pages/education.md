@@ -11,7 +11,7 @@ redirect_from:
 
 ****
 
-*	M.Sc. in Big Data Analytics,| May 2024 (GPA: 91.33)
+*	M.Sc. in Big Data Analytics, May 2024 (GPA: 91.33)
   
   Trent University, Peterborough, Canada 
  	
@@ -19,7 +19,7 @@ redirect_from:
   
   Skills: Python, Microsoft Excel, JSON, NLM .
 
-*	Ph.D. in Economics| May 2015
+*	Ph.D. in Economics, May 2015
   Scuola Superiore Sant'Anna di Pisa, Pisa, Italy 
 
   Thesis: Essays in Economics of Innovation
@@ -29,7 +29,7 @@ redirect_from:
   skills: Stata, R, QGIS, ,applied econometric models include spatial analysis, regression analysis, logit, and probit models.
 
 
-*	M.Sc. in Industrial Economics| May 2011 (GPA: 95)
+*	M.Sc. in Industrial Economics, May 2011 (GPA: 95)
   
   Gothenburg University, Gothenburg, Sweden 
   
@@ -40,7 +40,7 @@ redirect_from:
   skills: Stata, Finance, Performance Analysis, Panel Data, Logit and Probit Model.
 
 
-*	M.Sc. in Economics,| Dec 2006 (GPA: 83.85)
+*	M.Sc. in Economics, Dec 2006 (GPA: 83.85)
   
   Alzahra University, Tehran, Iran
   
