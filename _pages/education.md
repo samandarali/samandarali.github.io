@@ -9,14 +9,38 @@ redirect_from:
 
 {% include base_path %}
 
+****
 
-* Ph.D in Economics, Scuola Superiore Sant'Anna, 2015
+*	M.Sc. in Big Data Analytics, 
+Trent University, Peterborough, Canada | May 2024 (GPA: 91.33)
+Project: Labor Market Landscape for Economics Graduates in Canada
+Skills: Python, Microsoft Excel, JSON, NLM .
 
-  
-* M.S. in Big Data Anlyatics, Trent University, 2024
+*	Ph.D. in Economics
+Scuola Superiore Sant'Anna di Pisa, Pisa, Italy | May 2015
+Thesis: Essays in Economics of Innovation
+Supervisor: 
+skills: Stata, R, QGIS, ,applied econometric models include spatial analysis, regression analysis, logit, and probit models.
 
-  
-* M.S. in Industrial Economics, Gothenburg University, 2011
 
-  
-* B.S. in Business Economics, Allameh Tabataba'i University
+*	M.Sc. in Industrial Economics
+Gothenburg University, Gothenburg, Sweden | May 2011 
+Thesis: Corporate Governance and Default Risk
+Supervisor: (Martin Holmén)[https://www.gu.se/en/about/find-staff/martinholmen]
+skills: Stata, Finance, Performance Analysis, Panel Data, Logit and Probit Model.
+
+
+*	M.Sc. in Economics, 
+Alzahra University, Tehran, Iran| Dec 2006 (GPA: 83.85)
+Thesis: A solution for moral hazard in cooperative companies
+Skills: Matlab, Game theory, Simulation.
+
+*	B.S.c in Business Economics, 
+Allame Tabatabi Universiyt, Tehran, Iran| July 2003 (GPA:)
+
+**** Certifications
+
+* Adapting Behavior in a Fundamentally Uncertain World, IMPRS Uncertainty School, Max Planck Institute of Economics, Jena, Germany, Jan 2011
+* Time Series Analysis, CIDE (Interuniversity Centre of Econometrics), University of Torino, Bertinoro, Italy, Jan 2012
+* Advanced Patent Course, World Intellectual Property Organization (WIPO), April 2022
+* Specialized Course on the Essentials of Patents, World Intellectual Property Organization (WIPO), March 2022
