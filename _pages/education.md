@@ -33,10 +33,11 @@ skills: Stata, Finance, Performance Analysis, Panel Data, Logit and Probit Model
 *	M.Sc. in Economics, 
 Alzahra University, Tehran, Iran| Dec 2006 (GPA: 83.85)
 Thesis: A solution for moral hazard in cooperative companies
+Supervisor: Hossein Raghfar [https://www.linkedin.com/in/hossein-raghfar-71449254/]
 Skills: Matlab, Game theory, Simulation.
 
 *	B.S.c in Business Economics, 
-Allame Tabatabi Universiyt, Tehran, Iran| July 2003 (GPA:)
+Allame Tabatabi Universiyt, Tehran, Iran| July 2003 (GPA:90)
 
 **** Certifications
 
