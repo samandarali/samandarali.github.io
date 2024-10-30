@@ -13,7 +13,7 @@ redirect_from:
 
 ###	M.Sc. in Big Data Analytics,
 
-Trent University , Peterborough, Canada May 2024 (GPA: 91.33)<br>   
+Trent University , Peterborough, Canada May 2024 (GPA: 91.33)<br>
 **Project**: Labor Market Landscape for Economics Graduates in Canada<br>
 **Skills**: Python, Microsoft Excel, JSON, NLM .<br>
 
