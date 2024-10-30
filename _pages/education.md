@@ -43,7 +43,7 @@ Trent University , Peterborough, Canada May 2024 (GPA: 91.33)<br>
 
 ###	B.S.c in Business Economics
 
-    Allame Tabatabi Universiyt, Tehran, Iran,July 2003 (GPA:90)<br>
+  Allame Tabatabi Universiyt, Tehran, Iran, July 2003 (GPA:90)
 
 Certificates
 ======
