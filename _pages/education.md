@@ -13,46 +13,46 @@ redirect_from:
 
 *	M.Sc. in Big Data Analytics, May 2024 (GPA: 91.33)
   
-  Trent University, Peterborough, Canada 
+  **Trent University**, Peterborough, Canada 
  	
-  Project: Labor Market Landscape for Economics Graduates in Canada
+  **Project**: Labor Market Landscape for Economics Graduates in Canada
   
   Skills: Python, Microsoft Excel, JSON, NLM .
 
 *	Ph.D. in Economics, May 2015
-  Scuola Superiore Sant'Anna di Pisa, Pisa, Italy 
+  **Scuola Superiore Sant'Anna di Pisa**, Pisa, Italy 
 
-  Thesis: Essays in Economics of Innovation
+  **Thesis**: Essays in Economics of Innovation
  	
-  Supervisor: [Alessandro Nuvolari](https://www.santannapisa.it/en/alessandro-nuvolari)
+  **Supervisor**: [Alessandro Nuvolari](https://www.santannapisa.it/en/alessandro-nuvolari)
   
-  skills: Stata, R, QGIS, ,applied econometric models include spatial analysis, regression analysis, logit, and probit models.
+  **skills**: Stata, R, QGIS, ,applied econometric models include spatial analysis, regression analysis, logit, and probit models.
 
 
 *	M.Sc. in Industrial Economics, May 2011 (GPA: 95)
   
-  Gothenburg University, Gothenburg, Sweden 
+  **Gothenburg University**, Gothenburg, Sweden 
   
-  Thesis: Corporate Governance and Default Risk
+  **Thesis**: Corporate Governance and Default Risk
   
-  Supervisor: [Martin Holmén](https://www.gu.se/en/about/find-staff/martinholmen)
+  **Supervisor**: [Martin Holmén](https://www.gu.se/en/about/find-staff/martinholmen)
   
-  skills: Stata, Finance, Performance Analysis, Panel Data, Logit and Probit Model.
+   **skills**: Stata, Finance, Performance Analysis, Panel Data, Logit and Probit Model.
 
 
 *	M.Sc. in Economics, Dec 2006 (GPA: 83.85)
   
-  Alzahra University, Tehran, Iran
+  **Alzahra University**, Tehran, Iran
   
-  Thesis: A solution for moral hazard in cooperative companies
+  **Thesis**: A solution for moral hazard in cooperative companies
   
-  Supervisor: [Hossein Raghfar](https://www.linkedin.com/in/hossein-raghfar-71449254/)
+  **Supervisor**: [Hossein Raghfar](https://www.linkedin.com/in/hossein-raghfar-71449254/)
   
-  Skills: Matlab, Game theory, Simulation.
+   **skills**: Matlab, Game theory, Simulation.
 
 *	B.S.c in Business Economics,
   
-  Allame Tabatabi Universiyt, Tehran, Iran| July 2003 (GPA:90)
+  **Allame Tabatabi Universiyt**, Tehran, Iran| July 2003 (GPA:90)
 
 Certificates
 ======
