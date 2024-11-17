@@ -1,3 +1,5 @@
+
+
 ---
 title: "Regional innovative behavior"
 excerpt: "Regional innovative behavior.<br/><img src='/images/Regional.png'>"
