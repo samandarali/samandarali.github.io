@@ -5,4 +5,4 @@ collection: portfolio
 ---
 
 
-https://www.kaggle.com/code/mojgansamandar/exploratory-data-analysis-1
+[link](https://www.kaggle.com/code/mojgansamandar/exploratory-data-analysis-1)
