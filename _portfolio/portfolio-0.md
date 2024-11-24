@@ -108,6 +108,8 @@ The center heat map represents the number of jobs in each province. The top-righ
 **Figure 7.** Network Analysis of Soft Skills
 
 
+
+<img src="/images/Canada/Canada1.png" alt="">
 **Figure 8.** Network Analysis of Technical Skills
 
 <img src="/images/Canada1.png" alt="">
