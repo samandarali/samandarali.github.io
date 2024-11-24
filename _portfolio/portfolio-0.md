@@ -1,6 +1,6 @@
 ---
 title: "Labour Market Landscape for Economics Graduates in Canada"
-excerpt: "The 'Labour Market Landscape for Economics Graduates in Canada' project provides an in-depth analysis of job market trends, skill requirements, and regional variations for economics graduates, utilizing Web Scraping, advanced data analysis and network metrics.<br/><img src='/images/Canada/Picture1.jpg'>"
+excerpt: "The 'Labour Market Landscape for Economics Graduates in Canada' project provides an in-depth analysis of job market trends, skill requirements, and regional variations for economics graduates, utilizing Web Scraping, advanced data analysis and network metrics.<br/><img src='/images/Canada/Canada1.png'>"
 collection: portfolio
 ---
 
@@ -112,7 +112,7 @@ The center heat map represents the number of jobs in each province. The top-righ
 <img src="/images/Canada/Canada1.png" alt="">
 **Figure 8.** Network Analysis of Technical Skills
 
-<img src="/images/Canada1.png" alt="">
+<img src="images/Canada/Canada1.png" alt="">
 **Figure 9.** Most requested softwares and platforms
 
 # Citation
