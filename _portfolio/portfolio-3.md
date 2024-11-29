@@ -12,7 +12,7 @@ collection: portfolio
 
 You can access to the application [here](https://mojgansamandar.shinyapps.io/MyScientometrics05/)
 
-This appuses bibometrics library. you can have access to the code [here]()
+This appuses bibometrics library. you can have access to the code [here](https://github.com/samandarali/MyScientometrics03)
 
 # Purpose: 
 
@@ -36,6 +36,10 @@ Therefore, the only part that required time is to get the data from Web of Scien
 
 
 3)	Merge the data by copying and pasting the contents of each downloaded file into a new file, one after the other. Once the files are merged, the resulting file can be uploaded to MyScientometrics for analysis.
+
+
+You can click on Use Sample Dataset for loading the analysis for a sample data.
+
 
 ## citation:
 
