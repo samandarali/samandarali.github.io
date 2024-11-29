@@ -13,7 +13,7 @@ In this analysis, I applied descriptive analysis, association analysis, and mult
 The results revealed several interesting findings:
 
 
-
+- Depression becomes less significant compared to other diseases as individuals age.
 - A perception of being in good, very good, or even excellent health does not necessarily mean the absence of disease.
 
 - Individuals with heart disease, diabetes, or depression are significantly more likely to report their health as poor or fair.
