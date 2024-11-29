@@ -33,6 +33,8 @@ Therefore, the only part that required time is to get the data from Web of Scien
   <img src='/images/MyScientometrics/WOS1.png'>
   <img src='/images/MyScientometrics/WOS2.png'>
   <img src='/images/MyScientometrics/WOS3.png'>
+
+
 3)	Merge the data by copying and pasting the contents of each downloaded file into a new file, one after the other. Once the files are merged, the resulting file can be uploaded to MyScientometrics for analysis.
 
 ## citation:
