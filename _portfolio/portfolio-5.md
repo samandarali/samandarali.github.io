@@ -6,7 +6,7 @@ collection: portfolio
 [Link](https://www.kaggle.com/code/mojgansamandar/health-conditions-by-age-category)
 
 
-In this analysis, I used association analysis and multiple correspondence analysis (MCA) to explore whether health perception is associated with various diseases such as heart disease, skin cancer, other cancers, depression, diabetes, arthritis, or no disease. Health perception refers to individuals' responses to the question: "Would you say that, in general, your health is poor, fair, good, very good, or excellent?"
+In this analysis, I applied descriptive analysis, association analysis, and multiple correspondence analysis (MCA) to investigate whether health perception is associated with various diseases, including heart disease, skin cancer, other cancers, depression, diabetes, arthritis, or the absence of disease. Health perception refers to individuals' responses to the question: "Would you say that, in general, your health is poor, fair, good, very good, or excellent?"
 
 
 
