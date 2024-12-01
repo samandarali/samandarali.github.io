@@ -28,9 +28,9 @@ The results revealed several interesting findings:
 
 
 
-<img src='images/health/2.png' alt="">
+<img src='/images/health/2.png' alt="">
 
-<img src='images/health/3.png' alt="">
+<img src='/images/health/3.png' alt="">
 
 
-<img src='images/health/4.png' alt="">
+<img src='/images/health/4.png' alt="">
