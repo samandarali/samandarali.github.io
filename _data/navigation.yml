@@ -22,7 +22,7 @@ main:
     url: /teaching/    
     
   - title: "Workshop and Seminar Design"
-  url: /Workshop/
+    url: /Workshop/
         
   # - title: "Blog Posts"
   #   url: /year-archive/
