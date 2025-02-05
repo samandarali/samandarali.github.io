@@ -21,7 +21,7 @@ repository               : "samandarali/samandarali.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "images/Samandar Ali Eshtehardi-Mojgan-PR photo.jpg"      #"your-picture-url.jpg.JPG" #"profile.png"
+  avatar           : "Samandar Ali Eshtehardi-Mojgan-PR photo.jpg"      #"your-picture-url.jpg.JPG" #"profile.png"
   name             : "Mojgan Samandar A. E."
   pronouns         : # example: "she/her"  
   bio              : "Ph.D. in Economics | M.Sc. in Big Data Analytics | Research Economist | Data Analytics"
