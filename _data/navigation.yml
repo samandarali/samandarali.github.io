@@ -30,8 +30,8 @@ main:
   - title: "CV"
     url: /files/Resume.pdf
 
-  - title: "Portfolio"
-    url: /portfolio/
+  # - title: "Portfolio"
+  #   url: /portfolio/
     
-  - title: "Projects and Code"
-    url: /projects/
+  # - title: "Projects and Code"
+  #   url: /projects/
