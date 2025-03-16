@@ -47,7 +47,11 @@ Trent University , Peterborough, Canada May 2024 (GPA: 91.33)<br>
 
 Certificates
 ======
-
+* Scala and Spark for Big Data and Machine Learning – Udemy
+* The Complete SQL Bootcamp| 101 Practice SQL Questions: Basic to Advanced – Udemy
+* Introduction to Cloud Computing on AWS – Udemy
+* Microsoft Power BI for Business Intelligence – Udemy
+* The Complete JavaScript Course 2025: From Zero to Expert!- Udemy
 * Adapting Behavior in a Fundamentally Uncertain World, IMPRS Uncertainty School, Max Planck Institute of Economics, Jena, Germany, Jan 2011
 * Time Series Analysis, CIDE (Interuniversity Centre of Econometrics), University of Torino, Bertinoro, Italy, Jan 2012
 * Advanced Patent Course, World Intellectual Property Organization (WIPO), April 2022
