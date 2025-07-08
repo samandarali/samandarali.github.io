@@ -48,7 +48,8 @@ Trent University , Peterborough, Canada May 2024 (GPA: 91.33)<br>
 Certificates
 ======
 * Scala and Spark for Big Data and Machine Learning – Udemy
-* The Complete SQL Bootcamp| 101 Practice SQL Questions: Basic to Advanced – Udemy
+* The Complete SQL Bootcamp
+* 101 Practice SQL Questions: Basic to Advanced – Udemy
 * Introduction to Cloud Computing on AWS – Udemy
 * Microsoft Power BI for Business Intelligence – Udemy
 * The Complete JavaScript Course 2025: From Zero to Expert!- Udemy
