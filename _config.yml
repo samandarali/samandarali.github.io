@@ -6,7 +6,6 @@ title_separator: "|"
 name: &name "Mojgan Samandar A. E."
 description: &description "Ph.D. Economist | Big Data Analyst | Researcher | Policy & BI Consultant"
 url: "https://samandarali.github.io"
-baseurl: ""
 repository: "samandarali/samandarali.github.io"
 
 # Author Info
