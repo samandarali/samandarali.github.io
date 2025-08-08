@@ -10,5 +10,5 @@ redirect_from:
 
 
 
-![Editing a markdown file for a talk](/images/bio.jpeg)
+![Editing a markdown file for a talk](/images/bio.png)
 
