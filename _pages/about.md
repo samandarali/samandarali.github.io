@@ -4,7 +4,7 @@ permalink: /
 layout: single
 author_profile: true
 ---
-<img src="images/Samandar%20Ali%20Eshtehardi-Mojgan-PR%20photo%20%282%29.jpg" alt="Profile context photo" style="float:right; width:280px; margin:0 0 1rem 1rem;">
+<img src="images/mypic" alt="Profile context photo" style="float:right; width:280px; margin:0 0 1rem 1rem;">
 
 
 # Mojgan Samandar A. E.  
