@@ -1,1 +1,0 @@
-# samandarali.github.io
