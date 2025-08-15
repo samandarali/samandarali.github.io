@@ -18,3 +18,4 @@ Ontario, Canada
 - **LinkedIn:** [mojgan-samandar](https://linkedin.com/in/mojgan-samandar)
 
 Welcome! I’m an economist and data analyst focusing on policy evaluation, BI, and large-scale analytics. This site collects my work, teaching, and publications.
+![Editing a markdown file for a talk](/images/bio.png)
