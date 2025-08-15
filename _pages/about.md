@@ -5,7 +5,7 @@ layout: single
 author_profile: true
 ---
 
-<img src="/images/YOUR-RIGHT-SIDE-IMAGE.jpg" alt="Profile context photo" style="float:right; width:280px; margin:0 0 1rem 1rem;">
+<img src="images/Samandar Ali Eshtehardi-Mojgan-PR photo (2).jpg" alt="Profile context photo" style="float:right; width:280px; margin:0 0 1rem 1rem;">
 
 # Mojgan Samandar A. E.  
 _Ph.D. Economist · Big Data Analyst · Researcher · Policy & BI Consultant_
