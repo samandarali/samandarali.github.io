@@ -205,9 +205,29 @@
             };
         
             // Player control
-            canvas.addEventListener('mousemove', (event) => {
-                const rect = canvas.getBoundingClientRect();
-                const mouseY = event.c
-        
-        </body>
-        </html>
+                canvas.addEventListener('mousemove', (event) => {
+                    const rect = canvas.getBoundingClientRect();
+                    const mouseY = event.clientY - rect.top;
+                    const normalizedY = (mouseY / rect.height) * 2 - 1;
+                    paddle1.position.y = -normalizedY * (gameHeight/2 - 7.5);
+                });
+            
+                // Handle resize
+                const handleResize = () => {
+                    const width = canvas.clientWidth;
+                    const height = canvas.clientHeight;
+                    renderer.setSize(width, height);
+                    camera.left = -gameWidth/2;
+                    camera.right = gameWidth/2;
+                    camera.top = gameHeight/2;
+                    camera.bottom = -gameHeight/2;
+                    camera.updateProjectionMatrix();
+                };
+                window.addEventListener('resize', handleResize);
+            
+                // Initialize game
+                setupScene();
+                handleResize();
+                animate();
+            });
+            </script>
