@@ -101,11 +101,13 @@
                         build for fun.</p>
                 </div>
                 <div class="image-div">
-                    <img src="MyPhoto3.png" class="w-full h-full object-cover rounded-xl">
+                    <img src="images/MyPhoto3.png" class="w-full h-full object-cover rounded-xl">
                 </div>
             </div>
         </div>
 
+
+        
 
         <!-- Projects -->
         <section id="content-projects" class="tab-content hidden">
@@ -141,15 +143,19 @@
                     <span
                         class="inline-block bg-teal-100 text-teal-600 text-sm font-semibold py-1 px-3 rounded-full">Skills:
                         Econometrics, Stata, R</span>
+                    <a href="projects.html" target="_blank"
+                        class="inline-block bg-teal-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-teal-700 transition">
+                        View Projects &rarr;
+                    </a>
                 </div>
             </div>
 
             <!-- Pong Demo -->
-            <div class="mt-12 bg-white p-8 shadow-xl rounded-xl border border-gray-200">
+            <!-- <div class="mt-12 bg-white p-8 shadow-xl rounded-xl border border-gray-200">
                 <h3 class="text-2xl font-bold mb-4 text-gray-800">Quick Demo: Play Pong!</h3>
                 <p class="text-gray-600 mb-6">A simple interactive Pong game embedded directly in the page.</p>
                 <canvas id="pongCanvas" class="w-full h-96 rounded-lg shadow-inner bg-gray-900"></canvas>
-            </div>
+            </div> -->
         </section>
 
 
@@ -223,89 +229,89 @@
         // Load About tab by default
         switchTab('content-about');
 
-        // Pong Game Setup
-        function setupPong() {
-            const canvas = document.getElementById('pongCanvas');
-            const scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x111827);
-            const gameWidth = 100, gameHeight = 60;
-            const camera = new THREE.OrthographicCamera(-gameWidth / 2, gameWidth / 2, gameHeight / 2, -gameHeight / 2, 1, 1000);
-            camera.position.z = 5;
-            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        // // Pong Game Setup
+        // function setupPong() {
+        //     const canvas = document.getElementById('pongCanvas');
+        //     const scene = new THREE.Scene();
+        //     scene.background = new THREE.Color(0x111827);
+        //     const gameWidth = 100, gameHeight = 60;
+        //     const camera = new THREE.OrthographicCamera(-gameWidth / 2, gameWidth / 2, gameHeight / 2, -gameHeight / 2, 1, 1000);
+        //     camera.position.z = 5;
+        //     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+        //     renderer.setSize(canvas.clientWidth, canvas.clientHeight);
 
-            // Paddles
-            const paddleGeom = new THREE.BoxGeometry(4, 15, 1);
-            const paddleMat = new THREE.MeshBasicMaterial({ color: 0x8b5cf6 });
-            const paddle1 = new THREE.Mesh(paddleGeom, paddleMat);
-            const paddle2 = new THREE.Mesh(paddleGeom, paddleMat);
-            paddle1.position.set(-gameWidth / 2 + 5, 0, 0);
-            paddle2.position.set(gameWidth / 2 - 5, 0, 0);
-            scene.add(paddle1, paddle2);
+        //     // Paddles
+        //     const paddleGeom = new THREE.BoxGeometry(4, 15, 1);
+        //     const paddleMat = new THREE.MeshBasicMaterial({ color: 0x8b5cf6 });
+        //     const paddle1 = new THREE.Mesh(paddleGeom, paddleMat);
+        //     const paddle2 = new THREE.Mesh(paddleGeom, paddleMat);
+        //     paddle1.position.set(-gameWidth / 2 + 5, 0, 0);
+        //     paddle2.position.set(gameWidth / 2 - 5, 0, 0);
+        //     scene.add(paddle1, paddle2);
 
-            // Ball
-            const ballGeom = new THREE.SphereGeometry(2, 16, 16);
-            const ballMat = new THREE.MeshBasicMaterial({ color: 0x10b981 });
-            const ball = new THREE.Mesh(ballGeom, ballMat);
-            scene.add(ball);
+        //     // Ball
+        //     const ballGeom = new THREE.SphereGeometry(2, 16, 16);
+        //     const ballMat = new THREE.MeshBasicMaterial({ color: 0x10b981 });
+        //     const ball = new THREE.Mesh(ballGeom, ballMat);
+        //     scene.add(ball);
 
-            // Walls (visual)
-            const wallMat = new THREE.MeshBasicMaterial({ color: 0x374151 });
-            const wallThickness = 2;
-            const topWall = new THREE.Mesh(new THREE.BoxGeometry(gameWidth, wallThickness, 1), wallMat);
-            topWall.position.y = gameHeight / 2 + wallThickness / 2;
-            const bottomWall = new THREE.Mesh(new THREE.BoxGeometry(gameWidth, wallThickness, 1), wallMat);
-            bottomWall.position.y = -gameHeight / 2 - wallThickness / 2;
-            scene.add(topWall, bottomWall);
+        //     // Walls (visual)
+        //     const wallMat = new THREE.MeshBasicMaterial({ color: 0x374151 });
+        //     const wallThickness = 2;
+        //     const topWall = new THREE.Mesh(new THREE.BoxGeometry(gameWidth, wallThickness, 1), wallMat);
+        //     topWall.position.y = gameHeight / 2 + wallThickness / 2;
+        //     const bottomWall = new THREE.Mesh(new THREE.BoxGeometry(gameWidth, wallThickness, 1), wallMat);
+        //     bottomWall.position.y = -gameHeight / 2 - wallThickness / 2;
+        //     scene.add(topWall, bottomWall);
 
-            let ballSpeedX = 0.8, ballSpeedY = 0.5;
-            const paddleSpeed = 0.5;
+        //     let ballSpeedX = 0.8, ballSpeedY = 0.5;
+        //     const paddleSpeed = 0.5;
 
-            // Animation loop
-            function animate() {
-                requestAnimationFrame(animate);
+        //     // Animation loop
+        //     function animate() {
+        //         requestAnimationFrame(animate);
 
-                // Ball movement
-                ball.position.x += ballSpeedX;
-                ball.position.y += ballSpeedY;
+        //         // Ball movement
+        //         ball.position.x += ballSpeedX;
+        //         ball.position.y += ballSpeedY;
 
-                // Bounce top/bottom
-                if (ball.position.y + 2 > gameHeight / 2 || ball.position.y - 2 < -gameHeight / 2) ballSpeedY *= -1;
+        //         // Bounce top/bottom
+        //         if (ball.position.y + 2 > gameHeight / 2 || ball.position.y - 2 < -gameHeight / 2) ballSpeedY *= -1;
 
-                // AI paddle2
-                if (ball.position.y > paddle2.position.y + 1) paddle2.position.y += paddleSpeed;
-                if (ball.position.y < paddle2.position.y - 1) paddle2.position.y -= paddleSpeed;
+        //         // AI paddle2
+        //         if (ball.position.y > paddle2.position.y + 1) paddle2.position.y += paddleSpeed;
+        //         if (ball.position.y < paddle2.position.y - 1) paddle2.position.y -= paddleSpeed;
 
-                // Paddle collisions
-                if (ball.position.x - 2 < paddle1.position.x + 2 && ball.position.y > paddle1.position.y - 7.5 && ball.position.y < paddle1.position.y + 7.5 && ballSpeedX < 0) ballSpeedX *= -1;
-                if (ball.position.x + 2 > paddle2.position.x - 2 && ball.position.y > paddle2.position.y - 7.5 && ball.position.y < paddle2.position.y + 7.5 && ballSpeedX > 0) ballSpeedX *= -1;
+        //         // Paddle collisions
+        //         if (ball.position.x - 2 < paddle1.position.x + 2 && ball.position.y > paddle1.position.y - 7.5 && ball.position.y < paddle1.position.y + 7.5 && ballSpeedX < 0) ballSpeedX *= -1;
+        //         if (ball.position.x + 2 > paddle2.position.x - 2 && ball.position.y > paddle2.position.y - 7.5 && ball.position.y < paddle2.position.y + 7.5 && ballSpeedX > 0) ballSpeedX *= -1;
 
-                // Reset if out of bounds
-                if (ball.position.x > gameWidth / 2 || ball.position.x < -gameWidth / 2) {
-                    ball.position.set(0, 0, 0);
-                    ballSpeedX = (Math.random() > 0.5 ? 1 : -1) * 0.8;
-                    ballSpeedY = (Math.random() - 0.5) * 1;
-                }
+        //         // Reset if out of bounds
+        //         if (ball.position.x > gameWidth / 2 || ball.position.x < -gameWidth / 2) {
+        //             ball.position.set(0, 0, 0);
+        //             ballSpeedX = (Math.random() > 0.5 ? 1 : -1) * 0.8;
+        //             ballSpeedY = (Math.random() - 0.5) * 1;
+        //         }
 
-                renderer.render(scene, camera);
-            }
+        //         renderer.render(scene, camera);
+        //     }
 
-            animate();
+        //     animate();
 
-            // Player paddle control
-            canvas.addEventListener('mousemove', e => {
-                const rect = canvas.getBoundingClientRect();
-                const mouseY = e.clientY - rect.top;
-                const normalizedY = (mouseY / rect.height) * 2 - 1;
-                paddle1.position.y = -normalizedY * (gameHeight / 2 - 7.5);
-            });
+        //     // Player paddle control
+        //     canvas.addEventListener('mousemove', e => {
+        //         const rect = canvas.getBoundingClientRect();
+        //         const mouseY = e.clientY - rect.top;
+        //         const normalizedY = (mouseY / rect.height) * 2 - 1;
+        //         paddle1.position.y = -normalizedY * (gameHeight / 2 - 7.5);
+        //     });
 
-            // Resize handling
-            window.addEventListener('resize', () => {
-                renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-                camera.updateProjectionMatrix();
-            });
-        }
+        //     // Resize handling
+        //     window.addEventListener('resize', () => {
+        //         renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        //         camera.updateProjectionMatrix();
+        //     });
+        // }
     </script>
 </body>
 
