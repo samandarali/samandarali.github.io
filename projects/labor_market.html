@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technical Skills in Demand: Labor Market Analysis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .section-fade {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .section-fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stat-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .tool-badge {
+      transition: all 0.3s ease;
+    }
+
+    .tool-badge:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+    }
+
+    .image-placeholder {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      border: 2px dashed #cbd5e0;
+    }
+
+    .tab-button {
+      transition: all 0.3s ease;
+    }
+
+    .tab-button.active {
+      background-color: #9333ea;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .key-finding {
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+    }
+
+    .key-finding:hover {
+      border-left-color: #9333ea;
+      background-color: #faf5ff;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <a href="../projects.html" class="text-purple-600 hover:text-purple-800 font-medium transition flex items-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Portfolio
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 text-white py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold mb-6">
+          Research Article • Published 2025 • Canadian Public Policy
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+          Labour Market Landscape for Economics Graduates in Canada
+        </h1>
+        <p class="text-xl text-purple-100 mb-8 leading-relaxed">
+          A comprehensive data-driven investigation using web-scraping and natural language processing to analyze
+          demands and skill requirements for economics graduates in the Canadian job market.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="https://doi.org/10.3138/cpp.2024-023" target="_blank"
+            class="inline-flex items-center bg-white text-purple-700 font-semibold px-6 py-3 rounded-lg hover:bg-purple-50 transition shadow-lg">
+            Read Full Article
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Overview Stats -->
+  <section class="section-fade -mt-12 relative z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
+          <div class="text-4xl font-bold text-purple-600 mb-2">996</div>
+          <div class="text-gray-600 font-medium">Job Listings Scraped</div>
+        </div>
+        <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
+          <div class="text-4xl font-bold text-indigo-600 mb-2">525</div>
+          <div class="text-gray-600 font-medium">Non-Academic Jobs</div>
+        </div>
+        <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
+          <div class="text-4xl font-bold text-teal-600 mb-2">61</div>
+          <div class="text-gray-600 font-medium">Skills Categorized</div>
+        </div>
+        <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
+          <div class="text-4xl font-bold text-pink-600 mb-2">91</div>
+          <div class="text-gray-600 font-medium">Cities Analyzed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tab Navigation for Content -->
+  <section class="section-fade py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-xl shadow-lg p-2 flex flex-wrap gap-2">
+        <button onclick="switchTab('overview')" class="tab-button active px-6 py-3 rounded-lg font-semibold">
+          Overview
+        </button>
+        <button onclick="switchTab('methodology')" class="tab-button px-6 py-3 rounded-lg font-semibold">
+          Methodology
+        </button>
+        <button onclick="switchTab('findings')" class="tab-button px-6 py-3 rounded-lg font-semibold">
+          Key Findings
+        </button>
+        <button onclick="switchTab('extended')" class="tab-button px-6 py-3 rounded-lg font-semibold">
+          Extended Analysis
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Overview Tab -->
+  <section id="tab-overview" class="tab-content active section-fade py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Research Overview</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Using web-scraping and natural language processing techniques, this study investigates the demands and skill
+          requirements for economics graduates in the Canadian job market. Key regional hubs identified are Ontario
+          (Toronto), Quebec (Montreal), and Alberta (Calgary).
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Microsoft Office Suite, particularly Microsoft Excel, is the most prevalent software requirement. Beyond
+          software, economics graduates are expected to have a wide range of technical skills, including data
+          management, advanced modelling, programming (Python, SQL), and presentation and documentation (PowerPoint,
+          report writing).
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          <div class="bg-purple-50 border-l-4 border-purple-600 p-6 rounded-lg">
+            <h3 class="font-semibold text-purple-900 mb-2 flex items-center">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                <path fill-rule="evenodd"
+                  d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
+                  clip-rule="evenodd" />
+              </svg>
+              Research Gap
+            </h3>
+            <p class="text-purple-800">
+              While web-scraping research has been applied to computer science fields, there was a lack of similar
+              research specifically focused on economics graduates in Canada.
+            </p>
+          </div>
+
+          <div class="bg-indigo-50 border-l-4 border-indigo-600 p-6 rounded-lg">
+            <h3 class="font-semibold text-indigo-900 mb-2 flex items-center">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd" />
+              </svg>
+              Data Source
+            </h3>
+            <p class="text-indigo-800">
+              Data exclusively sourced from Indeed.ca on January 15, 2024, providing a real-time snapshot of the
+              Canadian economics job market.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-8 bg-amber-50 border-l-4 border-amber-500 p-6 rounded-lg">
+          <h3 class="text-lg font-semibold text-amber-900 mb-2">Why This Research Matters</h3>
+          <p class="text-amber-800 mb-4">
+            Traditional labor market study methods—such as surveys and interviews—are often time-consuming, costly, and
+            limited in scope. This study provides a modern, data-driven approach to understanding market dynamics.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="text-center">
+              <div class="text-2xl font-bold text-amber-700">Fast</div>
+              <div class="text-sm text-amber-600">Real-time data extraction</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-amber-700">Scalable</div>
+              <div class="text-sm text-amber-600">Massive data analysis</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-amber-700">Current</div>
+              <div class="text-sm text-amber-600">Up-to-date insights</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Methodology Tab -->
+  <section id="tab-methodology" class="tab-content section-fade py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Research Methodology</h2>
+
+      <div class="space-y-8">
+        <!-- Step 1 -->
+        <div class="bg-white rounded-xl shadow-lg p-8 flex gap-6 items-start hover:shadow-xl transition">
+          <div
+            class="flex-shrink-0 w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
+            1
+          </div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Data Collection</h3>
+            <p class="text-gray-700 leading-relaxed mb-3">
+              Scraped <strong>996 job listings</strong> from Indeed.ca using a custom Python script executed on Google
+              Cloud Notebook. The script used BeautifulSoup for web scraping and integrated the Scrapingdog API to
+              extract job titles, company names, locations, and hyperlinks.
+            </p>
+            <div class="bg-gray-50 rounded-lg p-4">
+              <div class="flex items-center text-sm text-gray-600 mb-2">
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd"
+                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                    clip-rule="evenodd" />
+                </svg>
+                Date: January 15, 2024
+              </div>
+              <div class="flex items-center text-sm text-gray-600">
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd"
+                    d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
+                </svg>
+                Pages scraped: 69 most recent pages
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-white rounded-xl shadow-lg p-8 flex gap-6 items-start hover:shadow-xl transition">
+          <div
+            class="flex-shrink-0 w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
+            2
+          </div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Data Cleaning & Translation</h3>
+            <p class="text-gray-700 leading-relaxed mb-3">
+              Eliminated duplicates, resulting in <strong>606 unique job listings</strong>. Translated 134 French and 5
+              Spanish listings using OpenAI, with manual error correction. Removed 81 listings (75 requiring other
+              degrees, 6 academic positions), focusing on <strong>525 non-academic jobs</strong>.
+            </p>
+            <div class="grid grid-cols-3 gap-4 mt-4">
+              <div class="bg-purple-50 p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-purple-600">996</div>
+                <div class="text-xs text-gray-600">Initial Listings</div>
+              </div>
+              <div class="bg-indigo-50 p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-indigo-600">606</div>
+                <div class="text-xs text-gray-600">After Deduplication</div>
+              </div>
+              <div class="bg-teal-50 p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-teal-600">525</div>
+                <div class="text-xs text-gray-600">Final Dataset</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-white rounded-xl shadow-lg p-8 flex gap-6 items-start hover:shadow-xl transition">
+          <div
+            class="flex-shrink-0 w-12 h-12 bg-teal-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
+            3
+          </div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Keyword Extraction & Skill Mapping</h3>
+            <p class="text-gray-700 leading-relaxed mb-3">
+              Used NLP techniques (tokenization, lemmatization, stop-word removal) to extract skills. Applied OpenAI
+              GPT-3.5-turbo API to categorize soft and technical skills. Created comprehensive dictionaries: <strong>31
+                soft skill categories</strong> and <strong>30 technical skill categories</strong>.
+            </p>
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+              <p class="text-sm text-blue-800">
+                <strong>Key Innovation:</strong> The comprehensive skill dictionaries created provide a transparent,
+                accessible resource for future labor market studies.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="bg-white rounded-xl shadow-lg p-8 flex gap-6 items-start hover:shadow-xl transition">
+          <div
+            class="flex-shrink-0 w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
+            4
+          </div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Network Analysis & Statistical Testing</h3>
+            <p class="text-gray-700 leading-relaxed mb-3">
+              Applied centrality metrics (degree, betweenness, closeness) to evaluate skill significance. Used
+              Chi-square and Fisher's exact tests to identify regional variations in skill demands across provinces.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
+              <div class="bg-gray-50 p-3 rounded text-center">
+                <div class="text-sm font-semibold text-gray-700">Degree Centrality</div>
+                <div class="text-xs text-gray-600">Direct connections</div>
+              </div>
+              <div class="bg-gray-50 p-3 rounded text-center">
+                <div class="text-sm font-semibold text-gray-700">Betweenness</div>
+                <div class="text-xs text-gray-600">Bridge between skills</div>
+              </div>
+              <div class="bg-gray-50 p-3 rounded text-center">
+                <div class="text-sm font-semibold text-gray-700">Closeness</div>
+                <div class="text-xs text-gray-600">Network position</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools Used -->
+      <div class="mt-12">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Tools & Technologies</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="tool-badge bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-xl p-6 shadow-lg">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">🐍</div>
+              <h4 class="text-lg font-bold">Python</h4>
+            </div>
+            <p class="text-blue-100 text-sm">Primary tool for data collection, cleaning, and analysis</p>
+          </div>
+
+          <div class="tool-badge bg-gradient-to-br from-green-500 to-green-700 text-white rounded-xl p-6 shadow-lg">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">🕸️</div>
+              <h4 class="text-lg font-bold">BeautifulSoup & Scrapingdog</h4>
+            </div>
+            <p class="text-green-100 text-sm">Web scraping tools for efficient data extraction</p>
+          </div>
+
+          <div class="tool-badge bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-xl p-6 shadow-lg">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">🤖</div>
+              <h4 class="text-lg font-bold">OpenAI GPT-3.5</h4>
+            </div>
+            <p class="text-purple-100 text-sm">AI for translation and skill expression extraction</p>
+          </div>
+
+          <div class="tool-badge bg-gradient-to-br from-orange-500 to-orange-700 text-white rounded-xl p-6 shadow-lg">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">📝</div>
+              <h4 class="text-lg font-bold">NLP Techniques</h4>
+            </div>
+            <p class="text-orange-100 text-sm">Tokenization, lemmatization, keyword extraction</p>
+          </div>
+
+          <div class="tool-badge bg-gradient-to-br from-teal-500 to-teal-700 text-white rounded-xl p-6 shadow-lg">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">📊</div>
+              <h4 class="text-lg font-bold">Statistical Analysis</h4>
+            </div>
+            <p class="text-teal-100 text-sm">Chi-square and Fisher's exact tests</p>
+          </div>
+
+          <div class="tool-badge bg-gradient-to-br from-pink-500 to-pink-700 text-white rounded-xl p-6 shadow-lg">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">🎨</div>
+              <h4 class="text-lg font-bold">Visualization</h4>
+            </div>
+            <p class="text-pink-100 text-sm">Python(Matplotlib,networkx), excel, and Photoshop for data presentation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Findings Tab -->
+  <section id="tab-findings" class="tab-content section-fade py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Key Findings </h2>
+
+      <!-- Regional Distribution -->
+      <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+          <svg class="w-7 h-7 mr-3 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+              clip-rule="evenodd" />
+          </svg>
+          Regional Job Distribution
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h4 class="font-semibold text-gray-800 mb-4">Top Provinces</h4>
+            <div class="space-y-3">
+              <div class="key-finding bg-white border border-gray-200 rounded-lg p-4">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <div class="font-bold text-gray-900">Ontario</div>
+                    <div class="text-sm text-gray-600">Toronto is the major hub</div>
+                  </div>
+                  <div class="text-2xl font-bold text-purple-600">46%</div>
+                </div>
+                <div class="mt-2 bg-purple-100 rounded-full h-2">
+                  <div class="bg-purple-600 h-2 rounded-full" style="width: 46%"></div>
+                </div>
+              </div>
+
+              <div class="key-finding bg-white border border-gray-200 rounded-lg p-4">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <div class="font-bold text-gray-900">Quebec</div>
+                    <div class="text-sm text-gray-600">Montreal concentration</div>
+                  </div>
+                  <div class="text-2xl font-bold text-indigo-600">17%</div>
+                </div>
+                <div class="mt-2 bg-indigo-100 rounded-full h-2">
+                  <div class="bg-indigo-600 h-2 rounded-full" style="width: 70%"></div>
+                </div>
+              </div>
+
+              <div class="key-finding bg-white border border-gray-200 rounded-lg p-4">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <div class="font-bold text-gray-900">British Columbia</div>
+                    <div class="text-sm text-gray-600">Vancouver area</div>
+                  </div>
+                  <div class="text-2xl font-bold text-teal-600">14%</div>
+                </div>
+                <div class="mt-2 bg-teal-100 rounded-full h-2">
+                  <div class="bg-teal-600 h-2 rounded-full" style="width: 58%"></div>
+                </div>
+              </div>
+
+              <div class="key-finding bg-white border border-gray-200 rounded-lg p-4">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <div class="font-bold text-gray-900">Alberta</div>
+                    <div class="text-sm text-gray-600">Calgary primary city</div>
+                  </div>
+                  <div class="text-2xl font-bold text-orange-600">13%</div>
+                </div>
+                <div class="mt-2 bg-orange-100 rounded-full h-2">
+                  <div class="bg-orange-600 h-2 rounded-full" style="width: 54%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-gray-800 mb-4">Top Cities</h4>
+            <div class="space-y-2">
+              <div class="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
+                <span class="font-semibold">Toronto</span>
+                <span class="text-purple-700 font-bold">147 jobs (28%)</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-indigo-50 rounded-lg">
+                <span class="font-semibold">Montreal</span>
+                <span class="text-indigo-700 font-bold">57 jobs</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-teal-50 rounded-lg">
+                <span class="font-semibold">Calgary</span>
+                <span class="text-teal-700 font-bold">46 jobs</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-orange-50 rounded-lg">
+                <span class="font-semibold">Vancouver</span>
+                <span class="text-orange-700 font-bold">34 jobs</span>
+              </div>
+            </div>
+
+            <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+              <p class="text-sm text-blue-800">
+                <strong>91 cities</strong> across Canada have job opportunities for economics graduates, with
+                significant concentration in major metropolitan areas.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg text-center">
+            <div class="text-3xl font-bold text-purple-700">52%</div>
+            <div class="text-sm text-gray-700 mt-1">Onsite Jobs</div>
+          </div>
+          <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-4 rounded-lg text-center">
+            <div class="text-3xl font-bold text-indigo-700">40%</div>
+            <div class="text-sm text-gray-700 mt-1">Remote Jobs</div>
+          </div>
+          <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-4 rounded-lg text-center">
+            <div class="text-3xl font-bold text-teal-700">38%</div>
+            <div class="text-sm text-gray-700 mt-1">Hybrid Jobs</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills Findings -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <!-- Soft Skills -->
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+            <svg class="w-7 h-7 mr-3 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+            </svg>
+            Top Soft Skills
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-semibold text-gray-800">Communication Skills</span>
+                <span class="text-indigo-600 font-bold">413</span>
+              </div>
+              <div class="bg-gray-200 rounded-full h-3">
+                <div class="bg-indigo-600 h-3 rounded-full" style="width: 79%"></div>
+              </div>
+              <div class="text-xs text-gray-600 mt-1">79% of job listings</div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-semibold text-gray-800">Teamwork</span>
+                <span class="text-purple-600 font-bold">340</span>
+              </div>
+              <div class="bg-gray-200 rounded-full h-3">
+                <div class="bg-purple-600 h-3 rounded-full" style="width: 65%"></div>
+              </div>
+              <div class="text-xs text-gray-600 mt-1">65% of job listings</div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-semibold text-gray-800">Analytical Skills</span>
+                <span class="text-teal-600 font-bold">335</span>
+              </div>
+              <div class="bg-gray-200 rounded-full h-3">
+                <div class="bg-teal-600 h-3 rounded-full" style="width: 64%"></div>
+              </div>
+              <div class="text-xs text-gray-600 mt-1">64% of job listings</div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-semibold text-gray-800">Interpersonal Skills</span>
+                <span class="text-pink-600 font-bold">280</span>
+              </div>
+              <div class="bg-gray-200 rounded-full h-3">
+                <div class="bg-pink-600 h-3 rounded-full" style="width: 53%"></div>
+              </div>
+              <div class="text-xs text-gray-600 mt-1">53% of job listings</div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-semibold text-gray-800">Presentation Skills</span>
+                <span class="text-orange-600 font-bold">275</span>
+              </div>
+              <div class="bg-gray-200 rounded-full h-3">
+                <div class="bg-orange-600 h-3 rounded-full" style="width: 52%"></div>
+              </div>
+              <div class="text-xs text-gray-600 mt-1">52% of job listings</div>
+            </div>
+          </div>
+
+          <div class="mt-6 bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded">
+            <p class="text-sm text-indigo-800">
+              All soft skills showed degree and closeness centrality of 1.0, indicating their highly interconnected and
+              multifaceted nature.
+            </p>
+          </div>
+        </div>
+
+        <!-- Technical Skills -->
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+            <svg class="w-7 h-7 mr-3 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                clip-rule="evenodd" />
+            </svg>
+            Top Technical Skills
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-semibold text-gray-800">Microsoft Excel</span>
+                <span class="text-purple-600 font-bold">189</span>
+              </div>
+              <div class="bg-gray-200 rounded-full h-3">
+                <div class="bg-purple-600 h-3 rounded-full" style="width: 36%"></div>
+              </div>
+              <div class="text-xs text-gray-600 mt-1">36% of job listings</div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-semibold text-gray-800">Microsoft Office</span>
+                <span class="text-indigo-600 font-bold">109</span>
+              </div>
+              <div class="bg-gray-200 rounded-full h-3">
+                <div class="bg-indigo-600 h-3 rounded-full" style="width: 21%"></div>
+              </div>
+              <div class="text-xs text-gray-600 mt-1">21% of job listings</div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-semibold text-gray-800">Microsoft Word</span>
+                <span class="text-teal-600 font-bold">90</span>
+              </div>
+              <div class="bg-gray-200 rounded-full h-3">
+                <div class="bg-teal-600 h-3 rounded-full" style="width: 17%"></div>
+              </div>
+              <div class="text-xs text-gray-600 mt-1">17% of job listings</div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-semibold text-gray-800">PowerPoint</span>
+                <span class="text-pink-600 font-bold">88</span>
+              </div>
+              <div class="bg-gray-200 rounded-full h-3">
+                <div class="bg-pink-600 h-3 rounded-full" style="width: 17%"></div>
+              </div>
+              <div class="text-xs text-gray-600 mt-1">17% of job listings</div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-semibold text-gray-800">Python</span>
+                <span class="text-blue-600 font-bold">60</span>
+              </div>
+              <div class="bg-gray-200 rounded-full h-3">
+                <div class="bg-blue-600 h-3 rounded-full" style="width: 11%"></div>
+              </div>
+              <div class="text-xs text-gray-600 mt-1">11% of job listings</div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-semibold text-gray-800">SQL</span>
+                <span class="text-orange-600 font-bold">51</span>
+              </div>
+              <div class="bg-gray-200 rounded-full h-3">
+                <div class="bg-orange-600 h-3 rounded-full" style="width: 10%"></div>
+              </div>
+              <div class="text-xs text-gray-600 mt-1">10% of job listings</div>
+            </div>
+          </div>
+
+          <div class="mt-6 bg-purple-50 border-l-4 border-purple-500 p-4 rounded">
+            <p class="text-sm text-purple-800">
+              <strong>Data Management</strong> (282 mentions) is the most critical technical skill category, followed by
+              Presentation & Documentation (276).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Insights -->
+      <div class="bg-white rounded-2xl shadow-xl p-8">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Additional Insights</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+            <div class="flex items-center mb-3">
+              <svg class="w-8 h-8 text-purple-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+              </svg>
+              <h4 class="font-bold text-gray-900 text-lg">Degree Requirements</h4>
+            </div>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start">
+                <span class="text-purple-600 mr-2">•</span>
+                <span>54% require Bachelor's degree</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-purple-600 mr-2">•</span>
+                <span>30% accept any university degree</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-purple-600 mr-2">•</span>
+                <span>1% require PhD</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-lg">
+            <div class="flex items-center mb-3">
+              <svg class="w-8 h-8 text-indigo-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd" />
+              </svg>
+              <h4 class="font-bold text-gray-900 text-lg">Experience Requirements</h4>
+            </div>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start">
+                <span class="text-indigo-600 mr-2">•</span>
+                <span>180 listings: No minimum specified</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-indigo-600 mr-2">•</span>
+                <span>88 listings: 5 years most common</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-indigo-600 mr-2">•</span>
+                <span>79 listings: 3 years required</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-6 rounded-lg">
+            <div class="flex items-center mb-3">
+              <svg class="w-8 h-8 text-teal-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+              </svg>
+              <h4 class="font-bold text-gray-900 text-lg">Competition</h4>
+            </div>
+            <p class="text-gray-700 text-sm mb-2">Economics graduates compete with:</p>
+            <ul class="space-y-1 text-gray-700 text-sm">
+              <li class="flex items-start">
+                <span class="text-teal-600 mr-2">•</span>
+                <span>Business & Management (363 jobs)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-teal-600 mr-2">•</span>
+                <span>Finance & Insurance (268 jobs)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-teal-600 mr-2">•</span>
+                <span>Accounting (128 jobs)</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg">
+            <div class="flex items-center mb-3">
+              <svg class="w-8 h-8 text-orange-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd" />
+              </svg>
+              <h4 class="font-bold text-gray-900 text-lg">Regional Variations</h4>
+            </div>
+            <p class="text-gray-700 text-sm">
+              Chi-square tests showed no significant differences (p > 0.05) in skill demands across provinces, though
+              Saskatchewan showed slightly more emphasis on leadership and less on data management.
+            </p>
+          </div>
+
+
+        </div>
+
+
+      </div>
+      <section class="visualization-section mt-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Visualization </h2>
+
+
+          <!-- Visualization Gallery -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <!-- Placeholder for Geographic Heatmap -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+              <div class="image-placeholder">
+                <img src="../images/laborMarket/cmap.png">
+              </div>
+              <div class="p-6">
+                <h3 class="font-bold text-gray-900 mb-2">Job Distribution Heatmap</h3>
+                <p class="text-gray-600 text-sm">
+                  Geographical visualization showing the distribution of job postings across Canadian provinces. Color
+                  intensity represents total job volume, while overlaid pie charts illustrate the proportion of
+                  onsite,
+                  remote, and hybrid work arrangements in each region. The map highlights regional hiring
+                  concentration
+                  and
+                  differences in workplace flexibility across the country.
+                </p>
+              </div>
+            </div>
+
+            <!-- Placeholder for Geographic Heatmap -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+              <div class="image-placeholder">
+                <img src="../images/laborMarket/degree_required.png">
+              </div>
+              <div class="p-6">
+                <h3 class="font-bold text-gray-900 mb-2">Degree Levels Required for Economics Positions</h3>
+                <p class="text-gray-600 text-sm">
+                  A donut chart displaying the educational requirements of employers; it highlights that while
+                  bachelor’s degrees are the most common requirement, many employers prioritize experience over a
+                  specific degree level.
+                </p>
+              </div>
+            </div>
+
+            <!-- Placeholder for Network Analysis -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+              <div class="image-placeholder">
+                <img src="../images/laborMarket/na_softwares.png">
+
+              </div>
+              <div class="p-6">
+                <h3 class="font-bold text-gray-900 mb-2">Network Visualization of Softwares</h3>
+                <p class="text-gray-600 text-sm">
+                  Interactive network diagram showing relationships between softwares, with node sizes representing
+                  frequency and edges showing co-occurrence patterns.
+                </p>
+              </div>
+            </div>
+
+            <!-- Placeholder for Skill Category Breakdown -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+              <div class="image-placeholder">
+                <img src="../images/laborMarket/na_technical_skill.png">
+
+              </div>
+              <div class="p-6">
+                <h3 class="font-bold text-gray-900 mb-2">Technical Skill Categories</h3>
+                <p class="text-gray-600 text-sm">
+                  Detailed breakdown of the 30 technical skill categories, showing Data Management, Presentation,
+                  Finance,
+                  and Analytics as dominant categories.
+                </p>
+              </div>
+            </div>
+
+            <!-- Placeholder for Regional Comparison -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+              <div class="image-placeholder">
+                <img src="../images/laborMarket/competitive_disciplines.png">
+
+              </div>
+              <div class="p-6">
+                <h3 class="font-bold text-gray-900 mb-2">Network Analysis of Degrees (Closest Programs)</h3>
+                <p class="text-gray-600 text-sm">
+                  A network graph illustrating the academic competition, showing which specific degree programs (such
+                  as
+                  mathematics or statistics) are frequently listed as acceptable alternatives to an economics degree.
+                </p>
+              </div>
+            </div>
+
+            <!-- Placeholder for Regional Comparison -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+              <div class="image-placeholder">
+                <img src="../images/laborMarket/na_softskills.png">
+
+              </div>
+              <div class="p-6">
+                <h3 class="font-bold text-gray-900 mb-2">Network Analysis of Soft Skills</h3>
+                <p class="text-gray-600 text-sm">
+                  This graph maps the relationships between 31 soft skill categories, showing that competencies like
+                  communication, teamwork, and analytical skills are highly interconnected and universally sought
+                  after.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- Extended Analysis Tab -->
+  <section id="tab-extended" class="tab-content section-fade py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">
+          Extended Analysis
+        </h2>
+
+        <p class="text-gray-700 leading-relaxed mb-6">
+          Building upon this research, I extended the analysis to explore associations between technical skills.
+          Specifically, I applied association rule analysis (Figure 1). The analyses revealed the following
+          frequent skillsets and associations.
+        </p>
+
+        <p class="text-gray-700 leading-relaxed mb-6">
+          The table below outlines the technical skillsets identified in the analysis, along with their
+          support values (the proportion of job postings where the skillset appears).
+        </p>
+        <div><img src="../images/laborMarket/table_support_value.png"></image>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-4">
+          Key Insights
+        </h3>
+
+        <div class="space-y-4 text-gray-700 leading-relaxed">
+
+          <p>
+            <strong>High-Importance Skills:</strong>
+            Data Management and Presentation & Documentation emerge as the most frequently required
+            technical skills, underscoring their foundational role across diverse job postings.
+            Financial Analysis & Management is another critical skill but is less common compared
+            to the above.
+          </p>
+
+          <p>
+            <strong>Frequent Pairings:</strong>
+            The pairing of Data Management with Presentation & Documentation suggests that employers
+            value candidates who can not only handle data but also effectively communicate insights
+            through reports and presentations. Similarly, the combination of Financial Analysis &
+            Management with Data Management indicates the reliance on data for financial
+            decision-making and reporting.
+          </p>
+
+          <p>
+            <strong>Comprehensive Skillsets:</strong>
+            The three-skill combination (Financial Analysis & Management, Data Management,
+            Presentation & Documentation) reflects demand for highly versatile professionals who
+            can bridge technical and business communication needs.
+          </p>
+
+          <p>
+            <strong>Emerging Skills:</strong>
+            Advanced Modeling & Analytics and Econometrics & Statistics have relatively lower
+            support but remain critical in specialized roles, particularly those requiring advanced
+            analytical techniques.
+          </p>
+
+          <p>
+            These findings not only reinforce the importance of technical skills for economics
+            graduates but also highlight how employers value the interplay between data, analysis,
+            and communication. The alignment of results between association analysis and clustering
+            further strengthens the reliability of these insights.
+          </p>
+
+        </div>
+
+        <p class="text-gray-700 text-sm leading-relaxed">
+          The extended analysis builds upon the published research by incorporating additional visualization
+          techniques,
+          deeper statistical exploration of regional variations, and longitudinal comparisons where applicable. All
+          methodologies follow the same rigorous standards established in the original study, with Python, NLP
+          techniques, and network analysis tools forming the analytical backbone. Images shown above are placeholders
+          -
+          replace them with your actual visualizations from the project.
+        </p>
+        <div> <img src="../images/laborMarket/association_rule_analysis.png"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Impact Section -->
+  <section class="section-fade py-16 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-4 text-center">Impact & Beneficiaries</h2>
+      <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+        This research provides actionable insights for multiple stakeholders across the economics and education
+        ecosystem.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Job Seekers -->
+        <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-purple-500 hover:shadow-xl transition">
+          <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-3xl">
+            🎯
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Aspiring Economists & Job Seekers</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Understand which skills (like Microsoft Excel, Python, and SQL) and soft competencies (communication,
+            teamwork) are most sought after, enabling targeted skill development aligned with industry needs.
+          </p>
+        </div>
+
+        <!-- Educators -->
+        <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-indigo-500 hover:shadow-xl transition">
+          <div class="w-14 h-14 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-3xl">
+            🎓
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Educators & Economics Departments</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Use these insights to refine curriculum and ensure academic programs align with the evolving demands of
+            various sectors, preparing students for real-world success.
+          </p>
+        </div>
+
+        <!-- Policy Makers -->
+        <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-teal-500 hover:shadow-xl transition">
+          <div class="w-14 h-14 bg-teal-100 rounded-full flex items-center justify-center mb-4 text-3xl">
+            🏛️
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Policy-Makers</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Leverage the data to align workforce development strategies with actual market demands, fostering economic
+            growth and efficient resource allocation at regional and national levels.
+          </p>
+        </div>
+
+        <!-- Researchers -->
+        <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-pink-500 hover:shadow-xl transition">
+          <div class="w-14 h-14 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-3xl">
+            🔬
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Researchers</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Access a comprehensive dictionary for soft and technical skills, providing a transparent, accessible
+            resource for future labor market studies and comparative research.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gradient-to-br from-purple-600 to-indigo-700 text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-4">Read the Full Publication</h2>
+      <p class="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
+        Dive deeper into the methodology, statistical analysis, and detailed findings in the complete research paper
+        published in Canadian Public Policy.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://doi.org/10.3138/cpp.2024-023" target="_blank"
+          class="inline-flex items-center bg-white text-purple-700 font-semibold px-8 py-4 rounded-lg hover:bg-purple-50 transition shadow-lg text-lg">
+          Access Full Publication
+          <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+        <a href="../projects.html"
+          class="inline-flex items-center bg-purple-500 text-white font-semibold px-8 py-4 rounded-lg hover:bg-purple-600 transition shadow-lg text-lg border-2 border-white">
+          Back to Portfolio
+          <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <p class="text-gray-400 mb-2">&copy; 2025 Mojgan Samandar. All rights reserved.</p>
+        <p class="text-gray-500 text-sm">
+          Published in Canadian Public Policy, Volume 51, Number 1, March 2025, pp. 61-76
+        </p>
+        <div class="mt-4">
+          <a href="index.html" class="text-purple-400 hover:text-purple-300 transition mx-3">Portfolio</a>
+          <a href="https://doi.org/10.3138/cpp.2024-023" target="_blank"
+            class="text-purple-400 hover:text-purple-300 transition mx-3">Full Article</a>
+          <a href="mailto:mojgan.samandar@outlook.com"
+            class="text-purple-400 hover:text-purple-300 transition mx-3">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll animation for sections
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.section-fade').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Tab switching function
+    function switchTab(tabName) {
+      // Hide all tab contents
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+
+      // Remove active class from all buttons
+      document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+      });
+
+      // Show selected tab content
+      const selectedTab = document.getElementById('tab-' + tabName);
+      if (selectedTab) {
+        selectedTab.classList.add('active');
+      }
+
+      // Add active class to clicked button
+      event.target.classList.add('active');
+
+      // Scroll to top of content
+      window.scrollTo({
+        top: 300,
+        behavior: 'smooth'
+      });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

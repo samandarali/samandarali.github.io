@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -141,14 +142,14 @@
             background: white;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
         }
 
         .project-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
         }
 
         .project-number {
@@ -206,12 +207,14 @@
             align-items: center;
             gap: 5px;
         }
-        .emoji_skills{
-          font-size: 25px;
+
+        .emoji_skills {
+            font-size: 25px;
         }
-        .skills-lists{
-          color: yellow
-        }        
+
+        .skills-lists {
+            color: inherit;
+        }
 
         /* List Layout */
         .projects-list {
@@ -228,7 +231,7 @@
             background: white;
             border-radius: 12px;
             padding: 20px 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
             gap: 20px;
@@ -238,7 +241,7 @@
 
         .project-list-item:hover {
             transform: translateX(4px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
         }
 
         .list-number {
@@ -294,12 +297,12 @@
 
         /* Color schemes */
         .color-purple {
-            background: linear-gradient(135deg, #667eea 0%, #2b084e 100%);
+            background: linear-gradient(135deg, #551297 0%, #9257f0 100%);
             color: white;
         }
 
         .color-orange {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, #dd2476 0%, #ff512f 100%);
             color: white;
         }
 
@@ -309,7 +312,7 @@
         }
 
         .color-green {
-            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            background: linear-gradient(135deg, #185c6e 0%, #2ecc71 100%);
             color: white;
         }
 
@@ -317,13 +320,18 @@
             background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
             color: #333;
         }
+
+        .hyberlink_non {
+            text-decoration: none;
+        }
     </style>
 </head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo">Layout</div>
-        <div class="sidebar-icon" id="gridIcon">
+        <div class="sidebar-icon active" id="gridIcon">
             <div class="icon-grid">
                 <div></div>
                 <div></div>
@@ -331,7 +339,7 @@
                 <div></div>
             </div>
         </div>
-        <div class="sidebar-icon active" id="listIcon">
+        <div class="sidebar-icon " id="listIcon">
             <div class="icon-list">
                 <div></div>
                 <div></div>
@@ -345,27 +353,32 @@
         <div class="header">
             <h1>Projects</h1>
             <div class="view-toggle">
-                <button class="toggle-btn" id="gridBtn">Grid</button>
-                <button class="toggle-btn active" id="listBtn">List</button>
+                <button class="toggle-btn active" id="gridBtn">Grid</button>
+                <button class="toggle-btn " id="listBtn">List</button>
             </div>
         </div>
 
         <!-- Grid View -->
-        <div class="projects-grid hidden" id="gridView">
-            <div class="project-card color-purple">
-                <div style="position: relative;">
-                    <div class="project-number">1</div>
-                    <img src="images/canadaLaborMarket1.png" alt="Project 2" class="project-image">
-                </div>
-                <div class="project-info">
-                    <div class="project-category"></div>
-                    <div class="project-title">Technical Skills in Demand: Analyzing the Labor Market for Economics Graduates in Canada</div>
-                    <div class="project-skills"><div  class="emoji_skills">👩‍🔧 </div>            
-                    <div class="skills-lists">Python, Web Scraping, Natural Language Processing (NLP), Dictionary Construction, Network Analysis</div> 
+
+        <div class="projects-grid " id="gridView">
+            <a class="hyberlink_non" href="projects/labor_market.html" rel="noopener noreferrer" class="project-link">
+                <div class="project-card color-purple">
+                    <div style="position: relative;">
+                        <div class="project-number">1</div>
+                        <img src="images/canadaLaborMarket1.png" alt="Project 2" class="project-image">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-category"></div>
+                        <div class="project-title">Technical Skills in Demand: Analyzing the Labor Market for Economics
+                            Graduates in Canada</div>
+                        <div class="project-skills">
+                            <div class="emoji_skills">🛠️ </div>
+                            <div class="skills-lists">Python, Web Scraping, Natural Language Processing (NLP),
+                                Dictionary Construction, Network Analysis, Systematic Literature Review</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            </a>
             <div class="project-card color-orange">
                 <div style="position: relative;">
                     <div class="project-number">5</div>
@@ -374,9 +387,11 @@
                 <div class="project-info">
                     <div class="project-category"> </div>
                     <div class="project-title">Educational Strategies for Entrepreneurial Universities </div>
-                    <div class="project-skills"><div  class="emoji_skills">👩‍🔧 </div>            
-                    <div class="skills-lists">Focus group,Structural-interpretative modeling </div> 
-                    </div>                    <!-- <div class="project-time">⏰ 5:30 AM</div> -->
+                    <div class="project-skills">
+                        <div class="emoji_skills">🛠️ </div>
+                        <div class="skills-lists">Systematic Literature Review and Framework Synthesis, Focus group,
+                            Interpretive Structural Modeling (ISM) </div>
+                    </div> <!-- <div class="project-time">⏰ 5:30 AM</div> -->
                 </div>
             </div>
 
@@ -388,9 +403,11 @@
                 <div class="project-info">
                     <!-- <div class="project-category">Walks, Tours, and Drop-ins</div> -->
                     <div class="project-title">Enhancing Efficiency of National Innovation System </div>
-                      <div class="project-skills"><div  class="emoji_skills">👩‍🔧 </div>            
-                      <div class="skills-lists">ned to be added </div> 
-                    </div>  
+                    <div class="project-skills">
+                        <div class="emoji_skills">🛠️ </div>
+                        <div class="skills-lists">Two-Stage Network Data Envelopment Analysis (DEA),Tobit Regression
+                            Model, Principal Component Analysis (PCA) </div>
+                    </div>
                 </div>
             </div>
 
@@ -402,9 +419,11 @@
                 <div class="project-info">
                     <!-- <div class="project-category">Courses and Workshops</div> -->
                     <div class="project-title">Using the crowd for business model innovation: the case of Digikala</div>
-                      <div class="project-skills"><div  class="emoji_skills">👩‍🔧 </div>            
-                      <div class="skills-lists">ned to be added </div> 
-                    </div>  
+                    <div class="project-skills">
+                        <div class="emoji_skills">🛠️ </div>
+                        <div class="skills-lists">Regression Analysis (Probit Model), Non-response Bias Testing,
+                            Descriptive Analysis </div>
+                    </div>
                 </div>
             </div>
 
@@ -417,41 +436,45 @@
                     <!-- <div class="project-category">Planetarium Programs</div> -->
                     <div class="project-title">Regional Innovative Behaviour: Evidence from Iran</div>
                     <!-- <div class="project-subtitle">Theater</div> -->
-                      <div class="project-skills"><div  class="emoji_skills">👩‍🔧 </div>            
-                      <div class="skills-lists">ned to be added </div> 
-                    </div> 
+                    <div class="project-skills">
+                        <div class="emoji_skills">🛠️ </div>
+                        <div class="skills-lists">Principal Components Analysis (PCA), Spatial Analysis, Stata, Excel
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- List View -->
-        <div class="projects-list" id="listView">
-            <div class="project-list-item color-purple">
-                <img src="images/canadaLaborMarket1.png" alt="Project 2" class="list-thumbnail">
-                <div class="list-info">
-                    <div class="list-title">Technical Skills in Demand: Analyzing the Labor Market for Economics Graduates in Canada</div>
-                    <div class="project-skills">
-                      <div  class="emoji_skills">👩‍🔧</div>            
-                      <div class="skills-lists">Python, Web Scraping, Natural Language Processing (NLP), Dictionary Construction, Network Analysis</div> 
-                    </div>               
+        <div class="projects-list hidden" id="listView">
+            <a class="hyberlink_non" href="projects/labor_market.html" rel="noopener noreferrer" class="project-link">
+                <div class="project-list-item color-purple">
+                    <img src="images/canadaLaborMarket1.png" alt="Project 2" class="list-thumbnail">
+                    <div class="list-info">
+                        <div class="list-title">Technical Skills in Demand: Analyzing the Labor Market for Economics
+                            Graduates in Canada</div>
+                        <div class="project-skills">
+                            <div class="emoji_skills">🛠️</div>
+                            <div class="skills-lists">Python, Web Scraping, Natural Language Processing (NLP),
+                                Dictionary Construction, Network Analysis, Systematic Literature Review</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="list-time"><a href="https://doi.org/10.3138/cpp.2024-023" style="color: white;">Link</a></div>
-
-            </div>            
+            </a>
 
             <div class="project-list-item color-orange">
                 <img src="images/entrepreneurial-university.jpg" alt="Project 5" class="list-thumbnail">
                 <div class="list-info">
                     <div class="list-title">Educational Strategies for Entrepreneurial Universities</div>
                     <div class="project-skills">
-                      <div  class="emoji_skills">👩‍🔧 </div>            
-                      <div class="skills-lists">Focus group,Structural-interpretative modeling </div> 
-                    </div>                
-                  </div>
-                <div class="list-time"> Link</div>
+                        <div class="emoji_skills">🛠️ </div>
+                        <div class="skills-lists">Systematic Literature Review and Framework Synthesis, Focus group,
+                            Interpretive Structural Modeling (ISM) </div>
+                    </div>
+                </div>
             </div>
 
- 
+
 
             <div class="project-list-item color-red">
                 <img src="images/national innovation system.jpg" alt="Project 7" class="list-thumbnail">
@@ -459,10 +482,12 @@
                     <!-- <div class="list-category">Walks, Tours, and Drop-ins</div> -->
                     <div class="list-title">Enhancing Efficiency of Iran’s National Innovation System </div>
                     <div class="project-title">Enhancing Efficiency of National Innovation System </div>
-                      <div class="project-skills"><div  class="emoji_skills">👩‍🔧 </div>            
-                      <div class="skills-lists">ned to be added </div> 
-                    </div>                  </div>
-                <div class="list-time">link</div>
+                    <div class="project-skills">
+                        <div class="emoji_skills">🛠️ </div>
+                        <div class="skills-lists">Two-Stage Network Data Envelopment Analysis (DEA),Tobit Regression
+                            Model, Principal Component Analysis (PCA) </div>
+                    </div>
+                </div>
             </div>
 
             <div class="project-list-item color-green">
@@ -470,10 +495,12 @@
                 <div class="list-info">
                     <div class="list-title">Using the crowd for business model innovation: the case of Digikala</div>
                     <div class="project-title"></div>
-                      <div class="project-skills"><div  class="emoji_skills">👩‍🔧 </div>            
-                      <div class="skills-lists">ned to be added </div> 
-                    </div>                  </div>
-                <div class="list-time">link</div>
+                    <div class="project-skills">
+                        <div class="emoji_skills">🛠️ </div>
+                        <div class="skills-lists">Regression Analysis (Probit Model), Non-response Bias Testing,
+                            Descriptive Analysis </div>
+                    </div>
+                </div>
             </div>
 
             <div class="project-list-item color-blue">
@@ -482,52 +509,54 @@
                 <div class="list-info">
                     <!-- <div class="list-category">Planetarium Programs</div> -->
                     <div class="list-title">Regional Innovative Behaviour: Evidence from Iran</div>
-                      <div class="project-skills"><div  class="emoji_skills">👩‍🔧 </div>            
-                        <div class="skills-lists">ned to be added </div> 
-                      </div>
-                <div class="list-time">link</div>
+                    <div class="project-skills">
+                        <div class="emoji_skills">🛠️ </div>
+                        <div class="skills-lists">Principal Components Analysis (PCA), Spatial Analysis, Stata, Excel
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
 
 
 
 
-    <script>
-        // Get elements
-        const gridBtn = document.getElementById('gridBtn');
-        const listBtn = document.getElementById('listBtn');
-        const gridIcon = document.getElementById('gridIcon');
-        const listIcon = document.getElementById('listIcon');
-        const gridView = document.getElementById('gridView');
-        const listView = document.getElementById('listView');
+        <script>
+            // Get elements
+            const gridBtn = document.getElementById('gridBtn');
+            const listBtn = document.getElementById('listBtn');
+            const gridIcon = document.getElementById('gridIcon');
+            const listIcon = document.getElementById('listIcon');
+            const gridView = document.getElementById('gridView');
+            const listView = document.getElementById('listView');
 
-        // Function to switch to grid view
-        function showGrid() {
-            gridView.classList.remove('hidden');
-            listView.classList.add('hidden');
-            gridBtn.classList.add('active');
-            listBtn.classList.remove('active');
-            gridIcon.classList.add('active');
-            listIcon.classList.remove('active');
-        }
+            // Function to switch to grid view
+            function showGrid() {
+                gridView.classList.remove('hidden');
+                listView.classList.add('hidden');
+                gridBtn.classList.add('active');
+                listBtn.classList.remove('active');
+                gridIcon.classList.add('active');
+                listIcon.classList.remove('active');
+            }
 
-        // Function to switch to list view
-        function showList() {
-            listView.classList.remove('hidden');
-            gridView.classList.add('hidden');
-            listBtn.classList.add('active');
-            gridBtn.classList.remove('active');
-            listIcon.classList.add('active');
-            gridIcon.classList.remove('active');
-        }
+            // Function to switch to list view
+            function showList() {
+                listView.classList.remove('hidden');
+                gridView.classList.add('hidden');
+                listBtn.classList.add('active');
+                gridBtn.classList.remove('active');
+                listIcon.classList.add('active');
+                gridIcon.classList.remove('active');
+            }
 
-        // Add event listeners
-        gridBtn.addEventListener('click', showGrid);
-        listBtn.addEventListener('click', showList);
-        gridIcon.addEventListener('click', showGrid);
-        listIcon.addEventListener('click', showList);
-    </script>
+            // Add event listeners
+            gridBtn.addEventListener('click', showGrid);
+            listBtn.addEventListener('click', showList);
+            gridIcon.addEventListener('click', showGrid);
+            listIcon.addEventListener('click', showList);
+        </script>
 </body>
+
 </html>
