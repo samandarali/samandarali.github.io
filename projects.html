@@ -15,11 +15,42 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background-color: #f5f5f5;
-            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .top-header {
+
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-bottom: 1px solid #e0e0e0;
+            /* margin-left: 50px; */
+        }
+
+        .header-inner {
+            /* max-width: 1400px; */
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .site-name {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+
+        .site-role {
+            font-size: 16px;
+            color: #666666;
+            font-weight: 400;
         }
 
         /* Sidebar */
         .sidebar {
+            position: fixed;
+            left: 0;
+            /* top:0; */
             width: 80px;
             background-color: #1a1a1a;
             height: 100vh;
@@ -85,7 +116,8 @@
 
         /* Main Content */
         .main-content {
-            flex: 1;
+            margin-left: 80px;
+            padding-top: 120px;
             padding: 40px;
         }
 
@@ -132,6 +164,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
+            align-items: stretch;
         }
 
         .projects-grid.hidden {
@@ -145,6 +178,10 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
+
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .project-card:hover {
@@ -176,7 +213,7 @@
         }
 
         .project-info {
-            padding: 20px;
+            padding: 14px 18px 18px 18px;
         }
 
         .project-category {
@@ -190,8 +227,9 @@
         .project-title {
             font-size: 16px;
             font-weight: 600;
-            margin-bottom: 4px;
-            line-height: 1.4;
+            margin-bottom: 6px;
+            line-height: 1.35;
+            /* min-height: 44px; */
         }
 
         .project-subtitle {
@@ -221,7 +259,11 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+            align-items: stretch;
+            height: 100%
         }
+
+
 
         .projects-list.hidden {
             display: none;
@@ -297,7 +339,7 @@
 
         /* Color schemes */
         .color-purple {
-            background: linear-gradient(135deg, #551297 0%, #9257f0 100%);
+            background: linear-gradient(135deg, #551297 0%, #9f97ac 100%);
             color: white;
         }
 
@@ -317,8 +359,18 @@
         }
 
         .color-blue {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            background: linear-gradient(135deg, #fed6e3 0%, #a8edea 100%);
             color: #333;
+        }
+
+        .color-airbnb-sunset {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            color: #2b2b2b;
+        }
+
+        .color-teal {
+            background: linear-gradient(135deg, #0f2027 0%, #68b2d2 100%);
+            color: white;
         }
 
         .hyberlink_non {
@@ -328,6 +380,16 @@
 </head>
 
 <body>
+    <!-- Top header bar -->
+    <header class="top-header">
+        <div class="header-inner">
+            <h1 class="site-name">Mojgan Samandar</h1>
+            <p class="site-role">Economist & Data Analyst</p>
+        </div>
+    </header>
+
+
+
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo">Layout</div>
@@ -368,7 +430,7 @@
                         <img src="images/canadaLaborMarket1.png" alt="Project 2" class="project-image">
                     </div>
                     <div class="project-info">
-                        <div class="project-category"></div>
+                        <div class="project-category">Research Project</div>
                         <div class="project-title">Technical Skills in Demand: Analyzing the Labor Market for Economics
                             Graduates in Canada</div>
                         <div class="project-skills">
@@ -379,70 +441,98 @@
                     </div>
                 </div>
             </a>
-            <div class="project-card color-orange">
-                <div style="position: relative;">
-                    <div class="project-number">5</div>
-                    <img src="images/entrepreneurial-university.jpg" alt="Project 5" class="project-image">
-                </div>
-                <div class="project-info">
-                    <div class="project-category"> </div>
-                    <div class="project-title">Educational Strategies for Entrepreneurial Universities </div>
-                    <div class="project-skills">
-                        <div class="emoji_skills">🛠️ </div>
-                        <div class="skills-lists">Systematic Literature Review and Framework Synthesis, Focus group,
-                            Interpretive Structural Modeling (ISM) </div>
-                    </div> <!-- <div class="project-time">⏰ 5:30 AM</div> -->
-                </div>
-            </div>
 
-            <div class="project-card color-red">
-                <div style="position: relative;">
-                    <div class="project-number">7</div>
-                    <img src="images/national innovation system.jpg" alt="Project 7" class="project-image">
-                </div>
-                <div class="project-info">
-                    <!-- <div class="project-category">Walks, Tours, and Drop-ins</div> -->
-                    <div class="project-title">Enhancing Efficiency of National Innovation System </div>
-                    <div class="project-skills">
-                        <div class="emoji_skills">🛠️ </div>
-                        <div class="skills-lists">Two-Stage Network Data Envelopment Analysis (DEA),Tobit Regression
-                            Model, Principal Component Analysis (PCA) </div>
+            <a class="hyberlink_non" href="projects/entrepreneurial_university_project.html" rel="noopener noreferrer"
+                class="project-link">
+                <div class="project-card color-orange">
+                    <div style="position: relative;">
+                        <div class="project-number">5</div>
+                        <img src="images/entrepreneurial-university.jpg" alt="Project 5" class="project-image">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-category"> Funded Project</div>
+                        <div class="project-title">Educational Strategies for Entrepreneurial Universities </div>
+                        <div class="project-skills">
+                            <div class="emoji_skills">🛠️ </div>
+                            <div class="skills-lists">Systematic Literature Review and Framework Synthesis, Focus group,
+                                Interpretive Structural Modeling (ISM) </div>
+                        </div> <!-- <div class="project-time">⏰ 5:30 AM</div> -->
                     </div>
                 </div>
-            </div>
+            </a>
 
-            <div class="project-card color-green">
-                <div style="position: relative;">
-                    <!-- <div class="project-number">14</div> -->
-                    <img src="images/crowdsourcing.jpg" alt="Project 14" class="project-image">
-                </div>
-                <div class="project-info">
-                    <!-- <div class="project-category">Courses and Workshops</div> -->
-                    <div class="project-title">Using the crowd for business model innovation: the case of Digikala</div>
-                    <div class="project-skills">
-                        <div class="emoji_skills">🛠️ </div>
-                        <div class="skills-lists">Regression Analysis (Probit Model), Non-response Bias Testing,
-                            Descriptive Analysis </div>
+            <a class="hyberlink_non" href="projects/NIS_efficiency.html" rel="noopener noreferrer" class="project-link">
+                <div class="project-card color-red">
+                    <div style="position: relative;">
+                        <div class="project-number">7</div>
+                        <img src="images/national innovation system.jpg" alt="Project 7" class="project-image">
                     </div>
-                </div>
-            </div>
-
-            <div class="project-card color-blue">
-                <div style="position: relative;">
-                    <div class="project-number">6</div>
-                    <img src="images/regional innovation.jpg" alt="Project 6" class="project-image">
-                </div>
-                <div class="project-info">
-                    <!-- <div class="project-category">Planetarium Programs</div> -->
-                    <div class="project-title">Regional Innovative Behaviour: Evidence from Iran</div>
-                    <!-- <div class="project-subtitle">Theater</div> -->
-                    <div class="project-skills">
-                        <div class="emoji_skills">🛠️ </div>
-                        <div class="skills-lists">Principal Components Analysis (PCA), Spatial Analysis, Stata, Excel
+                    <div class="project-info">
+                        <div class="project-category">Funded Porject</div>
+                        <div class="project-title">Enhancing Efficiency of National Innovation System </div>
+                        <div class="project-skills">
+                            <div class="emoji_skills">🛠️ </div>
+                            <div class="skills-lists">Two-Stage Network Data Envelopment Analysis (DEA),Tobit Regression
+                                Model, Principal Component Analysis (PCA) </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
+
+            <a class="hyberlink_non" href="projects/BMI_using_crowd.html" rel="noopener noreferrer">
+                <div class="project-card color-green">
+                    <div style="position: relative;">
+                        <img src="images/crowdsourcing.jpg" alt="Project 14" class="project-image">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-category">Industry-Collaborative Research Project</div>
+                        <div class="project-title">Using the crowd for business model innovation: the case of Digikala
+                        </div>
+                        <div class="project-skills">
+                            <div class="emoji_skills">🛠️ </div>
+                            <div class="skills-lists">Excel(Pivot Tables, Power Query, Data Auditing), Stata, Regression Analysis (Probit Model), Non-response Bias Testing,
+                                Descriptive Analysis </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a class="hyberlink_non" href="projects/regional_innovation.html" rel="noopener noreferrer">
+                <div class="project-card color-blue">
+                    <div style="position: relative;">
+                        <div class="project-number">6</div>
+                        <img src="images/regional innovation.jpg" alt="Project 6" class="project-image">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-category">Research Project</div>
+                        <div class="project-title">Regional Innovative Behaviour: Evidence from Iran</div>
+                        <!-- <div class="project-subtitle">Theater</div> -->
+                        <div class="project-skills">
+                            <div class="emoji_skills">🛠️ </div>
+                            <div class="skills-lists">Principal Components Analysis (PCA), Spatial Analysis, Stata,
+                                Excel
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="hyberlink_non" href="projects/airbnb.html" rel="noopener noreferrer">
+                <div class="project-card color-airbnb-sunset">
+                    <div style="position: relative;">
+                        <div class="project-number">7</div>
+                        <img src="images/cover_airbnb.png" alt="Project 6" class="project-image">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-category">Research Project</div>
+                        <div class="project-title">Discover the best of Europe with Airbnb (value + satisfaction)</div>
+                        <div class="project-skills">
+                            <div class="emoji_skills">🛠️ </div>
+                            <div class="skills-lists">R, Exploratory Data Analysis (EDA), Data Visualization </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
         </div>
 
         <!-- List View -->
@@ -451,74 +541,100 @@
                 <div class="project-list-item color-purple">
                     <img src="images/canadaLaborMarket1.png" alt="Project 2" class="list-thumbnail">
                     <div class="list-info">
-                        <div class="list-title">Technical Skills in Demand: Analyzing the Labor Market for Economics
+                        <div class="project-category">Research Project</div>
+                        <div class="project-title">Technical Skills in Demand: Analyzing the Labor Market for Economics
                             Graduates in Canada</div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️</div>
-                            <div class="skills-lists">Python, Web Scraping, Natural Language Processing (NLP),
+                            <div class="skills-lists">
+                                Python, Web Scraping, Natural Language Processing (NLP),
                                 Dictionary Construction, Network Analysis, Systematic Literature Review</div>
                         </div>
                     </div>
                 </div>
             </a>
 
-            <div class="project-list-item color-orange">
-                <img src="images/entrepreneurial-university.jpg" alt="Project 5" class="list-thumbnail">
-                <div class="list-info">
-                    <div class="list-title">Educational Strategies for Entrepreneurial Universities</div>
-                    <div class="project-skills">
-                        <div class="emoji_skills">🛠️ </div>
-                        <div class="skills-lists">Systematic Literature Review and Framework Synthesis, Focus group,
-                            Interpretive Structural Modeling (ISM) </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="project-list-item color-red">
-                <img src="images/national innovation system.jpg" alt="Project 7" class="list-thumbnail">
-                <div class="list-info">
-                    <!-- <div class="list-category">Walks, Tours, and Drop-ins</div> -->
-                    <div class="list-title">Enhancing Efficiency of Iran’s National Innovation System </div>
-                    <div class="project-title">Enhancing Efficiency of National Innovation System </div>
-                    <div class="project-skills">
-                        <div class="emoji_skills">🛠️ </div>
-                        <div class="skills-lists">Two-Stage Network Data Envelopment Analysis (DEA),Tobit Regression
-                            Model, Principal Component Analysis (PCA) </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-list-item color-green">
-                <img src="images/crowdsourcing.jpg" alt="Project 14" class="list-thumbnail">
-                <div class="list-info">
-                    <div class="list-title">Using the crowd for business model innovation: the case of Digikala</div>
-                    <div class="project-title"></div>
-                    <div class="project-skills">
-                        <div class="emoji_skills">🛠️ </div>
-                        <div class="skills-lists">Regression Analysis (Probit Model), Non-response Bias Testing,
-                            Descriptive Analysis </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-list-item color-blue">
-                <!-- <div class="list-number">6</div> -->
-                <img src="images/regional innovation.jpg" alt="Project 6" class="list-thumbnail">
-                <div class="list-info">
-                    <!-- <div class="list-category">Planetarium Programs</div> -->
-                    <div class="list-title">Regional Innovative Behaviour: Evidence from Iran</div>
-                    <div class="project-skills">
-                        <div class="emoji_skills">🛠️ </div>
-                        <div class="skills-lists">Principal Components Analysis (PCA), Spatial Analysis, Stata, Excel
+            <a class="hyberlink_non" href="projects/entrepreneurial_university_project.html" rel="noopener noreferrer"
+                class="project-link">
+                <div class="project-list-item color-orange">
+                    <img src="images/entrepreneurial-university.jpg" alt="Project 5" class="list-thumbnail">
+                    <div class="list-info">
+                        <div class="project-category">Funded Project</div>
+                        <div class="project-title">Educational Strategies for Entrepreneurial Universities</div>
+                        <div class="project-skills">
+                            <div class="emoji_skills">🛠️ </div>
+                            <div class="skills-lists">Systematic Literature Review and Framework Synthesis, Focus group,
+                                Interpretive Structural Modeling (ISM) </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
+
+
+            <a class="hyberlink_non" href="projects/NIS_efficiency.html" rel="noopener noreferrer" class="project-link">
+                <div class="project-list-item color-red">
+                    <img src="images/national innovation system.jpg" alt="Project 7" class="list-thumbnail">
+                    <div class="list-info">
+                        <div class="list-category">Funded Project</div>
+                        <div class="project-title">Enhancing Efficiency of National Innovation System </div>
+                        <div class="project-skills">
+                            <div class="emoji_skills">🛠️ </div>
+                            <div class="skills-lists">Two-Stage Network Data Envelopment Analysis (DEA),Tobit Regression
+                                Model, Principal Component Analysis (PCA) </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+
+            <a class="hyberlink_non" href="projects/BMI_using_crowd.html" rel="noopener noreferrer">
+                <div class="project-list-item color-green">
+                    <img src="images/crowdsourcing.jpg" alt="Project 14" class="list-thumbnail">
+                    <div class="list-info">
+                        <div class="project-category">Industry-Collaborative Research Project</div>
+                        <div class="project-title">Using the crowd for business model innovation: the case of Digikala
+                        </div>
+                        <div class="project-skills">
+                            <div class="emoji_skills">🛠️ </div>
+                            <div class="skills-lists">Excel(Pivot Tables, Power Query, Data Auditing), Stata, Regression Analysis (Probit Model), Non-response Bias Testing,
+                                Descriptive Analysis </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a class="hyberlink_non" href="projects/regional_innovation.html" rel="noopener noreferrer">
+                <div class="project-list-item color-blue">
+                    <!-- <div class="list-number">6</div> -->
+                    <img src="images/regional innovation.jpg" alt="Project 6" class="list-thumbnail">
+                    <div class="list-info">
+                        <div class="list-category">Research Project</div>
+                        <div class="project-title">Regional Innovative Behaviour: Evidence from Iran</div>
+                        <div class="project-skills">
+                            <div class="emoji_skills">🛠️ </div>
+                            <div class="skills-lists">Principal Components Analysis (PCA), Spatial Analysis, Stata,
+                                Excel
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a class="hyberlink_non" href="projects/airbnb.html" rel="noopener noreferrer">
+                <div class="project-list-item color-airbnb-sunset">
+                    <!-- <div class="list-number">6</div> -->
+                    <img src="images/cover_airbnb.png" alt="Project 6" class="list-thumbnail">
+                    <div class="list-info">
+                        <div class="list-category">Research Programs</div>
+                        <div class="project-title">Discover the best of Europe with Airbnb (value + satisfaction)</div>
+                        <div class="project-skills">
+                            <div class="emoji_skills">🛠️ </div>
+                            <div class="skills-lists">R, Exploratory Data Analysis (EDA), Data Visualization </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
-
-
 
 
 
