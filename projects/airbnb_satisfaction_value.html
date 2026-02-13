@@ -80,6 +80,19 @@
       background: rgba(255, 255, 255, 0.18);
       backdrop-filter: blur(8px);
     }
+    .visualization-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* two equal columns */
+    gap: 20px;
+    align-items: start;
+}
+
+.visualization-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
   </style>
 </head>
 
@@ -417,9 +430,13 @@
         <div class="prose prose-lg max-w-none">
           <h3 class="text-2xl font-bold text-gray-900 mb-4">1) Data & Preparation</h3>
           <p class="text-gray-700 leading-relaxed mb-6">
-            The dataset contains <strong>51,707</strong> listings across 10 cities. To compare cities fairly and avoid
-            city-specific scale issues (for example, Amsterdam’s prices are much higher than Athens), the analysis
-            uses <strong>within-sample quantiles</strong> to create comparable categories.
+          <p>This study uses the data set introduced by Gyódi and Nawaro (2021b) and presented in <a
+              href="https://www.kaggle.com/datasets/thedevastator/airbnb-prices-in-european-cities/data"> Kaggle </a> .
+          </p>
+
+          The dataset contains <strong>51,707</strong> listings across 10 cities. To compare cities fairly and avoid
+          city-specific scale issues (for example, Amsterdam’s prices are much higher than Athens), the analysis
+          uses <strong>within-sample quantiles</strong> to create comparable categories.
           </p>
 
           <div class="bg-rose-50 border-l-4 border-rose-600 p-6 my-8">
@@ -555,7 +572,41 @@
             </div>
           </div>
 
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">B) What Price Bands Look “Worth It” (By City)</h3>
+            <div class="flex flex-col items-center">
+              <img src="../images/airbnb/satisfaction.png" class="w-[50%] mx-auto">
+              <h4 class="font-semibold text-gray-800 mt-3 text-center">
+                Distribution of Guest Satisfaction Across Quartiles by City
+              </h4>
+            </div>
+            
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">B) Prices Across Cities</h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="key-finding bg-white rounded-lg p-6 shadow-sm">
+              <p class="font-semibold text-rose-700 mb-2">Highest price rates</p>
+              <p class="text-gray-700">
+                Amsterdam, Paris, and London have the largest proportions of listings in the highest price quartile.
+              </p>
+            </div>
+
+            <div class="key-finding bg-white rounded-lg p-6 shadow-sm">
+              <p class="font-semibold text-emerald-700 mb-2">Lowest price rates</p>
+              <p class="text-gray-700">
+                Athens and Budapest show the highest shares of low-price listings.
+              </p>
+            </div>
+          </div>
+          
+
+
+            <div class="flex flex-col items-center">
+              <img src="../images/airbnb/price_categories.png" class="w-[60%] mx-auto">
+              <h4 class="font-semibold text-gray-800 mt-3 text-center">
+                Distribution of Listing Prices Across Quartiles by City
+              </h4>
+            </div>  
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">C) What Price Bands Look “Worth It” (By City)</h3>
           <p class="text-gray-700 leading-relaxed mb-6">
             The patterns below summarize the residual interpretation: which price categories are associated with
             higher-than-expected high satisfaction, and which are associated with low satisfaction.
@@ -648,11 +699,40 @@
             </p>
           </div>
 
-          <div>
-            <div><img src="../images/airbnb/satisfaction.png"></div>
-            <div><img src="../images/airbnb/price_categories.png"></div>
+          <div class="mt-16">
+
+            <h3 class="text-2xl font-bold text-gray-900 text-center mb-3">
+              Price–Satisfaction Association by City
+            </h3>
+
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">
+              Residual heatmaps from Chi-square tests illustrating the association 
+              between price quartiles and guest satisfaction quartiles across 
+              European cities. Darker cells indicate stronger deviations from 
+              independence.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+
+              <div><img src="../images/airbnb/Amsterdam.png" class="w-full rounded-lg shadow"></div>
+              <div><img src="../images/airbnb/Athens.png" class="w-full rounded-lg shadow"></div>
+              <div><img src="../images/airbnb/Barcelona.png" class="w-full rounded-lg shadow"></div>
+              <div><img src="../images/airbnb/Budapest.png" class="w-full rounded-lg shadow"></div>
+              <div><img src="../images/airbnb/Berlin.png" class="w-full rounded-lg shadow"></div>
+              <div><img src="../images/airbnb/Lisbon.png" class="w-full rounded-lg shadow"></div>
+              <div><img src="../images/airbnb/London.png" class="w-full rounded-lg shadow"></div>
+              <div><img src="../images/airbnb/Paris.png" class="w-full rounded-lg shadow"></div>
+              <div><img src="../images/airbnb/Rome.png" class="w-full rounded-lg shadow"></div>
+              <div><img src="../images/airbnb/Vienna.png" class="w-full rounded-lg shadow"></div>
+
+            </div>
+
           </div>
 
+
+
+            
+          </div>
           <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Limitations (What This Does NOT Claim)</h3>
           <ul class="list-disc pl-6 space-y-2 text-gray-700">
             <li><strong>Not causal:</strong> price–satisfaction patterns are associations, not proof that price causes
