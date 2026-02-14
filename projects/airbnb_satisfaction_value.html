@@ -177,9 +177,7 @@
         <button onclick="switchTab('overview')" class="tab-button active px-6 py-3 rounded-lg font-semibold">
           Overview
         </button>
-        <button onclick="switchTab('literature')" class="tab-button px-6 py-3 rounded-lg font-semibold">
-          Literature Review
-        </button>
+
         <button onclick="switchTab('methodology')" class="tab-button px-6 py-3 rounded-lg font-semibold">
           Methodology
         </button>
@@ -419,7 +417,6 @@
       </div>
     </div>
   </section>
-
 
   <!-- Methodology -->
   <section id="tab-methodology" class="tab-content section-fade py-8">
@@ -783,19 +780,28 @@
       </div>
     </div>
   </section>
-
+  
   <!-- Footer -->
-  <footer class="py-12">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500">
-      <p class="font-semibold text-gray-700">Mojgan Samandar</p>
-      <p class="text-sm mt-2">Airbnb Satisfaction & Value Across European Cities — Research Project</p>
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <p class="text-gray-400 mb-2">&copy; 2025 Mojgan Samandar. All rights reserved.</p>
+
+        <div class="mt-4">
+          <a href="../index.html" class="text-orange-400 hover:text-teal-300 transition mx-3">Home</a>
+          <a href="../index.html#content-contact"
+            class="text-orange-400 hover:text-teal-300 transition mx-3">
+            Contact
+          </a>        </div>
+      </div>
     </div>
   </footer>
+
 
   <script>
     // Tabs
     function switchTab(tab) {
-      const tabs = ['overview', 'literature', 'methodology', 'findings', 'infographic'];
+      const tabs = ['overview',  'methodology', 'findings', 'infographic'];
 
       tabs.forEach(t => {
         const btns = document.querySelectorAll('.tab-button');

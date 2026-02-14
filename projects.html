@@ -27,9 +27,18 @@
             /* margin-left: 50px; */
         }
 
+        .header-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            font-size: 28px;
+
+        }
+
         .header-inner {
             /* max-width: 1400px; */
-            margin: 0 auto;
+            margin: 0;
+            margin-left: 20px;
             text-align: left;
         }
 
@@ -373,6 +382,11 @@
             color: white;
         }
 
+        .color-blue-green {
+            background: linear-gradient(135deg, #0b3b8f 0%, #1d4ed8 50%, #22c55e 100%);
+            color: white;
+        }
+
         .hyberlink_non {
             text-decoration: none;
         }
@@ -382,9 +396,12 @@
 <body>
     <!-- Top header bar -->
     <header class="top-header">
-        <div class="header-inner">
-            <h1 class="site-name">Mojgan Samandar</h1>
-            <p class="site-role">Economist & Data Analyst</p>
+        <div class="header-grid">
+            <div> <a href="index.html">⌂</a> </div>
+            <div class="header-inner">
+                <h1 class="site-name">Mojgan Samandar</h1>
+                <p class="site-role">Economist & Data Analyst</p>
+            </div>
         </div>
     </header>
 
@@ -461,8 +478,9 @@
                 </div>
             </a>
 
-            <a class="hyberlink_non" href="projects/NIS_efficiency.html" rel="noopener noreferrer" class="project-link">
-                <div class="project-card color-red">
+            <a class="hyberlink_non" href="projects/nis_efficiency_project.html" rel="noopener noreferrer"
+                class="project-link">
+                <div class="project-card color-blue-green">
                     <div style="position: relative;">
                         <div class="project-number">7</div>
                         <img src="images/national innovation system.jpg" alt="Project 7" class="project-image">
@@ -490,7 +508,8 @@
                         </div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
-                            <div class="skills-lists">Excel(Pivot Tables, Power Query, Data Auditing), Stata, Regression Analysis (Probit Model), Non-response Bias Testing,
+                            <div class="skills-lists">Excel(Pivot Tables, Power Query, Data Auditing), Stata, Regression
+                                Analysis (Probit Model), Non-response Bias Testing,
                                 Descriptive Analysis </div>
                         </div>
                     </div>
@@ -571,8 +590,9 @@
             </a>
 
 
-            <a class="hyberlink_non" href="projects/NIS_efficiency.html" rel="noopener noreferrer" class="project-link">
-                <div class="project-list-item color-red">
+            <a class="hyberlink_non" href="projects/nis_efficiency_project.html" rel="noopener noreferrer"
+                class="project-link">
+                <div class="project-list-item color-blue-green">
                     <img src="images/national innovation system.jpg" alt="Project 7" class="list-thumbnail">
                     <div class="list-info">
                         <div class="list-category">Funded Project</div>
@@ -596,7 +616,8 @@
                         </div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
-                            <div class="skills-lists">Excel(Pivot Tables, Power Query, Data Auditing), Stata, Regression Analysis (Probit Model), Non-response Bias Testing,
+                            <div class="skills-lists">Excel(Pivot Tables, Power Query, Data Auditing), Stata, Regression
+                                Analysis (Probit Model), Non-response Bias Testing,
                                 Descriptive Analysis </div>
                         </div>
                     </div>

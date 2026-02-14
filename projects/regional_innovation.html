@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regional Innovation Behavior — Spatial Knowledge Production</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+
+    /* Requested color */
+    .color-blue {
+      background: linear-gradient(135deg, #fed6e3 0%, #a8edea 100%);
+      color: #333;
+    }
+
+    .section-fade {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .section-fade.visible { opacity: 1; transform: translateY(0); }
+
+    .stat-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10); }
+
+    .tool-badge { transition: all 0.3s ease; }
+    .tool-badge:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(15, 118, 110, 0.25); }
+
+    .image-placeholder {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      border: 2px dashed #cbd5e1;
+      overflow: hidden;
+    }
+
+    .tab-button { transition: all 0.3s ease; }
+    .tab-button.active { background-color: #0f766e; color: white; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .key-finding { transition: all 0.3s ease; border-left: 4px solid transparent; }
+    .key-finding:hover { border-left-color: #0f766e; background-color: #f0fdfa; }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+
+  <!-- Navigation -->
+  <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <a href="../projects.html" class="text-teal-700 hover:text-teal-900 font-medium transition flex items-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Portfolio
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section (uses requested color-blue) -->
+  <section class="color-blue py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="inline-block bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold mb-6">
+          Research Article + Thesis Chapter • Spatial Innovation • PCA + Spatial Models
+        </div>
+
+        <!-- Avoid country name in headline -->
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight text-slate-900">
+          Regional Innovation Behavior: Spatial Knowledge Production
+        </h1>
+
+        <p class="text-xl text-slate-700 mb-8 leading-relaxed">
+          A regional innovation study using a spatial knowledge production function framework with Principal Component
+          Analysis (PCA) and spatial spillover testing, built on a proprietary domestic patent dataset.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <!-- Update paths to match your site -->
+          <a href="https://www.sciencedirect.com/science/article/abs/pii/S0040162516000536" target="_blank"
+            class="inline-flex items-center bg-slate-900 text-white font-semibold px-6 py-3 rounded-lg hover:bg-slate-800 transition shadow-lg">
+            Open Article
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+
+
+        </div>
+
+        <div class="mt-6 bg-white/70 border border-slate-200 rounded-xl p-5">
+          <p class="text-sm text-slate-700">
+            <span class="font-semibold text-slate-900">Publication reference:</span>
+            “Regional innovative behavior: Evidence from Iran”, <em>Technological Forecasting &amp; Social Change</em>, 2016,
+            DOI: 10.1016/j.techfore.2016.02.011
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Overview Stats (Cards must include patents analyzed + regions) -->
+  <section class="section-fade -mt-12 relative z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+        <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
+          <div class="text-4xl font-bold text-slate-900 mb-2">18,717</div>
+          <div class="text-gray-600 font-medium">Patents Analyzed</div>
+          <div class="text-xs text-gray-500 mt-2">Resident-granted patents (2008–2010)</div>
+        </div>
+
+        <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
+          <div class="text-4xl font-bold text-teal-700 mb-2">30</div>
+          <div class="text-gray-600 font-medium">Regions Covered</div>
+          <div class="text-xs text-gray-500 mt-2">Clustered at regional level</div>
+        </div>
+
+        <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
+          <div class="text-4xl font-bold text-indigo-700 mb-2">14</div>
+          <div class="text-gray-600 font-medium">Explanatory Variables</div>
+          <div class="text-xs text-gray-500 mt-2">R&amp;D, diffusion, demand, welfare, industry</div>
+        </div>
+
+        <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
+          <div class="text-4xl font-bold text-cyan-700 mb-2">3</div>
+          <div class="text-gray-600 font-medium">PCA Components</div>
+          <div class="text-xs text-gray-500 mt-2">Used to address multicollinearity</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Tab Navigation -->
+  <section class="section-fade py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-xl shadow-lg p-2 flex flex-wrap gap-2">
+        <button onclick="switchTab('overview', this)" class="tab-button active px-6 py-3 rounded-lg font-semibold">
+          Overview
+        </button>
+        <button onclick="switchTab('dataset', this)" class="tab-button px-6 py-3 rounded-lg font-semibold">
+          Dataset 
+        </button>
+        <button onclick="switchTab('methodology', this)" class="tab-button px-6 py-3 rounded-lg font-semibold">
+          Methodology
+        </button>
+        <button onclick="switchTab('findings', this)" class="tab-button px-6 py-3 rounded-lg font-semibold">
+          Findings
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview Tab -->
+  <section id="tab-overview" class="tab-content active section-fade py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Research Overview</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          This project explains why some regions are more innovative than others by modeling regional patenting intensity
+          (patents per capita) using a knowledge production function framework and PCA-based dimension reduction.
+          It analyzes the landscape of regional innovation and patenting activity in Iran between 2008 and 2012. Using a spatial knowledge production function, the research identifies that individual inventors dominate the system, while company-led patenting remains unusually low compared to global trends. The data highlights a geographic concentration of innovation around Tehran and reveals a significant lack of knowledge spillovers between neighboring regions.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          <div class="bg-teal-50 border-l-4 border-teal-700 p-6 rounded-lg">
+            <h3 class="font-semibold text-teal-900 mb-2">Research questions</h3>
+            <ul class="list-disc pl-5 space-y-2 text-teal-800">
+              <li>Which factors explain regional innovative output the most?</li>
+              <li>Do drivers differ by institutional ownership (individuals vs. universities vs. companies)?</li>
+              <li>Is there evidence of spatial spillovers between neighboring regions?</li>
+            </ul>
+          </div>
+
+          <div class="bg-indigo-50 border-l-4 border-indigo-700 p-6 rounded-lg">
+            <h3 class="font-semibold text-indigo-900 mb-2">Why the data matters</h3>
+            <p class="text-indigo-800">
+              The study is enabled by a proprietary dataset of domestic granted patents, built directly from official
+              sources, which makes regional quantitative analysis possible where it previously wasn’t.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-8 bg-slate-50 border border-slate-200 rounded-xl p-6">
+
+          <!-- Impact & Beneficiaries -->
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Impact & Beneficiaries</h3>
+
+          <p class="text-gray-600 mb-8 max-w-4xl leading-relaxed">
+            The research presented in the sources is primarily beneficial for policymakers, the academic community, and industrial stakeholders within Iran and similar developing economies. By identifying the specific factors that drive innovation in a unique context—where economic sanctions are prevalent and individual inventors outnumber corporate ones—the study provides a roadmap for fostering economic growth.
+          </p>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- 1 Policymakers -->
+            <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-teal-600 hover:shadow-xl transition">
+              <div class="w-14 h-14 bg-teal-100 rounded-full flex items-center justify-center mb-4 text-3xl">🏛️</div>
+              <h4 class="text-xl font-bold text-gray-900 mb-3">National and Regional Policymakers</h4>
+
+              <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                <li><span class="font-semibold">Strategic Planning:</span> Policymakers can use the research to understand why innovation is geographically centralized and why knowledge fails to "spill over" into neighboring regions.</li>
+                <li><span class="font-semibold">Commercialization:</span> The study highlights an "urgent need" for policies that encourage individual inventors to collaborate with and commercialize their ideas through Iranian companies.</li>
+                <li><span class="font-semibold">Promoting Competition:</span> The research suggests that promoting market competition is a viable way to boost regional innovative output, as monopoly power was found to have a negative effect.</li>
+              </ul>
+            </div>
+
+            <!-- 2 Academic -->
+            <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-indigo-600 hover:shadow-xl transition">
+              <div class="w-14 h-14 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-3xl">🔬</div>
+              <h4 class="text-xl font-bold text-gray-900 mb-3">The Academic and Scientific Community</h4>
+
+              <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                <li><span class="font-semibold">New Methodologies:</span> It demonstrates how the Griliches–Jaffe knowledge production function and Principal Component Analysis (PCA) can be applied to study innovation in developing countries.</li>
+                <li><span class="font-semibold">Foundation for Future Study:</span> It provides a baseline for future researchers to investigate smaller geographical scales (like cities) or longer time spans to better understand regional dynamics.</li>
+              </ul>
+            </div>
+
+            <!-- 3 Inventors & Companies -->
+            <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-cyan-600 hover:shadow-xl transition">
+              <div class="w-14 h-14 bg-cyan-100 rounded-full flex items-center justify-center mb-4 text-3xl">🏭</div>
+              <h4 class="text-xl font-bold text-gray-900 mb-3">Individual Inventors and Private Companies</h4>
+
+              <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                <li><span class="font-semibold">For Companies:</span> It identifies that R&D investment and human capital (lecturers and students) are the most influential factors for increasing company-owned patents.</li>
+                <li><span class="font-semibold">For Individual Inventors:</span> It recognizes them as the "main players" of the Iranian patent system (owning 87% of patents) and explores how welfare and standard of living directly impact their ability to innovate.</li>
+              </ul>
+            </div>
+
+            <!-- 4 Regional Developers -->
+            <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-emerald-600 hover:shadow-xl transition">
+              <div class="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-4 text-3xl">🗺️</div>
+              <h4 class="text-xl font-bold text-gray-900 mb-3">Regional Developers</h4>
+
+              <p class="text-gray-700 leading-relaxed">
+                Since technological innovation is a "major driving force" behind economic growth and prosperity, regional planners can use this data to identify which "contextual" or "industrial" indexes are lacking in their specific provinces to help boost local development.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Dataset Tab (Novelty + Details in the right place) -->
+  <section id="tab-dataset" class="tab-content section-fade py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Dataset Novelty & Construction</h2>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+        The primary tool for data collection was a proprietary dataset built by manually recording patent information from the "Iranian Official Journal" on a daily basis. Additional regional data were pulled from the Statistical Centre of Iran (SCI) and the Institute for Research and Planning in Higher Education (IRPHE).
+        </p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-emerald-50 border-l-4 border-emerald-600 p-6 rounded-lg">
+            <h3 class="text-xl font-bold text-emerald-900 mb-3">Why this dataset is novel</h3>
+            <ul class="list-disc pl-5 space-y-2 text-emerald-900/90">
+              <li><span class="font-semibold">First-of-its-kind domestic collection:</span> built from domestic granted patent records rather than international databases.</li>
+              <li><span class="font-semibold">Manual construction from official records:</span> recorded directly from daily official publications when no open public database existed.</li>
+              <li><span class="font-semibold">Researcher-assigned classifications:</span> required assigning IPC codes because they were not provided in the official advertisements.</li>
+              <li><span class="font-semibold">Rich bibliographic scope:</span> includes inventor/applicant information and enables regional clustering by inventor address.</li>
+            </ul>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-6 rounded-lg">
+            <h3 class="text-xl font-bold text-slate-900 mb-3">What the article uses</h3>
+            <p class="text-slate-700 leading-relaxed">
+              The article analyzes a <span class="font-semibold">subsample covering 18,717 resident-granted patents</span>
+              during <span class="font-semibold">2008–2010</span>, clustered across <span class="font-semibold">30 regions</span>.
+              Patents are assigned to provinces based on the address of the first inventor and categorized by institutional ownership.
+            </p>
+
+            <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="bg-white border border-slate-200 rounded-lg p-4">
+                <div class="text-sm text-slate-500">Patents analyzed</div>
+                <div class="text-2xl font-extrabold text-slate-900">18,717</div>
+              </div>
+              <div class="bg-white border border-slate-200 rounded-lg p-4">
+                <div class="text-sm text-slate-500">Regions</div>
+                <div class="text-2xl font-extrabold text-slate-900">30</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 bg-white border border-slate-200 rounded-xl p-6">
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Ownership categories used in the article</h3>
+          <p class="text-slate-700">
+            Patents are grouped as <span class="font-semibold">personal</span>, <span class="font-semibold">university</span>, and
+            <span class="font-semibold">company</span> patents, enabling comparisons of drivers by applicant type.
+          </p>
+
+          <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-teal-50 rounded-lg p-4 border border-teal-100">
+              <div class="text-sm text-teal-800 font-semibold">Personal</div>
+              <div class="text-xs text-slate-600 mt-1">Individuals only (no legal entity involved)</div>
+            </div>
+            <div class="bg-indigo-50 rounded-lg p-4 border border-indigo-100">
+              <div class="text-sm text-indigo-800 font-semibold">University</div>
+              <div class="text-xs text-slate-600 mt-1">Owned by a university / higher education institute</div>
+            </div>
+            <div class="bg-cyan-50 rounded-lg p-4 border border-cyan-100">
+              <div class="text-sm text-cyan-800 font-semibold">Company</div>
+              <div class="text-xs text-slate-600 mt-1">Owned by a firm; collaboration can count in both groups</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+<!-- Methodology Tab -->
+<section id="tab-methodology" class="tab-content section-fade py-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Methodology</h2>
+
+    <div class="space-y-8">
+
+      <!-- 1 — Theoretical Framework -->
+      <div class="bg-white rounded-xl shadow-lg p-8 flex gap-6 items-start hover:shadow-xl transition">
+        <div class="flex-shrink-0 w-12 h-12 bg-teal-700 text-white rounded-full flex items-center justify-center font-bold text-xl">1</div>
+
+        <div class="flex-1">
+          <h3 class="text-xl font-bold text-gray-900 mb-3">
+            Theoretical Framework — Knowledge Production Function
+          </h3>
+
+          <p class="text-gray-700 leading-relaxed mb-4">
+            The study applies the <span class="font-semibold">Griliches–Jaffe Knowledge Production Function (KPF)</span>,
+            a geographically extended version of the original innovation production model. It assumes that regional
+            innovative output depends on both internal inputs and external regional characteristics.
+          </p>
+
+          <div class="bg-teal-50 border-l-4 border-teal-600 p-4 rounded">
+            <p class="text-sm text-teal-900">
+              The model is specified in a <span class="font-semibold">logarithmic Cobb–Douglas form</span>, allowing the
+              elasticities of innovation output with respect to R&amp;D, human capital, and structural factors to be estimated.
+            </p>
+          </div>
+
+          <p class="text-gray-700 mt-4">
+            Innovation output is proxied by <span class="font-semibold">patents per capita</span>, estimated for total
+            patents and by ownership category (personal, university, company).
+          </p>
+        </div>
+      </div>
+
+      <!-- 2 — PCA -->
+      <div class="bg-white rounded-xl shadow-lg p-8 flex gap-6 items-start hover:shadow-xl transition">
+        <div class="flex-shrink-0 w-12 h-12 bg-indigo-700 text-white rounded-full flex items-center justify-center font-bold text-xl">2</div>
+
+        <div class="flex-1">
+          <h3 class="text-xl font-bold text-gray-900 mb-3">
+            Dimensionality Reduction — Principal Component Analysis
+          </h3>
+
+          <p class="text-gray-700 leading-relaxed mb-3">
+            Fourteen highly correlated regional indicators created multicollinearity and dimensionality challenges.
+            <span class="font-semibold">Principal Component Analysis (PCA)</span> was used to transform them into a smaller
+            set of orthogonal components.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+            <div class="bg-teal-50 p-4 rounded-lg text-center">
+              <div class="text-xl font-bold text-teal-800">Contextual Index</div>
+              <div class="text-xs text-gray-600 mt-1">R&amp;D + human capital + diffusion capacity</div>
+            </div>
+
+            <div class="bg-indigo-50 p-4 rounded-lg text-center">
+              <div class="text-xl font-bold text-indigo-800">Industrial Index</div>
+              <div class="text-xs text-gray-600 mt-1">Industrial structure &amp; specialization</div>
+            </div>
+
+            <div class="bg-cyan-50 p-4 rounded-lg text-center">
+              <div class="text-xl font-bold text-cyan-800">Low-Welfare Index</div>
+              <div class="text-xs text-gray-600 mt-1">Employment, literacy, living conditions</div>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded mt-4">
+            <p class="text-sm text-slate-700">
+              <span class="font-semibold">Validation tests:</span>
+              Kaiser–Meyer–Olkin (KMO) and Bartlett’s test of sphericity confirmed the dataset’s suitability for PCA.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 — Panel Data -->
+      <div class="bg-white rounded-xl shadow-lg p-8 flex gap-6 items-start hover:shadow-xl transition">
+        <div class="flex-shrink-0 w-12 h-12 bg-cyan-700 text-white rounded-full flex items-center justify-center font-bold text-xl">3</div>
+
+        <div class="flex-1">
+          <h3 class="text-xl font-bold text-gray-900 mb-3">
+            Econometric Modeling — Panel Data Analysis
+          </h3>
+
+          <p class="text-gray-700 leading-relaxed mb-4">
+            The dataset covers <span class="font-semibold">30 regions</span> over
+            <span class="font-semibold">three years (2008–2010)</span>, producing a balanced
+            panel of <span class="font-semibold">90 observations</span>.
+          </p>
+
+          <ul class="list-disc pl-5 space-y-2 text-gray-700">
+            <li>Ordinary Least Squares (OLS) used as a baseline estimator.</li>
+            <li>Random Effects (RE) models applied to account for regional heterogeneity.</li>
+            <li>The Hausman test confirmed RE as more efficient than Fixed Effects for this dataset.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4 — Spatial Econometrics -->
+      <div class="bg-white rounded-xl shadow-lg p-8 flex gap-6 items-start hover:shadow-xl transition">
+        <div class="flex-shrink-0 w-12 h-12 bg-emerald-700 text-white rounded-full flex items-center justify-center font-bold text-xl">4</div>
+
+        <div class="flex-1">
+          <h3 class="text-xl font-bold text-gray-900 mb-3">
+            Spatial Econometric Analysis
+          </h3>
+
+          <p class="text-gray-700 leading-relaxed mb-4">
+            To test whether innovation diffuses geographically, the study integrates spatial dependence into the KPF framework.
+          </p>
+
+          <ul class="list-disc pl-5 space-y-2 text-gray-700">
+            <li>
+              <span class="font-semibold">Spatial weight matrices:</span>
+              constructed using inverse road distance and road travel time between regions.
+            </li>
+            <li>
+              <span class="font-semibold">Spatial Durbin Model:</span>
+              tests whether explanatory variables in one region affect neighboring innovation output.
+            </li>
+            <li>
+              <span class="font-semibold">Diagnostic testing:</span>
+              Moran’s I and Lagrange Multiplier (LM) tests identify spatial lags and spatial error structures.
+            </li>
+          </ul>
+
+          <div class="bg-emerald-50 border-l-4 border-emerald-600 p-4 rounded mt-4">
+            <p class="text-sm text-emerald-900">
+              These tools determine whether regional innovation is spatially interdependent or geographically contained.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+<!-- Tools Used -->
+<div class="mt-12">
+  <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Tools & Technologies</h3>
+
+  <!-- ===== TOP ROW (4 cards) ===== -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+
+    <!-- STATA -->
+    <div class="tool-badge bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-xl p-6 shadow-lg">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">📊</div>
+        <h4 class="text-lg font-bold">Stata</h4>
+      </div>
+      <p class="text-blue-100 text-sm">
+        Used for statistical analysis and econometric modeling of regional innovation data.
+      </p>
+    </div>
+
+    <!-- EXCEL -->
+    <div class="tool-badge bg-gradient-to-br from-green-500 to-green-700 text-white rounded-xl p-6 shadow-lg">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+          <img src="../images/icons8-excel-48.png" class="w-6 h-6">
+        </div>
+        <h4 class="text-lg font-bold">Excel</h4>
+      </div>
+      <p class="text-green-100 text-sm">
+        Used for data entry, cleaning, coding, and dataset preparation prior to analysis.
+      </p>
+    </div>
+
+    <!-- DATA COLLECTION -->
+    <div class="tool-badge bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-xl p-6 shadow-lg">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">🗂️</div>
+        <h4 class="text-lg font-bold">Data Collection</h4>
+      </div>
+      <p class="text-purple-100 text-sm">
+        Proprietary patent dataset constructed manually from official domestic records.
+      </p>
+    </div>
+
+    <!-- THEORETICAL FRAMEWORK -->
+    <div class="tool-badge bg-gradient-to-br from-orange-500 to-orange-700 text-white rounded-xl p-6 shadow-lg">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">📝</div>
+        <h4 class="text-lg font-bold">Theoretical Framework</h4>
+      </div>
+      <p class="text-orange-100 text-sm">
+        Knowledge Production Function (Griliches–Jaffe spatial model).
+      </p>
+    </div>
+
+  </div>
+
+  <!-- ===== BOTTOM ROW ===== -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- STATISTICAL ANALYSIS — WIDE -->
+    <div class="lg:col-span-2 tool-badge bg-gradient-to-br from-teal-500 to-teal-700 text-white rounded-xl p-6 shadow-lg">
+
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center text-2xl"><img src="../images/icons8-statistic-64.png""></div>
+        <h4 class="text-xl font-bold">Statistical Analysis</h4>
+      </div>
+
+      <ul class="list-disc pl-5 space-y-2 text-teal-100 text-sm leading-relaxed">
+        <li><strong>Dimensionality Reduction:</strong> Principal Component Analysis (PCA)</li>
+        <li><strong>Econometric Modeling:</strong> Panel Data Analysis</li>
+        <li><strong>Spatial Analysis:</strong> Spatial Weight Matrices & Spatial Durbin Model</li>
+        <li><strong>Diagnostics:</strong> Moran’s I test and Lagrange Multiplier (LM) tests</li>
+      </ul>
+
+    </div>
+
+    <!-- VISUALIZATION -->
+    <div class="tool-badge bg-gradient-to-br from-pink-500 to-pink-700 text-white rounded-xl p-6 shadow-lg">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">🎨</div>
+        <h4 class="text-lg font-bold">Visualization</h4>
+      </div>
+      <p class="text-pink-100 text-sm">
+        Excel, QGIS, and Stata used to create charts, tables, and visual summaries of regional innovation patterns.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+  </div>
+</section>
+
+
+<!-- Findings + Beneficiaries Tab -->
+<section id="tab-findings" class="tab-content section-fade py-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Key Findings</h2>
+
+    <!-- Findings -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+      <h3 class="text-2xl font-bold text-gray-900 mb-6">Key Findings (Article)</h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- 1) Dominance of Individual Inventors -->
+        <div class="key-finding bg-white border border-gray-200 rounded-lg p-6">
+          <p class="font-semibold text-teal-800 mb-2">Dominance of individual inventors</p>
+          <p class="text-gray-700">
+            Most patents are owned by individuals (about <span class="font-semibold">87–88%</span>), unlike many developed
+            economies where firms dominate. The analysis suggests individuals are not simply filing on behalf of companies,
+            because the drivers of personal patents differ from those of company patents.
+          </p>
+        </div>
+
+        <!-- 2) Lack of Knowledge Spillover -->
+        <div class="key-finding bg-white border border-gray-200 rounded-lg p-6">
+          <p class="font-semibold text-cyan-800 mb-2">No spatial knowledge spillover</p>
+          <p class="text-gray-700">
+            The spatial models do not support inter-regional knowledge spillovers in the study period. Innovative activity
+            is concentrated in a small number of hubs, and knowledge externalities appear constrained by regional borders.
+          </p>
+        </div>
+
+        <!-- 3) Drivers / Indexes -->
+        <div class="key-finding bg-white border border-gray-200 rounded-lg p-6">
+          <p class="font-semibold text-indigo-800 mb-2">Low-Welfare index drives personal patents</p>
+          <p class="text-gray-700">
+            Among the PCA-based indices, the <span class="font-semibold">Low-Welfare</span> index shows the strongest
+            relative importance for <span class="font-semibold">total</span> and <span class="font-semibold">personal</span>
+            patents, linking regional standard-of-living factors (e.g., employment, literacy) to individual inventive activity.
+          </p>
+        </div>
+
+        <div class="key-finding bg-white border border-gray-200 rounded-lg p-6">
+          <p class="font-semibold text-emerald-800 mb-2">Contextual index drives company patents</p>
+          <p class="text-gray-700">
+            For <span class="font-semibold">company patents</span>, the main driver is the
+            <span class="font-semibold">Contextual</span> index, which captures factors such as
+            <span class="font-semibold">R&amp;D investment</span> and <span class="font-semibold">human capital</span>
+            (e.g., students and lecturers). The <span class="font-semibold">Industrial</span> index has a smaller effect
+            relative to the other two.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Visualizations Tab -->
+  <section id="tab-visuals" class="tab-content section-fade py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Visualizations</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="image-placeholder">
+            <span class="text-slate-500 text-sm px-6 text-center">
+              Add your regional patent intensity map (e.g., heatmap).<br />
+              Replace with: <code>&lt;img src="../images/regional_innovation/map.png"&gt;</code>
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-gray-900 mb-2">Patent Intensity by Region</h3>
+            <p class="text-gray-600 text-sm">
+              Patents per capita across regions to show geographic concentration patterns.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="image-placeholder">
+            <span class="text-slate-500 text-sm px-6 text-center">
+              Add PCA loadings / contribution chart.<br />
+              Replace with: <code>&lt;img src="../images/regional_innovation/pca.png"&gt;</code>
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-gray-900 mb-2">PCA Components</h3>
+            <p class="text-gray-600 text-sm">
+              Interpretable components (contextual, industrial, welfare) used in the regression models.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="image-placeholder">
+            <span class="text-slate-500 text-sm px-6 text-center">
+               coefficient summary (components → innovation output).<br />
+              Replace with your figure/table image.
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-gray-900 mb-2">Component Effects</h3>
+            <p class="text-gray-600 text-sm">
+              Estimated effects of components on patents per capita and by ownership category.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="image-placeholder">
+            <span class="text-slate-500 text-sm px-6 text-center">
+              Add spable.
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-gray-900 mb-2">Spatial Spillover Diagnostics</h3>
+            <p class="text-gray-600 text-sm">
+              Checks endence.
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 color-blue">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-4 text-slate-900">Read the Full Study</h2>
+      <p class="text-xl text-slate-700 mb-8 max-w-2xl mx-auto">
+        The paper and thesis chapter include the full variable definitions, PCA design, spatial specification, and robustness checks.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://www.sciencedirect.com/science/article/abs/pii/S0040162516000536" target="_blank"
+          class="inline-flex items-center bg-slate-900 text-white font-semibold px-8 py-4 rounded-lg hover:bg-slate-800 transition shadow-lg text-lg">
+          Open Article
+          <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+        <a href="../projects.html"
+          class="inline-flex items-center bg-white text-slate-900 font-semibold px-8 py-4 rounded-lg hover:bg-white/90 transition shadow-lg text-lg border border-slate-200">
+          Back to Portfolio
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <p class="text-gray-400 mb-2">&copy; 2026 Mojgan Samandar. All rights reserved.</p>
+
+        <div class="mt-4">
+          <a href="../index.html" class="text-teal-300 hover:text-teal-200 transition mx-3">Home</a>
+          <a href="../index.html#content-contact" class="text-teal-300 hover:text-teal-200 transition mx-3">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll animation for sections
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.section-fade').forEach(section => observer.observe(section));
+
+    // Tab switching (no reliance on global `event`)
+    function switchTab(tabName, btnEl) {
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
+
+      const selectedTab = document.getElementById('tab-' + tabName);
+      if (selectedTab) selectedTab.classList.add('active');
+      if (btnEl) btnEl.classList.add('active');
+
+      window.scrollTo({ top: 300, behavior: 'smooth' });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -229,6 +229,33 @@
         // Load About tab by default
         switchTab('content-about');
 
+
+
+        // Linking project to contact page
+        document.addEventListener("DOMContentLoaded", () => {
+            const hash = window.location.hash; // like "#content-contact"
+            if (!hash) return;
+
+            const targetContent = document.querySelector(hash);
+            const targetButton = document.querySelector(
+                `.tab-button[data-target="${hash.slice(1)}"]`
+            );
+
+            if (!targetContent || !targetButton) return;
+
+            // hide all contents
+            document.querySelectorAll(".tab-content").forEach(el => el.classList.add("hidden"));
+            // deactivate all buttons (optional)
+            document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+
+            // show target + activate button
+            targetContent.classList.remove("hidden");
+            targetButton.classList.add("active");
+
+            // optional: scroll neatly
+            targetContent.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+
         // // Pong Game Setup
         // function setupPong() {
         //     const canvas = document.getElementById('pongCanvas');

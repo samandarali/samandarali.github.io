@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Efficiency of National Innovation Systems (Iran & Selected Countries)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .section-fade { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .section-fade.visible { opacity: 1; transform: translateY(0); }
+
+    .stat-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
+
+    .tab-button { transition: all 0.25s ease; }
+    .tab-button.active { background-color: #1d4ed8; color: white; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .key-finding { transition: all 0.25s ease; border-left: 4px solid transparent; }
+    .key-finding:hover { border-left-color: #1d4ed8; background-color: #eff6ff; }
+
+    .tool-badge { transition: all 0.25s ease; }
+    .tool-badge:hover { transform: scale(1.03); box-shadow: 0 8px 18px rgba(29, 78, 216, 0.25); }
+
+    .chip { border: 1px solid rgba(255,255,255,0.25); }
+  </style>
+</head>
+
+<body class="bg-slate-50">
+
+  <!-- Navigation -->
+  <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <a href="../projects.html" class="text-blue-700 hover:text-blue-900 font-medium transition flex items-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Portfolio
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-[#0b3b8f] via-[#1d4ed8] to-[#22c55e] text-white py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold mb-6 chip">
+          <span>Funded Research Output</span>
+          <span class="opacity-70">•</span>
+          <span>Two-Stage DEA + Tobit</span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+          Efficiency of National Innovation Systems in Iran and Selected Countries
+        </h1>
+
+        <p class="text-xl text-blue-50/90 mb-8 leading-relaxed">
+          This study evaluates National Innovation System (NIS) efficiency by separating
+          <strong>invention creation</strong> from <strong>commercialization</strong>.
+          Results show Iran improves in generating scientific outputs, but overall system efficiency remains weak due to
+          poor commercialization performance.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <!-- Update these links to match your portfolio structure -->
+          <a href="https://www.ensani.ir/file/download/article/1626757219-9461-1400-2-5.pdf" target="_blank"
+            class="inline-flex items-center bg-white text-blue-800 font-semibold px-6 py-3 rounded-lg hover:bg-blue-50 transition shadow-lg">
+            Link to the article (Persian)
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Overview Stats -->
+  <section class="section-fade -mt-12 relative z-10" id="tab-overview">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
+          <div class="text-4xl font-bold text-blue-700 mb-2">2011–2016</div>
+          <div class="text-gray-600 font-medium">Study Period</div>
+        </div>
+
+        <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
+          <div class="text-4xl font-bold text-emerald-600 mb-2">17</div>
+          <div class="text-gray-600 font-medium">Countries Compared</div>
+        </div>
+
+        <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
+          <div class="text-4xl font-bold text-cyan-600 mb-2">2</div>
+          <div class="text-gray-600 font-medium">Connected Stages (DEA)</div>
+        </div>
+
+        <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
+          <div class="text-4xl font-bold text-green-600 mb-2">Tobit</div>
+          <div class="text-gray-600 font-medium">Environmental Drivers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tab Navigation -->
+  <section class="section-fade py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-xl shadow-lg p-2 flex flex-wrap gap-2">
+        <button onclick="switchTab('overview')" class="tab-button active px-6 py-3 rounded-lg font-semibold">
+          Overview
+        </button>
+        <button onclick="switchTab('methodology')" class="tab-button px-6 py-3 rounded-lg font-semibold">
+          Methodology
+        </button>
+        <button onclick="switchTab('data')" class="tab-button px-6 py-3 rounded-lg font-semibold">
+          Data & Variables
+        </button>
+        <button onclick="switchTab('findings')" class="tab-button px-6 py-3 rounded-lg font-semibold">
+          Key Findings
+        </button>
+        <button onclick="switchTab('tools')" class="tab-button px-6 py-3 rounded-lg font-semibold">
+          Tools & Sources
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview Tab -->
+  <section id="tab-overview-content" class="tab-content active section-fade py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Research Overview</h2>
+
+        <div class="prose prose-lg max-w-none">
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+            Innovation performance is often reported using single indicators (e.g., patents or publications), but
+            these measures do not tell you whether a country is <em>efficient</em> with its resources.
+            This project evaluates efficiency by separating the innovation pipeline into two connected stages:
+            (1) producing scientific/technical outputs and (2) turning them into economic and market outcomes.
+          </p>
+
+          <div class="bg-blue-50 border-l-4 border-blue-600 p-6 my-8">
+            <h3 class="text-xl font-bold text-blue-900 mb-3">Main Message</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Iran’s performance is relatively strong in the invention-creation stage, but overall NIS efficiency is
+              very low once commercialization is included. This suggests a policy shift toward market integration and
+              stronger university–industry linkages.
+            </p>
+          </div>
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">Who is compared?</h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-slate-50 rounded-lg p-6">
+              <h4 class="font-bold text-lg text-gray-900 mb-3">Regional Peers (Vision 2025 set)</h4>
+              <p class="text-gray-700">
+                Azerbaijan, Jordan, Armenia, Saudi Arabia, Qatar, Iran, Israel, Bahrain, Turkey, Georgia, Egypt,
+                Pakistan, Kyrgyzstan, UAE, Kazakhstan.
+              </p>
+            </div>
+
+            <div class="bg-slate-50 rounded-lg p-6">
+              <h4 class="font-bold text-lg text-gray-900 mb-3">Technological Leaders</h4>
+              <p class="text-gray-700">
+                South Korea and China are included as benchmarks for successful catching-up innovation policies.
+              </p>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  <!-- Impact Section -->
+  <section class="section-fade py-16 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-4 text-center">Impact & Beneficiaries</h2>
+      <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+        The findings of this research are designed to benefit a wide range of stakeholders involved in national
+        development—from high-level government officials to academic researchers and industry leaders.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Policymakers -->
+        <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-teal-500 hover:shadow-xl transition">
+          <div class="w-14 h-14 bg-teal-100 rounded-full flex items-center justify-center mb-4 text-3xl">
+            🏛️
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Policymakers & Government Officials</h3>
+          <ul class="text-gray-700 leading-relaxed space-y-3 list-disc pl-5">
+            <li>
+              <span class="font-semibold">National strategy development:</span> Provides a roadmap to support Iran’s Vision
+              2025 goal of becoming a leading regional economy.
+            </li>
+            <li>
+              <span class="font-semibold">Targeted resource allocation:</span> Separates efficiency into innovation
+              creation vs. commercialization, highlighting the main gap in market conversion.
+            </li>
+            <li>
+              <span class="font-semibold">Informed policy adjustments:</span> Supports evidence-based improvements in
+              governance indicators and trade/customs settings that materially affect innovation efficiency.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Universities -->
+        <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-indigo-500 hover:shadow-xl transition">
+          <div class="w-14 h-14 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-3xl">
+            🎓
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Universities & Academic Institutions</h3>
+          <ul class="text-gray-700 leading-relaxed space-y-3 list-disc pl-5">
+            <li>
+              <span class="font-semibold">Evaluation reform:</span> Encourages moving beyond paper/patent counts toward
+              rewarding real-world application and industry collaboration.
+            </li>
+            <li>
+              <span class="font-semibold">Strategic partnerships:</span> Shows university–industry links are essential for
+              commercialization and overall system efficiency.
+            </li>
+            <li>
+              <span class="font-semibold">Practical impact focus:</span> Aligns academic incentives with technology transfer
+              and market outcomes.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Industry -->
+        <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-purple-500 hover:shadow-xl transition">
+          <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-3xl">
+            🚀
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Industry Leaders & Entrepreneurs</h3>
+          <ul class="text-gray-700 leading-relaxed space-y-3 list-disc pl-5">
+            <li>
+              <span class="font-semibold">Economic environment insights:</span> Uses Economic Complexity to reflect
+              technological capability and export diversity—useful for strategy and investment direction.
+            </li>
+            <li>
+              <span class="font-semibold">Commercialization support:</span> Reinforces the need for policies that expand
+              industrial value-added and strengthen high-tech sectors.
+            </li>
+            <li>
+              <span class="font-semibold">Better conditions to scale:</span> Highlights system changes that improve the
+              pathway from invention to market.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Researchers -->
+        <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-pink-500 hover:shadow-xl transition">
+          <div class="w-14 h-14 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-3xl">
+            🔬
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Researchers & Scholars</h3>
+          <ul class="text-gray-700 leading-relaxed space-y-3 list-disc pl-5">
+            <li>
+              <span class="font-semibold">Methodological advancements:</span> Introduces Two-Stage Network DEA and integrates
+              Economic Complexity as an output indicator.
+            </li>
+            <li>
+              <span class="font-semibold">Comparative data:</span> Provides cross-country benchmarking across 17 regional
+              countries for future innovation and policy research.
+            </li>
+            <li>
+              <span class="font-semibold">Reusable research base:</span> Offers a structured foundation for replication and
+              comparative studies.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  </section>
+
+
+  
+  <!-- Methodology Tab -->
+  <section id="tab-methodology" class="tab-content section-fade py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Methodology</h2>
+
+        <div class="prose prose-lg max-w-none">
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="border-l-4 border-blue-600 pl-6">
+              <h3 class="text-2xl font-bold text-gray-900 mb-3">Two-Stage Network DEA</h3>
+              <p class="text-gray-700 leading-relaxed">
+                Instead of treating the innovation system as a "black box," I divided it into two connected sub-processes
+              </p>  
+              <ul class="mt-4 space-y-2 text-gray-700">
+                <li><strong>Stage 1:</strong> Innovation Creation: Measures the efficiency of turning inputs (like R&D and human capital) into scientific papers and patents.</li> 
+                <li><strong>Stage 2:</strong> Innovation Commercialization: Measures the efficiency of turning those scientific outputs into economic value (like industrial value-added and economic complexity</li> 
+                <li><strong>Reference model:</strong> Kao & Hwang (2008) relational decomposition</li>
+              </ul>
+            </div>
+
+            <div class="border-l-4 border-emerald-600 pl-6">
+              <h3 class="text-2xl font-bold text-gray-900 mb-3">Second Stage: Tobit Regression</h3>
+              <p class="text-gray-700 leading-relaxed">
+                After efficiency scores are computed, Tobit models examine how environmental factors relate to efficiency.
+                The analysis highlights governance quality and university–industry relations as key drivers.
+              </p>
+              <ul class="mt-4 space-y-2 text-gray-700">
+                <li><strong>Dependent variable:</strong> Efficiency scores (censored)</li>
+                <li><strong>Examples of drivers:</strong> Good governance, tariffs, university–industry collaboration</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Figure -->
+          <div class="mt-10 bg-slate-50 rounded-xl p-6 border">
+            <h4 class="font-bold text-gray-900 mb-3">
+              Figure — Two-Stage National Innovation System Framework
+            </h4>
+
+            <img src="../images/NIS_conceptualModel.png"
+                alt="Two-stage NIS conceptual framework"
+                class="w-full max-w-5xl mx-auto rounded-lg shadow-sm border bg-white" />
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Data & Variables Tab -->
+<section id="tab-data" class="tab-content section-fade py-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Data & Variables</h2>
+
+      <div class="prose prose-lg max-w-none">
+
+        <!-- KEEP YOUR INTRO -->
+        <p class="text-gray-700 leading-relaxed mb-6">
+          The model uses multiple international data sources to build comparable indicators for inputs, intermediate
+          outputs, and final outcomes. A key feature is using <strong>Economic Complexity (ECI)</strong> alongside more
+          standard economic outputs to capture technological capability and export sophistication.
+        </p>
+
+        <p class="text-gray-700 leading-relaxed mb-6">
+          The study required the integration and normalization of large datasets from multiple international databases,
+          including the World Bank (WDI & WGI), UNESCO (UIS.Stat), WIPO, Global Innovation Index, ILOSTAT, and the Atlas
+          of Economic Complexity.
+        </p>
+
+        <!-- VARIABLES TABLE -->
+        <div class="mt-10 overflow-x-auto">
+
+          <h3 class="text-xl font-bold text-gray-900 mb-4">
+            Innovation System Variables and Data Sources
+          </h3>
+
+          <table class="min-w-full border border-slate-200 rounded-lg overflow-hidden text-sm">
+
+            <thead class="bg-slate-100">
+              <tr>
+                <th class="px-4 py-3 text-left font-semibold text-gray-900">Stage</th>
+                <th class="px-4 py-3 text-left font-semibold text-gray-900">Variable</th>
+                <th class="px-4 py-3 text-left font-semibold text-gray-900">Indicator Description</th>
+                <th class="px-4 py-3 text-left font-semibold text-gray-900">Data Source</th>
+              </tr>
+            </thead>
+
+            <tbody class="divide-y">
+
+              <!-- Stage 1 Inputs -->
+              <tr>
+                <td class="px-4 py-3 font-semibold text-blue-700">Stage 1 — Creation</td>
+                <td class="px-4 py-3">Human Capital</td>
+                <td class="px-4 py-3">
+                  Higher education attainment; adult literacy rate
+                </td>
+                <td class="px-4 py-3">UNESCO (UIS.Stat), World Bank (WDI)</td>
+              </tr>
+
+              <tr>
+                <td class="px-4 py-3 font-semibold text-blue-700">Stage 1 — Creation</td>
+                <td class="px-4 py-3">Infrastructure</td>
+                <td class="px-4 py-3">
+                  ICT Access Index; QS top-3 universities score
+                </td>
+                <td class="px-4 py-3">Global Innovation Index, QS Rankings</td>
+              </tr>
+
+              <tr>
+                <td class="px-4 py-3 font-semibold text-blue-700">Stage 1 — Creation</td>
+                <td class="px-4 py-3">R&amp;D Expenditure</td>
+                <td class="px-4 py-3">
+                  Gross R&amp;D spending (% of GDP)
+                </td>
+                <td class="px-4 py-3">UNESCO, World Bank</td>
+              </tr>
+
+              <!-- Stage 1 Outputs -->
+              <tr>
+                <td class="px-4 py-3 font-semibold text-blue-700">Intermediate Output</td>
+                <td class="px-4 py-3">Scientific Publications</td>
+                <td class="px-4 py-3">
+                  Scientific &amp; technical journal articles
+                </td>
+                <td class="px-4 py-3">World Bank (WDI)</td>
+              </tr>
+
+              <tr>
+                <td class="px-4 py-3 font-semibold text-blue-700">Intermediate Output</td>
+                <td class="px-4 py-3">Patent Applications</td>
+                <td class="px-4 py-3">
+                  Total patent filings
+                </td>
+                <td class="px-4 py-3">WIPO</td>
+              </tr>
+
+              <!-- Stage 2 Inputs -->
+              <tr>
+                <td class="px-4 py-3 font-semibold text-emerald-700">Stage 2 — Commercialization</td>
+                <td class="px-4 py-3">Domestic Credit</td>
+                <td class="px-4 py-3">
+                  Credit to private sector (% of GDP)
+                </td>
+                <td class="px-4 py-3">World Bank (WDI)</td>
+              </tr>
+
+              <tr>
+                <td class="px-4 py-3 font-semibold text-emerald-700">Stage 2 — Commercialization</td>
+                <td class="px-4 py-3">High-Skill Labor</td>
+                <td class="px-4 py-3">
+                  Employment in high &amp; medium-tech industries
+                </td>
+                <td class="px-4 py-3">ILOSTAT</td>
+              </tr>
+
+              <!-- Final Outputs -->
+              <tr>
+                <td class="px-4 py-3 font-semibold text-purple-700">Final Output</td>
+                <td class="px-4 py-3">Economic Complexity Index</td>
+                <td class="px-4 py-3">
+                  Export diversity &amp; technological capability
+                </td>
+                <td class="px-4 py-3">Atlas of Economic Complexity</td>
+              </tr>
+
+              <tr>
+                <td class="px-4 py-3 font-semibold text-purple-700">Final Output</td>
+                <td class="px-4 py-3">Industrial Value Added</td>
+                <td class="px-4 py-3">
+                  Manufacturing value added per capita
+                </td>
+                <td class="px-4 py-3">World Bank (WDI)</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Environmental Variables -->
+        <div class="mt-12">
+
+          <h3 class="text-xl font-bold text-gray-900 mb-4">
+            Environmental Variables (Tobit Regression Stage)
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <div class="bg-white rounded-lg p-5 shadow-sm border">
+              <p class="font-semibold text-blue-700 mb-2">
+                Good Governance Index
+              </p>
+              <p class="text-gray-700 text-sm">
+                Composite governance measure constructed via <strong>PCA</strong> from World Governance Indicators
+                (rule of law, regulatory quality, corruption control, government effectiveness, political stability,
+                voice &amp; accountability). <br>
+                <span class="text-gray-500">Source: World Bank (WGI)</span>
+              </p>
+            </div>
+
+            <div class="bg-white rounded-lg p-5 shadow-sm border">
+              <p class="font-semibold text-blue-700 mb-2">
+                University–Industry Collaboration
+              </p>
+              <p class="text-gray-700 text-sm">
+                Measures research cooperation intensity between academia and industry.
+                <br><span class="text-gray-500">Source: Global Innovation Index</span>
+              </p>
+            </div>
+
+            <div class="bg-white rounded-lg p-5 shadow-sm border">
+              <p class="font-semibold text-blue-700 mb-2">
+                Customs Tariffs
+              </p>
+              <p class="text-gray-700 text-sm">
+                Weighted mean tariff rate used as trade policy barrier indicator.
+                <br><span class="text-gray-500">Source: World Bank (WDI)</span>
+              </p>
+            </div>
+
+            <div class="bg-white rounded-lg p-5 shadow-sm border">
+              <p class="font-semibold text-blue-700 mb-2">
+                Utility Model Law
+              </p>
+              <p class="text-gray-700 text-sm">
+                Dummy variable capturing legal protection of incremental (“small”) innovations.
+                <br><span class="text-gray-500">Source: WIPO</span>
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Findings Tab -->
+<section id="tab-findings" class="tab-content section-fade py-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Key Findings</h2>
+
+      <div class="prose prose-lg max-w-none">
+
+        <!-- Headline insight -->
+        <div class="bg-blue-50 border-l-4 border-blue-600 p-6 my-6">
+          <p class="text-lg font-semibold text-blue-900 mb-2">
+            Iran performs strongly in innovation creation but exhibits very low overall efficiency once
+            commercialization is incorporated.
+          </p>
+          <p class="text-gray-700 leading-relaxed">
+            The core systemic failure lies not in producing knowledge, but in transforming that knowledge into
+            economic value.
+          </p>
+        </div>
+
+        <!-- Findings Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+
+          <div class="bg-white rounded-lg p-6 shadow-sm border key-finding">
+            <h3 class="font-bold text-lg text-gray-900 mb-2">📈 Strong invention capacity</h3>
+            <p class="text-gray-700">
+              Iran ranks relatively high in scientific publications and patent generation within the country sample,
+              indicating an efficient knowledge production system supported by human capital and R&amp;D investment.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg p-6 shadow-sm border key-finding">
+            <h3 class="font-bold text-lg text-gray-900 mb-2">📉 Commercialization bottleneck</h3>
+            <p class="text-gray-700">
+              Efficiency scores decline sharply when second-stage outputs such as economic complexity and industrial
+              value added are included, revealing systemic weaknesses in innovation diffusion and market conversion.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg p-6 shadow-sm border key-finding">
+            <h3 class="font-bold text-lg text-gray-900 mb-2">🏛️ Governance as an efficiency driver</h3>
+            <p class="text-gray-700">
+              Governance quality—including rule of law, regulatory effectiveness, and political stability—shows a
+              statistically significant positive relationship with national innovation efficiency.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg p-6 shadow-sm border key-finding">
+            <h3 class="font-bold text-lg text-gray-900 mb-2">🤝 Dual role of university–industry collaboration</h3>
+            <p class="text-gray-700">
+              Collaboration appears to constrain pure invention output but becomes critical in the commercialization
+              stage, supporting the translation of research into industrial and economic applications.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Policy Findings (new structured block) -->
+        <div class="bg-slate-50 border rounded-xl p-8 mt-12">
+
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">
+            Policy-Oriented Findings
+          </h3>
+
+          <div class="space-y-6">
+
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">
+                1. Rebalance innovation policy toward commercialization
+              </h4>
+              <p class="text-gray-700 leading-relaxed">
+                Resources should shift from invention expansion to commercialization infrastructure. Increasing
+                industrial value added and economic complexity is more critical than further growth in publication or
+                patent volume.
+              </p>
+            </div>
+
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">
+                2. Reform academic evaluation systems
+              </h4>
+              <p class="text-gray-700 leading-relaxed">
+                Promotion and funding criteria should move beyond publication counts, incorporating technology
+                transfer, industry partnerships, and applied innovation outcomes as core performance indicators.
+              </p>
+            </div>
+
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">
+                3. Strengthen governance and business environment
+              </h4>
+              <p class="text-gray-700 leading-relaxed">
+                Institutional quality directly affects innovation efficiency. Improving regulatory quality, legal
+                enforcement, and political stability is essential for enabling innovation diffusion and private-sector
+                investment.
+              </p>
+            </div>
+
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">
+                4. Reduce structural trade barriers
+              </h4>
+              <p class="text-gray-700 leading-relaxed">
+                High customs tariffs hinder technological catching-up. Trade liberalization can accelerate knowledge
+                diffusion, technology imports, and industrial upgrading.
+              </p>
+            </div>
+
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-2">
+                5. Support early-stage innovation mechanisms
+              </h4>
+              <p class="text-gray-700 leading-relaxed">
+                While utility model laws show statistically limited impact across countries, they may still support
+                incremental innovation and early technological capability building.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Strategic takeaway -->
+        <div class="mt-12 bg-gradient-to-r from-blue-700 via-blue-600 to-emerald-600 rounded-xl p-8 text-white">
+          <h3 class="text-2xl font-bold mb-4">Strategic Implication</h3>
+          <p class="text-lg leading-relaxed">
+            National innovation performance depends less on the volume of knowledge produced and more on the system’s
+            capacity to commercialize that knowledge. Policy effectiveness therefore hinges on strengthening the
+            second stage of the innovation system.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Tools & Sources Tab -->
+   
+  <section id="tab-tools" class="tab-content section-fade py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Tools & Data Sources</h2>
+
+        <div class="prose prose-lg max-w-none">
+          <p class="text-gray-700 leading-relaxed mb-8">
+            The project integrates cross-country indicators from major international datasets and applies efficiency
+            modeling and regression techniques to identify bottlenecks and drivers of performance.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <div class="tool-badge bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-xl p-6 shadow-lg">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">📐</div>
+                <h4 class="text-lg font-bold">Network DEA</h4>
+              </div>
+              <p class="text-blue-100 text-sm">
+                Two-stage connected DEA (output-oriented, VRS) with efficiency decomposition.
+              </p>
+            </div>
+
+            <div class="tool-badge bg-gradient-to-br from-emerald-600 to-emerald-800 text-white rounded-xl p-6 shadow-lg">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">📉</div>
+                <h4 class="text-lg font-bold">Tobit Regression</h4>
+              </div>
+              <p class="text-emerald-100 text-sm">
+                Explains efficiency scores using censored regression with governance and collaboration drivers.
+              </p>
+            </div>
+
+            <div class="tool-badge bg-gradient-to-br from-cyan-600 to-cyan-800 text-white rounded-xl p-6 shadow-lg">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">🧠</div>
+                <h4 class="text-lg font-bold">PCA (Governance Index)</h4>
+              </div>
+              <p class="text-cyan-100 text-sm">
+                Principal Component Analysis used to compress governance dimensions into a single index.
+              </p>
+            </div>
+
+            <div class="tool-badge bg-gradient-to-br from-slate-700 to-slate-900 text-white rounded-xl p-6 shadow-lg">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">🌍</div>
+                <h4 class="text-lg font-bold">World Bank (WDI/WGI)</h4>
+              </div>
+              <p class="text-slate-200 text-sm">
+                Macroeconomic, industrial, and governance indicators for cross-country comparability.
+              </p>
+            </div>
+
+            <div class="tool-badge bg-gradient-to-br from-purple-600 to-purple-800 text-white rounded-xl p-6 shadow-lg">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">🎓</div>
+                <h4 class="text-lg font-bold">UNESCO (UIS)</h4>
+              </div>
+              <p class="text-purple-100 text-sm">
+                Education, human capital, and R&D statistics.
+              </p>
+            </div>
+
+            <div class="tool-badge bg-gradient-to-br from-amber-600 to-amber-800 text-white rounded-xl p-6 shadow-lg">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">🧾</div>
+                <h4 class="text-lg font-bold">WIPO + GII + ECI</h4>
+              </div>
+              <p class="text-amber-100 text-sm">
+                Patent indicators, infrastructure/collaboration metrics, and economic complexity rankings.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-12 bg-slate-50 rounded-xl p-6 border">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">What I did:</h3>
+            <ul class="text-gray-700 space-y-2">
+              <li>• Harmonized multi-source country-year datasets (2011–2016) and handled missing values.</li>
+              <li>• Built connected DEA models and decomposed efficiency into invention vs commercialization stages.</li>
+              <li>• Modeled environmental drivers with Tobit regression; interpreted policy implications.</li>
+              <li>• Produced visual summaries (rankings, trends) for reporting and publication.</li>
+            </ul>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <p class="text-gray-400 mb-2">&copy; 2025 Mojgan Samandar. All rights reserved.</p>
+
+        <div class="mt-4">
+          <a href="../index.html" class="text-blue-400 hover:text-teal-300 transition mx-3">Home</a>
+          <a href="../index.html#content-contact" 
+            class="text-blue-400 hover:text-blue-300 transition mx-3">
+            Contact
+          </a>        
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Fade-in on scroll (simple + lightweight)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.section-fade').forEach(el => observer.observe(el));
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function switchTab(tab) {
+      // buttons
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      const btnMap = {
+        overview: 0,
+        methodology: 1,
+        data: 2,
+        findings: 3,
+        tools: 4
+      };
+      document.querySelectorAll('.tab-button')[btnMap[tab]].classList.add('active');
+
+      // content
+      document.querySelectorAll('.tab-content').forEach(sec => sec.classList.remove('active'));
+      document.getElementById('tab-' + tab + (tab === 'overview' ? '-content' : '')).classList.add('active');
+
+      // scroll a bit to avoid feeling "stuck" under sticky nav
+      window.scrollTo({ top: window.scrollY - 10, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

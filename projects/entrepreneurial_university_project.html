@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,24 +11,65 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    .section-fade { opacity: 0; transform: translateY(18px); transition: opacity .6s ease-out, transform .6s ease-out; }
-    .section-fade.visible { opacity: 1; transform: translateY(0); }
+    body {
+      font-family: 'Inter', sans-serif;
+    }
 
-    .stat-card { transition: transform .25s ease, box-shadow .25s ease; }
-    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,.10); }
+    .section-fade {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .6s ease-out, transform .6s ease-out;
+    }
 
-    .tab-button { transition: all .25s ease; }
-    .tab-button.active { background-color: #dd2476; color: white; }
+    .section-fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
+    .stat-card {
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
 
-    .card { transition: transform .25s ease, box-shadow .25s ease; }
-    .card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,.10); }
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .10);
+    }
 
-    .key-point { border-left: 4px solid transparent; transition: all .25s ease; }
-    .key-point:hover { border-left-color:#dd2476; background: rgba(255,81,47,.10); }
+    .tab-button {
+      transition: all .25s ease;
+    }
+
+    .tab-button.active {
+      background-color: #dd2476;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .card {
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .10);
+    }
+
+    .key-point {
+      border-left: 4px solid transparent;
+      transition: all .25s ease;
+    }
+
+    .key-point:hover {
+      border-left-color: #dd2476;
+      background: rgba(255, 81, 47, .10);
+    }
 
     .figure-box {
       background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -36,8 +78,16 @@
       border: 2px dashed #cbd5e1;
     }
 
-    .badge { background: rgba(255,255,255,.18); backdrop-filter: blur(6px); }
-    .pill { background: #fff7ed; color: #9a3412; border: 1px solid #fed7aa; }
+    .badge {
+      background: rgba(255, 255, 255, .18);
+      backdrop-filter: blur(6px);
+    }
+
+    .pill {
+      background: #fff7ed;
+      color: #9a3412;
+      border: 1px solid #fed7aa;
+    }
   </style>
 </head>
 
@@ -47,10 +97,10 @@
   <nav class="bg-white shadow-sm sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <!-- Adjust this path to match your site structure -->
-      <a href="../projects.html" class="text-slate-700 hover:text-slate-900 font-medium transition inline-flex items-center">
+      <a href="../projects.html"
+        class="text-slate-700 hover:text-slate-900 font-medium transition inline-flex items-center">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
         </svg>
         Back to Portfolio
       </a>
@@ -66,12 +116,14 @@
         </div>
 
         <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
-          Society-Oriented & Entrepreneurial Universities (Iran)
+          Society-Oriented & Entrepreneurial Universities
         </h1>
 
         <p class="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
-          A ministry-commissioned initiative to accelerate the transition of universities toward stronger engagement with
-          society and industry. The project produced national policy documents and a series of virtual workshops and roundtables
+          A ministry-commissioned initiative to accelerate the transition of universities toward stronger engagement
+          with
+          society and industry. The project produced national policy documents and a series of virtual workshops and
+          roundtables
           (COVID-era) with university leadership across the country to support implementation and adoption.
         </p>
 
@@ -131,11 +183,16 @@
   <section class="section-fade py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white rounded-xl shadow-lg p-2 flex flex-wrap gap-2">
-        <button onclick="switchTab('overview')" class="tab-button active px-6 py-3 rounded-lg font-semibold">Overview</button>
-        <button onclick="switchTab('policy')" class="tab-button px-6 py-3 rounded-lg font-semibold">Policy Context</button>
-        <button onclick="switchTab('outputs')" class="tab-button px-6 py-3 rounded-lg font-semibold">Project Outputs</button>
-        <button onclick="switchTab('events')" class="tab-button px-6 py-3 rounded-lg font-semibold">Workshops & Seminars</button>
-        <button onclick="switchTab('research')" class="tab-button px-6 py-3 rounded-lg font-semibold">Research Articles</button>
+        <button onclick="switchTab('overview')"
+          class="tab-button active px-6 py-3 rounded-lg font-semibold">Overview</button>
+        <button onclick="switchTab('policy')" class="tab-button px-6 py-3 rounded-lg font-semibold">Policy
+          Context</button>
+        <button onclick="switchTab('outputs')" class="tab-button px-6 py-3 rounded-lg font-semibold">Project
+          Outputs</button>
+        <button onclick="switchTab('events')" class="tab-button px-6 py-3 rounded-lg font-semibold">Workshops &
+          Seminars</button>
+        <button onclick="switchTab('research')" class="tab-button px-6 py-3 rounded-lg font-semibold">Research
+          Articles</button>
         <button onclick="switchTab('figures')" class="tab-button px-6 py-3 rounded-lg font-semibold">Figures</button>
       </div>
     </div>
@@ -148,9 +205,11 @@
         <h2 class="text-3xl font-extrabold text-slate-900 mb-6">Project Overview</h2>
 
         <p class="text-lg text-slate-700 leading-relaxed mb-6">
-          This initiative was commissioned by the Ministry of Science, Research and Technology of Iran to facilitate innovation
+          This initiative was commissioned by the Ministry of Science, Research and Technology of Iran to facilitate
+          innovation
           and strengthen universities’ impact on society and industry. The goal was to accelerate the shift toward a
-          <span class="font-semibold">society-oriented and entrepreneurial university model</span> by translating high-level policy
+          <span class="font-semibold">society-oriented and entrepreneurial university model</span> by translating
+          high-level policy
           vision into actionable documents and implementation support.
         </p>
 
@@ -177,35 +236,61 @@
         </div>
       </div>
     </div>
-</section>
-  <!-- My Role -->
-<section>
+
+    <!-- My Role -->
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
         <h2 class="text-3xl font-extrabold text-slate-900 mb-6">My Role</h2>
 
-        <p class="text-slate-700 text-lg leading-relaxed mb-6">
-          I managed the national virtual meeting program linked to this project, ensuring that the Ministry’s stakeholder engagement
-          was executed smoothly and that concerns and ideas raised by university leadership were captured and synthesized.
-        </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1  gap-6">
           <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
             <h3 class="text-xl font-extrabold text-slate-900 mb-3">Responsibilities</h3>
-            <ul class="text-slate-700 space-y-2">
-              <li>• Led the primary research stream underpinning the national initiative (evidence synthesis and strategy development).</li>
-              <li>• Drafted the initial set of “society-oriented & entrepreneurial university” strategies based on research and policy review.</li>
-              <li>• Designed and ran multiple focus group sessions over ~1 year to validate, refine, and operationalize the strategies.</li>
-              <li>• Recruited and coordinated experts from science/technology and innovation ecosystems (e.g., university science & technology parks) and former senior government stakeholders.</li>
-              <li>• Managed end-to-end focus group logistics (agendas, invitations, virtual setup, timekeeping, troubleshooting) and supported facilitation.</li>
-              <li>• Collected, synthesized, and documented expert opinions; iteratively updated drafts and incorporated feedback into the policy workflow.</li>
-              <li>• Produced consolidated outputs and follow-up action items, culminating in two policy reports based on focus group results.</li>
-              <li>• Agenda planning and session design for national virtual workshops/roundtables.</li>
-              <li>• Coordinating invitations and attendance for university presidents and senior leadership.</li>
-              <li>• Managing virtual logistics (platform setup, timekeeping, panel coordination, troubleshooting).</li>
-              <li>• Supporting facilitation and ensuring discussions stayed structured and productive.</li>
-              <li>• Producing and consolidating meeting notes and follow-up action items.</li>
-            </ul>
+              <ul class="text-slate-700 space-y-4">
+
+                <!-- Phase 1 -->
+                <li>
+                  <span class="font-semibold text-slate-900">
+                    Phase 1 — Research & Strategy Architecture
+                  </span>
+                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                    <li>Led the primary research stream underpinning the national initiative, including evidence synthesis and strategy development.</li>
+                    <li>Benchmarked global entrepreneurial university models and extracted transferable strategic pillars.</li>
+                    <li>Drafted the initial set of “society-oriented & entrepreneurial university” strategies based on academic and policy review.</li>
+                  </ul>
+                </li>
+
+                <!-- Phase 2 -->
+                <li>
+                  <span class="font-semibold text-slate-900">
+                    Phase 2 — Expert Validation & Policy Drafting
+                  </span>
+                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                    <li>Designed and ran multi-session focus groups and expert panels over ~1 year to validate and operationalize strategies.</li>
+                    <li>Recruited and coordinated experts from science & technology ecosystems, innovation bodies, and former senior government stakeholders.</li>
+                    <li>Managed end-to-end session logistics (agendas, invitations, virtual platforms, facilitation support, troubleshooting).</li>
+                    <li>Collected, synthesized, and documented expert feedback; iteratively refined policy drafts.</li>
+                    <li>Produced consolidated outputs and action items, culminating in two national policy reports.</li>
+                    <li>Integrated formal feedback from the Ministry of Education to finalize the policy frameworks.</li>
+                  </ul>
+                </li>
+
+                <!-- Phase 3 -->
+                <li>
+                  <span class="font-semibold text-slate-900">
+                    Phase 3 — National Dissemination & Popularization
+                  </span>
+                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                    <li>Designed national workshops and seminars to promote the entrepreneurial university concept.</li>
+                    <li>Planned agendas and session structures for virtual roundtables and dissemination events.</li>
+                    <li>Coordinated invitations and participation of university presidents and senior leadership.</li>
+                    <li>Managed virtual delivery logistics and panel coordination.</li>
+                    <li>Documented proceedings and consolidated institutional feedback for ongoing policy alignment.</li>
+                  </ul>
+                </li>
+
+              </ul>
+
           </div>
 
           <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
@@ -215,13 +300,16 @@
               <li>• Qualitative research design and execution (focus groups, expert consultations).</li>
               <li>• Strategy validation and refinement through iterative stakeholder feedback.</li>
               <li>• Policy drafting and documentation: translating expert input into formal policy reports.</li>
-              <li>• Stakeholder recruitment and coordination across universities, science & technology parks, and government bodies.</li>
-              <li>• Senior stakeholder engagement (university presidents, innovation leaders, former government officials).</li>
+              <li>• Stakeholder recruitment and coordination across universities, science & technology parks, and
+                government bodies.</li>
+              <li>• Senior stakeholder engagement (university presidents, innovation leaders, former government
+                officials).</li>
               <li>• Workshop and roundtable program design (agenda setting, session structuring).</li>
               <li>• Virtual program management under COVID constraints.</li>
               <li>• End-to-end meeting operations: logistics, facilitation support, and documentation.</li>
               <li>• Qualitative synthesis: consolidating discussions into implementation-ready insights.</li>
-              <li>• Policy implementation thinking: aligning actors, identifying barriers, structuring action pathways.</li>
+              <li>• Policy implementation thinking: aligning actors, identifying barriers, structuring action pathways.
+              </li>
               <li>• Cross-institution communication and coordination.</li>
             </ul>
           </div>
@@ -238,12 +326,19 @@
         <h2 class="text-3xl font-extrabold text-slate-900 mb-6">Policy Context </h2>
 
         <div class="bg-slate-50 border border-slate-200 p-6 rounded-xl">
-          <p class="text-slate-800 leading-relaxed" >
-              Given the importance of accelerating the movement of the country’s universities toward society-orientation and entrepreneurship, the Ministry of Science, Research and Technology — with its overarching policy-making mandate in the field of higher education — formulated the statement “The Future of Universities in Iran: Society-Orientation and Entrepreneurship” and officially unveiled it in June 2020.
-              In light of the importance of promoting these concepts and developing the related implementation documents, the Ministry of Science, Research and Technology assigned this mission — through official letter No. 34689 dated January 16, 2021 — to the National Research Institute for Science Policy (NRISP).
+          <p class="text-slate-800 leading-relaxed">
+            Given the importance of accelerating the movement of the country’s universities toward society-orientation
+            and entrepreneurship, the Ministry of Science, Research and Technology — with its overarching policy-making
+            mandate in the field of higher education — formulated the statement “The Future of Universities in Iran:
+            Society-Orientation and Entrepreneurship” and officially unveiled it in June 2020.
+            In light of the importance of promoting these concepts and developing the related implementation documents,
+            the Ministry of Science, Research and Technology assigned this mission — through official letter No. 34689
+            dated January 16, 2021 — to the National Research Institute for Science Policy (NRISP).
           </p>
           <p class="text-slate-600 text-sm mt-4">
-            Source: <a class="text-slate-900 underline underline-offset-4" href="https://nrisp.ac.ir/society-oriented-and-entrepreneurship-in-universities/" target="_blank">NRISP initiative page</a>
+            Source: <a class="text-slate-900 underline underline-offset-4"
+              href="https://nrisp.ac.ir/society-oriented-and-entrepreneurship-in-universities/" target="_blank">NRISP
+              initiative page</a>
           </p>
         </div>
 
@@ -279,35 +374,54 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="card bg-white rounded-2xl shadow-lg p-8">
-          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
+          <div
+            class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
             National Document 1
           </div>
-          <h3 class="text-xl font-extrabold text-slate-900 mt-4" dir="rtl">
+          <!-- <h3 class="text-xl font-extrabold text-slate-900 mt-4" dir="rtl">
             بیانیه آینده دانشگاه‌ها در ایران؛ جامعه‌محوری و کارآفرینی
-          </h3>
+          </h3> -->
           <p class="text-slate-700 mt-3">
             National statement defining the strategic direction and expected transformation of universities.
           </p>
+          <a href="https://nrisp.ac.ir/wp-content/uploads/2021/11/bayanie.pdf" target="_blank"
+            class="mt-6 inline-flex items-center px-4 py-2 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition">
+            Link to the document
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
         </div>
 
         <div class="card bg-white rounded-2xl shadow-lg p-8">
-          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
+          <div
+            class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
             National Document 2
           </div>
-          <h3 class="text-xl font-extrabold text-slate-900 mt-4" dir="rtl">
+          <!-- <h3 class="text-xl font-extrabold text-slate-900 mt-4" dir="rtl">
             طرح تحول همکاری‌های دانشگاه‌ها و موسسات آموزشی، پژوهشی و فناوری با جامعه و صنعت
-          </h3>
+          </h3> -->
           <p class="text-slate-700 mt-3">
-            Executive transformation plan describing collaboration structures between universities/institutes and society/industry.
+            Executive transformation plan describing collaboration structures between universities/institutes and
+            society/industry.
           </p>
+          <a href="https://nrisp.ac.ir/wp-content/uploads/2021/11/1592977890-.pdf" target="_blank"
+            class="mt-6 inline-flex items-center px-4 py-2 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition">
+            Link to the document
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
         </div>
+
       </div>
 
       <div class="mt-8 bg-white rounded-2xl shadow-lg p-8">
         <h3 class="text-xl font-extrabold text-slate-900 mb-3">Also produced</h3>
         <ul class="text-slate-700 space-y-2">
           <li>• Policy notes and supporting research pieces.</li>
-          <li>• A national engagement series (workshops, seminars, roundtables) to popularize the concept and support adoption.</li>
+          <li>• A national engagement series (workshops, seminars, roundtables) to popularize the concept and support
+            adoption.</li>
           <li>• Structured feedback capture from university leaders (concerns, barriers, and implementation needs).</li>
         </ul>
       </div>
@@ -321,25 +435,52 @@
 
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
         <p class="text-slate-700 text-lg leading-relaxed mb-8">
-          During COVID, the project ran a national series of virtual sessions where heads of universities were invited by the Ministry
+          During COVID, the project ran a national series of virtual sessions where heads of universities were invited
+          by the Ministry
           to participate, share ideas, and raise concerns about implementation.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="card bg-slate-50 border border-slate-200 rounded-2xl p-6">
-            <div class="text-xs font-bold uppercase tracking-wide text-slate-600 mb-3">Past events (from the initiative page)</div>
-            <ul class="space-y-3 text-slate-800" dir="rtl">
-              <li class="key-point p-4 rounded-lg">دانشگاه کارآفرین از نظر تا عمل</li>
-              <li class="key-point p-4 rounded-lg">دانشگاه کارآفرین از نظر تا عمل با موضوع ارائه الگوی مفهومی و اجرایی دانشگاه کارآفرین</li>
-              <li class="key-point p-4 rounded-lg">میزگرد پیشران‌های آینده دانشگاه‌ها در ایران؛ جامعه محوری و کارآفرینی</li>
-              <li class="key-point p-4 rounded-lg">میزگرد تغییرات محوری در آینده دانشگاه‌ها</li>
-              <li class="key-point p-4 rounded-lg">میزگرد ارزش‌ها و سیاست‌های کلان حاکم بر دانشگاه‌های آینده</li>
-              <li class="key-point p-4 rounded-lg">گفت‌و‌گوی آزاد میان مخاطبین و اعضاء پانل با محوریت آینده دانشگاه‌ها در ایران؛ جامعه‌محوری و کارآفرینی</li>
+            <h3 class="text-xl font-extrabold text-slate-900 mb-2">
+              Past events (from the initiative page)
+            </h3>
+
+            <ul class="list-disc pl-5 space-y-3 text-slate-800">
+              <li class="key-point rounded-lg">
+                Entrepreneurial University: From Theory to Practice
+              </li>
+
+              <li class="key-point rounded-lg">
+                Entrepreneurial University: From Theory to Practice — Presenting a
+                Conceptual and Executive Model of the Entrepreneurial University
+              </li>
+
+              <li class="key-point rounded-lg">
+                Panel Discussion: Future Drivers of Universities in Iran — Community
+                Orientation and Entrepreneurship
+              </li>
+
+              <li class="key-point rounded-lg">
+                Panel Discussion: Transformational Changes in the Future of Universities
+              </li>
+
+              <li class="key-point rounded-lg">
+                Panel Discussion: Values and Macro-Policies Governing the Universities of
+                the Future
+              </li>
+
+              <li class="key-point rounded-lg">
+                Open Dialogue Between the Audience and Panel Members Focusing on the
+                Future of Universities in Iran — Community Orientation and Entrepreneurship
+              </li>
             </ul>
           </div>
 
+
           <div class="card bg-white border border-slate-200 rounded-2xl p-6">
-            <div class="text-xs font-bold uppercase tracking-wide text-slate-600 mb-3">What these sessions achieved</div>
+            <h3 class="text-xl font-extrabold text-slate-900 mb-2"> What these sessions achieved
+            </h3>
             <ul class="space-y-2 text-slate-700">
               <li>• Created a national platform for alignment between the Ministry, NRISP, and universities.</li>
               <li>• Collected leadership feedback to identify barriers and implementation needs.</li>
@@ -350,14 +491,17 @@
             <div class="mt-6 bg-amber-50 border-l-4 border-amber-500 p-4 rounded-xl">
               <div class="font-bold text-amber-900">My responsibility</div>
               <div class="text-amber-900">
-                I managed the coordination of these meetings end-to-end (planning, invitations, logistics, facilitation support, and documentation).
+                I managed the coordination of these meetings end-to-end (planning, invitations, logistics, facilitation
+                support, and documentation).
               </div>
             </div>
           </div>
         </div>
 
         <div class="mt-8 text-slate-600 text-sm">
-          Source page for the list of events and sections: <a class="text-slate-900 underline underline-offset-4" href="https://nrisp.ac.ir/society-oriented-and-entrepreneurship-in-universities/" target="_blank">NRISP initiative page</a>
+          Source page for the list of events and sections: <a class="text-slate-900 underline underline-offset-4"
+            href="https://nrisp.ac.ir/society-oriented-and-entrepreneurship-in-universities/" target="_blank">NRISP
+            initiative page</a>
         </div>
       </div>
     </div>
@@ -372,7 +516,8 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="card bg-white rounded-2xl shadow-lg p-8">
-          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-[#dd2476] bg-rose-50 px-3 py-1 rounded-full">
+          <div
+            class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-[#dd2476] bg-rose-50 px-3 py-1 rounded-full">
             Article 1
           </div>
           <h3 class="text-xl font-extrabold text-slate-900 mt-4">
@@ -381,9 +526,9 @@
           <p class="text-sm text-slate-600 mt-2">
             Systematic review + framework synthesis + focus group (strategy identification)
           </p>
-          <a href="10.22034_sspp.2022.556123.3233.pdf" target="_blank"
+          <a href="https://journal.irphe.ac.ir/article_703054.html?lang=en" target="_blank"
             class="mt-6 inline-flex items-center px-4 py-2 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition">
-            Open PDF
+            Link to the article
             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
@@ -391,7 +536,8 @@
         </div>
 
         <div class="card bg-white rounded-2xl shadow-lg p-8">
-          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-[#ff512f] bg-orange-50 px-3 py-1 rounded-full">
+          <div
+            class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-[#ff512f] bg-orange-50 px-3 py-1 rounded-full">
             Article 2
           </div>
           <h3 class="text-xl font-extrabold text-slate-900 mt-4">
@@ -400,9 +546,9 @@
           <p class="text-sm text-slate-600 mt-2">
             Interpretive Structural Modeling (ISM) (strategy prioritization & dependencies)
           </p>
-          <a href="10.52547_irphe.28.2.33.pdf" target="_blank"
+          <a href="https://sspp.iranjournals.ir/article_697072.html" target="_blank"
             class="mt-6 inline-flex items-center px-4 py-2 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition">
-            Open PDF
+            Link to the article
             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
@@ -413,7 +559,8 @@
       <div class="mt-8 bg-white rounded-2xl shadow-lg p-8">
         <h3 class="text-xl font-extrabold text-slate-900 mb-3">How the articles fit the project</h3>
         <p class="text-slate-700 leading-relaxed">
-          These publications are research outputs linked to the broader national policy project. They provide analytical structure
+          These publications are research outputs linked to the broader national policy project. They provide analytical
+          structure
           (strategy frameworks and dependency modeling) to support implementation planning.
         </p>
       </div>
@@ -423,16 +570,14 @@
   <!-- Figures -->
   <section id="tab-figures" class="tab-content section-fade py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-slate-900 mb-10 text-center">Figures (Add Your Screenshots)</h2>
+      <h2 class="text-3xl font-extrabold text-slate-900 mb-10 text-center">Figures </h2>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="bg-white rounded-2xl shadow-lg p-8">
-          <h3 class="text-lg font-bold text-slate-900 mb-3">Workshop / Roundtable Snapshot</h3>
+          <h3 class="text-lg font-bold text-slate-900 mb-3">Conceptual Framework for Entrepreneurial University Strategies</h3>
           <div class="figure-box flex items-center justify-center text-center p-6 text-slate-600">
             <div>
-              <div class="text-2xl mb-2">📌</div>
-              <div class="font-semibold">Add an image here</div>
-              <div class="text-sm mt-2">Example: screenshot from the NRISP page, agenda slide, or meeting poster.</div>
+              <div class="ism-image"><img src="../images/EUS_framework.png"></div>
             </div>
           </div>
         </div>
@@ -441,28 +586,22 @@
           <h3 class="text-lg font-bold text-slate-900 mb-3">Framework / ISM Model</h3>
           <div class="figure-box flex items-center justify-center text-center p-6 text-slate-600">
             <div>
-              <div class="text-2xl mb-2">🧠</div>
-              <div class="font-semibold">Add an image here</div>
-              <div class="text-sm mt-2">Add the conceptual framework or ISM digraph and caption it.</div>
+              <div class="ism-image"><img src="../images/ISM.png"></div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="mt-8 bg-white rounded-2xl shadow-lg p-8">
-        <h3 class="text-xl font-extrabold text-slate-900 mb-3">Next improvement (recommended)</h3>
-        <p class="text-slate-700">
-          Add measurable impact: number of sessions, number of participants, number of universities represented, and 3–5 top concerns.
-          This will make the project look much more concrete.
-        </p>
+
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="py-12">
+  <section class="py-12">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white rounded-2xl shadow-lg p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div
+        class="bg-white rounded-2xl shadow-lg p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div>
           <div class="font-extrabold text-slate-900">Project Page</div>
           <div class="text-slate-600 text-sm">
@@ -470,23 +609,58 @@
           </div>
         </div>
         <div class="flex flex-wrap gap-3">
+
+          <!-- NRISP Page -->
           <a href="https://nrisp.ac.ir/society-oriented-and-entrepreneurship-in-universities/" target="_blank"
-            class="inline-flex items-center px-4 py-2 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition">
+            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#b91c5c] text-white font-semibold hover:bg-[#9f174d] transition">
             NRISP Page
           </a>
-          <a href="10.22034_sspp.2022.556123.3233.pdf" target="_blank"
-            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#dd2476] text-white font-semibold hover:opacity-90 transition">
-            Article 1 PDF
+
+          <!-- National Document 1 -->
+          <a href="https://nrisp.ac.ir/wp-content/uploads/2021/11/bayanie.pdf" target="_blank"
+            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#c81e68] text-white font-semibold hover:bg-[#b91c5c] transition">
+            National Document 1
           </a>
-          <a href="10.52547_irphe.28.2.33.pdf" target="_blank"
-            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#ff512f] text-white font-semibold hover:opacity-90 transition">
-            Article 2 PDF
+
+          <!-- National Document 2 -->
+          <a href="https://nrisp.ac.ir/wp-content/uploads/2021/11/1592977890-.pdf" target="_blank"
+            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#dd2476] text-white font-semibold hover:bg-[#c81e68] transition">
+            National Document 2
+          </a>
+
+          <!-- Article 1 -->
+          <a href="https://sspp.iranjournals.ir/article_697072.html" target="_blank"
+            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#e63a86] text-white font-semibold hover:bg-[#dd2476] transition">
+            Article 1
+          </a>
+
+          <!-- Article 2 -->
+          <a href="https://journal.irphe.ac.ir/article_703054.html?lang=en" target="_blank"
+            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#f05a9b] text-white font-semibold hover:bg-[#e63a86] transition">
+            Article 2
+          </a>
+
+        </div>
+
+
+
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <p class="text-gray-400 mb-2">&copy; 2025 Mojgan Samandar. All rights reserved.</p>
+
+        <div class="mt-4">
+          <a href="../index.html" class="text-teal-400 hover:text-teal-300 transition mx-3">Home</a>
+          <a href="../index.html#content-contact" class="text-teal-400 hover:text-teal-300 transition mx-3">
+            Contact
           </a>
         </div>
       </div>
-      <p class="text-center text-slate-500 text-sm mt-6">
-        © <span id="year"></span> • Built with Tailwind CSS
-      </p>
     </div>
   </footer>
 
@@ -518,10 +692,13 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('year').textContent = new Date().getFullYear();
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear(); // <-- prevents crash
+
       revealOnScroll();
       window.addEventListener('scroll', revealOnScroll, { passive: true });
     });
   </script>
 </body>
+
 </html>
