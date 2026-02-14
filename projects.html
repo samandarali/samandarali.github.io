@@ -390,6 +390,18 @@
         .hyberlink_non {
             text-decoration: none;
         }
+
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            background: white;
+            color: #374151;
+            cursor: pointer;
+            font-size: 0.875rem;
+            margin-bottom: 20px;
+            margin-top: 0px;
+        }
     </style>
 </head>
 
@@ -429,6 +441,19 @@
 
     <!-- Main Content -->
     <div class="main-content">
+        <div class="controls-left">
+            <select id="targetTypeFilter" class="filter-select">
+                <option value="">All Project Types</option>
+                <option value="Research Project">Research Project</option>
+                <option value="Ministry-Commissioned Project">Ministry-Commissioned Project</option>
+                <option value="Funded Project">Funded Project</option>
+                <option value="Exploratory Research">Exploratory Research</option>
+                <option value="Industry-Collaborative Research Project">
+                    Industry-Collaborative Research Project
+                </option>
+            </select>
+        </div>
+
         <div class="header">
             <h1>Projects</h1>
             <div class="view-toggle">
@@ -441,7 +466,7 @@
 
         <div class="projects-grid " id="gridView">
             <a class="hyberlink_non" href="projects/labor_market.html" rel="noopener noreferrer" class="project-link">
-                <div class="project-card color-purple">
+                <div class="project-card color-purple" data-type="Research Project">
                     <div style="position: relative;">
                         <div class="project-number">1</div>
                         <img src="images/canadaLaborMarket1.png" alt="Project 2" class="project-image">
@@ -461,7 +486,7 @@
 
             <a class="hyberlink_non" href="projects/entrepreneurial_university_project.html" rel="noopener noreferrer"
                 class="project-link">
-                <div class="project-card color-orange">
+                <div class="project-card color-orange" data-type="Funded Project, Ministry-Commissioned Project">
                     <div style="position: relative;">
                         <div class="project-number">5</div>
                         <img src="images/entrepreneurial-university.jpg" alt="Project 5" class="project-image">
@@ -480,13 +505,13 @@
 
             <a class="hyberlink_non" href="projects/nis_efficiency_project.html" rel="noopener noreferrer"
                 class="project-link">
-                <div class="project-card color-blue-green">
+                <div class="project-card color-blue-green" data-type="Funded Project">
                     <div style="position: relative;">
                         <div class="project-number">7</div>
                         <img src="images/national innovation system.jpg" alt="Project 7" class="project-image">
                     </div>
                     <div class="project-info">
-                        <div class="project-category">Funded Porject</div>
+                        <div class="project-category">Funded Project</div>
                         <div class="project-title">Enhancing Efficiency of National Innovation System </div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
@@ -498,7 +523,7 @@
             </a>
 
             <a class="hyberlink_non" href="projects/BMI_using_crowd.html" rel="noopener noreferrer">
-                <div class="project-card color-green">
+                <div class="project-card color-green" data-type="Industry-Collaborative Research Project">
                     <div style="position: relative;">
                         <img src="images/crowdsourcing.jpg" alt="Project 14" class="project-image">
                     </div>
@@ -517,7 +542,7 @@
             </a>
 
             <a class="hyberlink_non" href="projects/regional_innovation.html" rel="noopener noreferrer">
-                <div class="project-card color-blue">
+                <div class="project-card color-blue" data-type="Research Project">
                     <div style="position: relative;">
                         <div class="project-number">6</div>
                         <img src="images/regional innovation.jpg" alt="Project 6" class="project-image">
@@ -536,7 +561,7 @@
                 </div>
             </a>
             <a class="hyberlink_non" href="projects/airbnb_satisfaction_value.html" rel="noopener noreferrer">
-                <div class="project-card color-airbnb-sunset">
+                <div class="project-card color-airbnb-sunset" data-type="Exploratory Research">
                     <div style="position: relative;">
                         <div class="project-number">7</div>
                         <img src="images/cover_airbnb.png" alt="Project 6" class="project-image">
@@ -557,7 +582,7 @@
         <!-- List View -->
         <div class="projects-list hidden" id="listView">
             <a class="hyberlink_non" href="projects/labor_market.html" rel="noopener noreferrer" class="project-link">
-                <div class="project-list-item color-purple">
+                <div class="project-list-item color-purple" data-type="Research Project">
                     <img src="images/canadaLaborMarket1.png" alt="Project 2" class="list-thumbnail">
                     <div class="list-info">
                         <div class="project-category">Research Project</div>
@@ -575,7 +600,7 @@
 
             <a class="hyberlink_non" href="projects/entrepreneurial_university_project.html" rel="noopener noreferrer"
                 class="project-link">
-                <div class="project-list-item color-orange">
+                <div class="project-list-item color-orange" data-type="Funded Project, Ministry-Commissioned Project">
                     <img src="images/entrepreneurial-university.jpg" alt="Project 5" class="list-thumbnail">
                     <div class="list-info">
                         <div class="project-category">Ministry-commissioned Project</div>
@@ -592,7 +617,7 @@
 
             <a class="hyberlink_non" href="projects/nis_efficiency_project.html" rel="noopener noreferrer"
                 class="project-link">
-                <div class="project-list-item color-blue-green">
+                <div class="project-list-item color-blue-green" data-type="Funded Project">
                     <img src="images/national innovation system.jpg" alt="Project 7" class="list-thumbnail">
                     <div class="list-info">
                         <div class="list-category">Funded Project</div>
@@ -608,7 +633,7 @@
 
 
             <a class="hyberlink_non" href="projects/BMI_using_crowd.html" rel="noopener noreferrer">
-                <div class="project-list-item color-green">
+                <div class="project-list-item color-green" data-type="Industry-Collaborative Research Project" >
                     <img src="images/crowdsourcing.jpg" alt="Project 14" class="list-thumbnail">
                     <div class="list-info">
                         <div class="project-category">Industry-Collaborative Research Project</div>
@@ -625,7 +650,7 @@
             </a>
 
             <a class="hyberlink_non" href="projects/regional_innovation.html" rel="noopener noreferrer">
-                <div class="project-list-item color-blue">
+                <div class="project-list-item color-blue" data-type="Research Project">
                     <!-- <div class="list-number">6</div> -->
                     <img src="images/regional innovation.jpg" alt="Project 6" class="list-thumbnail">
                     <div class="list-info">
@@ -642,7 +667,7 @@
             </a>
 
             <a class="hyberlink_non" href="projects/airbnb_satisfaction_value.html" rel="noopener noreferrer">
-                <div class="project-list-item color-airbnb-sunset">
+                <div class="project-list-item color-airbnb-sunset" data-type="Exploratory Research">
                     <!-- <div class="list-number">6</div> -->
                     <img src="images/cover_airbnb.png" alt="Project 6" class="list-thumbnail">
                     <div class="list-info">
@@ -659,41 +684,69 @@
 
 
 
-        <script>
-            // Get elements
-            const gridBtn = document.getElementById('gridBtn');
-            const listBtn = document.getElementById('listBtn');
-            const gridIcon = document.getElementById('gridIcon');
-            const listIcon = document.getElementById('listIcon');
-            const gridView = document.getElementById('gridView');
-            const listView = document.getElementById('listView');
+    <script>
+        // Get elements
+        const gridBtn = document.getElementById('gridBtn');
+        const listBtn = document.getElementById('listBtn');
+        const gridIcon = document.getElementById('gridIcon');
+        const listIcon = document.getElementById('listIcon');
+        const gridView = document.getElementById('gridView');
+        const listView = document.getElementById('listView');
 
-            // Function to switch to grid view
-            function showGrid() {
-                gridView.classList.remove('hidden');
-                listView.classList.add('hidden');
-                gridBtn.classList.add('active');
-                listBtn.classList.remove('active');
-                gridIcon.classList.add('active');
-                listIcon.classList.remove('active');
-            }
+        // Function to switch to grid view
+        function showGrid() {
+            gridView.classList.remove('hidden');
+            listView.classList.add('hidden');
+            gridBtn.classList.add('active');
+            listBtn.classList.remove('active');
+            gridIcon.classList.add('active');
+            listIcon.classList.remove('active');
+        }
 
-            // Function to switch to list view
-            function showList() {
-                listView.classList.remove('hidden');
-                gridView.classList.add('hidden');
-                listBtn.classList.add('active');
-                gridBtn.classList.remove('active');
-                listIcon.classList.add('active');
-                gridIcon.classList.remove('active');
-            }
+        // Function to switch to list view
+        function showList() {
+            listView.classList.remove('hidden');
+            gridView.classList.add('hidden');
+            listBtn.classList.add('active');
+            gridBtn.classList.remove('active');
+            listIcon.classList.add('active');
+            gridIcon.classList.remove('active');
+        }
 
-            // Add event listeners
-            gridBtn.addEventListener('click', showGrid);
-            listBtn.addEventListener('click', showList);
-            gridIcon.addEventListener('click', showGrid);
-            listIcon.addEventListener('click', showList);
-        </script>
+        // Add event listeners
+        gridBtn.addEventListener('click', showGrid);
+        listBtn.addEventListener('click', showList);
+        gridIcon.addEventListener('click', showGrid);
+        listIcon.addEventListener('click', showList);
+
+
+
+
+    const filterSelect = document.getElementById("targetTypeFilter");
+
+    // Get all project items (grid + list)
+    const gridProjects = document.querySelectorAll("#gridView .project-card");
+    const listProjects = document.querySelectorAll("#listView .project-list-item");
+
+    filterSelect.addEventListener("change", function () {
+    const selectedType = this.value;
+
+    filterProjects(gridProjects, selectedType);
+    filterProjects(listProjects, selectedType);
+    });
+
+    function filterProjects(projects, type) {
+    projects.forEach(project => {
+        const types = project.dataset.type.split(",").map(t => t.trim());
+
+        if (type === "" || types.includes(type)) {
+        project.style.display = "flex";
+        } else {
+        project.style.display = "none";
+        }
+    });
+    }
+    </script>
 </body>
 
 </html>
