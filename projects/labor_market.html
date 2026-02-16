@@ -167,80 +167,165 @@
 
 
 
-  <!-- Overview Tab -->
-  <section id="tab-overview" class="tab-content active section-fade py-8">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Research Overview</h2>
-        <p class="text-lg text-gray-700 leading-relaxed mb-6">
-          Using web-scraping and natural language processing techniques, this study investigates the demands and skill
-          requirements for economics graduates in the Canadian job market. Key regional hubs identified are Ontario
-          (Toronto), Quebec (Montreal), and Alberta (Calgary).
-        </p>
-        <p class="text-lg text-gray-700 leading-relaxed mb-6">
-          Microsoft Office Suite, particularly Microsoft Excel, is the most prevalent software requirement. Beyond
-          software, economics graduates are expected to have a wide range of technical skills, including data
-          management, advanced modelling, programming (Python, SQL), and presentation and documentation (PowerPoint,
-          report writing).
+<!-- Overview Tab -->
+<section id="tab-overview" class="tab-content active section-fade py-8">
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 space-y-12">
+
+      <!-- ========================= -->
+      <!-- Questions to Answer -->
+      <!-- ========================= -->
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+          Questions to Answer
+        </h2>
+
+        <p class="text-gray-700 mb-6 max-w-3xl">
+          This study investigates how the Canadian labour market values economics graduates,
+          focusing on geography, competition, and skill demand.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-          <div class="bg-purple-50 border-l-4 border-purple-600 p-6 rounded-lg">
-            <h3 class="font-semibold text-purple-900 mb-2 flex items-center">
-              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-                <path fill-rule="evenodd"
-                  d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                  clip-rule="evenodd" />
-              </svg>
-              Research Gap
-            </h3>
-            <p class="text-purple-800">
-              While web-scraping research has been applied to computer science fields, there was a lack of similar
-              research specifically focused on economics graduates in Canada.
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <div class="border rounded-xl p-5 hover:shadow-lg transition">
+            <h4 class="font-bold text-gray-900">📍 Favorable Locations</h4>
+            <p class="text-sm text-gray-600 mt-1">
+              Which provinces and cities offer the strongest employment opportunities?
             </p>
           </div>
 
-          <div class="bg-indigo-50 border-l-4 border-indigo-600 p-6 rounded-lg">
-            <h3 class="font-semibold text-indigo-900 mb-2 flex items-center">
-              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                  clip-rule="evenodd" />
-              </svg>
-              Data Source
-            </h3>
-            <p class="text-indigo-800">
-              Data exclusively sourced from Indeed.ca on January 15, 2024, providing a real-time snapshot of the
-              Canadian economics job market.
+          <div class="border rounded-xl p-5 hover:shadow-lg transition">
+            <h4 class="font-bold text-gray-900">🎓 Degree Competition</h4>
+            <p class="text-sm text-gray-600 mt-1">
+              Which academic disciplines compete with economics graduates?
             </p>
           </div>
-        </div>
 
-        <div class="mt-8 bg-amber-50 border-l-4 border-amber-500 p-6 rounded-lg">
-          <h3 class="text-lg font-semibold text-amber-900 mb-2">Why This Research Matters</h3>
-          <p class="text-amber-800 mb-4">
-            Traditional labor market study methods—such as surveys and interviews—are often time-consuming, costly, and
-            limited in scope. This study provides a modern, data-driven approach to understanding market dynamics.
-          </p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-amber-700">Fast</div>
-              <div class="text-sm text-amber-600">Real-time data extraction</div>
-            </div>
-            <div class="text-center">
-              <div class="text-2xl font-bold text-amber-700">Scalable</div>
-              <div class="text-sm text-amber-600">Massive data analysis</div>
-            </div>
-            <div class="text-center">
-              <div class="text-2xl font-bold text-amber-700">Current</div>
-              <div class="text-sm text-amber-600">Up-to-date insights</div>
-            </div>
+          <div class="border rounded-xl p-5 hover:shadow-lg transition">
+            <h4 class="font-bold text-gray-900">🧠 Essential Skills</h4>
+            <p class="text-sm text-gray-600 mt-1">
+              What technical and soft skills do employers prioritize?
+            </p>
           </div>
+
+          <div class="border rounded-xl p-5 hover:shadow-lg transition">
+            <h4 class="font-bold text-gray-900">🏛️ Regional Variation</h4>
+            <p class="text-sm text-gray-600 mt-1">
+              Do provinces emphasize different skill combinations?
+            </p>
+          </div>
+
         </div>
       </div>
+
+
+      <!-- ========================= -->
+      <!-- Why This Study -->
+      <!-- ========================= -->
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+          Why This Study
+        </h2>
+
+        <p class="text-gray-700 leading-relaxed max-w-5xl">
+          Rapid technological change is reshaping labour market expectations, 
+          making traditional survey-based research too slow to capture real demand.
+          This study analyzes nearly 1,000 real-time job postings from Indeed.ca.
+          using automated data collection and AI-assisted text analysis.
+          By examining employer requirements directly, the research provides
+          an evidence-based view of which degrees, software tools, and human
+          competencies are most valued in today’s economics job market.
+        </p>
+      </div>
+
+
+      <!-- ========================= -->
+      <!-- Overview of the Results -->
+      <!-- ========================= -->
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+          Overview of the Results
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+
+          <div class="bg-purple-50 border border-purple-100 rounded-xl p-5">
+            <h4 class="font-bold text-purple-900">Regional Hubs</h4>
+            <p class="text-sm text-purple-800 mt-1">
+              Ontario, Quebec, and Alberta lead hiring demand,
+              with Toronto, Montreal, and Calgary as top cities.
+            </p>
+          </div>
+
+          <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-5">
+            <h4 class="font-bold text-indigo-900">Experience Matters</h4>
+            <p class="text-sm text-indigo-800 mt-1">
+              Employers frequently prioritize practical experience and 
+              specific skills over the level of your diploma.
+            </p>
+          </div>
+
+          <div class="bg-teal-50 border border-teal-100 rounded-xl p-5">
+            <h4 class="font-bold text-teal-900">Multidisciplinary Demand</h4>
+            <p class="text-sm text-teal-800 mt-1">
+              Candidates need both data tools (Excel, analytics)
+              and strong communication abilities.
+            </p>
+          </div>
+
+        </div>
+
+        <p class="text-gray-700 leading-relaxed max-w-5xl">
+          Overall, the findings position economics graduates as hybrid professionals —
+          individuals expected to combine analytical, technical, and interpersonal
+          capabilities. The results provide a market-aligned roadmap for career
+          preparation and curriculum design.
+        </p>
+      </div>
+
+      <!-- ========================= -->
+      <!-- Key Contribution -->
+      <!-- ========================= -->
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+          Key Contribution — Skill Intelligence Framework
+        </h2>
+
+        <p class="text-gray-700 leading-relaxed max-w-3xl mb-6">
+          A central contribution of this study is the creation of three structured
+          skill dictionaries designed to systematically interpret employer
+          requirements. These taxonomies classify extracted keywords into
+          Soft Skills, Technical Skills, and Software Tools, enabling consistent
+          analysis across job postings and providing a reusable framework for
+          future labour market research.
+        </p>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+              <p class="text-sm text-blue-800">
+                <strong>Key Innovation:</strong> The comprehensive skill dictionaries created provide a transparent,
+                accessible resource for future labor market studies.
+              </p>
+            </div>
+
+        <!-- Impact strip -->
+        <div class="mt-6 bg-gray-50 border border-gray-200 rounded-xl p-5">
+          <p class="text-sm text-gray-700">
+            <strong>Why this matters:</strong>
+            These dictionaries transform unstructured job text into
+            measurable labour-market intelligence, enabling scalable
+            skill demand analysis across regions and industries.
+          </p>
+        </div>
+
+      </div>
+
     </div>
-  </section>
+  </div>
+
+</section>
+
+
 
   <!-- Methodology Tab -->
   <section id="tab-methodology" class="tab-content section-fade py-8">
@@ -312,27 +397,126 @@
           </div>
         </div>
 
-        <!-- Step 3 -->
-        <div class="bg-white rounded-xl shadow-lg p-8 flex gap-6 items-start hover:shadow-xl transition">
-          <div
-            class="flex-shrink-0 w-12 h-12 bg-teal-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
-            3
-          </div>
-          <div class="flex-1">
-            <h3 class="text-xl font-bold text-gray-900 mb-3">Keyword Extraction & Skill Mapping</h3>
-            <p class="text-gray-700 leading-relaxed mb-3">
-              Used NLP techniques (tokenization, lemmatization, stop-word removal) to extract skills. Applied OpenAI
-              GPT-3.5-turbo API to categorize soft and technical skills. Created comprehensive dictionaries: <strong>31
-                soft skill categories</strong> and <strong>30 technical skill categories</strong>.
-            </p>
-            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
-              <p class="text-sm text-blue-800">
-                <strong>Key Innovation:</strong> The comprehensive skill dictionaries created provide a transparent,
-                accessible resource for future labor market studies.
-              </p>
-            </div>
-          </div>
-        </div>
+<!-- Step 3 -->
+<div class="bg-white rounded-xl shadow-lg p-8 flex gap-6 items-start hover:shadow-xl transition">
+
+  <div class="flex-shrink-0 w-12 h-12 bg-teal-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
+    3
+  </div>
+
+  <div class="flex-1">
+
+    <h3 class="text-xl font-bold text-gray-900 mb-4">
+      Keyword Extraction & Skill Mapping
+    </h3>
+
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Skill identification was conducted through a multi-step dictionary
+      construction process combining academic frameworks, artificial
+      intelligence, and manual refinement to ensure analytical accuracy
+      and classification consistency.
+    </p>
+
+
+    <!-- Process Steps -->
+    <div class="space-y-6">
+
+      <!-- Step 3.1 -->
+      <div>
+        <h4 class="font-semibold text-gray-900 mb-2">
+          1. Establishing the Foundation
+        </h4>
+
+        <ul class="list-disc pl-5 text-gray-700 space-y-1 text-sm">
+          <li>
+            <strong>Soft Skills:</strong> Based on the framework by
+            Matturro, Raschetti, and Fontán (2019),
+            originally defining 30 core competencies.
+          </li>
+          <li>
+            <strong>Technical Skills:</strong> Grounded in the analytics
+            skill taxonomy proposed by Verma et al. (2019),
+            identifying 14 foundational technical skills.
+          </li>
+        </ul>
+      </div>
+
+
+      <!-- Step 3.2 -->
+      <div>
+        <h4 class="font-semibold text-gray-900 mb-2">
+          2. AI-Assisted Extraction
+        </h4>
+
+        <p class="text-gray-700 text-sm leading-relaxed">
+          To capture authentic employer language, job-posting text
+          was processed using the OpenAI GPT-3.5-turbo API.
+          A structured prompt pipeline extracted skill expressions
+          and mapped them to predefined categories, generating a
+          large corpus of real-market terminology.
+        </p>
+      </div>
+
+
+      <!-- Step 3.3 -->
+      <div>
+        <h4 class="font-semibold text-gray-900 mb-2">
+          3. Refinement & Expansion
+        </h4>
+
+        <ul class="list-disc pl-5 text-gray-700 space-y-1 text-sm">
+          <li>
+            <strong>Expansion:</strong>
+            Soft skills grew to 31 categories,
+            technical skills to 30 categories.
+          </li>
+
+          <li>
+            <strong>Normalization:</strong>
+            Variants such as “MS Office” and
+            “Microsoft Office” were unified.
+          </li>
+
+          <li>
+            <strong>Disambiguation:</strong>
+            Contextual review distinguished terms
+            like “Excel” (software) vs “excel”
+            (verb usage).
+          </li>
+        </ul>
+      </div>
+
+
+      <!-- Step 3.4 -->
+      <div>
+        <h4 class="font-semibold text-gray-900 mb-2">
+          4. Final Implementation
+        </h4>
+
+        <p class="text-gray-700 text-sm leading-relaxed">
+          The finalized dictionaries were integrated into a
+          keyword-matching pipeline that automatically tagged
+          each job posting with its associated skill categories,
+          enabling scalable labour-market skill analysis.
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- Contribution highlight -->
+    <div class="mt-6 bg-teal-50 border-l-4 border-teal-500 p-4 rounded">
+      <p class="text-sm text-teal-900">
+        <strong>Methodological Contribution:</strong>
+        The transparent skill dictionaries developed in this
+        process form a reusable classification framework for
+        future workforce analytics and labour-market research.
+      </p>
+    </div>
+
+  </div>
+</div>
+
 
         <!-- Step 4 -->
         <div class="bg-white rounded-xl shadow-lg p-8 flex gap-6 items-start hover:shadow-xl transition">
@@ -405,7 +589,7 @@
               <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">📊</div>
               <h4 class="text-lg font-bold">Statistical Analysis</h4>
             </div>
-            <p class="text-teal-100 text-sm">Chi-square and Fisher's exact tests</p>
+            <p class="text-teal-100 text-sm">Centrality metrics (degree, betweenness, closeness), Chi-square and Fisher's exact tests</p>
           </div>
 
           <div class="tool-badge bg-gradient-to-br from-pink-500 to-pink-700 text-white rounded-xl p-6 shadow-lg">
