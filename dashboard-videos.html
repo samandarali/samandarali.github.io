@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Videos | Mojgan Samandar</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #f4f6f8;
+            color: #1f2937;
+        }
+
+        .top-header {
+            background: white;
+            padding: 28px 40px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .top-header a {
+            text-decoration: none;
+            color: #4f46e5;
+            font-weight: 600;
+        }
+
+        .header-title {
+            margin-top: 8px;
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .header-subtitle {
+            margin-top: 6px;
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+        }
+
+        .page-intro {
+            margin-bottom: 28px;
+        }
+
+        .page-intro h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .page-intro p {
+            color: #4b5563;
+            line-height: 1.6;
+            max-width: 760px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .video-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+        }
+
+        .video-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-content {
+            padding: 20px;
+        }
+
+        .video-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #4f46e5;
+            background: #eef2ff;
+            padding: 6px 10px;
+            border-radius: 999px;
+            margin-bottom: 12px;
+        }
+
+        .video-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            line-height: 1.35;
+        }
+
+        .video-description {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .video-link-text {
+            font-weight: 700;
+            color: #dc2626;
+        }
+
+        .note-box {
+            margin-top: 40px;
+            background: white;
+            border-left: 5px solid #4f46e5;
+            padding: 18px 20px;
+            border-radius: 10px;
+            color: #374151;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="top-header">
+        <a href="index.html">&larr; Back to Home</a>
+        <div class="header-title">Interactive Dashboard Videos</div>
+        <div class="header-subtitle">Dashboard summaries with direct links to YouTube</div>
+    </header>
+
+    <main class="container">
+        <section class="page-intro">
+            <h2>View Dashboard Videos</h2>
+            <p>
+                This page presents selected dashboard demo videos. Each box includes a preview image and a short
+                explanation. Click any card to open the related YouTube video in a new tab.
+            </p>
+        </section>
+
+        <section class="video-grid">
+
+            <!-- Card 1 -->
+            <a class="video-card" href="https://www.youtube.com/watch?v=W4wKW9MHA-M" target="_blank" rel="noopener noreferrer">
+                <img src="images/ct-scan-dashboard.jpg" alt="CT Scan Wait Time Dashboard" class="video-image" />
+                <div class="video-content">
+                    <div class="video-tag">Healthcare Analytics</div>
+                    <h3 class="video-title">CT Scan Wait Time Equity Dashboard</h3>
+                    <p class="video-description">
+                        A short dashboard video showing inequality in CT scan wait times using percentile-based
+                        measures and province-level comparisons.
+                    </p>
+                    <div class="video-link-text">Open YouTube video &rarr;</div>
+                </div>
+            </a>
+
+            <!-- Card 2 -->
+            <a class="video-card" href="https://youtu.be/wNXZMDXuYE4" target="_blank" rel="noopener noreferrer">
+                <img src="images/mental-health-dashboard.jpg" alt="Mental Health Dashboard" class="video-image" />
+                <div class="video-content">
+                    <div class="video-tag">Survey Dashboard</div>
+                    <h3 class="video-title">Mental Health Survey Dashboard</h3>
+                    <p class="video-description">
+                        A dashboard video summarizing survey results and response patterns through interactive charts
+                        and indicators.
+                    </p>
+                    <div class="video-link-text">Open YouTube video &rarr;</div>
+                </div>
+            </a>
+
+            <!-- Card 3 -->
+            <a class="video-card" href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID_3" target="_blank" rel="noopener noreferrer">
+                <!-- <img src="images/powerbi-dashboard.jpg" alt="Power BI Dashboard Demo" class="video-image" />
+                <div class="video-content">
+                    <div class="video-tag">Power BI</div>
+                    <h3 class="video-title">Interactive Power BI Dashboard Demo</h3>
+                    <p class="video-description">
+                        A brief video introducing one of my interactive dashboard projects, highlighting layout,
+                        KPI tracking, and storytelling through visuals.
+                    </p>
+                    <div class="video-link-text">Open YouTube video &rarr;</div>
+                </div> -->
+            </a>
+
+        </section>
+
+        <div class="note-box">
+            Each dashboard video highlights a specific analytical problem, the approach taken, and key insights derived from the data.
+    Click on any card to view the full demonstration on YouTube.</strong>
+        </div>
+    </main>
+
+</body>
+</html>
