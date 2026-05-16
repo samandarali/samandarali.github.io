@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL — Knowledge, Shared Openly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --bg: #FAFAF8;
+      --surface: #FFFFFF;
+      --border: #E4E2DA;
+      --border-light: #EEECE6;
+      --text: #1A1A18;
+      --text-muted: #6B6B67;
+      --text-faint: #9B9B97;
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+      --serif: 'DM Serif Display', serif;
+
+      --green-50: #EAF3DE;
+      --green-100: #C0DD97;
+      --green-600: #3B6D11;
+      --green-800: #27500A;
+      --blue-50: #E6F1FB;
+      --blue-100: #B5D4F4;
+      --blue-600: #185FA5;
+      --blue-800: #0C447C;
+      --amber-50: #FAEEDA;
+      --amber-100: #FAC775;
+      --amber-600: #854F0B;
+      --amber-800: #633806;
+      --red-50: #FCEBEB;
+      --red-100: #F7C1C1;
+      --red-600: #A32D2D;
+      --red-800: #791F1F;
+    }
+
+
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh
+    }
+
+    /* ── LAYOUT ── */
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem
+    }
+
+    /* ── HERO ── */
+    .hero {
+      margin-bottom: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 1rem
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      line-height: 1.08;
+      color: var(--text);
+      margin-bottom: 1.25rem
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--green-600)
+    }
+
+    .hero-pitch {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 640px
+    }
+
+    .hero-pitch strong {
+      color: var(--text);
+      font-weight: 500
+    }
+
+    .hero-pitch code {
+      font-family: var(--mono);
+      font-size: 13px;
+      background: #F0EEE8;
+      padding: 1px 6px;
+      border-radius: 4px
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-row {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      align-items: center
+    }
+
+    .filter-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-right: 2px
+    }
+
+    .pill {
+      padding: 5px 14px;
+      font-size: 12px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: var(--sans);
+      transition: all .15s;
+      outline: none
+    }
+
+    .pill:hover {
+      background: #F0EEE8;
+      border-color: #C8C6BE
+    }
+
+    .pill.a-all {
+      background: #F0EEE8;
+      color: var(--text);
+      border-color: #C8C6BE;
+      font-weight: 500
+    }
+
+    .pill.a-beginner {
+      background: var(--green-50);
+      color: var(--green-800);
+      border-color: var(--green-600);
+      font-weight: 500
+    }
+
+    .pill.a-intermediate {
+      background: var(--blue-50);
+      color: var(--blue-800);
+      border-color: var(--blue-600);
+      font-weight: 500
+    }
+
+    .pill.a-advanced {
+      background: var(--amber-50);
+      color: var(--amber-800);
+      border-color: var(--amber-600);
+      font-weight: 500
+    }
+
+    .pill.a-expert {
+      background: var(--red-50);
+      color: var(--red-800);
+      border-color: var(--red-600);
+      font-weight: 500
+    }
+
+    /* ── LEVEL BLOCK ── */
+    .level-block {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      background: var(--surface)
+    }
+
+    .level-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 1.1rem 1.25rem;
+      cursor: pointer;
+      background: var(--surface);
+      user-select: none;
+      transition: background .15s
+    }
+
+    .level-header:hover {
+      background: #FAFAF8
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .dot-beginner {
+      background: var(--green-600)
+    }
+
+    .dot-intermediate {
+      background: var(--blue-600)
+    }
+
+    .dot-advanced {
+      background: var(--amber-600)
+    }
+
+    .dot-expert {
+      background: var(--red-600)
+    }
+
+    .lv-name {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      color: var(--text);
+      white-space: nowrap
+    }
+
+    .lv-summary {
+      font-size: 13px;
+      color: var(--text-muted);
+      flex: 1
+    }
+
+    .lv-badge {
+      font-size: 11px;
+      font-family: var(--mono);
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0
+    }
+
+    .badge-beginner {
+      background: var(--green-50);
+      color: var(--green-800)
+    }
+
+    .badge-intermediate {
+      background: var(--blue-50);
+      color: var(--blue-800)
+    }
+
+    .badge-advanced {
+      background: var(--amber-50);
+      color: var(--amber-800)
+    }
+
+    .badge-expert {
+      background: var(--red-50);
+      color: var(--red-800)
+    }
+
+    .chevron {
+      color: var(--text-faint);
+      font-size: 18px;
+      line-height: 1;
+      transition: transform .25s;
+      margin-left: 4px;
+      flex-shrink: 0
+    }
+
+    .level-header.open .chevron {
+      transform: rotate(180deg)
+    }
+
+    .level-body {
+      display: none;
+      border-top: 1px solid var(--border)
+    }
+
+    .level-body.open {
+      display: block
+    }
+
+    /* ── VIDEO SLOT (per level) ── */
+    .video-slot {
+      padding: 1.25rem 1.25rem 0
+    }
+
+    .video-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--text-faint);
+      margin-bottom: .6rem
+    }
+
+    .video-placeholder {
+      background: #F4F2EC;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 1.1rem;
+      color: var(--text-faint);
+      font-size: 13px
+    }
+
+    .video-placeholder svg {
+      flex-shrink: 0;
+      opacity: .5
+    }
+
+    /* When a real embed is provided, replace .video-placeholder with an iframe wrapper */
+    .video-embed {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      aspect-ratio: 16/9;
+      background: #000
+    }
+
+    .video-embed iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block
+    }
+
+    /* ── CATEGORY GRID ── */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      border-top: 1px solid var(--border);
+      margin-top: 1.25rem
+    }
+
+    .cat-card {
+      padding: 1rem 1.2rem;
+      border-right: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+      gap: .55rem
+    }
+
+    .cat-card:last-child {
+      border-right: none
+    }
+
+    .cat-name {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text)
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px
+    }
+
+    .chip {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: #F4F2EC;
+      color: var(--text-muted);
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid var(--border-light)
+    }
+
+    .ability {
+      font-size: 12px;
+      color: var(--text-faint);
+      line-height: 1.55;
+      padding-top: .5rem;
+      border-top: 1px dashed var(--border)
+    }
+
+    .cat-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding-top: .5rem;
+      margin-top: auto;
+      border-top: 1px solid var(--border-light)
+    }
+
+    .mini-btn {
+      font-size: 11px;
+      font-family: var(--mono);
+      padding: 3px 9px;
+      border-radius: 20px;
+      border: 1px dashed var(--border);
+      color: var(--text-faint);
+      background: transparent;
+      cursor: pointer;
+      transition: all .15s;
+      text-decoration: none;
+      display: inline-block
+    }
+
+    .mini-btn:hover {
+      background: #F4F2EC;
+      border-style: solid;
+      color: var(--text-muted)
+    }
+
+    .mini-btn.ex {
+      border-color: #C0DD97;
+      color: var(--green-600)
+    }
+
+    .mini-btn.ex:hover {
+      background: var(--green-50)
+    }
+
+    .mini-btn.ans {
+      border-color: var(--blue-100);
+      color: var(--blue-600)
+    }
+
+    .mini-btn.ans:hover {
+      background: var(--blue-50)
+    }
+
+    .mini-btn.vid {
+      border-color: #FAC775;
+      color: var(--amber-600)
+    }
+
+    .mini-btn.vid:hover {
+      background: var(--amber-50)
+    }
+
+    /* ─ coming badge (inactive) ─ */
+    .mini-btn.coming {
+      opacity: .45;
+      cursor: default;
+      pointer-events: none;
+      border-style: dashed
+    }
+
+    /* ── SECTION EXERCISES (bottom of level) ── */
+    .section-exercises {
+      border-top: 1px solid var(--border);
+      padding: 1.25rem
+    }
+
+    .sec-ex-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: .9rem
+    }
+
+    .sec-ex-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--text)
+    }
+
+    .sec-ex-badge {
+      font-size: 11px;
+      font-family: var(--mono);
+      padding: 2px 9px;
+      border-radius: 20px;
+      background: #F4F2EC;
+      color: var(--text-faint);
+      border: 1px dashed var(--border)
+    }
+
+    .sec-ex-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      line-height: 1.6
+    }
+
+    .sec-ex-placeholder {
+      background: #F4F2EC;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-faint);
+      font-size: 13px
+    }
+
+    .sec-ex-placeholder svg {
+      flex-shrink: 0;
+      opacity: .45
+    }
+
+    /* When exercises exist, list them as .q-list */
+    .q-list {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem
+    }
+
+    .q-item {
+      background: #FAFAF8;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: .85rem 1rem;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6
+    }
+
+    .q-item strong {
+      color: var(--text);
+      font-weight: 500;
+      font-family: var(--mono);
+      font-size: 11px;
+      display: block;
+      margin-bottom: .3rem
+    }
+
+    .q-item code {
+      font-family: var(--mono);
+      font-size: 12px;
+      background: #EEECE6;
+      padding: 1px 5px;
+      border-radius: 3px
+    }
+
+    /* ── WHAT IS SQL ── */
+    .what-is-sql {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem 1.5rem 1.25rem;
+      margin-bottom: 2rem
+    }
+
+    .wis-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: .5rem
+    }
+
+    .wis-title {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      color: var(--text);
+      margin-bottom: .75rem
+    }
+
+    .wis-body {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 640px;
+      margin-bottom: 1.25rem
+    }
+
+    .wis-body strong {
+      color: var(--text);
+      font-weight: 500
+    }
+
+    .wis-video {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      aspect-ratio: 16/9;
+      background: #000
+    }
+
+    .wis-video iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar {
+      width: 6px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px
+    }
+
+
+    .top-header {
+
+      background-color: #ffffff;
+      padding: 30px 40px;
+      border-bottom: 1px solid #e0e0e0;
+      /* margin-left: 50px; */
+    }
+
+    .header-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      font-size: 28px;
+
+    }
+
+    .header-inner {
+      /* max-width: 1400px; */
+      margin: 0;
+      margin-left: 20px;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <!-- Top header bar -->
+  <header class="top-header">
+    <div class="header-grid">
+      <div>
+        <a href="../index.html#teaching">🎓</a>
+      </div>
+      <div class="header-inner">
+        <h1 class="site-name">Mojgan Samandar</h1>
+        <p class="site-role">Economist & Data Analyst</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <!-- HERO -->
+      <div class="hero">
+        <h1>Change knowledge.<br><em>Share it openly.</em></h1>
+        <p class="hero-pitch">
+          SQL is the lingua franca of data -spoken by analysts, engineers, scientists, and product managers alike.
+          Every row in every database you'll ever touch is waiting for a query.
+          This page is a structured, open curriculum that takes you from your first <code>SELECT</code> to building
+          and securing database infrastructure at scale.<br><br>
+          Each level comes with a video overview, per-topic exercises, and a mixed practice section
+          that spans the whole level. Expand a level to start learning.
+        </p>
+      </div>
+
+      <!-- WHAT IS SQL -->
+      <div class="what-is-sql">
+        <div class="wis-title">What is SQL?</div>
+        <p class="wis-body">
+          SQL (Structured Query Language) is the standard language for talking to relational databases.
+          You use it to ask questions of your data, transform it, and
+          manage the tables that hold it - from a single CSV-sized table up to
+          billion-row production systems.
+          <!-- Watch this 10-minute primer before diving into any level below. -->
+        </p>
+        <!-- <div class="wis-video">
+      <a href="https://www.youtube.com/watch?v=xTqOaP3ueiA&t=213s" target="_blank" style="display:block; position:relative;">
+        <img 
+          src="https://img.youtube.com/vi/xTqOaP3ueiA/maxresdefault.jpg"
+          alt="What is SQL? — watch on YouTube"
+          style="width:100%; border-radius:10px; display:block;"
+        >
+        <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+          <div style="background:rgba(0,0,0,0.7); border-radius:50%; width:64px; height:64px; display:flex; align-items:center; justify-content:center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><polygon points="6,4 20,12 6,20"/></svg>
+          </div>
+        </div>
+      </a>
+    </div> -->
+      </div>
+
+      <!-- FILTER -->
+      <div class="filter-row">
+        <span class="filter-label">filter:</span>
+        <button class="pill a-all" onclick="setFilter('all',this)">All levels</button>
+        <button class="pill" onclick="setFilter('beginner',this)">Beginner</button>
+        <button class="pill" onclick="setFilter('intermediate',this)">Intermediate</button>
+        <button class="pill" onclick="setFilter('advanced',this)">Advanced</button>
+        <button class="pill" onclick="setFilter('expert',this)">Expert</button>
+      </div>
+
+      <div id="levels"></div>
+    </div>
+
+    <script>
+      // ─────────────────────────────────────────────
+      //  DATA
+      // ─────────────────────────────────────────────
+      const LEVELS = [
+        {
+          id: 'beginner', label: 'Beginner',
+          summary: 'Knows how to query a database — SELECT, filter, join two tables, and aggregate.',
+          // Replace the `video` object with a real YouTube/Vimeo embed URL when ready.
+          // Set video.ready = true and video.embedUrl = "https://www.youtube.com/embed/VIDEO_ID"
+          video: { ready: false, label: 'Intro to SQL — full beginner walkthrough', embedUrl: '' },
+          categories: [
+            {
+              name: 'Core syntax', concepts: ['SELECT', 'FROM', 'WHERE', 'ORDER BY', 'LIMIT', 'DISTINCT', 'AS (alias)'],
+              ability: 'Retrieve and filter rows from a single table; sort and rename columns',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Data types', concepts: ['INT / BIGINT', 'VARCHAR / TEXT', 'DATE / DATETIME', 'BOOLEAN', 'NULL'],
+              ability: 'Understand how data is stored and how NULL behaves in comparisons',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Filtering operators', concepts: ['= != < >', 'AND / OR / NOT', 'IN (...)', 'BETWEEN', 'LIKE / ILIKE', 'IS NULL / IS NOT NULL'],
+              ability: 'Write precise WHERE clauses combining multiple conditions',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Aggregate functions', concepts: ['COUNT(*)', 'SUM()', 'AVG()', 'MIN()', 'MAX()', 'GROUP BY', 'HAVING'],
+              ability: 'Summarize data by group; filter groups with HAVING',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Basic joins', concepts: ['INNER JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'ON clause'],
+              ability: 'Combine two tables; understand matched vs. unmatched rows',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Sorting & limiting', concepts: ['ORDER BY ASC/DESC', 'LIMIT / TOP', 'OFFSET', 'FETCH FIRST'],
+              ability: 'Paginate results; get top-N rows',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+          ],
+          sectionEx: { ready: false }
+        },
+        {
+          id: 'intermediate', label: 'Intermediate',
+          summary: 'Can write production queries — CTEs, subqueries, all join types, date and string manipulation.',
+          video: { ready: false, label: 'Intermediate SQL — production query patterns', embedUrl: '' },
+          categories: [
+            {
+              name: 'Joins (advanced)', concepts: ['FULL OUTER JOIN', 'CROSS JOIN', 'SELF JOIN', 'JOIN on multiple cols', 'non-equi joins'],
+              ability: 'Handle all join types; join a table to itself; join on expressions',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Set operations', concepts: ['UNION / UNION ALL', 'INTERSECT', 'EXCEPT / MINUS'],
+              ability: 'Combine result sets; understand deduplication vs. UNION ALL',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Subqueries', concepts: ['Scalar subquery', 'Correlated subquery', 'IN / EXISTS / ANY / ALL', 'Subquery in FROM'],
+              ability: 'Use nested queries for filtering, computing, and deriving tables',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'String functions', concepts: ['CONCAT / ||', 'UPPER / LOWER', 'TRIM / LTRIM', 'SUBSTRING', 'REPLACE', 'LENGTH', 'COALESCE', 'CASE WHEN'],
+              ability: 'Clean, transform, and branch on text data',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Date & time', concepts: ["NOW() / GETDATE()", 'DATE_PART / EXTRACT', 'DATE_ADD / DATEADD', 'DATEDIFF', 'DATE_TRUNC', 'FORMAT / TO_CHAR'],
+              ability: 'Calculate date differences, extract components, truncate to period',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'CTEs', concepts: ['WITH ... AS (...)', 'Multiple CTEs', 'Referencing a CTE', 'Recursive CTE (intro)'],
+              ability: 'Break complex queries into readable named steps',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Numeric functions', concepts: ['ROUND / CEIL / FLOOR', 'ABS', 'MOD / %', 'CAST / CONVERT', 'NULLIF', 'COALESCE'],
+              ability: 'Handle type conversions, division-by-zero, and null defaults',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Views', concepts: ['CREATE VIEW', 'DROP VIEW', 'Querying views', 'Updatable views'],
+              ability: 'Encapsulate logic as a reusable virtual table',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+          ],
+          sectionEx: { ready: false }
+        },
+        {
+          id: 'advanced', label: 'Advanced',
+          summary: 'Writes performant, schema-aware SQL — window functions, indexes, transactions, complex aggregations.',
+          video: { ready: false, label: 'Advanced SQL — windows, indexes & transactions', embedUrl: '' },
+          categories: [
+            {
+              name: 'Window functions', concepts: ['ROW_NUMBER()', 'RANK() / DENSE_RANK()', 'NTILE()', 'LAG() / LEAD()', 'FIRST_VALUE / LAST_VALUE', 'SUM() OVER', 'PARTITION BY', 'ROWS / RANGE BETWEEN'],
+              ability: 'Compute running totals, rankings, and row comparisons without collapsing rows',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Recursive CTEs', concepts: ['WITH RECURSIVE', 'Base case + recursive step', 'Hierarchy traversal', 'Graph traversal'],
+              ability: 'Walk org charts, category trees, bill-of-materials',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Indexing & performance', concepts: ['B-tree index', 'Composite index', 'Covering index', 'EXPLAIN ANALYZE', 'Query plan reading', 'Partial index', 'Full-text index'],
+              ability: 'Diagnose slow queries; choose correct index type and column order',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'DDL & schema design', concepts: ['CREATE TABLE', 'ALTER TABLE', 'DROP / TRUNCATE', 'Primary key', 'Foreign key', 'UNIQUE / CHECK', 'NOT NULL / DEFAULT', 'Normalization 1NF–3NF'],
+              ability: 'Design normalized schemas with integrity constraints',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Transactions', concepts: ['BEGIN / COMMIT / ROLLBACK', 'SAVEPOINT', 'Isolation levels', 'Dirty / phantom read', 'SELECT FOR UPDATE', 'DEADLOCK basics'],
+              ability: 'Write safe multi-step operations; understand concurrency issues',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Conditional & pivot', concepts: ['CASE WHEN (complex)', 'PIVOT / UNPIVOT', 'Conditional aggregation', 'FILTER clause', 'GROUPING SETS', 'ROLLUP / CUBE'],
+              ability: 'Produce cross-tab reports; multi-dimensional aggregation',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'JSON & semi-structured', concepts: ['JSON_EXTRACT / ->', 'JSON_ARRAYAGG', 'JSON_OBJECT', 'JSONB (Postgres)', 'UNNEST / JSON_TABLE'],
+              ability: 'Query and reshape JSON columns; flatten nested arrays into rows',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+          ],
+          sectionEx: { ready: false }
+        },
+        {
+          id: 'expert', label: 'Expert',
+          summary: 'Works at the database architecture level — query plans, stored procedures, partitioning, replication, and security.',
+          video: { ready: false, label: 'Expert SQL — architecture, optimization & security', embedUrl: '' },
+          categories: [
+            {
+              name: 'Query optimization', concepts: ['Cost-based optimizer', 'Statistics / ANALYZE', 'Index hints', 'Materialized views', 'Partition pruning', 'Parallel query', 'Join order hints'],
+              ability: 'Tune queries to sub-second on billion-row tables; use planner hints',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Stored procedures', concepts: ['CREATE FUNCTION', 'CREATE PROCEDURE', 'PL/pgSQL / T-SQL', 'Exception handling', 'Cursors', 'Dynamic SQL', 'EXECUTE'],
+              ability: 'Encapsulate business logic server-side; handle errors programmatically',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Triggers', concepts: ['BEFORE / AFTER triggers', 'INSERT / UPDATE / DELETE', 'INSTEAD OF (views)', 'Row-level vs statement-level'],
+              ability: 'Automate audit trails, cascade logic, and enforce complex rules',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Partitioning', concepts: ['Range partitioning', 'List partitioning', 'Hash partitioning', 'Partition pruning', 'Partition exchange', 'Sub-partitions'],
+              ability: 'Design tables partitioned for fast range scans and efficient archiving',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Advanced analytics', concepts: ['PERCENTILE_CONT/DISC', 'MEDIAN', 'STDDEV / VARIANCE', 'Cohort analysis', 'Funnel queries', 'Session windowing'],
+              ability: 'Build analytics-grade reports: cohorts, funnels, distributions',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Replication', concepts: ['Primary/replica setup', 'WAL / binlog', 'Logical replication', 'Sharding concepts', 'CQRS pattern', 'Connection pooling'],
+              ability: 'Architect scalable, highly available database infrastructure',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+            {
+              name: 'Security', concepts: ['GRANT / REVOKE', 'Roles & schemas', 'Row-level security (RLS)', 'Column masking', 'SQL injection prevention', 'Audit logging'],
+              ability: 'Implement least-privilege access, data masking, and audit compliance',
+              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+            },
+          ],
+          sectionEx: { ready: false }
+        }
+      ];
+
+      // ─────────────────────────────────────────────
+      //  STATE
+      // ─────────────────────────────────────────────
+      let activeFilter = 'all';
+      let openMap = {};
+
+      // ─────────────────────────────────────────────
+      //  RENDER
+      // ─────────────────────────────────────────────
+      function render() {
+        const container = document.getElementById('levels');
+        container.innerHTML = '';
+        const visible = activeFilter === 'all' ? LEVELS : LEVELS.filter(l => l.id === activeFilter);
+
+        visible.forEach(lv => {
+          const isOpen = !!openMap[lv.id];
+
+          // video block
+          const videoHTML = lv.video.ready
+            ? `<div class="video-embed"><iframe src="${lv.video.embedUrl}" allowfullscreen></iframe></div>`
+            : `<div class="video-placeholder">
+           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+           ${lv.video.label} — <em style="font-style:italic">coming soon</em>
+         </div>`;
+
+          // category cards
+          const catCards = lv.categories.map(c => {
+            const exClass = 'mini-btn ex' + (c.ex.ready ? '' : ' coming');
+            const ansClass = 'mini-btn ans' + (c.ans.ready ? '' : ' coming');
+            const vidClass = 'mini-btn vid' + (c.vid.ready ? '' : ' coming');
+            const exHref = c.ex.ready ? c.ex.url : '#';
+            const ansHref = c.ans.ready ? c.ans.url : '#';
+            const vidHref = c.vid.ready ? c.vid.url : '#';
+
+            return `<div class="cat-card">
+        <div class="cat-name">${c.name}</div>
+        <div class="chips">${c.concepts.map(x => `<span class="chip">${x}</span>`).join('')}</div>
+        <div class="ability">${c.ability}</div>
+        <div class="cat-footer">
+          <a class="${exClass}"  href="${exHref}" ${c.ex.ready ? 'target="_blank"' : ''}>exercises</a>
+          <a class="${ansClass}" href="${ansHref}" ${c.ans.ready ? 'target="_blank"' : ''}>answers</a>
+          <a class="${vidClass}" href="${vidHref}" ${c.vid.ready ? 'target="_blank"' : ''}>walkthrough</a>
+        </div>
+      </div>`;
+          }).join('');
+
+          // section exercises footer
+          const secExHTML = lv.sectionEx.ready
+            ? `<div class="q-list">${(lv.sectionEx.questions || []).map((q, i) => `
+          <div class="q-item"><strong>Q${i + 1}</strong>${q}</div>`).join('')}
+         </div>`
+            : `<div class="sec-ex-placeholder">
+           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
+           Mixed practice exercises for this level — coming soon
+         </div>`;
+
+          // assemble block
+          const block = document.createElement('div');
+          block.className = 'level-block';
+          block.innerHTML = `
+      <div class="level-header${isOpen ? ' open' : ''}" onclick="toggle('${lv.id}')">
+        <span class="dot dot-${lv.id}"></span>
+        <span class="lv-name">${lv.label}</span>
+        <span class="lv-summary">${lv.summary}</span>
+        <span class="lv-badge badge-${lv.id}">${lv.categories.length} topics</span>
+        <span class="chevron">&#8964;</span>
+      </div>
+      <div class="level-body${isOpen ? ' open' : ''}">
+        <div class="video-slot">
+          <div class="video-label">Level video</div>
+          ${videoHTML}
+        </div>
+        <div class="cat-grid">${catCards}</div>
+        <div class="section-exercises">
+          <div class="sec-ex-header">
+            <span class="sec-ex-title">Section exercises</span>
+            <span class="sec-ex-badge">mixed practice — all ${lv.label.toLowerCase()} topics</span>
+          </div>
+          <p class="sec-ex-desc">These questions draw on everything in this level. Work through them after completing all topics above.</p>
+          ${secExHTML}
+        </div>
+      </div>
+    `;
+          container.appendChild(block);
+        });
+      }
+
+      function toggle(id) { openMap[id] = !openMap[id]; render(); }
+
+      function setFilter(f, btn) {
+        activeFilter = f;
+        document.querySelectorAll('.pill').forEach(b => {
+          b.className = 'pill';
+        });
+        btn.className = 'pill a-' + f;
+        render();
+      }
+
+      render();
+    </script>
+</body>
+
+</html>

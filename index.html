@@ -7,11 +7,9 @@
     <title>Mojgan Samandar | Portfolio</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap"
-        rel="stylesheet"
-    />
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles/style-teaching.css" />
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -69,6 +67,9 @@
                 <button id="tab-projects" data-target="content-projects" class="tab-button py-3 px-2 text-gray-600">
                     Projects
                 </button>
+                <button id="tab-teaching" data-target="content-teaching" class="tab-button py-3 px-2 text-gray-600">
+                    Teaching
+                </button>
                 <button id="tab-articles" data-target="content-articles" class="tab-button py-3 px-2 text-gray-600">
                     My Articles
                 </button>
@@ -118,16 +119,18 @@
                 <div class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-teal-500 hover:shadow-2xl">
                     <h3 class="text-xl font-semibold mb-3 text-teal-800">Policy & Research Articles</h3>
                     <p class="text-gray-600 mb-4">
-                        Published and applied research across economics, data analytics, and public policy, focused on turning complex data into clear, evidence-based insights.
+                        Published and applied research across economics, data analytics, and public policy, focused on
+                        turning complex data into clear, evidence-based insights.
                     </p>
                     <a href="projects.html"
                         class="inline-block bg-teal-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-teal-700 transition">
                         View Projects &rarr;
                     </a>
                 </div>
-                
+
                 <!-- Interactive Dashboards -->
-                <div class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-indigo-500 hover:shadow-2xl">
+                <div
+                    class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-indigo-500 hover:shadow-2xl">
                     <h3 class="text-xl font-semibold mb-3 text-indigo-800">Interactive Data Dashboards</h3>
                     <p class="text-gray-600 mb-4">
                         A collection of dashboard demo videos showing healthcare and analytics projects,
@@ -142,10 +145,12 @@
 
 
                 <!-- Optional extra box -->
-                <div class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-purple-500 hover:shadow-2xl">
+                <div
+                    class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-purple-500 hover:shadow-2xl">
                     <h3 class="text-xl font-semibold mb-3 text-purple-800">Games & Interactive Apps</h3>
                     <p class="text-gray-600 mb-4">
-                        A collection of games and interactive applications built using Python, R Shiny, and JavaScript, ranging from small tools to data-driven projects.
+                        A collection of games and interactive applications built using Python, R Shiny, and JavaScript,
+                        ranging from small tools to data-driven projects.
                     </p>
                     <a href="projects-apps.html" target="_blank"
                         class="inline-block bg-purple-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 transition">
@@ -155,13 +160,184 @@
             </div>
         </section>
 
+        <!-- Teaching -->
+        <!-- HERO -->
+        <section id="content-teaching" class="tab-content hidden">
+            <div class="mb-8">
+                <p class="text-xs font-bold uppercase tracking-widest text-purple-600 mb-2">Teaching & Learning
+                    Resources</p>
+                <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight mb-3">
+                    Knowledge, <span class="text-purple-600">shared openly.</span>
+                </h2>
+                <p class="text-lg text-gray-500 max-w-2xl leading-relaxed">
+                    Tutorials, reference materials, and interactive tools across data analytics, early math, and
+                    economics of innovation — built from years of teaching and practice.
+                </p>
+            </div>
+            <!-- KO-FI BANNER -->
+            <div class="kofi-banner mb-10">
+                <div>
+                    <div class="text-base font-bold text-orange-900 mb-1">☕ Find these resources useful?</div>
+                    <div class="text-sm text-orange-700 max-w-md">If my tutorials or materials have helped you, consider
+                        buying me a coffee. It takes a few seconds and means a lot — thank you! 🙏</div>
+                </div>
+                <!-- ✏️ Replace YOUR_KOFI_USERNAME with your actual Ko-fi username -->
+                <a href="https://ko-fi.com/YOUR_KOFI_USERNAME" target="_blank" rel="noopener" class="kofi-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+                        <path
+                            d="M20.216 6.415l-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.195-.4-.597-.634-.996-.788a5.723 5.723 0 00-.626-.194c-1-.263-2.05-.36-3.077-.416a25.834 25.834 0 00-3.7.062c-.915.083-1.88.184-2.75.5-.318.116-.646.256-.919.479-.404.32-.518.979-.Statistical.479C5.85 1.6 5.3 2.02 5.09 2.618c-.147.413-.208.856-.274 1.29-.1.672-.18 1.347-.25 2.022-.062.597-.112 1.196-.175 1.793l-.002.016c-.007.083-.015.166-.023.25l-.033.38H3.88c-.552 0-1 .448-1 1v4c0 .552.448 1 1 1h.666L5 16.5c0 1.381 1.119 2.5 2.5 2.5H17c1.381 0 2.5-1.119 2.5-2.5l.453-7.5h.547c.552 0 1-.448 1-1v-1.085c0-.552-.448-1-1-1h-1.174a34.113 34.113 0 00-.11-.5zm-3.666 7.779a1 1 0 01-1 1H9a1 1 0 01-1-1V9.194a1 1 0 011-1h6.55a1 1 0 011 1v5z" />
+                    </svg>
+                    Support on Ko-fi
+                </a>
+            </div>
+            <!-- FILTER PILLS -->
+            <div class="flex gap-2 flex-wrap mb-7" id="cat-filters">
+                <button class="filter-pill active" data-cat="all">All</button>
+                <button class="filter-pill" data-cat="sql">SQL</button>
+                <button class="filter-pill" data-cat="excel">Excel</button>
+                <button class="filter-pill" data-cat="powerbi">Power BI</button>
+                <button class="filter-pill" data-cat="math">Math (Gr. 1–2)</button>
+                <button class="filter-pill" data-cat="economics">Economics</button>
+            </div>
+
+            <!-- CARDS GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6" id="cards-grid">
+
+                <!-- SQL card -->
+                <div class="card-item" data-cat="sql" data-panel="sql-panel">
+                    <div class="teach-card" onclick="togglePanel('sql-panel', this.closest('.card-item'))">
+                        <div class="card-thumb" style="background:#eff6ff;">📊</div>
+                        <div class="card-body">
+                            <div class="card-tag" style="color:#1d4ed8;">SQL</div>
+                            <div class="card-title">SQL — Beginner to Expert</div>
+                            <div class="card-desc">A complete reference covering core syntax, joins, window functions,
+                                indexing, and performance tuning — organized by skill level with video.</div>
+                            <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:2px;">
+                                <span
+                                    style="background:#dbeafe; color:#1e40af; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Beginner
+                                    → Expert</span>
+                                <span
+                                    style="background:#f3f4f6; color:#6b7280; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Reference
+                                    table</span>
+                                <span
+                                    style="background:#f3f4f6; color:#6b7280; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Video</span>
+                            </div>
+                        </div>
+                        <div class="card-footer" id="sql-footer" style="color:#1d4ed8;">
+                            <a href="teaching\sql_teaching_page.html"
+                                class="inline-block bg-teal-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-teal-700 transition">
+                                View resource &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Excel card (coming soon) -->
+                <div class="card-item coming-soon" data-cat="excel">
+                    <div class="teach-card">
+                        <div class="card-thumb" style="background:#f0fdf4;">📗</div>
+                        <div class="card-body">
+                            <div class="card-tag" style="color:#15803d;">Excel</div>
+                            <div class="card-title">Excel Dashboard Walkthroughs</div>
+                            <div class="card-desc">Pivot tables, Power Query, conditional formatting, and building
+                                interactive dashboards from raw data.</div>
+                            <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:2px;">
+                                <span
+                                    style="background:#dcfce7; color:#166534; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Intermediate</span>
+                                <span
+                                    style="background:#f3f4f6; color:#9ca3af; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Coming
+                                    soon</span>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="color:#9ca3af;">⏳ Coming soon</div>
+                    </div>
+                </div>
+
+                <!-- Power BI card (coming soon) -->
+                <div class="card-item coming-soon" data-cat="powerbi">
+                    <div class="teach-card">
+                        <div class="card-thumb" style="background:#fefce8;">📈</div>
+                        <div class="card-body">
+                            <div class="card-tag" style="color:#a16207;">Power BI</div>
+                            <div class="card-title">Power BI for Analysts</div>
+                            <div class="card-desc">Building interactive reports, writing DAX measures, and designing
+                                dashboards for business intelligence.</div>
+                            <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:2px;">
+                                <span
+                                    style="background:#fef9c3; color:#854d0e; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Intermediate</span>
+                                <span
+                                    style="background:#f3f4f6; color:#9ca3af; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Coming
+                                    soon</span>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="color:#9ca3af;">⏳ Coming soon</div>
+                    </div>
+                </div>
+
+                <!-- Math card (coming soon) -->
+                <div class="card-item coming-soon" data-cat="math">
+                    <div class="teach-card">
+                        <div class="card-thumb" style="background:#fdf4ff;">🔢</div>
+                        <div class="card-body">
+                            <div class="card-tag" style="color:#7e22ce;">Math for Kids</div>
+                            <div class="card-title">Math Activities — Grades 1 & 2</div>
+                            <div class="card-desc">Playful, visual activities to build number sense, counting, addition,
+                                subtraction, and patterns for young learners.</div>
+                            <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:2px;">
+                                <span
+                                    style="background:#f3e8ff; color:#7e22ce; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Grade
+                                    1–2</span>
+                                <span
+                                    style="background:#f3f4f6; color:#9ca3af; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Interactive
+                                    games</span>
+                                <span
+                                    style="background:#f3f4f6; color:#9ca3af; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Coming
+                                    soon</span>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="color:#9ca3af;">⏳ Coming soon</div>
+                    </div>
+                </div>
+
+                <!-- Economics card -->
+                <div class="card-item coming-soon" data-cat="economics" data-panel="econ-panel">
+                    <div class="teach-card" onclick="togglePanel('econ-panel', this.closest('.card-item'))">
+                        <div class="card-thumb" style="background:#fff7ed;">🎓</div>
+                        <div class="card-body">
+                            <div class="card-tag" style="color:#c2410c;">Economics of Innovation</div>
+                            <div class="card-title">Economics of Innovation — University Course</div>
+                            <div class="card-desc">A graduate course on innovation-driven growth, R&D investment,
+                                national innovation systems, and entrepreneurship policy.</div>
+                            <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:2px;">
+                                <span
+                                    style="background:#fed7aa; color:#c2410c; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">MSc
+                                    / Graduate</span>
+                                <span
+                                    style="background:#f3f4f6; color:#6b7280; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Course
+                                    overview</span>
+                            </div>
+                        </div>
+                        <div class="card-footer" id="econ-footer" style="color:#c2410c;">
+                            <!-- <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    View overview
+                    </div> -->
+                            <div class="card-footer" style="color:#9ca3af;">⏳ Coming soon</div>
+
+                        </div>
+                    </div>
+
+                </div><!-- /cards grid -->
+
+
+
+        </section>
+
         <!-- Articles -->
         <section id="content-articles" class="tab-content hidden bg-white p-8 shadow-xl rounded-xl">
             <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-2">My Publications</h2>
             <p class="text-gray-700 text-lg">
                 You can view my articles on
-                <a href="https://scholar.google.com/citations?user=fYvemsMAAAAJ&hl=en"
-                    target="_blank"
+                <a href="https://scholar.google.com/citations?user=fYvemsMAAAAJ&hl=en" target="_blank"
                     class="text-purple-600 hover:text-purple-800 font-medium">
                     Google Scholar
                 </a>.
@@ -181,16 +357,14 @@
                 </p>
                 <p>
                     <strong>LinkedIn:</strong>
-                    <a href="https://www.linkedin.com/in/mojgan-samandar"
-                        target="_blank"
+                    <a href="https://www.linkedin.com/in/mojgan-samandar" target="_blank"
                         class="text-purple-600 hover:text-purple-800 font-medium">
                         linkedin.com/in/mojgan-samandar
                     </a>
                 </p>
                 <p>
                     <strong>GitHub:</strong>
-                    <a href="#"
-                        class="text-purple-600 hover:text-purple-800 font-medium">
+                    <a href="#" class="text-purple-600 hover:text-purple-800 font-medium">
                         https://github.com/samandarali?tab=repositories
                     </a>
                 </p>
@@ -228,7 +402,16 @@
         });
 
         switchTab('content-about');
+
+
+        switchTab('content-about');
+
+        // ← add this
+        if (window.location.hash === '#teaching') {
+            switchTab('content-teaching');
+        }
     </script>
 
 </body>
+
 </html>
