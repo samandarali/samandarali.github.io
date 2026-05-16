@@ -1,94 +1,261 @@
   .filter-pill {
-      padding: 7px 18px; border-radius: 9999px; font-size: 13px; font-weight: 500;
-      border: 1px solid #d1d5db; background: white; color: #4b5563;
-      cursor: pointer; transition: all 0.15s;
-    }
-    .filter-pill:hover { border-color: #9333ea; color: #9333ea; }
-    .filter-pill.active { background: #9333ea; color: white; border-color: #9333ea; }
+    padding: 7px 18px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid #d1d5db;
+    background: white;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
 
-    /* cards */
-    .teach-card {
-      background: white; border-radius: 14px; overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      transition: transform 0.25s, box-shadow 0.25s;
-      display: flex; flex-direction: column; height: 100%;
-      cursor: pointer;
-    }
-    .teach-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.13); }
-    .card-item.coming-soon .teach-card { opacity: 0.62; pointer-events: none; cursor: default; }
-    .card-item.coming-soon { pointer-events: none; }
+  .filter-pill:hover {
+    border-color: #9333ea;
+    color: #9333ea;
+  }
 
-    /* active card highlight */
-    .card-item.open .teach-card {
-      box-shadow: 0 0 0 2.5px #9333ea, 0 8px 24px rgba(147,51,234,0.15);
-      transform: translateY(-3px);
+  .filter-pill.active {
+    background: #9333ea;
+    color: white;
+    border-color: #9333ea;
+  }
+
+  /* cards */
+  .teach-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s, box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  .teach-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.13);
+  }
+
+  .card-item.coming-soon .teach-card {
+    opacity: 0.62;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .card-item.coming-soon {
+    pointer-events: none;
+  }
+
+  /* active card highlight */
+  .card-item.open .teach-card {
+    box-shadow: 0 0 0 2.5px #9333ea, 0 8px 24px rgba(147, 51, 234, 0.15);
+    transform: translateY(-3px);
+  }
+
+  .card-thumb {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* ← change cover to contain */
+    object-position: center;
+    display: block;
+    background: #eff6ff;
+    /* ← adds a light background to fill any gaps */
+  }
+
+  .card-body {
+    padding: 16px 18px 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .card-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.35;
+  }
+
+  .card-desc {
+    font-size: 12.5px;
+    color: #6b7280;
+    line-height: 1.55;
+    flex: 1;
+  }
+
+  .card-footer {
+    border-top: 1px solid #f3f4f6;
+    padding: 10px 18px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* detail panels */
+  .detail-panel {
+    display: none;
+    margin-top: 0;
+    animation: slideDown 0.22s ease;
+  }
+
+  .detail-panel.open {
+    display: block;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
     }
 
-    .card-thumb {
-      width: 100%; height: 150px;
-      display: flex; align-items: center; justify-content: center; font-size: 3rem;
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
-    .card-body { padding: 16px 18px 18px; flex: 1; display: flex; flex-direction: column; gap: 7px; }
-    .card-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-    .card-title { font-size: 15px; font-weight: 700; color: #111827; line-height: 1.35; }
-    .card-desc { font-size: 12.5px; color: #6b7280; line-height: 1.55; flex: 1; }
-    .card-footer {
-      border-top: 1px solid #f3f4f6; padding: 10px 18px;
-      font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 5px;
-    }
+  }
 
-    /* detail panels */
-    .detail-panel {
-      display: none;
-      margin-top: 0;
-      animation: slideDown 0.22s ease;
-    }
-    .detail-panel.open { display: block; }
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+  /* SQL table */
+  .sql-wrap {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  }
 
-    /* SQL table */
-    .sql-wrap { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
-    .sql-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-    .sql-table th {
-      background: #f9fafb; color: #6b7280; font-weight: 600; font-size: 10.5px;
-      text-transform: uppercase; letter-spacing: 0.06em;
-      padding: 10px 14px; text-align: left; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0;
-    }
-    .sql-table td { padding: 9px 14px; border-bottom: 1px solid #f3f4f6; vertical-align: top; line-height: 1.5; }
-    .sql-table tr:last-child td { border-bottom: none; }
-    .sql-table tr:hover td { background: #fafafa; }
-    .badge { display: inline-block; padding: 2px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600; white-space: nowrap; }
-    .b-beginner     { background: #dcfce7; color: #166534; }
-    .b-intermediate { background: #dbeafe; color: #1e40af; }
-    .b-advanced     { background: #fef3c7; color: #92400e; }
-    .b-expert       { background: #fce7f3; color: #9d174d; }
-    .concepts-cell { display: flex; flex-wrap: wrap; gap: 4px; }
-    .concept {
-      font-family: ui-monospace, 'SF Mono', monospace; font-size: 11px;
-      background: #f3f4f6; color: #374151;
-      padding: 1px 6px; border-radius: 4px; white-space: nowrap; border: 1px solid #e5e7eb;
-    }
+  .sql-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
 
-    /* Ko-fi banner */
-    .kofi-banner {
-      background: linear-gradient(135deg, #fff7ed 0%, #fef3e2 100%);
-      border: 1.5px solid #fed7aa;
-      border-radius: 16px;
-      padding: 1.5rem 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
-    }
-    .kofi-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: #ff5e5b; color: white;
-      font-weight: 700; font-size: 14px;
-      padding: 11px 24px; border-radius: 9999px;
-      text-decoration: none; border: none; cursor: pointer;
-      box-shadow: 0 4px 14px rgba(255,94,91,0.35);
-      transition: transform 0.15s, box-shadow 0.15s;
-      white-space: nowrap;
-    }
-    .kofi-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,94,91,0.45); }
+  .sql-table th {
+    background: #f9fafb;
+    color: #6b7280;
+    font-weight: 600;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+  }
+
+  .sql-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #f3f4f6;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .sql-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .sql-table tr:hover td {
+    background: #fafafa;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .b-beginner {
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  .b-intermediate {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+
+  .b-advanced {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  .b-expert {
+    background: #fce7f3;
+    color: #9d174d;
+  }
+
+  .concepts-cell {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .concept {
+    font-family: ui-monospace, 'SF Mono', monospace;
+    font-size: 11px;
+    background: #f3f4f6;
+    color: #374151;
+    padding: 1px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    border: 1px solid #e5e7eb;
+  }
+
+  /* Ko-fi banner */
+  .kofi-banner {
+    background: linear-gradient(135deg, #fff7ed 0%, #fef3e2 100%);
+    border: 1.5px solid #fed7aa;
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .kofi-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ff5e5b;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 11px 24px;
+    border-radius: 9999px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(255, 94, 91, 0.35);
+    transition: transform 0.15s, box-shadow 0.15s;
+    white-space: nowrap;
+  }
+
+  .kofi-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 94, 91, 0.45);
+  }

@@ -59,7 +59,7 @@
 
     /* ── LAYOUT ── */
     .wrap {
-      max-width: 900px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 3rem 1.5rem 6rem
     }
@@ -616,27 +616,32 @@
     }
 
 
-    .top-header {
-
-      background-color: #ffffff;
-      padding: 30px 40px;
-      border-bottom: 1px solid #e0e0e0;
-      /* margin-left: 50px; */
+    .site-header {
+      background: #ffffff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     }
 
-    .header-grid {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      align-items: center;
-      font-size: 28px;
-
+    .site-header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 0;
     }
 
-    .header-inner {
-      /* max-width: 1400px; */
-      margin: 0;
-      margin-left: 20px;
-      text-align: left;
+    .site-name {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #111827;
+      letter-spacing: -0.02em;
+      font-family: 'Inter', var(--sans), sans-serif;
+    }
+
+    .site-role {
+      font-size: 1.1rem;
+      color: #27500A;
+      ;
+      font-weight: 500;
+      margin-top: 0.25rem;
+      font-family: 'Inter', var(--sans), sans-serif;
     }
   </style>
 </head>
@@ -645,43 +650,41 @@
 
   <!-- Header -->
   <!-- Top header bar -->
-  <header class="top-header">
-    <div class="header-grid">
-      <div>
-        <a href="../index.html#teaching">🎓</a>
-      </div>
-      <div class="header-inner">
-        <h1 class="site-name">Mojgan Samandar</h1>
-        <p class="site-role">Economist & Data Analyst</p>
-      </div>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <h1 class="site-name">Mojgan Samandar</h1>
+      <p class="site-role">Economist &amp; Data Analyst</p>
+      <a href="../index.html#teaching">← Back to Teaching</a>
+
+    </div>
+  </header>
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <div class="hero">
+      <h1>Change knowledge.<br><em>Share it openly.</em></h1>
+      <p class="hero-pitch">
+        SQL is the lingua franca of data -spoken by analysts, engineers, scientists, and product managers alike.
+        Every row in every database you'll ever touch is waiting for a query.
+        This page is a structured, open curriculum that takes you from your first <code>SELECT</code> to building
+        and securing database infrastructure at scale.<br><br>
+        Each level comes with a video overview, per-topic exercises, and a mixed practice section
+        that spans the whole level. Expand a level to start learning.
+      </p>
     </div>
 
-    <div class="wrap">
-
-      <!-- HERO -->
-      <div class="hero">
-        <h1>Change knowledge.<br><em>Share it openly.</em></h1>
-        <p class="hero-pitch">
-          SQL is the lingua franca of data -spoken by analysts, engineers, scientists, and product managers alike.
-          Every row in every database you'll ever touch is waiting for a query.
-          This page is a structured, open curriculum that takes you from your first <code>SELECT</code> to building
-          and securing database infrastructure at scale.<br><br>
-          Each level comes with a video overview, per-topic exercises, and a mixed practice section
-          that spans the whole level. Expand a level to start learning.
-        </p>
-      </div>
-
-      <!-- WHAT IS SQL -->
-      <div class="what-is-sql">
-        <div class="wis-title">What is SQL?</div>
-        <p class="wis-body">
-          SQL (Structured Query Language) is the standard language for talking to relational databases.
-          You use it to ask questions of your data, transform it, and
-          manage the tables that hold it - from a single CSV-sized table up to
-          billion-row production systems.
-          <!-- Watch this 10-minute primer before diving into any level below. -->
-        </p>
-        <!-- <div class="wis-video">
+    <!-- WHAT IS SQL -->
+    <div class="what-is-sql">
+      <div class="wis-title">What is SQL?</div>
+      <p class="wis-body">
+        SQL (Structured Query Language) is the standard language for talking to relational databases.
+        You use it to ask questions of your data, transform it, and
+        manage the tables that hold it - from a single CSV-sized table up to
+        billion-row production systems.
+        <!-- Watch this 10-minute primer before diving into any level below. -->
+      </p>
+      <!-- <div class="wis-video">
       <a href="https://www.youtube.com/watch?v=xTqOaP3ueiA&t=213s" target="_blank" style="display:block; position:relative;">
         <img 
           src="https://img.youtube.com/vi/xTqOaP3ueiA/maxresdefault.jpg"
@@ -695,237 +698,237 @@
         </div>
       </a>
     </div> -->
-      </div>
-
-      <!-- FILTER -->
-      <div class="filter-row">
-        <span class="filter-label">filter:</span>
-        <button class="pill a-all" onclick="setFilter('all',this)">All levels</button>
-        <button class="pill" onclick="setFilter('beginner',this)">Beginner</button>
-        <button class="pill" onclick="setFilter('intermediate',this)">Intermediate</button>
-        <button class="pill" onclick="setFilter('advanced',this)">Advanced</button>
-        <button class="pill" onclick="setFilter('expert',this)">Expert</button>
-      </div>
-
-      <div id="levels"></div>
     </div>
 
-    <script>
-      // ─────────────────────────────────────────────
-      //  DATA
-      // ─────────────────────────────────────────────
-      const LEVELS = [
-        {
-          id: 'beginner', label: 'Beginner',
-          summary: 'Knows how to query a database — SELECT, filter, join two tables, and aggregate.',
-          // Replace the `video` object with a real YouTube/Vimeo embed URL when ready.
-          // Set video.ready = true and video.embedUrl = "https://www.youtube.com/embed/VIDEO_ID"
-          video: { ready: false, label: 'Intro to SQL — full beginner walkthrough', embedUrl: '' },
-          categories: [
-            {
-              name: 'Core syntax', concepts: ['SELECT', 'FROM', 'WHERE', 'ORDER BY', 'LIMIT', 'DISTINCT', 'AS (alias)'],
-              ability: 'Retrieve and filter rows from a single table; sort and rename columns',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Data types', concepts: ['INT / BIGINT', 'VARCHAR / TEXT', 'DATE / DATETIME', 'BOOLEAN', 'NULL'],
-              ability: 'Understand how data is stored and how NULL behaves in comparisons',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Filtering operators', concepts: ['= != < >', 'AND / OR / NOT', 'IN (...)', 'BETWEEN', 'LIKE / ILIKE', 'IS NULL / IS NOT NULL'],
-              ability: 'Write precise WHERE clauses combining multiple conditions',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Aggregate functions', concepts: ['COUNT(*)', 'SUM()', 'AVG()', 'MIN()', 'MAX()', 'GROUP BY', 'HAVING'],
-              ability: 'Summarize data by group; filter groups with HAVING',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Basic joins', concepts: ['INNER JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'ON clause'],
-              ability: 'Combine two tables; understand matched vs. unmatched rows',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Sorting & limiting', concepts: ['ORDER BY ASC/DESC', 'LIMIT / TOP', 'OFFSET', 'FETCH FIRST'],
-              ability: 'Paginate results; get top-N rows',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-          ],
-          sectionEx: { ready: false }
-        },
-        {
-          id: 'intermediate', label: 'Intermediate',
-          summary: 'Can write production queries — CTEs, subqueries, all join types, date and string manipulation.',
-          video: { ready: false, label: 'Intermediate SQL — production query patterns', embedUrl: '' },
-          categories: [
-            {
-              name: 'Joins (advanced)', concepts: ['FULL OUTER JOIN', 'CROSS JOIN', 'SELF JOIN', 'JOIN on multiple cols', 'non-equi joins'],
-              ability: 'Handle all join types; join a table to itself; join on expressions',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Set operations', concepts: ['UNION / UNION ALL', 'INTERSECT', 'EXCEPT / MINUS'],
-              ability: 'Combine result sets; understand deduplication vs. UNION ALL',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Subqueries', concepts: ['Scalar subquery', 'Correlated subquery', 'IN / EXISTS / ANY / ALL', 'Subquery in FROM'],
-              ability: 'Use nested queries for filtering, computing, and deriving tables',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'String functions', concepts: ['CONCAT / ||', 'UPPER / LOWER', 'TRIM / LTRIM', 'SUBSTRING', 'REPLACE', 'LENGTH', 'COALESCE', 'CASE WHEN'],
-              ability: 'Clean, transform, and branch on text data',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Date & time', concepts: ["NOW() / GETDATE()", 'DATE_PART / EXTRACT', 'DATE_ADD / DATEADD', 'DATEDIFF', 'DATE_TRUNC', 'FORMAT / TO_CHAR'],
-              ability: 'Calculate date differences, extract components, truncate to period',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'CTEs', concepts: ['WITH ... AS (...)', 'Multiple CTEs', 'Referencing a CTE', 'Recursive CTE (intro)'],
-              ability: 'Break complex queries into readable named steps',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Numeric functions', concepts: ['ROUND / CEIL / FLOOR', 'ABS', 'MOD / %', 'CAST / CONVERT', 'NULLIF', 'COALESCE'],
-              ability: 'Handle type conversions, division-by-zero, and null defaults',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Views', concepts: ['CREATE VIEW', 'DROP VIEW', 'Querying views', 'Updatable views'],
-              ability: 'Encapsulate logic as a reusable virtual table',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-          ],
-          sectionEx: { ready: false }
-        },
-        {
-          id: 'advanced', label: 'Advanced',
-          summary: 'Writes performant, schema-aware SQL — window functions, indexes, transactions, complex aggregations.',
-          video: { ready: false, label: 'Advanced SQL — windows, indexes & transactions', embedUrl: '' },
-          categories: [
-            {
-              name: 'Window functions', concepts: ['ROW_NUMBER()', 'RANK() / DENSE_RANK()', 'NTILE()', 'LAG() / LEAD()', 'FIRST_VALUE / LAST_VALUE', 'SUM() OVER', 'PARTITION BY', 'ROWS / RANGE BETWEEN'],
-              ability: 'Compute running totals, rankings, and row comparisons without collapsing rows',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Recursive CTEs', concepts: ['WITH RECURSIVE', 'Base case + recursive step', 'Hierarchy traversal', 'Graph traversal'],
-              ability: 'Walk org charts, category trees, bill-of-materials',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Indexing & performance', concepts: ['B-tree index', 'Composite index', 'Covering index', 'EXPLAIN ANALYZE', 'Query plan reading', 'Partial index', 'Full-text index'],
-              ability: 'Diagnose slow queries; choose correct index type and column order',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'DDL & schema design', concepts: ['CREATE TABLE', 'ALTER TABLE', 'DROP / TRUNCATE', 'Primary key', 'Foreign key', 'UNIQUE / CHECK', 'NOT NULL / DEFAULT', 'Normalization 1NF–3NF'],
-              ability: 'Design normalized schemas with integrity constraints',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Transactions', concepts: ['BEGIN / COMMIT / ROLLBACK', 'SAVEPOINT', 'Isolation levels', 'Dirty / phantom read', 'SELECT FOR UPDATE', 'DEADLOCK basics'],
-              ability: 'Write safe multi-step operations; understand concurrency issues',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Conditional & pivot', concepts: ['CASE WHEN (complex)', 'PIVOT / UNPIVOT', 'Conditional aggregation', 'FILTER clause', 'GROUPING SETS', 'ROLLUP / CUBE'],
-              ability: 'Produce cross-tab reports; multi-dimensional aggregation',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'JSON & semi-structured', concepts: ['JSON_EXTRACT / ->', 'JSON_ARRAYAGG', 'JSON_OBJECT', 'JSONB (Postgres)', 'UNNEST / JSON_TABLE'],
-              ability: 'Query and reshape JSON columns; flatten nested arrays into rows',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-          ],
-          sectionEx: { ready: false }
-        },
-        {
-          id: 'expert', label: 'Expert',
-          summary: 'Works at the database architecture level — query plans, stored procedures, partitioning, replication, and security.',
-          video: { ready: false, label: 'Expert SQL — architecture, optimization & security', embedUrl: '' },
-          categories: [
-            {
-              name: 'Query optimization', concepts: ['Cost-based optimizer', 'Statistics / ANALYZE', 'Index hints', 'Materialized views', 'Partition pruning', 'Parallel query', 'Join order hints'],
-              ability: 'Tune queries to sub-second on billion-row tables; use planner hints',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Stored procedures', concepts: ['CREATE FUNCTION', 'CREATE PROCEDURE', 'PL/pgSQL / T-SQL', 'Exception handling', 'Cursors', 'Dynamic SQL', 'EXECUTE'],
-              ability: 'Encapsulate business logic server-side; handle errors programmatically',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Triggers', concepts: ['BEFORE / AFTER triggers', 'INSERT / UPDATE / DELETE', 'INSTEAD OF (views)', 'Row-level vs statement-level'],
-              ability: 'Automate audit trails, cascade logic, and enforce complex rules',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Partitioning', concepts: ['Range partitioning', 'List partitioning', 'Hash partitioning', 'Partition pruning', 'Partition exchange', 'Sub-partitions'],
-              ability: 'Design tables partitioned for fast range scans and efficient archiving',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Advanced analytics', concepts: ['PERCENTILE_CONT/DISC', 'MEDIAN', 'STDDEV / VARIANCE', 'Cohort analysis', 'Funnel queries', 'Session windowing'],
-              ability: 'Build analytics-grade reports: cohorts, funnels, distributions',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Replication', concepts: ['Primary/replica setup', 'WAL / binlog', 'Logical replication', 'Sharding concepts', 'CQRS pattern', 'Connection pooling'],
-              ability: 'Architect scalable, highly available database infrastructure',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-            {
-              name: 'Security', concepts: ['GRANT / REVOKE', 'Roles & schemas', 'Row-level security (RLS)', 'Column masking', 'SQL injection prevention', 'Audit logging'],
-              ability: 'Implement least-privilege access, data masking, and audit compliance',
-              ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-            },
-          ],
-          sectionEx: { ready: false }
-        }
-      ];
+    <!-- FILTER -->
+    <div class="filter-row">
+      <span class="filter-label">filter:</span>
+      <button class="pill a-all" onclick="setFilter('all',this)">All levels</button>
+      <button class="pill" onclick="setFilter('beginner',this)">Beginner</button>
+      <button class="pill" onclick="setFilter('intermediate',this)">Intermediate</button>
+      <button class="pill" onclick="setFilter('advanced',this)">Advanced</button>
+      <button class="pill" onclick="setFilter('expert',this)">Expert</button>
+    </div>
 
-      // ─────────────────────────────────────────────
-      //  STATE
-      // ─────────────────────────────────────────────
-      let activeFilter = 'all';
-      let openMap = {};
+    <div id="levels"></div>
+  </div>
 
-      // ─────────────────────────────────────────────
-      //  RENDER
-      // ─────────────────────────────────────────────
-      function render() {
-        const container = document.getElementById('levels');
-        container.innerHTML = '';
-        const visible = activeFilter === 'all' ? LEVELS : LEVELS.filter(l => l.id === activeFilter);
+  <script>
+    // ─────────────────────────────────────────────
+    //  DATA
+    // ─────────────────────────────────────────────
+    const LEVELS = [
+      {
+        id: 'beginner', label: 'Beginner',
+        summary: 'Knows how to query a database — SELECT, filter, join two tables, and aggregate.',
+        // Replace the `video` object with a real YouTube/Vimeo embed URL when ready.
+        // Set video.ready = true and video.embedUrl = "https://www.youtube.com/embed/VIDEO_ID"
+        video: { ready: false, label: 'Intro to SQL — full beginner walkthrough', embedUrl: '' },
+        categories: [
+          {
+            name: 'Core syntax', concepts: ['SELECT', 'FROM', 'WHERE', 'ORDER BY', 'LIMIT', 'DISTINCT', 'AS (alias)'],
+            ability: 'Retrieve and filter rows from a single table; sort and rename columns',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Data types', concepts: ['INT / BIGINT', 'VARCHAR / TEXT', 'DATE / DATETIME', 'BOOLEAN', 'NULL'],
+            ability: 'Understand how data is stored and how NULL behaves in comparisons',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Filtering operators', concepts: ['= != < >', 'AND / OR / NOT', 'IN (...)', 'BETWEEN', 'LIKE / ILIKE', 'IS NULL / IS NOT NULL'],
+            ability: 'Write precise WHERE clauses combining multiple conditions',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Aggregate functions', concepts: ['COUNT(*)', 'SUM()', 'AVG()', 'MIN()', 'MAX()', 'GROUP BY', 'HAVING'],
+            ability: 'Summarize data by group; filter groups with HAVING',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Basic joins', concepts: ['INNER JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'ON clause'],
+            ability: 'Combine two tables; understand matched vs. unmatched rows',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Sorting & limiting', concepts: ['ORDER BY ASC/DESC', 'LIMIT / TOP', 'OFFSET', 'FETCH FIRST'],
+            ability: 'Paginate results; get top-N rows',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+        ],
+        sectionEx: { ready: false }
+      },
+      {
+        id: 'intermediate', label: 'Intermediate',
+        summary: 'Can write production queries — CTEs, subqueries, all join types, date and string manipulation.',
+        video: { ready: false, label: 'Intermediate SQL — production query patterns', embedUrl: '' },
+        categories: [
+          {
+            name: 'Joins (advanced)', concepts: ['FULL OUTER JOIN', 'CROSS JOIN', 'SELF JOIN', 'JOIN on multiple cols', 'non-equi joins'],
+            ability: 'Handle all join types; join a table to itself; join on expressions',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Set operations', concepts: ['UNION / UNION ALL', 'INTERSECT', 'EXCEPT / MINUS'],
+            ability: 'Combine result sets; understand deduplication vs. UNION ALL',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Subqueries', concepts: ['Scalar subquery', 'Correlated subquery', 'IN / EXISTS / ANY / ALL', 'Subquery in FROM'],
+            ability: 'Use nested queries for filtering, computing, and deriving tables',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'String functions', concepts: ['CONCAT / ||', 'UPPER / LOWER', 'TRIM / LTRIM', 'SUBSTRING', 'REPLACE', 'LENGTH', 'COALESCE', 'CASE WHEN'],
+            ability: 'Clean, transform, and branch on text data',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Date & time', concepts: ["NOW() / GETDATE()", 'DATE_PART / EXTRACT', 'DATE_ADD / DATEADD', 'DATEDIFF', 'DATE_TRUNC', 'FORMAT / TO_CHAR'],
+            ability: 'Calculate date differences, extract components, truncate to period',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'CTEs', concepts: ['WITH ... AS (...)', 'Multiple CTEs', 'Referencing a CTE', 'Recursive CTE (intro)'],
+            ability: 'Break complex queries into readable named steps',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Numeric functions', concepts: ['ROUND / CEIL / FLOOR', 'ABS', 'MOD / %', 'CAST / CONVERT', 'NULLIF', 'COALESCE'],
+            ability: 'Handle type conversions, division-by-zero, and null defaults',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Views', concepts: ['CREATE VIEW', 'DROP VIEW', 'Querying views', 'Updatable views'],
+            ability: 'Encapsulate logic as a reusable virtual table',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+        ],
+        sectionEx: { ready: false }
+      },
+      {
+        id: 'advanced', label: 'Advanced',
+        summary: 'Writes performant, schema-aware SQL — window functions, indexes, transactions, complex aggregations.',
+        video: { ready: false, label: 'Advanced SQL — windows, indexes & transactions', embedUrl: '' },
+        categories: [
+          {
+            name: 'Window functions', concepts: ['ROW_NUMBER()', 'RANK() / DENSE_RANK()', 'NTILE()', 'LAG() / LEAD()', 'FIRST_VALUE / LAST_VALUE', 'SUM() OVER', 'PARTITION BY', 'ROWS / RANGE BETWEEN'],
+            ability: 'Compute running totals, rankings, and row comparisons without collapsing rows',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Recursive CTEs', concepts: ['WITH RECURSIVE', 'Base case + recursive step', 'Hierarchy traversal', 'Graph traversal'],
+            ability: 'Walk org charts, category trees, bill-of-materials',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Indexing & performance', concepts: ['B-tree index', 'Composite index', 'Covering index', 'EXPLAIN ANALYZE', 'Query plan reading', 'Partial index', 'Full-text index'],
+            ability: 'Diagnose slow queries; choose correct index type and column order',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'DDL & schema design', concepts: ['CREATE TABLE', 'ALTER TABLE', 'DROP / TRUNCATE', 'Primary key', 'Foreign key', 'UNIQUE / CHECK', 'NOT NULL / DEFAULT', 'Normalization 1NF–3NF'],
+            ability: 'Design normalized schemas with integrity constraints',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Transactions', concepts: ['BEGIN / COMMIT / ROLLBACK', 'SAVEPOINT', 'Isolation levels', 'Dirty / phantom read', 'SELECT FOR UPDATE', 'DEADLOCK basics'],
+            ability: 'Write safe multi-step operations; understand concurrency issues',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Conditional & pivot', concepts: ['CASE WHEN (complex)', 'PIVOT / UNPIVOT', 'Conditional aggregation', 'FILTER clause', 'GROUPING SETS', 'ROLLUP / CUBE'],
+            ability: 'Produce cross-tab reports; multi-dimensional aggregation',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'JSON & semi-structured', concepts: ['JSON_EXTRACT / ->', 'JSON_ARRAYAGG', 'JSON_OBJECT', 'JSONB (Postgres)', 'UNNEST / JSON_TABLE'],
+            ability: 'Query and reshape JSON columns; flatten nested arrays into rows',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+        ],
+        sectionEx: { ready: false }
+      },
+      {
+        id: 'expert', label: 'Expert',
+        summary: 'Works at the database architecture level — query plans, stored procedures, partitioning, replication, and security.',
+        video: { ready: false, label: 'Expert SQL — architecture, optimization & security', embedUrl: '' },
+        categories: [
+          {
+            name: 'Query optimization', concepts: ['Cost-based optimizer', 'Statistics / ANALYZE', 'Index hints', 'Materialized views', 'Partition pruning', 'Parallel query', 'Join order hints'],
+            ability: 'Tune queries to sub-second on billion-row tables; use planner hints',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Stored procedures', concepts: ['CREATE FUNCTION', 'CREATE PROCEDURE', 'PL/pgSQL / T-SQL', 'Exception handling', 'Cursors', 'Dynamic SQL', 'EXECUTE'],
+            ability: 'Encapsulate business logic server-side; handle errors programmatically',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Triggers', concepts: ['BEFORE / AFTER triggers', 'INSERT / UPDATE / DELETE', 'INSTEAD OF (views)', 'Row-level vs statement-level'],
+            ability: 'Automate audit trails, cascade logic, and enforce complex rules',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Partitioning', concepts: ['Range partitioning', 'List partitioning', 'Hash partitioning', 'Partition pruning', 'Partition exchange', 'Sub-partitions'],
+            ability: 'Design tables partitioned for fast range scans and efficient archiving',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Advanced analytics', concepts: ['PERCENTILE_CONT/DISC', 'MEDIAN', 'STDDEV / VARIANCE', 'Cohort analysis', 'Funnel queries', 'Session windowing'],
+            ability: 'Build analytics-grade reports: cohorts, funnels, distributions',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Replication', concepts: ['Primary/replica setup', 'WAL / binlog', 'Logical replication', 'Sharding concepts', 'CQRS pattern', 'Connection pooling'],
+            ability: 'Architect scalable, highly available database infrastructure',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Security', concepts: ['GRANT / REVOKE', 'Roles & schemas', 'Row-level security (RLS)', 'Column masking', 'SQL injection prevention', 'Audit logging'],
+            ability: 'Implement least-privilege access, data masking, and audit compliance',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+        ],
+        sectionEx: { ready: false }
+      }
+    ];
 
-        visible.forEach(lv => {
-          const isOpen = !!openMap[lv.id];
+    // ─────────────────────────────────────────────
+    //  STATE
+    // ─────────────────────────────────────────────
+    let activeFilter = 'all';
+    let openMap = {};
 
-          // video block
-          const videoHTML = lv.video.ready
-            ? `<div class="video-embed"><iframe src="${lv.video.embedUrl}" allowfullscreen></iframe></div>`
-            : `<div class="video-placeholder">
+    // ─────────────────────────────────────────────
+    //  RENDER
+    // ─────────────────────────────────────────────
+    function render() {
+      const container = document.getElementById('levels');
+      container.innerHTML = '';
+      const visible = activeFilter === 'all' ? LEVELS : LEVELS.filter(l => l.id === activeFilter);
+
+      visible.forEach(lv => {
+        const isOpen = !!openMap[lv.id];
+
+        // video block
+        const videoHTML = lv.video.ready
+          ? `<div class="video-embed"><iframe src="${lv.video.embedUrl}" allowfullscreen></iframe></div>`
+          : `<div class="video-placeholder">
            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
            ${lv.video.label} — <em style="font-style:italic">coming soon</em>
          </div>`;
 
-          // category cards
-          const catCards = lv.categories.map(c => {
-            const exClass = 'mini-btn ex' + (c.ex.ready ? '' : ' coming');
-            const ansClass = 'mini-btn ans' + (c.ans.ready ? '' : ' coming');
-            const vidClass = 'mini-btn vid' + (c.vid.ready ? '' : ' coming');
-            const exHref = c.ex.ready ? c.ex.url : '#';
-            const ansHref = c.ans.ready ? c.ans.url : '#';
-            const vidHref = c.vid.ready ? c.vid.url : '#';
+        // category cards
+        const catCards = lv.categories.map(c => {
+          const exClass = 'mini-btn ex' + (c.ex.ready ? '' : ' coming');
+          const ansClass = 'mini-btn ans' + (c.ans.ready ? '' : ' coming');
+          const vidClass = 'mini-btn vid' + (c.vid.ready ? '' : ' coming');
+          const exHref = c.ex.ready ? c.ex.url : '#';
+          const ansHref = c.ans.ready ? c.ans.url : '#';
+          const vidHref = c.vid.ready ? c.vid.url : '#';
 
-            return `<div class="cat-card">
+          return `<div class="cat-card">
         <div class="cat-name">${c.name}</div>
         <div class="chips">${c.concepts.map(x => `<span class="chip">${x}</span>`).join('')}</div>
         <div class="ability">${c.ability}</div>
@@ -935,22 +938,22 @@
           <a class="${vidClass}" href="${vidHref}" ${c.vid.ready ? 'target="_blank"' : ''}>walkthrough</a>
         </div>
       </div>`;
-          }).join('');
+        }).join('');
 
-          // section exercises footer
-          const secExHTML = lv.sectionEx.ready
-            ? `<div class="q-list">${(lv.sectionEx.questions || []).map((q, i) => `
+        // section exercises footer
+        const secExHTML = lv.sectionEx.ready
+          ? `<div class="q-list">${(lv.sectionEx.questions || []).map((q, i) => `
           <div class="q-item"><strong>Q${i + 1}</strong>${q}</div>`).join('')}
          </div>`
-            : `<div class="sec-ex-placeholder">
+          : `<div class="sec-ex-placeholder">
            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
            Mixed practice exercises for this level — coming soon
          </div>`;
 
-          // assemble block
-          const block = document.createElement('div');
-          block.className = 'level-block';
-          block.innerHTML = `
+        // assemble block
+        const block = document.createElement('div');
+        block.className = 'level-block';
+        block.innerHTML = `
       <div class="level-header${isOpen ? ' open' : ''}" onclick="toggle('${lv.id}')">
         <span class="dot dot-${lv.id}"></span>
         <span class="lv-name">${lv.label}</span>
@@ -974,23 +977,23 @@
         </div>
       </div>
     `;
-          container.appendChild(block);
-        });
-      }
+        container.appendChild(block);
+      });
+    }
 
-      function toggle(id) { openMap[id] = !openMap[id]; render(); }
+    function toggle(id) { openMap[id] = !openMap[id]; render(); }
 
-      function setFilter(f, btn) {
-        activeFilter = f;
-        document.querySelectorAll('.pill').forEach(b => {
-          b.className = 'pill';
-        });
-        btn.className = 'pill a-' + f;
-        render();
-      }
-
+    function setFilter(f, btn) {
+      activeFilter = f;
+      document.querySelectorAll('.pill').forEach(b => {
+        b.className = 'pill';
+      });
+      btn.className = 'pill a-' + f;
       render();
-    </script>
+    }
+
+    render();
+  </script>
 </body>
 
 </html>

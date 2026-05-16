@@ -197,7 +197,7 @@
                 <button class="filter-pill" data-cat="excel">Excel</button>
                 <button class="filter-pill" data-cat="powerbi">Power BI</button>
                 <button class="filter-pill" data-cat="math">Math (Gr. 1–2)</button>
-                <button class="filter-pill" data-cat="economics">Economics</button>
+                <!-- <button class="filter-pill" data-cat="economics">Economics</button> -->
             </div>
 
             <!-- CARDS GRID -->
@@ -206,10 +206,12 @@
                 <!-- SQL card -->
                 <div class="card-item" data-cat="sql" data-panel="sql-panel">
                     <div class="teach-card" onclick="togglePanel('sql-panel', this.closest('.card-item'))">
-                        <div class="card-thumb" style="background:#eff6ff;">📊</div>
+                        <div class="card-thumb">
+                            <img src="images/sql.png" alt="SQL course" />
+                        </div>
                         <div class="card-body">
                             <div class="card-tag" style="color:#1d4ed8;">SQL</div>
-                            <div class="card-title">SQL — Beginner to Expert</div>
+                            <div class="card-title">SQL - Beginner to Expert</div>
                             <div class="card-desc">A complete reference covering core syntax, joins, window functions,
                                 indexing, and performance tuning — organized by skill level with video.</div>
                             <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:2px;">
@@ -224,7 +226,7 @@
                             </div>
                         </div>
                         <div class="card-footer" id="sql-footer" style="color:#1d4ed8;">
-                            <a href="teaching\sql_teaching_page.html"
+                            <a href="teaching/sql_teaching_page.html"
                                 class="inline-block bg-teal-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-teal-700 transition">
                                 View resource &rarr;
                             </a>
@@ -235,7 +237,9 @@
                 <!-- Excel card (coming soon) -->
                 <div class="card-item coming-soon" data-cat="excel">
                     <div class="teach-card">
-                        <div class="card-thumb" style="background:#f0fdf4;">📗</div>
+                        <div class="card-thumb" style="background:#f0fdf4;">
+                            <img src="images/excel.png" alt="SQL course" />
+                        </div>
                         <div class="card-body">
                             <div class="card-tag" style="color:#15803d;">Excel</div>
                             <div class="card-title">Excel Dashboard Walkthroughs</div>
@@ -256,7 +260,9 @@
                 <!-- Power BI card (coming soon) -->
                 <div class="card-item coming-soon" data-cat="powerbi">
                     <div class="teach-card">
-                        <div class="card-thumb" style="background:#fefce8;">📈</div>
+                        <div class="card-thumb" style="background:#f0fdf4;">
+                            <img src="images/PowerBI.png" alt="SQL course" />
+                        </div>
                         <div class="card-body">
                             <div class="card-tag" style="color:#a16207;">Power BI</div>
                             <div class="card-title">Power BI for Analysts</div>
@@ -277,7 +283,9 @@
                 <!-- Math card (coming soon) -->
                 <div class="card-item coming-soon" data-cat="math">
                     <div class="teach-card">
-                        <div class="card-thumb" style="background:#fdf4ff;">🔢</div>
+                        <div class="card-thumb" style="background:#f0fdf4;">
+                            <img src="images/math.png" alt="SQL course" />
+                        </div>
                         <div class="card-body">
                             <div class="card-tag" style="color:#7e22ce;">Math for Kids</div>
                             <div class="card-title">Math Activities — Grades 1 & 2</div>
@@ -300,7 +308,7 @@
                 </div>
 
                 <!-- Economics card -->
-                <div class="card-item coming-soon" data-cat="economics" data-panel="econ-panel">
+                <!-- <div class="card-item coming-soon" data-cat="economics" data-panel="econ-panel">
                     <div class="teach-card" onclick="togglePanel('econ-panel', this.closest('.card-item'))">
                         <div class="card-thumb" style="background:#fff7ed;">🎓</div>
                         <div class="card-body">
@@ -321,12 +329,12 @@
                             <!-- <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     View overview
                     </div> -->
-                            <div class="card-footer" style="color:#9ca3af;">⏳ Coming soon</div>
+                <!-- <div class="card-footer" style="color:#9ca3af;">⏳ Coming soon</div>
 
-                        </div>
-                    </div>
+                    </div> -->
+                <!-- </div>  -->
 
-                </div><!-- /cards grid -->
+            </div><!-- /cards grid -->
 
 
 
