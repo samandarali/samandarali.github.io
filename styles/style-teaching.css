@@ -225,9 +225,11 @@
   }
 
   /* Ko-fi banner */
-  .kofi-banner {
-    background: linear-gradient(135deg, #fff7ed 0%, #fef3e2 100%);
-    border: 1.5px solid #fed7aa;
+.kofi-banner {
+    background-image: url('../images/support_background.png');
+    background-size: cover;
+    background-position: center;
+    border: 1.5px solid #e0d4f7;
     border-radius: 16px;
     padding: 1.5rem 2rem;
     display: flex;
@@ -235,7 +237,8 @@
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 1rem;
-  }
+    min-height: 120px;
+}
 
   .kofi-btn {
     display: inline-flex;
@@ -259,3 +262,46 @@
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(255, 94, 91, 0.45);
   }
+
+/* 
+  .teaching-hero {
+  background-image: url('../images/teaching_background.png');
+    background-size: cover;
+    background-position: center right;  /* keeps the books illustration on the right */
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    padding: 48px 40px;
+    margin-bottom: 32px;
+    min-height: 220px;
+}
+.teaching-hero h2 { color: #1f2937; font-size: 2.6rem; line-height: 1.15; margin-bottom: 12px; }
+.teaching-hero p  { color: #4b5563; max-width: 50%; line-height: 1.7; }  /* 50% keeps text left of the books */
+.teaching-hero .eyebrow {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: #9333ea; margin-bottom: 10px;
+}
+.hero-accent { color: #9333ea; font-style: normal; font-weight: 700; } */
+
+
+
+    /* ── TEACHING HERO ── */
+        /* .teaching-hero {
+            background-image: url('images/teaching_background.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            padding: 48px 40px;
+            margin-bottom: 32px;
+        }
+        .teaching-hero h2 { color: #1f2937; font-size: 2.6rem; line-height: 1.15; margin-bottom: 12px; }
+        .teaching-hero p  { color: #4b5563; max-width: 540px; line-height: 1.7; }
+        .teaching-hero .eyebrow {
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--teal-deep); margin-bottom: 10px;
+        } */
+        
+
+        /* ── TEACHING HERO ── */
