@@ -13,6 +13,8 @@
     --pixi-dk: #9932CC;
     --zing:    #FF8C42;
     --zing-dk: #E05A00;
+    --bibi:    #3DEB9A;
+    --bibi-dk: #0FB870;
     --bg:      #0D0A1A;
     --card-bg: #16122A;
     --star:    #FFE566;
@@ -96,10 +98,12 @@
   .card.numo  { border-color: var(--numo);  box-shadow: 0 8px 40px rgba(77,217,240,.20); }
   .card.pixi  { border-color: var(--pixi);  box-shadow: 0 8px 40px rgba(201,100,245,.20); }
   .card.zing  { border-color: var(--zing);  box-shadow: 0 8px 40px rgba(255,140,66,.20); }
+  .card.bibi  { border-color: var(--bibi);  box-shadow: 0 8px 40px rgba(61,235,154,.20); }
 
   .card.numo:hover  { box-shadow: 0 20px 60px rgba(77,217,240,.45); }
   .card.pixi:hover  { box-shadow: 0 20px 60px rgba(201,100,245,.45); }
   .card.zing:hover  { box-shadow: 0 20px 60px rgba(255,140,66,.45); }
+  .card.bibi:hover  { box-shadow: 0 20px 60px rgba(61,235,154,.45); }
 
   /* Glow bar at top */
   .card::before {
@@ -110,6 +114,7 @@
   .card.numo::before { background: linear-gradient(90deg, var(--numo-dk), var(--numo)); }
   .card.pixi::before { background: linear-gradient(90deg, var(--pixi-dk), var(--pixi)); }
   .card.zing::before { background: linear-gradient(90deg, var(--zing-dk), var(--zing)); }
+  .card.bibi::before { background: linear-gradient(90deg, var(--bibi-dk), var(--bibi)); }
 
   .card-img {
     width: 100%; height: 260px;
@@ -140,6 +145,7 @@
   .numo .card-tag  { background: rgba(77,217,240,.15); color: var(--numo); }
   .pixi .card-tag  { background: rgba(201,100,245,.15); color: var(--pixi); }
   .zing .card-tag  { background: rgba(255,140,66,.15);  color: var(--zing); }
+  .bibi .card-tag  { background: rgba(61,235,154,.15);  color: var(--bibi); }
 
   .card-body h2 {
     font-family: 'Fredoka One', cursive;
@@ -169,6 +175,7 @@
   .numo .card-btn  { background: linear-gradient(135deg, var(--numo-dk), var(--numo)); color: #0a1a22; box-shadow: 0 4px 18px rgba(77,217,240,.4); }
   .pixi .card-btn  { background: linear-gradient(135deg, var(--pixi-dk), var(--pixi)); color: #fff;    box-shadow: 0 4px 18px rgba(201,100,245,.4); }
   .zing .card-btn  { background: linear-gradient(135deg, var(--zing-dk), var(--zing)); color: #fff;    box-shadow: 0 4px 18px rgba(255,140,66,.4); }
+  .bibi .card-btn  { background: linear-gradient(135deg, var(--bibi-dk), var(--bibi)); color: #07200f; box-shadow: 0 4px 18px rgba(61,235,154,.4); }
 
   /* ── Modal overlay ── */
   .overlay {
@@ -215,6 +222,7 @@
   .numo-modal .modal-icon  { background: rgba(77,217,240,.15); }
   .pixi-modal .modal-icon  { background: rgba(201,100,245,.15); }
   .zing-modal .modal-icon  { background: rgba(255,140,66,.15); }
+  .bibi-modal .modal-icon  { background: rgba(61,235,154,.15); }
 
   .modal-title h3 {
     font-family: 'Fredoka One', cursive;
@@ -260,10 +268,12 @@
   .numo-modal .topic-pill  { background: rgba(77,217,240,.12); color: var(--numo); border: 1.5px solid rgba(77,217,240,.3); }
   .pixi-modal .topic-pill  { background: rgba(201,100,245,.12); color: var(--pixi); border: 1.5px solid rgba(201,100,245,.3); }
   .zing-modal .topic-pill  { background: rgba(255,140,66,.12);  color: var(--zing); border: 1.5px solid rgba(255,140,66,.3); }
+  .bibi-modal .topic-pill  { background: rgba(61,235,154,.12);  color: var(--bibi); border: 1.5px solid rgba(61,235,154,.3); }
 
   .numo-modal .topic-pill:hover  { background: rgba(77,217,240,.25);  box-shadow: 0 0 16px rgba(77,217,240,.3); }
   .pixi-modal .topic-pill:hover  { background: rgba(201,100,245,.25); box-shadow: 0 0 16px rgba(201,100,245,.3); }
   .zing-modal .topic-pill:hover  { background: rgba(255,140,66,.25);  box-shadow: 0 0 16px rgba(255,140,66,.3); }
+  .bibi-modal .topic-pill:hover  { background: rgba(61,235,154,.25);  box-shadow: 0 0 16px rgba(61,235,154,.3); }
 
   .desc-box {
     background: rgba(255,255,255,.04);
@@ -345,6 +355,21 @@
       <h2>Zing</h2>
       <p class="subtitle">The Fraction Chef</p>
       <button class="card-btn">Explore Fractions →</button>
+    </div>
+  </div>
+
+
+    <!-- Bibi -->
+  <div class="card bibi" onclick="openModal('bibi')">
+    <div class="card-img">
+      <img src="../images/Bibi.png" alt="Bibi the Binary Alien">
+    </div>
+
+    <div class="card-body">
+      <span class="card-tag">Number Systems</span>
+      <h2>Bibi</h2>
+      <p class="subtitle">The Binary Alien</p>
+      <button class="card-btn">Explore Bases →</button>
     </div>
   </div>
 
@@ -466,6 +491,44 @@
   </div>
 </div>
 
+<!-- BIBI Modal -->
+<div class="overlay" id="modal-bibi" onclick="closeOnOverlay(event,'bibi')">
+  <div class="modal bibi-modal">
+    <div class="modal-header">
+      <div class="modal-icon">👾</div>
+      <div class="modal-title">
+        <h3>Bibi's Binary Base</h3>
+        <p>Number Systems · Binary · Bases</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('bibi')">✕</button>
+    </div>
+    <div class="modal-body">
+      <h4>📚 What You'll Learn</h4>
+      <div class="topic-list">
+        <button class="topic-pill">Binary (Base 2)</button>
+        <button class="topic-pill">Decimal (Base 10)</button>
+        <button class="topic-pill">Octal (Base 8)</button>
+        <button class="topic-pill">Hexadecimal (Base 16)</button>
+        <button class="topic-pill">Converting Bases</button>
+        <button class="topic-pill">Counting in Binary</button>
+        <button class="topic-pill">Binary Addition</button>
+        <button class="topic-pill">How Computers Count</button>
+      </div>
+
+      <h4>🎮 Activities</h4>
+      <div class="topic-list">
+        <button class="topic-pill">Base Converter</button>
+        <button class="topic-pill">Binary Decoder <span class="coming-soon">soon</span></button>
+        <button class="topic-pill">Code Cracker <span class="coming-soon">soon</span></button>
+      </div>
+
+      <div class="desc-box">
+        🌟 <strong>Bibi</strong> comes from a planet where everything is 0s and 1s! This friendly alien will show you how computers think in binary and how the same number can look totally different depending on which base you use. Mind-bending and super fun!
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   function openModal(id) {
     document.getElementById('modal-' + id).classList.add('open');
@@ -480,7 +543,7 @@
   }
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
-      ['numo','pixi','zing'].forEach(id => closeModal(id));
+      ['numo','pixi','zing','bibi'].forEach(id => closeModal(id));
     }
   });
 </script>
