@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Kids – Learn with Numo, Pixi & Zing!</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --numo:    #4DD9F0;
+    --numo-dk: #1AACCC;
+    --pixi:    #C964F5;
+    --pixi-dk: #9932CC;
+    --zing:    #FF8C42;
+    --zing-dk: #E05A00;
+    --bg:      #0D0A1A;
+    --card-bg: #16122A;
+    --star:    #FFE566;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Starfield ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 55% 25%, rgba(255,255,255,.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 70%, rgba(255,255,255,.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 40%, rgba(255,255,255,.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 85%, rgba(255,255,255,.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 90% 10%, rgba(255,255,255,.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 90%, rgba(255,255,255,.4) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  /* ── Header ── */
+  header {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 60px 24px 20px;
+  }
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #FFE566 0%, #FF8C42 35%, #C964F5 65%, #4DD9F0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(255,229,102,.4));
+  }
+  header p {
+    color: rgba(255,255,255,.55);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-top: 8px;
+    letter-spacing: .5px;
+  }
+
+  /* ── Cards grid ── */
+  .cards {
+    position: relative; z-index: 1;
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 40px 24px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 28px;
+    width: 300px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease;
+    border: 2px solid transparent;
+  }
+
+  .card:hover { transform: translateY(-10px) scale(1.03); }
+
+  /* Per-card accent */
+  .card.numo  { border-color: var(--numo);  box-shadow: 0 8px 40px rgba(77,217,240,.20); }
+  .card.pixi  { border-color: var(--pixi);  box-shadow: 0 8px 40px rgba(201,100,245,.20); }
+  .card.zing  { border-color: var(--zing);  box-shadow: 0 8px 40px rgba(255,140,66,.20); }
+
+  .card.numo:hover  { box-shadow: 0 20px 60px rgba(77,217,240,.45); }
+  .card.pixi:hover  { box-shadow: 0 20px 60px rgba(201,100,245,.45); }
+  .card.zing:hover  { box-shadow: 0 20px 60px rgba(255,140,66,.45); }
+
+  /* Glow bar at top */
+  .card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    border-radius: 28px 28px 0 0;
+  }
+  .card.numo::before { background: linear-gradient(90deg, var(--numo-dk), var(--numo)); }
+  .card.pixi::before { background: linear-gradient(90deg, var(--pixi-dk), var(--pixi)); }
+  .card.zing::before { background: linear-gradient(90deg, var(--zing-dk), var(--zing)); }
+
+  .card-img {
+    width: 100%; height: 260px;
+    display: flex; align-items: center; justify-content: center;
+    background: #0a0818;
+    overflow: hidden;
+  }
+  .card-img img {
+    height: 240px;
+    width: auto;
+    object-fit: contain;
+    transition: transform .4s ease;
+  }
+  .card:hover .card-img img { transform: scale(1.08) translateY(-4px); }
+
+  .card-body { padding: 22px 24px 26px; }
+
+  .card-tag {
+    display: inline-block;
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .numo .card-tag  { background: rgba(77,217,240,.15); color: var(--numo); }
+  .pixi .card-tag  { background: rgba(201,100,245,.15); color: var(--pixi); }
+  .zing .card-tag  { background: rgba(255,140,66,.15);  color: var(--zing); }
+
+  .card-body h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.75rem;
+    color: #fff;
+    letter-spacing: .5px;
+  }
+  .card-body .subtitle {
+    font-size: .9rem;
+    color: rgba(255,255,255,.45);
+    font-weight: 600;
+    margin: 2px 0 16px;
+  }
+
+  .card-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px;
+    border-radius: 50px;
+    border: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: .95rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .card-btn:hover { transform: scale(1.06); }
+  .numo .card-btn  { background: linear-gradient(135deg, var(--numo-dk), var(--numo)); color: #0a1a22; box-shadow: 0 4px 18px rgba(77,217,240,.4); }
+  .pixi .card-btn  { background: linear-gradient(135deg, var(--pixi-dk), var(--pixi)); color: #fff;    box-shadow: 0 4px 18px rgba(201,100,245,.4); }
+  .zing .card-btn  { background: linear-gradient(135deg, var(--zing-dk), var(--zing)); color: #fff;    box-shadow: 0 4px 18px rgba(255,140,66,.4); }
+
+  /* ── Modal overlay ── */
+  .overlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(5,3,14,.85);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: #1a1530;
+    border-radius: 28px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    transform: translateY(40px) scale(.96);
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,.15) transparent;
+  }
+  .overlay.open .modal { transform: translateY(0) scale(1); }
+
+  .modal-header {
+    display: flex; align-items: center; gap: 18px;
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    position: sticky; top: 0;
+    background: #1a1530;
+    border-radius: 28px 28px 0 0;
+    z-index: 1;
+  }
+  .modal-icon {
+    width: 56px; height: 56px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+  .numo-modal .modal-icon  { background: rgba(77,217,240,.15); }
+  .pixi-modal .modal-icon  { background: rgba(201,100,245,.15); }
+  .zing-modal .modal-icon  { background: rgba(255,140,66,.15); }
+
+  .modal-title h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.6rem; color: #fff;
+  }
+  .modal-title p  { font-size: .85rem; color: rgba(255,255,255,.45); font-weight: 600; }
+
+  .modal-close {
+    margin-left: auto;
+    background: rgba(255,255,255,.07);
+    border: none; border-radius: 50%;
+    width: 40px; height: 40px;
+    cursor: pointer; color: rgba(255,255,255,.6);
+    font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+    transition: background .2s, color .2s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,.15); color: #fff; }
+
+  .modal-body { padding: 24px 28px 32px; }
+
+  .modal-body h4 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem; color: #fff;
+    margin: 24px 0 12px;
+  }
+  .modal-body h4:first-child { margin-top: 0; }
+
+  .topic-list {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-bottom: 4px;
+  }
+  .topic-pill {
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: .88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+    border: none;
+  }
+  .topic-pill:hover { transform: scale(1.07); }
+
+  .numo-modal .topic-pill  { background: rgba(77,217,240,.12); color: var(--numo); border: 1.5px solid rgba(77,217,240,.3); }
+  .pixi-modal .topic-pill  { background: rgba(201,100,245,.12); color: var(--pixi); border: 1.5px solid rgba(201,100,245,.3); }
+  .zing-modal .topic-pill  { background: rgba(255,140,66,.12);  color: var(--zing); border: 1.5px solid rgba(255,140,66,.3); }
+
+  .numo-modal .topic-pill:hover  { background: rgba(77,217,240,.25);  box-shadow: 0 0 16px rgba(77,217,240,.3); }
+  .pixi-modal .topic-pill:hover  { background: rgba(201,100,245,.25); box-shadow: 0 0 16px rgba(201,100,245,.3); }
+  .zing-modal .topic-pill:hover  { background: rgba(255,140,66,.25);  box-shadow: 0 0 16px rgba(255,140,66,.3); }
+
+  .desc-box {
+    background: rgba(255,255,255,.04);
+    border-radius: 16px;
+    padding: 18px 20px;
+    color: rgba(255,255,255,.7);
+    font-size: .95rem;
+    line-height: 1.7;
+    margin-top: 20px;
+    border: 1px solid rgba(255,255,255,.07);
+  }
+
+  /* Floating stars decoration */
+  .star-deco {
+    position: absolute; font-size: 1.4rem;
+    animation: float 3s ease-in-out infinite;
+    pointer-events: none; user-select: none;
+    opacity: .7;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-10px) rotate(15deg); }
+  }
+
+  /* Coming soon tag */
+  .coming-soon {
+    display: inline-block;
+    font-size: .72rem; font-weight: 800; letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px; border-radius: 20px;
+    background: rgba(255,255,255,.06);
+    color: rgba(255,255,255,.3);
+    margin-left: 10px; vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>✨ Math Adventure!</h1>
+  <p>Choose your guide and start exploring</p>
+</header>
+
+<div class="cards">
+
+  <!-- NUMO -->
+  <div class="card numo" onclick="openModal('numo')">
+    <div class="card-img">
+      <img src="../images/NUMO.png" alt="Numo the Number Collector">
+    </div>
+    <div class="card-body">
+      <span class="card-tag">Arithmetic</span>
+      <h2>Numo</h2>
+      <p class="subtitle">The Number Collector</p>
+      <button class="card-btn">Explore Numbers →</button>
+    </div>
+  </div>
+
+  <!-- PIXI -->
+  <div class="card pixi" onclick="openModal('pixi')">
+    <div class="card-img">
+      <img src="../images/Pixi_Geometry.png" alt="Pixi the Geometry Artist">
+    </div>
+    <div class="card-body">
+      <span class="card-tag">Geometry</span>
+      <h2>Pixi</h2>
+      <p class="subtitle">The Geometry Artist</p>
+      <button class="card-btn">Explore Shapes →</button>
+    </div>
+  </div>
+
+  <!-- ZING -->
+  <div class="card zing" onclick="openModal('zing')">
+    <div class="card-img">
+      <img src="../images/ZING.png" alt="Zing the Fraction Chef">
+    </div>
+    <div class="card-body">
+      <span class="card-tag">Fractions</span>
+      <h2>Zing</h2>
+      <p class="subtitle">The Fraction Chef</p>
+      <button class="card-btn">Explore Fractions →</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ MODALS ══════════════ -->
+
+<!-- NUMO Modal -->
+<div class="overlay" id="modal-numo" onclick="closeOnOverlay(event,'numo')">
+  <div class="modal numo-modal">
+    <div class="modal-header">
+      <div class="modal-icon">🔢</div>
+      <div class="modal-title">
+        <h3>Numo's Number World</h3>
+        <p>Arithmetic · Counting · Operations</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('numo')">✕</button>
+    </div>
+    <div class="modal-body">
+      <h4>📚 What You'll Learn</h4>
+      <div class="topic-list">
+        <button class="topic-pill">Counting 1–100</button>
+        <button class="topic-pill">Addition</button>
+        <button class="topic-pill">Subtraction</button>
+        <button class="topic-pill">Multiplication</button>
+        <button class="topic-pill">Division</button>
+        <button class="topic-pill">Number Patterns</button>
+        <button class="topic-pill">Odd &amp; Even</button>
+        <button class="topic-pill">Place Value</button>
+      </div>
+
+      <h4>🎮 Activities</h4>
+      <div class="topic-list">
+        <button class="topic-pill">Number Flashcards</button>
+        <button class="topic-pill">Math Puzzles <span class="coming-soon">soon</span></button>
+        <button class="topic-pill">Speed Round <span class="coming-soon">soon</span></button>
+      </div>
+
+      <div class="desc-box">
+        🌟 Join <strong>Numo</strong> on an intergalactic number hunt! Numo loves collecting numbers from across the universe and will teach you how to count, add, subtract, and discover secret patterns hidden inside every number.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PIXI Modal -->
+<div class="overlay" id="modal-pixi" onclick="closeOnOverlay(event,'pixi')">
+  <div class="modal pixi-modal">
+    <div class="modal-header">
+      <div class="modal-icon">🎨</div>
+      <div class="modal-title">
+        <h3>Pixi's Shape Studio</h3>
+        <p>Geometry · Drawing · Spatial Thinking</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('pixi')">✕</button>
+    </div>
+    <div class="modal-body">
+      <h4>📚 What You'll Learn</h4>
+      <div class="topic-list">
+        <button class="topic-pill">2D Shapes</button>
+        <button class="topic-pill">3D Shapes</button>
+        <button class="topic-pill">Angles</button>
+        <button class="topic-pill">Symmetry</button>
+        <button class="topic-pill">Perimeter</button>
+        <button class="topic-pill">Area</button>
+        <button class="topic-pill">Lines &amp; Curves</button>
+        <button class="topic-pill">Patterns</button>
+      </div>
+
+      <h4>🎮 Activities</h4>
+      <div class="topic-list">
+        <button class="topic-pill">Shape Drawing</button>
+        <button class="topic-pill">Spot the Shape <span class="coming-soon">soon</span></button>
+        <button class="topic-pill">Art Gallery <span class="coming-soon">soon</span></button>
+      </div>
+
+      <div class="desc-box">
+        🌟 <strong>Pixi</strong> sees the whole world as a canvas full of shapes! Put on your art smock and grab a paintbrush — together you'll explore triangles, squares, circles, and much more while creating colourful masterpieces along the way.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ZING Modal -->
+<div class="overlay" id="modal-zing" onclick="closeOnOverlay(event,'zing')">
+  <div class="modal zing-modal">
+    <div class="modal-header">
+      <div class="modal-icon">🍕</div>
+      <div class="modal-title">
+        <h3>Zing's Fraction Kitchen</h3>
+        <p>Fractions · Decimals · Measurement</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('zing')">✕</button>
+    </div>
+    <div class="modal-body">
+      <h4>📚 What You'll Learn</h4>
+      <div class="topic-list">
+        <button class="topic-pill">What is a Fraction?</button>
+        <button class="topic-pill">Halves &amp; Quarters</button>
+        <button class="topic-pill">Equal Parts</button>
+        <button class="topic-pill">Adding Fractions</button>
+        <button class="topic-pill">Comparing Fractions</button>
+        <button class="topic-pill">Fractions of a Set</button>
+        <button class="topic-pill">Simple Decimals</button>
+        <button class="topic-pill">Measurement</button>
+      </div>
+
+      <h4>🎮 Activities</h4>
+      <div class="topic-list">
+        <button class="topic-pill">Pizza Slicing</button>
+        <button class="topic-pill">Recipe Builder <span class="coming-soon">soon</span></button>
+        <button class="topic-pill">Fraction Duel <span class="coming-soon">soon</span></button>
+      </div>
+
+      <div class="desc-box">
+        🌟 Chef <strong>Zing</strong> needs your help in the kitchen! Every recipe is a fraction adventure — splitting pizzas, measuring cups, and dividing cookies. The tastiest way to master fractions!
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openModal(id) {
+    document.getElementById('modal-' + id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById('modal-' + id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeOnOverlay(e, id) {
+    if (e.target === e.currentTarget) closeModal(id);
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      ['numo','pixi','zing'].forEach(id => closeModal(id));
+    }
+  });
+</script>
+</body>
+</html>
