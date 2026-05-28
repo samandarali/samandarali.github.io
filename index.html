@@ -5,40 +5,44 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9E4B200372"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'G-9E4B200372');
+        gtag('config', 'G-9E4B200372');
     </script>
-    
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mojgan Samandar | Portfolio</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet" />
 
     <!-- <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" /> -->
 
-        
+
     <link rel="stylesheet" href="styles/style-teaching.css" />
     <style>
-                :root {
-            --teal-deep:    #7c3aed;
-            --teal-mid:     #a913bd;
-            --teal-bright:  #a855f7;
-            --teal-light:   #d8b4fe;
-            --teal-pale:    #f3e8ff;
-            --slate-dark:   #1e1b4b;
-            --slate-mid:    #312e81;
-            --slate-soft:   #6d28d9;
-            --mint:         #ede9fe;
-            --cream:        #fafafa;
-            --text-main:    #1f2937;
-            --text-muted:   #6b7280;
+        :root {
+            --teal-deep: #7c3aed;
+            --teal-mid: #a913bd;
+            --teal-bright: #a855f7;
+            --teal-light: #d8b4fe;
+            --teal-pale: #f3e8ff;
+            --slate-dark: #1e1b4b;
+            --slate-mid: #312e81;
+            --slate-soft: #6d28d9;
+            --mint: #ede9fe;
+            --cream: #fafafa;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
         }
-        * { box-sizing: border-box; }
+
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -46,8 +50,12 @@
             color: var(--text-main);
         }
 
-        h1, h2, h3 { font-family: 'DM Serif Display', serif; }
-        
+        h1,
+        h2,
+        h3 {
+            font-family: 'DM Serif Display', serif;
+        }
+
 
         /* ── NAV TABS ── */
         .tab-button {
@@ -57,12 +65,16 @@
             font-weight: 500;
             letter-spacing: 0.01em;
         }
+
         .tab-button.active {
             color: var(--teal-deep);
             border-bottom: 3px solid var(--teal-bright);
             font-weight: 700;
         }
-        .tab-button:not(.active):hover { color: var(--teal-mid); }
+
+        .tab-button:not(.active):hover {
+            color: var(--teal-mid);
+        }
 
         /* ── HEADER ── */
         header {
@@ -71,12 +83,15 @@
             overflow: hidden;
             border-bottom: 1px solid #f0e8ff;
         }
+
         .header-mountains {
             position: absolute;
-            bottom: 0; right: 0;
-            width: 340px; height: 110px;
+            bottom: 0;
+            right: 0;
+            width: 340px;
+            height: 110px;
             opacity: 0.18;
-        }        
+        }
 
         .image-div {
             border: none;
@@ -87,16 +102,17 @@
         .project-card {
             transition: all 0.25s ease;
         }
+
         .project-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(13,110,110,0.15);
+            box-shadow: 0 20px 40px rgba(13, 110, 110, 0.15);
         }
 
         /* ── SECTION CARDS ── */
         .section-card {
             background: white;
             border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(13,110,110,0.08);
+            box-shadow: 0 4px 24px rgba(13, 110, 110, 0.08);
         }
 
         .teaching-hero {
@@ -109,16 +125,33 @@
             padding: 48px 40px;
             margin-bottom: 32px;
         }
-        .teaching-hero h2 { color: #1f2937; font-size: 2.6rem; line-height: 1.15; margin-bottom: 12px; }
-        .teaching-hero p  { color: #4b5563; max-width: 540px; line-height: 1.7; }
-        .teaching-hero .eyebrow {
-            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
-            text-transform: uppercase; color: var(--teal-deep); margin-bottom: 10px;
-        }
-        .hero-accent { color: var(--teal-mid); font-style: italic; }
-        
 
-        
+        .teaching-hero h2 {
+            color: #1f2937;
+            font-size: 2.6rem;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+
+        .teaching-hero p {
+            color: #4b5563;
+            max-width: 540px;
+            line-height: 1.7;
+        }
+
+        .teaching-hero .eyebrow {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--teal-deep);
+            margin-bottom: 10px;
+        }
+
+        .hero-accent {
+            color: var(--teal-mid);
+            font-style: italic;
+        }
     </style>
 </head>
 
@@ -250,18 +283,27 @@
             <!-- Ko-fi banner -->
             <div class="kofi-banner mb-10">
                 <!-- left: coffee cup icon -->
-                <img src="images/coffee.png" alt="Support" style="width:200px; height:200px; object-fit:contain; flex-shrink:0;" />
+                <img src="images/coffee.png" alt="Support"
+                    style="width:200px; height:200px; object-fit:contain; flex-shrink:0;" />
 
                 <!-- centre: text block -->
                 <div style="flex:1; min-width:200px;">
-                    <div style="font-size:0.8rem; font-weight:700; color:#7c3aed; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">
+                    <div
+                        style="font-size:0.8rem; font-weight:700; color:#7c3aed; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">
                         Find these resources useful?</div>
-                    <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:6px;">Support my work 💜</div>
-                    <div style="font-size:0.85rem; color:#374151; max-width:420px; line-height:1.6;">Your support helps me create more free tutorials and tools for students and educators around the world. Every coffee makes a difference!</div>
-                    <div style="display:flex; gap:20px; margin-top:10px; font-size:0.78rem; color:#4b5563; font-weight:500;">
-                        <span>🔒 <strong>Secure</strong><br><span style="font-weight:400;">Safe &amp; encrypted</span></span>
-                        <span>⚡ <strong>Quick</strong><br><span style="font-weight:400;">Takes less than a minute</span></span>
-                        <span>🌐 <strong>Global</strong><br><span style="font-weight:400;">Support from anywhere</span></span>
+                    <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:6px;">Support my work
+                        💜</div>
+                    <div style="font-size:0.85rem; color:#374151; max-width:420px; line-height:1.6;">Your support helps
+                        me create more free tutorials and tools for students and educators around the world. Every
+                        coffee makes a difference!</div>
+                    <div
+                        style="display:flex; gap:20px; margin-top:10px; font-size:0.78rem; color:#4b5563; font-weight:500;">
+                        <span>🔒 <strong>Secure</strong><br><span style="font-weight:400;">Safe &amp;
+                                encrypted</span></span>
+                        <span>⚡ <strong>Quick</strong><br><span style="font-weight:400;">Takes less than a
+                                minute</span></span>
+                        <span>🌐 <strong>Global</strong><br><span style="font-weight:400;">Support from
+                                anywhere</span></span>
                     </div>
                 </div>
 
@@ -276,7 +318,7 @@
                     </div>
                 </div>
             </div>
-                        <!-- FILTER PILLS -->
+            <!-- FILTER PILLS -->
             <div class="flex gap-2 flex-wrap mb-7" id="cat-filters">
                 <button class="filter-pill active" data-cat="all">All</button>
                 <button class="filter-pill" data-cat="sql">SQL</button>
@@ -313,7 +355,7 @@
                         </div>
                         <div class="card-footer" id="sql-footer" style="color:#1d4ed8;">
                             <a href="teaching/sql_teaching_page.html"
-                                class="inline-block bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-teal-700 transition">
+                                class="inline-block bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#dc23d1] transition">
                                 View resource &rarr;
                             </a>
                         </div>
@@ -341,7 +383,7 @@
                         </div>
                         <div class="card-footer" id="excel-footer" style="color:#166534;">
                             <a href="teaching/excel_teaching_page.html"
-                                class="inline-block bg-teal-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-teal-700 transition">
+                                class="inline-block bg-teal-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#dc23d1] transition">
                                 View resource &rarr;
                             </a>
                         </div>
@@ -349,7 +391,7 @@
                 </div>
 
                 <!-- Power BI card (coming soon) -->
-                <div class="card-item coming-soon" data-cat="powerbi">
+                <div class="card-item" data-cat="powerbi">
                     <div class="teach-card">
                         <div class="card-thumb" style="background:#f0fdf4;">
                             <img src="images/PowerBI.png" alt="PowerBI course" />
@@ -367,8 +409,12 @@
                                     soon</span>
                             </div>
                         </div>
-                    <div class="card-footer" style="color:#9ca3af;">⏳ Coming soon</div>
-
+                        <div class="card-footer" id="sql-footer" style="color:#dde016;">
+                            <a href="teaching/powerbi_teaching_page.html"
+                                class="inline-block bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#dc23d1] transition">
+                                View resource &rarr;
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -394,12 +440,12 @@
                                     style="background:#f3f4f6; color:#9ca3af; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Coming
                                     soon</span>
                             </div>
-                        <div class="card-footer" id="math-footer" style="color:#1d4ed8;">
-                            <a href="teaching/math_kids.html"
-                                class="inline-block bg-purple-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-teal-700 transition">
-                                View resource &rarr;
-                            </a>
-                        </div>
+                            <div class="card-footer" id="math-footer" style="color:#1d4ed8;">
+                                <a href="teaching/math_kids.html"
+                                    class="inline-block bg-purple-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#dc23d1] transition">
+                                    View resource &rarr;
+                                </a>
+                            </div>
 
                         </div>
                     </div>

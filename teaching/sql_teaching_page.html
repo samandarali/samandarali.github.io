@@ -653,6 +653,23 @@
       margin-top: 0.25rem;
       font-family: 'Inter', var(--sans), sans-serif;
     }
+
+    .hero-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sql-logo {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .hero-lockup h1 {
+      margin: 0;
+    }    
   </style>
 </head>
 
@@ -673,8 +690,12 @@
 
     <!-- HERO -->
     <div class="hero">
-      <h1>Learn SQL.<br><em>From first query to full mastery.</em></h1>
-      <p class="hero-pitch">
+      <div class="hero-lockup">
+        <img src="../images/sql.jpg" alt="sql logo" class="sql-logo">
+        <h1>Learn SQL.<br><em>From first query to full mastery.</em></h1>
+      </div>
+            
+            <p class="hero-pitch">
         SQL is the lingua franca of data -spoken by analysts, engineers, scientists, and product managers alike.
         Every row in every database you'll ever touch is waiting for a query.
         This page is a structured, open curriculum that takes you from your first <code>SELECT</code> to building

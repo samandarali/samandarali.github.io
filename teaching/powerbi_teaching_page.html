@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9E4B200372"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9E4B200372');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power BI — Knowledge, Shared Openly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0 }
+
+    :root {
+      --bg: #FAFAF8;
+      --surface: #FFFFFF;
+      --border: #E4E2DA;
+      --border-light: #EEECE6;
+      --text: #1A1A18;
+      --text-muted: #6B6B67;
+      --text-faint: #9B9B97;
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+      --serif: 'DM Serif Display', serif;
+
+      /* Power BI brand palette — exact logo colors */
+      /* bar 1 lemon */
+      --pbi-1-bg:   #FEF9E0;
+      --pbi-1-mid:  #F9D84A;
+      --pbi-1-text: #7A5F00;
+      --pbi-1-dark: #5A4400;
+      /* bar 2 golden */
+      --pbi-2-bg:   #FDF0C0;
+      --pbi-2-mid:  #F0B429;
+      --pbi-2-text: #7A5600;
+      --pbi-2-dark: #5A3E00;
+      /* bar 3 amber */
+      --pbi-3-bg:   #FADFB0;
+      --pbi-3-mid:  #C47D0E;
+      --pbi-3-text: #7A4A00;
+      --pbi-3-dark: #5A3500;
+      /* bar 4 bronze (expert) */
+      --pbi-4-bg:   #F5D090;
+      --pbi-4-mid:  #A35F00;
+      --pbi-4-text: #6B3A00;
+      --pbi-4-dark: #4A2800;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh
+    }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 6rem }
+
+    /* ── SITE HEADER ── */
+    .site-header { background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.08) }
+    .site-header-inner { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 0 }
+    .site-name {
+      font-size: 2rem; font-weight: 900; color: #111827;
+      letter-spacing: -0.02em; font-family: 'Inter', var(--sans), sans-serif
+    }
+    .site-role {
+      font-size: 1.1rem; color: var(--pbi-3-mid); font-weight: 500;
+      margin-top: 0.25rem; font-family: 'Inter', var(--sans), sans-serif
+    }
+
+    /* ── HERO ── */
+    .hero {
+      margin-bottom: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border)
+    }
+
+    /* logo + title lockup */
+    .hero-lockup {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      margin-bottom: 1.25rem
+    }
+
+    .pbi-logo {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      line-height: 1.08;
+      color: var(--text);
+      margin: 0
+    }
+
+    .hero h1 em { font-style: italic; color: var(--pbi-3-mid) }
+
+    .hero-pitch {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 640px
+    }
+
+    .hero-pitch strong { color: var(--text); font-weight: 500 }
+    .hero-pitch code {
+      font-family: var(--mono); font-size: 13px;
+      background: #F0EEE8; padding: 1px 6px; border-radius: 4px
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-row {
+      display: flex; gap: 7px; flex-wrap: wrap;
+      margin-bottom: 2rem; align-items: center
+    }
+    .filter-label { font-family: var(--mono); font-size: 11px; color: var(--text-faint); margin-right: 2px }
+
+    .pill {
+      padding: 5px 14px; font-size: 12px; border: 1px solid var(--border);
+      border-radius: 20px; background: var(--surface); color: var(--text-muted);
+      cursor: pointer; font-family: var(--sans); transition: all .15s; outline: none
+    }
+    .pill:hover { background: #F0EEE8; border-color: #C8C6BE }
+    .pill.a-all    { background: #F0EEE8; color: var(--text); border-color: #C8C6BE; font-weight: 500 }
+    .pill.a-beginner     { background: var(--pbi-1-bg); color: var(--pbi-1-dark); border-color: var(--pbi-1-mid); font-weight: 500 }
+    .pill.a-intermediate { background: var(--pbi-2-bg); color: var(--pbi-2-dark); border-color: var(--pbi-2-mid); font-weight: 500 }
+    .pill.a-advanced     { background: var(--pbi-3-bg); color: var(--pbi-3-dark); border-color: var(--pbi-3-mid); font-weight: 500 }
+    .pill.a-expert       { background: var(--pbi-4-bg); color: var(--pbi-4-dark); border-color: var(--pbi-4-mid); font-weight: 500 }
+
+    /* ── LEVEL BLOCK ── */
+    .level-block {
+      border: 1px solid var(--border); border-radius: 14px;
+      overflow: hidden; margin-bottom: 1rem; background: var(--surface)
+    }
+    .level-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 1.1rem 1.25rem; cursor: pointer;
+      background: var(--surface); user-select: none; transition: background .15s
+    }
+    .level-header:hover { background: #FAFAF8 }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0 }
+    .dot-beginner     { background: #F9D84A }
+    .dot-intermediate { background: #F0B429 }
+    .dot-advanced     { background: #C47D0E }
+    .dot-expert       { background: #A35F00 }
+
+    .lv-name { font-family: var(--serif); font-size: 1.2rem; color: var(--text); white-space: nowrap }
+    .lv-summary { font-size: 13px; color: var(--text-muted); flex: 1 }
+
+    .lv-badge {
+      font-size: 11px; font-family: var(--mono);
+      padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0
+    }
+    .badge-beginner     { background: var(--pbi-1-bg); color: var(--pbi-1-dark) }
+    .badge-intermediate { background: var(--pbi-2-bg); color: var(--pbi-2-dark) }
+    .badge-advanced     { background: var(--pbi-3-bg); color: var(--pbi-3-dark) }
+    .badge-expert       { background: var(--pbi-4-bg); color: var(--pbi-4-dark) }
+
+    .chevron {
+      color: var(--text-faint); font-size: 18px; line-height: 1;
+      transition: transform .25s; margin-left: 4px; flex-shrink: 0
+    }
+    .level-header.open .chevron { transform: rotate(180deg) }
+    .level-body { display: none; border-top: 1px solid var(--border) }
+    .level-body.open { display: block }
+
+    /* ── VIDEO SLOT ── */
+    .video-slot { padding: 1.25rem 1.25rem 0 }
+    .video-label {
+      font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--text-faint); margin-bottom: .6rem
+    }
+    .video-placeholder {
+      background: #F4F2EC; border: 1px dashed var(--border); border-radius: 10px;
+      height: 56px; display: flex; align-items: center; gap: 12px;
+      padding: 0 1.1rem; color: var(--text-faint); font-size: 13px
+    }
+    .video-placeholder svg { flex-shrink: 0; opacity: .5 }
+    .video-embed {
+      border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--border); aspect-ratio: 16/9; background: #000
+    }
+    .video-embed iframe { width: 100%; height: 100%; border: none; display: block }
+
+    /* ── CATEGORY GRID ── */
+    .cat-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      border-top: 1px solid var(--border); margin-top: 1.25rem
+    }
+    .cat-card {
+      padding: 1rem 1.2rem;
+      border-right: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      display: flex; flex-direction: column; gap: .55rem
+    }
+    .cat-card:last-child { border-right: none }
+    .cat-name {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      letter-spacing: .08em; text-transform: uppercase; color: var(--text)
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 4px }
+    .chip {
+      font-family: var(--mono); font-size: 11px; background: #F4F2EC;
+      color: var(--text-muted); padding: 2px 7px; border-radius: 4px;
+      border: 1px solid var(--border-light)
+    }
+    .ability {
+      font-size: 12px; color: var(--text-faint); line-height: 1.55;
+      padding-top: .5rem; border-top: 1px dashed var(--border)
+    }
+    .cat-footer {
+      display: flex; flex-wrap: wrap; gap: 5px;
+      padding-top: .5rem; margin-top: auto; border-top: 1px solid var(--border-light)
+    }
+    .mini-btn {
+      font-size: 11px; font-family: var(--mono); padding: 3px 9px;
+      border-radius: 20px; border: 1px dashed var(--border); color: var(--text-faint);
+      background: transparent; cursor: pointer; transition: all .15s;
+      text-decoration: none; display: inline-block
+    }
+    .mini-btn:hover { background: #F4F2EC; border-style: solid; color: var(--text-muted) }
+    .mini-btn.ex   { border-color: #F9D84A; color: var(--pbi-1-dark) }
+    .mini-btn.ex:hover { background: var(--pbi-1-bg) }
+    .mini-btn.ans  { border-color: #F0B429; color: var(--pbi-2-dark) }
+    .mini-btn.ans:hover { background: var(--pbi-2-bg) }
+    .mini-btn.vid  { border-color: #C47D0E; color: var(--pbi-3-dark) }
+    .mini-btn.vid:hover { background: var(--pbi-3-bg) }
+    .mini-btn.coming { opacity: .45; cursor: default; pointer-events: none; border-style: dashed }
+
+    /* ── SECTION EXERCISES ── */
+    .section-exercises { border-top: 1px solid var(--border); padding: 1.25rem }
+    .sec-ex-header { display: flex; align-items: center; gap: 10px; margin-bottom: .9rem }
+    .sec-ex-title {
+      font-family: var(--mono); font-size: 11px;
+      text-transform: uppercase; letter-spacing: .1em; color: var(--text)
+    }
+    .sec-ex-badge {
+      font-size: 11px; font-family: var(--mono); padding: 2px 9px;
+      border-radius: 20px; background: #F4F2EC; color: var(--text-faint)
+    }
+    .sec-ex-desc { font-size: 13px; color: var(--text-faint); margin-bottom: 1rem; line-height: 1.6 }
+    .sec-ex-placeholder {
+      background: #F4F2EC; border: 1px dashed var(--border); border-radius: 10px;
+      height: 52px; display: flex; align-items: center; gap: 10px;
+      color: var(--text-faint); font-size: 13px; padding: 0 1rem
+    }
+    .sec-ex-placeholder svg { flex-shrink: 0; opacity: .45 }
+    .q-list { display: flex; flex-direction: column; gap: .75rem }
+    .q-item {
+      background: #FAFAF8; border: 1px solid var(--border-light);
+      border-radius: 8px; padding: .85rem 1rem;
+      font-size: 13px; color: var(--text-muted); line-height: 1.6
+    }
+    .q-item strong {
+      color: var(--text); font-weight: 500; font-family: var(--mono);
+      font-size: 11px; display: block; margin-bottom: .3rem
+    }
+
+    /* ── WHAT IS POWER BI ── */
+    .what-is-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.5rem 1.5rem 1.25rem; margin-bottom: 2rem
+    }
+    .wis-title { font-family: var(--serif); font-size: 1.5rem; color: var(--text); margin-bottom: .75rem }
+    .wis-body { font-size: 14px; color: var(--text-muted); line-height: 1.75; max-width: 640px }
+    .wis-body strong { color: var(--text); font-weight: 500 }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px }
+    ::-webkit-scrollbar-track { background: transparent }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <h1 class="site-name">Mojgan Samandar</h1>
+      <p class="site-role">Economist &amp; Data Analyst</p>
+      <a href="../index.html#teaching">← Back to Teaching</a>
+    </div>
+  </header>
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <div class="hero">
+      <!-- Logo + title lockup -->
+      <div class="hero-lockup">
+        <!-- Power BI logo — inline SVG, exact brand colors -->
+        <svg class="pbi-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Power BI logo">
+          <!-- bar 1: short / lemon -->
+          <rect x="8"  y="55" width="26" height="37" rx="5" fill="#F9D84A"/>
+          <!-- bar 2: medium / golden -->
+          <rect x="38" y="32" width="26" height="60" rx="5" fill="#F0B429"/>
+          <!-- bar 3: tall / amber -->
+          <rect x="68" y="8"  width="26" height="84" rx="5" fill="#C47D0E"/>
+        </svg>
+        <h1>Learn Power BI.<br><em>From first report to full mastery.</em></h1>
+      </div>
+      <p class="hero-pitch">
+        Power BI is Microsoft's leading business intelligence platform — used by analysts and
+        organisations worldwide to connect data, build models, and share interactive reports.
+        This page is a structured, open curriculum that takes you from your first visual
+        to building enterprise-grade data models and DAX at scale.<br><br>
+        Each level comes with a video overview, per-topic exercises, and a mixed practice section
+        that spans the whole level. Expand a level to start learning.
+      </p>
+      <script src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+      <script>
+                kofiwidget2.init('Buy me a Coffee', '#FFD700', 'H2H31ZM0W7');
+        kofiwidget2.draw();
+      </script>
+    </div>
+
+    <!-- WHAT IS POWER BI -->
+    <div class="what-is-box">
+      <div class="wis-title">What is Power BI?</div>
+      <p class="wis-body">
+        Power BI is a business analytics tool by Microsoft that lets you connect to hundreds of data
+        sources, transform and model your data, and publish interactive dashboards and reports.
+        It combines <strong>Power Query</strong> for data shaping, a <strong>data model</strong> for
+        relationships, and <strong>DAX</strong> for calculations — making it the go-to platform for
+        self-service and enterprise BI alike.
+      </p>
+    </div>
+
+    <!-- FILTER -->
+    <div class="filter-row">
+      <span class="filter-label">filter:</span>
+      <button class="pill a-all"      onclick="setFilter('all',this)">All levels</button>
+      <button class="pill"            onclick="setFilter('beginner',this)">Beginner</button>
+      <button class="pill"            onclick="setFilter('intermediate',this)">Intermediate</button>
+      <button class="pill"            onclick="setFilter('advanced',this)">Advanced</button>
+      <button class="pill"            onclick="setFilter('expert',this)">Expert</button>
+    </div>
+
+    <div id="levels"></div>
+  </div>
+
+  <script>
+    const LEVELS = [
+      {
+        id: 'beginner', label: 'Beginner',
+        summary: 'Connects to data, builds basic visuals, and publishes a simple interactive report.',
+        video: { ready: false, label: 'Intro to Power BI — full beginner walkthrough', embedUrl: '' },
+        categories: [
+          {
+            name: 'Interface & workflow',
+            concepts: ['Power BI Desktop', 'Report / Data / Model views', 'Fields pane', 'Visualizations pane', 'Filters pane', 'Canvas & pages', 'Publish to Service'],
+            ability: 'Navigate the Desktop interface and understand the end-to-end build-and-publish workflow',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Connecting to data',
+            concepts: ['Get Data', 'Excel / CSV / folder', 'SQL Server', 'SharePoint / OneDrive', 'Web connector', 'Import vs DirectQuery', 'Refresh basics'],
+            ability: 'Connect to common data sources; understand when to use Import vs DirectQuery',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Power Query basics',
+            concepts: ['Query Editor', 'Promote headers', 'Change data types', 'Remove columns / rows', 'Filter rows', 'Rename columns', 'Close & Apply'],
+            ability: 'Clean and shape a raw dataset into a report-ready table without writing code',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Basic visuals',
+            concepts: ['Bar / column chart', 'Line chart', 'Pie / donut chart', 'Card & multi-row card', 'Table visual', 'Matrix visual', 'Slicer'],
+            ability: 'Choose the right visual for the data; configure axes, legends, and values',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Formatting & layout',
+            concepts: ['Visual format pane', 'Titles & labels', 'Colours & themes', 'Canvas background', 'Align & distribute', 'Page size', 'Bookmarks (intro)'],
+            ability: 'Produce a clean, branded report layout that is easy to read',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'DAX fundamentals',
+            concepts: ['Measures vs calculated columns', 'SUM / COUNT / AVERAGE', 'DISTINCTCOUNT', 'IF', 'DIVIDE', 'Basic date functions', 'Implicit vs explicit measures'],
+            ability: 'Write basic DAX measures; understand why explicit measures are best practice',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+        ],
+        sectionEx: { ready: false }
+      },
+      {
+        id: 'intermediate', label: 'Intermediate',
+        summary: 'Builds a proper data model, writes context-aware DAX, and creates interactive report features.',
+        video: { ready: false, label: 'Intermediate Power BI — data model, DAX & interactivity', embedUrl: '' },
+        categories: [
+          {
+            name: 'Data modelling',
+            concepts: ['Star schema', 'Fact vs dimension tables', 'Relationships (1:M, M:1)', 'Active vs inactive relationships', 'Cardinality & cross-filter direction', 'Date table', 'Hide fields from report view'],
+            ability: 'Design a star-schema model with a proper date table and correct relationship cardinality',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Power Query intermediate',
+            concepts: ['Merge queries (join types)', 'Append queries', 'Group By', 'Pivot / Unpivot', 'Add custom column', 'Conditional column', 'Parameters'],
+            ability: 'Combine, reshape, and parameterise queries; replicate SQL-style joins in the UI',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'DAX filter context',
+            concepts: ['Row context vs filter context', 'CALCULATE', 'FILTER', 'ALL / ALLEXCEPT / ALLSELECTED', 'RELATED', 'USERELATIONSHIP', 'Context transition'],
+            ability: 'Modify filter context with CALCULATE; understand why context matters for every measure',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Time intelligence',
+            concepts: ['TOTALYTD / TOTALQTD / TOTALMTD', 'SAMEPERIODLASTYEAR', 'DATEADD', 'DATESBETWEEN', 'PARALLELPERIOD', 'Rolling averages', 'Mark as date table'],
+            ability: 'Calculate YoY, QoQ, MTD, and rolling-window measures with time intelligence functions',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Advanced visuals',
+            concepts: ['Clustered vs stacked bar', 'Combo chart (dual axis)', 'Scatter chart', 'Map / filled map', 'Treemap / funnel', 'Waterfall chart', 'KPI visual'],
+            ability: 'Select and configure the right chart type for comparisons, distributions, and KPIs',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Interactivity',
+            concepts: ['Cross-filter & highlight', 'Edit interactions', 'Drill-down / drill-through', 'Tooltips (custom)', 'Bookmarks & buttons', 'Page navigation', 'Q&A visual'],
+            ability: 'Build reports where visuals filter each other; add drill-through and bookmark navigation',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Power BI Service basics',
+            concepts: ['Workspaces', 'Publish & update', 'Scheduled refresh', 'Dashboards vs reports', 'Pin visuals', 'Share & permissions', 'Row-level security (intro)'],
+            ability: 'Publish, schedule, and share reports securely in the Power BI Service',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+        ],
+        sectionEx: { ready: false }
+      },
+      {
+        id: 'advanced', label: 'Advanced',
+        summary: 'Writes advanced DAX patterns, optimises the data model, and builds enterprise dashboards.',
+        video: { ready: false, label: 'Advanced Power BI — DAX patterns, optimisation & enterprise reporting', embedUrl: '' },
+        categories: [
+          {
+            name: 'Advanced DAX patterns',
+            concepts: ['RANKX', 'TOPN', 'SELECTEDVALUE / HASONEVALUE', 'SWITCH(TRUE(),...)', 'Dynamic measure selection', 'Disconnected tables', 'What-if parameters'],
+            ability: 'Build dynamic, parameterised measures that respond to slicer selections',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'DAX iterators',
+            concepts: ['SUMX / AVERAGEX / COUNTX', 'MAXX / MINX', 'RANKX with ALLSELECTED', 'GENERATE / GENERATEALL', 'ADDCOLUMNS / SELECTCOLUMNS', 'SUMMARIZE', 'Virtual tables'],
+            ability: 'Use X-functions to iterate row-by-row over virtual tables inside a measure',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Power Query advanced',
+            concepts: ['M language basics', 'Custom functions in M', 'List / Record / Table types', 'Error handling (try/otherwise)', 'Incremental refresh', 'Query folding', 'Combine files from folder'],
+            ability: 'Write M code for transformations the UI cannot express; enable incremental refresh',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Model optimisation',
+            concepts: ['VertiPaq engine basics', 'Column cardinality', 'Remove unused columns', 'Integer keys vs text keys', 'Aggregations table', 'Dual storage mode', 'Performance Analyzer'],
+            ability: 'Diagnose and fix slow reports using Performance Analyzer and VertiPaq principles',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Row-level security',
+            concepts: ['Static RLS roles', 'Dynamic RLS (USERPRINCIPALNAME)', 'Test as role', 'Object-level security', 'Manage roles in Service', 'RLS with bidirectional filters'],
+            ability: 'Restrict data visibility per user without building separate reports',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Advanced visuals & UX',
+            concepts: ['Field parameters', 'Calculation groups', 'Small multiples', 'Report themes (JSON)', 'Custom visuals (AppSource)', 'Conditional formatting (measures)', 'Accessibility standards'],
+            ability: 'Use calculation groups and field parameters to build flexible, accessible reports',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Deployment & governance',
+            concepts: ['Deployment pipelines (Dev/Test/Prod)', 'Endorsement (certified / promoted)', 'Sensitivity labels', 'Usage metrics', 'Lineage view', 'Dataset (semantic model) reuse', 'Gateway configuration'],
+            ability: 'Manage the full report lifecycle from development to certified production',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+        ],
+        sectionEx: { ready: false }
+      },
+      {
+        id: 'expert', label: 'Expert',
+        summary: 'Architects BI platforms — composite models, embedded analytics, CI/CD, and enterprise governance.',
+        video: { ready: false, label: 'Expert Power BI — architecture, embedded analytics & CI/CD', embedUrl: '' },
+        categories: [
+          {
+            name: 'Composite & hybrid models',
+            concepts: ['Import + DirectQuery composite', 'Hybrid tables', 'Aggregations (Auto & manual)', 'DirectLake (Fabric)', 'Dual storage mode', 'Remote models', 'Lakehouse integration'],
+            ability: 'Design hybrid models that balance query speed with near-real-time data freshness',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Tabular model & XMLA',
+            concepts: ['XMLA endpoint', 'Tabular Editor', 'Best Practice Analyzer', 'ALM Toolkit', 'Model metadata (BIM file)', 'External tools ecosystem', 'Deploy from Tabular Editor'],
+            ability: 'Manage semantic models as code with Tabular Editor; deploy via XMLA',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'CI/CD & version control',
+            concepts: ['Git integration (Fabric)', 'Power BI REST API', 'Power BI CLI / PowerShell', 'pbix in source control', 'Deployment pipeline API', 'DevOps YAML pipelines', 'Automated testing'],
+            ability: 'Automate deployments and integrate Power BI assets into a DevOps release pipeline',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Embedded analytics',
+            concepts: ['Embed for customers (App owns data)', 'Embed for organisation (User owns data)', 'Embed token', 'Power BI JavaScript SDK', 'Row-level security in embedded', 'Capacity (A / EM / P SKU)', 'Multi-tenancy patterns'],
+            ability: 'Embed Power BI reports in custom applications with token-based security',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Advanced DAX optimisation',
+            concepts: ['DAX Studio', 'Server timings', 'Storage engine vs formula engine', 'SE vs FE bottlenecks', 'Measure dependencies', 'DAX Optimizer', 'Avoid context transition overhead'],
+            ability: 'Profile slow DAX with DAX Studio; identify and fix storage vs formula engine bottlenecks',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Microsoft Fabric integration',
+            concepts: ['Fabric workspaces', 'Lakehouse & Delta tables', 'DirectLake mode', 'Dataflows Gen2', 'Data pipelines', 'Notebooks to Power BI', 'OneLake'],
+            ability: 'Build end-to-end analytics pipelines from OneLake through to a Power BI report',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+          {
+            name: 'Enterprise governance',
+            concepts: ['Tenant settings', 'Admin portal', 'Capacity management', 'Information protection (MIP)', 'Audit logs & activity API', 'Scanner API (metadata)', 'Centre of Excellence (COE) toolkit'],
+            ability: 'Govern a large Power BI tenant: policies, auditing, capacity, and the COE toolkit',
+            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
+          },
+        ],
+        sectionEx: { ready: false }
+      }
+    ];
+
+    let activeFilter = 'all';
+    let openMap = {};
+
+    function render() {
+      const container = document.getElementById('levels');
+      container.innerHTML = '';
+      const visible = activeFilter === 'all' ? LEVELS : LEVELS.filter(l => l.id === activeFilter);
+
+      visible.forEach(lv => {
+        const isOpen = !!openMap[lv.id];
+
+        const videoHTML = lv.video.ready
+          ? `<div class="video-embed"><iframe src="${lv.video.embedUrl}" allowfullscreen></iframe></div>`
+          : `<div class="video-placeholder">
+               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+               ${lv.video.label} — <em style="font-style:italic">coming soon</em>
+             </div>`;
+
+        const catCards = lv.categories.map(c => {
+          const exClass  = 'mini-btn ex'  + (c.ex.ready  ? '' : ' coming');
+          const ansClass = 'mini-btn ans' + (c.ans.ready ? '' : ' coming');
+          const vidClass = 'mini-btn vid' + (c.vid.ready ? '' : ' coming');
+          const exHref   = c.ex.ready  ? c.ex.url  : '#';
+          const ansHref  = c.ans.ready ? c.ans.url : '#';
+          const vidHref  = c.vid.ready ? c.vid.url : '#';
+
+          return `<div class="cat-card">
+            <div class="cat-name">${c.name}</div>
+            <div class="chips">${c.concepts.map(x => `<span class="chip">${x}</span>`).join('')}</div>
+            <div class="ability">${c.ability}</div>
+            <div class="cat-footer">
+              <a class="${exClass}"  href="${exHref}"  ${c.ex.ready  ? 'target="_blank"' : ''}>exercises</a>
+              <a class="${ansClass}" href="${ansHref}" ${c.ans.ready ? 'target="_blank"' : ''}>answers</a>
+              <a class="${vidClass}" href="${vidHref}" ${c.vid.ready ? 'target="_blank"' : ''}>walkthrough</a>
+            </div>
+          </div>`;
+        }).join('');
+
+        const secExHTML = lv.sectionEx.ready
+          ? `<div class="q-list">${(lv.sectionEx.questions || []).map((q, i) => `
+              <div class="q-item"><strong>Q${i + 1}</strong>${q}</div>`).join('')}
+             </div>`
+          : `<div class="sec-ex-placeholder">
+               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
+               Mixed practice exercises for this level — coming soon
+             </div>`;
+
+        const block = document.createElement('div');
+        block.className = 'level-block';
+        block.innerHTML = `
+          <div class="level-header${isOpen ? ' open' : ''}" onclick="toggle('${lv.id}')">
+            <span class="dot dot-${lv.id}"></span>
+            <span class="lv-name">${lv.label}</span>
+            <span class="lv-summary">${lv.summary}</span>
+            <span class="lv-badge badge-${lv.id}">${lv.categories.length} topics</span>
+            <span class="chevron">&#8964;</span>
+          </div>
+          <div class="level-body${isOpen ? ' open' : ''}">
+            <div class="video-slot">
+              <div class="video-label">Level video</div>
+              ${videoHTML}
+            </div>
+            <div class="cat-grid">${catCards}</div>
+            <div class="section-exercises">
+              <div class="sec-ex-header">
+                <span class="sec-ex-title">Section exercises</span>
+                <span class="sec-ex-badge">mixed practice — all ${lv.label.toLowerCase()} topics</span>
+              </div>
+              <p class="sec-ex-desc">These questions draw on everything in this level. Work through them after completing all topics above.</p>
+              ${secExHTML}
+            </div>
+          </div>
+        `;
+        container.appendChild(block);
+      });
+    }
+
+    function toggle(id) { openMap[id] = !openMap[id]; render(); }
+
+    function setFilter(f, btn) {
+      activeFilter = f;
+      document.querySelectorAll('.pill').forEach(b => { b.className = 'pill'; });
+      btn.className = 'pill a-' + f;
+      render();
+    }
+
+    render();
+  </script>
+</body>
+</html>

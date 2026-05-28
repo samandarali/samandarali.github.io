@@ -546,6 +546,23 @@
       margin-top: 0.25rem;
       font-family: 'Inter', var(--sans), sans-serif
     }
+
+    .hero-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .excel-logo {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .hero-lockup h1 {
+      margin: 0;
+    }
   </style>
 </head>
 
@@ -564,7 +581,14 @@
 
     <!-- HERO -->
     <div class="hero">
-      <h1>Learn Excel.<br><em>From first formula to full mastery.</em></h1>
+      <div class="hero-lockup">
+        <img src="../images/Microsoft_Office_Excel.png" alt="Excel logo" class="excel-logo">
+
+        <h1>
+          Learn Excel.<br>
+          <em>From first formula to full mastery.</em>
+        </h1>
+      </div>
       <p class="hero-pitch">
         Excel is the world's most widely used data tool — found in every industry, every role, every organisation.
         From a simple budget to a full financial model, it's the spreadsheet that runs the world.
@@ -575,7 +599,7 @@
       </p>
       <script src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
       <script>
-        kofiwidget2.init('Buy me a Coffee', '#72a4f2', 'H2H31ZM0W7');
+        kofiwidget2.init('Buy me a Coffee', '#217346', 'H2H31ZM0W7');
         kofiwidget2.draw();
       </script>
     </div>
