@@ -6,15 +6,14 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9E4B200372"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-9E4B200372');
   </script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SQL — Knowledge, Shared Openly</title>
+  <title>Excel — Knowledge, Shared Openly</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap"
@@ -55,8 +54,6 @@
       --red-600: #A32D2D;
       --red-800: #791F1F;
     }
-
-
 
     body {
       background: var(--bg);
@@ -100,7 +97,7 @@
 
     .hero h1 em {
       font-style: italic;
-      color: var(--blue-600)
+      color: var(--green-600)
     }
 
     .hero-pitch {
@@ -165,9 +162,9 @@
     }
 
     .pill.a-beginner {
-      background: var(--blue-50);
-      color: var(--blue-800);
-      border-color: var(--blue-600);
+      background: var(--green-50);
+      color: var(--green-800);
+      border-color: var(--green-600);
       font-weight: 500
     }
 
@@ -223,21 +220,10 @@
       flex-shrink: 0
     }
 
-    .dot-beginner {
-      background: var(--green-600)
-    }
-
-    .dot-intermediate {
-      background: var(--blue-600)
-    }
-
-    .dot-advanced {
-      background: var(--amber-600)
-    }
-
-    .dot-expert {
-      background: var(--red-600)
-    }
+    .dot-beginner { background: var(--green-600) }
+    .dot-intermediate { background: var(--blue-600) }
+    .dot-advanced { background: var(--amber-600) }
+    .dot-expert { background: var(--red-600) }
 
     .lv-name {
       font-family: var(--serif);
@@ -261,25 +247,10 @@
       flex-shrink: 0
     }
 
-    .badge-beginner {
-      background: var(--blue-50);
-      color: var(--blue-800)
-    }
-
-    .badge-intermediate {
-      background: var(--blue-50);
-      color: var(--blue-800)
-    }
-
-    .badge-advanced {
-      background: var(--amber-50);
-      color: var(--amber-800)
-    }
-
-    .badge-expert {
-      background: var(--red-50);
-      color: var(--red-800)
-    }
+    .badge-beginner { background: var(--green-50); color: var(--green-800) }
+    .badge-intermediate { background: var(--blue-50); color: var(--blue-800) }
+    .badge-advanced { background: var(--amber-50); color: var(--amber-800) }
+    .badge-expert { background: var(--red-50); color: var(--red-800) }
 
     .chevron {
       color: var(--text-faint);
@@ -290,23 +261,17 @@
       flex-shrink: 0
     }
 
-    .level-header.open .chevron {
-      transform: rotate(180deg)
-    }
+    .level-header.open .chevron { transform: rotate(180deg) }
 
     .level-body {
       display: none;
       border-top: 1px solid var(--border)
     }
 
-    .level-body.open {
-      display: block
-    }
+    .level-body.open { display: block }
 
-    /* ── VIDEO SLOT (per level) ── */
-    .video-slot {
-      padding: 1.25rem 1.25rem 0
-    }
+    /* ── VIDEO SLOT ── */
+    .video-slot { padding: 1.25rem 1.25rem 0 }
 
     .video-label {
       font-family: var(--mono);
@@ -330,12 +295,8 @@
       font-size: 13px
     }
 
-    .video-placeholder svg {
-      flex-shrink: 0;
-      opacity: .5
-    }
+    .video-placeholder svg { flex-shrink: 0; opacity: .5 }
 
-    /* When a real embed is provided, replace .video-placeholder with an iframe wrapper */
     .video-embed {
       border-radius: 10px;
       overflow: hidden;
@@ -368,9 +329,7 @@
       gap: .55rem
     }
 
-    .cat-card:last-child {
-      border-right: none
-    }
+    .cat-card:last-child { border-right: none }
 
     .cat-name {
       font-family: var(--mono);
@@ -381,11 +340,7 @@
       color: var(--text)
     }
 
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px
-    }
+    .chips { display: flex; flex-wrap: wrap; gap: 4px }
 
     .chip {
       font-family: var(--mono);
@@ -428,40 +383,14 @@
       display: inline-block
     }
 
-    .mini-btn:hover {
-      background: #F4F2EC;
-      border-style: solid;
-      color: var(--text-muted)
-    }
+    .mini-btn:hover { background: #F4F2EC; border-style: solid; color: var(--text-muted) }
+    .mini-btn.ex { border-color: #C0DD97; color: var(--green-600) }
+    .mini-btn.ex:hover { background: var(--green-50) }
+    .mini-btn.ans { border-color: var(--blue-100); color: var(--blue-600) }
+    .mini-btn.ans:hover { background: var(--blue-50) }
+    .mini-btn.vid { border-color: #FAC775; color: var(--amber-600) }
+    .mini-btn.vid:hover { background: var(--amber-50) }
 
-    .mini-btn.ex {
-      border-color: #C0DD97;
-      color: var(--blue-600)
-    }
-
-    .mini-btn.ex:hover {
-      background: var(--green-50)
-    }
-
-    .mini-btn.ans {
-      border-color: var(--blue-100);
-      color: var(--blue-600)
-    }
-
-    .mini-btn.ans:hover {
-      background: var(--blue-50)
-    }
-
-    .mini-btn.vid {
-      border-color: #FAC775;
-      color: var(--amber-600)
-    }
-
-    .mini-btn.vid:hover {
-      background: var(--amber-50)
-    }
-
-    /* ─ coming badge (inactive) ─ */
     .mini-btn.coming {
       opacity: .45;
       cursor: default;
@@ -469,7 +398,7 @@
       border-style: dashed
     }
 
-    /* ── SECTION EXERCISES (bottom of level) ── */
+    /* ── SECTION EXERCISES ── */
     .section-exercises {
       border-top: 1px solid var(--border);
       padding: 1.25rem
@@ -496,13 +425,12 @@
       padding: 2px 9px;
       border-radius: 20px;
       background: #F4F2EC;
-      color: var(--text-faint);
-      border: 1px dashed var(--border)
+      color: var(--text-faint)
     }
 
     .sec-ex-desc {
       font-size: 13px;
-      color: var(--text-muted);
+      color: var(--text-faint);
       margin-bottom: 1rem;
       line-height: 1.6
     }
@@ -511,25 +439,18 @@
       background: #F4F2EC;
       border: 1px dashed var(--border);
       border-radius: 10px;
-      padding: 1rem 1.25rem;
+      height: 52px;
       display: flex;
       align-items: center;
       gap: 10px;
       color: var(--text-faint);
-      font-size: 13px
+      font-size: 13px;
+      padding: 0 1rem
     }
 
-    .sec-ex-placeholder svg {
-      flex-shrink: 0;
-      opacity: .45
-    }
+    .sec-ex-placeholder svg { flex-shrink: 0; opacity: .45 }
 
-    /* When exercises exist, list them as .q-list */
-    .q-list {
-      display: flex;
-      flex-direction: column;
-      gap: .75rem
-    }
+    .q-list { display: flex; flex-direction: column; gap: .75rem }
 
     .q-item {
       background: #FAFAF8;
@@ -558,8 +479,8 @@
       border-radius: 3px
     }
 
-    /* ── WHAT IS SQL ── */
-    .what-is-sql {
+    /* ── WHAT IS EXCEL ── */
+    .what-is-excel {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
@@ -572,7 +493,7 @@
       font-size: 11px;
       letter-spacing: .12em;
       text-transform: uppercase;
-      color: var(--blue-600);
+      color: var(--green-600);
       margin-bottom: .5rem
     }
 
@@ -591,50 +512,23 @@
       margin-bottom: 1.25rem
     }
 
-    .wis-body strong {
-      color: var(--text);
-      font-weight: 500
-    }
-
-    .wis-video {
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      aspect-ratio: 16/9;
-      background: #000
-    }
-
-    .wis-video iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block
-    }
+    .wis-body strong { color: var(--text); font-weight: 500 }
 
     /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar {
-      width: 6px
-    }
+    ::-webkit-scrollbar { width: 6px }
+    ::-webkit-scrollbar-track { background: transparent }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px }
 
-    ::-webkit-scrollbar-track {
-      background: transparent
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--border);
-      border-radius: 3px
-    }
-
-
+    /* ── HEADER ── */
     .site-header {
       background: #ffffff;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08)
     }
 
     .site-header-inner {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 2rem 1.5rem 0;
+      padding: 2rem 1.5rem 0
     }
 
     .site-name {
@@ -642,16 +536,15 @@
       font-weight: 900;
       color: #111827;
       letter-spacing: -0.02em;
-      font-family: 'Inter', var(--sans), sans-serif;
+      font-family: 'Inter', var(--sans), sans-serif
     }
 
     .site-role {
       font-size: 1.1rem;
-      color: #1c63c0;
-      ;
+      color: #27500A;
       font-weight: 500;
       margin-top: 0.25rem;
-      font-family: 'Inter', var(--sans), sans-serif;
+      font-family: 'Inter', var(--sans), sans-serif
     }
   </style>
 </head>
@@ -659,13 +552,11 @@
 <body>
 
   <!-- Header -->
-  <!-- Top header bar -->
   <header class="site-header">
     <div class="site-header-inner">
       <h1 class="site-name">Mojgan Samandar</h1>
       <p class="site-role">Economist &amp; Data Analyst</p>
       <a href="../index.html#teaching">← Back to Teaching</a>
-
     </div>
   </header>
 
@@ -673,12 +564,12 @@
 
     <!-- HERO -->
     <div class="hero">
-      <h1>Learn SQL.<br><em>From first query to full mastery.</em></h1>
+      <h1>Learn Excel.<br><em>From first formula to full mastery.</em></h1>
       <p class="hero-pitch">
-        SQL is the lingua franca of data -spoken by analysts, engineers, scientists, and product managers alike.
-        Every row in every database you'll ever touch is waiting for a query.
-        This page is a structured, open curriculum that takes you from your first <code>SELECT</code> to building
-        and securing database infrastructure at scale.<br><br>
+        Excel is the world's most widely used data tool — found in every industry, every role, every organisation.
+        From a simple budget to a full financial model, it's the spreadsheet that runs the world.
+        This page is a structured, open curriculum that takes you from your first formula to building
+        advanced models, automations, and dashboards at scale.<br><br>
         Each level comes with a video overview, per-topic exercises, and a mixed practice section
         that spans the whole level. Expand a level to start learning.
       </p>
@@ -689,30 +580,15 @@
       </script>
     </div>
 
-    <!-- WHAT IS SQL -->
-    <div class="what-is-sql">
-      <div class="wis-title">What is SQL?</div>
+    <!-- WHAT IS EXCEL -->
+    <div class="what-is-excel">
+      <div class="wis-title">What is Excel?</div>
       <p class="wis-body">
-        SQL (Structured Query Language) is the standard language for talking to relational databases.
-        You use it to ask questions of your data, transform it, and
-        manage the tables that hold it - from a single CSV-sized table up to
-        billion-row production systems.
-        <!-- Watch this 10-minute primer before diving into any level below. -->
+        Microsoft Excel is a spreadsheet application used to organise, calculate, and visualise data.
+        You use it to build everything from simple tables and charts to sophisticated financial models,
+        dashboards, and automated workflows — making it indispensable for analysts, accountants,
+        managers, and anyone who works with numbers.
       </p>
-      <!-- <div class="wis-video">
-      <a href="https://www.youtube.com/watch?v=xTqOaP3ueiA&t=213s" target="_blank" style="display:block; position:relative;">
-        <img 
-          src="https://img.youtube.com/vi/xTqOaP3ueiA/maxresdefault.jpg"
-          alt="What is SQL? — watch on YouTube"
-          style="width:100%; border-radius:10px; display:block;"
-        >
-        <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-          <div style="background:rgba(0,0,0,0.7); border-radius:50%; width:64px; height:64px; display:flex; align-items:center; justify-content:center;">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><polygon points="6,4 20,12 6,20"/></svg>
-          </div>
-        </div>
-      </a>
-    </div> -->
     </div>
 
     <!-- FILTER -->
@@ -735,39 +611,43 @@
     const LEVELS = [
       {
         id: 'beginner', label: 'Beginner',
-        summary: 'Knows how to query a database — SELECT, filter, join two tables, and aggregate.',
-        // Replace the `video` object with a real YouTube/Vimeo embed URL when ready.
-        // Set video.ready = true and video.embedUrl = "https://www.youtube.com/embed/VIDEO_ID"
-        video: { ready: false, label: 'Intro to SQL — full beginner walkthrough', embedUrl: '' },
+        summary: 'Navigates the interface, enters data, writes basic formulas, and creates simple charts.',
+        video: { ready: false, label: 'Intro to Excel — full beginner walkthrough', embedUrl: '' },
         categories: [
           {
-            name: 'Core syntax', concepts: ['SELECT', 'FROM', 'WHERE', 'ORDER BY', 'LIMIT', 'DISTINCT', 'AS (alias)'],
-            ability: 'Retrieve and filter rows from a single table; sort and rename columns',
+            name: 'Interface & navigation',
+            concepts: ['Ribbon & tabs', 'Workbook vs worksheet', 'Cells, rows & columns', 'Name box', 'Formula bar', 'Keyboard shortcuts', 'Zoom & freeze panes'],
+            ability: 'Move confidently around a workbook; customise the view for readability',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Data types', concepts: ['INT / BIGINT', 'VARCHAR / TEXT', 'DATE / DATETIME', 'BOOLEAN', 'NULL'],
-            ability: 'Understand how data is stored and how NULL behaves in comparisons',
+            name: 'Data entry & types',
+            concepts: ['Text vs numbers', 'Dates & times', 'Currency formatting', 'AutoFill', 'Flash Fill', 'Data validation (basics)', 'Copy / paste special'],
+            ability: 'Enter and format data correctly; use AutoFill to save time',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Filtering operators', concepts: ['= != < >', 'AND / OR / NOT', 'IN (...)', 'BETWEEN', 'LIKE / ILIKE', 'IS NULL / IS NOT NULL'],
-            ability: 'Write precise WHERE clauses combining multiple conditions',
+            name: 'Basic formulas',
+            concepts: ['= (equals sign)', 'Arithmetic operators', 'SUM', 'AVERAGE', 'MIN / MAX', 'COUNT / COUNTA', 'Cell references (A1)'],
+            ability: 'Write formulas that add, average, and count data in a range',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Aggregate functions', concepts: ['COUNT(*)', 'SUM()', 'AVG()', 'MIN()', 'MAX()', 'GROUP BY', 'HAVING'],
-            ability: 'Summarize data by group; filter groups with HAVING',
+            name: 'Cell references',
+            concepts: ['Relative reference (A1)', 'Absolute reference ($A$1)', 'Mixed reference (A$1)', 'Copying formulas', 'Named ranges (intro)'],
+            ability: 'Control how references shift when formulas are copied across rows or columns',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Basic joins', concepts: ['INNER JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'ON clause'],
-            ability: 'Combine two tables; understand matched vs. unmatched rows',
+            name: 'Formatting',
+            concepts: ['Bold / italic / underline', 'Font & cell colour', 'Borders', 'Number formats', 'Merge & centre', 'Wrap text', 'Column width / row height'],
+            ability: 'Make spreadsheets clear and presentable for sharing',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Sorting & limiting', concepts: ['ORDER BY ASC/DESC', 'LIMIT / TOP', 'OFFSET', 'FETCH FIRST'],
-            ability: 'Paginate results; get top-N rows',
+            name: 'Basic charts',
+            concepts: ['Column / bar chart', 'Line chart', 'Pie chart', 'Chart title & labels', 'Selecting data ranges', 'Move & resize chart'],
+            ability: 'Turn a data range into a readable chart with correct labels',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
         ],
@@ -775,47 +655,49 @@
       },
       {
         id: 'intermediate', label: 'Intermediate',
-        summary: 'Can write production queries — CTEs, subqueries, all join types, date and string manipulation.',
-        video: { ready: false, label: 'Intermediate SQL — production query patterns', embedUrl: '' },
+        summary: 'Writes lookup and logical formulas, works with tables, and builds PivotTables.',
+        video: { ready: false, label: 'Intermediate Excel — lookups, logic & PivotTables', embedUrl: '' },
         categories: [
           {
-            name: 'Joins (advanced)', concepts: ['FULL OUTER JOIN', 'CROSS JOIN', 'SELF JOIN', 'JOIN on multiple cols', 'non-equi joins'],
-            ability: 'Handle all join types; join a table to itself; join on expressions',
+            name: 'Logical functions',
+            concepts: ['IF', 'AND / OR / NOT', 'Nested IF', 'IFS', 'SWITCH', 'IFERROR / IFNA', 'TRUE / FALSE'],
+            ability: 'Branch calculations based on conditions; handle errors gracefully',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Set operations', concepts: ['UNION / UNION ALL', 'INTERSECT', 'EXCEPT / MINUS'],
-            ability: 'Combine result sets; understand deduplication vs. UNION ALL',
+            name: 'Lookup functions',
+            concepts: ['VLOOKUP', 'HLOOKUP', 'INDEX', 'MATCH', 'INDEX+MATCH', 'XLOOKUP (intro)', 'Exact vs approximate match'],
+            ability: 'Retrieve data from another table by a key; replace fragile VLOOKUP with INDEX+MATCH',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Subqueries', concepts: ['Scalar subquery', 'Correlated subquery', 'IN / EXISTS / ANY / ALL', 'Subquery in FROM'],
-            ability: 'Use nested queries for filtering, computing, and deriving tables',
+            name: 'Text functions',
+            concepts: ['LEFT / RIGHT / MID', 'LEN', 'FIND / SEARCH', 'CONCATENATE / &', 'TEXTJOIN', 'TRIM', 'UPPER / LOWER / PROPER', 'TEXT(value, format)'],
+            ability: 'Parse, clean, and combine text; convert numbers to formatted strings',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'String functions', concepts: ['CONCAT / ||', 'UPPER / LOWER', 'TRIM / LTRIM', 'SUBSTRING', 'REPLACE', 'LENGTH', 'COALESCE', 'CASE WHEN'],
-            ability: 'Clean, transform, and branch on text data',
+            name: 'Date & time functions',
+            concepts: ['TODAY() / NOW()', 'DATE / DATEVALUE', 'YEAR / MONTH / DAY', 'EDATE / EOMONTH', 'NETWORKDAYS', 'DATEDIF', 'WEEKDAY / WEEKNUM'],
+            ability: 'Calculate durations, deadlines, and working days; extract date parts',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Date & time', concepts: ["NOW() / GETDATE()", 'DATE_PART / EXTRACT', 'DATE_ADD / DATEADD', 'DATEDIFF', 'DATE_TRUNC', 'FORMAT / TO_CHAR'],
-            ability: 'Calculate date differences, extract components, truncate to period',
+            name: 'Excel Tables',
+            concepts: ['Insert Table (Ctrl+T)', 'Structured references', 'Table name', 'AutoFilter', 'Total row', 'Resize table', 'Convert to range'],
+            ability: 'Use Tables for auto-expanding formulas and clean structured references',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'CTEs', concepts: ['WITH ... AS (...)', 'Multiple CTEs', 'Referencing a CTE', 'Recursive CTE (intro)'],
-            ability: 'Break complex queries into readable named steps',
+            name: 'PivotTables',
+            concepts: ['Insert PivotTable', 'Rows / Columns / Values / Filters', 'Value field settings', 'Grouping (dates, numbers)', 'Slicers', 'Refresh data', 'Calculated field (intro)'],
+            ability: 'Summarise and cross-tabulate large datasets without formulas',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Numeric functions', concepts: ['ROUND / CEIL / FLOOR', 'ABS', 'MOD / %', 'CAST / CONVERT', 'NULLIF', 'COALESCE'],
-            ability: 'Handle type conversions, division-by-zero, and null defaults',
-            ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
-          },
-          {
-            name: 'Views', concepts: ['CREATE VIEW', 'DROP VIEW', 'Querying views', 'Updatable views'],
-            ability: 'Encapsulate logic as a reusable virtual table',
+            name: 'Conditional formatting',
+            concepts: ['Highlight cell rules', 'Top/bottom rules', 'Data bars', 'Colour scales', 'Icon sets', 'Formula-based rules', 'Manage rules'],
+            ability: 'Visually flag exceptions, trends, and thresholds automatically',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
         ],
@@ -823,42 +705,49 @@
       },
       {
         id: 'advanced', label: 'Advanced',
-        summary: 'Writes performant, schema-aware SQL — window functions, indexes, transactions, complex aggregations.',
-        video: { ready: false, label: 'Advanced SQL — windows, indexes & transactions', embedUrl: '' },
+        summary: 'Builds dynamic models with array formulas, advanced lookups, Power Query, and dashboard charts.',
+        video: { ready: false, label: 'Advanced Excel — arrays, Power Query & dashboards', embedUrl: '' },
         categories: [
           {
-            name: 'Window functions', concepts: ['ROW_NUMBER()', 'RANK() / DENSE_RANK()', 'NTILE()', 'LAG() / LEAD()', 'FIRST_VALUE / LAST_VALUE', 'SUM() OVER', 'PARTITION BY', 'ROWS / RANGE BETWEEN'],
-            ability: 'Compute running totals, rankings, and row comparisons without collapsing rows',
+            name: 'Dynamic array functions',
+            concepts: ['FILTER', 'SORT / SORTBY', 'UNIQUE', 'SEQUENCE', 'RANDARRAY', 'Spill range (#)', 'XLOOKUP (full)', 'XMATCH'],
+            ability: 'Write a single formula that outputs a dynamic range of results',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Recursive CTEs', concepts: ['WITH RECURSIVE', 'Base case + recursive step', 'Hierarchy traversal', 'Graph traversal'],
-            ability: 'Walk org charts, category trees, bill-of-materials',
+            name: 'Advanced aggregation',
+            concepts: ['SUMIF / SUMIFS', 'COUNTIF / COUNTIFS', 'AVERAGEIF / AVERAGEIFS', 'MAXIFS / MINIFS', 'SUMPRODUCT', 'Array formulas (Ctrl+Shift+Enter)'],
+            ability: 'Aggregate with multiple criteria; use SUMPRODUCT for weighted sums and counts',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Indexing & performance', concepts: ['B-tree index', 'Composite index', 'Covering index', 'EXPLAIN ANALYZE', 'Query plan reading', 'Partial index', 'Full-text index'],
-            ability: 'Diagnose slow queries; choose correct index type and column order',
+            name: 'Statistical functions',
+            concepts: ['STDEV / STDEVP', 'VAR / VARP', 'PERCENTILE / QUARTILE', 'RANK / RANK.EQ', 'CORREL', 'FORECAST / FORECAST.LINEAR', 'NORM.DIST / NORM.INV'],
+            ability: 'Perform descriptive statistics, ranking, correlation, and basic forecasting',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'DDL & schema design', concepts: ['CREATE TABLE', 'ALTER TABLE', 'DROP / TRUNCATE', 'Primary key', 'Foreign key', 'UNIQUE / CHECK', 'NOT NULL / DEFAULT', 'Normalization 1NF–3NF'],
-            ability: 'Design normalized schemas with integrity constraints',
+            name: 'Power Query',
+            concepts: ['Get Data sources', 'Transform & clean steps', 'Merge queries (joins)', 'Append queries', 'Custom columns (M)', 'Unpivot columns', 'Refresh & load'],
+            ability: 'Import, reshape, and combine data from any source without formulas',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Transactions', concepts: ['BEGIN / COMMIT / ROLLBACK', 'SAVEPOINT', 'Isolation levels', 'Dirty / phantom read', 'SELECT FOR UPDATE', 'DEADLOCK basics'],
-            ability: 'Write safe multi-step operations; understand concurrency issues',
+            name: 'Advanced charts',
+            concepts: ['Combo chart', 'Secondary axis', 'Dynamic chart range', 'Waterfall chart', 'Funnel chart', 'Sparklines', 'Custom number formats in charts'],
+            ability: 'Build publication-quality charts that update automatically with data',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Conditional & pivot', concepts: ['CASE WHEN (complex)', 'PIVOT / UNPIVOT', 'Conditional aggregation', 'FILTER clause', 'GROUPING SETS', 'ROLLUP / CUBE'],
-            ability: 'Produce cross-tab reports; multi-dimensional aggregation',
+            name: 'Dashboard design',
+            concepts: ['Named ranges for controls', 'Drop-down lists', 'Form controls (combo box, scroll bar)', 'Camera tool', 'Linked pictures', 'Layout & alignment grids', 'Print area & page setup'],
+            ability: 'Build interactive, one-page dashboards with slicers and form controls',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'JSON & semi-structured', concepts: ['JSON_EXTRACT / ->', 'JSON_ARRAYAGG', 'JSON_OBJECT', 'JSONB (Postgres)', 'UNNEST / JSON_TABLE'],
-            ability: 'Query and reshape JSON columns; flatten nested arrays into rows',
+            name: 'Data tools',
+            concepts: ['Sort multi-level', 'Advanced Filter', 'Remove duplicates', 'Text to columns', 'Goal Seek', 'Solver (intro)', 'Scenario Manager'],
+            ability: 'Clean messy data; use what-if tools to answer business questions',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
         ],
@@ -866,42 +755,49 @@
       },
       {
         id: 'expert', label: 'Expert',
-        summary: 'Works at the database architecture level — query plans, stored procedures, partitioning, replication, and security.',
-        video: { ready: false, label: 'Expert SQL — architecture, optimization & security', embedUrl: '' },
+        summary: 'Masters VBA automation, Power Pivot data models, DAX, and enterprise-grade Excel architecture.',
+        video: { ready: false, label: 'Expert Excel — VBA, Power Pivot & DAX', embedUrl: '' },
         categories: [
           {
-            name: 'Query optimization', concepts: ['Cost-based optimizer', 'Statistics / ANALYZE', 'Index hints', 'Materialized views', 'Partition pruning', 'Parallel query', 'Join order hints'],
-            ability: 'Tune queries to sub-second on billion-row tables; use planner hints',
+            name: 'VBA fundamentals',
+            concepts: ['Sub & Function', 'Variables & data types', 'Loops (For, Do While)', 'Conditionals (If/ElseIf)', 'With...End With', 'MsgBox / InputBox', 'Debug.Print'],
+            ability: 'Write macros that automate repetitive tasks; build reusable functions',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Stored procedures', concepts: ['CREATE FUNCTION', 'CREATE PROCEDURE', 'PL/pgSQL / T-SQL', 'Exception handling', 'Cursors', 'Dynamic SQL', 'EXECUTE'],
-            ability: 'Encapsulate business logic server-side; handle errors programmatically',
+            name: 'VBA object model',
+            concepts: ['Workbooks / Worksheets', 'Range object', 'Cells(r,c)', 'UsedRange / CurrentRegion', 'Offset / Resize', 'Events (Worksheet_Change)', 'Application object'],
+            ability: 'Navigate the Excel object model to read, write, and format cells programmatically',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Triggers', concepts: ['BEFORE / AFTER triggers', 'INSERT / UPDATE / DELETE', 'INSTEAD OF (views)', 'Row-level vs statement-level'],
-            ability: 'Automate audit trails, cascade logic, and enforce complex rules',
+            name: 'Advanced VBA',
+            concepts: ['Error handling (On Error)', 'Arrays & dictionaries', 'UserForms', 'File I/O (Open/Close)', 'ADO / SQL from VBA', 'Class modules', 'API calls'],
+            ability: 'Build robust tools with custom forms, error handling, and external data access',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Partitioning', concepts: ['Range partitioning', 'List partitioning', 'Hash partitioning', 'Partition pruning', 'Partition exchange', 'Sub-partitions'],
-            ability: 'Design tables partitioned for fast range scans and efficient archiving',
+            name: 'Power Pivot & data model',
+            concepts: ['Enable Power Pivot', 'Import tables', 'Define relationships', 'Diagram view', 'Multiple fact tables', 'Many-to-one relationships', 'Hidden columns'],
+            ability: 'Build a multi-table data model that powers PivotTables across millions of rows',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Advanced analytics', concepts: ['PERCENTILE_CONT/DISC', 'MEDIAN', 'STDDEV / VARIANCE', 'Cohort analysis', 'Funnel queries', 'Session windowing'],
-            ability: 'Build analytics-grade reports: cohorts, funnels, distributions',
+            name: 'DAX',
+            concepts: ['Calculated columns vs measures', 'SUM / CALCULATE', 'FILTER context', 'ALL / ALLEXCEPT', 'RELATED / RELATEDTABLE', 'Time intelligence (SAMEPERIODLASTYEAR)', 'RANKX / TOPN'],
+            ability: 'Write DAX measures for YoY, running totals, and rank calculations in Power Pivot',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Replication', concepts: ['Primary/replica setup', 'WAL / binlog', 'Logical replication', 'Sharding concepts', 'CQRS pattern', 'Connection pooling'],
-            ability: 'Architect scalable, highly available database infrastructure',
+            name: 'Financial modelling',
+            concepts: ['Best-practice structure', 'Circular references & iterations', 'Sensitivity tables (1D & 2D)', 'Monte Carlo with RAND', 'NPV / IRR / XIRR', 'MIRR', 'Amortisation schedules'],
+            ability: 'Build audit-ready financial models with sensitivity analysis and proper flagging',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
           {
-            name: 'Security', concepts: ['GRANT / REVOKE', 'Roles & schemas', 'Row-level security (RLS)', 'Column masking', 'SQL injection prevention', 'Audit logging'],
-            ability: 'Implement least-privilege access, data masking, and audit compliance',
+            name: 'Performance & governance',
+            concepts: ['Workbook size optimisation', 'Volatile functions (NOW, INDIRECT)', 'Calculation mode (manual vs auto)', 'Protect sheet / workbook', 'Digital signatures', 'Version control practices', 'Audit trail with VBA'],
+            ability: 'Deliver fast, secure, maintainable spreadsheets fit for enterprise use',
             ex: { ready: false }, ans: { ready: false }, vid: { ready: false }
           },
         ],
@@ -926,72 +822,68 @@
       visible.forEach(lv => {
         const isOpen = !!openMap[lv.id];
 
-        // video block
         const videoHTML = lv.video.ready
           ? `<div class="video-embed"><iframe src="${lv.video.embedUrl}" allowfullscreen></iframe></div>`
           : `<div class="video-placeholder">
-           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
-           ${lv.video.label} — <em style="font-style:italic">coming soon</em>
-         </div>`;
+               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+               ${lv.video.label} — <em style="font-style:italic">coming soon</em>
+             </div>`;
 
-        // category cards
         const catCards = lv.categories.map(c => {
-          const exClass = 'mini-btn ex' + (c.ex.ready ? '' : ' coming');
+          const exClass  = 'mini-btn ex'  + (c.ex.ready  ? '' : ' coming');
           const ansClass = 'mini-btn ans' + (c.ans.ready ? '' : ' coming');
           const vidClass = 'mini-btn vid' + (c.vid.ready ? '' : ' coming');
-          const exHref = c.ex.ready ? c.ex.url : '#';
-          const ansHref = c.ans.ready ? c.ans.url : '#';
-          const vidHref = c.vid.ready ? c.vid.url : '#';
+          const exHref   = c.ex.ready  ? c.ex.url  : '#';
+          const ansHref  = c.ans.ready ? c.ans.url : '#';
+          const vidHref  = c.vid.ready ? c.vid.url : '#';
 
           return `<div class="cat-card">
-        <div class="cat-name">${c.name}</div>
-        <div class="chips">${c.concepts.map(x => `<span class="chip">${x}</span>`).join('')}</div>
-        <div class="ability">${c.ability}</div>
-        <div class="cat-footer">
-          <a class="${exClass}"  href="${exHref}" ${c.ex.ready ? 'target="_blank"' : ''}>exercises</a>
-          <a class="${ansClass}" href="${ansHref}" ${c.ans.ready ? 'target="_blank"' : ''}>answers</a>
-          <a class="${vidClass}" href="${vidHref}" ${c.vid.ready ? 'target="_blank"' : ''}>walkthrough</a>
-        </div>
-      </div>`;
+            <div class="cat-name">${c.name}</div>
+            <div class="chips">${c.concepts.map(x => `<span class="chip">${x}</span>`).join('')}</div>
+            <div class="ability">${c.ability}</div>
+            <div class="cat-footer">
+              <a class="${exClass}"  href="${exHref}"  ${c.ex.ready  ? 'target="_blank"' : ''}>exercises</a>
+              <a class="${ansClass}" href="${ansHref}" ${c.ans.ready ? 'target="_blank"' : ''}>answers</a>
+              <a class="${vidClass}" href="${vidHref}" ${c.vid.ready ? 'target="_blank"' : ''}>walkthrough</a>
+            </div>
+          </div>`;
         }).join('');
 
-        // section exercises footer
         const secExHTML = lv.sectionEx.ready
           ? `<div class="q-list">${(lv.sectionEx.questions || []).map((q, i) => `
-          <div class="q-item"><strong>Q${i + 1}</strong>${q}</div>`).join('')}
-         </div>`
+              <div class="q-item"><strong>Q${i + 1}</strong>${q}</div>`).join('')}
+             </div>`
           : `<div class="sec-ex-placeholder">
-           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
-           Mixed practice exercises for this level — coming soon
-         </div>`;
+               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
+               Mixed practice exercises for this level — coming soon
+             </div>`;
 
-        // assemble block
         const block = document.createElement('div');
         block.className = 'level-block';
         block.innerHTML = `
-      <div class="level-header${isOpen ? ' open' : ''}" onclick="toggle('${lv.id}')">
-        <span class="dot dot-${lv.id}"></span>
-        <span class="lv-name">${lv.label}</span>
-        <span class="lv-summary">${lv.summary}</span>
-        <span class="lv-badge badge-${lv.id}">${lv.categories.length} topics</span>
-        <span class="chevron">&#8964;</span>
-      </div>
-      <div class="level-body${isOpen ? ' open' : ''}">
-        <div class="video-slot">
-          <div class="video-label">Level video</div>
-          ${videoHTML}
-        </div>
-        <div class="cat-grid">${catCards}</div>
-        <div class="section-exercises">
-          <div class="sec-ex-header">
-            <span class="sec-ex-title">Section exercises</span>
-            <span class="sec-ex-badge">mixed practice — all ${lv.label.toLowerCase()} topics</span>
+          <div class="level-header${isOpen ? ' open' : ''}" onclick="toggle('${lv.id}')">
+            <span class="dot dot-${lv.id}"></span>
+            <span class="lv-name">${lv.label}</span>
+            <span class="lv-summary">${lv.summary}</span>
+            <span class="lv-badge badge-${lv.id}">${lv.categories.length} topics</span>
+            <span class="chevron">&#8964;</span>
           </div>
-          <p class="sec-ex-desc">These questions draw on everything in this level. Work through them after completing all topics above.</p>
-          ${secExHTML}
-        </div>
-      </div>
-    `;
+          <div class="level-body${isOpen ? ' open' : ''}">
+            <div class="video-slot">
+              <div class="video-label">Level video</div>
+              ${videoHTML}
+            </div>
+            <div class="cat-grid">${catCards}</div>
+            <div class="section-exercises">
+              <div class="sec-ex-header">
+                <span class="sec-ex-title">Section exercises</span>
+                <span class="sec-ex-badge">mixed practice — all ${lv.label.toLowerCase()} topics</span>
+              </div>
+              <p class="sec-ex-desc">These questions draw on everything in this level. Work through them after completing all topics above.</p>
+              ${secExHTML}
+            </div>
+          </div>
+        `;
         container.appendChild(block);
       });
     }
@@ -1000,9 +892,7 @@
 
     function setFilter(f, btn) {
       activeFilter = f;
-      document.querySelectorAll('.pill').forEach(b => {
-        b.className = 'pill';
-      });
+      document.querySelectorAll('.pill').forEach(b => { b.className = 'pill'; });
       btn.className = 'pill a-' + f;
       render();
     }
