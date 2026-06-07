@@ -448,7 +448,7 @@
 
     .hero-lockup { display: flex; align-items: center; gap: 12px }
     .sql-logo    { width: 70px; height: 70px; object-fit: contain; flex-shrink: 0 }
-    .hero-lockup h1 { margin: 0 }
+    .hero-lockup h1 { margin: 5 }
 
     /* ════════════════════════════════════════════════════
        AUTH BAR  — sits in the top-right of the header
@@ -487,7 +487,7 @@
 
     .auth-btn {
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: 15px;
       padding: 5px 13px;
       border-radius: 20px;
       border: 1px solid var(--border);
@@ -678,6 +678,15 @@
       margin-top: .75rem
     }
     .status-login-link { color: var(--blue-600); cursor: pointer; text-decoration: underline }
+
+    .progress-instruction {
+    margin-top: 8px;
+    max-width: 450px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #FF028D;
+    font-weight: 500;
+    }
   </style>
 </head>
 
@@ -747,6 +756,10 @@
       <!-- ── AUTH BAR ── -->
       <div class="auth-bar">
         <!-- Signed-out: show Login button -->
+        <div>
+
+          
+        </div> 
         <div id="auth-signed-out">
           <button class="auth-btn primary" onclick="showAuthModal()">Log in / Sign up</button>
         </div>
@@ -761,9 +774,13 @@
               <span class="legend-dot" style="background:var(--status-practice-border)"></span>practice &nbsp;
               <span class="legend-dot" style="background:var(--status-dontknow-border)"></span>don't know
             </div>
+     
           </div>
           <button class="auth-btn danger" onclick="firebaseSignOut()">Sign out</button>
         </div>
+        <div class="progress-instruction">
+            Log in to track. Click any topic below and mark whether you know it, need more practice, or don't know it yet.
+        </div>               
       </div>
       <!-- ── end AUTH BAR ── -->
 
