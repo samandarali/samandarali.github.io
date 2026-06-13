@@ -628,10 +628,62 @@
       background: var(--surface);
       border-radius: 14px;
       padding: 1.5rem 1.75rem 1.4rem;
-      width: 300px;
+      width: 480px;
       max-width: calc(100vw - 2rem);
+      max-height: calc(100vh - 3rem);
+      overflow-y: auto;
       box-shadow: 0 16px 50px rgba(0,0,0,.16);
       position: relative
+    }
+
+    /* ── Topic info sections inside the popup ── */
+    .popup-section {
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed var(--border)
+    }
+    .popup-section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: .35rem
+    }
+    .popup-section-body {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65
+    }
+    .popup-questions {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-left: 0;
+      list-style: none
+    }
+    .popup-questions li::before {
+      content: "→ ";
+      color: var(--text-faint);
+      font-family: var(--mono);
+      font-size: 11px
+    }
+    .popup-questions li {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5
+    }
+    .popup-example {
+      background: #F4F2EC;
+      border: 1px solid var(--border-light);
+      border-radius: 7px;
+      padding: .6rem .85rem;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text);
+      white-space: pre;
+      overflow-x: auto;
+      line-height: 1.7
     }
 
     .status-popup-close {
@@ -734,6 +786,25 @@
     <div class="status-popup">
       <button class="status-popup-close" onclick="closeStatusPopup()">&#x2715;</button>
       <div class="status-topic-name" id="status-topic-label"></div>
+
+      <!-- What is it for -->
+      <div class="popup-section" id="popup-desc-section" style="display:none">
+        <div class="popup-section-label">What is it for?</div>
+        <div class="popup-section-body" id="popup-desc"></div>
+      </div>
+
+      <!-- Sample questions -->
+      <div class="popup-section" id="popup-questions-section" style="display:none">
+        <div class="popup-section-label">Questions you can answer with this</div>
+        <ul class="popup-questions" id="popup-questions"></ul>
+      </div>
+
+      <!-- Example query -->
+      <div class="popup-section" id="popup-example-section" style="display:none">
+        <div class="popup-section-label">Example</div>
+        <pre class="popup-example" id="popup-example"></pre>
+      </div>
+
       <div class="status-hint">How well do you know this topic?</div>
       <div class="status-buttons">
         <button class="status-btn know"     onclick="selectStatus('know')">✓ I know this</button>
@@ -796,7 +867,7 @@
   <div class="wrap">
 
     <!-- HERO -->
-    <div class="hero">
+    <div class="hero"> 
       <div class="hero-lockup">
         <img src="../images/sql.jpg" alt="sql logo" class="sql-logo">
         <h1>Learn SQL.<br><em>From first query to full mastery.</em></h1>
@@ -1059,10 +1130,178 @@
     function escAttr(s) { return s.replace(/"/g, '&quot;') }
     function escJs(s)   { return s.replace(/'/g, "\\'") }
 
+    // ─────────────────────────────────────────────────────────────────
+    //  TOPIC INFO — description, sample questions, example query
+    //  Keys must exactly match the concept strings in LEVELS above.
+    // ─────────────────────────────────────────────────────────────────
+    const TOPIC_INFO = {
+      // ── Core syntax ──
+      'SELECT':        { desc: 'Specifies which columns (or expressions) to include in your result set.', questions: ['Which columns do I want to see?', 'How do I rename a column in the output?'], example: 'SELECT first_name, last_name\nFROM employees;' },
+      'FROM':          { desc: 'Tells SQL which table (or subquery) to read data from.', questions: ['Where does my data live?'], example: 'SELECT *\nFROM orders;' },
+      'WHERE':         { desc: 'Filters rows before any grouping happens — only rows matching the condition are kept.', questions: ['Which customers are from Canada?', 'Which orders were placed after 2023?'], example: 'SELECT *\nFROM orders\nWHERE country = \'Canada\';' },
+      'ORDER BY':      { desc: 'Sorts the result set by one or more columns, ascending (default) or descending.', questions: ['Who are my top-spending customers?', 'Show me the most recent orders first.'], example: 'SELECT name, revenue\nFROM customers\nORDER BY revenue DESC;' },
+      'LIMIT':         { desc: 'Restricts the number of rows returned — useful for previewing data or getting top-N results.', questions: ['Show me just the first 10 rows.', 'Who are the top 5 earners?'], example: 'SELECT name, salary\nFROM employees\nORDER BY salary DESC\nLIMIT 5;' },
+      'DISTINCT':      { desc: 'Removes duplicate rows from the result, returning only unique values.', questions: ['What unique countries do my customers come from?', 'How many different product categories exist?'], example: 'SELECT DISTINCT country\nFROM customers;' },
+      'AS (alias)':    { desc: 'Renames a column or table within the query result — makes output more readable.', questions: ['Can I give this calculated column a friendlier name?'], example: 'SELECT price * quantity AS total_value\nFROM order_items;' },
+
+      // ── Data types ──
+      'INT / BIGINT':      { desc: 'Whole-number types. INT holds up to ~2 billion; BIGINT handles much larger values.', questions: ['What type should I use for a user ID?', 'Why is my count overflowing?'], example: 'CREATE TABLE visits (\n  id BIGINT PRIMARY KEY,\n  page_views INT\n);' },
+      'VARCHAR / TEXT':    { desc: 'Variable-length string types. VARCHAR has a max length; TEXT is unlimited.', questions: ['How do I store a product name?', 'What\'s the difference between VARCHAR and TEXT?'], example: 'SELECT name\nFROM products\nWHERE name LIKE \'%Pro%\';' },
+      'DATE / DATETIME':   { desc: 'Stores calendar dates (DATE) or date + time (DATETIME / TIMESTAMP).', questions: ['How do I filter by a date range?', 'What orders were placed today?'], example: 'SELECT *\nFROM orders\nWHERE order_date BETWEEN \'2024-01-01\' AND \'2024-12-31\';' },
+      'BOOLEAN':           { desc: 'Stores true/false values. Often represented as 1/0 in some databases.', questions: ['Which users have verified their email?', 'Filter only active records.'], example: 'SELECT *\nFROM users\nWHERE is_active = TRUE;' },
+      'NULL':              { desc: 'Represents a missing or unknown value — not zero, not empty string. Requires IS NULL / IS NOT NULL to test.', questions: ['Which rows have no value in this column?', 'Why does NULL = NULL return false?'], example: 'SELECT *\nFROM employees\nWHERE manager_id IS NULL;' },
+
+      // ── Filtering operators ──
+      '= != < >':              { desc: 'Basic comparison operators for equality, inequality, and numeric/date ordering.', questions: ['Find all orders with a status not equal to "shipped".', 'Who earns more than $80k?'], example: 'SELECT *\nFROM employees\nWHERE salary > 80000 AND department != \'HR\';' },
+      'AND / OR / NOT':        { desc: 'Logical operators that combine multiple conditions in a WHERE clause.', questions: ['Find Canadian customers who spent over $500.', 'Exclude rows matching a condition.'], example: 'SELECT *\nFROM orders\nWHERE country = \'Canada\' AND total > 500;' },
+      'IN (...)':              { desc: 'Tests whether a value matches any value in a list — a cleaner alternative to multiple OR conditions.', questions: ['Which products are in categories 1, 3, or 7?'], example: 'SELECT *\nFROM products\nWHERE category_id IN (1, 3, 7);' },
+      'BETWEEN':               { desc: 'Tests whether a value falls within an inclusive range — works on numbers and dates.', questions: ['Orders placed in Q1?', 'Employees with salary between $60k and $90k?'], example: 'SELECT *\nFROM orders\nWHERE order_date BETWEEN \'2024-01-01\' AND \'2024-03-31\';' },
+      'LIKE / ILIKE':          { desc: 'Pattern matching on strings. % matches any sequence of characters; _ matches a single character. ILIKE is case-insensitive (PostgreSQL).', questions: ['Find all customers whose name starts with "Smith".', 'Search for products containing "pro".'], example: 'SELECT *\nFROM customers\nWHERE email LIKE \'%@gmail.com\';' },
+      'IS NULL / IS NOT NULL': { desc: 'The only correct way to test for NULL — equality operators won\'t work on NULL values.', questions: ['Which orders have no shipping address?', 'Find all records missing a phone number.'], example: 'SELECT *\nFROM orders\nWHERE shipped_at IS NULL;' },
+
+      // ── Aggregate functions ──
+      'COUNT(*)':  { desc: 'Counts the number of rows (or non-null values in a column) in a group.', questions: ['How many orders were placed this month?', 'How many users are in each country?'], example: 'SELECT country, COUNT(*) AS num_customers\nFROM customers\nGROUP BY country;' },
+      'SUM()':     { desc: 'Adds up all values in a numeric column within each group.', questions: ['What is total revenue per product?', 'How much did each salesperson sell?'], example: 'SELECT salesperson_id, SUM(amount) AS total_sales\nFROM orders\nGROUP BY salesperson_id;' },
+      'AVG()':     { desc: 'Computes the mean of a numeric column, ignoring NULLs.', questions: ['What is the average order value?', 'What\'s the mean salary by department?'], example: 'SELECT department, AVG(salary) AS avg_salary\nFROM employees\nGROUP BY department;' },
+      'MIN()':     { desc: 'Returns the smallest value in a column within each group.', questions: ['What was the earliest order date?', 'What is the cheapest product per category?'], example: 'SELECT category, MIN(price) AS cheapest\nFROM products\nGROUP BY category;' },
+      'MAX()':     { desc: 'Returns the largest value in a column within each group.', questions: ['Who has the highest salary?', 'What is the most expensive order per customer?'], example: 'SELECT customer_id, MAX(total) AS biggest_order\nFROM orders\nGROUP BY customer_id;' },
+      'GROUP BY':  { desc: 'Splits rows into groups so aggregate functions (SUM, COUNT, etc.) are applied per group rather than over the whole table.', questions: ['How many orders per country?', 'Total revenue by product category?'], example: 'SELECT category, COUNT(*), SUM(revenue)\nFROM products\nGROUP BY category;' },
+      'HAVING':    { desc: 'Filters groups after aggregation — like WHERE but for aggregate results.', questions: ['Which categories have more than 10 products?', 'Show only departments with an average salary above $70k.'], example: 'SELECT department, AVG(salary) AS avg_sal\nFROM employees\nGROUP BY department\nHAVING AVG(salary) > 70000;' },
+
+      // ── Basic joins ──
+      'INNER JOIN': { desc: 'Returns only rows that have a matching record in both tables.', questions: ['Show orders with their customer name.', 'Which products have been ordered at least once?'], example: 'SELECT o.id, c.name\nFROM orders o\nINNER JOIN customers c ON o.customer_id = c.id;' },
+      'LEFT JOIN':  { desc: 'Returns all rows from the left table plus matching rows from the right; unmatched right rows are NULL.', questions: ['Which customers have never placed an order?', 'List all products, including those with no sales.'], example: 'SELECT c.name, o.id AS order_id\nFROM customers c\nLEFT JOIN orders o ON c.id = o.customer_id;' },
+      'RIGHT JOIN': { desc: 'Returns all rows from the right table plus matching rows from the left; unmatched left rows are NULL.', questions: ['Show all orders, even those with no matching customer record.'], example: 'SELECT c.name, o.id\nFROM customers c\nRIGHT JOIN orders o ON c.id = o.customer_id;' },
+      'ON clause':  { desc: 'Specifies the join condition — how rows from two tables are matched.', questions: ['How do I join on a non-ID column?', 'Can I join on multiple columns?'], example: 'SELECT *\nFROM orders o\nJOIN shipments s\n  ON o.id = s.order_id AND o.region = s.region;' },
+
+      // ── Sorting & limiting ──
+      'ORDER BY ASC/DESC': { desc: 'ASC (default) sorts lowest-to-highest; DESC sorts highest-to-lowest. You can combine multiple columns.', questions: ['Show newest orders first.', 'Sort by department, then by salary descending.'], example: 'SELECT name, salary\nFROM employees\nORDER BY department ASC, salary DESC;' },
+      'LIMIT / TOP':       { desc: 'Caps the number of rows returned. LIMIT is used in PostgreSQL/MySQL; TOP in SQL Server.', questions: ['Give me just the top 10 results.', 'Preview the first 5 rows of a large table.'], example: 'SELECT * FROM products\nORDER BY price DESC\nLIMIT 10;' },
+      'OFFSET':            { desc: 'Skips a number of rows before starting to return results — used with LIMIT for pagination.', questions: ['How do I implement page 2 of search results?'], example: 'SELECT * FROM products\nORDER BY name\nLIMIT 20 OFFSET 40;  -- page 3' },
+      'FETCH FIRST':       { desc: 'SQL-standard alternative to LIMIT/TOP — fetches only the first N rows.', questions: ['Get the top 5 rows in a standards-compliant way.'], example: 'SELECT * FROM employees\nORDER BY hire_date\nFETCH FIRST 5 ROWS ONLY;' },
+
+      // ── Joins (advanced) ──
+      'FULL OUTER JOIN':      { desc: 'Returns all rows from both tables; unmatched rows from either side get NULLs.', questions: ['Show all customers and all orders, even where there\'s no match on either side.'], example: 'SELECT c.name, o.id\nFROM customers c\nFULL OUTER JOIN orders o ON c.id = o.customer_id;' },
+      'CROSS JOIN':           { desc: 'Produces the Cartesian product — every row from the left table matched with every row from the right.', questions: ['Generate all combinations of sizes and colours.', 'Create a date/product matrix.'], example: 'SELECT s.size, c.color\nFROM sizes s\nCROSS JOIN colors c;' },
+      'SELF JOIN':            { desc: 'Joins a table to itself — useful for hierarchies or comparing rows within the same table.', questions: ['Who reports to whom in an org chart?', 'Find pairs of employees in the same department.'], example: 'SELECT e.name, m.name AS manager\nFROM employees e\nJOIN employees m ON e.manager_id = m.id;' },
+      'JOIN on multiple cols': { desc: 'Match rows using more than one column condition in the ON clause.', questions: ['Join orders to shipments matching on both order ID and region.'], example: 'SELECT *\nFROM orders o\nJOIN shipments s\n  ON o.id = s.order_id\n  AND o.region = s.region;' },
+      'non-equi joins':       { desc: 'Join condition uses something other than equality (e.g., <, BETWEEN) — useful for range lookups.', questions: ['Which salary band does each employee fall into?'], example: 'SELECT e.name, b.band_name\nFROM employees e\nJOIN salary_bands b\n  ON e.salary BETWEEN b.min_sal AND b.max_sal;' },
+
+      // ── Set operations ──
+      'UNION / UNION ALL': { desc: 'Stacks result sets vertically. UNION removes duplicates; UNION ALL keeps them all (and is faster).', questions: ['Combine customers from two different region tables.', 'Stack this year\'s and last year\'s sales into one list.'], example: 'SELECT name FROM customers_us\nUNION ALL\nSELECT name FROM customers_eu;' },
+      'INTERSECT':         { desc: 'Returns only rows that appear in both result sets.', questions: ['Which products appear in both the 2023 and 2024 catalogues?'], example: 'SELECT product_id FROM catalog_2023\nINTERSECT\nSELECT product_id FROM catalog_2024;' },
+      'EXCEPT / MINUS':    { desc: 'Returns rows in the first result set that are not in the second. EXCEPT in PostgreSQL; MINUS in Oracle.', questions: ['Which customers from last year didn\'t buy anything this year?'], example: 'SELECT customer_id FROM orders_2023\nEXCEPT\nSELECT customer_id FROM orders_2024;' },
+
+      // ── Subqueries ──
+      'Scalar subquery':    { desc: 'A subquery that returns exactly one value — can be used anywhere an expression is valid.', questions: ['Find employees earning more than the company average.'], example: 'SELECT name, salary\nFROM employees\nWHERE salary > (SELECT AVG(salary) FROM employees);' },
+      'Correlated subquery':{ desc: 'A subquery that references the outer query\'s row — re-runs for every outer row.', questions: ['Find each customer\'s most recent order.', 'Which products have above-average sales for their category?'], example: 'SELECT name\nFROM employees e\nWHERE salary = (\n  SELECT MAX(salary)\n  FROM employees\n  WHERE dept = e.dept\n);' },
+      'IN / EXISTS / ANY / ALL': { desc: 'Operators for testing membership or comparison against a set of values returned by a subquery.', questions: ['Which customers have placed at least one order?', 'Find products cheaper than all items in a given category.'], example: 'SELECT name FROM customers\nWHERE id IN (\n  SELECT DISTINCT customer_id FROM orders\n);' },
+      'Subquery in FROM':   { desc: 'A subquery used as a derived table in the FROM clause — lets you pre-aggregate before joining.', questions: ['Join to a pre-computed monthly summary.'], example: 'SELECT c.name, s.total\nFROM customers c\nJOIN (\n  SELECT customer_id, SUM(amount) AS total\n  FROM orders GROUP BY customer_id\n) s ON c.id = s.customer_id;' },
+
+      // ── String functions ──
+      'CONCAT / ||':    { desc: 'Joins two or more strings together. || is the SQL-standard operator; CONCAT() is a function alternative.', questions: ['Combine first and last name into a full name.'], example: "SELECT first_name || ' ' || last_name AS full_name\nFROM employees;" },
+      'UPPER / LOWER':  { desc: 'Converts a string to all uppercase or all lowercase.', questions: ['Normalize email addresses for comparison.'], example: "SELECT LOWER(email) FROM users;" },
+      'TRIM / LTRIM':   { desc: 'Removes leading/trailing whitespace (or specified characters) from a string.', questions: ['Clean up user-submitted data with extra spaces.'], example: "SELECT TRIM('  hello  ');  -- returns 'hello'" },
+      'SUBSTRING':      { desc: 'Extracts part of a string given a start position and (optional) length.', questions: ['Extract the first 3 characters of a product code.', 'Get the year portion from a string date.'], example: "SELECT SUBSTRING(phone, 1, 3) AS area_code\nFROM contacts;" },
+      'REPLACE':        { desc: 'Substitutes all occurrences of a substring with another string.', questions: ['Remove unwanted characters from a column.', 'Fix a typo across all rows.'], example: "SELECT REPLACE(description, 'colour', 'color')\nFROM products;" },
+      'LENGTH':         { desc: 'Returns the number of characters in a string.', questions: ['Find rows where a code is not exactly 5 characters long.'], example: "SELECT name FROM products\nWHERE LENGTH(sku) != 8;" },
+      'COALESCE':       { desc: 'Returns the first non-NULL value from a list of arguments — great for providing defaults.', questions: ['Show "Unknown" when a name is missing.', 'Use a fallback column when the primary is NULL.'], example: "SELECT COALESCE(nickname, first_name, 'Unknown') AS display_name\nFROM users;" },
+      'CASE WHEN':      { desc: 'A conditional expression — like an if/else inside your query. Returns a value based on matching conditions.', questions: ['Label orders as "small", "medium", or "large" based on amount.', 'Assign a tier to each customer.'], example: "SELECT order_id,\n  CASE WHEN total < 50  THEN 'small'\n       WHEN total < 200 THEN 'medium'\n       ELSE 'large'\n  END AS size_bucket\nFROM orders;" },
+
+      // ── Date & time ──
+      "NOW() / GETDATE()": { desc: 'Returns the current date and time. NOW() in PostgreSQL/MySQL; GETDATE() in SQL Server.', questions: ['How many days since each order was placed?', 'Filter to orders placed today.'], example: "SELECT *, NOW() - order_date AS days_ago\nFROM orders;" },
+      'DATE_PART / EXTRACT': { desc: 'Extracts a component (year, month, day, hour…) from a date/timestamp.', questions: ['How many orders were placed in each month?', 'Filter to rows from a specific year.'], example: "SELECT EXTRACT(YEAR FROM order_date) AS yr,\n       COUNT(*) AS orders\nFROM orders\nGROUP BY yr;" },
+      'DATE_ADD / DATEADD':  { desc: 'Adds a time interval to a date. DATE_ADD in MySQL; DATEADD in SQL Server; interval syntax in PostgreSQL.', questions: ['What date is 30 days from the order date?', 'Flag orders whose due date has passed.'], example: "SELECT order_date + INTERVAL '30 days' AS due_date\nFROM orders;" },
+      'DATEDIFF':            { desc: 'Calculates the difference between two dates in a given unit (days, months, etc.).', questions: ['How many days between order placed and shipped?', 'Which customers haven\'t bought in 90+ days?'], example: "SELECT DATEDIFF(day, order_date, shipped_date) AS days_to_ship\nFROM orders;" },
+      'DATE_TRUNC':          { desc: 'Truncates a timestamp to the start of a time period (month, week, year…) — useful for grouping by period.', questions: ['Aggregate revenue by month.', 'Show weekly active users.'], example: "SELECT DATE_TRUNC('month', order_date) AS month,\n       SUM(total) AS revenue\nFROM orders\nGROUP BY 1;" },
+      'FORMAT / TO_CHAR':    { desc: 'Converts a date or number to a formatted string. TO_CHAR in PostgreSQL/Oracle; FORMAT in SQL Server.', questions: ['Display dates as "Jan 2024".', 'Format a number with commas.'], example: "SELECT TO_CHAR(order_date, 'Mon YYYY') AS period\nFROM orders;" },
+
+      // ── CTEs ──
+      'WITH ... AS (...)':      { desc: 'Defines a named temporary result set (Common Table Expression) you can reference later in the same query.', questions: ['Break a complex query into readable steps.', 'Pre-aggregate before joining.'], example: "WITH monthly_sales AS (\n  SELECT DATE_TRUNC('month', order_date) AS mo,\n         SUM(total) AS revenue\n  FROM orders GROUP BY 1\n)\nSELECT * FROM monthly_sales\nWHERE revenue > 10000;" },
+      'Multiple CTEs':          { desc: 'Chain several CTEs in one WITH block, each optionally referencing the previous ones.', questions: ['Build a pipeline of transformations step by step.'], example: "WITH step1 AS (\n  SELECT ... FROM orders\n),\nstep2 AS (\n  SELECT ... FROM step1\n  JOIN customers ...\n)\nSELECT * FROM step2;" },
+      'Referencing a CTE':      { desc: 'Use the CTE name in the main query (or in a later CTE) just like a table name.', questions: ['How do I use a CTE result in a join?'], example: "WITH top_customers AS (\n  SELECT customer_id FROM orders\n  GROUP BY 1 HAVING SUM(total) > 1000\n)\nSELECT c.*\nFROM customers c\nJOIN top_customers t ON c.id = t.customer_id;" },
+      'Recursive CTE (intro)':  { desc: 'A CTE that references itself — used to walk hierarchies like org charts or category trees.', questions: ['List all employees under a given manager at all levels.'], example: "WITH RECURSIVE subordinates AS (\n  SELECT id, name, manager_id FROM employees WHERE id = 1\n  UNION ALL\n  SELECT e.id, e.name, e.manager_id\n  FROM employees e\n  JOIN subordinates s ON e.manager_id = s.id\n)\nSELECT * FROM subordinates;" },
+
+      // ── Window functions ──
+      'ROW_NUMBER()':         { desc: 'Assigns a unique sequential integer to each row within a partition, starting at 1.', questions: ['Number rows within each group.', 'Keep only the first order per customer.'], example: "SELECT *, ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date) AS rn\nFROM orders;" },
+      'RANK() / DENSE_RANK()':{ desc: 'Ranks rows within a partition. RANK skips numbers after ties; DENSE_RANK does not.', questions: ['Rank employees by salary within each department.', 'Find the top-3 products by revenue.'], example: "SELECT name, salary,\n  DENSE_RANK() OVER (PARTITION BY dept ORDER BY salary DESC) AS rnk\nFROM employees;" },
+      'NTILE()':              { desc: 'Divides rows into N roughly equal buckets (e.g., quartiles, deciles).', questions: ['Assign customers to revenue quartiles.', 'Split scores into deciles.'], example: "SELECT name, score,\n  NTILE(4) OVER (ORDER BY score) AS quartile\nFROM students;" },
+      'LAG() / LEAD()':       { desc: 'Access the value from a previous (LAG) or following (LEAD) row within a partition — great for period-over-period comparisons.', questions: ['Calculate month-over-month revenue change.', 'Find the previous order date per customer.'], example: "SELECT month, revenue,\n  LAG(revenue) OVER (ORDER BY month) AS prev_month\nFROM monthly_sales;" },
+      'SUM() OVER':           { desc: 'Computes a running (cumulative) total without collapsing rows — unlike GROUP BY, each row keeps its identity.', questions: ['Show a running total of revenue over time.', 'Compute a 7-day rolling sum.'], example: "SELECT order_date, amount,\n  SUM(amount) OVER (ORDER BY order_date) AS running_total\nFROM orders;" },
+      'PARTITION BY':         { desc: 'Divides rows into groups for window functions — like GROUP BY, but rows are not collapsed.', questions: ['Compute a rank separately within each department.', 'Running totals per customer.'], example: "SELECT customer_id, order_date, total,\n  SUM(total) OVER (PARTITION BY customer_id ORDER BY order_date) AS cumulative\nFROM orders;" },
+
+      // ── Numeric functions ──
+      'ROUND / CEIL / FLOOR': { desc: 'ROUND rounds to N decimal places; CEIL rounds up to the nearest integer; FLOOR rounds down.', questions: ['Round a price to 2 decimal places.', 'How many full days between two timestamps?'], example: "SELECT ROUND(price, 2), CEIL(rating), FLOOR(score)\nFROM products;" },
+      'ABS':    { desc: 'Returns the absolute (non-negative) value of a number.', questions: ['Find rows where the variance from target is more than 10, regardless of direction.'], example: "SELECT * FROM forecasts\nWHERE ABS(actual - forecast) > 10;" },
+      'MOD / %':{ desc: 'Returns the remainder after integer division — useful for identifying even/odd rows or cycling patterns.', questions: ['Select every other row.', 'Find orders whose ID is a multiple of 5.'], example: "SELECT * FROM orders\nWHERE MOD(id, 2) = 0;  -- even IDs only" },
+      'CAST / CONVERT': { desc: 'Explicitly changes a value\'s data type — e.g., string to integer, or date to string.', questions: ['Convert a text column to a number for arithmetic.', 'Format a date as a string.'], example: "SELECT CAST(price AS INT) AS rounded_price\nFROM products;" },
+      'NULLIF':  { desc: 'Returns NULL if two expressions are equal, otherwise returns the first. Used to avoid division-by-zero.', questions: ['How do I safely divide when the denominator might be zero?'], example: "SELECT revenue / NULLIF(sessions, 0) AS revenue_per_session\nFROM web_stats;" },
+
+      // ── Views ──
+      'CREATE VIEW':     { desc: 'Creates a named virtual table based on a SELECT query — stored in the database, not the data itself.', questions: ['How do I save a complex query so others can use it like a table?'], example: "CREATE VIEW active_customers AS\nSELECT * FROM customers\nWHERE last_order_date > NOW() - INTERVAL '90 days';" },
+      'DROP VIEW':       { desc: 'Removes an existing view from the database.', questions: ['How do I delete a view I no longer need?'], example: "DROP VIEW IF EXISTS active_customers;" },
+      'Querying views':  { desc: 'Query a view exactly like a table — the database runs the underlying SELECT transparently.', questions: ['How do I use a view in a join?'], example: "SELECT v.customer_id, o.total\nFROM active_customers v\nJOIN orders o ON v.id = o.customer_id;" },
+      'Updatable views': { desc: 'Some simple views allow INSERT/UPDATE/DELETE — the changes pass through to the underlying table.', questions: ['Can I update data through a view?'], example: "UPDATE active_customers\nSET email = 'new@example.com'\nWHERE id = 42;" },
+
+      // ── DDL & schema design ──
+      'CREATE TABLE': { desc: 'Defines a new table with its columns, data types, and constraints.', questions: ['How do I create a new table in a database?'], example: "CREATE TABLE orders (\n  id SERIAL PRIMARY KEY,\n  customer_id INT NOT NULL,\n  total NUMERIC(10,2),\n  created_at TIMESTAMP DEFAULT NOW()\n);" },
+      'ALTER TABLE':  { desc: 'Modifies an existing table — add/drop/rename columns, change types, add constraints.', questions: ['How do I add a new column to an existing table?'], example: "ALTER TABLE customers\nADD COLUMN phone VARCHAR(20);" },
+      'Primary key':  { desc: 'A column (or set of columns) that uniquely identifies each row — cannot be NULL or duplicate.', questions: ['How do I ensure each row is uniquely identifiable?'], example: "CREATE TABLE products (\n  id SERIAL PRIMARY KEY,\n  name TEXT NOT NULL\n);" },
+      'Foreign key':  { desc: 'A column that references the primary key of another table — enforces referential integrity.', questions: ['How do I link orders to the customers table?'], example: "CREATE TABLE orders (\n  id SERIAL PRIMARY KEY,\n  customer_id INT REFERENCES customers(id)\n);" },
+
+      // ── Transactions ──
+      'BEGIN / COMMIT / ROLLBACK': { desc: 'BEGIN starts a transaction; COMMIT saves all changes; ROLLBACK undoes them — ensures atomicity.', questions: ['How do I make sure two updates either both succeed or both fail?'], example: "BEGIN;\nUPDATE accounts SET balance = balance - 100 WHERE id = 1;\nUPDATE accounts SET balance = balance + 100 WHERE id = 2;\nCOMMIT;" },
+      'SAVEPOINT': { desc: 'Creates a named checkpoint within a transaction so you can roll back to that point without abandoning the whole transaction.', questions: ['How do I partially undo part of a transaction?'], example: "BEGIN;\nINSERT INTO logs ...;\nSAVEPOINT before_update;\nUPDATE orders ...;\nROLLBACK TO before_update;\nCOMMIT;" },
+
+      // ── Conditional & pivot ──
+      'CASE WHEN (complex)': { desc: 'Multi-branch conditional logic inside a query — can be nested or used inside aggregates.', questions: ['Assign a letter grade based on a score.', 'Conditionally sum only certain rows.'], example: "SELECT\n  SUM(CASE WHEN status='won' THEN amount ELSE 0 END) AS won_revenue\nFROM deals;" },
+      'Conditional aggregation': { desc: 'Use CASE WHEN inside an aggregate to sum/count only rows matching a condition.', questions: ['Count active vs. inactive users in one row.', 'Revenue split by category in one query.'], example: "SELECT\n  COUNT(CASE WHEN status='active' THEN 1 END) AS active,\n  COUNT(CASE WHEN status='inactive' THEN 1 END) AS inactive\nFROM users;" },
+      'GROUPING SETS': { desc: 'Lets you define multiple groupings in a single query — equivalent to several GROUP BY queries combined with UNION ALL.', questions: ['Show subtotals by region, by product, and a grand total in one query.'], example: "SELECT region, product, SUM(sales)\nFROM orders\nGROUP BY GROUPING SETS ((region), (product), ());" },
+      'ROLLUP / CUBE': { desc: 'ROLLUP generates subtotals along a hierarchy; CUBE generates all possible subtotal combinations.', questions: ['Produce a report with regional and national totals automatically.'], example: "SELECT year, quarter, SUM(revenue)\nFROM sales\nGROUP BY ROLLUP(year, quarter);" },
+
+      // ── JSON & semi-structured ──
+      'JSON_EXTRACT / ->': { desc: 'Extracts a value from a JSON column using a path. -> returns JSON; ->> returns text (PostgreSQL).', questions: ['Pull a field out of a JSON column.', 'Filter rows by a value nested inside JSON.'], example: "SELECT data->>'name' AS product_name\nFROM raw_events\nWHERE data->>'type' = 'purchase';" },
+      'JSONB (Postgres)':  { desc: 'Binary JSON storage in PostgreSQL — indexed and faster to query than plain JSON.', questions: ['How do I index a JSON field for fast lookup?'], example: "CREATE INDEX ON events USING GIN(payload);\nSELECT * FROM events\nWHERE payload @> '{\"type\": \"click\"}';" },
+    };
+
     // Open the popup for a chip click
     window.openStatusPopup = function(topicName) {
       popupTopicName = topicName;
       document.getElementById('status-topic-label').textContent = topicName;
+
+      // Populate topic info if available
+      const info = TOPIC_INFO[topicName];
+
+      const descSection = document.getElementById('popup-desc-section');
+      const qSection    = document.getElementById('popup-questions-section');
+      const exSection   = document.getElementById('popup-example-section');
+
+      if (info) {
+        // Description
+        document.getElementById('popup-desc').textContent = info.desc;
+        descSection.style.display = 'block';
+
+        // Sample questions
+        if (info.questions && info.questions.length) {
+          document.getElementById('popup-questions').innerHTML =
+            info.questions.map(q => `<li>${q}</li>`).join('');
+          qSection.style.display = 'block';
+        } else {
+          qSection.style.display = 'none';
+        }
+
+        // Example query
+        if (info.example) {
+          document.getElementById('popup-example').textContent = info.example;
+          exSection.style.display = 'block';
+        } else {
+          exSection.style.display = 'none';
+        }
+      } else {
+        descSection.style.display = 'none';
+        qSection.style.display    = 'none';
+        exSection.style.display   = 'none';
+      }
 
       // Show login prompt if not authenticated
       const isLoggedIn = document.getElementById('auth-signed-in').style.display !== 'none';
