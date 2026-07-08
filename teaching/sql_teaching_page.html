@@ -4,6 +4,8 @@
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9E4B200372"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
@@ -917,6 +919,13 @@
     <div id="levels"></div>
   </div>
 
+      <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
+            <p class="text-sm">&copy; 2026 Mojgan Samandar. All rights reserved.</p>
+        </div>
+    </footer>
+
   <!-- ═══════════════════════════════════════════════════════════
        PAGE JAVASCRIPT
        (auth UI helpers + render logic + chip-click handler)
@@ -965,7 +974,7 @@
           { name: 'Recursive CTEs',       concepts: ['WITH RECURSIVE','Base case + recursive step','Hierarchy traversal','Graph traversal'],                                   ability: 'Walk org charts, category trees, bill-of-materials',                                                        ex:{ready:false},ans:{ready:false},vid:{ready:false} },
           { name: 'Indexing & performance',concepts: ['B-tree index','Composite index','Covering index','EXPLAIN ANALYZE','Query plan reading','Partial index','Full-text index'], ability: 'Diagnose slow queries; choose correct index type and column order',                                       ex:{ready:false},ans:{ready:false},vid:{ready:false} },
           { name: 'DDL & schema design',  concepts: ['CREATE TABLE','ALTER TABLE','DROP / TRUNCATE','Primary key','Foreign key','UNIQUE / CHECK','NOT NULL / DEFAULT','Normalization 1NF–3NF'], ability: 'Design normalized schemas with integrity constraints',                                                    ex:{ready:false},ans:{ready:false},vid:{ready:false} },
-          { name: 'Transactions',         concepts: ['BEGIN / COMMIT / ROLLBACK','SAVEPOINT','Isolation levels','Dirty / phantom read','SELECT FOR UPDATE','DEADLOCK basics'],  ability: 'Write safe multi-step operations; understand concurrency issues',                                            ex:{ready:false},ans:{ready:false},vid:{ready:false} },
+          { name: 'Transactions',         concepts: ['BEGIN / COMMIT / ROLLBACK','SAVEPOINT','Isolation levels','Dirty / phantom read','SELECT FOR UPDATE','DEADLOCK basics'],  ability: 'Write safe multi-step operations; understand concurrency issues',                                            ex:{ready:false},ans:{ready:false},vid:{ready:true, url: 'https://www.youtube.com/watch?v=Oy2NpxfV9ok'} },
           { name: 'Conditional & pivot',  concepts: ['CASE WHEN (complex)','PIVOT / UNPIVOT','Conditional aggregation','FILTER clause','GROUPING SETS','ROLLUP / CUBE'],        ability: 'Produce cross-tab reports; multi-dimensional aggregation',                                                  ex:{ready:false},ans:{ready:false},vid:{ready:false} },
           { name: 'JSON & semi-structured',concepts: ['JSON_EXTRACT / ->','JSON_ARRAYAGG','JSON_OBJECT','JSONB (Postgres)','UNNEST / JSON_TABLE'],                              ability: 'Query and reshape JSON columns; flatten nested arrays into rows',                                            ex:{ready:false},ans:{ready:false},vid:{ready:false} },
         ],

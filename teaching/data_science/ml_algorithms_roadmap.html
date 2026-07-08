@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Machine Learning Algorithms Roadmap</title>
+<style>
+  /* ============================================================
+     DESIGN TOKENS
+     A "field map" theme: paper background, ink text, a single
+     surveyor's-orange accent for interactive/clickable elements,
+     and a deep chart-navy for the sidebar (like a legend panel).
+     Edit these variables to re-theme the whole page.
+     ============================================================ */
+  :root{
+    --paper:#f7f5f0;
+    --paper-raised:#ffffff;
+    --ink:#20242b;
+    --ink-soft:#565f6d;
+    --line:#dedad0;
+    --navy:#161b26;
+    --navy-soft:#232a3a;
+    --navy-line:#333c50;
+    --accent:#c1611a;
+    --accent-soft:#f3e2d1;
+    --accent-ink:#7a3d0f;
+    --teal:#2f7a6f;
+    --teal-soft:#e0efec;
+    --danger:#a6413a;
+    --radius:10px;
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    --sans: "Iowan Old Style","Charter","Georgia",serif;
+    --ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--ui);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.5;
+  }
+
+  a{color:inherit;}
+
+  /* ============================================================
+     LAYOUT SHELL
+     ============================================================ */
+  .app{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    min-height:100vh;
+  }
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar{
+    background:var(--navy);
+    color:#cfd4de;
+    padding:22px 16px 40px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+  }
+  .brand{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    margin-bottom:4px;
+  }
+  .brand-mark{
+    font-family:var(--mono);
+    color:var(--accent);
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:.08em;
+  }
+  .brand-title{
+    font-family:var(--sans);
+    font-size:19px;
+    font-weight:700;
+    color:#fff;
+    line-height:1.2;
+  }
+  .brand-sub{
+    font-size:11.5px;
+    color:#8b93a3;
+    margin:6px 0 20px;
+    font-family:var(--mono);
+    letter-spacing:.03em;
+  }
+  .nav-count{
+    font-size:11px;
+    color:#8b93a3;
+    margin-bottom:10px;
+    font-family:var(--mono);
+  }
+  .nav-list{list-style:none;margin:0;padding:0;}
+  .nav-item{margin-bottom:2px;}
+  .nav-link{
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    color:#c3c9d4;
+    font-size:13.5px;
+    padding:8px 10px;
+    border-radius:7px;
+    cursor:pointer;
+    font-family:var(--ui);
+  }
+  .nav-link:hover{background:var(--navy-soft); color:#fff;}
+  .nav-link.active{background:var(--navy-soft); color:#fff; box-shadow:inset 3px 0 0 var(--accent);}
+  .nav-link .n{
+    font-family:var(--mono);
+    color:var(--accent);
+    font-size:11px;
+    min-width:18px;
+  }
+  .nav-link .count{
+    font-family:var(--mono);
+    font-size:10.5px;
+    color:#6d7688;
+  }
+
+  /* ---------- MAIN ---------- */
+  .main{
+    padding:36px 44px 100px;
+    max-width:980px;
+  }
+  header.page-head h1{
+    font-family:var(--sans);
+    font-size:34px;
+    margin:0 0 10px;
+    letter-spacing:-.01em;
+  }
+  header.page-head p.intro{
+    color:var(--ink-soft);
+    font-size:15.5px;
+    max-width:70ch;
+    margin:0 0 26px;
+  }
+  header.page-head p.intro strong{color:var(--ink);}
+
+  /* ---------- SEARCH ---------- */
+  .search-wrap{
+    position:sticky;
+    top:0;
+    background:var(--paper);
+    padding:14px 0 16px;
+    z-index:5;
+    border-bottom:1px solid var(--line);
+    margin-bottom:26px;
+  }
+  .search-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--paper-raised);
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:10px 14px;
+  }
+  .search-box:focus-within{border-color:var(--accent);}
+  .search-box svg{flex:0 0 auto; opacity:.5;}
+  #searchInput{
+    border:none;
+    outline:none;
+    font-size:15px;
+    width:100%;
+    background:transparent;
+    font-family:var(--ui);
+    color:var(--ink);
+  }
+  #searchMeta{
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:8px;
+    font-family:var(--mono);
+  }
+  #clearSearch{
+    border:none;background:var(--line);color:var(--ink-soft);
+    border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;display:none;
+  }
+
+  /* ---------- CATEGORY SECTIONS ---------- */
+  .category{
+    margin-bottom:20px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--paper-raised);
+    overflow:hidden;
+    scroll-margin-top:90px;
+    box-shadow:0 1px 2px rgba(20,20,10,.03);
+  }
+  /* Category headers are the strongest visual element on the page:
+     deep navy band, large number badge, and an accent rule so the
+     17 top-level categories are unmistakable landmarks when scanning. */
+  .category-head{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:20px 22px;
+    cursor:pointer;
+    user-select:none;
+    background:var(--navy);
+    border-left:6px solid var(--accent);
+  }
+  .category-head:hover{background:var(--navy-soft);}
+  .category-num{
+    font-family:var(--mono);
+    color:var(--navy);
+    font-size:14px;
+    font-weight:800;
+    background:var(--accent);
+    border-radius:7px;
+    padding:5px 10px;
+    flex:0 0 auto;
+  }
+  .category-head h2{
+    font-family:var(--sans);
+    font-size:22px;
+    font-weight:700;
+    margin:0;
+    flex:1;
+    color:#fff;
+    letter-spacing:-.01em;
+  }
+  .category-count{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:#aeb5c4;
+    white-space:nowrap;
+  }
+  .chevron{
+    width:9px;height:9px;
+    border-right:2px solid var(--ink-soft);
+    border-bottom:2px solid var(--ink-soft);
+    transform:rotate(45deg);
+    transition:transform .18s ease;
+    margin-right:3px;
+  }
+  .category-head .chevron{border-color:#fff;}
+  .category.collapsed .chevron{transform:rotate(-45deg);}
+  .category-body{
+    border-top:1px solid var(--line);
+    padding:10px 22px 20px;
+  }
+  .category.collapsed .category-body{display:none;}
+
+  .subcategory{margin-top:14px;}
+  .subcategory-head{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+    padding:6px 0;
+  }
+  .subcategory-head h3{
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:.07em;
+    color:var(--ink-soft);
+    margin:0;
+    font-family:var(--mono);
+    font-weight:600;
+  }
+  .subcategory.collapsed .card-grid{display:none;}
+  .subcategory .chevron{width:7px;height:7px;border-color:var(--ink-soft);}
+
+  .card-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-top:6px;
+  }
+
+  /* ---------- ALGORITHM CARD ---------- */
+  .card{
+    border:1px solid var(--line);
+    border-radius:9px;
+    background:var(--paper);
+    scroll-margin-top:90px;
+    transition:box-shadow .15s ease, border-color .15s ease;
+  }
+  .card.flash{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px var(--accent-soft);
+  }
+  .card-summary{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+    padding:13px 15px;
+    cursor:pointer;
+  }
+  .card-title-wrap{display:flex; flex-direction:column; gap:6px;}
+  .card-title{
+    font-size:15.5px;
+    font-weight:700;
+    font-family:var(--sans);
+  }
+  .card-tags{display:flex; gap:6px; flex-wrap:wrap;}
+  .badge{
+    font-family:var(--mono);
+    font-size:10.5px;
+    padding:2.5px 7px;
+    border-radius:5px;
+    letter-spacing:.02em;
+    white-space:nowrap;
+  }
+  .badge.path{background:#eef1f4; color:#5b6473;}
+  .card .chevron{margin-top:5px;}
+  .card-detail{
+    display:none;
+    padding:0 15px 18px;
+    border-top:1px solid var(--line);
+  }
+  .card.open .card-detail{display:block;}
+  .card.open .card-summary{padding-bottom:8px;}
+  .card.open .chevron{transform:rotate(-135deg);}
+
+  .card-detail h4{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--ink-soft);
+    margin:0 0 8px;
+    font-family:var(--mono);
+  }
+  .card-detail p{margin:0; font-size:14px; color:var(--ink);}
+
+  /* Two-column layout: algorithm explanation/actions on the left,
+     prerequisites on the right. Stacks to one column on mobile. */
+  .card-columns{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:0;
+    margin-top:14px;
+  }
+  .col-algo{padding-right:22px;}
+  .col-prereq{
+    padding-left:22px;
+    border-left:1px solid var(--line);
+  }
+  @media (max-width: 700px){
+    .card-columns{grid-template-columns:1fr; gap:18px;}
+    .col-algo{padding-right:0;}
+    .col-prereq{padding-left:0; border-left:none; border-top:1px solid var(--line); padding-top:14px;}
+  }
+
+  .prereq-list{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px;}
+  .prereq-list li{margin:0;}
+  .prereq{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    font-size:12.5px;
+    padding:5px 10px;
+    border-radius:20px;
+    text-decoration:none;
+    border:1px solid var(--line);
+    background:var(--paper-raised);
+    cursor:pointer;
+  }
+  .prereq.internal{border-color:#cfe0dc; color:var(--teal); background:var(--teal-soft);}
+  .prereq.internal:hover{background:#cfe6e0;}
+  .prereq.external{color:var(--accent-ink); background:var(--accent-soft); border-color:#e6c9a8;}
+  .prereq.external:hover{background:#eecfa9;}
+  .prereq svg{width:10px; height:10px;}
+
+  .also-in{font-size:12.5px; color:var(--ink-soft); margin-top:4px;}
+
+  .actions{margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    font-size:13px;
+    font-weight:600;
+    padding:8px 14px;
+    border-radius:7px;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+    font-family:var(--ui);
+  }
+  .btn-video{background:var(--navy); color:#fff;}
+  .btn-video:hover{background:var(--navy-soft);}
+
+  .empty-state{
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ink-soft);
+  }
+  .empty-state strong{display:block; font-size:16px; color:var(--ink); margin-bottom:6px;}
+
+  /* ---------- MOBILE ---------- */
+  .mobile-bar{display:none;}
+  @media (max-width: 880px){
+    .app{grid-template-columns:1fr;}
+    .sidebar{
+      position:fixed;
+      inset:0 20% 0 0;
+      z-index:40;
+      transform:translateX(-100%);
+      transition:transform .2s ease;
+      box-shadow:8px 0 30px rgba(0,0,0,.35);
+    }
+    .sidebar.open{transform:translateX(0);}
+    .mobile-bar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background:var(--navy);
+      color:#fff;
+      padding:14px 18px;
+      position:sticky;
+      top:0;
+      z-index:30;
+    }
+    .mobile-bar .brand-title{color:#fff; font-size:16px;}
+    #menuToggle{
+      background:none; border:1px solid var(--navy-line); color:#fff;
+      border-radius:7px; padding:7px 10px; font-size:13px; cursor:pointer;
+    }
+    .overlay{display:none; position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:35;}
+    .overlay.show{display:block;}
+    .main{padding:22px 18px 80px;}
+    header.page-head h1{font-size:26px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Mobile top bar with menu toggle (hidden on desktop) -->
+<div class="mobile-bar">
+  <span class="brand-title">ML Roadmap</span>
+  <button id="menuToggle">☰ Categories</button>
+</div>
+<div class="overlay" id="overlay"></div>
+
+<div class="app">
+
+  <!-- ======================= SIDEBAR / NAV ======================= -->
+  <nav class="sidebar" id="sidebar">
+    <div class="brand">
+      <span class="brand-mark">ML/</span>
+      <span class="brand-title">Roadmap</span>
+    </div>
+    <div class="brand-sub">17 categories · click to jump</div>
+    <div class="nav-count" id="navCount">Loading…</div>
+    <ul class="nav-list" id="navList"><!-- populated by JS --></ul>
+  </nav>
+
+  <!-- ======================= MAIN CONTENT ======================= -->
+  <main class="main">
+    <header class="page-head">
+      <h1>Machine Learning Algorithms Roadmap</h1>
+      <p class="intro">
+        This page organizes the main <strong>machine learning techniques</strong> into
+        17 categories, from linear models to self-supervised learning. Every algorithm
+        has a plain-language explanation, its typical use case, a difficulty badge,
+        and a list of <strong>prerequisites</strong> — click a prerequisite to jump to it
+        if it's covered here, or to open a video search if it's a general math,
+        stats, or programming concept. Use the search box or the sidebar to navigate.
+      </p>
+    </header>
+
+    <!-- SEARCH -->
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="searchInput" type="text" placeholder="Search by algorithm name, category, or prerequisite (e.g. “gradient descent”, “NLP”, “boosting”)…" autocomplete="off">
+        <button id="clearSearch">Clear</button>
+      </div>
+      <div id="searchMeta"></div>
+    </div>
+
+    <!-- ALGORITHM CATEGORIES render here -->
+    <div id="content"></div>
+
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <strong>No matches found</strong>
+      Try a broader term, or clear the search to browse all categories.
+    </div>
+  </main>
+</div>
+
+<script>
+/* ================================================================
+   DATA
+   Each algorithm is one object. Fields:
+   - id: unique slug, used for anchors + internal-link targets
+   - name: display name
+   - category / subcategory: used for grouping + sidebar
+   - explanation: beginner-friendly one/two-liner
+   - useCase: task type badge (regression, classification, etc.)
+   - difficulty: Beginner | Intermediate | Advanced
+   - prereqs: array of plain-text prerequisite labels. At render time
+     each label is resolved automatically:
+       -> if it matches (or aliases to) another algorithm's name here,
+          it becomes an internal jump link
+       -> otherwise it becomes an external YouTube search link
+   - alsoIn: optional array of extra category names shown as a note
+     (used for algorithms that logically belong to more than one
+     category, e.g. Random Forest is both Tree-Based and Ensemble)
+   To ADD a new algorithm: just push a new object into this array.
+   ================================================================ */
+const ALGORITHMS = [
+
+// ---------------- 1. LINEAR MODELS ----------------
+{id:"linear-regression", name:"Linear Regression", category:"Linear Models", subcategory:"Regression",
+ explanation:"Fits a straight line (or hyperplane) through data to predict a continuous number from one or more input variables.",
+ useCase:"Regression", difficulty:"Beginner",
+ prereqs:["Basic statistics","Linear algebra basics","Gradient descent"]},
+
+{id:"ridge-regression", name:"Ridge Regression (L2)", category:"Linear Models", subcategory:"Regression",
+ explanation:"Linear regression with an added penalty on large coefficients (L2 regularization), which reduces overfitting.",
+ useCase:"Regression", difficulty:"Beginner",
+ prereqs:["Linear Regression","L2 regularization","Matrix algebra"]},
+
+{id:"lasso-regression", name:"Lasso Regression (L1)", category:"Linear Models", subcategory:"Regression",
+ explanation:"Linear regression with an L1 penalty that can shrink some coefficients to exactly zero, effectively selecting features.",
+ useCase:"Regression", difficulty:"Intermediate",
+ prereqs:["Linear Regression","Loss functions","Regularization","Gradient descent"]},
+
+{id:"elastic-net", name:"Elastic Net", category:"Linear Models", subcategory:"Regression",
+ explanation:"Combines L1 and L2 penalties, blending Ridge and Lasso to balance feature selection with stability.",
+ useCase:"Regression", difficulty:"Intermediate",
+ prereqs:["Linear Regression","Ridge Regression (L2)","Lasso Regression (L1)","Regularization"]},
+
+{id:"bayesian-regression", name:"Bayesian Regression", category:"Linear Models", subcategory:"Regression",
+ explanation:"Treats regression coefficients as probability distributions instead of fixed numbers, giving predictions with uncertainty estimates.",
+ useCase:"Regression", difficulty:"Advanced",
+ prereqs:["Linear Regression","Probability theory","Bayes theorem"]},
+
+{id:"polynomial-regression", name:"Polynomial Regression", category:"Linear Models", subcategory:"Regression",
+ explanation:"Extends linear regression by adding powers of the input variables, allowing it to fit curved relationships.",
+ useCase:"Regression", difficulty:"Beginner",
+ prereqs:["Linear Regression","Polynomial functions"]},
+
+{id:"logistic-regression", name:"Logistic Regression", category:"Linear Models", subcategory:"Classification",
+ explanation:"Predicts the probability of a binary outcome (yes/no) using a logistic (S-shaped) function on a linear combination of inputs.",
+ useCase:"Classification", difficulty:"Beginner",
+ prereqs:["Linear Regression","Probability theory","Sigmoid function"]},
+
+{id:"multinomial-logistic-regression", name:"Multinomial Logistic Regression", category:"Linear Models", subcategory:"Classification",
+ explanation:"Extends logistic regression to problems with more than two classes using a softmax function.",
+ useCase:"Classification", difficulty:"Intermediate",
+ prereqs:["Logistic Regression","Softmax function","Probability theory"]},
+
+{id:"ordinal-logistic-regression", name:"Ordinal Logistic Regression", category:"Linear Models", subcategory:"Classification",
+ explanation:"A logistic regression variant for predicting ordered categories, like star ratings, where order matters but spacing doesn't.",
+ useCase:"Classification", difficulty:"Intermediate",
+ prereqs:["Logistic Regression","Multinomial Logistic Regression","Probability theory"]},
+
+// ---------------- 2. TREE-BASED MODELS ----------------
+{id:"decision-tree-classifier", name:"Decision Tree Classifier", category:"Tree-Based Models", subcategory:"Single Trees",
+ explanation:"Splits data into branches using simple yes/no questions about features, ending in leaves that represent class predictions.",
+ useCase:"Classification", difficulty:"Beginner",
+ prereqs:["Basic statistics","Entropy and information gain"]},
+
+{id:"decision-tree-regressor", name:"Decision Tree Regressor", category:"Tree-Based Models", subcategory:"Single Trees",
+ explanation:"Same branching idea as a decision tree classifier, but each leaf predicts a continuous number instead of a class.",
+ useCase:"Regression", difficulty:"Beginner",
+ prereqs:["Decision Tree Classifier","Variance reduction"]},
+
+{id:"random-forest", name:"Random Forest", category:"Tree-Based Models", subcategory:"Bagging Methods",
+ explanation:"Builds many decision trees on random subsets of data and features, then averages or votes their predictions for a more robust result.",
+ useCase:"Classification", difficulty:"Intermediate", alsoIn:["Ensemble Methods (Bagging)"],
+ prereqs:["Decision Tree Classifier","Bootstrap aggregating (bagging)"]},
+
+{id:"extra-trees", name:"Extra Trees (Extremely Randomized Trees)", category:"Tree-Based Models", subcategory:"Bagging Methods",
+ explanation:"Like Random Forest, but splits are chosen even more randomly, which trades a little accuracy for speed and reduced variance.",
+ useCase:"Classification", difficulty:"Intermediate",
+ prereqs:["Random Forest","Decision Tree Classifier"]},
+
+{id:"adaboost", name:"AdaBoost", category:"Tree-Based Models", subcategory:"Boosting Methods",
+ explanation:"Trains a sequence of weak learners (often shallow trees), each focusing more on the mistakes of the previous one.",
+ useCase:"Classification", difficulty:"Intermediate", alsoIn:["Ensemble Methods (Boosting)"],
+ prereqs:["Decision Tree Classifier","Ensemble learning basics","Weighted error"]},
+
+{id:"gbm", name:"Gradient Boosting Machine (GBM)", category:"Tree-Based Models", subcategory:"Boosting Methods",
+ explanation:"Builds trees sequentially, where each new tree corrects the errors (residuals) of the combined previous trees using gradient descent.",
+ useCase:"Classification", difficulty:"Advanced", alsoIn:["Ensemble Methods (Boosting)"],
+ prereqs:["Decision Tree Classifier","Gradient descent","Loss functions"]},
+
+{id:"xgboost", name:"XGBoost", category:"Tree-Based Models", subcategory:"Boosting Methods",
+ explanation:"A fast, regularized, and highly optimized implementation of gradient boosting that's a favorite for tabular data competitions.",
+ useCase:"Classification", difficulty:"Advanced", alsoIn:["Ensemble Methods (Boosting)"],
+ prereqs:["Decision Tree Classifier","Gradient Boosting Machine (GBM)","Loss functions","Regularization"]},
+
+{id:"lightgbm", name:"LightGBM", category:"Tree-Based Models", subcategory:"Boosting Methods",
+ explanation:"A gradient boosting framework that grows trees leaf-wise and uses histogram-based binning for very fast training on large datasets.",
+ useCase:"Classification", difficulty:"Advanced", alsoIn:["Ensemble Methods (Boosting)"],
+ prereqs:["Gradient Boosting Machine (GBM)","Decision Tree Classifier"]},
+
+{id:"catboost", name:"CatBoost", category:"Tree-Based Models", subcategory:"Boosting Methods",
+ explanation:"A gradient boosting library built to handle categorical features natively, without manual one-hot encoding.",
+ useCase:"Classification", difficulty:"Advanced", alsoIn:["Ensemble Methods (Boosting)"],
+ prereqs:["Gradient Boosting Machine (GBM)","Categorical encoding"]},
+
+// ---------------- 3. SUPPORT VECTOR MACHINES ----------------
+{id:"svc", name:"Support Vector Classifier (SVC)", category:"Support Vector Machines", subcategory:"Core",
+ explanation:"Finds the boundary (hyperplane) that separates classes with the widest possible margin between them.",
+ useCase:"Classification", difficulty:"Intermediate",
+ prereqs:["Linear algebra basics","Optimization basics"]},
+
+{id:"svr", name:"Support Vector Regression (SVR)", category:"Support Vector Machines", subcategory:"Core",
+ explanation:"Applies the SVM margin idea to regression, fitting a function that keeps most points within a tolerance band.",
+ useCase:"Regression", difficulty:"Intermediate",
+ prereqs:["Support Vector Classifier (SVC)","Loss functions"]},
+
+{id:"linear-svm", name:"Linear SVM", category:"Support Vector Machines", subcategory:"Core",
+ explanation:"An SVM that separates classes using a straight-line (linear) boundary — fast and effective when data is linearly separable.",
+ useCase:"Classification", difficulty:"Beginner",
+ prereqs:["Support Vector Classifier (SVC)"]},
+
+{id:"kernel-svm-rbf", name:"Kernel SVM — RBF", category:"Support Vector Machines", subcategory:"Kernel SVM",
+ explanation:"Uses the Radial Basis Function kernel to implicitly map data into higher dimensions, letting SVM draw curved decision boundaries.",
+ useCase:"Classification", difficulty:"Intermediate",
+ prereqs:["Support Vector Classifier (SVC)","Kernel trick"]},
+
+{id:"kernel-svm-poly", name:"Kernel SVM — Polynomial", category:"Support Vector Machines", subcategory:"Kernel SVM",
+ explanation:"Uses a polynomial kernel to capture curved, polynomial-shaped decision boundaries between classes.",
+ useCase:"Classification", difficulty:"Intermediate",
+ prereqs:["Support Vector Classifier (SVC)","Kernel trick","Polynomial functions"]},
+
+{id:"kernel-svm-sigmoid", name:"Kernel SVM — Sigmoid", category:"Support Vector Machines", subcategory:"Kernel SVM",
+ explanation:"Uses a sigmoid kernel, which behaves similarly to a small neural network layer, to separate classes.",
+ useCase:"Classification", difficulty:"Advanced",
+ prereqs:["Support Vector Classifier (SVC)","Kernel trick","Sigmoid function"]},
+
+// ---------------- 4. INSTANCE-BASED LEARNING ----------------
+{id:"knn", name:"K-Nearest Neighbors (KNN)", category:"Instance-Based (Distance-Based) Learning", subcategory:"Core",
+ explanation:"Classifies a new point by looking at the 'k' closest labeled points and taking a majority vote (or average, for regression).",
+ useCase:"Classification", difficulty:"Beginner",
+ prereqs:["Distance metrics (Euclidean distance)"]},
+
+{id:"radius-neighbors", name:"Radius Neighbors", category:"Instance-Based (Distance-Based) Learning", subcategory:"Core",
+ explanation:"Like KNN, but instead of a fixed number of neighbors, it considers all points within a fixed radius.",
+ useCase:"Classification", difficulty:"Beginner",
+ prereqs:["K-Nearest Neighbors (KNN)","Distance metrics (Euclidean distance)"]},
+
+{id:"lvq", name:"Learning Vector Quantization (LVQ)", category:"Instance-Based (Distance-Based) Learning", subcategory:"Core",
+ explanation:"Learns a small set of representative 'prototype' points from the data, then classifies new points by nearest prototype.",
+ useCase:"Classification", difficulty:"Intermediate",
+ prereqs:["K-Nearest Neighbors (KNN)","Distance metrics (Euclidean distance)"]},
+
+// ---------------- 5. NAIVE BAYES ----------------
+{id:"gaussian-nb", name:"Gaussian Naïve Bayes", category:"Naïve Bayes", subcategory:"Core",
+ explanation:"Applies Bayes' theorem assuming features are independent and follow a normal (Gaussian) distribution.",
+ useCase:"Classification", difficulty:"Beginner",
+ prereqs:["Bayes theorem","Probability theory","Normal distribution"]},
+
+{id:"multinomial-nb", name:"Multinomial Naïve Bayes", category:"Naïve Bayes", subcategory:"Core",
+ explanation:"A Naïve Bayes variant for count data (like word counts in text), commonly used for document classification.",
+ useCase:"NLP", difficulty:"Beginner",
+ prereqs:["Bayes theorem","Bag of Words"]},
+
+{id:"bernoulli-nb", name:"Bernoulli Naïve Bayes", category:"Naïve Bayes", subcategory:"Core",
+ explanation:"A Naïve Bayes variant for binary features (present/absent), often used for short text classification.",
+ useCase:"NLP", difficulty:"Beginner",
+ prereqs:["Bayes theorem","Probability theory"]},
+
+{id:"complement-nb", name:"Complement Naïve Bayes", category:"Naïve Bayes", subcategory:"Core",
+ explanation:"A variant of Multinomial Naïve Bayes designed to perform better on imbalanced text datasets.",
+ useCase:"NLP", difficulty:"Intermediate",
+ prereqs:["Multinomial Naïve Bayes","Bayes theorem"]},
+
+// ---------------- 6. NEURAL NETWORKS ----------------
+{id:"mlp", name:"Multi-Layer Perceptron (MLP)", category:"Neural Networks", subcategory:"Classical",
+ explanation:"A network of layered 'neurons' that learns non-linear patterns by combining weighted sums and activation functions.",
+ useCase:"Classification", difficulty:"Intermediate",
+ prereqs:["Linear algebra basics","Gradient descent","Activation functions","Backpropagation"]},
+
+{id:"feedforward-nn", name:"Feedforward Neural Networks", category:"Neural Networks", subcategory:"Deep Learning",
+ explanation:"The most basic deep network: information flows in one direction through stacked layers, with no loops.",
+ useCase:"Classification", difficulty:"Intermediate",
+ prereqs:["Multi-Layer Perceptron (MLP)","Backpropagation"]},
+
+{id:"cnn", name:"Convolutional Neural Networks (CNN)", category:"Neural Networks", subcategory:"Deep Learning",
+ explanation:"Uses sliding filters (convolutions) to detect spatial patterns like edges and shapes, making it ideal for images.",
+ useCase:"Classification", difficulty:"Advanced",
+ prereqs:["Feedforward Neural Networks","Backpropagation","Convolution operation"]},
+
+{id:"rnn", name:"Recurrent Neural Networks (RNN)", category:"Neural Networks", subcategory:"Deep Learning",
+ explanation:"Processes sequences step by step, carrying a hidden 'memory' forward so earlier inputs can influence later predictions.",
+ useCase:"NLP", difficulty:"Advanced",
+ prereqs:["Feedforward Neural Networks","Backpropagation","Sequence data"]},
+
+{id:"lstm", name:"LSTM", category:"Neural Networks", subcategory:"Deep Learning",
+ explanation:"A type of RNN with gated memory cells that can retain information over long sequences, avoiding the vanishing-gradient problem.",
+ useCase:"NLP", difficulty:"Advanced", alsoIn:["Time Series Models (Machine Learning)"],
+ prereqs:["Feedforward Neural Networks","Recurrent Neural Networks (RNN)","Backpropagation","Sequence data"]},
+
+{id:"gru", name:"GRU", category:"Neural Networks", subcategory:"Deep Learning",
+ explanation:"A simplified alternative to LSTM with fewer gates, often training faster while achieving similar performance.",
+ useCase:"NLP", difficulty:"Advanced",
+ prereqs:["Recurrent Neural Networks (RNN)","LSTM"]},
+
+{id:"transformer", name:"Transformer Networks", category:"Neural Networks", subcategory:"Deep Learning",
+ explanation:"Uses an 'attention' mechanism to weigh the relevance of every part of the input to every other part, without needing recurrence.",
+ useCase:"NLP", difficulty:"Advanced",
+ prereqs:["Feedforward Neural Networks","Embeddings","Attention mechanism","NLP basics"]},
+
+{id:"autoencoders", name:"Autoencoders", category:"Neural Networks", subcategory:"Deep Learning",
+ explanation:"A network trained to compress input into a small representation and then reconstruct it, useful for compression and anomaly detection.",
+ useCase:"Dimensionality reduction", difficulty:"Advanced",
+ alsoIn:["Dimensionality Reduction (Neural)","Anomaly Detection (Deep Learning)"],
+ prereqs:["Feedforward Neural Networks","Backpropagation"]},
+
+{id:"vae", name:"Variational Autoencoders (VAE)", category:"Neural Networks", subcategory:"Deep Learning",
+ explanation:"An autoencoder that learns a probability distribution over the compressed space, allowing it to generate new, realistic samples.",
+ useCase:"Dimensionality reduction", difficulty:"Advanced",
+ prereqs:["Autoencoders","Probability theory","Bayes theorem"]},
+
+{id:"gan", name:"Generative Adversarial Networks (GAN)", category:"Neural Networks", subcategory:"Deep Learning",
+ explanation:"Pits two networks against each other — a generator creating fake samples and a discriminator judging them — until the fakes look real.",
+ useCase:"NLP", difficulty:"Advanced",
+ prereqs:["Feedforward Neural Networks","Backpropagation","Game theory basics"]},
+
+// ---------------- 7. CLUSTERING ----------------
+{id:"kmeans", name:"K-Means", category:"Clustering (Unsupervised Learning)", subcategory:"Partitioning",
+ explanation:"Groups data into k clusters by repeatedly assigning points to the nearest cluster center and recomputing the centers.",
+ useCase:"Clustering", difficulty:"Beginner",
+ prereqs:["Distance metrics (Euclidean distance)","Basic statistics"]},
+
+{id:"kmedoids", name:"K-Medoids", category:"Clustering (Unsupervised Learning)", subcategory:"Partitioning",
+ explanation:"Like K-Means, but cluster centers must be actual data points (medoids), making it more robust to outliers.",
+ useCase:"Clustering", difficulty:"Intermediate",
+ prereqs:["K-Means","Distance metrics (Euclidean distance)"]},
+
+{id:"minibatch-kmeans", name:"Mini-Batch K-Means", category:"Clustering (Unsupervised Learning)", subcategory:"Partitioning",
+ explanation:"A faster version of K-Means that updates cluster centers using small random batches of data instead of the whole dataset.",
+ useCase:"Clustering", difficulty:"Intermediate",
+ prereqs:["K-Means"]},
+
+{id:"agglomerative-clustering", name:"Agglomerative Clustering", category:"Clustering (Unsupervised Learning)", subcategory:"Hierarchical",
+ explanation:"Starts with every point as its own cluster and repeatedly merges the closest pairs until one big tree (dendrogram) remains.",
+ useCase:"Clustering", difficulty:"Intermediate",
+ prereqs:["Distance metrics (Euclidean distance)","Basic statistics"]},
+
+{id:"divisive-clustering", name:"Divisive Clustering", category:"Clustering (Unsupervised Learning)", subcategory:"Hierarchical",
+ explanation:"The opposite of agglomerative clustering: starts with one big cluster and recursively splits it into smaller ones.",
+ useCase:"Clustering", difficulty:"Intermediate",
+ prereqs:["Agglomerative Clustering","Distance metrics (Euclidean distance)"]},
+
+{id:"dbscan", name:"DBSCAN", category:"Clustering (Unsupervised Learning)", subcategory:"Density-Based",
+ explanation:"Groups points that are densely packed together and marks isolated points in low-density regions as noise/outliers.",
+ useCase:"Clustering", difficulty:"Intermediate",
+ prereqs:["Distance metrics (Euclidean distance)","Density estimation basics"]},
+
+{id:"hdbscan", name:"HDBSCAN", category:"Clustering (Unsupervised Learning)", subcategory:"Density-Based",
+ explanation:"An extension of DBSCAN that handles varying cluster densities by building a hierarchy of clusters.",
+ useCase:"Clustering", difficulty:"Advanced",
+ prereqs:["DBSCAN","Agglomerative Clustering"]},
+
+{id:"optics", name:"OPTICS", category:"Clustering (Unsupervised Learning)", subcategory:"Density-Based",
+ explanation:"Similar to DBSCAN but orders points to reveal clusters of varying density without needing one fixed density threshold.",
+ useCase:"Clustering", difficulty:"Advanced",
+ prereqs:["DBSCAN","Density estimation basics"]},
+
+{id:"gmm", name:"Gaussian Mixture Models (GMM)", category:"Clustering (Unsupervised Learning)", subcategory:"Model-Based",
+ explanation:"Assumes data comes from a mix of several Gaussian (bell-curve) distributions and estimates which one each point likely belongs to.",
+ useCase:"Clustering", difficulty:"Advanced",
+ prereqs:["Normal distribution","Probability theory","Expectation-Maximization (EM)"]},
+
+{id:"em", name:"Expectation-Maximization (EM)", category:"Clustering (Unsupervised Learning)", subcategory:"Model-Based",
+ explanation:"A general algorithm that alternates between estimating hidden group assignments and updating model parameters until convergence.",
+ useCase:"Clustering", difficulty:"Advanced",
+ prereqs:["Probability theory","Bayes theorem","Optimization basics"]},
+
+{id:"mean-shift", name:"Mean Shift", category:"Clustering (Unsupervised Learning)", subcategory:"Other",
+ explanation:"Finds clusters by shifting points uphill toward the nearest peak of data density, without needing to specify the number of clusters.",
+ useCase:"Clustering", difficulty:"Intermediate",
+ prereqs:["Density estimation basics","Distance metrics (Euclidean distance)"]},
+
+{id:"spectral-clustering", name:"Spectral Clustering", category:"Clustering (Unsupervised Learning)", subcategory:"Other",
+ explanation:"Uses the eigenvalues of a similarity graph between points to reduce dimensions before clustering, good for oddly-shaped clusters.",
+ useCase:"Clustering", difficulty:"Advanced",
+ prereqs:["Eigenvalues and eigenvectors","K-Means","Graph theory basics"]},
+
+{id:"affinity-propagation", name:"Affinity Propagation", category:"Clustering (Unsupervised Learning)", subcategory:"Other",
+ explanation:"Lets data points 'send messages' to each other to decide which points should act as cluster exemplars, without pre-choosing k.",
+ useCase:"Clustering", difficulty:"Advanced",
+ prereqs:["Distance metrics (Euclidean distance)","Graph theory basics"]},
+
+{id:"birch", name:"BIRCH", category:"Clustering (Unsupervised Learning)", subcategory:"Other",
+ explanation:"Incrementally builds a compact tree summary of the data, making it efficient for clustering very large datasets.",
+ useCase:"Clustering", difficulty:"Advanced",
+ prereqs:["K-Means","Basic statistics"]},
+
+// ---------------- 8. DIMENSIONALITY REDUCTION ----------------
+{id:"pca", name:"Principal Component Analysis (PCA)", category:"Dimensionality Reduction", subcategory:"Linear",
+ explanation:"Finds new axes (principal components) that capture the most variance in the data, letting you reduce dimensions with minimal information loss.",
+ useCase:"Dimensionality reduction", difficulty:"Intermediate",
+ prereqs:["Variance and covariance","Covariance matrix","Eigenvalues and eigenvectors","Linear algebra basics"]},
+
+{id:"lda-dimred", name:"Linear Discriminant Analysis (LDA)", category:"Dimensionality Reduction", subcategory:"Linear",
+ explanation:"Reduces dimensions while maximizing the separation between known classes, unlike PCA which ignores labels.",
+ useCase:"Dimensionality reduction", difficulty:"Intermediate",
+ prereqs:["Principal Component Analysis (PCA)","Variance and covariance"]},
+
+{id:"factor-analysis", name:"Factor Analysis", category:"Dimensionality Reduction", subcategory:"Linear",
+ explanation:"Models observed variables as combinations of a smaller number of unobserved 'latent factors' plus noise.",
+ useCase:"Dimensionality reduction", difficulty:"Advanced",
+ prereqs:["Principal Component Analysis (PCA)","Variance and covariance","Probability theory"]},
+
+{id:"ica", name:"Independent Component Analysis (ICA)", category:"Dimensionality Reduction", subcategory:"Linear",
+ explanation:"Separates a multivariate signal into statistically independent components, classically used to unmix audio signals.",
+ useCase:"Dimensionality reduction", difficulty:"Advanced",
+ prereqs:["Principal Component Analysis (PCA)","Probability theory"]},
+
+{id:"tsne", name:"t-SNE", category:"Dimensionality Reduction", subcategory:"Nonlinear",
+ explanation:"Maps high-dimensional data into 2D or 3D for visualization by preserving how close neighboring points are to each other.",
+ useCase:"Dimensionality reduction", difficulty:"Advanced",
+ prereqs:["Principal Component Analysis (PCA)","Probability theory"]},
+
+{id:"umap", name:"UMAP", category:"Dimensionality Reduction", subcategory:"Nonlinear",
+ explanation:"Similar goal to t-SNE — visualizing high-dimensional data — but faster and often better at preserving global structure.",
+ useCase:"Dimensionality reduction", difficulty:"Advanced",
+ prereqs:["t-SNE","Graph theory basics"]},
+
+{id:"isomap", name:"Isomap", category:"Dimensionality Reduction", subcategory:"Nonlinear",
+ explanation:"Reduces dimensions while preserving the geodesic (along-the-manifold) distance between points, not just straight-line distance.",
+ useCase:"Dimensionality reduction", difficulty:"Advanced",
+ prereqs:["Principal Component Analysis (PCA)","Graph theory basics"]},
+
+{id:"lle", name:"Locally Linear Embedding (LLE)", category:"Dimensionality Reduction", subcategory:"Nonlinear",
+ explanation:"Assumes each point can be reconstructed from its neighbors, and finds a lower-dimensional space preserving those local relationships.",
+ useCase:"Dimensionality reduction", difficulty:"Advanced",
+ prereqs:["K-Nearest Neighbors (KNN)","Linear algebra basics"]},
+
+{id:"mds", name:"MDS", category:"Dimensionality Reduction", subcategory:"Nonlinear",
+ explanation:"Places points in a low-dimensional space so that the distances between them match the original pairwise distances as closely as possible.",
+ useCase:"Dimensionality reduction", difficulty:"Intermediate",
+ prereqs:["Distance metrics (Euclidean distance)","Linear algebra basics"]},
+
+// ---------------- 9. ASSOCIATION RULE LEARNING ----------------
+{id:"apriori", name:"Apriori", category:"Association Rule Learning", subcategory:"Core",
+ explanation:"Finds frequent itemsets in transaction data (like a shopping basket) and derives 'if A then B' rules from them.",
+ useCase:"Association rules", difficulty:"Beginner",
+ prereqs:["Probability theory","Basic statistics"]},
+
+{id:"fp-growth", name:"FP-Growth", category:"Association Rule Learning", subcategory:"Core",
+ explanation:"A faster alternative to Apriori that finds frequent itemsets using a compact tree structure instead of repeated scans.",
+ useCase:"Association rules", difficulty:"Intermediate",
+ prereqs:["Apriori","Tree data structures"]},
+
+{id:"eclat", name:"Eclat", category:"Association Rule Learning", subcategory:"Core",
+ explanation:"Finds frequent itemsets using a vertical data format and set intersections, often faster than Apriori on sparse data.",
+ useCase:"Association rules", difficulty:"Intermediate",
+ prereqs:["Apriori","Set theory basics"]},
+
+// ---------------- 10. TIME SERIES MODELS ----------------
+{id:"ar", name:"AR", category:"Time Series Models", subcategory:"Statistical",
+ explanation:"Predicts the next value in a series as a weighted combination of its own previous values (autoregression).",
+ useCase:"Forecasting", difficulty:"Intermediate",
+ prereqs:["Basic statistics","Stationarity"]},
+
+{id:"ma", name:"MA", category:"Time Series Models", subcategory:"Statistical",
+ explanation:"Models the next value as a function of past forecast errors, smoothing out short-term noise.",
+ useCase:"Forecasting", difficulty:"Intermediate",
+ prereqs:["Basic statistics","Stationarity"]},
+
+{id:"arma", name:"ARMA", category:"Time Series Models", subcategory:"Statistical",
+ explanation:"Combines AR and MA components to model time series that don't need differencing to become stationary.",
+ useCase:"Forecasting", difficulty:"Intermediate",
+ prereqs:["AR","MA","Stationarity"]},
+
+{id:"arima", name:"ARIMA", category:"Time Series Models", subcategory:"Statistical",
+ explanation:"Extends ARMA with a differencing step (the 'I') to handle trends and make non-stationary series stationary first.",
+ useCase:"Forecasting", difficulty:"Intermediate",
+ prereqs:["ARMA","Stationarity","Differencing"]},
+
+{id:"sarima", name:"SARIMA", category:"Time Series Models", subcategory:"Statistical",
+ explanation:"ARIMA plus an extra seasonal component, for series with repeating patterns like monthly or yearly cycles.",
+ useCase:"Forecasting", difficulty:"Advanced",
+ prereqs:["ARIMA","Seasonality"]},
+
+{id:"sarimax", name:"SARIMAX", category:"Time Series Models", subcategory:"Statistical",
+ explanation:"SARIMA with the ability to include external explanatory variables (exogenous inputs) alongside the time series itself.",
+ useCase:"Forecasting", difficulty:"Advanced",
+ prereqs:["SARIMA","Linear Regression"]},
+
+{id:"var", name:"VAR", category:"Time Series Models", subcategory:"Statistical",
+ explanation:"Models several interdependent time series together, where each variable depends on past values of itself and the others.",
+ useCase:"Forecasting", difficulty:"Advanced",
+ prereqs:["AR","Matrix algebra","Stationarity"]},
+
+{id:"holt-winters", name:"Holt-Winters Exponential Smoothing", category:"Time Series Models", subcategory:"Statistical",
+ explanation:"Forecasts by exponentially weighting past observations, with extra terms for trend and seasonality.",
+ useCase:"Forecasting", difficulty:"Intermediate",
+ prereqs:["Basic statistics","Seasonality"]},
+
+{id:"prophet", name:"Prophet", category:"Time Series Models", subcategory:"Statistical",
+ explanation:"A forecasting tool designed for business time series with strong seasonality and holiday effects, robust to missing data.",
+ useCase:"Forecasting", difficulty:"Intermediate",
+ prereqs:["Holt-Winters Exponential Smoothing","Seasonality"]},
+
+{id:"xgboost-forecasting", name:"XGBoost for Forecasting", category:"Time Series Models", subcategory:"Machine Learning",
+ explanation:"Reframes forecasting as a supervised regression problem (using lagged values as features) and applies XGBoost to it.",
+ useCase:"Forecasting", difficulty:"Advanced",
+ prereqs:["XGBoost","Feature engineering for time series"]},
+
+{id:"lightgbm-forecasting", name:"LightGBM for Forecasting", category:"Time Series Models", subcategory:"Machine Learning",
+ explanation:"Uses LightGBM's fast, tree-based boosting on engineered lag and rolling-window features to forecast future values.",
+ useCase:"Forecasting", difficulty:"Advanced",
+ prereqs:["LightGBM","Feature engineering for time series"]},
+
+{id:"rf-regression-ts", name:"Random Forest Regression (for Time Series)", category:"Time Series Models", subcategory:"Machine Learning",
+ explanation:"Applies Random Forest to lagged time series features, capturing non-linear patterns without assuming a fixed statistical form.",
+ useCase:"Forecasting", difficulty:"Intermediate",
+ prereqs:["Random Forest","Feature engineering for time series"]},
+
+{id:"lstm-ts", name:"LSTM (for Time Series)", category:"Time Series Models", subcategory:"Machine Learning",
+ explanation:"Uses an LSTM's memory cells to learn long-range temporal dependencies directly from sequences of past values.",
+ useCase:"Forecasting", difficulty:"Advanced",
+ prereqs:["LSTM","Sequence data"]},
+
+{id:"tft", name:"Temporal Fusion Transformer (TFT)", category:"Time Series Models", subcategory:"Machine Learning",
+ explanation:"A transformer-based forecasting model that combines attention with recurrent layers to handle multiple time series and covariates.",
+ useCase:"Forecasting", difficulty:"Advanced",
+ prereqs:["Transformer Networks","LSTM","Attention mechanism"]},
+
+// ---------------- 11. REINFORCEMENT LEARNING ----------------
+{id:"q-learning", name:"Q-Learning", category:"Reinforcement Learning", subcategory:"Core",
+ explanation:"Learns the expected long-term reward (Q-value) of taking each action in each state, without needing a model of the environment.",
+ useCase:"Reinforcement learning", difficulty:"Intermediate",
+ prereqs:["Probability theory","Markov Decision Processes"]},
+
+{id:"dqn", name:"Deep Q Network (DQN)", category:"Reinforcement Learning", subcategory:"Core",
+ explanation:"Replaces Q-Learning's lookup table with a neural network, enabling it to handle huge or continuous state spaces like images.",
+ useCase:"Reinforcement learning", difficulty:"Advanced",
+ prereqs:["Q-Learning","Feedforward Neural Networks","Backpropagation"]},
+
+{id:"sarsa", name:"SARSA", category:"Reinforcement Learning", subcategory:"Core",
+ explanation:"Similar to Q-Learning but updates its estimates using the action actually taken next, making it an 'on-policy' method.",
+ useCase:"Reinforcement learning", difficulty:"Intermediate",
+ prereqs:["Q-Learning","Markov Decision Processes"]},
+
+{id:"policy-gradient", name:"Policy Gradient", category:"Reinforcement Learning", subcategory:"Core",
+ explanation:"Directly learns a policy (a mapping from states to action probabilities) by adjusting it to increase expected reward.",
+ useCase:"Reinforcement learning", difficulty:"Advanced",
+ prereqs:["Q-Learning","Gradient descent","Probability theory"]},
+
+{id:"actor-critic", name:"Actor-Critic", category:"Reinforcement Learning", subcategory:"Core",
+ explanation:"Combines a policy network (actor) that chooses actions with a value network (critic) that evaluates them, stabilizing learning.",
+ useCase:"Reinforcement learning", difficulty:"Advanced",
+ prereqs:["Policy Gradient","Q-Learning"]},
+
+{id:"ppo", name:"PPO (Proximal Policy Optimization)", category:"Reinforcement Learning", subcategory:"Core",
+ explanation:"A stable, widely-used policy gradient method that limits how much the policy can change in one update step.",
+ useCase:"Reinforcement learning", difficulty:"Advanced",
+ prereqs:["Policy Gradient","Actor-Critic"]},
+
+{id:"a3c", name:"A3C", category:"Reinforcement Learning", subcategory:"Core",
+ explanation:"Runs many actor-critic agents in parallel on different environment copies, asynchronously updating a shared model.",
+ useCase:"Reinforcement learning", difficulty:"Advanced",
+ prereqs:["Actor-Critic","Policy Gradient"]},
+
+{id:"ddpg", name:"DDPG", category:"Reinforcement Learning", subcategory:"Core",
+ explanation:"An actor-critic method designed for continuous action spaces, like controlling steering angle or motor torque.",
+ useCase:"Reinforcement learning", difficulty:"Advanced",
+ prereqs:["Actor-Critic","Deep Q Network (DQN)"]},
+
+// ---------------- 12. ANOMALY DETECTION ----------------
+{id:"z-score", name:"Z-score", category:"Anomaly Detection", subcategory:"Statistical",
+ explanation:"Flags a point as an outlier if it lies too many standard deviations away from the mean.",
+ useCase:"Anomaly detection", difficulty:"Beginner",
+ prereqs:["Basic statistics","Normal distribution"]},
+
+{id:"iqr-method", name:"IQR Method", category:"Anomaly Detection", subcategory:"Statistical",
+ explanation:"Flags outliers as values that fall far below or above the interquartile range (the middle 50% of the data).",
+ useCase:"Anomaly detection", difficulty:"Beginner",
+ prereqs:["Basic statistics"]},
+
+{id:"isolation-forest", name:"Isolation Forest", category:"Anomaly Detection", subcategory:"Machine Learning",
+ explanation:"Randomly splits data repeatedly; anomalies get isolated in fewer splits than normal points because they're 'rare and different'.",
+ useCase:"Anomaly detection", difficulty:"Intermediate",
+ prereqs:["Decision Tree Classifier","Random Forest"]},
+
+{id:"one-class-svm", name:"One-Class SVM", category:"Anomaly Detection", subcategory:"Machine Learning",
+ explanation:"Learns a boundary around 'normal' data and flags anything falling outside it as an anomaly.",
+ useCase:"Anomaly detection", difficulty:"Advanced",
+ prereqs:["Support Vector Classifier (SVC)","Kernel trick"]},
+
+{id:"lof", name:"Local Outlier Factor (LOF)", category:"Anomaly Detection", subcategory:"Machine Learning",
+ explanation:"Compares a point's local density to its neighbors' density — points in much sparser regions are flagged as outliers.",
+ useCase:"Anomaly detection", difficulty:"Intermediate",
+ prereqs:["K-Nearest Neighbors (KNN)","Density estimation basics"]},
+
+{id:"elliptic-envelope", name:"Elliptic Envelope", category:"Anomaly Detection", subcategory:"Machine Learning",
+ explanation:"Assumes normal data follows a Gaussian distribution and fits an ellipse around it; points outside are anomalies.",
+ useCase:"Anomaly detection", difficulty:"Intermediate",
+ prereqs:["Normal distribution","Covariance matrix"]},
+
+{id:"autoencoders-anomaly", name:"Autoencoders (for Anomaly Detection)", category:"Anomaly Detection", subcategory:"Deep Learning",
+ explanation:"Trains an autoencoder on normal data only; inputs that reconstruct poorly (high error) are flagged as anomalies.",
+ useCase:"Anomaly detection", difficulty:"Advanced",
+ prereqs:["Autoencoders"]},
+
+// ---------------- 13. ENSEMBLE METHODS ----------------
+{id:"bagging-classifier", name:"Bagging Classifier", category:"Ensemble Methods", subcategory:"Bagging",
+ explanation:"Trains multiple copies of a base model on random bootstrapped samples of the data and combines their votes.",
+ useCase:"Classification", difficulty:"Intermediate",
+ prereqs:["Decision Tree Classifier","Bootstrap aggregating (bagging)"]},
+
+{id:"stacking-classifier", name:"Stacking Classifier", category:"Ensemble Methods", subcategory:"Stacking",
+ explanation:"Trains several different models and then trains a 'meta-model' to combine their predictions optimally.",
+ useCase:"Classification", difficulty:"Advanced",
+ prereqs:["Random Forest","Logistic Regression","Ensemble learning basics"]},
+
+{id:"stacking-regressor", name:"Stacking Regressor", category:"Ensemble Methods", subcategory:"Stacking",
+ explanation:"The regression version of stacking: combines several regressors' predictions using a meta-regressor.",
+ useCase:"Regression", difficulty:"Advanced",
+ prereqs:["Stacking Classifier","Linear Regression"]},
+
+{id:"hard-voting", name:"Hard Voting", category:"Ensemble Methods", subcategory:"Voting",
+ explanation:"Combines several classifiers by taking a simple majority vote of their predicted class labels.",
+ useCase:"Classification", difficulty:"Beginner",
+ prereqs:["Ensemble learning basics"]},
+
+{id:"soft-voting", name:"Soft Voting", category:"Ensemble Methods", subcategory:"Voting",
+ explanation:"Combines several classifiers by averaging their predicted probabilities rather than just their final labels.",
+ useCase:"Classification", difficulty:"Beginner",
+ prereqs:["Hard Voting","Probability theory"]},
+
+{id:"blending", name:"Blending", category:"Ensemble Methods", subcategory:"Blending",
+ explanation:"Similar to stacking, but the meta-model is trained on a held-out validation set instead of using cross-validation.",
+ useCase:"Classification", difficulty:"Advanced",
+ prereqs:["Stacking Classifier"]},
+
+// ---------------- 14. RECOMMENDER SYSTEMS ----------------
+{id:"user-based-cf", name:"User-Based Collaborative Filtering", category:"Recommender Systems", subcategory:"Collaborative Filtering",
+ explanation:"Recommends items liked by other users who have similar taste to the current user.",
+ useCase:"Recommendation", difficulty:"Beginner",
+ prereqs:["Distance metrics (Euclidean distance)","Basic statistics"]},
+
+{id:"item-based-cf", name:"Item-Based Collaborative Filtering", category:"Recommender Systems", subcategory:"Collaborative Filtering",
+ explanation:"Recommends items similar to ones a user already liked, based on how other users rated those items together.",
+ useCase:"Recommendation", difficulty:"Beginner",
+ prereqs:["User-Based Collaborative Filtering"]},
+
+{id:"matrix-factorization", name:"Matrix Factorization (SVD)", category:"Recommender Systems", subcategory:"Collaborative Filtering",
+ explanation:"Decomposes the user-item ratings matrix into smaller matrices of latent factors that explain user preferences and item traits.",
+ useCase:"Recommendation", difficulty:"Advanced",
+ prereqs:["Linear algebra basics","Eigenvalues and eigenvectors","Item-Based Collaborative Filtering"]},
+
+{id:"content-based-filtering", name:"Content-Based Filtering", category:"Recommender Systems", subcategory:"Content-Based Filtering",
+ explanation:"Recommends items similar in attributes (genre, keywords, features) to items a user has liked before.",
+ useCase:"Recommendation", difficulty:"Beginner",
+ prereqs:["TF-IDF","Distance metrics (Euclidean distance)"]},
+
+{id:"hybrid-recommenders", name:"Hybrid Recommendation Systems", category:"Recommender Systems", subcategory:"Hybrid",
+ explanation:"Combines collaborative and content-based signals to give recommendations that are more robust than either alone.",
+ useCase:"Recommendation", difficulty:"Intermediate",
+ prereqs:["Content-Based Filtering","Matrix Factorization (SVD)"]},
+
+{id:"deep-recommenders", name:"Deep Learning Recommenders", category:"Recommender Systems", subcategory:"Deep Learning Recommenders",
+ explanation:"Uses neural networks (often with embeddings) to model complex, non-linear user-item interactions for recommendations.",
+ useCase:"Recommendation", difficulty:"Advanced",
+ prereqs:["Matrix Factorization (SVD)","Feedforward Neural Networks","Embeddings"]},
+
+// ---------------- 15. NATURAL LANGUAGE PROCESSING MODELS ----------------
+{id:"tfidf", name:"TF-IDF", category:"Natural Language Processing Models", subcategory:"Traditional",
+ explanation:"Scores how important a word is to a document by weighing its frequency against how common it is across all documents.",
+ useCase:"NLP", difficulty:"Beginner",
+ prereqs:["Bag of Words","Basic statistics"]},
+
+{id:"bow", name:"Bag of Words", category:"Natural Language Processing Models", subcategory:"Traditional",
+ explanation:"Represents text as a simple count of word occurrences, ignoring grammar and word order.",
+ useCase:"NLP", difficulty:"Beginner",
+ prereqs:["NLP basics"]},
+
+{id:"word2vec", name:"Word2Vec", category:"Natural Language Processing Models", subcategory:"Traditional",
+ explanation:"Learns dense vector representations of words such that words used in similar contexts end up close together.",
+ useCase:"NLP", difficulty:"Intermediate",
+ prereqs:["Bag of Words","Embeddings","Feedforward Neural Networks"]},
+
+{id:"glove", name:"GloVe", category:"Natural Language Processing Models", subcategory:"Traditional",
+ explanation:"Learns word vectors from global word co-occurrence statistics across an entire corpus, rather than local context windows.",
+ useCase:"NLP", difficulty:"Intermediate",
+ prereqs:["Word2Vec","Covariance matrix"]},
+
+{id:"fasttext", name:"FastText", category:"Natural Language Processing Models", subcategory:"Traditional",
+ explanation:"Extends Word2Vec by representing words as bags of character n-grams, so it can handle rare and misspelled words better.",
+ useCase:"NLP", difficulty:"Intermediate",
+ prereqs:["Word2Vec","Embeddings"]},
+
+{id:"bert", name:"BERT", category:"Natural Language Processing Models", subcategory:"Modern",
+ explanation:"A transformer pretrained to understand context from both directions in a sentence, then fine-tuned for specific tasks.",
+ useCase:"NLP", difficulty:"Advanced",
+ prereqs:["Transformer Networks","Embeddings","Attention mechanism"]},
+
+{id:"roberta", name:"RoBERTa", category:"Natural Language Processing Models", subcategory:"Modern",
+ explanation:"A more robustly-trained version of BERT with tweaks to training data and procedure that improve performance.",
+ useCase:"NLP", difficulty:"Advanced",
+ prereqs:["BERT"]},
+
+{id:"gpt", name:"GPT", category:"Natural Language Processing Models", subcategory:"Modern",
+ explanation:"A transformer trained to predict the next word in a sequence, which lets it generate fluent, coherent text.",
+ useCase:"NLP", difficulty:"Advanced",
+ prereqs:["Transformer Networks","Attention mechanism","Embeddings"]},
+
+{id:"t5", name:"T5", category:"Natural Language Processing Models", subcategory:"Modern",
+ explanation:"Frames every NLP task — translation, summarization, classification — as a text-to-text problem using one transformer architecture.",
+ useCase:"NLP", difficulty:"Advanced",
+ prereqs:["Transformer Networks","BERT","GPT"]},
+
+{id:"distilbert", name:"DistilBERT", category:"Natural Language Processing Models", subcategory:"Modern",
+ explanation:"A smaller, faster version of BERT trained via knowledge distillation to retain most of its performance.",
+ useCase:"NLP", difficulty:"Advanced",
+ prereqs:["BERT","Knowledge distillation"]},
+
+// ---------------- 16. SEMI-SUPERVISED LEARNING ----------------
+{id:"label-propagation", name:"Label Propagation", category:"Semi-Supervised Learning", subcategory:"Core",
+ explanation:"Spreads labels from a few labeled points to nearby unlabeled points through a similarity graph.",
+ useCase:"Classification", difficulty:"Intermediate",
+ prereqs:["K-Nearest Neighbors (KNN)","Graph theory basics"]},
+
+{id:"label-spreading", name:"Label Spreading", category:"Semi-Supervised Learning", subcategory:"Core",
+ explanation:"Similar to label propagation, but allows some label 'noise', letting confident labels change if evidence suggests otherwise.",
+ useCase:"Classification", difficulty:"Intermediate",
+ prereqs:["Label Propagation"]},
+
+{id:"self-training", name:"Self-Training", category:"Semi-Supervised Learning", subcategory:"Core",
+ explanation:"Trains a model on labeled data, uses it to label the unlabeled data, then retrains including its own confident predictions.",
+ useCase:"Classification", difficulty:"Intermediate",
+ prereqs:["Logistic Regression","Probability theory"]},
+
+{id:"pseudo-labeling", name:"Pseudo Labeling", category:"Semi-Supervised Learning", subcategory:"Core",
+ explanation:"A specific self-training approach where high-confidence model predictions on unlabeled data are treated as if they were true labels.",
+ useCase:"Classification", difficulty:"Intermediate",
+ prereqs:["Self-Training"]},
+
+// ---------------- 17. SELF-SUPERVISED LEARNING ----------------
+{id:"contrastive-learning", name:"Contrastive Learning (SimCLR, MoCo)", category:"Self-Supervised Learning", subcategory:"Core",
+ explanation:"Learns representations by pulling together different augmented views of the same example while pushing apart different examples.",
+ useCase:"Dimensionality reduction", difficulty:"Advanced",
+ prereqs:["Convolutional Neural Networks (CNN)","Embeddings"]},
+
+{id:"byol", name:"BYOL", category:"Self-Supervised Learning", subcategory:"Core",
+ explanation:"Learns representations by predicting one augmented view of an image from another, without needing negative examples at all.",
+ useCase:"Dimensionality reduction", difficulty:"Advanced",
+ prereqs:["Contrastive Learning (SimCLR, MoCo)"]},
+
+{id:"mae", name:"MAE (Masked Autoencoders)", category:"Self-Supervised Learning", subcategory:"Core",
+ explanation:"Masks out large parts of an image and trains a model to reconstruct the missing pixels, learning strong visual features.",
+ useCase:"Dimensionality reduction", difficulty:"Advanced",
+ prereqs:["Autoencoders","Transformer Networks"]},
+
+];
+
+/* ================================================================
+   ALIASES
+   Maps alternative phrasings of an algorithm's name to its id,
+   so prerequisites referencing them still link internally.
+   ================================================================ */
+const ALIASES = {
+  "decision trees":"decision-tree-classifier",
+  "decision tree":"decision-tree-classifier",
+  "gradient boosting":"gbm",
+  "rnns":"rnn",
+  "neural networks":"mlp",
+  "kernel svm":"kernel-svm-rbf",
+  "svm":"svc",
+  "lstm":"lstm"
+};
+
+/* ================================================================
+   BUILD LOOKUP TABLE (name/alias -> id) for prerequisite resolution
+   ================================================================ */
+const NAME_TO_ID = {};
+ALGORITHMS.forEach(a => { NAME_TO_ID[a.name.toLowerCase()] = a.id; });
+Object.keys(ALIASES).forEach(k => { NAME_TO_ID[k] = ALIASES[k]; });
+
+function resolvePrereq(label){
+  const key = label.toLowerCase().trim();
+  if(NAME_TO_ID[key]) return {type:"internal", id:NAME_TO_ID[key]};
+  return {type:"external", url:"https://www.youtube.com/results?search_query=" + encodeURIComponent(label + " explained")};
+}
+function videoUrl(name){
+  return "https://www.youtube.com/results?search_query=" + encodeURIComponent(name + " machine learning tutorial");
+}
+
+/* ================================================================
+   GROUP DATA: category -> subcategory -> [algorithms]
+   Preserves first-seen order.
+   ================================================================ */
+const CATEGORY_ORDER = [];
+const GROUPED = {};
+ALGORITHMS.forEach(a=>{
+  if(!GROUPED[a.category]){ GROUPED[a.category] = {order:[], subs:{}}; CATEGORY_ORDER.push(a.category); }
+  const cat = GROUPED[a.category];
+  if(!cat.subs[a.subcategory]){ cat.subs[a.subcategory] = []; cat.order.push(a.subcategory); }
+  cat.subs[a.subcategory].push(a);
+});
+
+/* ================================================================
+   ICONS (tiny inline SVGs, no external assets)
+   ================================================================ */
+const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M8 5v14l11-7z"/></svg>';
+const ICON_LINK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M10 14L21 3M21 3h-6M21 3v6"/><path d="M5 12v7a2 2 0 0 0 2 2h7"/></svg>';
+
+/* ================================================================
+   RENDER
+   ================================================================ */
+function catSlug(name){ return "cat-" + name.toLowerCase().replace(/[^a-z0-9]+/g,"-"); }
+
+function renderAll(){
+  const content = document.getElementById("content");
+  const navList = document.getElementById("navList");
+  let html = "";
+  let navHtml = "";
+  let num = 1;
+
+  CATEGORY_ORDER.forEach(catName=>{
+    const cat = GROUPED[catName];
+    let count = 0;
+    cat.order.forEach(s=> count += cat.subs[s].length);
+    const slug = catSlug(catName);
+
+    navHtml += `<li class="nav-item">
+      <button class="nav-link" data-target="${slug}">
+        <span><span class="n">${String(num).padStart(2,"0")}</span> ${catName}</span>
+        <span class="count">${count}</span>
+      </button>
+    </li>`;
+
+    let subHtml = "";
+    cat.order.forEach(subName=>{
+      const items = cat.subs[subName];
+      const showSubHeader = !(cat.order.length===1 && subName==="Core");
+      subHtml += `<div class="subcategory" data-sub="${subName}">`;
+      if(showSubHeader){
+        subHtml += `<div class="subcategory-head" data-toggle="sub">
+          <span class="chevron"></span><h3>${subName}</h3>
+        </div>`;
+      }
+      subHtml += `<div class="card-grid">`;
+      items.forEach(a=>{ subHtml += renderCard(a); });
+      subHtml += `</div></div>`;
+    });
+
+    html += `<section class="category" id="${slug}" data-category="${catName}">
+      <div class="category-head" data-toggle="cat">
+        <span class="chevron"></span>
+        <span class="category-num">${String(num).padStart(2,"0")}</span>
+        <h2>${catName}</h2>
+        <span class="category-count">${count} algorithms</span>
+      </div>
+      <div class="category-body">${subHtml}</div>
+    </section>`;
+    num++;
+  });
+
+  content.innerHTML = html;
+  navList.innerHTML = navHtml;
+  document.getElementById("navCount").textContent = ALGORITHMS.length + " algorithms indexed";
+}
+
+function renderCard(a){
+  const prereqHtml = a.prereqs.map(p=>{
+    const r = resolvePrereq(p);
+    if(r.type==="internal"){
+      return `<li><a class="prereq internal" data-jump="${r.id}">${ICON_LINK} ${p}</a></li>`;
+    }
+    return `<li><a class="prereq external" href="${r.url}" target="_blank" rel="noopener">${p} ↗</a></li>`;
+  }).join("");
+
+  const alsoInHtml = a.alsoIn ? `<div class="also-in">Also relevant to: ${a.alsoIn.join(", ")}</div>` : "";
+
+  return `<article class="card" id="${a.id}" data-name="${a.name.toLowerCase()}" data-cat="${a.category.toLowerCase()}" data-sub="${a.subcategory.toLowerCase()}" data-prereqs="${a.prereqs.join(" | ").toLowerCase()}">
+    <div class="card-summary" data-toggle="card">
+      <div class="card-title-wrap">
+        <div class="card-title">${a.name}</div>
+        <div class="card-tags">
+          <span class="badge path">${a.category} · ${a.subcategory}</span>
+        </div>
+      </div>
+      <span class="chevron"></span>
+    </div>
+    <div class="card-detail">
+      <div class="card-columns">
+        <div class="col-algo">
+          <h4>Algorithm</h4>
+          <p>${a.explanation}</p>
+          ${alsoInHtml}
+          <div class="actions">
+            <a class="btn btn-video" href="${videoUrl(a.name)}" target="_blank" rel="noopener">${ICON_PLAY} Watch video</a>
+          </div>
+        </div>
+        <div class="col-prereq">
+          <h4>Prerequisites</h4>
+          <ul class="prereq-list">${prereqHtml || "<li style='color:var(--ink-soft); font-size:13px;'>None — great starting point.</li>"}</ul>
+        </div>
+      </div>
+    </div>
+  </article>`;
+}
+
+renderAll();
+
+/* ================================================================
+   INTERACTIONS: collapsing categories / subcategories / cards
+   ================================================================ */
+document.getElementById("content").addEventListener("click", (e)=>{
+  const catHead = e.target.closest('[data-toggle="cat"]');
+  const subHead = e.target.closest('[data-toggle="sub"]');
+  const cardHead = e.target.closest('[data-toggle="card"]');
+  const jump = e.target.closest('[data-jump]');
+
+  if(jump){
+    e.preventDefault();
+    goToAlgorithm(jump.getAttribute("data-jump"));
+    return;
+  }
+  if(cardHead){
+    cardHead.closest(".card").classList.toggle("open");
+    return;
+  }
+  if(subHead){
+    subHead.closest(".subcategory").classList.toggle("collapsed");
+    return;
+  }
+  if(catHead){
+    catHead.closest(".category").classList.toggle("collapsed");
+    return;
+  }
+});
+
+function goToAlgorithm(id){
+  const card = document.getElementById(id);
+  if(!card) return;
+  // expand its parent category + subcategory
+  card.closest(".category").classList.remove("collapsed");
+  const sub = card.closest(".subcategory");
+  if(sub) sub.classList.remove("collapsed");
+  card.classList.add("open");
+  card.scrollIntoView({behavior:"smooth", block:"center"});
+  card.classList.add("flash");
+  setTimeout(()=>card.classList.remove("flash"), 1600);
+}
+
+/* ================================================================
+   SIDEBAR NAVIGATION
+   ================================================================ */
+document.getElementById("navList").addEventListener("click",(e)=>{
+  const btn = e.target.closest(".nav-link");
+  if(!btn) return;
+  document.querySelectorAll(".nav-link").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  const target = document.getElementById(btn.getAttribute("data-target"));
+  if(target){
+    target.classList.remove("collapsed");
+    target.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+  closeMobileNav();
+});
+
+/* ================================================================
+   MOBILE NAV TOGGLE
+   ================================================================ */
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+document.getElementById("menuToggle").addEventListener("click", ()=>{
+  sidebar.classList.add("open");
+  overlay.classList.add("show");
+});
+overlay.addEventListener("click", closeMobileNav);
+function closeMobileNav(){
+  sidebar.classList.remove("open");
+  overlay.classList.remove("show");
+}
+
+/* ================================================================
+   SEARCH
+   Filters cards by name, category, subcategory, or prerequisite text.
+   Hides empty categories/subcategories and shows an empty state.
+   ================================================================ */
+const searchInput = document.getElementById("searchInput");
+const clearBtn = document.getElementById("clearSearch");
+const searchMeta = document.getElementById("searchMeta");
+const emptyState = document.getElementById("emptyState");
+
+searchInput.addEventListener("input", runSearch);
+clearBtn.addEventListener("click", ()=>{ searchInput.value=""; runSearch(); searchInput.focus(); });
+
+function runSearch(){
+  const q = searchInput.value.trim().toLowerCase();
+  clearBtn.style.display = q ? "inline-block" : "none";
+  const cards = document.querySelectorAll(".card");
+  let visibleCount = 0;
+
+  cards.forEach(card=>{
+    const haystack = card.getAttribute("data-name") + " " + card.getAttribute("data-cat") + " " +
+                      card.getAttribute("data-sub") + " " + card.getAttribute("data-prereqs");
+    const match = !q || haystack.includes(q);
+    card.style.display = match ? "" : "none";
+    if(match) visibleCount++;
+  });
+
+  // hide/show subcategories & categories based on whether they have visible cards
+  document.querySelectorAll(".subcategory").forEach(sub=>{
+    const anyVisible = [...sub.querySelectorAll(".card")].some(c=>c.style.display!=="none");
+    sub.style.display = anyVisible ? "" : "none";
+    if(q && anyVisible) sub.classList.remove("collapsed");
+  });
+  document.querySelectorAll(".category").forEach(cat=>{
+    const anyVisible = [...cat.querySelectorAll(".card")].some(c=>c.style.display!=="none");
+    cat.style.display = anyVisible ? "" : "none";
+    if(q && anyVisible) cat.classList.remove("collapsed");
+  });
+
+  emptyState.style.display = (q && visibleCount===0) ? "block" : "none";
+  searchMeta.textContent = q ? `${visibleCount} of ${cards.length} algorithms match "${searchInput.value.trim()}"` : "";
+}
+
+/* ================================================================
+   ACTIVE NAV HIGHLIGHT ON SCROLL
+   ================================================================ */
+const sections = () => document.querySelectorAll(".category");
+window.addEventListener("scroll", ()=>{
+  let currentId = null;
+  sections().forEach(sec=>{
+    const rect = sec.getBoundingClientRect();
+    if(rect.top <= 120) currentId = sec.id;
+  });
+  document.querySelectorAll(".nav-link").forEach(b=>{
+    b.classList.toggle("active", b.getAttribute("data-target")===currentId);
+  });
+}, {passive:true});
+</script>
+</body>
+</html>

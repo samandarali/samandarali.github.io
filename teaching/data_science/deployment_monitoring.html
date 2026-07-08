@@ -1,0 +1,268 @@
+<section class="topic-page deployment-monitoring-page">
+  <style>
+    .deployment-monitoring-page{
+      --paper:#f7f5f0;
+      --paper-raised:#ffffff;
+      --ink:#20242b;
+      --ink-soft:#565f6d;
+      --line:#dedad0;
+      --navy:#161b26;
+      --navy-soft:#232a3a;
+      --accent:#c1611a;
+      --accent-soft:#f3e2d1;
+      --teal:#2f7a6f;
+      --teal-soft:#e0efec;
+      --radius:10px;
+      --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+      --sans:"Iowan Old Style","Charter","Georgia",serif;
+      --ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+      font-family:var(--ui);
+      background:var(--paper);
+      color:var(--ink);
+      line-height:1.5;
+      display:grid;
+      grid-template-columns:280px 1fr;
+      min-height:100vh;
+    }
+    .deployment-monitoring-page *{box-sizing:border-box;}
+    .deployment-monitoring-page .sidebar{
+      background:var(--navy);
+      color:#cfd4de;
+      padding:22px 16px 40px;
+      position:sticky;
+      top:0;
+      height:100vh;
+      overflow-y:auto;
+    }
+    .deployment-monitoring-page .brand{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;}
+    .deployment-monitoring-page .brand-mark{font-family:var(--mono);color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.08em;}
+    .deployment-monitoring-page .brand-title{font-family:var(--sans);font-size:19px;font-weight:700;color:#fff;line-height:1.2;}
+    .deployment-monitoring-page .brand-sub{font-size:11.5px;color:#8b93a3;margin:6px 0 20px;font-family:var(--mono);letter-spacing:.03em;}
+    .deployment-monitoring-page .nav-count{font-size:11px;color:#8b93a3;margin-bottom:10px;font-family:var(--mono);}
+    .deployment-monitoring-page .nav-list{list-style:none;margin:0;padding:0;}
+    .deployment-monitoring-page .nav-link{
+      display:flex;justify-content:space-between;gap:8px;width:100%;text-align:left;background:none;border:none;
+      color:#c3c9d4;font-size:13.5px;padding:8px 10px;border-radius:7px;cursor:pointer;font-family:var(--ui);
+    }
+    .deployment-monitoring-page .nav-link:hover,
+    .deployment-monitoring-page .nav-link.active{background:var(--navy-soft);color:#fff;box-shadow:inset 3px 0 0 var(--accent);}
+    .deployment-monitoring-page .nav-link .n{font-family:var(--mono);color:var(--accent);font-size:11px;min-width:18px;}
+    .deployment-monitoring-page .nav-link .count{font-family:var(--mono);font-size:10.5px;color:#6d7688;}
+    .deployment-monitoring-page .main{padding:36px 44px 100px;max-width:980px;}
+    .deployment-monitoring-page h1{font-family:var(--sans);font-size:34px;margin:0 0 10px;letter-spacing:-.01em;}
+    .deployment-monitoring-page .intro{color:var(--ink-soft);font-size:15.5px;max-width:72ch;margin:0 0 26px;}
+    .deployment-monitoring-page .intro strong{color:var(--ink);}
+    .deployment-monitoring-page .search-wrap{position:sticky;top:0;background:var(--paper);padding:14px 0 16px;z-index:5;border-bottom:1px solid var(--line);margin-bottom:26px;}
+    .deployment-monitoring-page .search-box{display:flex;align-items:center;gap:10px;background:var(--paper-raised);border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;}
+    .deployment-monitoring-page .search-box:focus-within{border-color:var(--accent);}
+    .deployment-monitoring-page #searchInput{border:none;outline:none;font-size:15px;width:100%;background:transparent;font-family:var(--ui);color:var(--ink);}
+    .deployment-monitoring-page #searchMeta{font-size:12px;color:var(--ink-soft);margin-top:8px;font-family:var(--mono);}
+    .deployment-monitoring-page #clearSearch{border:none;background:var(--line);color:var(--ink-soft);border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;display:none;}
+    .deployment-monitoring-page .category{margin-bottom:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper-raised);overflow:hidden;scroll-margin-top:90px;box-shadow:0 1px 2px rgba(20,20,10,.03);}
+    .deployment-monitoring-page .category-head{display:flex;align-items:center;gap:14px;padding:20px 22px;cursor:pointer;user-select:none;background:var(--navy);border-left:6px solid var(--accent);}
+    .deployment-monitoring-page .category-head:hover{background:var(--navy-soft);}
+    .deployment-monitoring-page .category-num{font-family:var(--mono);color:var(--navy);font-size:14px;font-weight:800;background:var(--accent);border-radius:7px;padding:5px 10px;flex:0 0 auto;}
+    .deployment-monitoring-page .category-head h2{font-family:var(--sans);font-size:22px;font-weight:700;margin:0;flex:1;color:#fff;letter-spacing:-.01em;}
+    .deployment-monitoring-page .category-count{font-family:var(--mono);font-size:11.5px;color:#aeb5c4;white-space:nowrap;}
+    .deployment-monitoring-page .chevron{width:9px;height:9px;border-right:2px solid var(--ink-soft);border-bottom:2px solid var(--ink-soft);transform:rotate(45deg);transition:transform .18s ease;margin-right:3px;}
+    .deployment-monitoring-page .category-head .chevron{border-color:#fff;}
+    .deployment-monitoring-page .category.collapsed .category-body{display:none;}
+    .deployment-monitoring-page .category.collapsed .chevron{transform:rotate(-45deg);}
+    .deployment-monitoring-page .category-body{border-top:1px solid var(--line);padding:10px 22px 20px;}
+    .deployment-monitoring-page .subcategory{margin-top:14px;}
+    .deployment-monitoring-page .subcategory-head{display:flex;align-items:center;gap:8px;cursor:pointer;padding:6px 0;}
+    .deployment-monitoring-page .subcategory-head h3{font-size:12.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft);margin:0;font-family:var(--mono);font-weight:600;}
+    .deployment-monitoring-page .subcategory.collapsed .card-grid{display:none;}
+    .deployment-monitoring-page .subcategory .chevron{width:7px;height:7px;border-color:var(--ink-soft);}
+    .deployment-monitoring-page .card-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:6px;}
+    .deployment-monitoring-page .card{border:1px solid var(--line);border-radius:9px;background:var(--paper);scroll-margin-top:90px;transition:box-shadow .15s ease,border-color .15s ease;}
+    .deployment-monitoring-page .card.flash{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}
+    .deployment-monitoring-page .card-summary{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:13px 15px;cursor:pointer;}
+    .deployment-monitoring-page .card-title{font-size:15.5px;font-weight:700;font-family:var(--sans);}
+    .deployment-monitoring-page .card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+    .deployment-monitoring-page .badge{font-family:var(--mono);font-size:10.5px;padding:2.5px 7px;border-radius:5px;letter-spacing:.02em;white-space:nowrap;}
+    .deployment-monitoring-page .badge.path{background:#eef1f4;color:#5b6473;}
+    .deployment-monitoring-page .card-detail{display:none;padding:0 15px 18px;border-top:1px solid var(--line);}
+    .deployment-monitoring-page .card.open .card-detail{display:block;}
+    .deployment-monitoring-page .card.open .chevron{transform:rotate(-135deg);}
+    .deployment-monitoring-page .card-columns{display:grid;grid-template-columns:1.05fr 1.25fr;gap:0;margin-top:14px;}
+    .deployment-monitoring-page .col-explain{padding-right:22px;}
+    .deployment-monitoring-page .col-code{padding-left:22px;border-left:1px solid var(--line);}
+    .deployment-monitoring-page h4{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 8px;font-family:var(--mono);}
+    .deployment-monitoring-page p{margin:0;font-size:14px;color:var(--ink);}
+    .deployment-monitoring-page ul{margin:8px 0 0 18px;color:var(--ink-soft);font-size:13.5px;}
+    .deployment-monitoring-page pre{margin:0;background:#111827;color:#e5e7eb;border-radius:9px;padding:14px;overflow:auto;font-size:12.5px;line-height:1.55;font-family:var(--mono);}
+    .deployment-monitoring-page .actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;}
+    .deployment-monitoring-page .btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:8px 14px;border-radius:7px;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--ui);}
+    .deployment-monitoring-page .btn-video{background:var(--navy);color:#fff;}
+    .deployment-monitoring-page .btn-video:hover{background:var(--navy-soft);}
+    .deployment-monitoring-page .empty-state{text-align:center;padding:60px 20px;color:var(--ink-soft);}
+    .deployment-monitoring-page .empty-state strong{display:block;font-size:16px;color:var(--ink);margin-bottom:6px;}
+    @media (max-width:880px){.deployment-monitoring-page{grid-template-columns:1fr}.deployment-monitoring-page .sidebar{position:relative;height:auto}.deployment-monitoring-page .main{padding:22px 18px 80px}.deployment-monitoring-page h1{font-size:26px}}
+    @media (max-width:700px){.deployment-monitoring-page .card-columns{grid-template-columns:1fr;gap:18px}.deployment-monitoring-page .col-explain{padding-right:0}.deployment-monitoring-page .col-code{padding-left:0;border-left:none;border-top:1px solid var(--line);padding-top:14px}}
+  </style>
+
+  <nav class="sidebar">
+    <div class="brand"><span class="brand-mark">DM/</span><span class="brand-title">Deployment & Monitoring</span></div>
+    <div class="brand-sub">production readiness · click to jump</div>
+    <div class="nav-count" id="navCount">Loading…</div>
+    <ul class="nav-list" id="navList"></ul>
+  </nav>
+
+  <main class="main">
+    <header class="page-head">
+      <h1>Deployment & Monitoring Roadmap</h1>
+      <p class="intro">
+        <strong>Deployment</strong> means moving a trained model or data product from a notebook into a usable system. 
+        <strong>Monitoring</strong> means checking whether that system continues to work correctly after it is used with real data, real users, and changing business conditions.
+      </p>
+    </header>
+
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="searchInput" type="text" placeholder="Search deployment, API, Docker, monitoring, drift, retraining…" autocomplete="off">
+        <button id="clearSearch">Clear</button>
+      </div>
+      <div id="searchMeta"></div>
+    </div>
+
+    <div id="content"></div>
+    <div class="empty-state" id="emptyState" style="display:none;"><strong>No matches found</strong>Try a broader term, or clear the search.</div>
+  </main>
+
+  <script>
+    (function(){
+      const TOPICS = [
+        {id:'save-load-models', name:'Save & Load Models', category:'Model Packaging', subcategory:'Persistence', explanation:'After training a model, save it so you can reuse it later without retraining. This is useful for production, testing, sharing, and deployment.', useCase:'Model persistence', difficulty:'Beginner', prereqs:['trained model','scikit-learn','file paths'], code:`import joblib\n\n# Save a trained model\njoblib.dump(model, "churn_model.pkl")\n\n# Load it later\nloaded_model = joblib.load("churn_model.pkl")\n\n# Predict with the loaded model\npredictions = loaded_model.predict(X_new)`},
+        {id:'save-preprocessing-pipeline', name:'Save the Preprocessing Pipeline', category:'Model Packaging', subcategory:'Persistence', explanation:'A model is not enough. You must also save the same preprocessing steps used during training, such as scaling, encoding, and imputation.', useCase:'Reproducibility', difficulty:'Beginner', prereqs:['preprocessing','pipeline','train/test split'], code:`from sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.linear_model import LogisticRegression\nimport joblib\n\npipe = Pipeline([\n    ("scaler", StandardScaler()),\n    ("model", LogisticRegression())\n])\n\npipe.fit(X_train, y_train)\njoblib.dump(pipe, "full_pipeline.pkl")\n\npipe_loaded = joblib.load("full_pipeline.pkl")\npipe_loaded.predict(X_new)`},
+        {id:'environment-file', name:'Create an Environment File', category:'Model Packaging', subcategory:'Environment', explanation:'Deployment fails when the production environment does not have the same packages as development. An environment file records dependencies.', useCase:'Reproducibility', difficulty:'Beginner', prereqs:['Python packages','terminal basics'], code:`# In terminal\npip freeze > requirements.txt\n\n# Later, recreate the environment\npip install -r requirements.txt\n\n# Example requirements.txt content\npandas==2.2.2\nscikit-learn==1.5.1\njoblib==1.4.2\nfastapi==0.112.0`},
+        {id:'fastapi-endpoint', name:'Serve Model with FastAPI', category:'API Deployment', subcategory:'REST API', explanation:'An API lets other applications send data to your model and receive predictions. FastAPI is commonly used because it is simple and fast.', useCase:'API serving', difficulty:'Intermediate', prereqs:['Python functions','HTTP basics','JSON'], code:`from fastapi import FastAPI\nfrom pydantic import BaseModel\nimport joblib\nimport pandas as pd\n\napp = FastAPI()\nmodel = joblib.load("full_pipeline.pkl")\n\nclass Customer(BaseModel):\n    age: int\n    income: float\n    tenure: int\n\n@app.post("/predict")\ndef predict(customer: Customer):\n    X = pd.DataFrame([customer.dict()])\n    pred = model.predict(X)[0]\n    return {"prediction": int(pred)}`},
+        {id:'test-api', name:'Test the API Locally', category:'API Deployment', subcategory:'Testing', explanation:'Before deployment, test the API locally to make sure the endpoint receives input correctly and returns valid predictions.', useCase:'Local testing', difficulty:'Beginner', prereqs:['FastAPI endpoint','terminal basics'], code:`# Run the API in terminal\nuvicorn app:app --reload\n\n# Test with Python\nimport requests\n\npayload = {"age": 35, "income": 65000, "tenure": 24}\nresponse = requests.post("http://127.0.0.1:8000/predict", json=payload)\n\nprint(response.status_code)\nprint(response.json())`},
+        {id:'dockerize-model', name:'Dockerize the Application', category:'Deployment Infrastructure', subcategory:'Containers', explanation:'Docker packages your application, model file, code, and dependencies into a portable container that can run consistently across machines.', useCase:'Container deployment', difficulty:'Intermediate', prereqs:['requirements.txt','FastAPI','terminal basics'], code:`# Dockerfile\nFROM python:3.11-slim\n\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\n\nCOPY . .\n\nCMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]\n\n# Build and run\n# docker build -t churn-api .\n# docker run -p 8000:8000 churn-api`},
+        {id:'batch-prediction', name:'Batch Prediction', category:'Deployment Patterns', subcategory:'Batch', explanation:'Batch prediction is used when predictions do not need to happen instantly. For example, scoring all customers every night.', useCase:'Scheduled scoring', difficulty:'Beginner', prereqs:['pandas','saved model','CSV files'], code:`import pandas as pd\nimport joblib\n\nmodel = joblib.load("full_pipeline.pkl")\nnew_data = pd.read_csv("new_customers.csv")\n\nnew_data["prediction"] = model.predict(new_data)\nnew_data["score"] = model.predict_proba(new_data)[:, 1]\n\nnew_data.to_csv("scored_customers.csv", index=False)`},
+        {id:'real-time-prediction', name:'Real-Time Prediction', category:'Deployment Patterns', subcategory:'Online', explanation:'Real-time prediction is used when a user or system needs an immediate prediction, such as fraud detection or recommendation.', useCase:'Online scoring', difficulty:'Intermediate', prereqs:['API deployment','latency','JSON input'], code:`# Example client request to a deployed API\nimport requests\n\ncustomer = {\n    "age": 42,\n    "income": 72000,\n    "tenure": 36\n}\n\nresponse = requests.post("https://your-api-url.com/predict", json=customer)\nprint(response.json())`},
+        {id:'logging-predictions', name:'Log Predictions', category:'Monitoring', subcategory:'Logging', explanation:'Logging stores inputs, outputs, timestamps, and sometimes model versions. Without logs, you cannot investigate errors or measure performance after deployment.', useCase:'Observability', difficulty:'Beginner', prereqs:['pandas','prediction API','timestamps'], code:`from datetime import datetime\nimport pandas as pd\n\nlog_row = {\n    "timestamp": datetime.now(),\n    "model_version": "v1.0",\n    "prediction": int(pred),\n    "score": float(score)\n}\n\nlog_df = pd.DataFrame([log_row])\nlog_df.to_csv("prediction_log.csv", mode="a", header=False, index=False)`},
+        {id:'monitor-performance', name:'Monitor Model Performance', category:'Monitoring', subcategory:'Performance', explanation:'Once true outcomes become available, compare predictions against actual values to check whether the model is still accurate.', useCase:'Quality monitoring', difficulty:'Intermediate', prereqs:['classification metrics','regression metrics','ground truth labels'], code:`from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score\n\ny_true = monitoring_df["actual"]\ny_pred = monitoring_df["prediction"]\n\nmetrics = {\n    "accuracy": accuracy_score(y_true, y_pred),\n    "precision": precision_score(y_true, y_pred),\n    "recall": recall_score(y_true, y_pred),\n    "f1": f1_score(y_true, y_pred)\n}\n\nprint(metrics)`},
+        {id:'data-drift', name:'Detect Data Drift', category:'Monitoring', subcategory:'Drift', explanation:'Data drift happens when new production data differs from training data. This can make model performance worse even if the code did not change.', useCase:'Drift detection', difficulty:'Intermediate', prereqs:['distributions','training data','production data'], code:`from scipy.stats import ks_2samp\n\ntrain_age = train_df["Age"].dropna()\nlive_age = live_df["Age"].dropna()\n\nstat, p_value = ks_2samp(train_age, live_age)\n\nif p_value < 0.05:\n    print("Possible data drift detected")\nelse:\n    print("No strong evidence of drift")`},
+        {id:'prediction-drift', name:'Monitor Prediction Drift', category:'Monitoring', subcategory:'Drift', explanation:'Prediction drift means the distribution of model outputs changes over time. It can signal a shift in users, behavior, or input data.', useCase:'Output monitoring', difficulty:'Beginner', prereqs:['prediction scores','histograms'], code:`import matplotlib.pyplot as plt\n\nreference_scores = reference_log["score"]\nlive_scores = live_log["score"]\n\nplt.hist(reference_scores, alpha=0.5, label="reference")\nplt.hist(live_scores, alpha=0.5, label="live")\nplt.legend()\nplt.title("Prediction Score Distribution")\nplt.show()`},
+        {id:'retraining-pipeline', name:'Retraining Pipeline', category:'Model Maintenance', subcategory:'Retraining', explanation:'A retraining pipeline updates the model when new data arrives or performance drops below an acceptable threshold.', useCase:'Model refresh', difficulty:'Intermediate', prereqs:['training pipeline','evaluation metrics','versioning'], code:`def retrain_if_needed(current_f1, threshold=0.75):\n    if current_f1 < threshold:\n        data = load_latest_training_data()\n        X_train, X_test, y_train, y_test = split_data(data)\n        model = train_model(X_train, y_train)\n        new_f1 = evaluate_model(model, X_test, y_test)\n\n        if new_f1 > current_f1:\n            save_model(model, "model_v2.pkl")\n            return "new model saved"\n\n    return "no retraining needed"`},
+        {id:'model-versioning', name:'Model Versioning', category:'Model Maintenance', subcategory:'Version Control', explanation:'Versioning tracks which model, dataset, features, and code produced each prediction. This is necessary for debugging and accountability.', useCase:'Governance', difficulty:'Intermediate', prereqs:['Git','model files','experiment tracking'], code:`import joblib\nfrom datetime import date\n\nversion = "v1_" + date.today().isoformat()\nmodel_path = f"models/churn_model_{version}.pkl"\n\njoblib.dump(model, model_path)\n\nmetadata = {\n    "model_version": version,\n    "training_rows": len(train_df),\n    "features": list(X_train.columns),\n    "metric": "f1",\n    "score": 0.82\n}`},
+        {id:'dashboard-monitoring', name:'Monitoring Dashboard', category:'Monitoring', subcategory:'Dashboards', explanation:'A dashboard summarizes model health: traffic, latency, errors, drift, and performance. It helps users quickly see whether the model is reliable.', useCase:'Reporting', difficulty:'Intermediate', prereqs:['logs','metrics','visualization'], code:`import pandas as pd\n\nlog = pd.read_csv("prediction_log.csv")\n\nsummary = log.groupby("model_version").agg(\n    total_predictions=("prediction", "count"),\n    average_score=("score", "mean")\n)\n\nprint(summary)\n\n# This summary can be connected to Power BI, Tableau, Streamlit, or Dash.`}
+      ];
+
+      const CATEGORY_ORDER = [];
+      const GROUPED = {};
+      TOPICS.forEach(t=>{
+        if(!GROUPED[t.category]){GROUPED[t.category]={order:[],subs:{}};CATEGORY_ORDER.push(t.category);}
+        if(!GROUPED[t.category].subs[t.subcategory]){GROUPED[t.category].subs[t.subcategory]=[];GROUPED[t.category].order.push(t.subcategory);}
+        GROUPED[t.category].subs[t.subcategory].push(t);
+      });
+
+      const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M8 5v14l11-7z"/></svg>';
+      function videoUrl(name){return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(name + ' data science deployment tutorial');}
+      function catSlug(name){return 'cat-' + name.toLowerCase().replace(/[^a-z0-9]+/g,'-');}
+
+      function renderCard(t){
+        return `<article class="card" id="${t.id}" data-name="${t.name.toLowerCase()}" data-cat="${t.category.toLowerCase()}" data-sub="${t.subcategory.toLowerCase()}" data-prereqs="${t.prereqs.join(' | ').toLowerCase()}">
+          <div class="card-summary" data-toggle="card">
+            <div>
+              <div class="card-title">${t.name}</div>
+              <div class="card-tags"><span class="badge path">${t.category} · ${t.subcategory}</span><span class="badge path">${t.difficulty}</span></div>
+            </div>
+            <span class="chevron"></span>
+          </div>
+          <div class="card-detail">
+            <div class="card-columns">
+              <div class="col-explain">
+                <h4>Explanation</h4>
+                <p>${t.explanation}</p>
+                <h4 style="margin-top:16px;">Prerequisites</h4>
+                <ul>${t.prereqs.map(p=>`<li>${p}</li>`).join('')}</ul>
+                <div class="actions"><a class="btn btn-video" href="${videoUrl(t.name)}" target="_blank" rel="noopener">${ICON_PLAY} Watch video</a></div>
+              </div>
+              <div class="col-code">
+                <h4>Python / Command Example</h4>
+                <pre><code>${t.code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre>
+              </div>
+            </div>
+          </div>
+        </article>`;
+      }
+
+      function renderAll(){
+        const content = document.getElementById('content');
+        const navList = document.getElementById('navList');
+        let html = '', navHtml = '', num = 1;
+        CATEGORY_ORDER.forEach(catName=>{
+          const cat = GROUPED[catName];
+          let count = 0;
+          cat.order.forEach(s=>count += cat.subs[s].length);
+          const slug = catSlug(catName);
+          navHtml += `<li><button class="nav-link" data-target="${slug}"><span><span class="n">${String(num).padStart(2,'0')}</span> ${catName}</span><span class="count">${count}</span></button></li>`;
+          let subHtml = '';
+          cat.order.forEach(subName=>{
+            subHtml += `<div class="subcategory" data-sub="${subName}"><div class="subcategory-head" data-toggle="sub"><span class="chevron"></span><h3>${subName}</h3></div><div class="card-grid">${cat.subs[subName].map(renderCard).join('')}</div></div>`;
+          });
+          html += `<section class="category" id="${slug}" data-category="${catName}"><div class="category-head" data-toggle="cat"><span class="chevron"></span><span class="category-num">${String(num).padStart(2,'0')}</span><h2>${catName}</h2><span class="category-count">${count} topics</span></div><div class="category-body">${subHtml}</div></section>`;
+          num++;
+        });
+        content.innerHTML = html;
+        navList.innerHTML = navHtml;
+        document.getElementById('navCount').textContent = TOPICS.length + ' topics indexed';
+      }
+
+      renderAll();
+
+      document.getElementById('content').addEventListener('click', e=>{
+        const catHead = e.target.closest('[data-toggle="cat"]');
+        const subHead = e.target.closest('[data-toggle="sub"]');
+        const cardHead = e.target.closest('[data-toggle="card"]');
+        if(cardHead){cardHead.closest('.card').classList.toggle('open');return;}
+        if(subHead){subHead.closest('.subcategory').classList.toggle('collapsed');return;}
+        if(catHead){catHead.closest('.category').classList.toggle('collapsed');}
+      });
+
+      document.getElementById('navList').addEventListener('click', e=>{
+        const btn = e.target.closest('.nav-link');
+        if(!btn) return;
+        document.querySelectorAll('.deployment-monitoring-page .nav-link').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = document.getElementById(btn.dataset.target);
+        if(target){target.classList.remove('collapsed');target.scrollIntoView({behavior:'smooth',block:'start'});}
+      });
+
+      const searchInput = document.getElementById('searchInput');
+      const clearBtn = document.getElementById('clearSearch');
+      const searchMeta = document.getElementById('searchMeta');
+      const emptyState = document.getElementById('emptyState');
+      searchInput.addEventListener('input', runSearch);
+      clearBtn.addEventListener('click', ()=>{searchInput.value='';runSearch();searchInput.focus();});
+
+      function runSearch(){
+        const q = searchInput.value.trim().toLowerCase();
+        clearBtn.style.display = q ? 'inline-block' : 'none';
+        const cards = document.querySelectorAll('.deployment-monitoring-page .card');
+        let visibleCount = 0;
+        cards.forEach(card=>{
+          const haystack = card.dataset.name + ' ' + card.dataset.cat + ' ' + card.dataset.sub + ' ' + card.dataset.prereqs;
+          const match = !q || haystack.includes(q);
+          card.style.display = match ? '' : 'none';
+          if(match) visibleCount++;
+        });
+        document.querySelectorAll('.deployment-monitoring-page .subcategory').forEach(sub=>{
+          const anyVisible = [...sub.querySelectorAll('.card')].some(c=>c.style.display !== 'none');
+          sub.style.display = anyVisible ? '' : 'none';
+          if(q && anyVisible) sub.classList.remove('collapsed');
+        });
+        document.querySelectorAll('.deployment-monitoring-page .category').forEach(cat=>{
+          const anyVisible = [...cat.querySelectorAll('.card')].some(c=>c.style.display !== 'none');
+          cat.style.display = anyVisible ? '' : 'none';
+          if(q && anyVisible) cat.classList.remove('collapsed');
+        });
+        emptyState.style.display = (q && visibleCount === 0) ? 'block' : 'none';
+        searchMeta.textContent = q ? `${visibleCount} of ${cards.length} topics match "${searchInput.value.trim()}"` : '';
+      }
+    })();
+  </script>
+</section>

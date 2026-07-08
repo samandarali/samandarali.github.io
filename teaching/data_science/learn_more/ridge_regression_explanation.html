@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ridge Regression Explained</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.65;
+    max-width: 950px;
+    margin: 40px auto;
+    padding: 0 24px;
+    color: #1f2937;
+    background: #f8fafc;
+  }
+  h1, h2, h3 { color: #111827; }
+  h1 { border-bottom: 3px solid #2563eb; padding-bottom: 10px; }
+  .box {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 22px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .formula {
+    background: #eef2ff;
+    border-left: 5px solid #4f46e5;
+    padding: 16px;
+    font-size: 1.2rem;
+    overflow-x: auto;
+  }
+  code, pre {
+    background: #111827;
+    color: #f9fafb;
+    border-radius: 8px;
+  }
+  pre { padding: 16px; overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 16px;
+  }
+  th, td {
+    border: 1px solid #e5e7eb;
+    padding: 12px;
+    text-align: left;
+  }
+  th { background: #e0e7ff; }
+  .note {
+    background: #fff7ed;
+    border-left: 5px solid #f97316;
+    padding: 14px;
+    margin: 20px 0;
+  }
+</style>
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(','\\)'], ['$', '$']] } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<h1>Ridge Regression Explained</h1>
+
+<div class="box">
+  <h2>Main Formula</h2>
+  <div class="formula">
+    \[
+    \hat{\beta} = (X^T X + \lambda I)^{-1}X^T y
+    \]
+  </div>
+  <p>This is the closed-form solution for <strong>Ridge Regression</strong>.</p>
+</div>
+
+<div class="box">
+  <h2>1. Ordinary Linear Regression</h2>
+  <p>In linear regression, predictions are written as:</p>
+  <div class="formula">\[ \hat{y} = X\beta \]</div>
+  <p>where:</p>
+  <ul>
+    <li><strong>X</strong> is the feature matrix</li>
+    <li><strong>y</strong> is the target variable</li>
+    <li><strong>β</strong> represents the coefficients</li>
+  </ul>
+
+  <p>Ordinary Least Squares minimizes the sum of squared errors:</p>
+  <div class="formula">\[ RSS = (y - X\beta)^T(y - X\beta) \]</div>
+
+  <p>The solution is:</p>
+  <div class="formula">\[ \hat{\beta} = (X^T X)^{-1}X^Ty \]</div>
+</div>
+
+<div class="box">
+  <h2>2. The Problem with Ordinary Least Squares</h2>
+  <p>OLS can become unstable when:</p>
+  <ul>
+    <li>features are highly correlated,</li>
+    <li>there are many predictors,</li>
+    <li>or \(X^TX\) is close to singular.</li>
+  </ul>
+
+  <p>For example, if two variables are almost identical, such as <em>Income</em> and <em>Salary</em>, the model may produce unstable coefficients:</p>
+
+<pre>β1 = 1450
+β2 = -1447</pre>
+
+  <p>The predictions may still be reasonable, but the coefficients become too large and unreliable.</p>
+</div>
+
+<div class="box">
+  <h2>3. Ridge Regression Idea</h2>
+  <p>Ridge Regression adds a penalty for large coefficients.</p>
+
+  <p>Instead of minimizing only:</p>
+  <div class="formula">\[ (y-X\beta)^T(y-X\beta) \]</div>
+
+  <p>Ridge minimizes:</p>
+  <div class="formula">
+    \[
+    (y-X\beta)^T(y-X\beta) + \lambda\beta^T\beta
+    \]
+  </div>
+
+  <p>The second term is the <strong>L2 penalty</strong>.</p>
+</div>
+
+<div class="box">
+  <h2>4. What Does \(\lambda\) Mean?</h2>
+  <p>\(\lambda\) controls how strongly the model penalizes large coefficients.</p>
+
+  <table>
+    <tr>
+      <th>Value of \(\lambda\)</th>
+      <th>Meaning</th>
+    </tr>
+    <tr>
+      <td>\(\lambda = 0\)</td>
+      <td>Ridge becomes ordinary linear regression.</td>
+    </tr>
+    <tr>
+      <td>Small \(\lambda\)</td>
+      <td>Small penalty; coefficients shrink slightly.</td>
+    </tr>
+    <tr>
+      <td>Large \(\lambda\)</td>
+      <td>Strong penalty; coefficients shrink strongly toward zero.</td>
+    </tr>
+  </table>
+
+  <p>Example:</p>
+<pre>Without Ridge:
+β = [8.4, -6.7, 15.2]
+
+With Ridge:
+β = [2.9, -2.4, 4.8]</pre>
+</div>
+
+<div class="box">
+  <h2>5. Deriving the Ridge Formula</h2>
+
+  <p>The Ridge objective function is:</p>
+  <div class="formula">
+    \[
+    J(\beta) = (y-X\beta)^T(y-X\beta) + \lambda\beta^T\beta
+    \]
+  </div>
+
+  <p>Take the derivative with respect to \(\beta\):</p>
+  <div class="formula">
+    \[
+    -2X^T(y-X\beta) + 2\lambda\beta = 0
+    \]
+  </div>
+
+  <p>Expand:</p>
+  <div class="formula">
+    \[
+    -2X^Ty + 2X^TX\beta + 2\lambda\beta = 0
+    \]
+  </div>
+
+  <p>Simplify:</p>
+  <div class="formula">
+    \[
+    X^TX\beta + \lambda\beta = X^Ty
+    \]
+  </div>
+
+  <p>Factor out \(\beta\):</p>
+  <div class="formula">
+    \[
+    (X^TX + \lambda I)\beta = X^Ty
+    \]
+  </div>
+
+  <p>Finally:</p>
+  <div class="formula">
+    \[
+    \hat{\beta} = (X^TX + \lambda I)^{-1}X^Ty
+    \]
+  </div>
+</div>
+
+<div class="box">
+  <h2>6. Why Do We Add \(\lambda I\)?</h2>
+  <p>\(X^TX\) is a matrix, so we cannot add the scalar \(\lambda\) directly to it. We add \(\lambda I\), where \(I\) is the identity matrix.</p>
+
+  <div class="formula">
+    \[
+    I =
+    \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    \]
+  </div>
+
+  <p>This increases only the diagonal values of \(X^TX\):</p>
+
+  <div class="formula">
+    \[
+    X^TX + \lambda I =
+    \begin{bmatrix}
+    4 & 2 \\
+    2 & 3
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+    0.5 & 0 \\
+    0 & 0.5
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    4.5 & 2 \\
+    2 & 3.5
+    \end{bmatrix}
+    \]
+  </div>
+</div>
+
+<div class="box">
+  <h2>7. Why Ridge Helps</h2>
+  <p>Adding \(\lambda I\):</p>
+  <ul>
+    <li>makes the matrix easier to invert,</li>
+    <li>reduces unstable coefficients,</li>
+    <li>handles multicollinearity better,</li>
+    <li>reduces overfitting,</li>
+    <li>usually improves prediction on new data.</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>8. Bias–Variance Tradeoff</h2>
+  <table>
+    <tr>
+      <th>Model</th>
+      <th>Bias</th>
+      <th>Variance</th>
+    </tr>
+    <tr>
+      <td>Ordinary Least Squares</td>
+      <td>Low</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Ridge Regression</td>
+      <td>Slightly higher</td>
+      <td>Lower</td>
+    </tr>
+  </table>
+
+  <p>Ridge accepts a small increase in bias in exchange for a larger reduction in variance. This often gives better results on unseen data.</p>
+</div>
+
+<div class="box">
+  <h2>9. OLS vs Ridge Summary</h2>
+  <table>
+    <tr>
+      <th>Ordinary Least Squares</th>
+      <th>Ridge Regression</th>
+    </tr>
+    <tr>
+      <td>Minimizes only RSS</td>
+      <td>Minimizes RSS + L2 penalty</td>
+    </tr>
+    <tr>
+      <td>Formula: \((X^TX)^{-1}X^Ty\)</td>
+      <td>Formula: \((X^TX+\lambda I)^{-1}X^Ty\)</td>
+    </tr>
+    <tr>
+      <td>No coefficient penalty</td>
+      <td>Penalizes large coefficients</td>
+    </tr>
+    <tr>
+      <td>Sensitive to multicollinearity</td>
+      <td>Handles multicollinearity better</td>
+    </tr>
+    <tr>
+      <td>Can overfit</td>
+      <td>Usually generalizes better</td>
+    </tr>
+  </table>
+</div>
+
+<div class="note">
+  <strong>Important:</strong> In practice, the intercept is usually not penalized. Most software packages shrink only the feature coefficients, not the intercept.
+</div>
+
+</body>
+</html>

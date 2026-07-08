@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics & Data Science - Interactive Learning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+:root{
+  --bg:#ebe3db;--bg-2:#fffdf5;--panel:#0f1730;--panel-2:#0c1428;
+  --border:rgba(120,140,200,0.14);--border-2:rgba(139,92,246,0.35);
+  --txt:#e6ecff;--mute:#8b95b8;--dim:#5a647f;
+  --violet:#a78bfa;--violet-2:#8b5cf6;--cyan:#22d3ee;--blue:#3b82f6;
+  --grad-title:linear-gradient(90deg,#c084fc 0%,#8b5cf6 25%,#60a5fa 60%,#22d3ee 100%);
+  --grad-node:linear-gradient(135deg,#8b5cf6,#22d3ee);
+  --shadow:0 20px 60px -20px rgba(0,0,0,0.7);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--txt);font-family:'DM Sans',system-ui,sans-serif;line-height:1.6;min-height:100vh}
+body{
+  background:
+   radial-gradient(1200px 600px at 80% -10%,rgba(139,92,246,0.18),transparent 60%),
+   radial-gradient(900px 500px at 10% 10%,rgba(34,211,238,0.10),transparent 60%),
+   var(--bg);
+}
+.wrap{max-width:1360px;margin:0 auto;padding:32px 28px 60px}
+
+/* ============ HERO ============ */
+.hero{position:relative;padding:12px 4px 0px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
+.hero-eyebrow{color:#60a5fa;font-weight:600;font-size:18px;margin-bottom:8px;font-family:'Sora',sans-serif}
+.hero h1{font-family:'Sora',sans-serif;font-size:clamp(38px,5.5vw,68px);font-weight:800;letter-spacing:-0.02em;line-height:1.05;background:var(--grad-title);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:6px}
+.hero p.sub{color:#334155;max-width:640px;font-size:16px; font-weight:500;}
+.hero-illustration{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.hero-illustration img{
+    width:100%;
+    max-width:480px;
+    height:auto;
+
+    filter:
+        drop-shadow(0 0 30px rgba(34,211,238,.35))
+        drop-shadow(0 0 80px rgba(139,92,246,.25));
+}
+.top-icons{position:absolute;top:8px;right:8px;display:flex;gap:14px;align-items:center}
+.top-icons .ico{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#cbd5ff;cursor:pointer}
+.top-icons .avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#22d3ee,#8b5cf6);border:2px solid rgba(255,255,255,.4)}
+
+/* ============ ROADMAP ============ */
+/* ============ ROADMAP ============ */
+
+.roadmap{
+    margin:0px 0 28px;
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    gap:6px;
+    position:relative;
+    top:-10px;
+}
+
+/* Connection line */
+.roadmap::before{
+    content:"";
+    position:absolute;
+    left:6%;
+    right:6%;
+    top:62px;
+    height:2px;
+
+    background:repeating-linear-gradient(
+        90deg,
+        rgba(6,182,212,.35) 0 8px,
+        transparent 8px 16px
+    );
+
+    z-index:0;
+}
+
+/* Each node */
+
+.node{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    cursor:pointer;
+    z-index:1;
+    padding:4px;
+}
+
+
+.node-img{
+    filter: invert(35%) sepia(75%) saturate(900%) hue-rotate(150deg);
+}
+/* Number */
+
+.node .num{
+    position:absolute;
+    top:-2px;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:#ffffff;
+    border:1px solid rgba(6,182,212,.45);
+    display:grid;
+    place-items:center;
+    font-size:11px;
+    font-weight:700;
+    color:#0f766e;
+    z-index:3;
+    transition:.25s;
+}
+
+/* Circle */
+
+.node .circle{
+    margin-top:12px;
+    width:88px;
+    height:88px;
+    border-radius:50%;
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(34,211,238,.12),
+            rgba(245,251,252,.98) 70%
+        );
+
+    border:2px solid rgba(34,211,238,.35);
+
+    display:grid;
+    place-items:center;
+
+    color:#0f766e;
+
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        border-color .25s;
+}
+
+/* SVG */
+
+.node .circle svg{    width:36px;    height:36px;    stroke:url(#nodeGrad);    fill:none;    stroke-width:1.6;}
+.node .circle img.node-img{width:46px;height:46px;object-fit:contain;filter:none;}
+
+/* Label */
+.node .label{margin-top:12px; font-weight:600; font-size:12.5px; text-align:center; color:#374151; line-height:1.25;}
+
+/* Hover */
+.node:hover .circle{    transform:translateY(-3px);border-color:#06b6d4; box-shadow: 0 6px 20px rgba(6,182,212,.18);}
+
+/* Active circle */
+
+.node.active .circle{
+    border-color:#06b6d4;    box-shadow:        0 0 0 6px rgba(6,182,212,.16),        0 10px 30px rgba(6,182,212,.22);}
+
+/* Active number */
+
+.node.active .num{    background:#06b6d4;    color:white;    border-color:#06b6d4;}
+
+/* Active label */
+
+.node.active .label{    color:#0f766e;    font-weight:700;}
+
+
+/* ============ LOADED NODE CONTENT ============ */
+.node-content-shell{
+    margin-top:18px;
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    min-height:700px;
+    padding:18px;
+    overflow:hidden;
+}
+.node-content-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:14px;
+    padding-bottom:12px;
+    border-bottom:1px solid rgba(120,140,200,.14);
+}
+.node-content-head h2{
+    font-family:'Sora',sans-serif;
+    font-size:20px;
+    color:#fff;
+    margin:0;
+}
+.node-content-head .file-name{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:#a78bfa;
+    background:rgba(139,92,246,.14);
+    border:1px solid rgba(139,92,246,.35);
+    padding:5px 10px;
+    border-radius:999px;
+}
+.node-frame{
+    width:100%;
+    min-height:820px;
+    border:0;
+    border-radius:14px;
+    background:#fff;
+}
+@media (max-width:1100px){
+  .node-content-head{align-items:flex-start;flex-direction:column;}
+  .node-frame{min-height:900px;}
+}
+
+/* ============ WORKSPACE 3 COLUMNS ============ */
+.workspace{display:grid;grid-template-columns:280px 1fr 420px;gap:18px;margin-top:18px}
+.panel{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);min-height:540px;padding:22px}
+.panel h2{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.panel h2 .count{margin-left:auto;background:rgba(139,92,246,.18);color:#c4b5fd;border:1px solid rgba(139,92,246,.4);font-size:12px;padding:2px 10px;border-radius:999px;font-weight:600}
+.panel h2 .num-tag{color:#a78bfa}
+
+/* left */
+.sub-list{display:flex;flex-direction:column;gap:4px;position:relative}
+.sub-list::before{content:"";position:absolute;left:14px;top:8px;bottom:8px;width:1px;background:linear-gradient(180deg,transparent,rgba(139,92,246,.35),transparent)}
+.sub-item{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;cursor:pointer;color:#bfc8e6;font-size:14px;font-weight:500;transition:.2s;position:relative}
+.sub-item .ic{width:30px;height:30px;border-radius:8px;background:rgba(139,92,246,.10);display:grid;place-items:center;color:#a78bfa;font-size:14px;flex-shrink:0;z-index:1}
+.sub-item:hover{background:rgba(139,92,246,.07);color:#fff}
+.sub-item.active{background:linear-gradient(90deg,rgba(139,92,246,.22),rgba(34,211,238,.05));color:#fff;border:1px solid rgba(139,92,246,.45)}
+.sub-item.active .ic{background:rgba(139,92,246,.3);color:#fff}
+.view-all{margin-top:14px;padding:10px;text-align:center;color:#a78bfa;font-size:13px;cursor:pointer;border-top:1px dashed rgba(139,92,246,.25)}
+
+/* middle */
+.content h3{font-family:'Sora',sans-serif;font-size:22px;margin-bottom:10px;color:#fff}
+.content .lede{color:#b8c1dc;margin-bottom:18px;font-size:14.5px}
+.callout{background:linear-gradient(135deg,rgba(139,92,246,.14),rgba(34,211,238,.06));border:1px solid rgba(139,92,246,.32);border-radius:14px;padding:14px 16px;display:flex;gap:14px;margin-bottom:20px}
+.callout .badge{width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,.35);display:grid;place-items:center;color:#fff;font-weight:700;font-family:'JetBrains Mono';font-size:14px;flex-shrink:0}
+.callout .ttl{font-weight:700;color:#fff;margin-bottom:2px;font-size:14.5px}
+.callout .ex{color:#9aa5c8;font-size:13px}
+.content h4{font-family:'Sora',sans-serif;font-size:16px;margin:16px 0 10px;color:#e8ecff}
+.checklist{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.chk{display:flex;align-items:flex-start;gap:10px;color:#cfd6ef;font-size:14px}
+.chk .dot{width:20px;height:20px;border-radius:50%;background:rgba(139,92,246,.25);border:1px solid rgba(167,139,250,.6);display:grid;place-items:center;color:#a78bfa;font-size:11px;flex-shrink:0;margin-top:2px}
+.tbl{width:100%;border-collapse:collapse;background:rgba(11,16,32,.4);border-radius:12px;overflow:hidden;border:1px solid rgba(120,140,200,.1)}
+.tbl th,.tbl td{padding:12px 16px;text-align:left;font-size:13.5px;border-bottom:1px solid rgba(120,140,200,.08)}
+.tbl th{background:rgba(139,92,246,.10);color:#cfd6ef;font-weight:600}
+.tbl td{color:#bfc8e6}
+.tbl tr:last-child td{border-bottom:none}
+.tip-bar{margin-top:18px;display:flex;align-items:center;gap:10px;padding:12px 14px;background:linear-gradient(90deg,rgba(245,158,11,.12),transparent);border:1px solid rgba(245,158,11,.35);border-radius:10px;color:#fde68a;font-size:13.5px}
+
+/* right code */
+.code-panel{background:linear-gradient(180deg,#0b1124,#070b1a);padding:18px;position:relative;overflow:hidden}
+.code-tab{display:inline-block;padding:6px 14px;background:rgba(139,92,246,.22);border:1px solid rgba(139,92,246,.4);border-radius:8px;font-family:'JetBrains Mono';font-size:12px;color:#c4b5fd;margin-bottom:12px}
+.copy-btn{position:absolute;top:22px;right:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#cfd6ef;padding:5px 10px;border-radius:6px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px}
+.copy-btn:hover{background:rgba(139,92,246,.18)}
+pre.code{font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.65;color:#cdd6f4;white-space:pre;overflow:auto;max-height:520px;padding-right:8px}
+.code .com{color:#65b58a}
+.code .kw{color:#c084fc}
+.code .str{color:#f9c97c}
+.code .fn{color:#7dd3fc}
+.code .num{color:#fda4af}
+
+@media (max-width:1100px){
+  .workspace{grid-template-columns:1fr}
+  .roadmap{grid-template-columns:repeat(4,1fr);row-gap:18px}
+  .roadmap::before{display:none}
+.hero{
+    grid-template-columns:70% 30%;
+}
+.hero-illustration img{
+    background:transparent;
+}
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="nodeGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div>
+      <div class="hero-eyebrow">Your Journey in</div>
+      <h1>Analytics &amp; Data Science</h1>
+      <p class="sub">From raw data to real-world impact. Click any step below to explore the concepts, techniques, and code examples.</p>
+    </div>
+    <div class="hero-illustration">
+        <img src="..\images\hero-analytics.png"
+            alt="Analytics Illustration">
+    </div>
+
+    <div class="top-icons">
+      <div class="ico" title="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </div>
+      <div class="ico" title="Notifications">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+      </div>
+      <div class="avatar"></div>
+    </div>
+  </header>
+
+  <!-- ============ ROADMAP ============ -->
+  <div class="roadmap" id="roadmap"></div>
+
+  <!-- ============ LOADED CONTENT AREA ============ -->
+  <section class="node-content-shell" id="nodeContentShell">
+    <div class="node-content-head">
+      <h2 id="loadedTitle">Data Acquisition</h2>
+      <span class="file-name" id="loadedFile"></span>
+    </div>
+    <iframe id="nodeFrame" class="node-frame" src="data_acquisition.html" title="Selected roadmap content"></iframe>
+  </section>
+</div>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
+            <p class="text-sm">&copy; 2026 Mojgan Samandar. All rights reserved.</p>
+        </div>
+    </footer>
+
+<script>
+/* ============================================================
+   ROADMAP DATA — add more topics by extending subtopics[] arrays
+   Each subtopic: { title, lede, sections[], code }
+   sections[] item types: 'callout', 'checklist', 'table', 'text', 'tip'
+============================================================ */
+const ICONS = {
+  dataAcquisition: `
+  <svg viewBox="0 0 24 24">
+    <!-- Database -->
+    <ellipse cx="12" cy="5" rx="7" ry="2.5"/>
+    <path d="M5 5v6c0 1.5 3.1 2.5 7 2.5s7-1 7-2.5V5"/>
+    <!-- Download arrow -->
+    <path d="M12 10v8"/>
+    <path d="M9.5 15.5L12 18l2.5-2.5"/>
+  </svg>
+  `,
+  database:'<svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>',
+  search:'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg>',
+  cleaning:`<img class="node-img" src="../images/data-cleaning.png" class="node-img">`,
+  tools:'<svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2z"/><path d="m18 14 4 4-3 3-4-4"/></svg>',
+  chart:'<svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="4" width="3" height="14"/></svg>',
+  brain:'<svg viewBox="0 0 24 24"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24A2.5 2.5 0 0 0 14.5 2Z"/></svg>',
+  trend:'<svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 5-7"/></svg>',
+  rocket:'<svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1-2 5-2 5s4-.5 5-2c.59-.85.59-2.14-.04-3-.62-.85-1.91-.85-2.96 0z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22 22 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>',
+};
+const ITEM_ICONS = ['📋','📊','❓','📄','🔢','🏷️','📈','📉'];
+
+const ROADMAP = [
+// --------- 1. DATA ACQUISITION --------
+
+{  id:'import',   num:1,  title:'Data Acquisition',  label:'Data\nAcquisition',  icon:'database', page:'data_science/data_acquisition.html',
+  subtopics:[
+    {
+      title:'Data Sources',
+      lede:'Data can come from many different sources.',
+
+      sections:[
+        { type:'checklist',   items:[  'CSV files',  'Excel files',   'SQL databases',     'JSON files',      'REST APIs',
+            'Web scraping',
+            'Cloud storage'
+          ]
+        }
+      ],
+
+      code:`import pandas as pd
+
+# CSV
+df = pd.read_csv("data.csv")
+
+# Excel
+df = pd.read_excel("data.xlsx")
+
+# SQL
+import sqlite3
+conn = sqlite3.connect("database.db")
+
+# JSON
+df = pd.read_json("data.json")`
+    }
+  ]
+},
+  // ---------- 2. DATA Exploration ----------
+  { id:'understand', num:2, title:'Data Exploration', label:'Data\nExploration', icon:'search', page:'data_science/data_exploration.html',
+    subtopics:[
+      { title:'Understand the Dataset',
+        lede:'Before any analysis, we must understand what our data represents.',
+        sections:[
+          {type:'callout',badge:'?',ttl:'What does each row represent?',ex:'Examples: One customer, One transaction, One patient, One survey response'},
+          {type:'heading',text:'Ask Yourself'},
+          {type:'checklist',items:['What is the unit of analysis?','What does each column represent?','Where did the data come from?']},
+          {type:'tip',text:'Understanding your data deeply is 80% of a successful project.'}
+        ],
+        code:`# Load dataset
+import pandas as pd
+df = pd.read_csv('customer_churn.csv')
+
+# See first few rows
+df.head()
+df.sample(5)`},
+      { title:'Data Dictionary',
+        lede:'Document what every column means before you touch the data.',
+        sections:[
+          {type:'checklist',items:['Column name','Meaning / business definition','Expected type & range']},
+          {type:'table',headers:['Variable','Meaning'],rows:[['CustomerID','Unique customer'],['Age','Customer age'],['Churn','Left company (Yes/No)']]}
+        ],
+        code:`# Data dictionary example
+data_dict = {
+    'CustomerID': 'Unique customer',
+    'Age':        'Customer age',
+    'Churn':      'Left company (Yes/No)'
+}
+
+data_dict`},
+      { title:'Shape',
+        lede:'Inspect the size and memory footprint of your data.',
+        sections:[
+          {type:'heading',text:'Row & Column Count'},
+          {type:'text',html:'Use <code>shape</code> and <code>info()</code> to get a quick overview.'},
+          {type:'checklist',items:['How many rows?','How many columns?','How much memory does it use?']}
+        ],
+        code:`df.shape          # (rows, cols)
+df.columns.tolist()
+df.info()          # types + memory`},
+      { title:'Data Types',
+        lede:'Check what type pandas assigned to every column.',
+        sections:[{type:'checklist',items:['Numeric vs object','Dates as datetime','Categories as category']}],
+        code:`df.dtypes
+df.select_dtypes(include='object').columns
+df.select_dtypes(include='number').columns`},
+      { title:'Summary Statistics',
+        lede:'Summary numbers tell the story of your data.',
+        sections:[{type:'checklist',items:['Mean, median, std','Min/max range','Quartiles']}],
+        code:`df.describe()
+df.describe(include='object')`},
+      { title:'Unique Values',
+        lede:'Understand the cardinality of each feature.',
+        sections:[{type:'checklist',items:['Unique count per column','Top frequent values','Spot rare categories']}],
+        code:`df.nunique()
+df['Country'].value_counts().head(10)`}
+    ]
+  },
+  // ---------- 3. DATA CLEANING ----------
+  { id:'clean', num:3, title:'Data Cleaning & Validation', label:'Data\nCleaning & Validation', icon:'cleaning', page:'data_science/data_cleaning_validation.html',
+    subtopics:[
+      { title:'Missing Values',
+        lede:'Identify gaps before they bias your model.',
+        sections:[
+          {type:'callout',badge:'!',ttl:'Detect missingness',ex:'Always inspect both count and percentage of missing values per column.'},
+          {type:'checklist',items:['Count missing per column','Visualize missing pattern','Decide: drop, impute, or flag']}
+        ],
+        code:`df.isna().sum()
+df.isna().mean().sort_values(ascending=False)
+
+# Drop or flag for now (imputation comes later)
+df = df.dropna(subset=['Age'])`},
+      { title:'Duplicate Records',
+        lede:'Find and remove repeated rows that distort your analysis.',
+        sections:[{type:'checklist',items:['Check exact duplicates','Check duplicates on key columns','Decide policy: keep first / last']}],
+        code:`df.duplicated().sum()
+df = df.drop_duplicates()
+df = df.drop_duplicates(subset=['CustomerID'], keep='last')`},
+      { title:'Incorrect Data Types',
+        lede:'Fix columns that were loaded with the wrong type.',
+        sections:[{type:'checklist',items:['Numbers stored as text','Dates stored as strings','Booleans stored as 0/1 or Yes/No']}],
+        code:`df['SignupDate'] = pd.to_datetime(df['SignupDate'])
+df['Plan'] = df['Plan'].astype('category')
+df['Income'] = pd.to_numeric(df['Income'], errors='coerce')`},
+      { title:'Invalid Values',
+        lede:'Catch values that are technically valid types but make no sense.',
+        sections:[{type:'checklist',items:['Negative ages or prices','Dates in the future','Values outside a known range']}],
+        code:`import numpy as np
+invalid_age = df[(df['Age'] < 0) | (df['Age'] > 120)]
+df.loc[df['Age'] < 0, 'Age'] = np.nan`},
+      { title:'Inconsistent Categories',
+        lede:'Standardize labels that represent the same thing.',
+        sections:[{type:'checklist',items:["'USA' vs 'U.S.A' vs 'United States'",'Case & whitespace differences','Typos in category labels']}],
+        code:`df['Country'] = df['Country'].str.strip().str.title()
+df['Country'] = df['Country'].replace({'Usa':'United States','U.S.A':'United States'})`},
+      { title:'Outlier Detection',
+        lede:'Detect extreme values that may need special handling.',
+        sections:[{type:'checklist',items:['Boxplots per feature','IQR rule','Z-score check']}],
+        code:`import numpy as np
+Q1, Q3 = df['Income'].quantile([0.25,0.75])
+IQR = Q3 - Q1
+mask = (df['Income'] < Q1-1.5*IQR) | (df['Income'] > Q3+1.5*IQR)
+df.loc[mask, 'Income']`},
+      { title:'Data Validation',
+        lede:'Confirm the cleaned dataset actually meets your expectations.',
+        sections:[{type:'checklist',items:['Re-check shape & dtypes','Assert business rules','Automate checks with a schema library']}],
+        code:`assert df['Age'].between(0,120).all()
+assert df['CustomerID'].is_unique
+
+# Optional: schema-based validation
+import pandera as pa
+schema = pa.DataFrameSchema({'Age': pa.Column(int, pa.Check.in_range(0,120))})
+schema.validate(df)`}
+    ]
+  },
+  // ---------- 4. DATA PREPROCESSING ----------
+  { id:'prep', num:4, title:'Feature Engineering & Preprocessing', label:'Feature\nEngineering & Preprocessing', icon:'tools', page:'data_science/data_feature_engineering.html',
+    subtopics:[
+      { title:'Missing-Value Imputation',
+        lede:'Choose the right imputation strategy for each column.',
+        sections:[{type:'checklist',items:['Mean / median imputation','KNN imputer','Indicator flag']}],
+        code:`from sklearn.impute import SimpleImputer, KNNImputer
+imp = SimpleImputer(strategy='median')
+df[['Age','Income']] = imp.fit_transform(df[['Age','Income']])`},
+      { title:'Encoding Categorical Variables',
+        lede:'Convert text categories to numbers a model can use.',
+        sections:[{type:'checklist',items:['Label encoding','One-hot encoding','Target encoding']}],
+        code:`df = pd.get_dummies(df, columns=['Plan','Country'], drop_first=True)`},
+      { title:'Scaling / Normalization',
+        lede:'Bring features onto comparable scales.',
+        sections:[{type:'checklist',items:['StandardScaler (z-score)','MinMaxScaler (0-1)','RobustScaler (outliers)']}],
+        code:`from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)`},
+      { title:'Feature Engineering',
+        lede:'Craft new features that expose signal to the model.',
+        sections:[{type:'checklist',items:['Ratios & interactions','Date parts','Aggregations']}],
+        code:`df['Tenure_months'] = (pd.Timestamp.now() - df['SignupDate']).dt.days // 30
+df['AvgSpend'] = df['TotalSpend'] / df['Tenure_months']`},
+      { title:'Feature Selection',
+        lede:'Keep only the features that add predictive value.',
+        sections:[{type:'checklist',items:['Correlation / variance filters','Recursive feature elimination','Model-based importance']}],
+        code:`from sklearn.feature_selection import SelectKBest, f_classif
+selector = SelectKBest(f_classif, k=10).fit(X, y)
+X_selected = selector.transform(X)`},
+      { title:'Dimensionality Reduction',
+        lede:'Compress many correlated features into fewer components.',
+        sections:[{type:'checklist',items:['PCA','t-SNE / UMAP (visualization)','Explained variance ratio']}],
+        code:`from sklearn.decomposition import PCA
+pca = PCA(n_components=0.95)
+X_reduced = pca.fit_transform(X_scaled)`},
+      { title:'Train / Test Split',
+        lede:'Hold out data so you can measure real performance.',
+        sections:[{type:'checklist',items:['Random split','Stratified split','Time-based split']}],
+        code:`from sklearn.model_selection import train_test_split
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)`}
+    ]
+  },
+  // ---------- 5. EXPLORATORY DATA ANALYSIS ----------
+  { id:'eda', num:5, title:'Exploratory Data Analysis (EDA)', label:'Exploratory\nData Analysis', icon:'chart', page:'data_science/exploratory_data_analysis.html',
+    subtopics:[
+      { title:'Univariate Analysis',
+        lede:'Study one variable at a time to understand its distribution.',
+        sections:[{type:'checklist',items:['Histograms','Boxplots','Value counts']}],
+        code:`import matplotlib.pyplot as plt
+df['Age'].hist(bins=30)
+plt.title('Age distribution'); plt.show()`},
+      { title:'Bivariate Analysis',
+        lede:'Examine relationships between pairs of variables.',
+        sections:[{type:'checklist',items:['Scatter plots','Grouped means','Cross-tabs']}],
+        code:`import seaborn as sns
+sns.scatterplot(data=df, x='Income', y='Spend', hue='Churn')`},
+      { title:'Correlation',
+        lede:'Quantify how variables move together.',
+        sections:[{type:'checklist',items:['Pearson (linear)','Spearman (rank)','Heatmap']}],
+        code:`corr = df.corr(numeric_only=True)
+sns.heatmap(corr, annot=True, cmap='coolwarm')`},
+      { title:'Hypothesis Testing',
+        lede:'Use statistics to confirm or reject a claim.',
+        sections:[{type:'checklist',items:['t-test','chi-square','ANOVA']}],
+        code:`from scipy import stats
+stats.ttest_ind(df[df.Churn=='Yes'].Age, df[df.Churn=='No'].Age)`}
+    ]
+  },
+  // ---------- 3. MACHINE LEARNING ----------
+  { id:'ml', num:6, title:'Machine Learning', label:'Machine\nLearning', icon:'brain', page:'data_science/ml_algorithms_roadmap.html',
+    subtopics:[
+      { title:'Linear Regression',
+        lede:'Predict a continuous target from numeric features.',
+        sections:[{type:'checklist',items:['Fit on training data','Inspect coefficients','Check residuals']}],
+        code:`from sklearn.linear_model import LinearRegression
+model = LinearRegression().fit(X_tr, y_tr)
+print(model.coef_, model.intercept_)`},
+      { title:'Logistic Regression',
+        lede:'Classify binary outcomes with probabilities.',
+        sections:[{type:'checklist',items:['Linear log-odds','Probabilistic output','Regularization']}],
+        code:`from sklearn.linear_model import LogisticRegression
+clf = LogisticRegression(max_iter=1000).fit(X_tr, y_tr)
+clf.predict_proba(X_te)[:5]`},
+      { title:'Decision Trees',
+        lede:'Interpretable rule-based predictions.',
+        sections:[{type:'checklist',items:['Splits by Gini/entropy','Control depth','Visualize tree']}],
+        code:`from sklearn.tree import DecisionTreeClassifier
+tree = DecisionTreeClassifier(max_depth=5).fit(X_tr, y_tr)`},
+      { title:'Random Forest',
+        lede:'Ensemble of trees for robust accuracy.',
+        sections:[{type:'checklist',items:['Bagging','Feature importance','OOB score']}],
+        code:`from sklearn.ensemble import RandomForestClassifier
+rf = RandomForestClassifier(n_estimators=300, random_state=42).fit(X_tr, y_tr)`},
+      { title:'K-Means Clustering',
+        lede:'Unsupervised grouping of similar observations.',
+        sections:[{type:'checklist',items:['Choose k (elbow)','Scale features','Profile clusters']}],
+        code:`from sklearn.cluster import KMeans
+km = KMeans(n_clusters=4, n_init=10, random_state=42).fit(X_scaled)
+df['cluster'] = km.labels_`}
+    ]
+  },
+  // ---------- 4. MODEL EVALUATION ----------
+  { id:'eval', num:7, title:'Model Evaluation & Validation', label:'Model Evaluation\n& Validation', icon:'trend',page:'data_science/model_evaluation_validation.html',
+    subtopics:[
+      { title:'Classification Metrics',
+        lede:'Measure how well your classifier performs.',
+        sections:[{type:'checklist',items:['Accuracy / precision / recall','F1 score','Confusion matrix']}],
+        code:`from sklearn.metrics import classification_report, confusion_matrix
+print(classification_report(y_te, clf.predict(X_te)))`},
+      { title:'Regression Metrics',
+        lede:'Quantify prediction error for continuous targets.',
+        sections:[{type:'checklist',items:['MAE','RMSE','R²']}],
+        code:`from sklearn.metrics import mean_absolute_error, r2_score
+print(mean_absolute_error(y_te, preds), r2_score(y_te, preds))`},
+      { title:'Cross-Validation',
+        lede:'Robust performance estimate via repeated splits.',
+        sections:[{type:'checklist',items:['K-fold','Stratified K-fold','Time-series split']}],
+        code:`from sklearn.model_selection import cross_val_score
+scores = cross_val_score(clf, X, y, cv=5, scoring='f1')
+scores.mean(), scores.std()`},
+      { title:'ROC & AUC',
+        lede:'Trade-off between true and false positive rates.',
+        sections:[{type:'checklist',items:['ROC curve','AUC score','Threshold tuning']}],
+        code:`from sklearn.metrics import roc_auc_score
+roc_auc_score(y_te, clf.predict_proba(X_te)[:,1])`}
+    ]
+  },
+  // ---------- 5. DEPLOYMENT ----------
+  { id:'deploy', num:8, title:'Deployment & Monitoring', label:'Deployment &\nMonitoring', icon:'rocket', page:'data_science/deployment_monitoring.html',
+    subtopics:[
+      { title:'Save & Load Models',
+        lede:'Persist trained models for production use.',
+        sections:[{type:'checklist',items:['Pickle / joblib','Versioning','Reproducible env']}],
+        code:`import joblib
+joblib.dump(clf, 'model.pkl')
+clf = joblib.load('model.pkl')`},
+      { title:'Serve via API',
+        lede:'Expose your model behind a REST endpoint.',
+        sections:[{type:'checklist',items:['FastAPI / Flask','Input validation','Containerize with Docker']}],
+        code:`from fastapi import FastAPI
+import joblib, pandas as pd
+app = FastAPI(); model = joblib.load('model.pkl')
+
+@app.post('/predict')
+def predict(features: dict):
+    X = pd.DataFrame([features])
+    return {'pred': float(model.predict(X)[0])}`},
+      { title:'Monitor in Production',
+        lede:'Track quality and detect data drift over time.',
+        sections:[{type:'checklist',items:['Log predictions','Data drift checks','Performance dashboards']}],
+        code:`# Simple drift check
+from scipy.stats import ks_2samp
+stat, p = ks_2samp(reference['Age'], live['Age'])
+print('drift' if p < 0.05 else 'stable')`},
+      { title:'Retraining Pipeline',
+        lede:'Automate refresh as new data arrives.',
+        sections:[{type:'checklist',items:['Scheduled retraining','Champion / challenger','A/B test rollout']}],
+        code:`# Pseudo pipeline
+def retrain():
+    data = load_latest()
+    model = train(data)
+    if evaluate(model) > current_score:
+        deploy(model)`}
+    ]
+  }
+];
+
+/* ============ RENDER ============ */
+const roadmapEl = document.getElementById('roadmap');
+
+function titleToFileName(title){
+  return title
+    .toLowerCase()
+    .replace(/&/g, ' ')
+    .replace(/\(.*?\)/g, '')
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '') + '.html';
+}
+
+function loadNode(sec){
+  document.querySelectorAll('.node').forEach(n=>n.classList.toggle('active', n.dataset.id===sec.id));
+
+  const fileName = sec.page || titleToFileName(sec.title);
+  document.getElementById('loadedTitle').textContent = sec.title;
+  /* document.getElementById('loadedFile').textContent = fileName; */
+  document.getElementById('nodeFrame').src = fileName;
+}
+
+ROADMAP.forEach((sec,i)=>{
+  const el = document.createElement('div');
+  el.className = 'node' + (i===0?' active':'');
+  el.dataset.id = sec.id;
+  el.innerHTML = `
+    <div class="num">${sec.num}</div>
+    <div class="circle">${ICONS[sec.icon]}</div>
+    <div class="label">${sec.label.replace(/\n/g,'<br>')}</div>`;
+  el.addEventListener('click',()=>loadNode(sec));
+  roadmapEl.appendChild(el);
+});
+
+// init: load the first node under the roadmap
+loadNode(ROADMAP[0]);
+
+/* ============ PYTHON HIGHLIGHTER ============ */
+function highlight(src){
+  const esc = src.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const lines = esc.split('\n').map(line=>{
+    // comments first
+    const cIdx = line.indexOf('#');
+    let code = line, comment = '';
+    if(cIdx >= 0){ code = line.slice(0,cIdx); comment = `<span class="com">${line.slice(cIdx)}</span>`; }
+    code = code.replace(/('[^']*'|"[^"]*")/g,'<span class="str">$1</span>');
+    code = code.replace(/\b(import|from|as|def|return|if|else|for|in|not|and|or|class|with|lambda|print|True|False|None)\b/g,'<span class="kw">$1</span>');
+    code = code.replace(/\b([a-zA-Z_][\w]*)\(/g,'<span class="fn">$1</span>(');
+    code = code.replace(/\b(\d+\.?\d*)\b/g,'<span class="num">$1</span>');
+    return code + comment;
+  });
+  return lines.join('\n');
+}
+
+function copyCode(){
+  const txt = document.getElementById('codeBox').innerText;
+  navigator.clipboard.writeText(txt);
+  const btn = document.querySelector('.copy-btn');
+  const orig = btn.innerHTML;
+  btn.innerHTML = '✓ Copied';
+  setTimeout(()=>btn.innerHTML = orig, 1400);
+}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feature Engineering & Preprocessing</title>
+<style>
+:root{--paper:#f7f5f0;--paper-raised:#fff;--ink:#20242b;--ink-soft:#565f6d;--line:#dedad0;--navy:#161b26;--navy-soft:#232a3a;--accent:#c1611a;--accent-soft:#f3e2d1;--teal:#2f7a6f;--teal-soft:#e0efec;--radius:10px;--mono:Consolas,Menlo,monospace;--sans:Georgia,serif;--ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--ui);line-height:1.5}.app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}.sidebar{background:var(--navy);color:#cfd4de;padding:22px 16px 40px;position:sticky;top:0;height:100vh;overflow-y:auto}.brand{display:flex;gap:8px;align-items:baseline}.brand-mark{font-family:var(--mono);color:var(--accent);font-weight:700;font-size:13px}.brand-title{font-family:var(--sans);font-size:19px;font-weight:700;color:#fff}.brand-sub,.nav-count{font-size:11.5px;color:#8b93a3;margin:8px 0 18px;font-family:var(--mono)}.nav-list{list-style:none;margin:0;padding:0}.nav-link{display:flex;justify-content:space-between;width:100%;border:0;background:none;color:#c3c9d4;padding:8px 10px;border-radius:7px;cursor:pointer;text-align:left}.nav-link:hover,.nav-link.active{background:var(--navy-soft);color:#fff}.nav-link.active{box-shadow:inset 3px 0 0 var(--accent)}.n{font-family:var(--mono);color:var(--accent);font-size:11px}.count{font-family:var(--mono);font-size:10.5px;color:#6d7688}.main{padding:36px 44px 100px;max-width:980px}.page-head h1{font-family:var(--sans);font-size:34px;margin:0 0 10px}.intro{color:var(--ink-soft);font-size:15.5px;max-width:75ch;margin:0 0 26px}.search-wrap{position:sticky;top:0;background:var(--paper);padding:14px 0 16px;z-index:5;border-bottom:1px solid var(--line);margin-bottom:26px}.search-box{display:flex;gap:10px;align-items:center;background:var(--paper-raised);border:1.5px solid var(--line);border-radius:10px;padding:10px 14px}.search-box:focus-within{border-color:var(--accent)}#searchInput{border:0;outline:0;font-size:15px;width:100%;background:transparent;color:var(--ink)}#clearSearch{display:none;border:0;background:var(--line);border-radius:6px;padding:3px 8px;cursor:pointer}.category{margin-bottom:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper-raised);overflow:hidden;scroll-margin-top:90px}.category-head{display:flex;align-items:center;gap:14px;padding:20px 22px;cursor:pointer;background:var(--navy);border-left:6px solid var(--accent)}.category-num{font-family:var(--mono);font-weight:800;background:var(--accent);color:var(--navy);border-radius:7px;padding:5px 10px}.category-head h2{font-family:var(--sans);font-size:22px;margin:0;color:#fff;flex:1}.category-count{font-family:var(--mono);font-size:11.5px;color:#aeb5c4}.chevron{width:9px;height:9px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg);transition:.18s}.category.collapsed .chevron{transform:rotate(-45deg)}.category-body{border-top:1px solid var(--line);padding:10px 22px 20px}.category.collapsed .category-body{display:none}.subcategory{margin-top:14px}.subcategory-head{display:flex;gap:8px;align-items:center;cursor:pointer;padding:6px 0}.subcategory-head h3{font-family:var(--mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft);margin:0}.subcategory .chevron{border-color:var(--ink-soft);width:7px;height:7px}.subcategory.collapsed .card-grid{display:none}.card-grid{display:grid;gap:10px;margin-top:6px}.card{border:1px solid var(--line);border-radius:9px;background:var(--paper);scroll-margin-top:90px}.card-summary{display:flex;justify-content:space-between;gap:12px;padding:13px 15px;cursor:pointer}.card-title{font-family:var(--sans);font-size:15.5px;font-weight:700}.badge{font-family:var(--mono);font-size:10.5px;padding:2.5px 7px;border-radius:5px;background:#eef1f4;color:#5b6473}.card-detail{display:none;padding:0 15px 18px;border-top:1px solid var(--line)}.card.open .card-detail{display:block}.card.open .chevron{transform:rotate(-135deg)}.card-columns{display:grid;grid-template-columns:1.1fr 1fr;gap:0;margin-top:14px}.col-main{padding-right:22px}.col-code{padding-left:22px;border-left:1px solid var(--line)}h4{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 8px}p{font-size:14px}.code{background:#101827;color:#dbeafe;border-radius:8px;padding:12px;overflow:auto;font-family:var(--mono);font-size:12.5px;line-height:1.55}.tips{margin:10px 0 0;padding-left:18px;color:var(--ink-soft);font-size:13.5px}.prereq-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}.prereq{display:inline-flex;font-size:12.5px;padding:5px 10px;border-radius:20px;border:1px solid #cfe0dc;color:var(--teal);background:var(--teal-soft)}.actions{margin-top:16px}.btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:8px 14px;border-radius:7px;text-decoration:none;background:var(--navy);color:#fff}.empty-state{text-align:center;padding:50px;color:var(--ink-soft)}.mobile-bar{display:none}@media(max-width:880px){.app{grid-template-columns:1fr}.sidebar{position:fixed;inset:0 20% 0 0;z-index:40;transform:translateX(-100%);transition:.2s}.sidebar.open{transform:translateX(0)}.mobile-bar{display:flex;justify-content:space-between;background:var(--navy);color:#fff;padding:14px 18px;position:sticky;top:0;z-index:30}.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:35}.overlay.show{display:block}.main{padding:22px 18px 80px}.card-columns{grid-template-columns:1fr}.col-code{padding-left:0;border-left:0;border-top:1px solid var(--line);padding-top:14px}.col-main{padding-right:0}}
+</style>
+</head>
+<body>
+<div class="mobile-bar"><span class="brand-title">Feature Engineering</span><button id="menuToggle">☰ Categories</button></div><div class="overlay" id="overlay"></div>
+<div class="app">
+<nav class="sidebar" id="sidebar"><div class="brand"><span class="brand-mark">FE/</span><span class="brand-title">Preprocessing</span></div><div class="brand-sub">Data transformation · click to jump</div><div class="nav-count" id="navCount">Loading…</div><ul class="nav-list" id="navList"></ul></nav>
+<main class="main"><header class="page-head"><h1>Feature Engineering & Preprocessing</h1><p class="intro"><strong>Feature engineering</strong> creates useful variables from existing data. <strong>Preprocessing</strong> transforms the data into a format that machine learning models can use reliably. This step comes after cleaning and before model training.</p></header>
+<div class="search-wrap"><div class="search-box"><span>🔎</span><input id="searchInput" placeholder="Search by topic, code, or prerequisite, e.g. scaling, one-hot, PCA..."><button id="clearSearch">Clear</button></div><div id="searchMeta"></div></div><div id="content"></div><div class="empty-state" id="emptyState" style="display:none"><strong>No matches found</strong><br>Try a broader term.</div></main></div>
+<script>
+const TOPICS=[
+{id:'imputation',name:'Missing-Value Imputation',category:'Missing Data Handling',subcategory:'Core',explanation:'Imputation replaces missing values with reasonable substitutes such as median, mean, mode, or model-based estimates. This is preprocessing, while detecting missing values belongs to cleaning.',prereqs:['pandas basics','Missing value detection','Train/test split'],code:`from sklearn.impute import SimpleImputer
+
+num_cols = ['Age', 'Income']
+cat_cols = ['City']
+
+num_imp = SimpleImputer(strategy='median')
+cat_imp = SimpleImputer(strategy='most_frequent')
+
+df[num_cols] = num_imp.fit_transform(df[num_cols])
+df[cat_cols] = cat_imp.fit_transform(df[cat_cols])`,tips:['Fit imputers on training data only to avoid data leakage.','Use median instead of mean when outliers are strong.']},
+{id:'missing-indicator',name:'Missingness Indicator',category:'Missing Data Handling',subcategory:'Core',explanation:'A missingness indicator creates a binary flag showing whether a value was originally missing. Sometimes the fact that a value is missing contains useful information.',prereqs:['Missing-value imputation','Binary variables'],code:`df['Income_was_missing'] = df['Income'].isna().astype(int)
+
+df['Income'] = df['Income'].fillna(df['Income'].median())`,tips:['Useful when missingness is not random.','Do not add indicators blindly for every column.']},
+{id:'one-hot',name:'One-Hot Encoding',category:'Categorical Encoding',subcategory:'Nominal Categories',explanation:'One-hot encoding converts categories with no natural order into separate 0/1 columns. It is suitable for variables like country, product type, or payment method.',prereqs:['Categorical variables','pandas get_dummies'],code:`df_encoded = pd.get_dummies(
+    df,
+    columns=['Country', 'Plan'],
+    drop_first=True
+)`,tips:['Use drop_first=True for linear models to reduce multicollinearity.','For high-cardinality columns, one-hot encoding can create too many columns.']},
+{id:'ordinal',name:'Ordinal Encoding',category:'Categorical Encoding',subcategory:'Ordered Categories',explanation:'Ordinal encoding converts ordered categories into numbers. It should only be used when the order is meaningful, such as Low, Medium, High.',prereqs:['Categorical variables','Ordered scales'],code:`mapping = {'Low': 1, 'Medium': 2, 'High': 3}
+df['Risk_Level_encoded'] = df['Risk_Level'].map(mapping)`,tips:['Do not use ordinal encoding for unordered categories like city names.','Make sure the numeric order reflects the real order.']},
+{id:'label-encoding',name:'Label Encoding',category:'Categorical Encoding',subcategory:'Classification Labels',explanation:'Label encoding converts target labels into numeric classes. It is mainly appropriate for the target variable, not regular unordered features.',prereqs:['Classification target','sklearn preprocessing'],code:`from sklearn.preprocessing import LabelEncoder
+
+le = LabelEncoder()
+y = le.fit_transform(df['Churn'])
+
+# See original class names
+le.classes_`,tips:['Good for y labels.','Avoid using it for unordered input features in linear models.']},
+{id:'standard-scaling',name:'Standard Scaling',category:'Scaling & Transformation',subcategory:'Scaling',explanation:'Standard scaling transforms values into z-scores with mean 0 and standard deviation 1. It is important for distance-based models, gradient descent, and regularized models.',prereqs:['Mean and standard deviation','Train/test split'],code:`from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)`,tips:['Fit the scaler only on training data.','Important for logistic regression, SVM, KNN, PCA, and neural networks.']},
+{id:'minmax-scaling',name:'Min-Max Scaling',category:'Scaling & Transformation',subcategory:'Scaling',explanation:'Min-max scaling transforms values into a fixed range, usually 0 to 1. It is useful when features need bounded values.',prereqs:['Minimum and maximum','Numeric variables'],code:`from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)`,tips:['Very sensitive to outliers.','Useful for neural networks and algorithms needing bounded inputs.']},
+{id:'robust-scaling',name:'Robust Scaling',category:'Scaling & Transformation',subcategory:'Scaling',explanation:'Robust scaling uses median and interquartile range, so it is less affected by outliers than standard scaling.',prereqs:['Median','Interquartile range'],code:`from sklearn.preprocessing import RobustScaler
+
+scaler = RobustScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)`,tips:['Good when numeric features contain extreme values.','Still inspect outliers before scaling.']},
+{id:'log-transform',name:'Log Transformation',category:'Scaling & Transformation',subcategory:'Distribution Shape',explanation:'Log transformation reduces right skewness in variables such as income, sales, prices, or population.',prereqs:['Skewness','Numeric variables'],code:`import numpy as np
+
+df['Income_log'] = np.log1p(df['Income'])
+df['Sales_log'] = np.log1p(df['Sales'])`,tips:['Use log1p when values can be zero.','Do not use log directly on negative values.']},
+{id:'date-features',name:'Date Feature Engineering',category:'Feature Creation',subcategory:'Time Features',explanation:'Date columns often contain useful information such as year, month, weekday, quarter, and elapsed time.',prereqs:['Datetime data type','pandas datetime'],code:`df['SignupDate'] = pd.to_datetime(df['SignupDate'])
+
+df['signup_year'] = df['SignupDate'].dt.year
+df['signup_month'] = df['SignupDate'].dt.month
+df['signup_weekday'] = df['SignupDate'].dt.day_name()
+df['tenure_days'] = (pd.Timestamp.today() - df['SignupDate']).dt.days`,tips:['Convert strings to datetime before extracting features.','For time series, avoid using future information.']},
+{id:'interaction-features',name:'Interaction Features',category:'Feature Creation',subcategory:'Numeric Features',explanation:'Interaction features combine two variables to capture relationships that are not visible from each variable alone.',prereqs:['Numeric variables','Linear models'],code:`df['income_per_household_member'] = df['Income'] / df['Household_Size']
+df['price_x_quantity'] = df['Price'] * df['Quantity']
+df['age_income_interaction'] = df['Age'] * df['Income']`,tips:['Useful for linear models.','Too many interactions can increase overfitting.']},
+{id:'binning',name:'Binning',category:'Feature Creation',subcategory:'Numeric Features',explanation:'Binning converts a continuous variable into groups. This can make patterns easier to interpret, but it may also lose information.',prereqs:['Numeric variables','Categorical variables'],code:`df['age_group'] = pd.cut(
+    df['Age'],
+    bins=[0, 18, 35, 50, 65, 120],
+    labels=['0-18', '19-35', '36-50', '51-65', '65+']
+)`,tips:['Useful for reporting and interpretability.','Avoid binning when the model can use the continuous variable well.']},
+{id:'text-features',name:'Text Feature Extraction',category:'Feature Creation',subcategory:'Text Features',explanation:'Text must be converted into numeric features before most machine learning models can use it. Common approaches include word counts and TF-IDF.',prereqs:['Text data','Tokenization'],code:`from sklearn.feature_extraction.text import TfidfVectorizer
+
+vectorizer = TfidfVectorizer(max_features=1000, stop_words='english')
+X_text = vectorizer.fit_transform(df['Review_Text'])`,tips:['Clean text before vectorizing when needed.','Limit max_features for small projects.']},
+{id:'correlation-filter',name:'Correlation-Based Feature Selection',category:'Feature Selection',subcategory:'Filter Methods',explanation:'Correlation filtering removes highly correlated features to reduce redundancy and simplify the model.',prereqs:['Correlation','Numeric variables'],code:`corr = X_train.corr().abs()
+upper = corr.where(np.triu(np.ones(corr.shape), k=1).astype(bool))
+
+to_drop = [col for col in upper.columns if any(upper[col] > 0.90)]
+X_train_reduced = X_train.drop(columns=to_drop)
+X_test_reduced = X_test.drop(columns=to_drop)`,tips:['Choose the threshold based on the project.','Correlation only captures linear relationships.']},
+{id:'variance-filter',name:'Low-Variance Feature Removal',category:'Feature Selection',subcategory:'Filter Methods',explanation:'Low-variance features change very little across observations and often carry little predictive information.',prereqs:['Variance','sklearn feature selection'],code:`from sklearn.feature_selection import VarianceThreshold
+
+selector = VarianceThreshold(threshold=0.01)
+X_train_var = selector.fit_transform(X_train)
+X_test_var = selector.transform(X_test)`,tips:['Useful after one-hot encoding.','Check which columns were removed before finalizing.']},
+{id:'selectkbest',name:'SelectKBest',category:'Feature Selection',subcategory:'Statistical Selection',explanation:'SelectKBest keeps the top k features based on a statistical test, such as ANOVA F-test for classification.',prereqs:['Hypothesis testing','Classification target'],code:`from sklearn.feature_selection import SelectKBest, f_classif
+
+selector = SelectKBest(score_func=f_classif, k=10)
+X_train_best = selector.fit_transform(X_train, y_train)
+X_test_best = selector.transform(X_test)`,tips:['Fit only on training data.','The best k should usually be tuned with cross-validation.']},
+{id:'pca',name:'Principal Component Analysis (PCA)',category:'Dimensionality Reduction',subcategory:'Linear Reduction',explanation:'PCA compresses correlated numeric features into fewer components while preserving as much variance as possible.',prereqs:['Scaling','Variance','Eigenvalues'],code:`from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+pca = PCA(n_components=0.95)
+X_train_pca = pca.fit_transform(X_train_scaled)
+X_test_pca = pca.transform(X_test_scaled)`,tips:['Scale before PCA.','PCA improves compactness but reduces interpretability.']},
+{id:'pipeline',name:'Preprocessing Pipeline',category:'Workflow',subcategory:'Production-Ready Preprocessing',explanation:'A pipeline chains preprocessing and modeling steps so the same transformations are applied consistently to training and test data.',prereqs:['Train/test split','sklearn basics'],code:`from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+pipe = Pipeline([
+    ('scaler', StandardScaler()),
+    ('model', LogisticRegression(max_iter=1000))
+])
+
+pipe.fit(X_train, y_train)
+preds = pipe.predict(X_test)`,tips:['Pipelines reduce data leakage.','Use pipelines when comparing models.']},
+{id:'column-transformer',name:'ColumnTransformer',category:'Workflow',subcategory:'Production-Ready Preprocessing',explanation:'ColumnTransformer applies different preprocessing steps to different column types, such as scaling numeric columns and one-hot encoding categorical columns.',prereqs:['Pipelines','Categorical encoding','Scaling'],code:`from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
+
+numeric_features = ['Age', 'Income']
+categorical_features = ['City', 'Plan']
+
+preprocess = ColumnTransformer([
+    ('num', StandardScaler(), numeric_features),
+    ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)
+])
+
+model = Pipeline([
+    ('preprocess', preprocess),
+    ('classifier', LogisticRegression(max_iter=1000))
+])
+
+model.fit(X_train, y_train)`,tips:['Best option for mixed numeric and categorical data.','handle_unknown="ignore" prevents errors with new categories in test data.']}
+];
+const CATEGORY_ORDER=[];const GROUPED={};TOPICS.forEach(t=>{if(!GROUPED[t.category]){GROUPED[t.category]={order:[],subs:{}};CATEGORY_ORDER.push(t.category)}if(!GROUPED[t.category].subs[t.subcategory]){GROUPED[t.category].subs[t.subcategory]=[];GROUPED[t.category].order.push(t.subcategory)}GROUPED[t.category].subs[t.subcategory].push(t)});
+function slug(s){return 'cat-'+s.toLowerCase().replace(/[^a-z0-9]+/g,'-')}function videoUrl(name){return 'https://www.youtube.com/results?search_query='+encodeURIComponent(name+' data science tutorial')}function renderCard(t){return `<article class="card" id="${t.id}" data-text="${(t.name+' '+t.category+' '+t.subcategory+' '+t.explanation+' '+t.prereqs.join(' ')+' '+t.code).toLowerCase()}"><div class="card-summary" data-toggle="card"><div><div class="card-title">${t.name}</div><div><span class="badge">${t.category} · ${t.subcategory}</span></div></div><span class="chevron"></span></div><div class="card-detail"><div class="card-columns"><div class="col-main"><h4>Explanation</h4><p>${t.explanation}</p><h4>Prerequisites</h4><ul class="prereq-list">${t.prereqs.map(p=>`<li><span class="prereq">${p}</span></li>`).join('')}</ul><h4 style="margin-top:14px">Common mistakes / best practices</h4><ul class="tips">${t.tips.map(x=>`<li>${x}</li>`).join('')}</ul><div class="actions"><a class="btn" href="${videoUrl(t.name)}" target="_blank">▶ Watch video</a></div></div><div class="col-code"><h4>Python code</h4><pre class="code"><code>${t.code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre></div></div></div></article>`}
+function renderAll(){let html='',nav='';CATEGORY_ORDER.forEach((cat,i)=>{let count=0;GROUPED[cat].order.forEach(s=>count+=GROUPED[cat].subs[s].length);nav+=`<li><button class="nav-link" data-target="${slug(cat)}"><span><span class="n">${String(i+1).padStart(2,'0')}</span> ${cat}</span><span class="count">${count}</span></button></li>`;let body='';GROUPED[cat].order.forEach(sub=>{body+=`<div class="subcategory"><div class="subcategory-head" data-toggle="sub"><span class="chevron"></span><h3>${sub}</h3></div><div class="card-grid">${GROUPED[cat].subs[sub].map(renderCard).join('')}</div></div>`});html+=`<section class="category" id="${slug(cat)}"><div class="category-head" data-toggle="cat"><span class="chevron"></span><span class="category-num">${String(i+1).padStart(2,'0')}</span><h2>${cat}</h2><span class="category-count">${count} topics</span></div><div class="category-body">${body}</div></section>`});document.getElementById('content').innerHTML=html;document.getElementById('navList').innerHTML=nav;document.getElementById('navCount').textContent=TOPICS.length+' topics indexed'}
+renderAll();
+document.getElementById('content').addEventListener('click',e=>{const card=e.target.closest('[data-toggle="card"]');const cat=e.target.closest('[data-toggle="cat"]');const sub=e.target.closest('[data-toggle="sub"]');if(card)card.closest('.card').classList.toggle('open');if(cat)cat.closest('.category').classList.toggle('collapsed');if(sub)sub.closest('.subcategory').classList.toggle('collapsed')});
+document.getElementById('navList').addEventListener('click',e=>{const b=e.target.closest('.nav-link');if(!b)return;document.querySelectorAll('.nav-link').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.target).scrollIntoView({behavior:'smooth'});closeMobileNav()});
+const searchInput=document.getElementById('searchInput'),clearBtn=document.getElementById('clearSearch'),meta=document.getElementById('searchMeta'),empty=document.getElementById('emptyState');searchInput.addEventListener('input',runSearch);clearBtn.addEventListener('click',()=>{searchInput.value='';runSearch()});function runSearch(){const q=searchInput.value.trim().toLowerCase();clearBtn.style.display=q?'inline-block':'none';let visible=0;document.querySelectorAll('.card').forEach(c=>{const m=!q||c.dataset.text.includes(q);c.style.display=m?'':'none';if(m)visible++});document.querySelectorAll('.subcategory').forEach(s=>{const any=[...s.querySelectorAll('.card')].some(c=>c.style.display!=='none');s.style.display=any?'':'none';if(q&&any)s.classList.remove('collapsed')});document.querySelectorAll('.category').forEach(c=>{const any=[...c.querySelectorAll('.card')].some(x=>x.style.display!=='none');c.style.display=any?'':'none';if(q&&any)c.classList.remove('collapsed')});empty.style.display=q&&visible===0?'block':'none';meta.textContent=q?`${visible} of ${TOPICS.length} topics match "${searchInput.value.trim()}"`:''}
+const sidebar=document.getElementById('sidebar'),overlay=document.getElementById('overlay');document.getElementById('menuToggle').addEventListener('click',()=>{sidebar.classList.add('open');overlay.classList.add('show')});overlay.addEventListener('click',closeMobileNav);function closeMobileNav(){sidebar.classList.remove('open');overlay.classList.remove('show')}
+</script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Understanding Checklist</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 30px;
+      color: #1f2937;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .topic {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .topic-header {
+      padding: 18px 22px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+    }
+
+    .topic-header:hover {
+      background: #eefdf9;
+    }
+
+    .topic-content {
+      display: none;
+      padding: 20px 22px;
+      border-top: 1px solid #e5e7eb;
+      line-height: 1.6;
+    }
+
+    .topic.open .topic-content {
+      display: block;
+    }
+
+    code, pre {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 12px;
+      border-radius: 8px;
+      display: block;
+      overflow-x: auto;
+      font-family: Consolas, monospace;
+      margin: 10px 0;
+    }
+
+    .arrow {
+      font-size: 20px;
+      transition: transform 0.2s;
+    }
+
+    .topic.open .arrow {
+      transform: rotate(90deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Before Modeling: Data Understanding Checklist</h1>
+
+    <div class="topic">
+      <div class="topic-header">
+        <span>1. Understand the Data</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="topic-content">
+        <p>Ask: What does each row represent?</p>
+        <ul>
+          <li>One customer</li>
+          <li>One transaction</li>
+          <li>One patient</li>
+          <li>One survey response</li>
+        </ul>
+
+        <p>Create a data dictionary:</p>
+
+        <pre><code>Variable     Meaning
+CustomerID   Unique customer
+Age          Customer age
+Churn        Left company: Yes/No</code></pre>
+      </div>
+    </div>
+
+    <div class="topic">
+      <div class="topic-header">
+        <span>2. Dataset Structure</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="topic-content">
+        <p>Check dataset size:</p>
+
+        <pre><code>df.shape</code></pre>
+
+        <p>Check column types and missing values:</p>
+
+        <pre><code>df.info()</code></pre>
+
+        <p>Questions:</p>
+        <ul>
+          <li>How many rows?</li>
+          <li>How many columns?</li>
+          <li>Which variables are numeric?</li>
+          <li>Which variables are categorical?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="topic">
+      <div class="topic-header">
+        <span>3. Missing Values</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="topic-content">
+        <pre><code>df.isna().sum()
+df.isna().mean() * 100</code></pre>
+
+        <p>Questions:</p>
+        <ul>
+          <li>Which variables have missing values?</li>
+          <li>What percentage is missing?</li>
+          <li>Are missing values random?</li>
+          <li>Is an entire group missing?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="topic">
+      <div class="topic-header">
+        <span>4. Duplicates</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="topic-content">
+        <pre><code>df.duplicated().sum()
+df["customer_id"].duplicated().sum()</code></pre>
+
+        <p>Check for exact duplicate rows and duplicate IDs.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const topics = document.querySelectorAll(".topic");
+
+    topics.forEach(topic => {
+      const header = topic.querySelector(".topic-header");
+
+      header.addEventListener("click", () => {
+        topic.classList.toggle("open");
+      });
+    });
+  </script>
+</body>
+</html>

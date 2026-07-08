@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Acquisition Roadmap</title>
+<style>
+  :root{
+    --paper:#f7f5f0;
+    --paper-raised:#ffffff;
+    --ink:#20242b;
+    --ink-soft:#565f6d;
+    --line:#dedad0;
+    --navy:#161b26;
+    --navy-soft:#232a3a;
+    --navy-line:#333c50;
+    --accent:#c1611a;
+    --accent-soft:#f3e2d1;
+    --accent-ink:#7a3d0f;
+    --teal:#2f7a6f;
+    --teal-soft:#e0efec;
+    --radius:10px;
+    --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+    --sans:"Iowan Old Style","Charter","Georgia",serif;
+    --ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:var(--ui);background:var(--paper);color:var(--ink);line-height:1.5;}
+  a{color:inherit;}
+  .app{display:grid;grid-template-columns:280px 1fr;min-height:100vh;}
+  .sidebar{background:var(--navy);color:#cfd4de;padding:22px 16px 40px;position:sticky;top:0;height:100vh;overflow-y:auto;}
+  .brand{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;}
+  .brand-mark{font-family:var(--mono);color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.08em;}
+  .brand-title{font-family:var(--sans);font-size:19px;font-weight:700;color:#fff;line-height:1.2;}
+  .brand-sub{font-size:11.5px;color:#8b93a3;margin:6px 0 20px;font-family:var(--mono);letter-spacing:.03em;}
+  .nav-count{font-size:11px;color:#8b93a3;margin-bottom:10px;font-family:var(--mono);}
+  .nav-list{list-style:none;margin:0;padding:0;}
+  .nav-item{margin-bottom:2px;}
+  .nav-link{display:flex;justify-content:space-between;gap:8px;width:100%;text-align:left;background:none;border:none;color:#c3c9d4;font-size:13.5px;padding:8px 10px;border-radius:7px;cursor:pointer;font-family:var(--ui);}
+  .nav-link:hover{background:var(--navy-soft);color:#fff;}
+  .nav-link.active{background:var(--navy-soft);color:#fff;box-shadow:inset 3px 0 0 var(--accent);}
+  .nav-link .n{font-family:var(--mono);color:var(--accent);font-size:11px;min-width:18px;}
+  .nav-link .count{font-family:var(--mono);font-size:10.5px;color:#6d7688;}
+  .main{padding:36px 44px 100px;max-width:980px;}
+  header.page-head h1{font-family:var(--sans);font-size:34px;margin:0 0 10px;letter-spacing:-.01em;}
+  header.page-head p.intro{color:var(--ink-soft);font-size:15.5px;max-width:75ch;margin:0 0 26px;}
+  header.page-head p.intro strong{color:var(--ink);}
+  .search-wrap{position:sticky;top:0;background:var(--paper);padding:14px 0 16px;z-index:5;border-bottom:1px solid var(--line);margin-bottom:26px;}
+  .search-box{display:flex;align-items:center;gap:10px;background:var(--paper-raised);border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;}
+  .search-box:focus-within{border-color:var(--accent);}
+  .search-box svg{flex:0 0 auto;opacity:.5;}
+  #searchInput{border:none;outline:none;font-size:15px;width:100%;background:transparent;font-family:var(--ui);color:var(--ink);}
+  #searchMeta{font-size:12px;color:var(--ink-soft);margin-top:8px;font-family:var(--mono);}
+  #clearSearch{border:none;background:var(--line);color:var(--ink-soft);border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;display:none;}
+  .category{margin-bottom:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper-raised);overflow:hidden;scroll-margin-top:90px;box-shadow:0 1px 2px rgba(20,20,10,.03);}
+  .category-head{display:flex;align-items:center;gap:14px;padding:20px 22px;cursor:pointer;user-select:none;background:var(--navy);border-left:6px solid var(--accent);}
+  .category-head:hover{background:var(--navy-soft);}
+  .category-num{font-family:var(--mono);color:var(--navy);font-size:14px;font-weight:800;background:var(--accent);border-radius:7px;padding:5px 10px;flex:0 0 auto;}
+  .category-head h2{font-family:var(--sans);font-size:22px;font-weight:700;margin:0;flex:1;color:#fff;letter-spacing:-.01em;}
+  .category-count{font-family:var(--mono);font-size:11.5px;color:#aeb5c4;white-space:nowrap;}
+  .chevron{width:9px;height:9px;border-right:2px solid var(--ink-soft);border-bottom:2px solid var(--ink-soft);transform:rotate(45deg);transition:transform .18s ease;margin-right:3px;}
+  .category-head .chevron{border-color:#fff;}
+  .category.collapsed .chevron{transform:rotate(-45deg);}
+  .category-body{border-top:1px solid var(--line);padding:10px 22px 20px;}
+  .category.collapsed .category-body{display:none;}
+  .subcategory{margin-top:14px;}
+  .subcategory-head{display:flex;align-items:center;gap:8px;cursor:pointer;padding:6px 0;}
+  .subcategory-head h3{font-size:12.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft);margin:0;font-family:var(--mono);font-weight:600;}
+  .subcategory.collapsed .card-grid{display:none;}
+  .subcategory .chevron{width:7px;height:7px;border-color:var(--ink-soft);}
+  .card-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:6px;}
+  .card{border:1px solid var(--line);border-radius:9px;background:var(--paper);scroll-margin-top:90px;transition:box-shadow .15s ease,border-color .15s ease;}
+  .card.flash{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}
+  .card-summary{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:13px 15px;cursor:pointer;}
+  .card-title-wrap{display:flex;flex-direction:column;gap:6px;}
+  .card-title{font-size:15.5px;font-weight:700;font-family:var(--sans);}
+  .card-tags{display:flex;gap:6px;flex-wrap:wrap;}
+  .badge{font-family:var(--mono);font-size:10.5px;padding:2.5px 7px;border-radius:5px;letter-spacing:.02em;white-space:nowrap;}
+  .badge.path{background:#eef1f4;color:#5b6473;}
+  .badge.level{background:var(--teal-soft);color:var(--teal);}
+  .card .chevron{margin-top:5px;}
+  .card-detail{display:none;padding:0 15px 18px;border-top:1px solid var(--line);}
+  .card.open .card-detail{display:block;}
+  .card.open .card-summary{padding-bottom:8px;}
+  .card.open .chevron{transform:rotate(-135deg);}
+  .card-detail h4{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 8px;font-family:var(--mono);}
+  .card-detail p{margin:0;font-size:14px;color:var(--ink);}
+  .card-columns{display:grid;grid-template-columns:1.1fr 1.2fr;gap:0;margin-top:14px;}
+  .col-concept{padding-right:22px;}
+  .col-code{padding-left:22px;border-left:1px solid var(--line);}
+  pre{margin:0;background:#111827;color:#e5e7eb;border-radius:9px;padding:14px;overflow:auto;font-size:12.8px;line-height:1.6;font-family:var(--mono);}
+  .note-list{margin:12px 0 0;padding-left:18px;color:var(--ink-soft);font-size:13.5px;}
+  .prereq-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;}
+  .prereq{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;padding:5px 10px;border-radius:20px;text-decoration:none;border:1px solid #e6c9a8;color:var(--accent-ink);background:var(--accent-soft);}
+  .empty-state{text-align:center;padding:60px 20px;color:var(--ink-soft);}
+  .empty-state strong{display:block;font-size:16px;color:var(--ink);margin-bottom:6px;}
+  .mobile-bar{display:none;}
+  @media (max-width:880px){
+    .app{grid-template-columns:1fr;}
+    .sidebar{position:fixed;inset:0 20% 0 0;z-index:40;transform:translateX(-100%);transition:transform .2s ease;box-shadow:8px 0 30px rgba(0,0,0,.35);}
+    .sidebar.open{transform:translateX(0);}
+    .mobile-bar{display:flex;align-items:center;justify-content:space-between;background:var(--navy);color:#fff;padding:14px 18px;position:sticky;top:0;z-index:30;}
+    .mobile-bar .brand-title{color:#fff;font-size:16px;}
+    #menuToggle{background:none;border:1px solid var(--navy-line);color:#fff;border-radius:7px;padding:7px 10px;font-size:13px;cursor:pointer;}
+    .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:35;}
+    .overlay.show{display:block;}
+    .main{padding:22px 18px 80px;}
+    header.page-head h1{font-size:26px;}
+    .card-columns{grid-template-columns:1fr;gap:18px;}
+    .col-concept{padding-right:0;}
+    .col-code{padding-left:0;border-left:none;border-top:1px solid var(--line);padding-top:14px;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-bar"><span class="brand-title">Data Acquisition</span><button id="menuToggle">☰ Topics</button></div>
+<div class="overlay" id="overlay"></div>
+<div class="app">
+  <nav class="sidebar" id="sidebar">
+    <div class="brand"><span class="brand-mark">DATA/</span><span class="brand-title">Acquisition</span></div>
+    <div class="brand-sub">9 categories · click to jump</div>
+    <div class="nav-count" id="navCount">Loading…</div>
+    <ul class="nav-list" id="navList"></ul>
+  </nav>
+  <main class="main">
+    <header class="page-head">
+      <h1>Data Acquisition Roadmap</h1>
+      <p class="intro">
+        <strong>Data acquisition</strong> is the process of collecting data from files, databases,
+        APIs, web pages, cloud systems, and streaming sources so it can be used for analysis or machine learning.
+        The goal is not only to load data, but to load it correctly, reproducibly, and with basic quality checks.
+      </p>
+    </header>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="searchInput" type="text" placeholder="Search by source, library, or topic: CSV, SQL, API, scraping, Spark…" autocomplete="off">
+        <button id="clearSearch">Clear</button>
+      </div>
+      <div id="searchMeta"></div>
+    </div>
+    <div id="content"></div>
+    <div class="empty-state" id="emptyState" style="display:none;"><strong>No matches found</strong>Try a broader term, or clear the search.</div>
+  </main>
+</div>
+<script>
+const TOPICS = [
+{id:"csv",name:"CSV Files",category:"File-Based Data",subcategory:"Tabular Files",level:"Beginner",prereqs:["Python basics","pandas","File paths"],explanation:"CSV files are plain-text tables where values are separated by commas. They are one of the most common formats for raw datasets.",best:["Check the delimiter.","Check encoding if characters look wrong.","Inspect shape, columns, and missing values after loading."],code:`import pandas as pd
+
+# Basic CSV import
+df = pd.read_csv("data/customers.csv")
+
+print(df.shape)
+print(df.head())
+print(df.info())`},
+{id:"excel",name:"Excel Files",category:"File-Based Data",subcategory:"Tabular Files",level:"Beginner",prereqs:["Python basics","pandas","openpyxl"],explanation:"Excel files are common in business settings. A workbook can contain multiple sheets, so you need to specify which sheet to read.",best:["Use sheet_name when the workbook has many sheets.","Check merged cells and notes manually.","Avoid using Excel formatting as data."],code:`import pandas as pd
+
+# Read one sheet
+df = pd.read_excel("data/sales.xlsx", sheet_name="2026")
+
+# See all sheet names
+xls = pd.ExcelFile("data/sales.xlsx")
+print(xls.sheet_names)`},
+{id:"json",name:"JSON Files",category:"File-Based Data",subcategory:"Semi-Structured Files",level:"Beginner",prereqs:["Python dictionaries","pandas"],explanation:"JSON stores nested data using key-value pairs. It is common for APIs and web applications.",best:["Inspect the nested structure first.","Use json_normalize for nested records.","Check whether the file is JSON lines or regular JSON."],code:`import pandas as pd
+import json
+
+# Simple JSON
+df = pd.read_json("data/orders.json")
+
+# Nested JSON
+with open("data/orders_nested.json", "r") as f:
+    data = json.load(f)
+
+df_nested = pd.json_normalize(data, record_path="items", meta=["order_id", "date"])
+print(df_nested.head())`},
+{id:"parquet",name:"Parquet Files",category:"File-Based Data",subcategory:"Columnar Files",level:"Intermediate",prereqs:["pandas","pyarrow","Data types"],explanation:"Parquet is a compressed columnar format. It is faster and more efficient than CSV for large analytical datasets.",best:["Use Parquet for large repeated analysis.","Preserve data types better than CSV.","Partition large datasets by date or region when needed."],code:`import pandas as pd
+
+# Read parquet
+df = pd.read_parquet("data/transactions.parquet")
+
+# Save as parquet
+df.to_parquet("data/transactions_clean.parquet", index=False)`},
+{id:"sqlite",name:"SQLite Database",category:"Databases",subcategory:"SQL Databases",level:"Beginner",prereqs:["SQL basics","pandas"],explanation:"SQLite is a lightweight database stored in a single file. It is useful for practice, small projects, and local apps.",best:["Write explicit SELECT queries.","Avoid loading huge tables without filters.","Close the connection after use."],code:`import sqlite3
+import pandas as pd
+
+conn = sqlite3.connect("data/company.db")
+
+query = """
+SELECT customer_id, age, city, total_spend
+FROM customers
+WHERE total_spend IS NOT NULL
+"""
+
+df = pd.read_sql_query(query, conn)
+conn.close()
+
+print(df.head())`},
+{id:"postgresql",name:"PostgreSQL / SQL Server",category:"Databases",subcategory:"SQL Databases",level:"Intermediate",prereqs:["SQL basics","Database credentials","sqlalchemy"],explanation:"Production data often lives in relational databases such as PostgreSQL, SQL Server, MySQL, or Oracle. Python usually connects through SQLAlchemy or database drivers.",best:["Never hard-code passwords in public files.","Use environment variables for credentials.","Filter rows in SQL before loading into Python."],code:`import pandas as pd
+from sqlalchemy import create_engine
+
+# Example PostgreSQL connection
+engine = create_engine(
+    "postgresql+psycopg2://username:password@localhost:5432/mydatabase"
+)
+
+query = """
+SELECT order_id, customer_id, order_date, amount
+FROM orders
+WHERE order_date >= '2026-01-01'
+"""
+
+df = pd.read_sql(query, engine)
+print(df.head())`},
+{id:"mongodb",name:"MongoDB",category:"Databases",subcategory:"NoSQL Databases",level:"Intermediate",prereqs:["JSON","Python dictionaries","pymongo"],explanation:"MongoDB stores data as flexible documents rather than fixed relational tables. It is useful when records have nested or changing structures.",best:["Convert ObjectId values before exporting.","Flatten nested fields when needed.","Query only the fields you need."],code:`from pymongo import MongoClient
+import pandas as pd
+
+client = MongoClient("mongodb://localhost:27017/")
+db = client["shop"]
+collection = db["orders"]
+
+records = collection.find(
+    {"status": "completed"},
+    {"_id": 0, "order_id": 1, "customer_id": 1, "amount": 1}
+)
+
+df = pd.DataFrame(list(records))
+print(df.head())`},
+{id:"rest-api",name:"REST APIs",category:"APIs",subcategory:"Web APIs",level:"Intermediate",prereqs:["HTTP basics","JSON","requests"],explanation:"A REST API lets you request data from a web service using URLs. The response is often JSON that you convert into a DataFrame.",best:["Check the status code before using the response.","Read the API documentation.","Handle errors, authentication, and pagination."],code:`import requests
+import pandas as pd
+
+url = "https://api.example.com/customers"
+response = requests.get(url, timeout=30)
+
+if response.status_code == 200:
+    data = response.json()
+    df = pd.DataFrame(data)
+    print(df.head())
+else:
+    print("Request failed:", response.status_code)`},
+{id:"api-auth",name:"API Authentication",category:"APIs",subcategory:"Web APIs",level:"Intermediate",prereqs:["REST APIs","Tokens","Environment variables"],explanation:"Many APIs require an API key or bearer token. Authentication proves that you are allowed to access the data.",best:["Do not publish API keys on GitHub.","Store secrets in environment variables.","Refresh expired tokens when required."],code:`import os
+import requests
+import pandas as pd
+
+api_key = os.getenv("MY_API_KEY")
+headers = {"Authorization": f"Bearer {api_key}"}
+
+url = "https://api.example.com/transactions"
+response = requests.get(url, headers=headers, timeout=30)
+response.raise_for_status()
+
+df = pd.DataFrame(response.json()["results"])
+print(df.head())`},
+{id:"pagination",name:"API Pagination",category:"APIs",subcategory:"Web APIs",level:"Intermediate",prereqs:["REST APIs","Loops","JSON"],explanation:"APIs often return data page by page. Pagination is the process of repeatedly requesting each page until all records are collected.",best:["Check the API's pagination style.","Stop the loop when there is no next page.","Add delays if the API has rate limits."],code:`import requests
+import pandas as pd
+
+all_rows = []
+page = 1
+
+while True:
+    response = requests.get(
+        "https://api.example.com/orders",
+        params={"page": page, "limit": 100},
+        timeout=30
+    )
+    response.raise_for_status()
+    data = response.json()
+    rows = data["results"]
+
+    if not rows:
+        break
+
+    all_rows.extend(rows)
+    page += 1
+
+df = pd.DataFrame(all_rows)
+print(df.shape)`},
+{id:"beautifulsoup",name:"Web Scraping with BeautifulSoup",category:"Web Scraping",subcategory:"Static Pages",level:"Intermediate",prereqs:["HTML basics","requests","BeautifulSoup"],explanation:"BeautifulSoup extracts data from static HTML pages. It is useful when the data is visible in the page source.",best:["Respect robots.txt and website terms.","Avoid overloading websites with many requests.","Use stable CSS selectors when possible."],code:`import requests
+import pandas as pd
+from bs4 import BeautifulSoup
+
+url = "https://example.com/products"
+html = requests.get(url, timeout=30).text
+soup = BeautifulSoup(html, "html.parser")
+
+rows = []
+for item in soup.select(".product"):
+    rows.append({
+        "name": item.select_one(".name").get_text(strip=True),
+        "price": item.select_one(".price").get_text(strip=True)
+    })
+
+df = pd.DataFrame(rows)
+print(df.head())`},
+{id:"selenium",name:"Selenium / Playwright",category:"Web Scraping",subcategory:"Dynamic Pages",level:"Advanced",prereqs:["HTML basics","Browser automation","CSS selectors"],explanation:"Some websites load data with JavaScript after the page opens. Selenium or Playwright can control a browser and extract the rendered content.",best:["Use browser automation only when requests/BeautifulSoup is not enough.","Wait for elements before reading them.","Do not scrape private or restricted data."],code:`from selenium import webdriver
+from selenium.webdriver.common.by import By
+import pandas as pd
+
+browser = webdriver.Chrome()
+browser.get("https://example.com/jobs")
+
+jobs = []
+for card in browser.find_elements(By.CSS_SELECTOR, ".job-card"):
+    jobs.append({
+        "title": card.find_element(By.CSS_SELECTOR, ".title").text,
+        "company": card.find_element(By.CSS_SELECTOR, ".company").text
+    })
+
+browser.quit()
+df = pd.DataFrame(jobs)
+print(df.head())`},
+{id:"s3",name:"AWS S3",category:"Cloud Storage",subcategory:"Object Storage",level:"Intermediate",prereqs:["Cloud basics","AWS credentials","boto3"],explanation:"AWS S3 stores files as objects in buckets. Data teams often keep CSV, JSON, and Parquet files in S3.",best:["Use IAM permissions carefully.","Avoid downloading huge files unless needed.","Prefer Parquet for large cloud datasets."],code:`import pandas as pd
+
+# Requires s3fs installed and AWS credentials configured
+path = "s3://my-bucket/data/customers.parquet"
+
+df = pd.read_parquet(path)
+print(df.head())`},
+{id:"azure-blob",name:"Azure Blob Storage",category:"Cloud Storage",subcategory:"Object Storage",level:"Intermediate",prereqs:["Cloud basics","Azure credentials"],explanation:"Azure Blob Storage is Microsoft's object storage service. It is used to store files, logs, and analytical datasets.",best:["Use secure connection strings.","Avoid exposing account keys.","Organize files by project/date/source."],code:`from azure.storage.blob import BlobServiceClient
+import pandas as pd
+from io import BytesIO
+
+conn_str = "YOUR_CONNECTION_STRING"
+service = BlobServiceClient.from_connection_string(conn_str)
+container = service.get_container_client("data")
+blob = container.get_blob_client("customers.csv")
+
+content = blob.download_blob().readall()
+df = pd.read_csv(BytesIO(content))
+print(df.head())`},
+{id:"gcs",name:"Google Cloud Storage",category:"Cloud Storage",subcategory:"Object Storage",level:"Intermediate",prereqs:["Cloud basics","Google credentials"],explanation:"Google Cloud Storage stores files in buckets. It is commonly used with BigQuery, Vertex AI, and data pipelines.",best:["Use service accounts for projects.","Keep raw and processed folders separate.","Use Parquet for large analytical data."],code:`import pandas as pd
+
+# Requires gcsfs installed and Google credentials configured
+path = "gs://my-bucket/raw/customers.csv"
+
+df = pd.read_csv(path)
+print(df.head())`},
+{id:"spark",name:"Spark DataFrames",category:"Big Data Sources",subcategory:"Distributed Data",level:"Advanced",prereqs:["Python basics","DataFrames","Spark basics"],explanation:"Spark reads and processes large datasets across multiple machines. It is used when pandas is too slow or the data is too large for memory.",best:["Use Spark for large datasets, not small files.","Avoid collecting huge Spark DataFrames to pandas.","Partition data for performance."],code:`from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName("DataAcquisition").getOrCreate()
+
+# Read CSV with Spark
+df = spark.read.csv("data/large_file.csv", header=True, inferSchema=True)
+
+df.printSchema()
+df.show(5)`},
+{id:"hive",name:"Hive Tables",category:"Big Data Sources",subcategory:"Distributed Data",level:"Advanced",prereqs:["SQL basics","Spark basics","Data warehouse basics"],explanation:"Hive tables are often used in big data warehouses. Spark can query Hive tables using SQL-like commands.",best:["Filter partitions in your query.","Avoid SELECT * on very large tables.","Check table schema before loading."],code:`from pyspark.sql import SparkSession
+
+spark = SparkSession.builder \
+    .appName("HiveRead") \
+    .enableHiveSupport() \
+    .getOrCreate()
+
+query = """
+SELECT customer_id, amount, transaction_date
+FROM warehouse.transactions
+WHERE transaction_date >= '2026-01-01'
+"""
+
+df = spark.sql(query)
+df.show(5)`},
+{id:"kafka",name:"Kafka Streaming",category:"Streaming Data",subcategory:"Real-Time Data",level:"Advanced",prereqs:["Streaming basics","Kafka","Spark"],explanation:"Kafka is used for real-time event streams such as clicks, transactions, logs, and sensor data. The data arrives continuously instead of as one static file.",best:["Define the message schema clearly.","Handle late or duplicated events.","Save raw events before transforming them."],code:`from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName("KafkaRead").getOrCreate()
+
+stream_df = spark.readStream.format("kafka") \
+    .option("kafka.bootstrap.servers", "localhost:9092") \
+    .option("subscribe", "transactions") \
+    .load()
+
+# Kafka value is binary, so cast it to string
+messages = stream_df.selectExpr("CAST(value AS STRING) as message")`},
+{id:"quality-check",name:"Initial Quality Checks",category:"Data Quality Checks",subcategory:"After Loading",level:"Beginner",prereqs:["pandas","Data types"],explanation:"After acquiring data, always run basic checks before analysis. This confirms that the data was loaded correctly.",best:["Check shape, columns, dtypes, and missing values.","Look at sample rows.","Confirm the expected unit of observation."],code:`# Basic checks after loading data
+print(df.shape)
+print(df.columns)
+print(df.dtypes)
+print(df.head())
+print(df.isna().sum())
+print(df.duplicated().sum())`},
+{id:"save-raw",name:"Save Raw Data",category:"Data Quality Checks",subcategory:"After Loading",level:"Beginner",prereqs:["pandas","File organization"],explanation:"A good acquisition step saves the original raw data before cleaning. This makes the workflow reproducible and auditable.",best:["Keep raw data unchanged.","Save processed data separately.","Use dates or version numbers in filenames."],code:`from pathlib import Path
+import pandas as pd
+
+raw_dir = Path("data/raw")
+raw_dir.mkdir(parents=True, exist_ok=True)
+
+# Save a raw copy immediately after acquisition
+df.to_csv(raw_dir / "customers_raw_2026_07_07.csv", index=False)
+
+# Later cleaned data should go somewhere else
+# data/processed/customers_clean.csv`}
+];
+
+const CATEGORY_ORDER = [];
+const GROUPED = {};
+TOPICS.forEach(t=>{
+  if(!GROUPED[t.category]){GROUPED[t.category]={order:[],subs:{}};CATEGORY_ORDER.push(t.category);}
+  if(!GROUPED[t.category].subs[t.subcategory]){GROUPED[t.category].subs[t.subcategory]=[];GROUPED[t.category].order.push(t.subcategory);}
+  GROUPED[t.category].subs[t.subcategory].push(t);
+});
+function slug(name){return "cat-"+name.toLowerCase().replace(/[^a-z0-9]+/g,"-");}
+function renderAll(){
+  const content=document.getElementById("content");
+  const navList=document.getElementById("navList");
+  let html="", navHtml="", num=1;
+  CATEGORY_ORDER.forEach(catName=>{
+    const cat=GROUPED[catName];
+    let count=0; cat.order.forEach(s=>count+=cat.subs[s].length);
+    const id=slug(catName);
+    navHtml += `<li class="nav-item"><button class="nav-link" data-target="${id}"><span><span class="n">${String(num).padStart(2,"0")}</span> ${catName}</span><span class="count">${count}</span></button></li>`;
+    let subHtml="";
+    cat.order.forEach(subName=>{
+      subHtml += `<div class="subcategory" data-sub="${subName}"><div class="subcategory-head" data-toggle="sub"><span class="chevron"></span><h3>${subName}</h3></div><div class="card-grid">`;
+      cat.subs[subName].forEach(t=>subHtml+=renderCard(t));
+      subHtml += `</div></div>`;
+    });
+    html += `<section class="category" id="${id}" data-category="${catName}"><div class="category-head" data-toggle="cat"><span class="chevron"></span><span class="category-num">${String(num).padStart(2,"0")}</span><h2>${catName}</h2><span class="category-count">${count} topics</span></div><div class="category-body">${subHtml}</div></section>`;
+    num++;
+  });
+  content.innerHTML=html;
+  navList.innerHTML=navHtml;
+  document.getElementById("navCount").textContent = TOPICS.length + " acquisition topics indexed";
+}
+function renderCard(t){
+  const prereqs=t.prereqs.map(p=>`<li><span class="prereq">${p}</span></li>`).join("");
+  const best=t.best.map(b=>`<li>${b}</li>`).join("");
+  return `<article class="card" id="${t.id}" data-name="${t.name.toLowerCase()}" data-cat="${t.category.toLowerCase()}" data-sub="${t.subcategory.toLowerCase()}" data-prereqs="${t.prereqs.join(" | ").toLowerCase()}" data-text="${t.explanation.toLowerCase()}">
+    <div class="card-summary" data-toggle="card"><div class="card-title-wrap"><div class="card-title">${t.name}</div><div class="card-tags"><span class="badge path">${t.category} · ${t.subcategory}</span><span class="badge level">${t.level}</span></div></div><span class="chevron"></span></div>
+    <div class="card-detail"><div class="card-columns"><div class="col-concept"><h4>Explanation</h4><p>${t.explanation}</p><h4 style="margin-top:16px;">Prerequisites</h4><ul class="prereq-list">${prereqs}</ul><h4 style="margin-top:16px;">Best Practices</h4><ul class="note-list">${best}</ul></div><div class="col-code"><h4>Python Code</h4><pre><code>${escapeHtml(t.code)}</code></pre></div></div></div>
+  </article>`;
+}
+function escapeHtml(str){return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+renderAll();
+
+document.getElementById("content").addEventListener("click",e=>{
+  const catHead=e.target.closest('[data-toggle="cat"]');
+  const subHead=e.target.closest('[data-toggle="sub"]');
+  const cardHead=e.target.closest('[data-toggle="card"]');
+  if(cardHead){cardHead.closest(".card").classList.toggle("open");return;}
+  if(subHead){subHead.closest(".subcategory").classList.toggle("collapsed");return;}
+  if(catHead){catHead.closest(".category").classList.toggle("collapsed");}
+});
+
+document.getElementById("navList").addEventListener("click",e=>{
+  const btn=e.target.closest(".nav-link"); if(!btn)return;
+  document.querySelectorAll(".nav-link").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  const target=document.getElementById(btn.getAttribute("data-target"));
+  if(target){target.classList.remove("collapsed");target.scrollIntoView({behavior:"smooth",block:"start"});}
+  closeMobileNav();
+});
+const sidebar=document.getElementById("sidebar"), overlay=document.getElementById("overlay");
+document.getElementById("menuToggle").addEventListener("click",()=>{sidebar.classList.add("open");overlay.classList.add("show");});
+overlay.addEventListener("click",closeMobileNav);
+function closeMobileNav(){sidebar.classList.remove("open");overlay.classList.remove("show");}
+
+const searchInput=document.getElementById("searchInput"), clearBtn=document.getElementById("clearSearch"), searchMeta=document.getElementById("searchMeta"), emptyState=document.getElementById("emptyState");
+searchInput.addEventListener("input",runSearch);
+clearBtn.addEventListener("click",()=>{searchInput.value="";runSearch();searchInput.focus();});
+function runSearch(){
+  const q=searchInput.value.trim().toLowerCase();
+  clearBtn.style.display=q?"inline-block":"none";
+  const cards=document.querySelectorAll(".card"); let visibleCount=0;
+  cards.forEach(card=>{
+    const haystack=card.getAttribute("data-name")+" "+card.getAttribute("data-cat")+" "+card.getAttribute("data-sub")+" "+card.getAttribute("data-prereqs")+" "+card.getAttribute("data-text");
+    const match=!q||haystack.includes(q);
+    card.style.display=match?"":"none"; if(match)visibleCount++;
+  });
+  document.querySelectorAll(".subcategory").forEach(sub=>{
+    const any=[...sub.querySelectorAll(".card")].some(c=>c.style.display!=="none");
+    sub.style.display=any?"":"none"; if(q&&any)sub.classList.remove("collapsed");
+  });
+  document.querySelectorAll(".category").forEach(cat=>{
+    const any=[...cat.querySelectorAll(".card")].some(c=>c.style.display!=="none");
+    cat.style.display=any?"":"none"; if(q&&any)cat.classList.remove("collapsed");
+  });
+  emptyState.style.display=(q&&visibleCount===0)?"block":"none";
+  searchMeta.textContent=q?`${visibleCount} of ${cards.length} topics match "${searchInput.value.trim()}"`:"";
+}
+
+window.addEventListener("scroll",()=>{
+  let currentId=null;
+  document.querySelectorAll(".category").forEach(sec=>{if(sec.getBoundingClientRect().top<=120)currentId=sec.id;});
+  document.querySelectorAll(".nav-link").forEach(btn=>btn.classList.toggle("active",btn.getAttribute("data-target")===currentId));
+});
+</script>
+</body>
+</html>

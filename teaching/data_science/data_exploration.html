@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Exploration Roadmap</title>
+<style>
+:root{
+  --paper:#f7f5f0;
+  --paper-raised:#ffffff;
+  --ink:#20242b;
+  --ink-soft:#565f6d;
+  --line:#dedad0;
+  --navy:#161b26;
+  --navy-soft:#232a3a;
+  --navy-line:#333c50;
+  --accent:#c1611a;
+  --accent-soft:#f3e2d1;
+  --accent-ink:#7a3d0f;
+  --teal:#2f7a6f;
+  --teal-soft:#e0efec;
+  --radius:10px;
+  --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  --sans:"Iowan Old Style","Charter","Georgia",serif;
+  --ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--ui);background:var(--paper);color:var(--ink);line-height:1.5}
+a{color:inherit}
+.app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+.sidebar{background:var(--navy);color:#cfd4de;padding:22px 16px 40px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.brand{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.brand-mark{font-family:var(--mono);color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.08em}
+.brand-title{font-family:var(--sans);font-size:19px;font-weight:700;color:#fff;line-height:1.2}
+.brand-sub{font-size:11.5px;color:#8b93a3;margin:6px 0 20px;font-family:var(--mono);letter-spacing:.03em}
+.nav-count{font-size:11px;color:#8b93a3;margin-bottom:10px;font-family:var(--mono)}
+.nav-list{list-style:none;margin:0;padding:0}
+.nav-item{margin-bottom:2px}
+.nav-link{display:flex;justify-content:space-between;gap:8px;width:100%;text-align:left;background:none;border:none;color:#c3c9d4;font-size:13.5px;padding:8px 10px;border-radius:7px;cursor:pointer;font-family:var(--ui)}
+.nav-link:hover{background:var(--navy-soft);color:#fff}
+.nav-link.active{background:var(--navy-soft);color:#fff;box-shadow:inset 3px 0 0 var(--accent)}
+.nav-link .n{font-family:var(--mono);color:var(--accent);font-size:11px;min-width:18px}
+.nav-link .count{font-family:var(--mono);font-size:10.5px;color:#6d7688}
+.main{padding:36px 44px 100px;max-width:980px}
+header.page-head h1{font-family:var(--sans);font-size:34px;margin:0 0 10px;letter-spacing:-.01em}
+header.page-head p.intro{color:var(--ink-soft);font-size:15.5px;max-width:74ch;margin:0 0 26px}
+header.page-head p.intro strong{color:var(--ink)}
+.search-wrap{position:sticky;top:0;background:var(--paper);padding:14px 0 16px;z-index:5;border-bottom:1px solid var(--line);margin-bottom:26px}
+.search-box{display:flex;align-items:center;gap:10px;background:var(--paper-raised);border:1.5px solid var(--line);border-radius:10px;padding:10px 14px}
+.search-box:focus-within{border-color:var(--accent)}
+.search-box svg{flex:0 0 auto;opacity:.5}
+#searchInput{border:none;outline:none;font-size:15px;width:100%;background:transparent;font-family:var(--ui);color:var(--ink)}
+#searchMeta{font-size:12px;color:var(--ink-soft);margin-top:8px;font-family:var(--mono)}
+#clearSearch{border:none;background:var(--line);color:var(--ink-soft);border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;display:none}
+.category{margin-bottom:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper-raised);overflow:hidden;scroll-margin-top:90px;box-shadow:0 1px 2px rgba(20,20,10,.03)}
+.category-head{display:flex;align-items:center;gap:14px;padding:20px 22px;cursor:pointer;user-select:none;background:var(--navy);border-left:6px solid var(--accent)}
+.category-head:hover{background:var(--navy-soft)}
+.category-num{font-family:var(--mono);color:var(--navy);font-size:14px;font-weight:800;background:var(--accent);border-radius:7px;padding:5px 10px;flex:0 0 auto}
+.category-head h2{font-family:var(--sans);font-size:22px;font-weight:700;margin:0;flex:1;color:#fff;letter-spacing:-.01em}
+.category-count{font-family:var(--mono);font-size:11.5px;color:#aeb5c4;white-space:nowrap}
+.chevron{width:9px;height:9px;border-right:2px solid var(--ink-soft);border-bottom:2px solid var(--ink-soft);transform:rotate(45deg);transition:transform .18s ease;margin-right:3px}
+.category-head .chevron{border-color:#fff}
+.category.collapsed .chevron{transform:rotate(-45deg)}
+.category-body{border-top:1px solid var(--line);padding:10px 22px 20px}
+.category.collapsed .category-body{display:none}
+.subcategory{margin-top:14px}
+.subcategory-head{display:flex;align-items:center;gap:8px;cursor:pointer;padding:6px 0}
+.subcategory-head h3{font-size:12.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft);margin:0;font-family:var(--mono);font-weight:600}
+.subcategory.collapsed .card-grid{display:none}
+.subcategory .chevron{width:7px;height:7px;border-color:var(--ink-soft)}
+.card-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:6px}
+.card{border:1px solid var(--line);border-radius:9px;background:var(--paper);scroll-margin-top:90px;transition:box-shadow .15s ease,border-color .15s ease}
+.card.flash{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.card-summary{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:13px 15px;cursor:pointer}
+.card-title-wrap{display:flex;flex-direction:column;gap:6px}
+.card-title{font-size:15.5px;font-weight:700;font-family:var(--sans)}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap}
+.badge{font-family:var(--mono);font-size:10.5px;padding:2.5px 7px;border-radius:5px;letter-spacing:.02em;white-space:nowrap}
+.badge.path{background:#eef1f4;color:#5b6473}
+.badge.skill{background:var(--teal-soft);color:var(--teal)}
+.card .chevron{margin-top:5px}
+.card-detail{display:none;padding:0 15px 18px;border-top:1px solid var(--line)}
+.card.open .card-detail{display:block}
+.card.open .card-summary{padding-bottom:8px}
+.card.open .chevron{transform:rotate(-135deg)}
+.card-detail h4{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 8px;font-family:var(--mono)}
+.card-detail p{margin:0;font-size:14px;color:var(--ink)}
+.card-columns{display:grid;grid-template-columns:1.15fr 1fr;gap:0;margin-top:14px}
+.col-main{padding-right:22px}
+.col-code{padding-left:22px;border-left:1px solid var(--line)}
+.code-block{background:#111827;color:#e5e7eb;border-radius:8px;padding:13px 14px;overflow:auto;font-family:var(--mono);font-size:12.5px;line-height:1.55;margin:0 0 14px}
+.list{margin:0 0 14px 18px;padding:0;color:var(--ink);font-size:14px}
+.list li{margin-bottom:5px}
+.actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:8px 14px;border-radius:7px;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--ui)}
+.btn-video{background:var(--navy);color:#fff}.btn-video:hover{background:var(--navy-soft)}
+.empty-state{text-align:center;padding:60px 20px;color:var(--ink-soft)}
+.empty-state strong{display:block;font-size:16px;color:var(--ink);margin-bottom:6px}
+.mobile-bar{display:none}
+@media(max-width:880px){.app{grid-template-columns:1fr}.sidebar{position:fixed;inset:0 20% 0 0;z-index:40;transform:translateX(-100%);transition:transform .2s ease;box-shadow:8px 0 30px rgba(0,0,0,.35)}.sidebar.open{transform:translateX(0)}.mobile-bar{display:flex;align-items:center;justify-content:space-between;background:var(--navy);color:#fff;padding:14px 18px;position:sticky;top:0;z-index:30}.mobile-bar .brand-title{color:#fff;font-size:16px}#menuToggle{background:none;border:1px solid var(--navy-line);color:#fff;border-radius:7px;padding:7px 10px;font-size:13px;cursor:pointer}.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:35}.overlay.show{display:block}.main{padding:22px 18px 80px}header.page-head h1{font-size:26px}.card-columns{grid-template-columns:1fr;gap:18px}.col-main{padding-right:0}.col-code{padding-left:0;border-left:none;border-top:1px solid var(--line);padding-top:14px}}
+</style>
+</head>
+<body>
+<div class="mobile-bar"><span class="brand-title">Data Exploration</span><button id="menuToggle">☰ Topics</button></div>
+<div class="overlay" id="overlay"></div>
+<div class="app">
+  <nav class="sidebar" id="sidebar">
+    <div class="brand"><span class="brand-mark">EXP/</span><span class="brand-title">Data Exploration</span></div>
+    <div class="brand-sub">Inspect · understand · diagnose</div>
+    <div class="nav-count" id="navCount">Loading…</div>
+    <ul class="nav-list" id="navList"></ul>
+  </nav>
+  <main class="main">
+    <header class="page-head">
+      <h1>Data Exploration Roadmap</h1>
+      <p class="intro"><strong>Data exploration</strong> is the first serious look at a dataset after you acquire it. The goal is not to clean or model yet. The goal is to understand the structure, variables, data types, distributions, missingness, duplicates, and early patterns so you know what you are working with.</p>
+    </header>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="searchInput" type="text" placeholder="Search topics, methods, or code terms, e.g. dtypes, missing, describe, duplicates..." autocomplete="off">
+        <button id="clearSearch">Clear</button>
+      </div>
+      <div id="searchMeta"></div>
+    </div>
+    <div id="content"></div>
+    <div class="empty-state" id="emptyState" style="display:none;"><strong>No matches found</strong>Try a broader term or clear the search.</div>
+  </main>
+</div>
+<script>
+const TOPICS = [
+{id:'first-look',name:'First Look at the Dataset',category:'Initial Inspection',subcategory:'Core',skill:'Beginner',
+ explanation:'Start by viewing a few rows so you can see the actual structure, column names, and example values.',
+ why:['Confirm the file loaded correctly','See whether columns make sense','Spot obvious problems early'],
+ mistakes:['Assuming the dataset loaded correctly without checking rows','Looking only at the first rows if the data may be sorted'],
+ code:`import pandas as pd
+
+df = pd.read_csv("data.csv")
+
+# First rows
+df.head()
+
+# Random rows are often more useful than only the top rows
+df.sample(5, random_state=42)`},
+
+{id:'shape-size',name:'Shape, Columns, and Size',category:'Initial Inspection',subcategory:'Core',skill:'Beginner',
+ explanation:'Check how many rows and columns the dataset has, and list the column names.',
+ why:['Understand the scale of the dataset','Detect unexpected missing or extra columns','Estimate whether the dataset is small or large'],
+ mistakes:['Ignoring column names with spaces or hidden characters','Not checking whether the row count matches expectations'],
+ code:`# Number of rows and columns
+df.shape
+
+# Column names
+df.columns.tolist()
+
+# Total number of cells
+df.size
+
+# Number of rows only
+len(df)`},
+
+{id:'info-dtypes',name:'Data Types and Memory',category:'Structure',subcategory:'Data Types',skill:'Beginner',
+ explanation:'Use data types to see whether pandas interpreted columns correctly, such as numbers, text, dates, and categories.',
+ why:['Find numbers stored as text','Find dates stored as strings','Check memory usage'],
+ mistakes:['Treating object columns as clean text without inspecting them','Forgetting to convert date columns to datetime'],
+ code:`# Data types and non-null counts
+df.info()
+
+# Only data types
+df.dtypes
+
+# Select columns by type
+numeric_cols = df.select_dtypes(include="number").columns
+text_cols = df.select_dtypes(include="object").columns`},
+
+{id:'summary-statistics',name:'Summary Statistics',category:'Structure',subcategory:'Numeric Overview',skill:'Beginner',
+ explanation:'Summary statistics give a quick view of central tendency, spread, minimum, maximum, and quartiles.',
+ why:['Detect unrealistic minimum or maximum values','Compare mean and median','Understand spread before visualization'],
+ mistakes:['Using mean only when the data is skewed','Ignoring count because missing values affect summaries'],
+ code:`# Numeric summary
+df.describe()
+
+# Include non-numeric columns too
+df.describe(include="all")
+
+# Specific statistics
+df["Age"].mean()
+df["Age"].median()
+df["Age"].std()`},
+
+{id:'categorical-overview',name:'Categorical Variables',category:'Structure',subcategory:'Categorical Overview',skill:'Beginner',
+ explanation:'Explore categories by checking unique values, number of categories, and frequency counts.',
+ why:['Find inconsistent labels','Find rare categories','Detect spelling or capitalization problems'],
+ mistakes:['Assuming two labels are different when they only differ by spaces or case','Ignoring very rare categories'],
+ code:`# Number of unique values per column
+df.nunique().sort_values(ascending=False)
+
+# Frequency table
+df["Country"].value_counts(dropna=False)
+
+# Percentages
+df["Country"].value_counts(normalize=True, dropna=False) * 100`},
+
+{id:'missing-values',name:'Missing Values Exploration',category:'Data Quality Signals',subcategory:'Missingness',skill:'Beginner',
+ explanation:'At the exploration stage, you identify missing values and patterns. You do not necessarily fix them yet.',
+ why:['Know which columns have incomplete data','Decide whether missingness is small or serious','Prepare for cleaning or imputation'],
+ mistakes:['Filling missing values too early','Checking only counts but not percentages'],
+ code:`# Missing count by column
+missing_count = df.isna().sum().sort_values(ascending=False)
+
+# Missing percentage by column
+missing_pct = (df.isna().mean() * 100).sort_values(ascending=False)
+
+missing_report = pd.DataFrame({
+    "missing_count": missing_count,
+    "missing_percent": missing_pct
+})
+
+missing_report[missing_report["missing_count"] > 0]`},
+
+{id:'duplicates',name:'Duplicate Records Exploration',category:'Data Quality Signals',subcategory:'Duplicates',skill:'Beginner',
+ explanation:'Duplicates can distort counts, averages, and model training. First detect them and understand where they occur.',
+ why:['Find repeated rows','Find duplicated IDs','Decide whether duplicates are errors or valid repeated events'],
+ mistakes:['Dropping duplicates without understanding why they exist','Checking only full-row duplicates when ID duplicates matter more'],
+ code:`# Full-row duplicates
+df.duplicated().sum()
+
+# Show duplicate rows
+df[df.duplicated(keep=False)]
+
+# Duplicates based on an ID column
+df["CustomerID"].duplicated().sum()
+df[df["CustomerID"].duplicated(keep=False)]`},
+
+{id:'numeric-distribution',name:'Numeric Distributions',category:'Patterns',subcategory:'Univariate Patterns',skill:'Beginner',
+ explanation:'Explore one numeric variable at a time to understand its shape, skewness, range, and possible outliers.',
+ why:['See whether data is normal, skewed, or multi-peaked','Detect extreme values','Choose possible transformations later'],
+ mistakes:['Relying only on averages','Not checking histograms before modeling'],
+ code:`import matplotlib.pyplot as plt
+
+# Histogram
+df["Income"].hist(bins=30)
+plt.title("Income Distribution")
+plt.xlabel("Income")
+plt.ylabel("Frequency")
+plt.show()
+
+# Boxplot
+df.boxplot(column="Income")
+plt.show()`},
+
+{id:'relationships',name:'Relationships Between Variables',category:'Patterns',subcategory:'Bivariate Patterns',skill:'Intermediate',
+ explanation:'Look at relationships between two variables, such as numeric-numeric, category-numeric, or category-category relationships.',
+ why:['Identify useful predictors','Find possible non-linear patterns','Detect suspicious relationships'],
+ mistakes:['Assuming correlation means causation','Using correlation for categorical variables without proper methods'],
+ code:`import matplotlib.pyplot as plt
+
+# Numeric vs numeric scatter plot
+df.plot.scatter(x="Age", y="Income")
+plt.show()
+
+# Category vs numeric grouped mean
+df.groupby("Education")["Income"].mean().sort_values()
+
+# Category vs category cross-tab
+pd.crosstab(df["Gender"], df["Churn"], normalize="index")`},
+
+{id:'correlation',name:'Correlation Analysis',category:'Patterns',subcategory:'Numeric Relationships',skill:'Intermediate',
+ explanation:'Correlation measures how numeric variables move together. It is useful for detecting associations and multicollinearity.',
+ why:['Find related numeric variables','Detect redundant features','Prepare for feature selection later'],
+ mistakes:['Using Pearson correlation for non-linear relationships','Forgetting that correlation does not prove causality'],
+ code:`import matplotlib.pyplot as plt
+
+# Correlation matrix for numeric columns
+corr = df.corr(numeric_only=True)
+
+# Sort correlations with a target variable
+corr["Income"].sort_values(ascending=False)
+
+# Simple heatmap using matplotlib
+plt.imshow(corr, aspect="auto")
+plt.xticks(range(len(corr.columns)), corr.columns, rotation=90)
+plt.yticks(range(len(corr.columns)), corr.columns)
+plt.colorbar()
+plt.title("Correlation Matrix")
+plt.tight_layout()
+plt.show()`},
+
+{id:'grouped-analysis',name:'Grouped Exploration',category:'Patterns',subcategory:'Grouped Summaries',skill:'Intermediate',
+ explanation:'Group data by categories and compare counts, averages, medians, or rates across groups.',
+ why:['Compare segments','Find differences across regions or groups','Create business-friendly summaries'],
+ mistakes:['Taking group means without checking group sizes','Ignoring missing categories'],
+ code:`# Group count
+df.groupby("Region").size().sort_values(ascending=False)
+
+# Grouped summary
+df.groupby("Region")["Income"].agg(["count", "mean", "median", "min", "max"])
+
+# Multiple grouping variables
+df.groupby(["Region", "Gender"])["Income"].mean().reset_index()`},
+
+{id:'data-dictionary',name:'Data Dictionary',category:'Documentation',subcategory:'Metadata',skill:'Beginner',
+ explanation:'A data dictionary records what each column means, its expected type, valid values, and notes about quality issues.',
+ why:['Avoid confusion later','Help other users understand the dataset','Document assumptions before cleaning'],
+ mistakes:['Skipping documentation until the end','Documenting column names but not business meaning'],
+ code:`data_dictionary = pd.DataFrame({
+    "column": df.columns,
+    "dtype": df.dtypes.astype(str).values,
+    "non_null_count": df.notna().sum().values,
+    "unique_values": df.nunique().values
+})
+
+data_dictionary`}
+];
+
+const CATEGORY_ORDER=[];const GROUPED={};
+TOPICS.forEach(t=>{if(!GROUPED[t.category]){GROUPED[t.category]={order:[],subs:{}};CATEGORY_ORDER.push(t.category)};if(!GROUPED[t.category].subs[t.subcategory]){GROUPED[t.category].subs[t.subcategory]=[];GROUPED[t.category].order.push(t.subcategory)};GROUPED[t.category].subs[t.subcategory].push(t)});
+const ICON_PLAY='<svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M8 5v14l11-7z"/></svg>';
+function videoUrl(name){return "https://www.youtube.com/results?search_query="+encodeURIComponent(name+" pandas data exploration tutorial")}
+function catSlug(name){return "cat-"+name.toLowerCase().replace(/[^a-z0-9]+/g,"-")}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function renderAll(){const content=document.getElementById("content");const navList=document.getElementById("navList");let html="";let navHtml="";let num=1;CATEGORY_ORDER.forEach(catName=>{const cat=GROUPED[catName];let count=0;cat.order.forEach(s=>count+=cat.subs[s].length);const slug=catSlug(catName);navHtml+=`<li class="nav-item"><button class="nav-link" data-target="${slug}"><span><span class="n">${String(num).padStart(2,"0")}</span> ${catName}</span><span class="count">${count}</span></button></li>`;let subHtml="";cat.order.forEach(subName=>{const items=cat.subs[subName];subHtml+=`<div class="subcategory" data-sub="${subName}"><div class="subcategory-head" data-toggle="sub"><span class="chevron"></span><h3>${subName}</h3></div><div class="card-grid">`;items.forEach(t=>subHtml+=renderCard(t));subHtml+=`</div></div>`});html+=`<section class="category" id="${slug}" data-category="${catName}"><div class="category-head" data-toggle="cat"><span class="chevron"></span><span class="category-num">${String(num).padStart(2,"0")}</span><h2>${catName}</h2><span class="category-count">${count} topics</span></div><div class="category-body">${subHtml}</div></section>`;num++});content.innerHTML=html;navList.innerHTML=navHtml;document.getElementById("navCount").textContent=TOPICS.length+" topics indexed"}
+function renderCard(t){return `<article class="card" id="${t.id}" data-name="${t.name.toLowerCase()}" data-cat="${t.category.toLowerCase()}" data-sub="${t.subcategory.toLowerCase()}" data-text="${(t.explanation+' '+t.why.join(' ')+' '+t.mistakes.join(' ')+' '+t.code).toLowerCase().replace(/"/g,'&quot;')}"><div class="card-summary" data-toggle="card"><div class="card-title-wrap"><div class="card-title">${t.name}</div><div class="card-tags"><span class="badge path">${t.category} · ${t.subcategory}</span><span class="badge skill">${t.skill}</span></div></div><span class="chevron"></span></div><div class="card-detail"><div class="card-columns"><div class="col-main"><h4>Explanation</h4><p>${t.explanation}</p><h4 style="margin-top:16px">Why it matters</h4><ul class="list">${t.why.map(x=>`<li>${x}</li>`).join('')}</ul><h4>Common mistakes</h4><ul class="list">${t.mistakes.map(x=>`<li>${x}</li>`).join('')}</ul><div class="actions"><a class="btn btn-video" href="${videoUrl(t.name)}" target="_blank" rel="noopener">${ICON_PLAY} Watch video</a></div></div><div class="col-code"><h4>Python code</h4><pre class="code-block"><code>${esc(t.code)}</code></pre></div></div></div></article>`}
+renderAll();
+
+document.getElementById("content").addEventListener("click",e=>{const catHead=e.target.closest('[data-toggle="cat"]');const subHead=e.target.closest('[data-toggle="sub"]');const cardHead=e.target.closest('[data-toggle="card"]');if(cardHead){cardHead.closest(".card").classList.toggle("open");return}if(subHead){subHead.closest(".subcategory").classList.toggle("collapsed");return}if(catHead){catHead.closest(".category").classList.toggle("collapsed")}});
+document.getElementById("navList").addEventListener("click",e=>{const btn=e.target.closest(".nav-link");if(!btn)return;document.querySelectorAll(".nav-link").forEach(b=>b.classList.remove("active"));btn.classList.add("active");const target=document.getElementById(btn.getAttribute("data-target"));if(target){target.classList.remove("collapsed");target.scrollIntoView({behavior:"smooth",block:"start"})}closeMobileNav()});
+const sidebar=document.getElementById("sidebar");const overlay=document.getElementById("overlay");document.getElementById("menuToggle").addEventListener("click",()=>{sidebar.classList.add("open");overlay.classList.add("show")});overlay.addEventListener("click",closeMobileNav);function closeMobileNav(){sidebar.classList.remove("open");overlay.classList.remove("show")}
+const searchInput=document.getElementById("searchInput");const clearBtn=document.getElementById("clearSearch");const searchMeta=document.getElementById("searchMeta");const emptyState=document.getElementById("emptyState");searchInput.addEventListener("input",runSearch);clearBtn.addEventListener("click",()=>{searchInput.value="";runSearch();searchInput.focus()});
+function runSearch(){const q=searchInput.value.trim().toLowerCase();clearBtn.style.display=q?"inline-block":"none";const cards=document.querySelectorAll(".card");let visibleCount=0;cards.forEach(card=>{const haystack=card.getAttribute("data-name")+" "+card.getAttribute("data-cat")+" "+card.getAttribute("data-sub")+" "+card.getAttribute("data-text");const match=!q||haystack.includes(q);card.style.display=match?"":"none";if(match)visibleCount++});document.querySelectorAll(".subcategory").forEach(sub=>{const anyVisible=[...sub.querySelectorAll(".card")].some(c=>c.style.display!=="none");sub.style.display=anyVisible?"":"none";if(q&&anyVisible)sub.classList.remove("collapsed")});document.querySelectorAll(".category").forEach(cat=>{const anyVisible=[...cat.querySelectorAll(".card")].some(c=>c.style.display!=="none");cat.style.display=anyVisible?"":"none";if(q&&anyVisible)cat.classList.remove("collapsed")});emptyState.style.display=(q&&visibleCount===0)?"block":"none";searchMeta.textContent=q?`${visibleCount} of ${cards.length} topics match "${searchInput.value.trim()}"`:""}
+window.addEventListener("scroll",()=>{let currentId=null;document.querySelectorAll(".category").forEach(sec=>{const rect=sec.getBoundingClientRect();if(rect.top<=120)currentId=sec.id});document.querySelectorAll(".nav-link").forEach(btn=>btn.classList.toggle("active",btn.getAttribute("data-target")===currentId))});
+</script>
+</body>
+</html>

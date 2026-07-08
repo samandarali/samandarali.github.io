@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Cleaning & Validation Roadmap</title>
+<style>
+:root{
+  --paper:#f7f5f0;
+  --paper-raised:#ffffff;
+  --ink:#20242b;
+  --ink-soft:#565f6d;
+  --line:#dedad0;
+  --navy:#161b26;
+  --navy-soft:#232a3a;
+  --navy-line:#333c50;
+  --accent:#c1611a;
+  --accent-soft:#f3e2d1;
+  --accent-ink:#7a3d0f;
+  --teal:#2f7a6f;
+  --teal-soft:#e0efec;
+  --radius:10px;
+  --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  --sans:"Iowan Old Style","Charter","Georgia",serif;
+  --ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--ui);background:var(--paper);color:var(--ink);line-height:1.5}
+a{color:inherit}
+.app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+.sidebar{background:var(--navy);color:#cfd4de;padding:22px 16px 40px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.brand{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.brand-mark{font-family:var(--mono);color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.08em}
+.brand-title{font-family:var(--sans);font-size:19px;font-weight:700;color:#fff;line-height:1.2}
+.brand-sub{font-size:11.5px;color:#8b93a3;margin:6px 0 20px;font-family:var(--mono);letter-spacing:.03em}
+.nav-count{font-size:11px;color:#8b93a3;margin-bottom:10px;font-family:var(--mono)}
+.nav-list{list-style:none;margin:0;padding:0}
+.nav-item{margin-bottom:2px}
+.nav-link{display:flex;justify-content:space-between;gap:8px;width:100%;text-align:left;background:none;border:none;color:#c3c9d4;font-size:13.5px;padding:8px 10px;border-radius:7px;cursor:pointer;font-family:var(--ui)}
+.nav-link:hover{background:var(--navy-soft);color:#fff}
+.nav-link.active{background:var(--navy-soft);color:#fff;box-shadow:inset 3px 0 0 var(--accent)}
+.nav-link .n{font-family:var(--mono);color:var(--accent);font-size:11px;min-width:18px}
+.nav-link .count{font-family:var(--mono);font-size:10.5px;color:#6d7688}
+.main{padding:36px 44px 100px;max-width:980px}
+header.page-head h1{font-family:var(--sans);font-size:34px;margin:0 0 10px;letter-spacing:-.01em}
+header.page-head p.intro{color:var(--ink-soft);font-size:15.5px;max-width:75ch;margin:0 0 26px}
+header.page-head p.intro strong{color:var(--ink)}
+.search-wrap{position:sticky;top:0;background:var(--paper);padding:14px 0 16px;z-index:5;border-bottom:1px solid var(--line);margin-bottom:26px}
+.search-box{display:flex;align-items:center;gap:10px;background:var(--paper-raised);border:1.5px solid var(--line);border-radius:10px;padding:10px 14px}
+.search-box:focus-within{border-color:var(--accent)}
+.search-box svg{flex:0 0 auto;opacity:.5}
+#searchInput{border:none;outline:none;font-size:15px;width:100%;background:transparent;font-family:var(--ui);color:var(--ink)}
+#searchMeta{font-size:12px;color:var(--ink-soft);margin-top:8px;font-family:var(--mono)}
+#clearSearch{border:none;background:var(--line);color:var(--ink-soft);border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;display:none}
+.category{margin-bottom:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper-raised);overflow:hidden;scroll-margin-top:90px;box-shadow:0 1px 2px rgba(20,20,10,.03)}
+.category-head{display:flex;align-items:center;gap:14px;padding:20px 22px;cursor:pointer;user-select:none;background:var(--navy);border-left:6px solid var(--accent)}
+.category-head:hover{background:var(--navy-soft)}
+.category-num{font-family:var(--mono);color:var(--navy);font-size:14px;font-weight:800;background:var(--accent);border-radius:7px;padding:5px 10px;flex:0 0 auto}
+.category-head h2{font-family:var(--sans);font-size:22px;font-weight:700;margin:0;flex:1;color:#fff;letter-spacing:-.01em}
+.category-count{font-family:var(--mono);font-size:11.5px;color:#aeb5c4;white-space:nowrap}
+.chevron{width:9px;height:9px;border-right:2px solid var(--ink-soft);border-bottom:2px solid var(--ink-soft);transform:rotate(45deg);transition:transform .18s ease;margin-right:3px}
+.category-head .chevron{border-color:#fff}
+.category.collapsed .chevron{transform:rotate(-45deg)}
+.category-body{border-top:1px solid var(--line);padding:10px 22px 20px}
+.category.collapsed .category-body{display:none}
+.subcategory{margin-top:14px}
+.subcategory-head{display:flex;align-items:center;gap:8px;cursor:pointer;padding:6px 0}
+.subcategory-head h3{font-size:12.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft);margin:0;font-family:var(--mono);font-weight:600}
+.subcategory.collapsed .card-grid{display:none}
+.subcategory .chevron{width:7px;height:7px;border-color:var(--ink-soft)}
+.card-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:6px}
+.card{border:1px solid var(--line);border-radius:9px;background:var(--paper);scroll-margin-top:90px;transition:box-shadow .15s ease,border-color .15s ease}
+.card.flash{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.card-summary{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:13px 15px;cursor:pointer}
+.card-title-wrap{display:flex;flex-direction:column;gap:6px}
+.card-title{font-size:15.5px;font-weight:700;font-family:var(--sans)}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap}
+.badge{font-family:var(--mono);font-size:10.5px;padding:2.5px 7px;border-radius:5px;letter-spacing:.02em;white-space:nowrap}
+.badge.path{background:#eef1f4;color:#5b6473}
+.card .chevron{margin-top:5px}
+.card-detail{display:none;padding:0 15px 18px;border-top:1px solid var(--line)}
+.card.open .card-detail{display:block}
+.card.open .card-summary{padding-bottom:8px}
+.card.open .chevron{transform:rotate(-135deg)}
+.card-detail h4{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 8px;font-family:var(--mono)}
+.card-detail p{margin:0 0 12px;font-size:14px;color:var(--ink)}
+.card-columns{display:grid;grid-template-columns:1.2fr 1fr;gap:0;margin-top:14px}
+.col-main{padding-right:22px}
+.col-side{padding-left:22px;border-left:1px solid var(--line)}
+.code-block{background:#111827;color:#e5e7eb;border-radius:9px;padding:14px 16px;overflow:auto;font-family:var(--mono);font-size:12.8px;line-height:1.55;margin-top:10px;white-space:pre}
+.list{margin:0 0 12px 18px;padding:0;color:var(--ink);font-size:14px}
+.list li{margin-bottom:6px}
+.prereq-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.prereq{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;padding:5px 10px;border-radius:20px;text-decoration:none;border:1px solid var(--line);background:var(--paper-raised);cursor:pointer}
+.prereq.external{color:var(--accent-ink);background:var(--accent-soft);border-color:#e6c9a8}
+.actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:8px 14px;border-radius:7px;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--ui)}
+.btn-video{background:var(--navy);color:#fff}.btn-video:hover{background:var(--navy-soft)}
+.empty-state{text-align:center;padding:60px 20px;color:var(--ink-soft)}
+.empty-state strong{display:block;font-size:16px;color:var(--ink);margin-bottom:6px}
+.mobile-bar{display:none}
+@media (max-width:880px){.app{grid-template-columns:1fr}.sidebar{position:fixed;inset:0 20% 0 0;z-index:40;transform:translateX(-100%);transition:transform .2s ease;box-shadow:8px 0 30px rgba(0,0,0,.35)}.sidebar.open{transform:translateX(0)}.mobile-bar{display:flex;align-items:center;justify-content:space-between;background:var(--navy);color:#fff;padding:14px 18px;position:sticky;top:0;z-index:30}.mobile-bar .brand-title{color:#fff;font-size:16px}#menuToggle{background:none;border:1px solid var(--navy-line);color:#fff;border-radius:7px;padding:7px 10px;font-size:13px;cursor:pointer}.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:35}.overlay.show{display:block}.main{padding:22px 18px 80px}header.page-head h1{font-size:26px}.card-columns{grid-template-columns:1fr;gap:18px}.col-main{padding-right:0}.col-side{padding-left:0;border-left:none;border-top:1px solid var(--line);padding-top:14px}}
+</style>
+</head>
+<body>
+<div class="mobile-bar"><span class="brand-title">Cleaning Roadmap</span><button id="menuToggle">☰ Topics</button></div>
+<div class="overlay" id="overlay"></div>
+<div class="app">
+<nav class="sidebar" id="sidebar">
+  <div class="brand"><span class="brand-mark">DC/</span><span class="brand-title">Cleaning & Validation</span></div>
+  <div class="brand-sub">8 categories · click to jump</div>
+  <div class="nav-count" id="navCount">Loading…</div>
+  <ul class="nav-list" id="navList"></ul>
+</nav>
+<main class="main">
+<header class="page-head">
+  <h1>Data Cleaning & Validation Roadmap</h1>
+  <p class="intro">
+    <strong>Data cleaning</strong> means finding and fixing problems that make a dataset unreliable. 
+    <strong>Data validation</strong> means checking that the cleaned data follows expected rules before analysis or modeling. 
+    This page explains the main cleaning tasks and gives Python code for each type.
+  </p>
+</header>
+<div class="search-wrap">
+  <div class="search-box">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="searchInput" type="text" placeholder="Search cleaning topics, code, or problems e.g. missing, duplicate, outlier, schema..." autocomplete="off">
+    <button id="clearSearch">Clear</button>
+  </div>
+  <div id="searchMeta"></div>
+</div>
+<div id="content"></div>
+<div class="empty-state" id="emptyState" style="display:none"><strong>No matches found</strong>Try a broader term, or clear the search.</div>
+</main>
+</div>
+<script>
+const TOPICS = [
+{id:'missing-detection',name:'Missing Value Detection',category:'Missing Data',subcategory:'Detection',difficulty:'Beginner',
+ explanation:'Identify where values are absent before deciding whether to drop, impute, or flag them. Detection belongs to cleaning; imputation usually belongs to preprocessing.',
+ code:`import pandas as pd\n\ndf = pd.read_csv("customers.csv")\n\n# Count missing values per column\nmissing_count = df.isna().sum()\n\n# Percentage missing per column\nmissing_pct = df.isna().mean().sort_values(ascending=False) * 100\n\nprint(missing_count)\nprint(missing_pct)`,
+ prereqs:['pandas basics','DataFrame columns'],mistakes:['Using df == None instead of isna()','Ignoring empty strings that should be treated as missing','Looking only at counts instead of percentages'],best:['Check missing count and percentage','Check whether missingness is concentrated in specific groups','Do not impute before understanding why values are missing']},
+{id:'empty-strings',name:'Empty Strings and Placeholder Values',category:'Missing Data',subcategory:'Detection',difficulty:'Beginner',
+ explanation:'Some missing values are hidden as blank strings, spaces, "N/A", "unknown", "-", or similar placeholders. Convert them to real NaN values first.',
+ code:`import numpy as np\n\nplaceholders = ["", " ", "N/A", "NA", "Unknown", "unknown", "-", "--"]\n\ndf = df.replace(placeholders, np.nan)\n\n# Re-check missing values\ndf.isna().sum()`,
+ prereqs:['pandas replace','numpy NaN'],mistakes:['Assuming blanks are automatically NaN','Replacing valid categories accidentally','Forgetting to strip whitespace'],best:['Strip text columns first','Create a clear list of missing-value placeholders','Document every placeholder you convert']},
+{id:'drop-missing',name:'Dropping Missing Records',category:'Missing Data',subcategory:'Handling',difficulty:'Beginner',
+ explanation:'Drop rows only when missing values make the row unusable or when the missing percentage is very small and random.',
+ code:`# Drop rows where a critical column is missing\ndf = df.dropna(subset=["CustomerID", "TransactionDate"])\n\n# Drop columns with more than 70% missing values\nthreshold = 0.70\ndf = df.loc[:, df.isna().mean() < threshold]`,
+ prereqs:['Missing Value Detection','Business rules'],mistakes:['Dropping too many rows without checking impact','Dropping target-variable missingness without documenting it','Dropping columns before asking whether they are important'],best:['Compare shape before and after dropping','Drop only with a clear reason','Keep a log of removed rows and columns']},
+{id:'duplicates',name:'Duplicate Records',category:'Duplicate Data',subcategory:'Rows and Keys',difficulty:'Beginner',
+ explanation:'Duplicate rows can inflate counts, bias summaries, and leak information into models. Check both exact duplicates and duplicates based on key columns.',
+ code:`# Exact duplicate rows\nexact_dupes = df.duplicated().sum()\n\n# Duplicate customer IDs\nkey_dupes = df.duplicated(subset=["CustomerID"]).sum()\n\n# Remove exact duplicates\ndf = df.drop_duplicates()\n\n# Keep the most recent record per customer\ndf = df.sort_values("UpdatedAt").drop_duplicates("CustomerID", keep="last")`,
+ prereqs:['pandas duplicated','Primary key concept'],mistakes:['Checking only exact duplicates','Removing duplicate IDs when they actually represent repeated transactions','Not sorting before keep="last"'],best:['Define the unit of analysis first','Use key columns for duplicate checks','Check the number of rows removed']},
+{id:'data-types',name:'Incorrect Data Types',category:'Type and Format Problems',subcategory:'Data Types',difficulty:'Beginner',
+ explanation:'Columns often load with the wrong type: dates as text, numbers as strings, and categories as objects. Fixing types makes analysis safer.',
+ code:`# Inspect data types\ndf.dtypes\n\n# Convert dates\ndf["SignupDate"] = pd.to_datetime(df["SignupDate"], errors="coerce")\n\n# Convert numbers stored as text\ndf["Income"] = pd.to_numeric(df["Income"], errors="coerce")\n\n# Convert low-cardinality text to category\ndf["Plan"] = df["Plan"].astype("category")`,
+ prereqs:['pandas dtypes','datetime basics'],mistakes:['Using astype(int) when values contain blanks','Forgetting errors="coerce"','Treating ID codes as numeric variables'],best:['Use to_numeric and to_datetime safely','Check dtypes after conversion','Keep IDs as strings unless you do math with them']},
+{id:'text-standardization',name:'Text Standardization',category:'Type and Format Problems',subcategory:'Text Cleaning',difficulty:'Beginner',
+ explanation:'Text categories often differ only because of case, spaces, punctuation, or spelling. Standardize them before counting or modeling.',
+ code:`# Strip spaces and standardize case\ndf["Country"] = df["Country"].str.strip().str.title()\n\n# Standardize known variations\ndf["Country"] = df["Country"].replace({\n    "Usa": "United States",\n    "U.S.A": "United States",\n    "United States Of America": "United States"\n})\n\n# Check final categories\ndf["Country"].value_counts()`,
+ prereqs:['String methods','Categorical variables'],mistakes:['Standardizing without checking unique values first','Changing meaningful capitalization in codes','Using replace rules that are too broad'],best:['Inspect value_counts before and after','Create a mapping dictionary','Keep raw values if auditability matters']},
+{id:'invalid-values',name:'Invalid Values and Business Rules',category:'Logical Validation',subcategory:'Rules',difficulty:'Beginner',
+ explanation:'Some values have the correct type but are impossible or unreasonable, such as negative age, future birth date, or quantity below zero.',
+ code:`import numpy as np\n\n# Age should be between 0 and 120\ninvalid_age = ~df["Age"].between(0, 120)\ndf.loc[invalid_age, "Age"] = np.nan\n\n# Quantity should not be negative\ninvalid_qty = df["Quantity"] < 0\ndf.loc[invalid_qty, "Quantity"] = np.nan\n\n# Transaction date should not be in the future\nfuture_dates = df["TransactionDate"] > pd.Timestamp.today()\ndf.loc[future_dates, "TransactionDate"] = pd.NaT`,
+ prereqs:['Boolean masks','Domain knowledge'],mistakes:['Assuming all numeric values are valid','Removing suspicious values without checking source data','Using generic rules when business rules differ'],best:['Write explicit validation rules','Separate impossible values from unusual but possible values','Discuss rules with domain experts']},
+{id:'range-checks',name:'Range Checks',category:'Logical Validation',subcategory:'Rules',difficulty:'Beginner',
+ explanation:'Range checks confirm that values fall inside acceptable minimum and maximum limits.',
+ code:`rules = {\n    "Age": (0, 120),\n    "DiscountRate": (0, 1),\n    "SatisfactionScore": (1, 5)\n}\n\nfor col, (low, high) in rules.items():\n    bad = ~df[col].between(low, high)\n    print(col, bad.sum(), "invalid values")`,
+ prereqs:['for loops','Boolean masks'],mistakes:['Using the same range for all datasets','Forgetting inclusive vs exclusive limits','Not reporting how many records fail'],best:['Put rules in a dictionary','Print failure counts','Review invalid records before changing them']},
+{id:'outliers-iqr',name:'Outlier Detection with IQR',category:'Outliers',subcategory:'Statistical Checks',difficulty:'Beginner',
+ explanation:'The IQR method flags values far below Q1 or far above Q3. It is simple and works well for many numeric columns.',
+ code:`Q1 = df["Income"].quantile(0.25)\nQ3 = df["Income"].quantile(0.75)\nIQR = Q3 - Q1\n\nlower = Q1 - 1.5 * IQR\nupper = Q3 + 1.5 * IQR\n\noutliers = df[(df["Income"] < lower) | (df["Income"] > upper)]\nprint(outliers[["Income"]])`,
+ prereqs:['Quartiles','pandas filtering'],mistakes:['Automatically deleting every outlier','Using IQR on ID columns','Ignoring skewed distributions'],best:['Inspect outliers before changing them','Decide whether they are errors or rare valid cases','Document the rule used']},
+{id:'outliers-zscore',name:'Outlier Detection with Z-Score',category:'Outliers',subcategory:'Statistical Checks',difficulty:'Intermediate',
+ explanation:'Z-score measures how many standard deviations a value is from the mean. It works best when the variable is roughly normally distributed.',
+ code:`from scipy import stats\nimport numpy as np\n\nz = np.abs(stats.zscore(df["Income"].dropna()))\noutlier_mask = z > 3\n\noutliers = df.loc[df["Income"].dropna().index[outlier_mask]]\nprint(outliers[["Income"]])`,
+ prereqs:['Normal distribution','Standard deviation'],mistakes:['Using z-score on highly skewed variables','Forgetting NaN values','Deleting outliers without context'],best:['Use z-score mainly for near-normal data','Compare with boxplots','Consider robust methods for skewed variables']},
+{id:'date-validation',name:'Date Validation',category:'Logical Validation',subcategory:'Dates',difficulty:'Intermediate',
+ explanation:'Dates need special checks: impossible dates, future dates, wrong order between start and end dates, and inconsistent formats.',
+ code:`df["StartDate"] = pd.to_datetime(df["StartDate"], errors="coerce")\ndf["EndDate"] = pd.to_datetime(df["EndDate"], errors="coerce")\n\n# End date should not be before start date\nbad_order = df["EndDate"] < df["StartDate"]\nprint(df.loc[bad_order, ["StartDate", "EndDate"]])\n\n# No future start dates\nfuture_start = df["StartDate"] > pd.Timestamp.today()\ndf.loc[future_start, "StartDate"] = pd.NaT`,
+ prereqs:['datetime conversion','Business rules'],mistakes:['Leaving dates as strings','Comparing dates before conversion','Ignoring timezone issues'],best:['Use errors="coerce"','Check date order rules','Keep date parsing format consistent']},
+{id:'schema-validation',name:'Schema Validation',category:'Automated Validation',subcategory:'Schema',difficulty:'Intermediate',
+ explanation:'Schema validation checks whether columns, types, ranges, and null rules match what your dataset is supposed to contain.',
+ code:`# Basic manual schema checks\nrequired_columns = ["CustomerID", "Age", "Income", "SignupDate"]\n\nmissing_cols = set(required_columns) - set(df.columns)\nassert len(missing_cols) == 0, f"Missing columns: {missing_cols}"\n\nassert df["CustomerID"].notna().all()\nassert df["Age"].between(0, 120).all()\nassert df["CustomerID"].is_unique`,
+ prereqs:['assert statements','Data dictionary'],mistakes:['Relying only on visual inspection','Not checking required columns','Not validating after transformations'],best:['Validate before and after cleaning','Keep schema rules near the code','Fail early when critical rules break']},
+{id:'pandera-validation',name:'Validation with Pandera',category:'Automated Validation',subcategory:'Schema',difficulty:'Advanced',
+ explanation:'Pandera lets you define a formal schema for a pandas DataFrame and validate data automatically.',
+ code:`# pip install pandera\nimport pandera as pa\nfrom pandera import Column, Check\n\nschema = pa.DataFrameSchema({\n    "CustomerID": Column(str, nullable=False),\n    "Age": Column(float, Check.in_range(0, 120), nullable=True),\n    "Income": Column(float, Check.ge(0), nullable=True),\n})\n\nvalidated_df = schema.validate(df)`,
+ prereqs:['pandas','Schema validation','Python packages'],mistakes:['Making the schema too strict too early','Not handling nullable columns','Ignoring validation errors instead of fixing causes'],best:['Start with critical columns','Add rules gradually','Use schema validation in pipelines']},
+{id:'audit-log',name:'Cleaning Audit Log',category:'Workflow',subcategory:'Documentation',difficulty:'Intermediate',
+ explanation:'A cleaning audit log records what changed, why it changed, and how many records were affected. This makes your work reproducible.',
+ code:`cleaning_log = []\n\nrows_before = len(df)\ndf = df.drop_duplicates()\nrows_after = len(df)\n\ncleaning_log.append({\n    "step": "drop exact duplicates",\n    "rows_before": rows_before,\n    "rows_after": rows_after,\n    "rows_removed": rows_before - rows_after\n})\n\nlog_df = pd.DataFrame(cleaning_log)\nprint(log_df)`,
+ prereqs:['pandas DataFrame','Reproducible workflow'],mistakes:['Cleaning manually without recording steps','Overwriting raw data','Not saving row counts before and after'],best:['Never overwrite raw data','Log every major cleaning decision','Save a cleaned version with a clear file name']},
+{id:'final-checks',name:'Final Data Quality Report',category:'Workflow',subcategory:'Final Checks',difficulty:'Beginner',
+ explanation:'After cleaning, create a final quality summary so you know the dataset is ready for exploration, preprocessing, or modeling.',
+ code:`quality_report = pd.DataFrame({\n    "dtype": df.dtypes.astype(str),\n    "missing_count": df.isna().sum(),\n    "missing_pct": (df.isna().mean() * 100).round(2),\n    "unique_values": df.nunique()\n})\n\nprint("Shape:", df.shape)\nprint(quality_report)`,
+ prereqs:['pandas summary methods'],mistakes:['Assuming cleaning worked without checking','Not checking duplicate keys again','Skipping validation before modeling'],best:['Re-run missing, duplicate, dtype, and range checks','Save the quality report','Use the report to decide next preprocessing steps']}
+];
+const CATEGORY_ORDER=[];const GROUPED={};TOPICS.forEach(t=>{if(!GROUPED[t.category]){GROUPED[t.category]={order:[],subs:{}};CATEGORY_ORDER.push(t.category)}const c=GROUPED[t.category];if(!c.subs[t.subcategory]){c.subs[t.subcategory]=[];c.order.push(t.subcategory)}c.subs[t.subcategory].push(t)});
+const ICON_PLAY='<svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M8 5v14l11-7z"/></svg>';
+function catSlug(name){return 'cat-'+name.toLowerCase().replace(/[^a-z0-9]+/g,'-')}
+function videoUrl(name){return 'https://www.youtube.com/results?search_query='+encodeURIComponent(name+' data cleaning pandas tutorial')}
+function renderAll(){const content=document.getElementById('content');const navList=document.getElementById('navList');let html='';let navHtml='';let num=1;CATEGORY_ORDER.forEach(catName=>{const cat=GROUPED[catName];let count=0;cat.order.forEach(s=>count+=cat.subs[s].length);const slug=catSlug(catName);navHtml+=`<li class="nav-item"><button class="nav-link" data-target="${slug}"><span><span class="n">${String(num).padStart(2,'0')}</span> ${catName}</span><span class="count">${count}</span></button></li>`;let subHtml='';cat.order.forEach(subName=>{const items=cat.subs[subName];subHtml+=`<div class="subcategory" data-sub="${subName}"><div class="subcategory-head" data-toggle="sub"><span class="chevron"></span><h3>${subName}</h3></div><div class="card-grid">`;items.forEach(t=>subHtml+=renderCard(t));subHtml+='</div></div>'});html+=`<section class="category" id="${slug}" data-category="${catName}"><div class="category-head" data-toggle="cat"><span class="chevron"></span><span class="category-num">${String(num).padStart(2,'0')}</span><h2>${catName}</h2><span class="category-count">${count} topics</span></div><div class="category-body">${subHtml}</div></section>`;num++});content.innerHTML=html;navList.innerHTML=navHtml;document.getElementById('navCount').textContent=TOPICS.length+' topics indexed'}
+function renderCard(t){const prereqHtml=t.prereqs.map(p=>`<li><span class="prereq external">${p}</span></li>`).join('');const mistakes=t.mistakes.map(x=>`<li>${x}</li>`).join('');const best=t.best.map(x=>`<li>${x}</li>`).join('');return `<article class="card" id="${t.id}" data-name="${t.name.toLowerCase()}" data-cat="${t.category.toLowerCase()}" data-sub="${t.subcategory.toLowerCase()}" data-prereqs="${t.prereqs.join(' | ').toLowerCase()}" data-code="${t.code.toLowerCase()}"><div class="card-summary" data-toggle="card"><div class="card-title-wrap"><div class="card-title">${t.name}</div><div class="card-tags"><span class="badge path">${t.category} · ${t.subcategory} · ${t.difficulty}</span></div></div><span class="chevron"></span></div><div class="card-detail"><div class="card-columns"><div class="col-main"><h4>Explanation</h4><p>${t.explanation}</p><h4>Python example</h4><pre class="code-block">${escapeHtml(t.code)}</pre><div class="actions"><a class="btn btn-video" href="${videoUrl(t.name)}" target="_blank" rel="noopener">${ICON_PLAY} Watch video</a></div></div><div class="col-side"><h4>Prerequisites</h4><ul class="prereq-list">${prereqHtml}</ul><h4 style="margin-top:18px">Common mistakes</h4><ul class="list">${mistakes}</ul><h4>Best practices</h4><ul class="list">${best}</ul></div></div></div></article>`}
+function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+renderAll();
+document.getElementById('content').addEventListener('click',e=>{const catHead=e.target.closest('[data-toggle="cat"]');const subHead=e.target.closest('[data-toggle="sub"]');const cardHead=e.target.closest('[data-toggle="card"]');if(cardHead){cardHead.closest('.card').classList.toggle('open');return}if(subHead){subHead.closest('.subcategory').classList.toggle('collapsed');return}if(catHead){catHead.closest('.category').classList.toggle('collapsed');return}});
+document.getElementById('navList').addEventListener('click',e=>{const btn=e.target.closest('.nav-link');if(!btn)return;document.querySelectorAll('.nav-link').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const target=document.getElementById(btn.getAttribute('data-target'));if(target){target.classList.remove('collapsed');target.scrollIntoView({behavior:'smooth',block:'start'})}closeMobileNav()});
+const sidebar=document.getElementById('sidebar');const overlay=document.getElementById('overlay');document.getElementById('menuToggle').addEventListener('click',()=>{sidebar.classList.add('open');overlay.classList.add('show')});overlay.addEventListener('click',closeMobileNav);function closeMobileNav(){sidebar.classList.remove('open');overlay.classList.remove('show')}
+const searchInput=document.getElementById('searchInput');const clearBtn=document.getElementById('clearSearch');const searchMeta=document.getElementById('searchMeta');const emptyState=document.getElementById('emptyState');searchInput.addEventListener('input',runSearch);clearBtn.addEventListener('click',()=>{searchInput.value='';runSearch();searchInput.focus()});
+function runSearch(){const q=searchInput.value.trim().toLowerCase();clearBtn.style.display=q?'inline-block':'none';const cards=document.querySelectorAll('.card');let visibleCount=0;cards.forEach(card=>{const haystack=card.getAttribute('data-name')+' '+card.getAttribute('data-cat')+' '+card.getAttribute('data-sub')+' '+card.getAttribute('data-prereqs')+' '+card.getAttribute('data-code');const match=!q||haystack.includes(q);card.style.display=match?'':'none';if(match)visibleCount++});document.querySelectorAll('.subcategory').forEach(sub=>{const any=[...sub.querySelectorAll('.card')].some(c=>c.style.display!=='none');sub.style.display=any?'':'none';if(q&&any)sub.classList.remove('collapsed')});document.querySelectorAll('.category').forEach(cat=>{const any=[...cat.querySelectorAll('.card')].some(c=>c.style.display!=='none');cat.style.display=any?'':'none';if(q&&any)cat.classList.remove('collapsed')});emptyState.style.display=(q&&visibleCount===0)?'block':'none';searchMeta.textContent=q?`${visibleCount} of ${cards.length} topics match "${searchInput.value.trim()}"`:''}
+window.addEventListener('scroll',()=>{let currentId=null;document.querySelectorAll('.category').forEach(sec=>{if(sec.getBoundingClientRect().top<=120)currentId=sec.id});document.querySelectorAll('.nav-link').forEach(btn=>btn.classList.toggle('active',btn.getAttribute('data-target')===currentId))});
+</script>
+</body>
+</html>

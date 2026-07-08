@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bayesian Methods and Bayesian Regression</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #4f46e5;
+      --accent-light: #eef2ff;
+      --border: #e2e8f0;
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+      --good: #047857;
+      --warn: #b45309;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #312e81, #4f46e5);
+      color: white;
+      padding: 42px 28px;
+      border-radius: 22px;
+      margin-bottom: 28px;
+      box-shadow: 0 12px 30px rgba(79, 70, 229, 0.25);
+    }
+
+    header h1 {
+      margin: 0 0 12px;
+      font-size: 2.2rem;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 1.05rem;
+      max-width: 850px;
+      color: #e0e7ff;
+    }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px;
+      margin: 22px 0;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+    }
+
+    h2 {
+      color: #312e81;
+      margin-top: 0;
+      border-bottom: 2px solid var(--accent-light);
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      color: #1e293b;
+      margin-top: 24px;
+    }
+
+    .box {
+      background: var(--accent-light);
+      border-left: 5px solid var(--accent);
+      padding: 16px 18px;
+      border-radius: 12px;
+      margin: 18px 0;
+    }
+
+    .formula {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      font-size: 1.1rem;
+      margin: 18px 0;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      background: white;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    code {
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.95rem;
+    }
+
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 18px;
+      border-radius: 14px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      margin: 3px;
+    }
+
+    .good {
+      color: var(--good);
+      font-weight: bold;
+    }
+
+    .warn {
+      color: var(--warn);
+      font-weight: bold;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 800px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      header h1 {
+        font-size: 1.75rem;
+      }
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 30px;
+    }
+  
+
+    .math-card {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+      font-size: 1.2rem;
+      margin: 18px 0;
+      overflow-x: auto;
+      box-shadow: inset 0 0 0 1px rgba(79, 70, 229, 0.04);
+    }
+
+    .quote-box {
+      background: #f8fafc;
+      border-left: 5px solid #64748b;
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-style: italic;
+      color: #334155;
+      margin: 14px 0;
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Bayesian Methods and Bayesian Regression</h1>
+      <p>
+        A practical explanation of Bayesian thinking, Bayesian regression, confidence intervals versus credible intervals,
+        when to use Bayesian methods in machine learning, and how to run Bayesian regression in Python.
+      </p>
+    </header>
+
+    <section>
+      <h2>1. What Are Bayesian Methods?</h2>
+      <p>
+        Bayesian methods are statistical methods based on the idea of <strong>updating beliefs using evidence</strong>.
+        You start with an initial belief, called the <strong>prior</strong>. Then you observe data. After seeing the data,
+        you update your belief and obtain the <strong>posterior</strong>.
+      </p>
+
+      <div class="box">
+        <strong>Main idea:</strong><br>
+        Prior belief + observed data = updated belief
+      </div>
+
+      <p>
+        This is different from many classical statistical methods, where parameters are treated as fixed but unknown.
+        In Bayesian methods, uncertain quantities such as regression coefficients are treated as probability distributions.
+      </p>
+    </section>
+
+    <section>
+      <h2>2. Bayes' Theorem</h2>
+
+      <p>Bayesian methods are built on Bayes' theorem:</p>
+
+      <div class="math-card">\[ P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)} \]</div>
+
+      <p>In words:</p>
+
+      <table>
+        <tr>
+          <th>Term</th>
+          <th>Meaning</th>
+        </tr>
+        <tr>
+          <td>P(A)</td>
+          <td>Prior probability: what we believe before seeing new evidence.</td>
+        </tr>
+        <tr>
+          <td>P(B|A)</td>
+          <td>Likelihood: how likely the evidence is if A is true.</td>
+        </tr>
+        <tr>
+          <td>P(A|B)</td>
+          <td>Posterior probability: updated belief after seeing evidence.</td>
+        </tr>
+        <tr>
+          <td>P(B)</td>
+          <td>Evidence: a normalizing value that makes probabilities valid.</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>3. Bayesian Regression</h2>
+
+      <p>
+        Bayesian regression is a regression method where the coefficients are not treated as single fixed values.
+        Instead, each coefficient has a probability distribution.
+      </p>
+
+      <p>In ordinary linear regression, we write:</p>
+
+      <div class="math-card">\[ y = \beta_0 + \beta_1 x + \varepsilon \]</div>
+
+      <p>
+        Ordinary least squares estimates one value for each coefficient, for example:
+      </p>
+
+      <div class="math-card">\[ \hat{\beta}_0 = 2.35, \qquad \hat{\beta}_1 = 4.18 \]</div>
+
+      <p>
+        Bayesian regression says: we are uncertain about these coefficients. So instead of only estimating one value,
+        we estimate a distribution:
+      </p>
+
+      <div class="math-card">\[ \beta_1 \sim \mathcal{N}(4.18, 0.25^2) \]</div>
+
+      <p>
+        This means the slope is probably around 4.18, but other nearby values are also possible.
+      </p>
+    </section>
+
+    <section>
+      <h2>4. Bayesian Regression Formula</h2>
+
+      <p>For regression, Bayes' theorem becomes:</p>
+
+      <div class="math-card">\[ P(\boldsymbol{\beta}\mid D)=\frac{P(D\mid\boldsymbol{\beta})P(\boldsymbol{\beta})}{P(D)} \]</div>
+
+      <table>
+        <tr>
+          <th>Component</th>
+          <th>Meaning in Bayesian Regression</th>
+        </tr>
+        <tr>
+          <td>P(β)</td>
+          <td>Prior distribution of the coefficients.</td>
+        </tr>
+        <tr>
+          <td>P(Data | β)</td>
+          <td>Likelihood: how likely the observed data are for given coefficients.</td>
+        </tr>
+        <tr>
+          <td>P(β | Data)</td>
+          <td>Posterior distribution of the coefficients after observing the data.</td>
+        </tr>
+        <tr>
+          <td>P(Data)</td>
+          <td>Evidence or normalizing constant.</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>5. The Three Main Parts</h2>
+
+      <h3>Step 1: Prior</h3>
+      <p>
+        The prior represents what we believe before seeing the data.
+      </p>
+
+      <div class="math-card">\[ \beta_1 \sim \mathcal{N}(0, 10^2) \]</div>
+
+      <p>
+        This says the coefficient is expected to be around zero, but many values are possible.
+        The prior can be informative, weakly informative, or non-informative.
+      </p>
+
+      <h3>Step 2: Likelihood</h3>
+      <p>
+        The likelihood describes how likely the observed data are for a given set of coefficients.
+        With normal regression errors:
+      </p>
+
+      <div class="math-card">\[ y_i \sim \mathcal{N}(\beta_0 + \beta_1 x_i, \sigma^2) \]</div>
+
+      <h3>Step 3: Posterior</h3>
+      <p>
+        The posterior combines the prior and the data. This is the final updated distribution of the coefficients.
+      </p>
+
+      <div class="box">
+        <strong>Prior</strong> + <strong>Likelihood</strong> → <strong>Posterior</strong>
+      </div>
+    </section>
+
+    <section>
+      <h2>6. Confidence Interval vs Credible Interval</h2>
+
+      <p>
+        Ordinary regression also gives intervals. The important difference is not whether an interval exists.
+        The important difference is <strong>what the interval means</strong>.
+      </p>
+
+      <h3>Ordinary Linear Regression</h3>
+
+      <p>Suppose ordinary least squares estimates:</p>
+
+      <div class="math-card">\[ \hat{\beta}_1 = 5 \]</div>
+
+      <p>with a 95% confidence interval:</p>
+
+      <div class="math-card">\[ (4.2,\;5.8) \]</div>
+
+      <p>Many people interpret this as:</p>
+
+      <div class="quote-box">
+        There is a 95% probability that the true coefficient lies between 4.2 and 5.8.
+      </div>
+
+      <p><strong>This interpretation is incorrect in ordinary frequentist regression.</strong></p>
+
+      <p>The correct frequentist interpretation is:</p>
+
+      <div class="quote-box">
+        If we repeatedly collected new datasets and computed a 95% confidence interval each time,
+        about 95% of those intervals would contain the true coefficient.
+      </div>
+
+      <p>
+        In ordinary regression, the coefficient is treated as <strong>fixed but unknown</strong>.
+        The interval is random because it depends on the random sample.
+      </p>
+
+      <h3>Bayesian Regression</h3>
+
+      <p>Suppose Bayesian regression estimates:</p>
+
+      <div class="math-card">\[ \beta_1 \sim \mathcal{N}(5,\;0.4^2) \]</div>
+
+      <p>Its 95% credible interval is:</p>
+
+      <div class="math-card">\[ (4.2,\;5.8) \]</div>
+
+      <p>Now you can say:</p>
+
+      <div class="quote-box">
+        There is a 95% probability that the coefficient lies between 4.2 and 5.8,
+        given the observed data and the prior.
+      </div>
+
+      <p>
+        This is because, in Bayesian statistics, the coefficient itself is treated as a
+        <strong>random variable</strong> with a probability distribution.
+      </p>
+
+      <h3>The Main Difference</h3>
+
+      <table>
+        <tr>
+          <th>Ordinary Regression</th>
+          <th>Bayesian Regression</th>
+        </tr>
+        <tr>
+          <td>Coefficient is fixed.</td>
+          <td>Coefficient is random.</td>
+        </tr>
+        <tr>
+          <td>Interval changes from sample to sample.</td>
+          <td>Coefficient distribution is updated by the data.</td>
+        </tr>
+        <tr>
+          <td>Confidence interval.</td>
+          <td>Credible interval.</td>
+        </tr>
+        <tr>
+          <td>Probability statement about the procedure.</td>
+          <td>Probability statement about the parameter.</td>
+        </tr>
+      </table>
+
+      <div class="box">
+        <strong>Simple summary:</strong> Ordinary regression says the method works 95% of the time in repeated samples.
+        Bayesian regression says there is a 95% probability for the parameter range, given the data and prior.
+      </div>
+    </section>
+
+    <section>
+      <h2>7. When Should You Use Bayesian Regression in Machine Learning?</h2>
+
+      <div class="two-col">
+        <div>
+          <h3 class="good">Good Use Cases</h3>
+          <p><span class="tag">Small datasets</span></p>
+          <p><span class="tag">Need uncertainty estimates</span></p>
+          <p><span class="tag">Prior knowledge matters</span></p>
+          <p><span class="tag">Noisy data</span></p>
+          <p><span class="tag">Sequential updating</span></p>
+          <p><span class="tag">Avoiding overfitting</span></p>
+        </div>
+
+        <div>
+          <h3 class="warn">Less Suitable Cases</h3>
+          <p><span class="tag">Very large datasets</span></p>
+          <p><span class="tag">Only prediction accuracy matters</span></p>
+          <p><span class="tag">Highly nonlinear relationships</span></p>
+          <p><span class="tag">Need very fast training</span></p>
+          <p><span class="tag">No need for uncertainty</span></p>
+        </div>
+      </div>
+
+      <p>
+        Bayesian regression is especially useful when the question is not only “What is the prediction?”
+        but also “How uncertain is the prediction?”
+      </p>
+    </section>
+
+    <section>
+      <h2>8. Practical Comparison with Other Regression Models</h2>
+
+      <table>
+        <tr>
+          <th>Situation</th>
+          <th>Recommended Model</th>
+        </tr>
+        <tr>
+          <td>Linear relationship, enough data</td>
+          <td>Linear Regression</td>
+        </tr>
+        <tr>
+          <td>Multicollinearity</td>
+          <td>Ridge Regression</td>
+        </tr>
+        <tr>
+          <td>Feature selection</td>
+          <td>Lasso Regression</td>
+        </tr>
+        <tr>
+          <td>Both multicollinearity and feature selection</td>
+          <td>Elastic Net</td>
+        </tr>
+        <tr>
+          <td>Curved relationship</td>
+          <td>Polynomial Regression</td>
+        </tr>
+        <tr>
+          <td>Small data plus uncertainty</td>
+          <td>Bayesian Regression</td>
+        </tr>
+        <tr>
+          <td>Complex nonlinear pattern</td>
+          <td>Random Forest, Gradient Boosting, XGBoost, Neural Networks</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>9. Python Example: Bayesian Regression with Scikit-Learn</h2>
+
+      <p>
+        The easiest way to run Bayesian regression in Python is to use <code>BayesianRidge</code> from scikit-learn.
+        This model behaves like ridge regression but estimates uncertainty in the coefficients using a Bayesian approach.
+      </p>
+
+      <h3>Complete Example</h3>
+
+      <pre><code>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from sklearn.linear_model import BayesianRidge, LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, r2_score
+
+# -----------------------------
+# 1. Create sample data
+# -----------------------------
+np.random.seed(42)
+
+X = np.linspace(0, 10, 100).reshape(-1, 1)
+noise = np.random.normal(0, 3, size=100)
+
+# True relationship: y = 5 + 2x + noise
+y = 5 + 2 * X.ravel() + noise
+
+# -----------------------------
+# 2. Split data
+# -----------------------------
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42
+)
+
+# -----------------------------
+# 3. Fit Bayesian regression
+# -----------------------------
+bayes_model = BayesianRidge()
+bayes_model.fit(X_train, y_train)
+
+# -----------------------------
+# 4. Predict
+# -----------------------------
+y_pred = bayes_model.predict(X_test)
+
+# -----------------------------
+# 5. Evaluate
+# -----------------------------
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+r2 = r2_score(y_test, y_pred)
+
+print("Intercept:", bayes_model.intercept_)
+print("Coefficient:", bayes_model.coef_)
+print("RMSE:", rmse)
+print("R-squared:", r2)
+
+# -----------------------------
+# 6. Prediction with uncertainty
+# -----------------------------
+X_new = np.array([[6]])
+
+mean_prediction, std_prediction = bayes_model.predict(
+    X_new, return_std=True
+)
+
+print("Prediction for X = 6:", mean_prediction[0])
+print("Prediction standard deviation:", std_prediction[0])
+
+# Approximate 95% prediction interval
+lower = mean_prediction[0] - 1.96 * std_prediction[0]
+upper = mean_prediction[0] + 1.96 * std_prediction[0]
+
+print("Approximate 95% interval:", lower, upper)</code></pre>
+
+      <h3>What the Code Does</h3>
+
+      <table>
+        <tr>
+          <th>Step</th>
+          <th>Explanation</th>
+        </tr>
+        <tr>
+          <td>Create data</td>
+          <td>Generates artificial data with a linear relationship plus random noise.</td>
+        </tr>
+        <tr>
+          <td>Fit model</td>
+          <td>Uses <code>BayesianRidge()</code> to estimate the regression relationship.</td>
+        </tr>
+        <tr>
+          <td>Evaluate</td>
+          <td>Uses RMSE and R-squared to measure prediction performance.</td>
+        </tr>
+        <tr>
+          <td>Predict with uncertainty</td>
+          <td>Uses <code>return_std=True</code> to return both the predicted mean and uncertainty.</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>10. Comparing Ordinary Linear Regression and Bayesian Ridge</h2>
+
+      <pre><code># Fit ordinary linear regression
+linear_model = LinearRegression()
+linear_model.fit(X_train, y_train)
+
+linear_pred = linear_model.predict(X_test)
+
+print("Linear Regression coefficient:", linear_model.coef_)
+print("Bayesian Ridge coefficient:", bayes_model.coef_)
+
+print("Linear Regression RMSE:",
+      np.sqrt(mean_squared_error(y_test, linear_pred)))
+
+print("Bayesian Ridge RMSE:",
+      np.sqrt(mean_squared_error(y_test, y_pred)))</code></pre>
+
+      <p>
+        In many simple datasets, ordinary linear regression and Bayesian ridge may produce similar predictions.
+        The main extra benefit of Bayesian regression is that it gives a probabilistic view of coefficients and predictions.
+      </p>
+    </section>
+
+    <section>
+      <h2>11. Visualizing Prediction Uncertainty</h2>
+
+      <pre><code># Sort values for a smooth plot
+X_plot = np.linspace(0, 10, 200).reshape(-1, 1)
+
+# Predict mean and standard deviation
+y_mean, y_std = bayes_model.predict(X_plot, return_std=True)
+
+plt.figure(figsize=(9, 6))
+plt.scatter(X_train, y_train, label="Training data")
+plt.plot(X_plot, y_mean, label="Bayesian prediction")
+
+# 95% uncertainty band
+plt.fill_between(
+    X_plot.ravel(),
+    y_mean - 1.96 * y_std,
+    y_mean + 1.96 * y_std,
+    alpha=0.2,
+    label="Approx. 95% interval"
+)
+
+plt.xlabel("X")
+plt.ylabel("y")
+plt.title("Bayesian Regression with Prediction Uncertainty")
+plt.legend()
+plt.show()</code></pre>
+
+      <p>
+        The central line is the model prediction. The shaded band represents uncertainty.
+        Wider bands mean the model is less certain about its prediction.
+      </p>
+    </section>
+
+    <section>
+      <h2>12. Important Warning About BayesianRidge</h2>
+
+      <p>
+        <code>BayesianRidge</code> in scikit-learn is a convenient and practical Bayesian-style regression model,
+        but it is not the full version of Bayesian modeling that you may see in libraries such as PyMC or Stan.
+      </p>
+
+      <p>
+        For many machine learning tasks, <code>BayesianRidge</code> is enough. But if you want to define custom priors,
+        complex models, hierarchical structures, or full posterior sampling, then you would use:
+      </p>
+
+      <ul>
+        <li><strong>PyMC</strong></li>
+        <li><strong>Stan</strong></li>
+        <li><strong>NumPyro</strong></li>
+        <li><strong>TensorFlow Probability</strong></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>13. Simple Rule of Thumb</h2>
+
+      <div class="box">
+        Use Bayesian Regression when you care about <strong>uncertainty</strong>, have <strong>limited data</strong>,
+        or want to include <strong>prior knowledge</strong>. If you only want fast prediction accuracy on a large dataset,
+        simpler or more powerful machine learning models may be better.
+      </div>
+    </section>
+
+    <section>
+      <h2>14. Summary</h2>
+
+      <p>
+        Bayesian methods update prior beliefs using observed data. Bayesian regression applies this idea to regression
+        by treating coefficients as probability distributions instead of fixed values.
+      </p>
+
+      <p>
+        Ordinary regression gives confidence intervals, but Bayesian regression gives credible intervals with a more direct
+        probability interpretation. The biggest advantage of Bayesian regression is not always better prediction accuracy;
+        it is the ability to model uncertainty in a principled way.
+      </p>
+    </section>
+
+    <div class="footer">
+      Bayesian Methods Learning Page
+    </div>
+  </div>
+</body>
+</html>

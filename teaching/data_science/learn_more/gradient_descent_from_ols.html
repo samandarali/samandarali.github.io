@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gradient Descent from Traditional Regression</title>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 980px; margin: 40px auto; padding: 0 24px; color: #222; background: #fafafa; }
+  h1, h2, h3 { color: #17324d; }
+  h1 { border-bottom: 4px solid #17324d; padding-bottom: 10px; }
+  .box { background: white; border-left: 5px solid #2b6cb0; padding: 16px 20px; margin: 20px 0; box-shadow: 0 1px 5px rgba(0,0,0,.08); }
+  .warning { border-left-color: #d97706; }
+  .key { border-left-color: #15803d; }
+  table { border-collapse: collapse; width: 100%; background: white; margin: 16px 0; }
+  th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+  th { background: #e9f2ff; }
+  code { background: #eee; padding: 2px 5px; border-radius: 4px; }
+  pre { background: #1e1e1e; color: #f5f5f5; padding: 16px; overflow-x: auto; border-radius: 8px; }
+  .formula { background: #fff; padding: 12px 16px; border-radius: 8px; margin: 14px 0; }
+  .small { color: #555; font-size: 0.95em; }
+</style>
+</head>
+<body>
+
+<h1>Gradient Descent from Traditional Regression</h1>
+
+<div class="box key">
+  <strong>Main idea:</strong> In ordinary least squares, we minimize the sum of squared residuals by solving the first-order conditions exactly. In gradient descent, we use the same objective function and the same derivatives, but instead of solving the derivative equation exactly, we move step by step until the derivative becomes close to zero.
+</div>
+
+<h2>1. Traditional Regression: What You Already Know</h2>
+
+<p>Suppose we have the simple linear regression model:</p>
+
+<div class="formula">
+\[
+\hat y_i = \beta_0 + \beta_1 x_i
+\]
+</div>
+
+<p>The residual is:</p>
+
+<div class="formula">
+\[
+e_i = y_i - \hat y_i = y_i - (\beta_0 + \beta_1x_i)
+\]
+</div>
+
+<p>The sum of squared errors is:</p>
+
+<div class="formula">
+\[
+S(\beta_0, \beta_1)=\sum_{i=1}^{n}(y_i-\beta_0-\beta_1x_i)^2
+\]
+</div>
+
+<p>In the traditional OLS approach, we take derivatives and set them equal to zero:</p>
+
+<div class="formula">
+\[
+\frac{\partial S}{\partial \beta_0}=0,
+\qquad
+\frac{\partial S}{\partial \beta_1}=0
+\]
+</div>
+
+<p>Then we solve these equations exactly and obtain the OLS coefficients.</p>
+
+<div class="box">
+  <strong>Important:</strong> OLS and gradient descent start from the same objective function. The difference is not the goal. The difference is the method used to reach the minimum.
+</div>
+
+<h2>2. Why Use Gradient Descent?</h2>
+
+<p>For small ordinary least squares problems, the closed-form OLS solution is usually fine. Gradient descent becomes useful when:</p>
+
+<ul>
+  <li>the dataset is too large for matrix inversion,</li>
+  <li>there are many features,</li>
+  <li>the matrix \(X'X\) is not invertible,</li>
+  <li>the model has no closed-form solution, such as logistic regression or neural networks.</li>
+</ul>
+
+<p>The closed-form OLS solution is:</p>
+
+<div class="formula">
+\[
+\hat\beta = (X'X)^{-1}X'y
+\]
+</div>
+
+<p>This requires matrix inversion. Gradient descent avoids matrix inversion.</p>
+
+<h2>3. The Key Confusion: What Do We Differentiate?</h2>
+
+<div class="box warning">
+  The derivative is not taken after you compute one number like \(S=850\). The derivative is taken from the function \(S(\beta_0,\beta_1)\) before plugging in specific values for \(\beta_0\) and \(\beta_1\).
+</div>
+
+<h3>Example Data</h3>
+
+<table>
+  <thead>
+    <tr><th>x</th><th>y</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>2</td></tr>
+    <tr><td>2</td><td>3</td></tr>
+    <tr><td>3</td><td>5</td></tr>
+  </tbody>
+</table>
+
+<p>The regression model is:</p>
+
+<div class="formula">
+\[
+\hat y_i = \beta_0 + \beta_1x_i
+\]
+</div>
+
+<p>So the residual is:</p>
+
+<div class="formula">
+\[
+e_i = y_i - (\beta_0 + \beta_1x_i)
+\]
+</div>
+
+<p>This residual is still a function of \(\beta_0\) and \(\beta_1\). It is not a fixed number until you choose coefficient values.</p>
+
+<h3>Write SSE as a Function</h3>
+
+<div class="formula">
+\[
+S(\beta_0,\beta_1)=\sum_{i=1}^{n}(y_i-\beta_0-\beta_1x_i)^2
+\]
+</div>
+
+<p>Using the three actual observations:</p>
+
+<div class="formula">
+\[
+S(\beta_0,\beta_1)
+=(2-\beta_0-\beta_1)^2
++(3-\beta_0-2\beta_1)^2
++(5-\beta_0-3\beta_1)^2
+\]
+</div>
+
+<p>This is the formula whose derivative we calculate.</p>
+
+<h2>4. Derivative with Respect to \(\beta_1\)</h2>
+
+<p>Now differentiate the function with respect to \(\beta_1\):</p>
+
+<div class="formula">
+\[
+\frac{\partial S}{\partial \beta_1}
+=
+-2(2-\beta_0-\beta_1)
+-4(3-\beta_0-2\beta_1)
+-6(5-\beta_0-3\beta_1)
+\]
+</div>
+
+<p>This derivative is still a function. It depends on \(\beta_0\) and \(\beta_1\).</p>
+
+<h3>Now Substitute the Current Guess</h3>
+
+<p>Suppose gradient descent starts with:</p>
+
+<div class="formula">
+\[
+\beta_0=0, \qquad \beta_1=0
+\]
+</div>
+
+<p>Substitute them into the derivative:</p>
+
+<div class="formula">
+\[
+\frac{\partial S}{\partial \beta_1}
+=
+-2(2)-4(3)-6(5)=-46
+\]
+</div>
+
+<div class="box key">
+  At the point \((0,0)\), the slope with respect to \(\beta_1\) is \(-46\). This means increasing \(\beta_1\) will reduce the SSE.
+</div>
+
+<h2>5. Gradient Descent Update Rule</h2>
+
+<p>The update rule is:</p>
+
+<div class="formula">
+\[
+\beta_j \leftarrow \beta_j - \alpha \frac{\partial S}{\partial \beta_j}
+\]
+</div>
+
+<p>where:</p>
+
+<ul>
+  <li>\(\beta_j\) is the coefficient being updated,</li>
+  <li>\(\alpha\) is the learning rate,</li>
+  <li>\(\frac{\partial S}{\partial \beta_j}\) is the derivative of the loss with respect to that coefficient.</li>
+</ul>
+
+<p>Using \(\alpha=0.01\):</p>
+
+<div class="formula">
+\[
+\beta_1 = 0 - 0.01(-46)=0.46
+\]
+</div>
+
+<p>Then we evaluate the same derivative formula again, but now using the updated coefficient value. The derivative formula does not change; only the values plugged into it change.</p>
+
+<h2>6. OLS vs Gradient Descent</h2>
+
+<table>
+  <thead>
+    <tr><th>Traditional OLS</th><th>Gradient Descent</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Derives the first-order conditions.</td><td>Derives the gradient formula.</td></tr>
+    <tr><td>Sets derivatives equal to zero.</td><td>Evaluates derivatives at current coefficient values.</td></tr>
+    <tr><td>Solves exactly for coefficients.</td><td>Updates coefficients step by step.</td></tr>
+    <tr><td>Needs a closed-form solution.</td><td>Works even when no closed-form solution exists.</td></tr>
+    <tr><td>Good for small or moderate OLS problems.</td><td>Useful for large datasets and complex models.</td></tr>
+  </tbody>
+</table>
+
+<h2>7. Correct Understanding of the Derivative</h2>
+
+<div class="box key">
+  You derive the derivative formula once. Then, at each iteration, you substitute the current values of the coefficients into that formula to compute the current gradient. You update the coefficients and repeat until the gradient is close to zero or the cost function stops improving meaningfully.
+</div>
+
+<p>In Python-like logic:</p>
+
+<pre><code>initialize beta0 = 0
+initialize beta1 = 0
+choose learning_rate = 0.01
+
+repeat many times:
+    compute predictions
+    compute residuals
+    compute derivative with respect to beta0
+    compute derivative with respect to beta1
+    update beta0
+    update beta1
+
+stop when the gradient is close to zero
+or when SSE changes very little</code></pre>
+
+<h2>8. What Is the Learning Rate?</h2>
+
+<p>The learning rate \(\alpha\) controls the size of each step.</p>
+
+<div class="formula">
+\[
+\beta_j \leftarrow \beta_j - \alpha \frac{\partial S}{\partial \beta_j}
+\]
+</div>
+
+<p>The gradient tells us the direction. The learning rate tells us how far to move in that direction.</p>
+
+<h3>If the Learning Rate Is Too Small</h3>
+
+<p>The algorithm moves very slowly.</p>
+
+<pre><code>SSE:
+850
+849.9
+849.8
+849.7
+...</code></pre>
+
+<h3>If the Learning Rate Is Too Large</h3>
+
+<p>The algorithm may jump over the minimum and keep bouncing around. It may even diverge.</p>
+
+<pre><code>SSE:
+850
+1200
+3400
+18000
+900000</code></pre>
+
+<h3>If the Learning Rate Is Reasonable</h3>
+
+<p>The algorithm moves toward the minimum efficiently.</p>
+
+<pre><code>SSE:
+850
+410
+280
+170
+150
+148
+147.98</code></pre>
+
+<h2>9. How Is the Learning Rate Chosen?</h2>
+
+<p>There is no universal formula for the best learning rate. It is a hyperparameter chosen by the analyst.</p>
+
+<p>Common values to try include:</p>
+
+<pre><code>1
+0.3
+0.1
+0.03
+0.01
+0.003
+0.001
+0.0001</code></pre>
+
+<p>In practice, you test different values and monitor whether the loss decreases smoothly.</p>
+
+<h3>Method 1: Try Several Values</h3>
+
+<p>Train the model with different learning rates and compare the loss curve.</p>
+
+<table>
+  <thead>
+    <tr><th>Learning Rate</th><th>Possible Result</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Too small</td><td>Very slow convergence</td></tr>
+    <tr><td>Reasonable</td><td>Smooth decrease in loss</td></tr>
+    <tr><td>Too large</td><td>Oscillation or divergence</td></tr>
+  </tbody>
+</table>
+
+<h3>Method 2: Learning Rate Schedule</h3>
+
+<p>Start with a larger learning rate and reduce it during training.</p>
+
+<pre><code>Start: 0.1
+Later: 0.05
+Later: 0.01
+Later: 0.001</code></pre>
+
+<p>This gives larger steps at the beginning and smaller steps near the minimum.</p>
+
+<h3>Method 3: Adaptive Optimizers</h3>
+
+<p>Modern machine learning often uses optimizers that adjust the effective learning rate automatically. Examples include:</p>
+
+<ul>
+  <li>SGD with Momentum</li>
+  <li>RMSProp</li>
+  <li>Adam</li>
+  <li>AdamW</li>
+</ul>
+
+<h2>10. Final Intuition</h2>
+
+<div class="box key">
+  Think of gradient descent as walking downhill in fog. The gradient tells you which direction is downhill. The learning rate tells you how large your step should be. You continue walking until the slope is nearly flat.
+</div>
+
+<p>OLS solves the problem analytically. Gradient descent solves the problem numerically. Both are trying to minimize the same loss function.</p>
+
+</body>
+</html>
