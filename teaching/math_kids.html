@@ -7,6 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
 <style>
   :root {
+    --tucky: #eb121d;
+    --tucky-dk: #a90d15;;
     --numo:    #4DD9F0;
     --numo-dk: #1AACCC;
     --pixi:    #C964F5;
@@ -95,11 +97,13 @@
   .card:hover { transform: translateY(-10px) scale(1.03); }
 
   /* Per-card accent */
+  .card.tucky  { border-color: var(--tucky);  box-shadow: 0 8px 40px rgba(235,18,29,.20); }
   .card.numo  { border-color: var(--numo);  box-shadow: 0 8px 40px rgba(77,217,240,.20); }
   .card.pixi  { border-color: var(--pixi);  box-shadow: 0 8px 40px rgba(201,100,245,.20); }
   .card.zing  { border-color: var(--zing);  box-shadow: 0 8px 40px rgba(255,140,66,.20); }
   .card.bibi  { border-color: var(--bibi);  box-shadow: 0 8px 40px rgba(61,235,154,.20); }
 
+  .card.tucky:hover {box-shadow: 0 20px 60px rgba(235,18,29,.45);}
   .card.numo:hover  { box-shadow: 0 20px 60px rgba(77,217,240,.45); }
   .card.pixi:hover  { box-shadow: 0 20px 60px rgba(201,100,245,.45); }
   .card.zing:hover  { box-shadow: 0 20px 60px rgba(255,140,66,.45); }
@@ -111,6 +115,7 @@
     position: absolute; top: 0; left: 0; right: 0; height: 4px;
     border-radius: 28px 28px 0 0;
   }
+  .card.tucky::before {background: linear-gradient(90deg, var(--tucky-dk), var(--tucky));}
   .card.numo::before { background: linear-gradient(90deg, var(--numo-dk), var(--numo)); }
   .card.pixi::before { background: linear-gradient(90deg, var(--pixi-dk), var(--pixi)); }
   .card.zing::before { background: linear-gradient(90deg, var(--zing-dk), var(--zing)); }
@@ -142,6 +147,7 @@
     border-radius: 20px;
     margin-bottom: 10px;
   }
+  .tucky .card-tag { background: rgba(235,18,29,.15);  color: var(--tucky);}
   .numo .card-tag  { background: rgba(77,217,240,.15); color: var(--numo); }
   .pixi .card-tag  { background: rgba(201,100,245,.15); color: var(--pixi); }
   .zing .card-tag  { background: rgba(255,140,66,.15);  color: var(--zing); }
@@ -172,6 +178,8 @@
     transition: transform .2s ease, box-shadow .2s ease;
   }
   .card-btn:hover { transform: scale(1.06); }
+  .tucky .card-btn {background: linear-gradient(135deg, var(--tucky-dk), var(--tucky));  color: #fff;  box-shadow: 0 4px 18px rgba(235,18,29,.4);
+}
   .numo .card-btn  { background: linear-gradient(135deg, var(--numo-dk), var(--numo)); color: #0a1a22; box-shadow: 0 4px 18px rgba(77,217,240,.4); }
   .pixi .card-btn  { background: linear-gradient(135deg, var(--pixi-dk), var(--pixi)); color: #fff;    box-shadow: 0 4px 18px rgba(201,100,245,.4); }
   .zing .card-btn  { background: linear-gradient(135deg, var(--zing-dk), var(--zing)); color: #fff;    box-shadow: 0 4px 18px rgba(255,140,66,.4); }
@@ -219,6 +227,7 @@
     font-size: 1.8rem;
     flex-shrink: 0;
   }
+  .tucky-modal .modal-icon  { background: rgba(77,217,240,.15); }
   .numo-modal .modal-icon  { background: rgba(77,217,240,.15); }
   .pixi-modal .modal-icon  { background: rgba(201,100,245,.15); }
   .zing-modal .modal-icon  { background: rgba(255,140,66,.15); }
@@ -265,11 +274,13 @@
   }
   .topic-pill:hover { transform: scale(1.07); }
 
+  .tucky-modal .topic-pill  { background: rgba(77,217,240,.12); color: var(--numo); border: 1.5px solid rgba(77,217,240,.3); }
   .numo-modal .topic-pill  { background: rgba(77,217,240,.12); color: var(--numo); border: 1.5px solid rgba(77,217,240,.3); }
   .pixi-modal .topic-pill  { background: rgba(201,100,245,.12); color: var(--pixi); border: 1.5px solid rgba(201,100,245,.3); }
   .zing-modal .topic-pill  { background: rgba(255,140,66,.12);  color: var(--zing); border: 1.5px solid rgba(255,140,66,.3); }
   .bibi-modal .topic-pill  { background: rgba(61,235,154,.12);  color: var(--bibi); border: 1.5px solid rgba(61,235,154,.3); }
 
+  .topic-modal .topic-pill:hover  { background: rgba(77,217,240,.25);  box-shadow: 0 0 16px rgba(77,217,240,.3); }
   .numo-modal .topic-pill:hover  { background: rgba(77,217,240,.25);  box-shadow: 0 0 16px rgba(77,217,240,.3); }
   .pixi-modal .topic-pill:hover  { background: rgba(201,100,245,.25); box-shadow: 0 0 16px rgba(201,100,245,.3); }
   .zing-modal .topic-pill:hover  { background: rgba(255,140,66,.25);  box-shadow: 0 0 16px rgba(255,140,66,.3); }
@@ -319,7 +330,23 @@
 
 <div class="cards">
 
+  <!-- tucky -->
+<div class="card tucky" onclick="window.location.href='Clock/index.html'">
+  <div class="card-img">
+    <img src="../images/math/TUCKY.png" alt="Tucky the Time Teacher">
+  </div>
+
+  <div class="card-body">
+    <span class="card-tag">Time</span>
+    <h2>Tucky</h2>
+    <p class="subtitle">The Time Teacher</p>
+
+    <button class="card-btn">Practice Time →</button>
+  </div>
+</div>
+
   <!-- NUMO -->
+
   <div class="card numo" onclick="openModal('numo')">
     <div class="card-img">
       <img src="../images/NUMO.png" alt="Numo the Number Collector">

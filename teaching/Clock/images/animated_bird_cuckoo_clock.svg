@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000"
+role="img" aria-labelledby="title desc">
+<title id="title">Animated cuckoo clock with flying bird</title>
+<desc id="desc">A hand-drawn style cuckoo clock. A blue bird flaps its wings and flies from a branch to the cuckoo opening and back. The clock pendulum gently swings.</desc>
+
+<defs>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="5" stdDeviation="5" flood-opacity=".18"/>
+  </filter>
+</defs>
+
+<rect width="1000" height="1000" fill="#f4e4d5"/>
+
+<!-- CLOCK HOUSE -->
+<g id="clock-house" filter="url(#shadow)">
+  <path d="M505 420 L655 245 L825 420 L775 435 L760 635
+           Q650 650 525 630 L515 455 Z"
+        fill="#a96132" stroke="#2b1208" stroke-width="8" stroke-linejoin="round"/>
+
+  <!-- roof -->
+  <path d="M468 462 L650 235 L825 455" fill="none"
+        stroke="#5a1716" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- wood grain -->
+  <g stroke="#6f3d23" stroke-width="3" opacity=".9" fill="none">
+    <path d="M535 480 Q590 465 655 480 T755 475"/>
+    <path d="M535 510 Q610 500 675 510 T760 505"/>
+    <path d="M535 545 Q600 532 668 545 T758 540"/>
+    <path d="M535 585 Q600 573 665 585 T755 580"/>
+    <path d="M540 615 Q620 605 695 615 T750 610"/>
+    <path d="M570 390 Q620 375 665 390 T745 388"/>
+    <path d="M585 355 Q640 345 695 355"/>
+  </g>
+
+  <!-- cuckoo opening -->
+  <path d="M600 430 Q650 345 700 430 V465 H600 Z"
+        fill="#18100d" stroke="#2b1208" stroke-width="6"/>
+
+  <!-- shutters -->
+  <g id="left-door">
+    <rect x="575" y="385" width="26" height="82" rx="4"
+          fill="#5d321e" stroke="#2b1208" stroke-width="5"
+          transform="rotate(-12 601 425)"/>
+  </g>
+  <g id="right-door">
+    <rect x="700" y="385" width="26" height="82" rx="4"
+          fill="#5d321e" stroke="#2b1208" stroke-width="5"
+          transform="rotate(13 700 425)"/>
+  </g>
+
+  <!-- clock face -->
+  <circle cx="645" cy="535" r="63" fill="#fff" stroke="#111" stroke-width="8"/>
+  <g stroke="#111" stroke-width="3">
+    <line x1="645" y1="478" x2="645" y2="486"/>
+    <line x1="674" y1="486" x2="670" y2="493"/>
+    <line x1="694" y1="506" x2="687" y2="510"/>
+    <line x1="702" y1="535" x2="694" y2="535"/>
+    <line x1="694" y1="564" x2="687" y2="560"/>
+    <line x1="674" y1="584" x2="670" y2="577"/>
+    <line x1="645" y1="592" x2="645" y2="584"/>
+    <line x1="616" y1="584" x2="620" y2="577"/>
+    <line x1="596" y1="564" x2="603" y2="560"/>
+    <line x1="588" y1="535" x2="596" y2="535"/>
+    <line x1="596" y1="506" x2="603" y2="510"/>
+    <line x1="616" y1="486" x2="620" y2="493"/>
+  </g>
+
+  <!-- hands -->
+  <line x1="645" y1="535" x2="645" y2="489"
+        stroke="#111" stroke-width="6" stroke-linecap="round"/>
+  <line x1="645" y1="535" x2="673" y2="565"
+        stroke="#111" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="645" cy="535" r="7" fill="#111"/>
+
+  <!-- hanging strings -->
+  <line x1="592" y1="640" x2="586" y2="765" stroke="#24130c" stroke-width="5"/>
+  <line x1="680" y1="640" x2="681" y2="860" stroke="#24130c" stroke-width="5"/>
+
+  <!-- left weight -->
+  <ellipse cx="586" cy="790" rx="24" ry="52" fill="#5c2c12" stroke="#111" stroke-width="6"/>
+
+  <!-- right weight -->
+  <ellipse cx="681" cy="885" rx="25" ry="52" fill="#5c2c12" stroke="#111" stroke-width="6"/>
+
+  <!-- pendulum -->
+  <g id="pendulum" transform="rotate(0 668 640)">
+    <line x1="668" y1="640" x2="738" y2="752" stroke="#6d432b" stroke-width="7"/>
+    <ellipse cx="755" cy="770" rx="43" ry="38" fill="#8d5128" stroke="#6a3b22" stroke-width="7"/>
+    <animateTransform attributeName="transform" type="rotate"
+      values="-13 668 640; 13 668 640; -13 668 640"
+      dur="2s" repeatCount="indefinite"/>
+  </g>
+</g>
+
+<!-- BRANCH -->
+<path d="M245 315 Q315 300 380 300 Q410 300 425 312"
+      fill="none" stroke="#3c1d0b" stroke-width="18" stroke-linecap="round"/>
+
+<!-- BIRD -->
+<g id="bird" transform="translate(0 0)">
+  <!-- body -->
+  <path d="M255 132
+           Q310 120 320 175
+           Q327 215 370 230
+           Q335 255 290 245
+           Q245 235 232 190
+           Q220 150 255 132 Z"
+        fill="#00a8cf" stroke="#111" stroke-width="8"/>
+
+  <!-- head / beak -->
+  <path d="M235 150 L175 112 L225 172 Z"
+        fill="#ef4a42" stroke="#111" stroke-width="7" stroke-linejoin="round"/>
+  <circle cx="266" cy="130" r="12" fill="#fff" stroke="#111" stroke-width="5"/>
+  <circle cx="269" cy="130" r="5" fill="#111"/>
+
+  <!-- tail -->
+  <path d="M355 215 L402 202 L365 238 Z"
+        fill="#006a84" stroke="#111" stroke-width="7"/>
+
+  <!-- wing -->
+  <g id="bird-wing" transform="rotate(0 305 180)">
+    <path d="M300 175 Q348 120 385 145 Q363 195 320 217 Q286 204 300 175 Z"
+          fill="#0c7185" stroke="#111" stroke-width="8"/>
+    <animateTransform attributeName="transform" type="rotate"
+      values="0 305 180;-22 305 180;12 305 180;-22 305 180;0 305 180"
+      dur=".75s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- legs -->
+  <path d="M275 240 L270 305 M305 242 L300 304"
+        stroke="#111" stroke-width="8" stroke-linecap="round"/>
+  <path d="M260 305 q12 -12 22 0 M290 304 q12 -12 22 0"
+        stroke="#111" stroke-width="7" fill="none" stroke-linecap="round"/>
+
+  <!-- small crest -->
+  <path d="M282 112 q18 -16 18 -34" fill="none" stroke="#111" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- bird movement: perch -> clock -> perch -->
+  <animateTransform attributeName="transform" type="translate"
+    values="
+      0 0;
+      0 0;
+      105 -30;
+      245 35;
+      335 165;
+      335 165;
+      245 35;
+      105 -30;
+      0 0;
+      0 0"
+    keyTimes="0;0.12;0.24;0.36;0.48;0.62;0.74;0.84;0.94;1"
+    dur="8s" repeatCount="indefinite"/>
+</g>
+
+<!-- FLIGHT MOTION MARKS -->
+<g id="motion-marks" fill="none" stroke="#3c1d0b" stroke-width="8" stroke-linecap="round" opacity=".85">
+  <path d="M385 315 l38 0 l-48 64 l105 0 l-41 54 l92 0"/>
+  <animate attributeName="opacity" values=".15;.85;.85;.15" dur="8s" repeatCount="indefinite"/>
+</g>
+
+<!-- instructional caption -->
+<text x="500" y="950" text-anchor="middle"
+      font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#5a3425">
+  The bird flies to the cuckoo clock and back!
+</text>
+</svg>

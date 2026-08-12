@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Clock Practice — Let's Learn to Tell Time!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="sky" aria-hidden="true">
+  <div class="cloud cloud-a"></div>
+  <div class="cloud cloud-b"></div>
+  <div class="cloud cloud-c"></div>
+</div>
+
+<div id="app" class="app">
+
+  <!-- ============ HOME SCREEN ============ -->
+  <section id="screen-home" class="screen active-screen" aria-labelledby="home-title">
+    <header class="brand">
+      <div class="brand-clock" aria-hidden="true"><img src="images\Alarm Clock.svg" width="100"></div>
+      <h1 id="home-title">Clock Practice</h1>
+      <p class="subtitle">Learn to tell time while you play!</p>
+    </header>
+
+    <div class="card-row" role="radiogroup" aria-label="Choose an activity">
+      <button type="button" class="choice-card" id="choice-set" data-activity="set" aria-pressed="false">
+        <span class="choice-check" aria-hidden="true">✓</span>
+        <span class="choice-emoji" aria-hidden="true"><img src="images\set_clock.png" width="100"></span>
+        <span class="choice-title">Set the Clock</span>
+        <span class="choice-desc">Move the hands to show the time</span>
+      </button>
+      <button type="button" class="choice-card" id="choice-tell" data-activity="tell" aria-pressed="false">
+        <span class="choice-check" aria-hidden="true">✓</span>
+        <span class="choice-emoji" aria-hidden="true"><img src="images\tell-time.png" width="100"></span>
+        <span class="choice-title">Tell the Time</span>
+        <span class="choice-desc">Look at the clock and type the time</span>
+      </button>
+    </div>
+
+    <div class="setup-panel">
+      <div class="setup-group">
+        <h2 class="setup-label">Difficulty</h2>
+        <div class="pill-row" role="radiogroup" aria-label="Choose difficulty level" id="level-group">
+          <button type="button" class="pill" data-level="1" aria-pressed="false">Level 1<span>O'Clock</span></button>
+          <button type="button" class="pill" data-level="2" aria-pressed="false">Level 2<span>Half Hours</span></button>
+          <button type="button" class="pill" data-level="3" aria-pressed="false">Level 3<span>Quarter Hours</span></button>
+          <button type="button" class="pill" data-level="4" aria-pressed="false">Level 4<span>5 Minutes</span></button>
+        </div>
+      </div>
+
+      <div class="setup-group">
+        <h2 class="setup-label">How many questions?</h2>
+        <div class="pill-row" role="radiogroup" aria-label="Choose number of questions" id="count-group">
+          <button type="button" class="pill pill-num" data-count="5" aria-pressed="false">5</button>
+          <button type="button" class="pill pill-num" data-count="10" aria-pressed="false">10</button>
+          <button type="button" class="pill pill-num" data-count="15" aria-pressed="false">15</button>
+          <button type="button" class="pill pill-num" data-count="20" aria-pressed="false">20</button>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" id="btn-start" class="btn btn-primary btn-huge">
+      Start Practice <span aria-hidden="true">▶</span>
+    </button>
+
+    <button type="button" id="btn-sound" class="sound-toggle" aria-pressed="true">
+      <span class="sound-icon" aria-hidden="true">🔊</span>
+      <span class="sound-text">Sound On</span>
+    </button>
+  </section>
+
+  <!-- ============ PRACTICE SCREEN ============ -->
+  <section id="screen-practice" class="screen" aria-labelledby="practice-instruction">
+    <div class="practice-topbar">
+      <button type="button" id="btn-home" class="btn-icon btn-icon-labeled" aria-label="Exit practice and go back to the home screen">
+        <span aria-hidden="true">🏠</span>
+        <span class="btn-icon-label">Back</span>
+      </button>
+      <div class="progress-wrap">
+        <div class="progress-text">
+          <span id="question-counter">Question 1 of 10</span>
+          <span id="score-display">⭐ Score: 0 / 10</span>
+        </div>
+        <div class="progress-bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-track">
+          <div class="progress-bar-fill" id="progress-bar-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <h2 id="practice-instruction" class="instruction"></h2>
+
+    <div class="clock-stage">
+      <div class="clock-face" id="clock-face">
+        <div class="clock-ticks" id="clock-ticks" aria-hidden="true"></div>
+        <div class="clock-numbers" id="clock-numbers" role="list" aria-label="Clock face numbers 1 through 12"></div>
+        <div class="clock-minute-helpers" id="clock-minute-helpers" aria-hidden="true" hidden></div>
+        <div class="hand hour-hand" id="hour-hand"></div>
+        <div class="hand minute-hand" id="minute-hand"></div>
+        <div class="clock-center" aria-hidden="true"></div>
+        <div class="drag-grabber" id="hour-grabber" role="slider" tabindex="0"
+             aria-label="Hour hand. Use left and right arrow keys to move it."
+             aria-valuemin="1" aria-valuemax="12" aria-valuenow="12"></div>
+        <div class="drag-grabber" id="minute-grabber" role="slider" tabindex="0"
+             aria-label="Minute hand. Use left and right arrow keys to move it."
+             aria-valuemin="0" aria-valuemax="59" aria-valuenow="0"></div>
+      </div>
+    </div>
+
+    <div class="hand-helper" id="hand-helper">
+      <span>🕓 <strong>Short hand</strong> = Hour</span>
+      <span>🕐 <strong>Long hand</strong> = Minutes</span>
+      <button type="button" id="btn-toggle-helper" class="link-btn">Hide this</button>
+    </div>
+
+    <button type="button" id="btn-minute-helpers" class="btn btn-ghost" hidden>Show Minute Helpers</button>
+
+    <!-- Tell the Time input -->
+    <div class="answer-card" id="answer-card" hidden>
+      <p class="answer-card-label">⌨️ Type the time</p>
+      <form id="tell-time-form" class="tell-time-form" autocomplete="off">
+        <label for="time-input" class="visually-hidden">What time is it? Type the hour and minutes, like 3:30</label>
+        <input type="text" id="time-input" class="time-input" inputmode="numeric" placeholder="3:30" aria-describedby="time-input-hint" autocomplete="off">
+      </form>
+      <p id="time-input-hint" class="answer-card-example">Example: 3:30</p>
+    </div>
+
+    <p class="feedback-message" id="feedback-message" role="status" aria-live="polite"></p>
+    <p class="hint-message" id="hint-message" role="status" aria-live="polite"></p>
+
+    <div class="action-row">
+      <button type="button" id="btn-hint" class="btn btn-hint">💡 Hint</button>
+      <button type="button" id="btn-check" class="btn btn-primary">✓ Check</button>
+      <button type="button" id="btn-next" class="btn btn-next" hidden>Next Question →</button>
+    </div>
+
+    <div class="celebration" id="celebration" aria-hidden="true"></div>
+  </section>
+
+  <!-- ============ RESULTS SCREEN ============ -->
+  <section id="screen-results" class="screen" aria-labelledby="results-title">
+    <div class="results-card">
+      <h2 id="results-title">🎉 Practice Complete!</h2>
+      <p class="results-stars" id="results-stars"></p>
+      <p class="results-summary" id="results-summary"></p>
+
+      <dl class="results-stats">
+        <div class="stat">
+          <dt>Questions Completed</dt>
+          <dd id="stat-completed">0</dd>
+        </div>
+        <div class="stat">
+          <dt>First-Try Correct</dt>
+          <dd id="stat-firsttry">0 / 0</dd>
+        </div>
+        <div class="stat">
+          <dt>Hints Used</dt>
+          <dd id="stat-hints">0</dd>
+        </div>
+      </dl>
+
+      <div class="action-row">
+        <button type="button" id="btn-again" class="btn btn-primary">🔄 Practice Again</button>
+        <button type="button" id="btn-home2" class="btn btn-ghost">🏠 Back to Home</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div id="sr-live" class="visually-hidden" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
