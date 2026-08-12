@@ -875,6 +875,8 @@
     });
   }
 
+
+  
   /* ------------------------------------------------------------------ *
    *  INIT
    * ------------------------------------------------------------------ */
@@ -892,3 +894,22 @@
 
   document.addEventListener("DOMContentLoaded", init);
 })();
+
+
+
+const timeInput = document.getElementById("time-input");
+
+timeInput.addEventListener("input", function () {
+    // Keep numbers only
+    let digits = this.value.replace(/\D/g, "");
+
+    // Maximum 4 digits: HHMM
+    digits = digits.slice(0, 4);
+
+    // Automatically add ":" after 2 digits
+    if (digits.length > 2) {
+        this.value = digits.slice(0, 2) + ":" + digits.slice(2);
+    } else {
+        this.value = digits;
+    }
+});

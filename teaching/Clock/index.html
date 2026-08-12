@@ -130,9 +130,10 @@
       <p class="answer-card-label">⌨️ Type the time</p>
       <form id="tell-time-form" class="tell-time-form" autocomplete="off">
         <label for="time-input" class="visually-hidden">What time is it? Type the hour and minutes, like 3:30</label>
-        <input type="text" id="time-input" class="time-input" inputmode="numeric" placeholder="3:30" aria-describedby="time-input-hint" autocomplete="off">
+        <input type="text" id="time-input" class="time-input" inputmode="numeric" placeholder="--:--" aria-describedby="time-input-hint" autocomplete="off">
       </form>
-      <p id="time-input-hint" class="answer-card-example">Example: 3:30</p>
+      <p id="time-input-hint" class="answer-card-example">Example: 03:30</p>
+      <p id="time-input-hint" class="answer-card-example">   Just type the numbers - we'll add the : for you!</p>
     </div>
 
     <p class="feedback-message" id="feedback-message" role="status" aria-live="polite"></p>
