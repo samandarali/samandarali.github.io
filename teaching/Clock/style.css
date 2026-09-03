@@ -186,12 +186,15 @@ input:focus-visible,
 
 .card-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   width: 100%;
   margin-bottom: 24px;
 }
-@media (max-width: 560px) {
+@media (max-width: 700px) {
+  .card-row { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 460px) {
   .card-row { grid-template-columns: 1fr; }
 }
 
@@ -326,6 +329,17 @@ input:focus-visible,
 .pill[data-level="3"][aria-pressed="true"] { background: var(--coral-deep); border-color: var(--coral-deep); }
 .pill[data-level="3"][aria-pressed="true"] span { color: #ffe4df; }
 .pill[data-level="4"][aria-pressed="true"] { background: var(--grape-deep); border-color: var(--grape-deep); }
+
+/* Time Challenge has its own 3-level scale (data-clevel), reusing the
+   same accent colors as levels 1-3 of the other activities so the
+   difficulty "feel" stays consistent across the app. */
+.pill[data-clevel="1"][aria-pressed="true"] { background: var(--sun-deep); border-color: var(--sun-deep); color: var(--navy); }
+.pill[data-clevel="1"][aria-pressed="true"] span { color: #6b4a0a; }
+.pill[data-clevel="2"][aria-pressed="true"] { background: var(--grass-deep); border-color: var(--grass-deep); }
+.pill[data-clevel="2"][aria-pressed="true"] span { color: #dff7e7; }
+.pill[data-clevel="3"][aria-pressed="true"] { background: var(--coral-deep); border-color: var(--coral-deep); }
+.pill[data-clevel="3"][aria-pressed="true"] span { color: #ffe4df; }
+
 .pill-num {
   min-width: 56px;
   align-items: center;
@@ -621,6 +635,66 @@ input:focus-visible,
   box-shadow: var(--shadow-card);
 }
 .hand-helper strong { color: var(--navy); }
+
+/* ---------- time challenge: word-problem story card (Level 3) ---------- */
+.story-card {
+  width: 100%;
+  max-width: 520px;
+  text-align: left;
+  background: linear-gradient(180deg, #fffefb 0%, #fff7e8 100%);
+  border: 4px solid var(--sun-deep);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  margin: 4px 0 18px;
+  box-shadow: var(--shadow-card);
+  animation: answer-card-in 0.25s ease both;
+}
+.story-card p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(15px, 3.6vw, 18px);
+  font-weight: 700;
+  line-height: 1.55;
+  color: var(--navy);
+}
+
+/* ---------- time challenge: starting-time label (Levels 1-2) ---------- */
+.starting-time-text {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--grape-deep);
+  margin: -4px 0 10px;
+}
+
+/* ---------- time challenge: AM/PM selector (Level 3 answers) ---------- */
+.ampm-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+.ampm-btn {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--navy);
+  background: var(--sky);
+  border: 3px solid var(--sky-deep);
+  border-radius: 999px;
+  padding: 10px 26px;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+}
+.ampm-btn:hover { transform: translateY(-2px); }
+.ampm-btn[aria-pressed="true"] {
+  background: var(--grape);
+  border-color: var(--grape-deep);
+  color: var(--white);
+  box-shadow: 0 4px 0 rgba(43, 58, 85, 0.18);
+}
 
 /* ---------- tell-the-time answer card ---------- */
 .answer-card {

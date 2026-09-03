@@ -26,13 +26,35 @@
 
   const STORAGE_NOT_USED = true; // placeholder flag: no backend in v1
 
+  // --- Time Challenge (3rd activity) constants -----------------------
+  // Level 1: single simple duration to add.
+  const CHALLENGE_L1_DURATIONS = [15, 30, 45];
+  // Level 2: combined hour+minute durations, [hours, minutes].
+  const CHALLENGE_L2_DURATIONS = [
+    [1, 20], [1, 40],
+    [2, 15], [2, 30], [2, 40], [2, 50],
+    [3, 15], [3, 25],
+  ];
+  // Level 3: pool of plausible segment durations (minutes) for word
+  // problems; each story picks 2-4 of these per template.
+  const CHALLENGE_DURATION_POOL = [
+    15, 20, 25, 30, 35, 40, 45, 50, 55, 60,
+    70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180,
+  ];
+  const CHALLENGE_NAMES = [
+    "Emma", "Liam", "Sophia", "Noah", "Ava", "Mason",
+    "Mia", "Lucas", "Zoey", "Ethan", "Grace", "Oliver",
+  ];
+
   /* ------------------------------------------------------------------ *
    *  STATE
    * ------------------------------------------------------------------ */
 
   const state = {
-    currentActivity: "set",       // 'set' | 'tell'
-    difficultyLevel: 1,           // 1-4
+    currentActivity: "set",       // 'set' | 'tell' | 'challenge'
+    difficultyLevel: 1,           // 1-4, used by 'set' and 'tell'
+    challengeLevel: 1,            // 1-3, used only by 'challenge'
+    answerAmPm: null,             // 'AM' | 'PM' | null — Time Challenge Level 3 answer
     totalQuestions: 10,
     currentQuestionIndex: 0,      // 0-based
     correctAnswers: 0,            // questions completed correctly
@@ -64,14 +86,18 @@
   function cacheDom() {
     [
       "screen-home", "screen-practice", "screen-results",
-      "choice-set", "choice-tell", "level-group", "count-group",
+      "choice-set", "choice-tell", "choice-challenge",
+      "level-group", "level-group-challenge",
+      "setup-group-standard-levels", "setup-group-challenge-levels",
+      "count-group",
       "btn-start", "btn-sound",
       "btn-home", "question-counter", "score-display",
       "progress-bar-track", "progress-bar-fill", "practice-instruction",
-      "clock-face", "clock-ticks", "clock-numbers", "clock-minute-helpers",
+      "clock-stage", "clock-face", "clock-ticks", "clock-numbers", "clock-minute-helpers",
       "hour-hand", "minute-hand", "hour-grabber", "minute-grabber",
       "hand-helper", "btn-toggle-helper", "btn-minute-helpers",
-      "answer-card", "tell-time-form", "time-input",
+      "story-card", "story-text", "starting-time-text",
+      "answer-card", "tell-time-form", "time-input", "ampm-toggle",
       "feedback-message", "hint-message",
       "btn-hint", "btn-check", "btn-next", "celebration",
       "screen-results", "results-stars", "results-summary",
@@ -124,6 +150,55 @@
   }
   function hourAngleFor(hour, minute) {
     return (hour % 12) * 30 + minute * 0.5;
+  }
+
+  /* ------------------------------------------------------------------ *
+   *  TIME CHALLENGE — ELAPSED-TIME ARITHMETIC
+   *  All duration math is done in minutes (either a 0-719 "12-hour clock
+   *  face" basis for Levels 1-2, which don't need AM/PM, or a 0-1439
+   *  "minutes since midnight" basis for Level 3, which does). We never
+   *  add/subtract on the displayed "H:MM" strings directly.
+   * ------------------------------------------------------------------ */
+
+  // 12-hour face basis (no AM/PM): hour 1-12, minute 0-59 -> 0-719.
+  function to12HourTotal(hour, minute) {
+    return (hour % 12) * 60 + minute;
+  }
+  function from12HourTotal(total) {
+    const t = ((total % 720) + 720) % 720;
+    let hour = Math.floor(t / 60);
+    const minute = t % 60;
+    if (hour === 0) hour = 12;
+    return { hour, minute };
+  }
+
+  // Full-day basis (with AM/PM): hour 1-12 + isPM, minute 0-59 -> 0-1439.
+  function to24HourTotal(hour12, minute, isPM) {
+    let hour24 = hour12 % 12;
+    if (isPM) hour24 += 12;
+    return hour24 * 60 + minute;
+  }
+  function from24HourTotal(total) {
+    const t = ((total % 1440) + 1440) % 1440;
+    const hour24 = Math.floor(t / 60);
+    const minute = t % 60;
+    const isPM = hour24 >= 12;
+    let hour12 = hour24 % 12;
+    if (hour12 === 0) hour12 = 12;
+    return { hour: hour12, minute, isPM };
+  }
+
+  function formatTimeAmPm(hour, minute, isPM) {
+    return `${formatTime(hour, minute)} ${isPM ? "PM" : "AM"}`;
+  }
+
+  // "2 h 40 min" / "45 min" / "2 h" — used in question and hint text.
+  function formatDuration(totalMinutes) {
+    const h = Math.floor(totalMinutes / 60);
+    const m = totalMinutes % 60;
+    if (h === 0) return `${m} min`;
+    if (m === 0) return `${h} h`;
+    return `${h} h ${m} min`;
   }
 
   /* ------------------------------------------------------------------ *
@@ -231,21 +306,35 @@
     return angle;
   }
 
-  // Snap a raw minute angle to the nearest allowed minute value for the
-  // current difficulty level (so young children don't need pixel-perfect
-  // accuracy), using circular (wrap-around) nearest-neighbor matching.
+  // Snap a raw minute angle to the nearest of the 60 individual minute
+  // positions (0-59), 6deg apart. Dragging the minute hand is always
+  // free at one-minute resolution in every difficulty level — the level
+  // only controls which times are *asked* (see LEVEL_MINUTES usage in
+  // question generation), not how finely the hand can be moved.
   function snapMinute(rawMinute) {
-    const allowed = LEVEL_MINUTES[state.difficultyLevel];
-    let best = allowed[0];
-    let bestDiff = Infinity;
-    allowed.forEach((m) => {
-      const diff = circularDiff(m * 6, rawMinute * 6);
-      if (diff < bestDiff) {
-        bestDiff = diff;
-        best = m;
-      }
-    });
-    return best;
+    let m = Math.round(rawMinute) % 60;
+    if (m < 0) m += 60;
+    return m;
+  }
+
+  // When the minute hand crosses the 12 o'clock mark, roll the hour hand
+  // forward or backward by exactly one hour. This is driven by comparing
+  // the previous and new minute values (not recomputed from the raw
+  // pointer angle), which is what lets the hour hand keep advancing to
+  // the *next* hour every time the minute hand completes a clockwise
+  // rotation, instead of snapping back toward the current/previous hour.
+  function advanceHourOnMinuteWrap(oldMinute, newMinute) {
+    const delta = newMinute - oldMinute;
+    if (delta > 30) {
+      // Large jump downward-in-angle-terms actually means we wrapped
+      // backwards past 0 (e.g. 2 -> 58 while dragging counterclockwise):
+      // the hour should decrease.
+      state.handHour = ((state.handHour - 2 + 12) % 12) + 1;
+    } else if (delta < -30) {
+      // Wrapped forward past 59 back to 0 (e.g. 58 -> 2 while dragging
+      // clockwise): the hour should advance to the next hour.
+      state.handHour = (state.handHour % 12) + 1;
+    }
   }
 
   function handleHandDrag(clientX, clientY) {
@@ -253,8 +342,12 @@
     const angle = angleFromCenter(clientX, clientY, state.clockRect);
 
     if (state.activeHand === "minute") {
-      const rawMinute = angle / 6; // 0-60
-      state.handMinute = snapMinute(Math.round(rawMinute) % 60);
+      const rawMinute = angle / 6; // 0-60, each tick = 1 minute = 6deg
+      const newMinute = snapMinute(rawMinute);
+      if (newMinute !== state.handMinute) {
+        advanceHourOnMinuteWrap(state.handMinute, newMinute);
+        state.handMinute = newMinute;
+      }
     } else if (state.activeHand === "hour") {
       // Remove the "creep" caused by the current minute value before
       // figuring out which hour number the child is pointing at.
@@ -336,14 +429,18 @@
     if (!el.clockFace.classList.contains("interactive")) return;
     let handled = true;
     if (hand === "minute") {
-      const allowed = LEVEL_MINUTES[state.difficultyLevel];
-      const idx = allowed.indexOf(state.handMinute);
+      const oldMinute = state.handMinute;
+      let newMinute = oldMinute;
       if (e.key === "ArrowRight" || e.key === "ArrowUp") {
-        state.handMinute = allowed[(idx + 1 + allowed.length) % allowed.length];
+        newMinute = (oldMinute + 1) % 60;
       } else if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
-        state.handMinute = allowed[(idx - 1 + allowed.length) % allowed.length];
+        newMinute = (oldMinute - 1 + 60) % 60;
       } else {
         handled = false;
+      }
+      if (handled) {
+        advanceHourOnMinuteWrap(oldMinute, newMinute);
+        state.handMinute = newMinute;
       }
     } else {
       if (e.key === "ArrowRight" || e.key === "ArrowUp") {
@@ -407,11 +504,232 @@
   }
 
   /* ------------------------------------------------------------------ *
+   *  TIME CHALLENGE — QUESTION GENERATORS
+   *  Each generator returns a question object carrying enough info to
+   *  determine the starting time, duration(s), correct ending time, and
+   *  (for hints) the intermediate steps — never just the final answer.
+   * ------------------------------------------------------------------ */
+
+  // Level 1: single 15/30/45-minute add. No AM/PM needed.
+  function generateChallengeLevel1() {
+    const startHour = randInt(1, 12);
+    const startMinute = randInt(0, 59);
+    const duration = CHALLENGE_L1_DURATIONS[randInt(0, CHALLENGE_L1_DURATIONS.length - 1)];
+
+    const startTotal = to12HourTotal(startHour, startMinute);
+    const { hour: correctHour, minute: correctMinute } = from12HourTotal(startTotal + duration);
+
+    return {
+      activity: "challenge",
+      level: 1,
+      startHour,
+      startMinute,
+      durationMinutes: duration,
+      correctHour,
+      correctMinute,
+      questionText: `It is ${formatTime(startHour, startMinute)}. What time will it be after ${duration} minutes?`,
+    };
+  }
+
+  // Level 2: combined hour(s) + minutes add. No AM/PM needed.
+  function generateChallengeLevel2() {
+    const startHour = randInt(1, 12);
+    const startMinute = randInt(0, 59);
+    const [durationHours, durationMins] = CHALLENGE_L2_DURATIONS[randInt(0, CHALLENGE_L2_DURATIONS.length - 1)];
+    const duration = durationHours * 60 + durationMins;
+
+    const startTotal = to12HourTotal(startHour, startMinute);
+    const { hour: correctHour, minute: correctMinute } = from12HourTotal(startTotal + duration);
+
+    return {
+      activity: "challenge",
+      level: 2,
+      startHour,
+      startMinute,
+      durationHours,
+      durationMins,
+      durationMinutes: duration,
+      correctHour,
+      correctMinute,
+      questionText: `It is ${formatTime(startHour, startMinute)}. What time will it be after ${formatDuration(duration)}?`,
+    };
+  }
+
+  // Level 3 story templates. Each `build` receives the character's name,
+  // the formatted starting-time label, and an array of {minutes, label}
+  // duration objects (one per segment required by the template), and
+  // returns the story text plus a short label per segment for hints.
+  const CHALLENGE_TEMPLATES = [
+    { // driving / travel
+      segments: 3,
+      build: (name, startLabel, d) => ({
+        text: `${name} left home at ${startLabel} to drive and visit family. ${name} drove for ${d[0].label}, stopped for a ${d[1].label} break at a rest stop, then drove another ${d[2].label} to arrive. What time did ${name} arrive?`,
+        labels: ["driving before the stop", "the rest stop break", "driving the rest of the way"],
+      }),
+    },
+    { // school
+      segments: 2,
+      build: (name, startLabel, d) => ({
+        text: `${name} started morning class at ${startLabel}. Class lasted ${d[0].label}, then there was a ${d[1].label} recess before the next class began. What time did the next class start?`,
+        labels: ["the first class", "recess"],
+      }),
+    },
+    { // sports
+      segments: 3,
+      build: (name, startLabel, d) => ({
+        text: `${name}'s soccer practice began at ${startLabel}. The team warmed up for ${d[0].label}, played a scrimmage for ${d[1].label}, then cooled down for ${d[2].label}. What time did practice end?`,
+        labels: ["the warm-up", "the scrimmage", "the cool-down"],
+      }),
+    },
+    { // visiting family
+      segments: 3,
+      build: (name, startLabel, d) => ({
+        text: `${name} arrived at grandma's house at ${startLabel}. They chatted for ${d[0].label}, baked cookies together for ${d[1].label}, and then played a board game for ${d[2].label}. What time did the game end?`,
+        labels: ["chatting", "baking cookies", "the board game"],
+      }),
+    },
+    { // shopping
+      segments: 2,
+      build: (name, startLabel, d) => ({
+        text: `${name} started shopping at the mall at ${startLabel}. They browsed the toy store for ${d[0].label}, then tried on shoes at the shoe store for ${d[1].label}. What time did they finish?`,
+        labels: ["the toy store", "the shoe store"],
+      }),
+    },
+    { // movies
+      segments: 2,
+      build: (name, startLabel, d) => ({
+        text: `${name} arrived at the movie theater at ${startLabel}. Previews and ads played for ${d[0].label}, then the movie played for ${d[1].label}. What time did the movie end?`,
+        labels: ["the previews", "the movie"],
+      }),
+    },
+    { // parties
+      segments: 4,
+      build: (name, startLabel, d) => ({
+        text: `${name}'s birthday party started at ${startLabel}. Guests played games for ${d[0].label}, ate lunch for ${d[1].label}, watched ${name} open presents for ${d[2].label}, and finished with cake for ${d[3].label}. What time did the party end?`,
+        labels: ["games", "lunch", "opening presents", "cake time"],
+      }),
+    },
+    { // cooking / baking
+      segments: 3,
+      build: (name, startLabel, d) => ({
+        text: `${name} began baking bread at ${startLabel}. Mixing the dough took ${d[0].label}, letting it rise took ${d[1].label}, and baking it in the oven took ${d[2].label}. What time was the bread ready?`,
+        labels: ["mixing the dough", "letting it rise", "baking"],
+      }),
+    },
+    { // library
+      segments: 2,
+      build: (name, startLabel, d) => ({
+        text: `${name} got to the library at ${startLabel}. They read quietly for ${d[0].label}, then joined story time for ${d[1].label}. What time did story time end?`,
+        labels: ["reading", "story time"],
+      }),
+    },
+    { // trip with stops
+      segments: 4,
+      build: (name, startLabel, d) => ({
+        text: `${name} took a train trip that started at ${startLabel}. The train rode for ${d[0].label}, stopped at a station for ${d[1].label}, rode again for ${d[2].label}, then stopped once more for ${d[3].label} before reaching the final stop. What time did the train arrive?`,
+        labels: ["the first leg", "the station stop", "the second leg", "the last stop"],
+      }),
+    },
+  ];
+
+  const CHALLENGE_START_MINUTES = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+
+  // Level 3: multi-step word problem. Uses the full-day (AM/PM) basis
+  // since stories can cross noon or move from morning into the afternoon.
+  function generateChallengeLevel3() {
+    const template = CHALLENGE_TEMPLATES[randInt(0, CHALLENGE_TEMPLATES.length - 1)];
+    const name = CHALLENGE_NAMES[randInt(0, CHALLENGE_NAMES.length - 1)];
+
+    const startHour = randInt(1, 12);
+    const startMinute = CHALLENGE_START_MINUTES[randInt(0, CHALLENGE_START_MINUTES.length - 1)];
+    const startIsPM = Math.random() < 0.5;
+    const startLabel = formatTimeAmPm(startHour, startMinute, startIsPM);
+
+    const durMinutesList = [];
+    for (let i = 0; i < template.segments; i++) {
+      durMinutesList.push(CHALLENGE_DURATION_POOL[randInt(0, CHALLENGE_DURATION_POOL.length - 1)]);
+    }
+    const durLabels = durMinutesList.map((m) => ({ minutes: m, label: formatDuration(m) }));
+
+    const { text: storyText, labels: segmentLabels } = template.build(name, startLabel, durLabels);
+
+    // Walk through each segment, tracking the running total in minutes
+    // since midnight so hour/AM-PM boundaries are handled automatically.
+    let runningTotal = to24HourTotal(startHour, startMinute, startIsPM);
+    const steps = [];
+    durMinutesList.forEach((mins, idx) => {
+      runningTotal += mins;
+      const t = from24HourTotal(runningTotal);
+      steps.push({
+        durationMinutes: mins,
+        durationLabel: durLabels[idx].label,
+        segmentLabel: segmentLabels[idx],
+        resultHour: t.hour,
+        resultMinute: t.minute,
+        resultIsPM: t.isPM,
+        resultLabel: formatTimeAmPm(t.hour, t.minute, t.isPM),
+      });
+    });
+
+    const final = steps[steps.length - 1];
+
+    return {
+      activity: "challenge",
+      level: 3,
+      startHour,
+      startMinute,
+      startIsPM,
+      startLabel,
+      storyText,
+      steps,
+      correctHour: final.resultHour,
+      correctMinute: final.resultMinute,
+      correctIsPM: final.resultIsPM,
+    };
+  }
+
+  // Builds `count` Time Challenge questions for the chosen level, guarding
+  // (best-effort) against the exact same question appearing twice in a row.
+  function generateChallengeQuestionSet(count, level) {
+    const generator =
+      level === 1 ? generateChallengeLevel1 :
+      level === 2 ? generateChallengeLevel2 :
+      generateChallengeLevel3;
+
+    const result = [];
+    let last = null;
+    for (let i = 0; i < count; i++) {
+      let q = generator();
+      let guard = 0;
+      while (last && challengeQuestionsEqual(q, last) && guard < 10) {
+        q = generator();
+        guard++;
+      }
+      result.push(q);
+      last = q;
+    }
+    return result;
+  }
+
+  function challengeQuestionsEqual(a, b) {
+    if (a.level !== b.level) return false;
+    if (a.level === 3) return a.storyText === b.storyText;
+    return (
+      a.startHour === b.startHour &&
+      a.startMinute === b.startMinute &&
+      a.durationMinutes === b.durationMinutes
+    );
+  }
+
+  /* ------------------------------------------------------------------ *
    *  SESSION FLOW
    * ------------------------------------------------------------------ */
 
   function startSession() {
-    state.questions = generateQuestionSet(state.totalQuestions, state.difficultyLevel);
+    state.questions =
+      state.currentActivity === "challenge"
+        ? generateChallengeQuestionSet(state.totalQuestions, state.challengeLevel)
+        : generateQuestionSet(state.totalQuestions, state.difficultyLevel);
     state.currentQuestionIndex = 0;
     state.correctAnswers = 0;
     state.firstTryCorrect = 0;
@@ -429,20 +747,37 @@
     state.firstTryCorrect = 0;
     state.hintsUsed = 0;
     state.currentQuestion = null;
+    state.answerAmPm = null;
   }
 
   function setupPracticeUiForActivity() {
-    const isSet = state.currentActivity === "set";
-    // The answer card (label + input) is a single visual unit for Activity 2.
-    // Toggling the wrapper — not just the inner <form> — guarantees the
-    // whole card (including its heading and example text) appears or
-    // disappears together, with no leftover empty box in Activity 1.
+    const activity = state.currentActivity;
+    const isSet = activity === "set";
+    const isTell = activity === "tell";
+    const isChallenge = activity === "challenge";
+    const isChallengeStory = isChallenge && state.challengeLevel === 3;
+    const isChallengeClockLevel = isChallenge && !isChallengeStory;
+
+    // The answer card (label + input) is a single visual unit for
+    // Activities 2 & 3. Toggling the wrapper — not just the inner
+    // <form> — guarantees the whole card appears/disappears together.
     el.answerCard.hidden = isSet;
     el.handHelper.hidden = !isSet || !state.showHandHelper;
-    el.btnMinuteHelpers.hidden = isSet; // minute helpers only meaningful in tell-the-time reading
+    el.btnMinuteHelpers.hidden = !isTell; // minute helpers only meaningful in tell-the-time reading
     el.clockFace.classList.toggle("interactive", isSet);
     el.screenPractice.classList.toggle("activity-set", isSet);
-    el.screenPractice.classList.toggle("activity-tell", !isSet);
+    el.screenPractice.classList.toggle("activity-tell", isTell);
+    el.screenPractice.classList.toggle("activity-challenge", isChallenge);
+
+    // Level 3 word problems put the story front and center; the clock is
+    // hidden so it doesn't compete for attention. Levels 1-2 show the
+    // clock (display-only) plus a text label of the starting time.
+    el.storyCard.hidden = !isChallengeStory;
+    el.startingTimeText.hidden = !isChallengeClockLevel;
+    el.clockStage.hidden = isChallengeStory;
+
+    // AM/PM answer selector only matters for Level 3 word problems.
+    el.ampmToggle.hidden = !isChallengeStory;
   }
 
   function generateQuestion() {
@@ -450,6 +785,7 @@
     state.attemptsForCurrentQuestion = 0;
     state.hintsShownForCurrentQuestion = 0;
     state.answeredCorrectly = false;
+    resetAmPmAnswer();
 
     el.feedbackMessage.textContent = "";
     el.feedbackMessage.classList.remove("is-error");
@@ -461,9 +797,10 @@
     el.timeInput.value = "";
     el.timeInput.disabled = false;
 
-    const { hour, minute } = state.currentQuestion;
+    const q = state.currentQuestion;
 
     if (state.currentActivity === "set") {
+      const { hour, minute } = q;
       el.practiceInstruction.textContent = `Show ${formatTime(hour, minute)} on the clock.`;
       // Start the hands somewhere clearly different from the target so
       // the child has to actually move them.
@@ -473,15 +810,32 @@
         startHour = ((hour + 5) % 12) + 1;
       }
       setClockTime(startHour, startMinute);
-    } else {
+    } else if (state.currentActivity === "tell") {
+      const { hour, minute } = q;
       el.practiceInstruction.textContent = "What time is it?";
       setClockTime(hour, minute);
       setTimeout(() => el.timeInput.focus(), 50);
+    } else {
+      setupChallengeQuestion(q);
     }
 
     updateMinuteHelperVisibility();
     updateProgress();
     updateScore();
+  }
+
+  // Populates the instruction, story card / starting-time text, and
+  // display-only clock for a Time Challenge question.
+  function setupChallengeQuestion(q) {
+    if (q.level === 3) {
+      el.practiceInstruction.textContent = "Read the story and work out the time.";
+      el.storyText.textContent = q.storyText;
+    } else {
+      el.practiceInstruction.textContent = q.questionText;
+      el.startingTimeText.textContent = `Starting time: ${formatTime(q.startHour, q.startMinute)}`;
+      setClockTime(q.startHour, q.startMinute);
+    }
+    setTimeout(() => el.timeInput.focus(), 50);
   }
 
   function nextQuestion() {
@@ -501,8 +855,9 @@
     if (pct >= 0.9) stars = "⭐⭐⭐";
     else if (pct >= 0.6) stars = "⭐⭐";
 
+    const activityLabel = state.currentActivity === "challenge" ? "time challenge" : "clock";
     el.resultsStars.textContent = stars;
-    el.resultsSummary.textContent = `You completed ${state.totalQuestions} clock question${state.totalQuestions === 1 ? "" : "s"}!`;
+    el.resultsSummary.textContent = `You completed ${state.totalQuestions} ${activityLabel} question${state.totalQuestions === 1 ? "" : "s"}!`;
     el.statCompleted.textContent = String(state.correctAnswers);
     el.statFirsttry.textContent = `${state.firstTryCorrect} / ${state.totalQuestions}`;
     el.statHints.textContent = String(state.hintsUsed);
@@ -532,8 +887,14 @@
     if (state.answeredCorrectly) return;
     state.attemptsForCurrentQuestion++;
 
-    const correct =
-      state.currentActivity === "set" ? checkHandPosition() : checkTypedTime();
+    let correct;
+    if (state.currentActivity === "set") {
+      correct = checkHandPosition();
+    } else if (state.currentActivity === "tell") {
+      correct = checkTypedTime();
+    } else {
+      correct = checkChallengeAnswer();
+    }
 
     if (correct) {
       state.answeredCorrectly = true;
@@ -581,6 +942,26 @@
     return parsed.hour === hour && parsed.minute === minute;
   }
 
+  // Time Challenge answer check. Levels 1-2 compare hour/minute only
+  // (no AM/PM needed); Level 3 also requires the student to pick AM/PM,
+  // since word problems can cross from morning into afternoon/evening.
+  function checkChallengeAnswer() {
+    const parsed = parseTypedTime(el.timeInput.value);
+    if (!parsed) return false;
+    const q = state.currentQuestion;
+
+    if (q.level === 3) {
+      if (!state.answerAmPm) return false;
+      const isPM = state.answerAmPm === "PM";
+      return (
+        parsed.hour === q.correctHour &&
+        parsed.minute === q.correctMinute &&
+        isPM === q.correctIsPM
+      );
+    }
+    return parsed.hour === q.correctHour && parsed.minute === q.correctMinute;
+  }
+
   /* ------------------------------------------------------------------ *
    *  FEEDBACK
    * ------------------------------------------------------------------ */
@@ -589,11 +970,19 @@
   const TRYAGAIN_MESSAGES = ["🙂 Almost! Try again.", "😕 Almost! Look at the clock again."];
 
   function showCorrectFeedback() {
-    const { hour, minute } = state.currentQuestion;
-    const msg =
-      state.currentActivity === "tell"
-        ? `🎉 Great job! ${formatTime(hour, minute)} is correct!`
-        : CORRECT_MESSAGES[randInt(0, CORRECT_MESSAGES.length - 1)];
+    const q = state.currentQuestion;
+    let msg;
+    if (state.currentActivity === "tell") {
+      msg = `🎉 Great job! ${formatTime(q.hour, q.minute)} is correct!`;
+    } else if (state.currentActivity === "challenge") {
+      const timeStr =
+        q.level === 3
+          ? formatTimeAmPm(q.correctHour, q.correctMinute, q.correctIsPM)
+          : formatTime(q.correctHour, q.correctMinute);
+      msg = `🎉 Great job! ${timeStr} is correct!`;
+    } else {
+      msg = CORRECT_MESSAGES[randInt(0, CORRECT_MESSAGES.length - 1)];
+    }
 
     el.feedbackMessage.textContent = msg;
     el.feedbackMessage.classList.remove("is-error");
@@ -610,10 +999,18 @@
   }
 
   function showTryAgainFeedback() {
-    const msg =
-      state.currentActivity === "tell"
-        ? "🙂 Almost! Look carefully at both hands and try again."
-        : TRYAGAIN_MESSAGES[randInt(0, TRYAGAIN_MESSAGES.length - 1)];
+    let msg;
+    if (state.currentActivity === "tell") {
+      msg = "🙂 Almost! Look carefully at both hands and try again.";
+    } else if (state.currentActivity === "challenge") {
+      const q = state.currentQuestion;
+      msg =
+        q.level === 3 && !state.answerAmPm
+          ? "🙂 Almost! Don't forget to pick AM or PM too."
+          : "🙂 Almost! Check your math and try again.";
+    } else {
+      msg = TRYAGAIN_MESSAGES[randInt(0, TRYAGAIN_MESSAGES.length - 1)];
+    }
     el.feedbackMessage.textContent = msg;
     el.feedbackMessage.classList.add("is-error");
     playSound("tryagain");
@@ -698,13 +1095,73 @@
     return hints;
   }
 
+  // Time Challenge Level 1: if the add crosses the next hour, suggest
+  // splitting it at the hour boundary (never states the final answer).
+  function buildChallengeLevel1Hints(q) {
+    const minutesToNextHour = (60 - q.startMinute) % 60;
+    const nextHour = (q.startHour % 12) + 1;
+    const hints = [];
+
+    if (minutesToNextHour > 0 && q.durationMinutes > minutesToNextHour) {
+      const remain = q.durationMinutes - minutesToNextHour;
+      hints.push(`💡 First add ${minutesToNextHour} minutes to reach ${nextHour}:00. You still have ${remain} minutes left to add.`);
+      hints.push(`💡 Once you reach ${nextHour}:00, count on ${remain} more minutes to land on the answer.`);
+    } else {
+      hints.push(`💡 Count on ${q.durationMinutes} minutes from ${formatTime(q.startHour, q.startMinute)}, a little at a time.`);
+      hints.push(`💡 Try counting on by 5s or 10s from ${formatTime(q.startHour, q.startMinute)} until you've added ${q.durationMinutes} minutes in total.`);
+    }
+    return hints;
+  }
+
+  // Time Challenge Level 2: suggest adding the hour(s) first, then the
+  // minutes; a second hint (if needed) reveals that intermediate step.
+  function buildChallengeLevel2Hints(q) {
+    const hourWord = q.durationHours === 1 ? "hour" : "hours";
+    const hints = [
+      `💡 Try adding the ${q.durationHours} ${hourWord} first, then add the ${q.durationMins} minutes.`,
+    ];
+    const afterHourTotal = to12HourTotal(q.startHour, q.startMinute) + q.durationHours * 60;
+    const afterHour = from12HourTotal(afterHourTotal);
+    hints.push(`💡 After adding the ${hourWord}, you're at ${formatTime(afterHour.hour, afterHour.minute)}. Now add the ${q.durationMins} minutes.`);
+    return hints;
+  }
+
+  // Time Challenge Level 3: break the story into steps, revealing one
+  // more step of the *operation* each time — never the running total or
+  // the final answer.
+  function buildChallengeLevel3Hints(q) {
+    const hints = [];
+    const n = q.steps.length;
+    for (let i = 0; i < n - 1; i++) {
+      if (i === 0) {
+        hints.push(`💡 Step 1: Start at ${q.startLabel} and add the first ${q.steps[0].durationLabel} (${q.steps[0].segmentLabel}).`);
+      } else {
+        hints.push(`💡 Step ${i + 1}: Add the ${q.steps[i].durationLabel} (${q.steps[i].segmentLabel}) to your new time from Step ${i}.`);
+      }
+    }
+    if (hints.length === 0) {
+      hints.push(`💡 Add ${q.steps[0].durationLabel} to ${q.startLabel} to find the answer.`);
+    }
+    return hints;
+  }
+
+  function buildChallengeHints(q) {
+    if (q.level === 1) return buildChallengeLevel1Hints(q);
+    if (q.level === 2) return buildChallengeLevel2Hints(q);
+    return buildChallengeLevel3Hints(q);
+  }
+
   function showHint() {
     if (!state.currentQuestion) return;
-    const { hour, minute } = state.currentQuestion;
-    const hints =
-      state.currentActivity === "set"
-        ? buildSetClockHints(hour, minute)
-        : buildTellTimeHints(hour, minute);
+    const q = state.currentQuestion;
+    let hints;
+    if (state.currentActivity === "set") {
+      hints = buildSetClockHints(q.hour, q.minute);
+    } else if (state.currentActivity === "tell") {
+      hints = buildTellTimeHints(q.hour, q.minute);
+    } else {
+      hints = buildChallengeHints(q);
+    }
 
     const idx = Math.min(state.hintsShownForCurrentQuestion, hints.length - 1);
     el.hintMessage.textContent = hints[idx];
@@ -786,12 +1243,45 @@
     state.currentActivity = activity;
     el.choiceSet.setAttribute("aria-pressed", String(activity === "set"));
     el.choiceTell.setAttribute("aria-pressed", String(activity === "tell"));
+    el.choiceChallenge.setAttribute("aria-pressed", String(activity === "challenge"));
+    updateLevelPanelVisibility();
+  }
+
+  // Swaps which difficulty-level panel is shown on the home screen:
+  // the standard 4-level panel (Set/Tell) or the 3-level Time Challenge
+  // panel. Switching back and forth preserves each activity's own level.
+  function updateLevelPanelVisibility() {
+    const isChallenge = state.currentActivity === "challenge";
+    el.setupGroupStandardLevels.hidden = isChallenge;
+    el.setupGroupChallengeLevels.hidden = !isChallenge;
   }
 
   function setLevel(level) {
     state.difficultyLevel = level;
     document.querySelectorAll("#level-group .pill").forEach((btn) => {
       btn.setAttribute("aria-pressed", String(Number(btn.dataset.level) === level));
+    });
+  }
+
+  function setChallengeLevel(level) {
+    state.challengeLevel = level;
+    document.querySelectorAll("#level-group-challenge .pill").forEach((btn) => {
+      btn.setAttribute("aria-pressed", String(Number(btn.dataset.clevel) === level));
+    });
+  }
+
+  // Time Challenge Level 3's AM/PM answer selector.
+  function resetAmPmAnswer() {
+    state.answerAmPm = null;
+    document.querySelectorAll("#ampm-toggle .ampm-btn").forEach((btn) => {
+      btn.setAttribute("aria-pressed", "false");
+    });
+  }
+
+  function setAnswerAmPm(value) {
+    state.answerAmPm = value;
+    document.querySelectorAll("#ampm-toggle .ampm-btn").forEach((btn) => {
+      btn.setAttribute("aria-pressed", String(btn.dataset.ampm === value));
     });
   }
 
@@ -816,9 +1306,16 @@
   function initEventListeners() {
     el.choiceSet.addEventListener("click", () => setActivity("set"));
     el.choiceTell.addEventListener("click", () => setActivity("tell"));
+    el.choiceChallenge.addEventListener("click", () => setActivity("challenge"));
 
     document.querySelectorAll("#level-group .pill").forEach((btn) => {
       btn.addEventListener("click", () => setLevel(Number(btn.dataset.level)));
+    });
+    document.querySelectorAll("#level-group-challenge .pill").forEach((btn) => {
+      btn.addEventListener("click", () => setChallengeLevel(Number(btn.dataset.clevel)));
+    });
+    document.querySelectorAll("#ampm-toggle .ampm-btn").forEach((btn) => {
+      btn.addEventListener("click", () => setAnswerAmPm(btn.dataset.ampm));
     });
     document.querySelectorAll("#count-group .pill").forEach((btn) => {
       btn.addEventListener("click", () => setCount(Number(btn.dataset.count)));
@@ -886,6 +1383,7 @@
     buildClockFace();
     setActivity(state.currentActivity);
     setLevel(state.difficultyLevel);
+    setChallengeLevel(state.challengeLevel);
     setCount(state.totalQuestions);
     updateMinuteHelperVisibility();
     setClockTime(12, 0);

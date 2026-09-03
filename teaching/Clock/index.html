@@ -46,16 +46,32 @@
         <span class="choice-title">Tell the Time</span>
         <span class="choice-desc">Look at the clock and type the time</span>
       </button>
+      <button type="button" class="choice-card" id="choice-challenge" data-activity="challenge" aria-pressed="false">
+        <span class="choice-check" aria-hidden="true">✓</span>
+        <span class="choice-emoji" aria-hidden="true"><img src="images\time-after.png" width="100"></span>
+        <span class="choice-title">Time Challenge</span>
+        <span class="choice-desc">Work out what time comes next</span>
+      </button>
     </div>
 
     <div class="setup-panel">
-      <div class="setup-group">
+      <div class="setup-group" id="setup-group-standard-levels">
         <h2 class="setup-label">Difficulty</h2>
         <div class="pill-row" role="radiogroup" aria-label="Choose difficulty level" id="level-group">
           <button type="button" class="pill" data-level="1" aria-pressed="false">Level 1<span>O'Clock</span></button>
           <button type="button" class="pill" data-level="2" aria-pressed="false">Level 2<span>Half Hours</span></button>
           <button type="button" class="pill" data-level="3" aria-pressed="false">Level 3<span>Quarter Hours</span></button>
           <button type="button" class="pill" data-level="4" aria-pressed="false">Level 4<span>5 Minutes</span></button>
+        </div>
+      </div>
+
+      <!-- Difficulty levels shown only for the Time Challenge activity. -->
+      <div class="setup-group" id="setup-group-challenge-levels" hidden>
+        <h2 class="setup-label">Difficulty</h2>
+        <div class="pill-row" role="radiogroup" aria-label="Choose Time Challenge difficulty level" id="level-group-challenge">
+          <button type="button" class="pill" data-clevel="1" aria-pressed="false">Level 1<span>15, 30 &amp; 45 Min</span></button>
+          <button type="button" class="pill" data-clevel="2" aria-pressed="false">Level 2<span>Hours &amp; Minutes</span></button>
+          <button type="button" class="pill" data-clevel="3" aria-pressed="false">Level 3<span>Word Problems</span></button>
         </div>
       </div>
 
@@ -100,7 +116,18 @@
 
     <h2 id="practice-instruction" class="instruction"></h2>
 
-    <div class="clock-stage">
+    <!-- Time Challenge (Level 3): word-problem story card. The story is
+         the focus for Level 3, so the clock stage is hidden while this
+         is shown (see setupPracticeUiForActivity in script.js). -->
+    <div class="story-card" id="story-card" hidden>
+      <p id="story-text"></p>
+    </div>
+
+    <!-- Time Challenge (Levels 1-2): shows the starting time in words
+         above the (display-only) clock. -->
+    <p class="starting-time-text" id="starting-time-text" hidden></p>
+
+    <div class="clock-stage" id="clock-stage">
       <div class="clock-face" id="clock-face">
         <div class="clock-ticks" id="clock-ticks" aria-hidden="true"></div>
         <div class="clock-numbers" id="clock-numbers" role="list" aria-label="Clock face numbers 1 through 12"></div>
@@ -134,6 +161,13 @@
       </form>
       <p id="time-input-hint" class="answer-card-example">Example: 03:30</p>
       <p id="time-input-hint" class="answer-card-example">   Just type the numbers - we'll add the : for you!</p>
+
+      <!-- AM/PM selector: only shown for Time Challenge Level 3, where the
+           story can cross from morning to afternoon/evening. -->
+      <div class="ampm-toggle" id="ampm-toggle" hidden role="radiogroup" aria-label="Choose AM or PM">
+        <button type="button" class="ampm-btn" data-ampm="AM" aria-pressed="false">AM</button>
+        <button type="button" class="ampm-btn" data-ampm="PM" aria-pressed="false">PM</button>
+      </div>
     </div>
 
     <p class="feedback-message" id="feedback-message" role="status" aria-live="polite"></p>
