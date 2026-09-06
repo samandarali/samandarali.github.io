@@ -3557,3 +3557,654 @@ details.learning-section.subsection-card > .learning-body {
   border-left: 3px solid hsl(236, 57%, 22%);;
   border-radius: 12px;
 }
+
+/* =========================================
+   FIVE Cs OVERVIEW
+   ========================================= */
+
+.five-cs-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  gap: 2rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border: 1px solid #dce5ec;
+  border-radius: 18px;
+}
+
+/* IMAGE */
+
+.five-cs-image {
+  margin: 0;
+}
+
+.five-cs-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+/* DEFINITIONS */
+
+.five-cs-definitions h3 {
+  margin: 0 0 1rem;
+  color: #173b63;
+  font-size: 1.35rem;
+}
+
+.five-cs-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.five-cs-list li {
+  padding: 0.8rem 1rem;
+  background: #ffffff;
+  border-left: 4px solid #2878a9;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 3px 12px rgba(23, 59, 99, 0.06);
+}
+
+.five-cs-list strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: #173b63;
+  font-size: 1rem;
+}
+
+.five-cs-list p {
+  margin: 0;
+  color: #526273;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* RESPONSIVE LAYOUT */
+
+@media (max-width: 850px) {
+  .five-cs-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .five-cs-image {
+    max-width: 700px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .five-cs-overview {
+    gap: 1.25rem;
+    padding: 1rem;
+  }
+}
+
+
+/* =====================================================
+   HYPOTHETICAL COMMERCIAL CREDIT CASE
+   ===================================================== */
+
+.credit-case {
+  max-width: 1100px;
+  margin: 2.5rem auto;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  color: #27384a;
+  background: #f7f9fb;
+  border: 1px solid #dbe4eb;
+  border-radius: 20px;
+}
+
+.credit-case-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.credit-case-label,
+.case-panel-label {
+  margin: 0 0 0.25rem;
+  color: #2878a9;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.credit-case-header h3 {
+  margin: 0 0 0.5rem;
+  color: #173b63;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.credit-case-header p:last-child {
+  max-width: 720px;
+  margin: 0;
+  color: #5b6977;
+}
+
+.credit-case-badge {
+  flex-shrink: 0;
+  padding: 0.45rem 0.85rem;
+  color: #ffffff;
+  background: #173b63;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+/* FINANCING REQUEST */
+
+.case-request {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  color: #ffffff;
+  background: linear-gradient(135deg, #173b63, #285f8d);
+  border-radius: 14px;
+}
+
+.case-request-icon {
+  display: grid;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: #173b63;
+  background: #ffffff;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.case-request h4 {
+  margin: 0 0 0.3rem;
+  color: #ffffff;
+}
+
+.case-request p {
+  margin: 0;
+  color: #ffffff;
+}
+
+/* SUMMARY CARDS */
+
+.case-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.case-summary-card,
+.case-panel {
+  position: relative;
+  padding: 1.25rem;
+  background: #ffffff;
+  border: 1px solid #dbe4eb;
+  border-radius: 14px;
+}
+
+.case-summary-card h4,
+.case-panel h4 {
+  margin: 0 0 1rem;
+  color: #173b63;
+}
+
+.case-card-number {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #d8e3eb;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+/* DEFINITION LIST */
+
+.case-facts {
+  margin: 0;
+}
+
+.case-facts div {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid #edf1f4;
+}
+
+.case-facts div:last-child {
+  border-bottom: 0;
+}
+
+.case-facts dt {
+  color: #657483;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.case-facts dd {
+  margin: 0.1rem 0 0;
+  color: #27384a;
+  font-weight: 600;
+}
+
+/* LISTS */
+
+.case-point-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.case-point-list li {
+  margin-bottom: 0.55rem;
+}
+
+.case-point-list li:last-child {
+  margin-bottom: 0;
+}
+
+.case-point-list li::marker {
+  color: #2878a9;
+}
+
+/* FINANCIAL TABLE */
+
+.case-panel {
+  margin-bottom: 1.5rem;
+}
+
+.case-panel-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.case-panel-heading span {
+  color: #6b7986;
+  font-size: 0.82rem;
+}
+
+.case-table-wrapper {
+  overflow-x: auto;
+}
+
+.case-financial-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.case-financial-table th,
+.case-financial-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e4eaef;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.case-financial-table th:first-child {
+  text-align: left;
+}
+
+.case-financial-table thead th {
+  color: #ffffff;
+  background: #173b63;
+}
+
+.case-financial-table thead th:first-child {
+  border-radius: 8px 0 0 0;
+}
+
+.case-financial-table thead th:last-child {
+  border-radius: 0 8px 0 0;
+}
+
+.case-financial-table tbody tr:nth-child(even) {
+  background: #f6f9fb;
+}
+
+/* QUALITATIVE DETAILS */
+
+.case-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.case-risk-panel {
+  border-top: 4px solid #c86b58;
+}
+
+/* ASSESSMENT QUESTION */
+
+.case-analysis-prompt {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-top: 0.25rem;
+  padding: 1.2rem;
+  background: #edf6fb;
+  border-left: 5px solid #2878a9;
+  border-radius: 0 12px 12px 0;
+}
+
+.case-analysis-icon {
+  display: grid;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  color: #ffffff;
+  background: #2878a9;
+  border-radius: 50%;
+  font-weight: 800;
+}
+
+.case-analysis-prompt h4 {
+  margin: 0 0 0.25rem;
+  color: #173b63;
+}
+
+.case-analysis-prompt p {
+  margin: 0;
+}
+
+.case-disclaimer {
+  margin: 1rem 0 0;
+  color: #6b7986;
+  font-size: 0.8rem;
+  font-style: italic;
+  text-align: center;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+  .case-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .case-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 580px) {
+  .credit-case-header {
+    flex-direction: column;
+  }
+
+  .case-request,
+  .case-analysis-prompt {
+    flex-direction: column;
+  }
+
+  .case-financial-table th,
+  .case-financial-table td {
+    padding: 0.65rem 0.75rem;
+  }
+}
+
+/* =====================================================
+   BANK-STYLE COMMERCIAL CREDIT REPORT
+   ===================================================== */
+
+.bank-credit-report {
+  max-width: 900px;
+  margin: 2.5rem auto 0;
+  padding: 2.75rem 3.25rem;
+  color: #1f2933;
+  background: #ffffff;
+  border: 1px solid #c8cfd5;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+/* REPORT HEADER */
+
+.bank-report-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: flex-start;
+  padding-bottom: 0.9rem;
+  border-bottom: 3px solid #173b63;
+}
+
+.bank-report-type {
+  margin: 0 0 0.15rem;
+  color: #5d6771;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.bank-report-header h3 {
+  margin: 0;
+  color: #173b63;
+  font-size: 1.4rem;
+}
+
+.bank-report-decision {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.bank-report-decision span {
+  display: block;
+  color: #5d6771;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.bank-report-decision strong {
+  display: block;
+  color: #8a2e28;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+/* SUMMARY TABLE */
+
+.bank-summary-table {
+  width: 100%;
+  margin: 1.25rem 0;
+  border-collapse: collapse;
+}
+
+.bank-summary-table th,
+.bank-summary-table td {
+  padding: 0.45rem 0.55rem;
+  border: 1px solid #aeb8c1;
+  vertical-align: top;
+}
+
+.bank-summary-table th {
+  width: 21%;
+  color: #293744;
+  background: #eef1f3;
+  font-size: 0.7rem;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.bank-summary-table td {
+  width: 29%;
+}
+
+/* REPORT SECTIONS */
+
+.bank-report-section {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+.bank-report-section h4 {
+  margin: 1.4rem 0 0.5rem;
+  padding-bottom: 0.2rem;
+  color: #173b63;
+  border-bottom: 1px solid #aeb8c1;
+  font-size: 0.9rem;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+.bank-report-section p {
+  margin: 0.4rem 0;
+}
+
+.bank-report-section ul,
+.bank-report-section ol {
+  margin: 0.4rem 0 0.7rem;
+  padding-left: 1.3rem;
+}
+
+.bank-report-section li {
+  margin-bottom: 0.2rem;
+}
+
+/* FINANCIAL TABLE */
+
+.bank-table-wrapper {
+  overflow-x: auto;
+}
+
+.bank-financial-table {
+  width: 100%;
+  margin: 0.6rem 0;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.bank-financial-table th,
+.bank-financial-table td {
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid #ccd2d7;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.bank-financial-table thead th {
+  color: #173b63;
+  background: #eef1f3;
+  border-top: 1px solid #173b63;
+  border-bottom: 2px solid #173b63;
+}
+
+.bank-financial-table th:first-child,
+.bank-financial-table td:first-child {
+  text-align: left;
+}
+
+.bank-financial-table td:last-child {
+  text-align: left;
+  white-space: normal;
+}
+
+.bank-report-note {
+  color: #5d6771;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+/* APPROVAL TABLE */
+
+.bank-approval-table {
+  width: 100%;
+  margin-top: 1.6rem;
+  border-collapse: collapse;
+}
+
+.bank-approval-table th,
+.bank-approval-table td {
+  height: 2.2rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid #aeb8c1;
+  text-align: left;
+}
+
+.bank-approval-table th {
+  width: 19%;
+  color: #293744;
+  background: #eef1f3;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+/* DISCLAIMER */
+
+.bank-report-disclaimer {
+  margin: 1.2rem 0 0;
+  padding-top: 0.5rem;
+  color: #5d6771;
+  border-top: 1px solid #aeb8c1;
+  font-size: 0.7rem;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+  .bank-credit-report {
+    padding: 1.5rem 1rem;
+  }
+
+  .bank-report-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .bank-report-decision {
+    text-align: left;
+  }
+
+  .bank-summary-table th,
+  .bank-summary-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .bank-summary-table th {
+    border-bottom: 0;
+  }
+
+  .bank-financial-table {
+    min-width: 680px;
+  }
+}
+
+/* PRINT VERSION */
+
+@media print {
+  .bank-credit-report {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .bank-report-section h4 {
+    break-after: avoid;
+  }
+
+  .bank-summary-table,
+  .bank-financial-table,
+  .bank-approval-table {
+    break-inside: avoid;
+  }
+}

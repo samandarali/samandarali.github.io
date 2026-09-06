@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Commercial Credit Risk Analysis</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cra_style.css">
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 
@@ -132,7 +132,7 @@
         <span class="chevron" aria-hidden="true">⌄</span>
       </summary> -->
 
-    <!-- INTRODUCTION TO COMMERCIAL CREDIT RISK -->
+    <!-- 1. INTRODUCTION TO COMMERCIAL CREDIT RISK -->
     <details id="introduction-section" class="learning-section intro-accordion" data-section="introduction" open>
       <summary class="learning-summary stage-summary stage-summary-introduction" aria-expanded="true">
         <span class="stage-number stage-number-introduction">1</span>
@@ -156,13 +156,7 @@
                 process for making that determination.
               </p>
 
-              <div class="credit-question-box">
-                <span class="credit-intro-label">Central Credit Question</span>
 
-                <h3 id="credit-question">
-                  Can the borrower repay the loan as agreed, and what could prevent repayment?
-                </h3>
-              </div>
 
               <div class="credit-intro-overview">
                 <h4>What this page covers</h4>
@@ -1713,10 +1707,8 @@
                           interest expense?</p>
                       </div>
                       <div class="ratio-field"><span class="rf-label">Watch for</span>
-                        <p>Declining coverage may indicate less financial flexibility, especially if interest expense
-                          is
-                          rising
-                          faster than EBIT.</p>
+                        <p>Declining coverage may indicate less financial flexibility, especially if interest expense is
+                          rising faster than EBIT.</p>
                       </div>
                       <div class="ratio-field">
                         <span class="rf-label">Where to find Interest Expense</span>
@@ -1784,88 +1776,182 @@
                 </div>
               </details>
 
-              <!-- ROA -->
+              <!-- DSCR -->
               <details class="learning-section ratio-details coverage-ratio" data-section="dscr">
                 <summary class="learning-summary" aria-expanded="false">
                   <h4>Debt Service Coverage Ratio (DSCR)</h4>
                   <span class="chevron" aria-hidden="true">⌄</span>
                 </summary>
+
                 <div class="ratio-card">
                   <div class="ratio-columns">
+
+                    <!-- APPLE EXAMPLE -->
                     <div class="apple-example data-limited">
                       <span class="ae-label">Apple FY2025 Example</span>
-                      <p class="ae-line">Repayments of term debt (financing activities) = $<span
-                          class="ae-num">10,932</span>M</p>
-                      <p class="ae-line">Interest Expense = <em>not separately disclosed</em></p>
-                      <p class="ae-line">"Cash Available for Debt Service" = <em>not a defined line item here</em></p>
-                      <div class="ae-result">Cannot be calculated reliably</div>
-                      <p class="ae-note">The cash flow statement shows actual debt repayments (not necessarily the
-                        same
-                        as scheduled "required" principal), and interest expense is not separately disclosed. Because
-                        both the numerator and part of the denominator rely on figures this page does not provide,
-                        DSCR
-                        cannot be calculated accurately from the available data.</p>
+
+                      <p class="ae-line">
+                        Net Operating Income (Operating Income) =
+                        $<span class="ae-num">133,050</span>M
+                      </p>
+
+                      <p class="ae-line">
+                        Repayments of Term Debt =
+                        $<span class="ae-num">10,932</span>M
+                      </p>
+
+                      <p class="ae-line">
+                        Interest Expense =
+                        $<span class="ae-num">[insert amount]</span>M
+                      </p>
+
+                      <p class="ae-line">
+                        Estimated Total Debt Service =
+                        Interest Expense + $10,932M
+                      </p>
+
+                      <div class="ae-result">
+                        Cannot be calculated reliably
+                      </div>
+
+                      <p class="ae-note">
+                        Apple reports operating income and actual repayments of term debt.
+                        However, actual repayments reported in the cash flow statement are
+                        not necessarily the same as scheduled required principal repayments.
+                        Because interest expense and required principal repayments are not
+                        separately identified in the figures used here, total debt service—and
+                        therefore DSCR—cannot be calculated reliably.
+                      </p>
                     </div>
+
+                    <!-- EXPLANATION -->
                     <div class="ratio-explanation">
+
                       <div class="ratio-formula">
                         \[
                         \text{DSCR}
                         =
                         \frac{
-                        \text{Cash Available for Debt Service}
+                        \color{#0c7973}{\text{Net Operating Income (NOI)}}
                         }{
-                        \color{#0c7973}{\text{Interest Expense}}
-                        +
-                        \color{#1b59df}{\text{Required Principal Repayments}}
+                        \color{#0c7973}{\text{Total Debt Service}}
                         }
                         \]
                       </div>
 
+                      <!-- COMPONENTS -->
                       <div class="ratio-field">
                         <div class="ae-line">
-                        <strong>Cash Available for Debt Service (CADS)</strong>
-                        = Operating Cash Generation − Cash Needed to Maintain Operations
+                          <strong>Net Operating Income (NOI)</strong>
+                          = Operating Revenue − Operating Expenses
                         </div>
 
-                        <p class="ae-line">
-                          Cash Available for Debt Service (CADS) is the cash generated by the business
-                          that is available to meet its scheduled debt obligations, including interest
-                          and required principal repayments.
-                        </p>
+                        <div class="ae-line">
+                          <strong>Total Debt Service</strong>
+                          = Interest Expense + Required Principal Repayments
+                        </div>
+                      </div>
+
+                      <!-- WHAT IT SHOWS -->
+                      <div class="ratio-field">
+                        <span class="rf-label">What it shows</span>
 
                         <p>
-                          CADS is generally a calculated measure rather than a single line item that can
-                          be directly extracted from the financial statements. Its exact calculation
-                          depends on the lender's or credit agreement's definition.
+                          DSCR measures whether the borrower’s net operating income is
+                          sufficient to cover its scheduled interest and principal payments.
                         </p>
                       </div>
 
-                      <div class="ratio-field"><span class="rf-label">Note</span>
-                        <p>DSCR definitions differ across lenders and credit agreements — "cash available for debt
-                          service"
-                          may
-                          be
-                          defined differently from one lender to another.</p>
+                      <!-- INTERPRETATION -->
+                      <div class="ratio-field">
+                        <span class="rf-label">Interpretation</span>
+
+                        <p>
+                          A higher DSCR generally indicates stronger repayment capacity and
+                          a larger cushion against declining income or unexpected expenses.
+                          A lower DSCR indicates tighter repayment capacity and greater
+                          credit risk.
+                        </p>
                       </div>
-                      <div class="ratio-field"><span class="rf-label">Reading the result</span>
+
+                      <!-- READING THE RESULT -->
+                      <div class="ratio-field">
+                        <span class="rf-label">Reading the result</span>
+
                         <ul>
-                          <li><strong>DSCR &gt; 1:</strong> available cash exceeds scheduled debt service under the
-                            selected
-                            definition.</li>
-                          <li><strong>DSCR = 1:</strong> available cash exactly covers scheduled debt service.</li>
-                          <li><strong>DSCR &lt; 1:</strong> available cash is insufficient to cover scheduled debt
-                            service under the selected definition.</li>
+                          <li>
+                            <strong>DSCR &gt; 1:</strong>
+                            net operating income exceeds scheduled debt service under the
+                            selected definition.
+                          </li>
+
+                          <li>
+                            <strong>DSCR = 1:</strong>
+                            net operating income exactly covers scheduled debt service.
+                          </li>
+
+                          <li>
+                            <strong>DSCR &lt; 1:</strong>
+                            net operating income is insufficient to cover scheduled debt
+                            service under the selected definition.
+                          </li>
                         </ul>
                       </div>
+
+                      <!-- WARNING SIGNALS -->
                       <div class="ratio-field">
-                        <p>No fixed value (e.g. 1.20 or 1.25) is universally acceptable — required levels are
-                          typically
-                          set by the specific lender or credit agreement.</p>
+                        <span class="rf-label">Potential warning signals</span>
+
+                        <ul>
+                          <li>A DSCR below 1.00.</li>
+
+                          <li>A consistently declining DSCR.</li>
+
+                          <li>
+                            Net operating income growing more slowly than scheduled debt
+                            service.
+                          </li>
+
+                          <li>
+                            Increasing interest expense or required principal repayments.
+                          </li>
+
+                          <li>
+                            A DSCR only slightly above the lender’s minimum requirement.
+                          </li>
+
+                          <li>
+                            Dependence on unusually high or non-recurring operating income.
+                          </li>
+                        </ul>
                       </div>
+
+                      <!-- IMPORTANT NOTE -->
+                      <div class="ratio-field">
+                        <span class="rf-label">Important note</span>
+
+                        <p>
+                          DSCR definitions may differ across lenders and credit agreements.
+                          The definition of net operating income and the items included in
+                          total debt service should therefore be confirmed before calculating
+                          or comparing the ratio.
+                        </p>
+                      </div>
+
+                      <!-- ACCEPTABLE LEVEL -->
+                      <div class="ratio-field">
+                        <p>
+                          No fixed value (e.g. 1.20 or 1.25) is universally acceptable -the
+                          required level is typically set by the specific lender or credit
+                          agreement.
+                        </p>
+                      </div>
+
                     </div>
                   </div>
                 </div>
               </details>
+
             </div>
           </details>
 
@@ -1877,8 +1963,7 @@
             </summary>
             <div class="learning-body">
               <p class="section-intro"><strong>Profitability ratios</strong> measure the company's ability to generate
-                earnings from its
-                sales, assets, and capital.</p>
+                earnings from its sales, assets, and capital.</p>
 
 
               <!-- Gross Profit Margin -->
@@ -1895,6 +1980,11 @@
                       <p class="ae-line">Total Net Sales (Revenue) = $<span class="ae-num">416,161</span>M</p>
                       <div class="ae-step">Gross Profit Margin = 195,201 ÷ 416,161 × 100</div>
                       <div class="ae-result">= <strong>46.91%</strong></div>
+                      <p class="ae-line">
+                        <strong>Interpretation:</strong> Apple’s gross profit margin of 46.91% means that approximately
+                        $0.47 of every $1.00 of revenue remained after covering the direct costs of its products and
+                        services. This amount was available to cover operating expenses, interest, taxes, and profit.
+                      </p>
                     </div>
                     <div class="ratio-explanation">
 
@@ -1912,7 +2002,7 @@
                       </div>
 
                       <div class="ratio-field"><span class="rf-label">Meaning</span>
-                        <p>
+                        <p class="ae-line">
                           Gross Profit Margin shows the percentage of revenue remaining after direct production costs,
                           before operating expenses.
                           It tells you how much of each dollar of revenue remains after paying the direct costs of
@@ -1920,7 +2010,7 @@
                         </p>
                       </div>
                       <div class="ratio-field"><span class="rf-label">Potential warning signals</span>
-                        <p>Declining gross margins over time.</p>
+                        <p class="ae-line">Declining gross margins over time.</p>
                       </div>
                     </div>
                   </div>
@@ -1942,10 +2032,10 @@
                       <p class="ae-line">Total Net Sales (Revenue) = $<span class="ae-num">416,161</span>M</p>
                       <div class="ae-step">Operating Profit Margin = 133,050 ÷ 416,161 × 100</div>
                       <div class="ae-result">= <strong>31.97%</strong></div>
-                      <p><Strong>Interpretation: </Strong>The 32.0% margin means the borrower generates about $0.32 of
-                        operating profit from each $1 of revenue before interest and tax. For a lender, the result
-                        should be considered alongside trend, industry norms, and the borrower’s cash-flow forecast
-                        because it may indicate weaker operating cash-generation capacity.</p>
+                      <p class="ae-line"><Strong>Interpretation: </Strong>The 32.0% margin means the borrower generates
+                        about $0.32 of operating profit from each $1 of revenue before interest and tax. For a lender,
+                        the result should be considered alongside trend, industry norms, and the borrower’s cash-flow
+                        forecast because it may indicate weaker operating cash-generation capacity.</p>
                     </div>
                     <div class="ratio-explanation">
                       <div class="ratio-formula">
@@ -1970,6 +2060,17 @@
                         <p>Profitability from core operations before interest and taxes.</p>
                       </div>
 
+                      <div class="ratio-field">
+                        <span class="rf-label">Potential Warning Signals</span>
+                        <ul>
+                          <li>A consistently declining operating profit margin.</li>
+                          <li>Revenue growth that does not translate into operating profit growth.</li>
+                          <li>A margin materially below historical levels or industry peers.</li>
+                          <li>A narrow or negative margin that provides limited capacity to cover interest and debt
+                            repayments.</li>
+                        </ul>
+                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -1990,6 +2091,12 @@
                       <p class="ae-line">Total Net Sales (Revenue) = $<span class="ae-num">416,161</span>M</p>
                       <div class="ae-step">Net Profit Margin = 112,010 ÷ 416,161 × 100</div>
                       <div class="ae-result">= <strong>26.92%</strong></div>
+
+                      <p class="ae-line">
+                        <strong>Interpretation:</strong> Apple’s net profit margin of 26.92% means that approximately
+                        $0.27 of every $1.00 of revenue remained as net income after all operating expenses, interest,
+                        and taxes were deducted.
+                      </p>
                     </div>
                     <div class="ratio-explanation">
                       <div class="ratio-formula">
@@ -2006,6 +2113,18 @@
                       </div>
                       <div class="ratio-field"><span class="rf-label">Meaning</span>
                         <p>Bottom-line profit as a percentage of revenue, after all expenses, interest, and taxes.</p>
+                      </div>
+                      <div class="ratio-field">
+                        <span class="rf-label">Potential Warning Signals</span>
+                        <ul>
+                          <li>A consistently declining or negative net profit margin.</li>
+                          <li>Revenue growth that does not translate into net income growth.</li>
+                          <li>A margin materially below the company’s historical level or industry peers.</li>
+                          <li>Rising interest expenses or taxes that substantially reduce the profit generated from
+                            operations.</li>
+                          <li>Net income that depends heavily on one-time gains or other non-recurring items.</li>
+                          <li>A narrow margin that leaves the borrower vulnerable to lower revenue or higher costs.</li>
+                        </ul>
                       </div>
                     </div>
                   </div>
@@ -2051,6 +2170,11 @@
                       <div class="ae-result">
                         = <strong>34.78%</strong>
                       </div>
+                      <p class="ae-line">
+                        <strong>Interpretation:</strong> Apple’s EBITDA margin of 34.78% means that approximately $0.35
+                        of every $1.00 of revenue remained as EBITDA before deducting depreciation, amortization,
+                        interest, and taxes.
+                      </p>
                     </div>
 
 
@@ -2170,8 +2294,11 @@
                       <div class="ae-result">
                         ≈ <strong>30.93%</strong>
                       </div>
-                      <p class="ae-note">For every $100 invested in assets, the company generates about $30.93 of net
-                        income.</p>
+                      <p class="ae-line">
+                        <strong>Interpretation:</strong> For every $100 invested in assets, the company generates about
+                        $30.93 of net
+                        income.
+                      </p>
                     </div>
 
                     <!-- Explanation -->
@@ -2232,7 +2359,9 @@
                       <div class="ae-step">Average Equity = (56,950 + 73,733) ÷ 2 = 65,341.5<br>ROE = 112,010 ÷
                         65,341.5 × 100</div>
                       <div class="ae-result">= <strong>171.42%</strong></div>
-                      <p class="ae-note">For every $100 of shareholders’ equity, the company generates about $171.42
+                      <p class="ae-line">
+                        <strong>Interpretation:</strong> For every $100 of shareholders’ equity, the company generates
+                        about $171.42
                         of net income.
                         <!-- Beginning and ending equity are both available from Apple's Statement of
                     Shareholders' Equity, so a true average equity figure can be used here. -->
@@ -2305,7 +2434,12 @@
                           100
                         </div>
                         <div class="ae-result">= <strong>68.72%</strong></div>
-                        <p class="ae-note">Uses Apple's FY2025 ending Total Assets and Current Liabilities, consistent
+                        <p class="ae-line">
+                          <strong>Interpretation:</strong> Apple’s ROCE of 68.72% means that it generated approximately
+                          $0.69 of operating profit (EBIT) for every $1.00 of capital employed.
+                        </p>
+                        <p class="ae-note"><strong>Note: </strong>Uses Apple's FY2025 ending Total Assets and Current
+                          Liabilities, consistent
                           with
                           the "Total Assets − Current Liabilities" definition of Capital Employed used on this page.
                         </p>
@@ -2342,6 +2476,16 @@
                             <li>Compare with historical ROCE and industry peers</li>
                           </ul>
                         </div>
+                        <div class="ratio-field">
+                          <span class="rf-label">Potential Warning Signals</span>
+                          <ul>
+                            <li>Declining or negative ROCE.</li>
+                            <li>ROCE below historical or industry levels.</li>
+                            <li>Capital employed growing faster than operating profit.</li>
+                            <li>An artificially high ROCE caused by a very small capital base.</li>
+                          </ul>
+                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -2437,7 +2581,7 @@
                     </div>
 
                     <!-- Apple Example -->
-                    <div class="apple-example">
+                    <div class="apple-example ">
                       <span class="ae-label">Apple FY2025 Example</span>
 
                       <p class="ae-line">
@@ -2491,7 +2635,7 @@
                 </summary>
                 <div class="ratio-card">
                   <div class="ratio-columns">
-                    <div class="apple-example data-limited">
+                    <div class="apple-example ">
                       <span class="ae-label">Apple FY2025 Example</span>
                       <p class="ae-line">Inventories (FY2025, ending) = $<span class="ae-num">5,718</span>M</p>
                       <p class="ae-line">Total Cost of Sales (COGS) = $<span class="ae-num">220,960</span>M</p>
@@ -2500,7 +2644,8 @@
 
                       <p class="ae-note"><strong>Interpretation: </strong>Apple holds inventory for approximately 9.45
                         days, on average, before it is sold or used.</p>
-                      <p class="ae-note">Uses ending inventory as an approximation for average inventory, for the same
+                      <p class="ae-note"><strong>Note: </strong>Uses ending inventory as an approximation for average
+                        inventory, for the same
                         reason noted under Inventory Turnover.</p>
                     </div>
                     <div class="ratio-explanation">
@@ -2519,7 +2664,23 @@
                         \times 365
                         \]
                       </div>
+                      <div class="ratio-field">
+                        <span class="rf-label">Meaning</span>
+                        <p>
+                          DIO measures the average number of days inventory remains in the business before being sold or
+                          used.
+                        </p>
+                      </div>
 
+                      <div class="ratio-field">
+                        <span class="rf-label">Potential Warning Signals</span>
+                        <ul>
+                          <li>Increasing DIO over time.</li>
+                          <li>DIO materially above industry peers.</li>
+                          <li>Slow-moving, obsolete, or excess inventory.</li>
+                          <li>Inventory growing faster than sales.</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2533,7 +2694,7 @@
                 </summary>
                 <div class="ratio-card">
                   <div class="ratio-columns">
-                    <div class="apple-example data-limited">
+                    <div class="apple-example">
                       <span class="ae-label">Apple FY2025 Example</span>
                       <p class="ae-line">Total Net Sales (Revenue) = $<span class="ae-num">416,161</span>M</p>
                       <p class="ae-line">Accounts receivable, net (FY2025, ending) = $<span
@@ -2563,18 +2724,36 @@
                         }
                         \]
                       </div>
-                      <p class="ae-note">
-                        A declining receivables turnover may indicate slower customer collections and increasing cash
-                        tied up in accounts receivable, which could weaken the borrower's liquidity and repayment
-                        capacity.
-                      </p>
+                      <div class="ratio-field">
+                        <div class="ratio-field">
+                          <span class="rf-label">Meaning</span>
+                          <p>
+                            Measures how many times, on average, a company collects its accounts receivable during a
+                            period.
+                          </p>
+                        </div>
 
-                      <p class="ae-note">
+                        <div class="ratio-field">
+                          <span class="rf-label">Potential Warning Signals</span>
+                          <ul>
+                            <li>Declining turnover over time.</li>
+                            <li>Turnover materially below industry peers.</li>
+                            <li>Receivables growing faster than sales.</li>
+                            <li>Slow-paying customers or weakening collection practices.</li>
+                          </ul>
+                        </div>
+                        <p class="ae-note">
+                          A declining receivables turnover may indicate slower customer collections and increasing cash
+                          tied up in accounts receivable, which could weaken the borrower's liquidity and repayment
+                          capacity.
+                        </p>
 
-                      </p>
+                        <p class="ae-note">
+
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
               </details>
 
               <details class="learning-section ratio-details efficiency-ratio" data-section="dso">
@@ -2584,7 +2763,7 @@
                 </summary>
                 <div class="ratio-card">
                   <div class="ratio-columns">
-                    <div class="apple-example data-limited">
+                    <div class="apple-example ">
                       <span class="ae-label">Apple FY2025 Example</span>
                       <p class="ae-line">Accounts receivable, net (FY2025, ending) = $<span
                           class="ae-num">39,777</span>M
@@ -2619,6 +2798,23 @@
                         \times 365
                         \]
                       </div>
+
+                      <div class="ratio-field">
+                        <span class="rf-label">Meaning</span>
+                        <p>
+                          Measures the average number of days a company takes to collect its accounts receivable.
+                        </p>
+                      </div>
+
+                      <div class="ratio-field">
+                        <span class="rf-label">Potential Warning Signals</span>
+                        <ul>
+                          <li>Increasing DSO over time.</li>
+                          <li>DSO above customer payment terms or industry levels.</li>
+                          <li>Receivables growing faster than sales.</li>
+                          <li>Overdue or potentially uncollectible receivables.</li>
+                        </ul>
+                      </div>
                       <div class="ratio-field"><span class="rf-label">Watch for</span>
                         <p>Increasing DSO can indicate slower collection, weaker customer payment behavior, looser
                           credit
@@ -2640,13 +2836,19 @@
                 </summary>
                 <div class="ratio-card">
                   <div class="ratio-columns">
-                    <div class="apple-example data-limited">
+                    <div class="apple-example ">
                       <span class="ae-label">Apple FY2025 Example</span>
                       <p class="ae-line">Total Cost of Sales (COGS) = $<span class="ae-num">220,960</span>M</p>
                       <p class="ae-line">Accounts payable (FY2025, ending) = $<span class="ae-num">69,860</span>M</p>
                       <div class="ae-step">AP Turnover ≈ 220,960 ÷ 69,860</div>
                       <div class="ae-result">≈ <strong>3.16×</strong></div>
-                      <p class="ae-note">Apple's statements do not disclose "purchases" separately, so COGS is used as
+
+                      <p class="ae-line">
+                        <strong>Interpretation:</strong> Apple’s accounts payable turnover of 3.16× means it paid its
+                        average supplier balance approximately 3.16 times during the year.
+                      </p>
+                      <p class="ae-note"><strong>Note: </strong>Apple's statements do not disclose "purchases"
+                        separately, so COGS is used as
                         the approximation the explanation on the right describes. Ending accounts payable is used
                         because
                         no FY2024 beginning balance is shown on this page.</p>
@@ -2663,7 +2865,22 @@
                         }
                         \]
                       </div>
+                      <div class="ratio-field">
+                        <span class="rf-label">Meaning</span>
+                        <p>
+                          Measures how many times, on average, a company pays its suppliers during a period.
+                        </p>
+                      </div>
 
+                      <div class="ratio-field">
+                        <span class="rf-label">Potential Warning Signals</span>
+                        <ul>
+                          <li>Declining turnover caused by increasingly delayed supplier payments.</li>
+                          <li>Turnover materially below historical or industry levels.</li>
+                          <li>Accounts payable growing faster than purchases.</li>
+                          <li>Overdue balances, strained supplier relationships, or reduced trade-credit access.</li>
+                        </ul>
+                      </div>
                       <div class="ratio-field">
                         <p>When purchases are unavailable, <span class="fterm" data-jump="cogs">COGS</span> ÷ Average
                           Accounts
@@ -2682,13 +2899,18 @@
                 </summary>
                 <div class="ratio-card">
                   <div class="ratio-columns">
-                    <div class="apple-example data-limited">
+                    <div class="apple-example ">
                       <span class="ae-label">Apple FY2025 Example</span>
                       <p class="ae-line">Total Net Sales (Revenue) = $<span class="ae-num">416,161</span>M</p>
                       <p class="ae-line">Total Assets (FY2025, ending) = $<span class="ae-num">359,241</span>M</p>
                       <div class="ae-step">Asset Turnover ≈ 416,161 ÷ 359,241</div>
                       <div class="ae-result">≈ <strong>1.16×</strong></div>
-                      <p class="ae-note">Only the FY2025 ending Total Assets balance is shown on this page, so ending
+                      <p class="ae-line">
+                        <strong>Interpretation:</strong> Apple’s asset turnover of 1.16× means it generated
+                        approximately $1.16 of revenue for every $1.00 of assets.
+                      </p>
+                      <p class="ae-note"><strong>Note: </strong>Only the FY2025 ending Total Assets balance is shown on
+                        this page, so ending
                         Total Assets is used here in place of average Total Assets.</p>
                     </div>
                     <div class="ratio-explanation">
@@ -2702,6 +2924,22 @@
                         \color{#1b59df}{\text{Average Total Assets}}
                         }
                         \]
+                      </div>
+                      <div class="ratio-field">
+                        <span class="rf-label">Meaning</span>
+                        <p>
+                          Measures how efficiently a company uses its assets to generate revenue.
+                        </p>
+                      </div>
+
+                      <div class="ratio-field">
+                        <span class="rf-label">Potential Warning Signals</span>
+                        <ul>
+                          <li>Declining asset turnover over time.</li>
+                          <li>Asset growth that does not produce corresponding revenue growth.</li>
+                          <li>Turnover materially below historical or industry levels.</li>
+                          <li>Idle, underused, or unproductive assets.</li>
+                        </ul>
                       </div>
                     </div>
                   </div>
@@ -2724,7 +2962,12 @@
                         416,161 ÷
                         65,341.5</div>
                       <div class="ae-result">= <strong>6.37×</strong></div>
-                      <p class="ae-note">Beginning and ending equity are both shown in Apple's Statement of
+                      <p class="ae-line">
+                        <strong>Interpretation:</strong> Apple’s equity turnover of 6.37× means it generated
+                        approximately $6.37 of revenue for every $1.00 of average shareholders’ equity.
+                      </p>
+                      <p class="ae-note"><strong>Note: </strong>Beginning and ending equity are both shown in Apple's
+                        Statement of
                         Shareholders'
                         Equity, so a true average equity figure can be used here.</p>
                     </div>
@@ -2739,6 +2982,24 @@
                         \color{#1b59df}{\text{Average Shareholders' Equity}}
                         }
                         \]
+                      </div>
+                      apple 6.37
+
+                      <div class="ratio-field">
+                        <span class="rf-label">Meaning</span>
+                        <p>
+                          Measures how efficiently a company uses shareholders’ equity to generate revenue.
+                        </p>
+                      </div>
+
+                      <div class="ratio-field">
+                        <span class="rf-label">Potential Warning Signals</span>
+                        <ul>
+                          <li>Declining turnover over time.</li>
+                          <li>Revenue growing more slowly than equity.</li>
+                          <li>Turnover materially below historical or industry levels.</li>
+                          <li>An unusually high ratio caused by a very small or negative equity base.</li>
+                        </ul>
                       </div>
                       <div class="ratio-field">
                         <p>A high sales-to-equity ratio may reflect efficient use of owners' capital, but it can also
@@ -2867,19 +3128,10 @@
       <div class="learning-body">
 
         <!-- INTRODUCTION -->
-        <p class="section-intro">
-          <strong>Commercial credit risk assessment brings together quantitative analysis,
-            qualitative assessment, and the proposed loan structure to determine whether a
-            borrower is likely to repay its obligations and whether the level of risk is
-            acceptable to the lender.</strong>
-        </p>
 
-        <p>
-          Financial ratios are important, but credit decisions should not be based on ratios
-          alone. A commercial credit analyst also considers the borrower and its business,
-          the purpose of financing, historical financial performance, cash flow, existing
-          debt obligations, management quality, industry conditions, collateral, guarantees,
-          loan structure, and key risks.
+        <p class="section-intro">
+          Now that we are familiar with financial statements and financial ratios, it is time to walk through the
+          practical process of assessing the creditworthiness of a commercial financing applicant.
         </p>
 
         <aside class="central-question" aria-labelledby="central-question-title">
@@ -2894,8 +3146,98 @@
           </div>
         </aside>
 
+        <p class="section-intro">
+          Financial ratios are essential, but a credit decision should never be based on ratios alone. A commercial
+          credit analyst must also consider the borrower’s business, the purpose of the financing, historical financial
+          performance, cash flow, existing debt obligations, management quality, industry and economic conditions,
+          collateral, guarantees, the proposed loan structure, and the key risks affecting repayment.
+
+        </p>
+
+        <p class="section-intro">
+
+          The<strong> 5 Cs of Credit</strong> provide a widely used theoretical framework for bringing this financial
+          and qualitative evidence together:
+        </p>
+
+        <div class="five-cs-overview">
+
+          <!-- LEFT: 5 Cs IMAGE -->
+          <figure class="five-cs-image">
+            <img src="images/5Cs.jpeg"
+              alt="The 5 Cs of Credit: Character, Capacity, Capital, Collateral, and Conditions">
+          </figure>
+
+          <!-- RIGHT: 5 Cs DEFINITIONS -->
+          <div class="five-cs-definitions">
+            <h3>The Five Components</h3>
+
+            <ul class="five-cs-list">
+              <li>
+                <strong>Character</strong>
+                <p>
+                  The borrower’s integrity, reliability, experience, and history of
+                  meeting financial obligations.
+                </p>
+              </li>
+
+              <li>
+                <strong>Capacity</strong>
+                <p>
+                  The business’s ability to generate sufficient cash flow to repay the
+                  proposed loan.
+                </p>
+              </li>
+
+              <li>
+                <strong>Capital</strong>
+                <p>
+                  The owners’ financial investment in the business and the borrower’s
+                  overall financial strength.
+                </p>
+              </li>
+
+              <li>
+                <strong>Collateral</strong>
+                <p>
+                  The assets and guarantees available to provide secondary repayment
+                  support if the borrower defaults.
+                </p>
+              </li>
+
+              <li>
+                <strong>Conditions</strong>
+                <p>
+                  The purpose and terms of the financing, together with industry,
+                  market, and economic conditions that could affect the borrower.
+                </p>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+
+        <p class="section-intro">
+          The 5 Cs help analysts <strong>organize and evaluate the evidence </strong>gathered during a credit
+          assessment. They do not, however, specify the order in which the analysis should be performed. For that
+          purpose, we use a practical <strong>12-step commercial credit assessment process</strong> that explains how to
+          conduct the analysis from the initial financing request through to the final credit recommendation.
+        </p>
+
+
+        <p class="section-intro">
+          Below, we first work through each of the 1 steps, explain the purpose and key considerations of every step,
+          and apply them to assess the applicant’s
+          creditworthiness. We then introduce a hypothetical commercial financing application apply these steps to
+          analysis it.
+        </p>
+
+
+
+
         <!-- 5 Cs -->
-        <details class="learning-section subsection-card" data-section="5-Cs">
+        <!-- <details class="learning-section subsection-card" data-section="5-Cs">
           <summary class="learning-summary subsection-summary" aria-expanded="false">
             <h3>A. The 5 Cs of Credit — Conceptual Framework</h3>
             <span class="chevron" aria-hidden="true">⌄</span>
@@ -3017,1069 +3359,1193 @@
             </div>
           </div>
 
-        </details>
+        </details> -->
 
-        <!-- =========================================================
-     B. COMMERCIAL CREDIT ASSESSMENT PROCESS
-     ========================================================= -->
+
+        <!-- =====================================================
+     COMMERCIAL CREDIT ASSESSMENT PROCESS
+     ===================================================== -->
 
         <details class="learning-section subsection-card" data-section="assessment-process">
+
           <summary class="learning-summary subsection-summary" aria-expanded="false">
-            <h3>B. Commercial Credit Assessment Process</h3>
+            <h3>A. Commercial Credit Assessment Process</h3>
             <span class="chevron" aria-hidden="true">⌄</span>
           </summary>
 
           <div class="learning-body">
 
-            <!-- INTRODUCTION -->
             <p class="section-intro cs-intro">
-              The 5 Cs provide a useful framework for understanding the major dimensions
-              of creditworthiness. In practice, however, commercial credit analysis follows
-              a broader process that combines business analysis, financial performance,
-              repayment capacity, facility structure, downside testing, and professional judgment.
+              A commercial credit assessment can be organized into the following
+              12-step analytical process. The exact process and terminology may differ
+              across lenders.
             </p>
 
-            <div class="callout-box">
-              <h4>Central Credit Question</h4>
-              <p style="margin:0;">
-                <strong>
-                  How will the borrower repay the credit, what could prevent repayment,
-                  and is the remaining risk acceptable to the lender?
-                </strong>
-              </p>
-            </div>
-
-            <p class="section-intro cs-intro">
-              A commercial credit assessment can be organized into the following analytical flow.
-              The exact process and terminology may differ across lenders.
-            </p>
-
-
-            <!-- =====================================================
-         12-STEP ASSESSMENT FLOW
-         ===================================================== -->
+            <!-- 12-STEP FLOW -->
 
             <div class="connection-flow assessment-flow" aria-label="Commercial credit assessment process">
 
               <div class="flow-item assessment-flow-item step-1" data-assessment-jump="assessment-step-1" tabindex="0"
                 role="button">
-                <strong>1. Borrower &amp; Business Profile</strong>
-                <span>Business model · Management · Ownership</span>
+                <strong>1. Borrower, Business &amp; Management</strong>
+                <span>Ownership · Business model · Character</span>
               </div>
 
               <div class="flow-item assessment-flow-item step-2" data-assessment-jump="assessment-step-2" tabindex="0"
                 role="button">
-                <strong>2. Purpose of the Credit</strong>
-                <span>Financing need · Facility purpose</span>
+                <strong>2. Purpose &amp; Financing Request</strong>
+                <span>Use of funds · Amount · Facility type</span>
               </div>
 
               <div class="flow-item assessment-flow-item step-3" data-assessment-jump="assessment-step-3" tabindex="0"
                 role="button">
-                <strong>3. Financial Performance &amp; Trends</strong>
-                <span>Revenue · Profitability · Historical trends</span>
+                <strong>3. Historical Revenue &amp; Profitability</strong>
+                <span>Revenue · Margins · Earnings quality</span>
               </div>
 
               <div class="flow-item assessment-flow-item step-4" data-assessment-jump="assessment-step-4" tabindex="0"
                 role="button">
-                <strong>4. Repayment Capacity</strong>
-                <span>Cash flow · DSCR · Debt service</span>
+                <strong>4. Historical Liquidity &amp; Working Capital</strong>
+                <span>Liquidity · Receivables · Inventory · Payables</span>
               </div>
 
               <div class="flow-item assessment-flow-item step-5" data-assessment-jump="assessment-step-5" tabindex="0"
                 role="button">
-                <strong>5. Leverage &amp; Liquidity</strong>
-                <span>Debt burden · Working capital · Financial cushion</span>
+                <strong>5. Historical Leverage &amp; Capital</strong>
+                <span>Debt burden · Equity · Financial cushion</span>
               </div>
 
               <div class="flow-item assessment-flow-item step-6" data-assessment-jump="assessment-step-6" tabindex="0"
                 role="button">
-                <strong>6. Industry &amp; Qualitative Risk</strong>
-                <span>Management · Industry · Concentration · External risk</span>
+                <strong>6. Historical Cash Flow &amp; Debt Service</strong>
+                <span>Cash generation · DSCR · Coverage</span>
               </div>
 
               <div class="flow-item assessment-flow-item step-7" data-assessment-jump="assessment-step-7" tabindex="0"
                 role="button">
-                <strong>7. Facility Structure</strong>
-                <span>Amount · Type · Term · Amortization</span>
+                <strong>7. Pro Forma Performance</strong>
+                <span>Forecasts · Future ratios · Repayment capacity</span>
               </div>
 
               <div class="flow-item assessment-flow-item step-8" data-assessment-jump="assessment-step-8" tabindex="0"
                 role="button">
-                <strong>8. Collateral &amp; Guarantees</strong>
-                <span>Security · Recovery · Secondary support</span>
+                <strong>8. Sensitivity &amp; Downside Analysis</strong>
+                <span>Stress scenarios · Break-even · Resilience</span>
               </div>
 
               <div class="flow-item assessment-flow-item step-9" data-assessment-jump="assessment-step-9" tabindex="0"
                 role="button">
-                <strong>9. Covenants &amp; Conditions</strong>
-                <span>Financial · Reporting · Protective conditions</span>
+                <strong>9. Industry, Market &amp; Economic Risks</strong>
+                <span>Competition · Industry · External conditions</span>
               </div>
 
               <div class="flow-item assessment-flow-item step-10" data-assessment-jump="assessment-step-10" tabindex="0"
                 role="button">
-                <strong>10. Stress / Sensitivity Analysis</strong>
-                <span>Downside scenarios · Repayment resilience</span>
+                <strong>10. Collateral &amp; Guarantees</strong>
+                <span>Security · Recovery · Secondary repayment</span>
               </div>
 
               <div class="flow-item assessment-flow-item step-11" data-assessment-jump="assessment-step-11" tabindex="0"
                 role="button">
-                <strong>11. Credit Strengths, Risks &amp; Mitigants</strong>
-                <span>Synthesize · Balance · Assess residual risk</span>
+                <strong>11. Facility Structure &amp; Covenants</strong>
+                <span>Term · Amortization · Conditions · Monitoring</span>
               </div>
 
               <div class="flow-item assessment-flow-item step-12" data-assessment-jump="assessment-step-12" tabindex="0"
                 role="button">
-                <strong>12. Final Credit Recommendation</strong>
-                <span>Approve · Conditional approval · Decline</span>
+                <strong>12. Recommendation &amp; Monitoring Plan</strong>
+                <span>Approve · Modify · Decline · Monitor</span>
               </div>
 
             </div>
 
-
-            <div class="callout-box" style="margin-top:16px;">
-              <p style="margin:0;">
+            <div class="callout-box" style="margin-top: 16px;">
+              <p style="margin: 0;">
                 <strong>
-                  Commercial credit analysis is a decision-making process,
-                  not simply a financial-ratio calculation.
+                  Historical financial analysis is divided across Steps 3–6. These
+                  areas are presented separately for clarity, but they must ultimately
+                  be evaluated together.
                 </strong>
               </p>
             </div>
 
-
             <!-- =====================================================
-         STEP 1 — BORROWER & BUSINESS PROFILE
+         STEP 1
          ===================================================== -->
 
             <details class="learning-section" id="assessment-step-1" data-section="assessment-process">
 
               <summary class="learning-summary" aria-expanded="false">
-                <h4>1. Borrower &amp; Business Profile</h4>
+                <h4>1. Understand the Borrower, Business and Management</h4>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </summary>
 
               <div class="learning-body">
 
                 <p>
-                  Before analyzing financial ratios, the analyst needs to understand
-                  how the business operates, how it generates cash, and what could
-                  disrupt that process.
+                  Establish who owns and controls the borrower, how the business
+                  generates cash, what could interrupt its operations, and whether
+                  management is capable, reliable and transparent.
                 </p>
+
+                <aside class="central-question">
+                  <div class="central-question-icon" aria-hidden="true">?</div>
+                  <div class="central-question-content">
+                    <h4>Central Question</h4>
+                    <p>
+                      How does the business generate repayment cash, and can the lender
+                      rely on the people managing it?
+                    </p>
+                  </div>
+                </aside>
 
                 <div class="overview-grid">
 
                   <article class="overview-card">
-                    <h3>Business Model</h3>
+                    <h4>Questions to Ask</h4>
                     <ul>
-                      <li>What products or services does the company provide?</li>
-                      <li>How does the company generate revenue?</li>
-                      <li>What are its major cost drivers?</li>
-                      <li>Is the business seasonal or cyclical?</li>
+                      <li>Who legally owns and controls the borrower?</li>
+                      <li>What products or services generate revenue?</li>
+                      <li>Who are the principal customers and suppliers?</li>
+                      <li>Is the business seasonal, cyclical or concentrated?</li>
+                      <li>What experience does management have?</li>
+                      <li>Has the borrower paid previous obligations as agreed?</li>
+                      <li>Are taxes, licences and regulatory filings current?</li>
                     </ul>
                   </article>
 
                   <article class="overview-card">
-                    <h3>Customers &amp; Suppliers</h3>
+                    <h4>Information and Sources</h4>
                     <ul>
-                      <li>Who are the major customers?</li>
-                      <li>Is revenue concentrated?</li>
-                      <li>Who are the major suppliers?</li>
-                      <li>Are critical inputs dependent on a small number of suppliers?</li>
+                      <li>Corporate registration and ownership records</li>
+                      <li>Business plan and organizational chart</li>
+                      <li>Customer and supplier contracts</li>
+                      <li>Management résumés</li>
+                      <li>Business and personal credit reports</li>
+                      <li>Bank and existing loan records</li>
+                      <li>Tax, court, judgment and lien searches</li>
                     </ul>
                   </article>
 
                   <article class="overview-card">
-                    <h3>Ownership &amp; Management</h3>
+                    <h4>Potential Warning Signals Signals</h4>
                     <ul>
-                      <li>Who owns the company?</li>
-                      <li>Who manages the business?</li>
-                      <li>What is management's experience and track record?</li>
-                      <li>Is there appropriate succession planning?</li>
-                    </ul>
-                  </article>
-
-                  <article class="overview-card">
-                    <h3>Competitive Position</h3>
-                    <ul>
-                      <li>What differentiates the business?</li>
-                      <li>Who are its main competitors?</li>
-                      <li>How strong is its market position?</li>
-                      <li>What could threaten its business model?</li>
+                      <li>Undisclosed owners, debts or legal proceedings</li>
+                      <li>Information that conflicts with supporting records</li>
+                      <li>Repeated late payments or unpaid taxes</li>
+                      <li>Excessive dependence on one manager</li>
+                      <li>Weak records or unrealistic explanations</li>
+                      <li>Resistance to reasonable information requests</li>
                     </ul>
                   </article>
 
                 </div>
 
-                <div class="callout-box">
-                  <p style="margin:0;">
-                    <strong>
-                      Financial ratios show what is happening financially;
-                      understanding the business helps explain why it is happening.
-                    </strong>
-                  </p>
+                <div class="assessment-output">
+                  <h4>Output of Step 1</h4>
+                  <ul>
+                    <li>Verified borrower and ownership profile</li>
+                    <li>Summary of the business model and key dependencies</li>
+                    <li>Assessment of management capability and character</li>
+                    <li>Identification of important operational risks</li>
+                  </ul>
                 </div>
 
               </div>
             </details>
 
-
             <!-- =====================================================
-         STEP 2 — PURPOSE OF CREDIT
+         STEP 2
          ===================================================== -->
 
             <details class="learning-section" id="assessment-step-2" data-section="assessment-process">
 
               <summary class="learning-summary" aria-expanded="false">
-                <h4>2. Purpose of the Credit</h4>
+                <h4>2. Understand the Purpose and Financing Request</h4>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </summary>
 
               <div class="learning-body">
 
                 <p>
-                  The analyst needs to understand exactly why financing is requested
-                  and whether the proposed facility is appropriate for that need.
+                  Determine exactly why the borrower needs financing, how the amount
+                  was calculated, how the funds will be used and whether the proposed
+                  facility matches the financing need.
                 </p>
 
-                <ul>
-                  <li>Working capital</li>
-                  <li>Seasonal financing</li>
-                  <li>Equipment purchase</li>
-                  <li>Business expansion</li>
-                  <li>Commercial real estate</li>
-                  <li>Acquisition</li>
-                  <li>Refinancing existing debt</li>
-                </ul>
-
-                <div class="comparison-card">
-
-                  <div>
-                    <h4>Short-Term Need</h4>
+                <aside class="central-question">
+                  <div class="central-question-icon" aria-hidden="true">?</div>
+                  <div class="central-question-content">
+                    <h4>Central Question</h4>
                     <p>
-                      <strong>Example:</strong>
-                      Seasonal or working-capital needs may be better matched
-                      with a revolving operating facility.
+                      Is the financing purpose legitimate, economically sensible and
+                      appropriately structured?
                     </p>
                   </div>
+                </aside>
 
-                  <div>
-                    <h4>Long-Term Need</h4>
-                    <p>
-                      <strong>Example:</strong>
-                      Long-lived equipment may be financed with a term facility
-                      whose amortization reflects the asset's useful life and
-                      expected cash generation.
-                    </p>
-                  </div>
+                <div class="overview-grid">
+
+                  <article class="overview-card">
+                    <h4>Questions to Ask</h4>
+                    <ul>
+                      <li>What is the exact use of the requested funds?</li>
+                      <li>Is the need temporary, recurring or permanent?</li>
+                      <li>How was the requested amount calculated?</li>
+                      <li>What amount will the owners contribute?</li>
+                      <li>When will the funds be required?</li>
+                      <li>When will the investment begin generating cash?</li>
+                      <li>What would happen without the financing?</li>
+                    </ul>
+                  </article>
+
+                  <article class="overview-card">
+                    <h4>Information and Sources</h4>
+                    <ul>
+                      <li>Written financing request</li>
+                      <li>Project budget and business plan</li>
+                      <li>Purchase agreements and supplier quotations</li>
+                      <li>Working-capital forecast</li>
+                      <li>Acquisition agreement or property appraisal</li>
+                      <li>Existing loan and payout statements</li>
+                      <li>Evidence of the owners’ contribution</li>
+                    </ul>
+                  </article>
+
+                  <article class="overview-card">
+                    <h4>Potential Warning Signals</h4>
+                    <ul>
+                      <li>Vague or changing use of funds</li>
+                      <li>Requested amount unsupported by documents</li>
+                      <li>Short-term credit funding long-lived assets</li>
+                      <li>Long-term debt funding recurring losses</li>
+                      <li>Refinancing that only delays financial problems</li>
+                      <li>No meaningful owner contribution</li>
+                    </ul>
+                  </article>
 
                 </div>
 
                 <div class="callout-box">
-                  <p style="margin:0;">
+                  <p style="margin: 0;">
                     <strong>
-                      The purpose, term, and repayment structure of the facility
-                      should make economic sense together.
+                      Operating lines generally fund fluctuating working-capital needs.
+                      Term loans generally fund equipment, property, acquisitions and
+                      other long-lived investments.
                     </strong>
                   </p>
+                </div>
+
+                <div class="assessment-output">
+                  <h4>Output of Step 2</h4>
+                  <ul>
+                    <li>Verified purpose and amount of the financing</li>
+                    <li>Total project cost and borrower contribution</li>
+                    <li>Appropriate facility type, term and disbursement method</li>
+                    <li>Connection between the use of funds and repayment</li>
+                  </ul>
                 </div>
 
               </div>
             </details>
 
+            <!-- =====================================================
+         STEPS 3–6 INTRODUCTION
+         ===================================================== -->
+
+            <div class="callout-box">
+              <h4>Historical Financial Analysis: Steps 3–6</h4>
+              <p style="margin-bottom: 0;">
+                Historical financial analysis includes revenue and profitability,
+                liquidity and working capital, leverage and capital structure, and cash
+                flow and debt-service capacity. These areas are separated to make the
+                process easier to follow, but the findings must be evaluated together.
+              </p>
+            </div>
 
             <!-- =====================================================
-         STEP 3 — FINANCIAL PERFORMANCE
+         STEP 3
          ===================================================== -->
 
             <details class="learning-section" id="assessment-step-3" data-section="assessment-process">
 
               <summary class="learning-summary" aria-expanded="false">
-                <h4>3. Financial Performance &amp; Trend Analysis</h4>
+                <h4>3. Analyze Historical Revenue, Profitability and Earnings Quality</h4>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </summary>
 
               <div class="learning-body">
 
                 <p>
-                  Analysts normally examine several periods of financial information
-                  rather than relying on a single year. The objective is to determine
-                  whether performance is improving, stable, volatile, or deteriorating.
+                  Examine whether revenue, margins and earnings are improving, stable,
+                  volatile or deteriorating, and determine whether reported profits
+                  represent sustainable operating performance.
                 </p>
+
+                <aside class="central-question">
+                  <div class="central-question-icon" aria-hidden="true">?</div>
+                  <div class="central-question-content">
+                    <h4>Central Question</h4>
+                    <p>
+                      Does the borrower generate stable and sustainable earnings from
+                      its normal business operations?
+                    </p>
+                  </div>
+                </aside>
 
                 <div class="overview-grid">
 
                   <article class="overview-card">
-                    <h3>Revenue</h3>
+                    <h4>Questions and Analysis</h4>
                     <ul>
-                      <li>Growing, stable, or declining?</li>
-                      <li>Is growth sustainable?</li>
-                      <li>Are sales volatile?</li>
-                      <li>Is revenue concentrated?</li>
+                      <li>Is revenue growing, stable, declining or volatile?</li>
+                      <li>What caused the change in revenue?</li>
+                      <li>Are gross, operating and EBITDA margins improving?</li>
+                      <li>Are costs increasing faster than revenue?</li>
+                      <li>Are profits generated by normal normal operations?</li>
+                      <li>Is growth profitable and sustainable?</li>
+                      <li>How does performance compare with prior years and peers?</li>
                     </ul>
                   </article>
 
                   <article class="overview-card">
-                    <h3>Profitability</h3>
+                    <h4>Information and Sources</h4>
                     <ul>
-                      <li>Gross margin</li>
-                      <li>Operating margin</li>
-                      <li>EBIT / EBITDA</li>
-                      <li>Net profit margin</li>
+                      <li>Three to five years of financial statements</li>
+                      <li>Most recent interim statements</li>
+                      <li>Tax returns and notices of assessment</li>
+                      <li>Monthly sales and expense reports</li>
+                      <li>Sales by customer, product and location</li>
+                      <li>Customer contracts and order backlog</li>
+                      <li>Trial balance and general ledger</li>
                     </ul>
                   </article>
 
                   <article class="overview-card">
-                    <h3>Earnings Quality</h3>
+                    <h4>Potential Warning Signals</h4>
                     <ul>
-                      <li>Are earnings generated by normal operations?</li>
-                      <li>Are there large one-time gains or expenses?</li>
-                      <li>Are margins stable?</li>
-                      <li>Do earnings translate into cash flow?</li>
-                    </ul>
-                  </article>
-
-                  <article class="overview-card">
-                    <h3>Trend</h3>
-                    <ul>
-                      <li>Historical direction</li>
-                      <li>Volatility</li>
-                      <li>Peer / industry comparison</li>
-                      <li>Relationship between growth and debt</li>
+                      <li>Revenue growth with declining margins</li>
+                      <li>Operating expenses growing faster than revenue</li>
+                      <li>Declining or highly volatile earnings</li>
+                      <li>Dependence on one-time or non-operating gains</li>
+                      <li>Growth dependent on one customer</li>
+                      <li>Interim results materially below expectations</li>
                     </ul>
                   </article>
 
                 </div>
 
                 <div class="callout-box">
-                  <p style="margin:0;">
-                    <strong>
-                      Trend analysis is often more informative than a single-period ratio.
-                    </strong>
+                  <h4>Normalize Reported Earnings</h4>
+                  <p style="margin-bottom: 0;">
+                    Investigate one-time gains and losses, asset sales, government
+                    subsidies, related-party transactions, unusual expenses and
+                    discretionary owner compensation. Adjustments must be reasonable,
+                    supported and clearly documented.
                   </p>
+                </div>
+
+                <div class="assessment-output">
+                  <h4>Output of Step 3</h4>
+                  <ul>
+                    <li>Revenue and profitability trend</li>
+                    <li>Explanation of material changes</li>
+                    <li>Normalized and sustainable earnings estimate</li>
+                    <li>Assessment of earnings quality</li>
+                  </ul>
                 </div>
 
               </div>
             </details>
 
-
             <!-- =====================================================
-         STEP 4 — REPAYMENT CAPACITY
+         STEP 4
          ===================================================== -->
 
             <details class="learning-section" id="assessment-step-4" data-section="assessment-process">
 
               <summary class="learning-summary" aria-expanded="false">
-                <h4>4. Repayment Capacity</h4>
+                <h4>4. Analyze Historical Liquidity and Working Capital</h4>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </summary>
 
               <div class="learning-body">
 
-                <p class="simple-q">
-                  “Where will the cash come from to repay principal and interest?”
-                </p>
-
                 <p>
-                  Repayment capacity is generally one of the most important parts
-                  of commercial credit analysis. A borrower should normally be able
-                  to service debt through sustainable cash generated by the business.
+                  Assess whether the borrower can meet short-term obligations and
+                  whether receivables, inventory and payables are managed effectively.
                 </p>
 
-                <div class="comparison-card">
-
-                  <div>
-                    <h4>Primary Source of Repayment</h4>
-                    <p>Normally cash generated through business operations.</p>
-                    <ul>
-                      <li>Operating cash flow</li>
-                      <li>Recurring business income</li>
-                      <li>Cash available for debt service</li>
-                      <li>Contracted cash flows where applicable</li>
-                    </ul>
+                <aside class="central-question">
+                  <div class="central-question-icon" aria-hidden="true">?</div>
+                  <div class="central-question-content">
+                    <h4>Central Question</h4>
+                    <p>
+                      Can the borrower finance its operating cycle and pay obligations
+                      as they become due?
+                    </p>
                   </div>
+                </aside>
 
-                  <div>
-                    <h4>Secondary Source of Repayment</h4>
-                    <p>Support available if normal repayment fails.</p>
-                    <ul>
-                      <li>Collateral realization</li>
-                      <li>Guarantees</li>
-                      <li>Asset sales</li>
-                      <li>Other recovery sources</li>
-                    </ul>
-                  </div>
-
-                </div>
-
-                <div class="connection-flow" aria-label="Primary source of repayment">
-
-                  <div class="flow-item">
-                    <strong>Business Operations</strong>
-                    <span>Generate revenue</span>
-                  </div>
-
-                  <div class="flow-item">
-                    <strong>Cash Generation</strong>
-                    <span>Cash becomes available</span>
-                  </div>
-
-                  <div class="flow-item">
-                    <strong>Debt Service</strong>
-                    <span>Principal + interest</span>
-                  </div>
-
-                </div>
-
-                <div class="overview-grid" style="margin-top:16px;">
+                <div class="overview-grid">
 
                   <article class="overview-card">
-                    <h3>Cash Flow</h3>
+                    <h4>Questions and Analysis</h4>
                     <ul>
-                      <li>Operating cash flow</li>
-                      <li>Working-capital requirements</li>
-                      <li>Capital expenditures</li>
-                      <li>Owner distributions</li>
+                      <li>Are the current and quick ratios improving or declining?</li>
+                      <li>Is working capital positive and adequate?</li>
+                      <li>Are receivables collectible and collected promptly?</li>
+                      <li>Is inventory current, saleable and properly valued?</li>
+                      <li>Are suppliers being paid within agreed terms?</li>
+                      <li>Is the cash-conversion cycle becoming longer?</li>
+                      <li>Does the operating line revolve or remain fully used?</li>
                     </ul>
                   </article>
 
                   <article class="overview-card">
-                    <h3>Coverage</h3>
+                    <h4>Information and Sources</h4>
                     <ul>
-                      <li>DSCR</li>
-                      <li>Interest coverage</li>
-                      <li>Fixed-charge coverage where applicable</li>
-                      <li>Debt maturity requirements</li>
+                      <li>Balance sheets and bank statements</li>
+                      <li>Accounts-receivable aging reports</li>
+                      <li>Accounts-payable aging reports</li>
+                      <li>Inventory reports</li>
+                      <li>Customer concentration reports</li>
+                      <li>Bad-debt and collection history</li>
+                      <li>Operating-line statements and borrowing-base reports</li>
+                    </ul>
+                  </article>
+
+                  <article class="overview-card">
+                    <h4>Potential Warning Signals</h4>
+                    <ul>
+                      <li>Declining liquidity ratios</li>
+                      <li>Current liabilities growing faster than current assets</li>
+                      <li>Overdue or concentrated receivables</li>
+                      <li>Obsolete or slow-moving inventory</li>
+                      <li>Suppliers increasingly paid late</li>
+                      <li>Permanent reliance on the operating line</li>
                     </ul>
                   </article>
 
                 </div>
 
-                <div class="callout-box">
-                  <p style="margin:0;">
-                    <strong>
-                      Strong collateral should not automatically compensate
-                      for inadequate repayment capacity.
-                    </strong>
-                  </p>
+                <div class="assessment-output">
+                  <h4>Output of Step 4</h4>
+                  <ul>
+                    <li>Assessment of short-term payment capacity</li>
+                    <li>Quality of receivables and inventory</li>
+                    <li>Normal and peak working-capital requirements</li>
+                    <li>Appropriate operating-line or borrowing-base requirement</li>
+                  </ul>
                 </div>
 
               </div>
             </details>
 
-
             <!-- =====================================================
-         STEP 5 — LEVERAGE & LIQUIDITY
+         STEP 5
          ===================================================== -->
 
             <details class="learning-section" id="assessment-step-5" data-section="assessment-process">
 
               <summary class="learning-summary" aria-expanded="false">
-                <h4>5. Leverage &amp; Liquidity</h4>
+                <h4>5. Analyze Historical Leverage and Capital Structure</h4>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </summary>
 
               <div class="learning-body">
 
                 <p>
-                  Repayment capacity should be considered together with the borrower's
-                  balance-sheet strength. Leverage shows the extent of financial
-                  obligations, while liquidity indicates the borrower's ability
-                  to absorb short-term pressure.
+                  Determine how much financial risk is carried by lenders relative to
+                  the owners and whether the borrower’s capital can absorb unexpected
+                  losses.
                 </p>
 
-                <div class="comparison-card">
-
-                  <div>
-                    <h4>Leverage</h4>
+                <aside class="central-question">
+                  <div class="central-question-icon" aria-hidden="true">?</div>
+                  <div class="central-question-content">
+                    <h4>Central Question</h4>
                     <p>
-                      Measures how heavily the business relies on borrowed funds
-                      and other creditor financing.
+                      Is the borrower’s existing debt burden sustainable, and have the
+                      owners invested sufficient capital?
                     </p>
-
-                    <ul>
-                      <li>Debt-to-equity</li>
-                      <li>Debt-to-assets</li>
-                      <li>Total liabilities-to-equity</li>
-                      <li>Debt growth</li>
-                      <li>Debt maturity profile</li>
-                    </ul>
                   </div>
+                </aside>
 
-                  <div>
-                    <h4>Liquidity</h4>
-                    <p>
-                      Measures the ability of the borrower to meet near-term
-                      obligations and manage working-capital requirements.
-                    </p>
+                <div class="overview-grid">
 
+                  <article class="overview-card">
+                    <h4>Questions and Analysis</h4>
                     <ul>
-                      <li>Current ratio</li>
-                      <li>Quick ratio</li>
-                      <li>Working capital</li>
-                      <li>Cash reserves</li>
-                      <li>Availability under operating facilities</li>
+                      <li>Is total debt increasing or decreasing?</li>
+                      <li>Why was existing debt incurred?</li>
+                      <li>How do debt-to-equity and debt-to-assets compare over time?</li>
+                      <li>Is tangible net worth adequate?</li>
+                      <li>Are earnings being retained in the business?</li>
+                      <li>Are owners making large withdrawals?</li>
+                      <li>Are shareholder loans subordinated?</li>
+                      <li>Are major debt maturities approaching?</li>
                     </ul>
-                  </div>
+                  </article>
+
+                  <article class="overview-card">
+                    <h4>Information and Sources</h4>
+                    <ul>
+                      <li>Historical balance sheets</li>
+                      <li>Complete debt schedule</li>
+                      <li>Loan and lease agreements</li>
+                      <li>Shareholder-loan agreements</li>
+                      <li>Business credit reports</li>
+                      <li>Contingent liabilities and guarantees</li>
+                      <li>Off-balance-sheet obligations</li>
+                    </ul>
+                  </article>
+
+                  <article class="overview-card">
+                    <h4>Potential Warning Signals</h4>
+                    <ul>
+                      <li>Debt increasing faster than earnings</li>
+                      <li>Thin or negative tangible net worth</li>
+                      <li>Large owner withdrawals</li>
+                      <li>Short-term debt financing permanent assets</li>
+                      <li>Balloon payments without a repayment source</li>
+                      <li>Undisclosed guarantees or contingent obligations</li>
+                    </ul>
+                  </article>
 
                 </div>
 
-                <div class="callout-box">
-                  <p style="margin:0;">
-                    <strong>
-                      High leverage reduces financial flexibility, while weak liquidity
-                      can create repayment pressure even when a business remains profitable.
-                    </strong>
-                  </p>
+                <div class="assessment-output">
+                  <h4>Output of Step 5</h4>
+                  <ul>
+                    <li>Historical leverage trend</li>
+                    <li>Assessment of the quality and adequacy of capital</li>
+                    <li>Debt maturity and refinancing risks</li>
+                    <li>Need for additional equity or debt subordination</li>
+                  </ul>
                 </div>
 
               </div>
             </details>
 
-
             <!-- =====================================================
-         STEP 6 — INDUSTRY & QUALITATIVE RISK
+         STEP 6
          ===================================================== -->
 
             <details class="learning-section" id="assessment-step-6" data-section="assessment-process">
 
               <summary class="learning-summary" aria-expanded="false">
-                <h4>6. Industry &amp; Qualitative Risk Assessment</h4>
+                <h4>6. Analyze Historical Cash Flow and Debt-Service Capacity</h4>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </summary>
 
               <div class="learning-body">
 
                 <p>
-                  Not every material credit risk appears directly in the financial
-                  statements. Qualitative analysis helps identify factors that may
-                  affect the borrower's future financial performance and repayment ability.
+                  Determine whether recurring business cash flow has been sufficient
+                  to pay interest, principal, leases and other fixed financing
+                  obligations.
                 </p>
+
+                <aside class="central-question">
+                  <div class="central-question-icon" aria-hidden="true">?</div>
+                  <div class="central-question-content">
+                    <h4>Central Question</h4>
+                    <p>
+                      Has the borrower historically generated sufficient cash to meet
+                      its debt-service obligations?
+                    </p>
+                  </div>
+                </aside>
 
                 <div class="overview-grid">
 
                   <article class="overview-card">
-                    <h3>Management Risk</h3>
+                    <h4>Questions and Analysis</h4>
                     <ul>
-                      <li>Experience</li>
-                      <li>Track record</li>
-                      <li>Financial discipline</li>
-                      <li>Governance</li>
-                      <li>Succession planning</li>
+                      <li>What is the primary repayment source?</li>
+                      <li>Is operating cash flow consistently positive?</li>
+                      <li>Are accounting earnings converted into cash?</li>
+                      <li>Is historical DSCR adequate and stable?</li>
+                      <li>Is interest coverage adequate?</li>
+                      <li>What maintenance capital expenditure is necessary?</li>
+                      <li>How much additional debt service can the business support?</li>
                     </ul>
                   </article>
 
                   <article class="overview-card">
-                    <h3>Industry Risk</h3>
+                    <h4>Information and Sources</h4>
                     <ul>
-                      <li>Industry growth or decline</li>
-                      <li>Cyclicality</li>
-                      <li>Competition</li>
-                      <li>Barriers to entry</li>
-                      <li>Technology disruption</li>
+                      <li>Historical cash-flow statements</li>
+                      <li>Bank statements</li>
+                      <li>Existing debt schedules</li>
+                      <li>Loan and lease payment records</li>
+                      <li>>Capital-expenditure history</li>
+                      <li>Tax payments and owner distributions</li>
+                      <li>Changes in working-capital accounts</li>
                     </ul>
                   </article>
 
                   <article class="overview-card">
-                    <h3>Customer Concentration</h3>
-                    <p>
-                      Dependence on one or a few major customers can materially
-                      affect revenue and cash flow if a relationship is lost.
-                    </p>
-                  </article>
-
-                  <article class="overview-card">
-                    <h3>Supplier Concentration</h3>
-                    <p>
-                      Dependence on critical suppliers can disrupt production,
-                      increase costs, or reduce margins.
-                    </p>
-                  </article>
-
-                  <article class="overview-card">
-                    <h3>Economic Risk</h3>
+                    <h4>Potential Warning Signals</h4>
                     <ul>
-                      <li>Interest rates</li>
-                      <li>Inflation</li>
-                      <li>Economic slowdown</li>
-                      <li>Exchange rates where relevant</li>
-                      <li>Commodity prices where relevant</li>
+                      <li>DSCR close to or below 1.00</li>
+                      <li>Recurring negative operating cash flow</li>
+                      <li>Debt service funded through new borrowing</li>
+                      <li>Coverage dependent on unsupported add-backs</li>
+                      <li>Maintenance capital expenditure excluded</li>
+                      <li>Repayment dependent on selling essential assets</li>
                     </ul>
                   </article>
 
-                  <article class="overview-card">
-                    <h3>Regulatory Risk</h3>
-                    <p>
-                      Legal or regulatory changes may affect costs, revenue,
-                      profitability, or the company's ability to operate.
-                    </p>
-                  </article>
+                </div>
 
+                <div class="callout-box">
+                  <p style="margin: 0;">
+                    <strong>
+                      EBITDA is not automatically equal to cash available for debt
+                      service. The analyst must consider taxes, working-capital needs,
+                      capital expenditure, distributions and other cash obligations.
+                    </strong>
+                  </p>
+                </div>
+
+                <div class="assessment-output">
+                  <h4>Output of Step 6</h4>
+                  <ul>
+                    <li>Historical DSCR and coverage trend</li>
+                    <li>Verified primary repayment source</li>
+                    <li>Reconciliation of earnings to available cash flow</li>
+                    <li>Capacity to support additional debt service</li>
+                  </ul>
                 </div>
 
               </div>
             </details>
 
-
             <!-- =====================================================
-         STEP 7 — FACILITY STRUCTURE
+         STEP 7
          ===================================================== -->
 
             <details class="learning-section" id="assessment-step-7" data-section="assessment-process">
 
               <summary class="learning-summary" aria-expanded="false">
-                <h4>7. Facility Structure</h4>
+                <h4>7. Analyze Pro Forma Performance and Repayment Capacity</h4>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </summary>
 
               <div class="learning-body">
 
                 <p>
-                  Credit risk depends not only on the borrower but also on how
-                  the proposed financing is structured.
+                  Evaluate the borrower’s expected financial position after the
+                  proposed financing and determine whether projected repayment capacity
+                  is supported by reasonable assumptions.
                 </p>
+
+                <aside class="central-question">
+                  <div class="central-question-icon" aria-hidden="true">?</div>
+                  <div class="central-question-content">
+                    <h4>Central Question</h4>
+                    <p>
+                      After receiving the financing, will the borrower remain liquid,
+                      appropriately leveraged and able to service the proposed debt?
+                    </p>
+                  </div>
+                </aside>
 
                 <div class="overview-grid">
 
                   <article class="overview-card">
-                    <h3>Facility</h3>
+                    <h4>Analysis Required</h4>
                     <ul>
-                      <li>Facility amount</li>
-                      <li>Facility type</li>
-                      <li>Currency where relevant</li>
-                      <li>Committed or demand facility</li>
+                      <li>Projected income statement</li>
+                      <li>Projected balance sheet</li>
+                      <li>Projected cash-flow statement</li>
+                      <li>New interest and principal payments</li>
+                      <li>Projected liquidity and leverage</li>
+                      <li>Projected DSCR and interest coverage</li>
+                      <li>Expected compliance with proposed covenants</li>
                     </ul>
                   </article>
 
                   <article class="overview-card">
-                    <h3>Repayment Structure</h3>
+                    <h4>Assumptions to Verify</h4>
                     <ul>
-                      <li>Loan term</li>
-                      <li>Amortization period</li>
-                      <li>Principal repayment schedule</li>
-                      <li>Balloon payment where applicable</li>
+                      <li>Revenue growth and selling prices</li>
+                      <li>Gross margin and operating expenses</li>
+                      <li>Customer contracts and order backlog</li>
+                      <li>Equipment productivity and cost savings</li>
+                      <li>Working-capital requirements</li>
+                      <li>Interest rates and repayment schedules</li>
+                      <li>Owner contributions and distributions</li>
                     </ul>
                   </article>
 
                   <article class="overview-card">
-                    <h3>Pricing</h3>
+                    <h4>Potential Warning Signals</h4>
                     <ul>
-                      <li>Interest rate</li>
-                      <li>Fixed or floating rate</li>
-                      <li>Fees where applicable</li>
+                      <li>Growth materially above historical experience</li>
+                      <li>Unsupported improvement in margins</li>
+                      <li>Understated working-capital requirements</li>
+                      <li>Projections that do not reconcile</li>
+                      <li>Interest or principal payments omitted</li>
+                      <li>Only a best-case forecast is provided</li>
                     </ul>
                   </article>
 
                 </div>
 
-                <div class="callout-box">
-                  <p style="margin:0;">
-                    <strong>
-                      A well-structured facility attempts to match repayment
-                      requirements with the borrower's expected cash generation,
-                      financing purpose, and risk profile.
-                    </strong>
-                  </p>
+                <div class="assessment-output">
+                  <h4>Output of Step 7</h4>
+                  <ul>
+                    <li>Validated base-case projections</li>
+                    <li>Pro forma liquidity, leverage and coverage ratios</li>
+                    <li>Assessment of forecast credibility</li>
+                    <li>Identification of assumptions requiring stress testing</li>
+                  </ul>
                 </div>
 
               </div>
             </details>
 
-
             <!-- =====================================================
-         STEP 8 — COLLATERAL & GUARANTEES
+         STEP 8
          ===================================================== -->
 
             <details class="learning-section" id="assessment-step-8" data-section="assessment-process">
 
               <summary class="learning-summary" aria-expanded="false">
-                <h4>8. Collateral &amp; Guarantees</h4>
+                <h4>8. Perform Sensitivity and Downside Analysis</h4>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </summary>
 
               <div class="learning-body">
 
                 <p>
-                  Collateral and guarantees provide secondary support if the borrower
-                  cannot repay through normal business cash flow. They can reduce
-                  potential loss after default and therefore relate closely to
-                  <strong>Loss Given Default (LGD)</strong>.
+                  Test how weaker assumptions and adverse events would affect cash flow,
+                  liquidity, covenant compliance and debt-service capacity.
                 </p>
 
-                <div class="connection-flow" aria-label="Collateral and LGD relationship">
-
-                  <div class="flow-item">
-                    <strong>Default</strong>
-                    <span>Borrower cannot repay</span>
+                <aside class="central-question">
+                  <div class="central-question-icon" aria-hidden="true">?</div>
+                  <div class="central-question-content">
+                    <h4>Central Question</h4>
+                    <p>
+                      If management’s assumptions are wrong or conditions deteriorate,
+                      can the borrower still repay the debt?
+                    </p>
                   </div>
+                </aside>
 
-                  <div class="flow-item">
-                    <strong>Recovery</strong>
-                    <span>Collateral / guarantees</span>
-                  </div>
+                <div class="overview-grid">
 
-                  <div class="flow-item">
-                    <strong>LGD</strong>
-                    <span>Recovery affects lender loss</span>
-                  </div>
+                  <article class="overview-card">
+                    <h4>Variables to Stress</h4>
+                    <ul>
+                      <li>Revenue and sales volume</li>
+                      <li>Gross margin and input costs</li>
+                      <li>Operating expenses</li>
+                      <li>Interest rates</li>
+                      <li>Loss of a major customer</li>
+                      <li>Slower receivable collection</li>
+                      <li>Project delays and cost overruns</li>
+                      <li>Delayed cost savings</li>
+                    </ul>
+                  </article>
+
+                  <article class="overview-card">
+                    <h4>Scenarios to Prepare</h4>
+                    <ul>
+                      <li>Base case</li>
+                      <li>Moderate downside case</li>
+                      <li>Severe but plausible downside case</li>
+                      <li>Combined-risk scenario</li>
+                      <li>DSCR break-even analysis</li>
+                      <li>Liquidity or covenant break-even analysis</li>
+                    </ul>
+                  </article>
+
+                  <article class="overview-card">
+                    <h4>Questions to Answer</h4>
+                    <ul>
+                      <li>When does DSCR fall below the required level?</li>
+                      <li>When is the operating line fully used?</li>
+                      <li>Which covenant fails first?</li>
+                      <li>Can spending or distributions be reduced?</li>
+                      <li>Is additional capital realistically available?</li>
+                      <li>Would the facility require restructuring?</li>
+                    </ul>
+                  </article>
 
                 </div>
 
-                <p><strong>Collateral analysis may consider:</strong></p>
-
-                <ul>
-                  <li>Type of collateral</li>
-                  <li>Market and appraised value</li>
-                  <li>Liquidity</li>
-                  <li>Advance rate</li>
-                  <li>Existing liens</li>
-                  <li>Value volatility</li>
-                  <li>Legal enforceability</li>
-                  <li>Recovery costs</li>
-                  <li>Time required to realize the asset</li>
-                </ul>
-
-                <p>
-                  Guarantees may provide additional support, but their value depends
-                  on the guarantor's financial capacity and legal enforceability.
-                </p>
-
-                <div class="callout-box">
-                  <p style="margin:0;">
-                    <strong>
-                      Collateral is normally a secondary source of repayment;
-                      sustainable business cash flow remains the primary source.
-                    </strong>
-                  </p>
+                <div class="assessment-output">
+                  <h4>Output of Step 8</h4>
+                  <ul>
+                    <li>Documented downside assumptions and scenarios</li>
+                    <li>Stressed cash flow, DSCR, liquidity and leverage</li>
+                    <li>Break-even point and principal risk drivers</li>
+                    <li>Required mitigants, covenants or facility changes</li>
+                  </ul>
                 </div>
 
               </div>
             </details>
 
-
             <!-- =====================================================
-         STEP 9 — COVENANTS & CONDITIONS
+         STEP 9
          ===================================================== -->
 
             <details class="learning-section" id="assessment-step-9" data-section="assessment-process">
 
               <summary class="learning-summary" aria-expanded="false">
-                <h4>9. Covenants &amp; Conditions</h4>
+                <h4>9. Assess Industry, Market and Economic Risks</h4>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </summary>
 
               <div class="learning-body">
 
                 <p>
-                  Covenants and approval conditions can help control risk,
-                  maintain financial discipline, and provide early warning
-                  if the borrower's risk profile deteriorates.
+                  Evaluate external conditions that could reduce demand, increase
+                  costs, disrupt operations or weaken repayment capacity.
                 </p>
 
-                <div class="comparison-card">
-
-                  <div>
-                    <h4>Financial Covenants</h4>
-
-                    <ul>
-                      <li>Minimum DSCR</li>
-                      <li>Maximum leverage</li>
-                      <li>Minimum working capital</li>
-                      <li>Minimum tangible net worth</li>
-                    </ul>
+                <aside class="central-question">
+                  <div class="central-question-icon" aria-hidden="true">?</div>
+                  <div class="central-question-content">
+                    <h4>Central Question</h4>
+                    <p>
+                      Which external risks could materially affect the borrower, and
+                      how well can the business respond?
+                    </p>
                   </div>
+                </aside>
 
-                  <div>
-                    <h4>Non-Financial Covenants</h4>
+                <div class="overview-grid">
 
+                  <article class="overview-card">
+                    <h4>Factors to Analyze</h4>
                     <ul>
-                      <li>Regular financial reporting</li>
-                      <li>Maintain appropriate insurance</li>
-                      <li>Restrictions on additional borrowing</li>
-                      <li>Restrictions on major asset sales</li>
+                      <li>Industry growth and cyclicality</li>
+                      <li>Competitive intensity and barriers to entry</li>
+                      <li>Technology and substitution risks</li>
+                      <li>Regulation and licensing</li>
+                      <li>Interest rates, inflation and exchange rates</li>
+                      <li>Commodity-price and supply-chain exposure</li>
+                      <li>Geographic and environmental risks</li>
                     </ul>
-                  </div>
+                  </article>
+
+                  <article class="overview-card">
+                    <h4>Information and Sources</h4>
+                    <ul>
+                      <li>Government economic data</li>
+                      <li>Central-bank publications</li>
+                      <li>Industry and trade-association reports</li>
+                      <li>Regulatory publications</li>
+                      <li>Competitor filings</li>
+                      <li>Market research</li>
+                      <li>Customer and supplier information</li>
+                    </ul>
+                  </article>
+
+                  <article class="overview-card">
+                    <h4>Potential Warning Signals</h4>
+                    <ul>
+                      <li>Declining or structurally disrupted industry</li>
+                      <li>High exposure to volatile input prices</li>
+                      <li>Weak ability to pass cost increases to customers</li>
+                      <li>Significant regulatory changes</li>
+                      <li>High currency or international-trade exposure</li>
+                      <li>Forecasts inconsistent with the industry outlook</li>
+                    </ul>
+                  </article>
 
                 </div>
 
-                <div class="ratio-card">
-
-                  <h4>Conditions of Approval</h4>
-
+                <div class="assessment-output">
+                  <h4>Output of Step 9</h4>
                   <ul>
-                    <li>Equity injection before funding</li>
-                    <li>Required collateral documentation</li>
-                    <li>Guarantees</li>
-                    <li>Updated appraisal</li>
-                    <li>Repayment of specified existing debt</li>
-                    <li>Other lender-specific conditions</li>
+                    <li>Industry outlook and borrower’s competitive position</li>
+                    <li>Principal external risks</li>
+                    <li>Assessment of business resilience</li>
+                    <li>External risks requiring stress testing or monitoring</li>
                   </ul>
-
-                </div>
-
-                <div class="callout-box">
-                  <p style="margin:0;">
-                    <strong>
-                      Covenants help monitor and control risk;
-                      they do not eliminate the underlying credit risk.
-                    </strong>
-                  </p>
                 </div>
 
               </div>
             </details>
 
-
             <!-- =====================================================
-         STEP 10 — STRESS / SENSITIVITY ANALYSIS
+         STEP 10
          ===================================================== -->
 
             <details class="learning-section" id="assessment-step-10" data-section="assessment-process">
 
               <summary class="learning-summary" aria-expanded="false">
-                <h4>10. Stress / Sensitivity Analysis</h4>
+                <h4>10. Evaluate Collateral and Guarantees</h4>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </summary>
 
               <div class="learning-body">
 
-                <p class="simple-q">
-                  “What happens to repayment capacity if conditions become worse than expected?”
+                <p>
+                  Determine what secondary repayment support is available and what the
+                  lender could realistically recover after considering prior claims,
+                  realization costs and delays.
                 </p>
 
-                <p>
-                  Stress testing examines whether the borrower can continue to service
-                  debt under reasonable downside assumptions.
-                </p>
+                <aside class="central-question">
+                  <div class="central-question-icon" aria-hidden="true">?</div>
+                  <div class="central-question-content">
+                    <h4>Central Question</h4>
+                    <p>
+                      If the primary repayment source fails, what can the lender
+                      realistically recover?
+                    </p>
+                  </div>
+                </aside>
 
                 <div class="overview-grid">
 
                   <article class="overview-card">
-                    <h3>Revenue Stress</h3>
+                    <h4>Questions and Analysis</h4>
                     <ul>
-                      <li>Revenue declines</li>
-                      <li>A major customer is lost</li>
-                      <li>Sales growth slows</li>
+                      <li>Who legally owns the collateral?</li>
+                      <li>What is its market and liquidation value?</li>
+                      <li>How quickly could it be sold?</li>
+                      <li>Are there prior-ranking liens?</li>
+                      <li>Is the collateral specialized or volatile?</li>
+                      <li>Is it adequately insured?</li>
+                      <li>Do guarantors have sufficient net worth and liquidity?</li>
                     </ul>
                   </article>
 
                   <article class="overview-card">
-                    <h3>Margin Stress</h3>
+                    <h4>Information and Sources</h4>
                     <ul>
-                      <li>Gross margin declines</li>
-                      <li>Input costs increase</li>
-                      <li>Operating expenses rise</li>
+                      <li>Independent appraisals</li>
+                      <li>Purchase agreements and asset listings</li>
+                      <li>Title, lien and security searches</li>
+                      <li>Receivable and inventory reports</li>
+                      <li>Insurance certificates</li>
+                      <li>Environmental assessments</li>
+                      <li>Guarantor financial statements and credit reports</li>
                     </ul>
                   </article>
 
                   <article class="overview-card">
-                    <h3>Liquidity Stress</h3>
+                    <h4>Potential Warning Signals</h4>
                     <ul>
-                      <li>Receivable collection slows</li>
-                      <li>Inventory increases</li>
-                      <li>Working-capital requirements rise</li>
+                      <li>Collateral owned by another party</li>
+                      <li>Prior-ranking liens</li>
+                      <li>Specialized or rapidly depreciating assets</li>
+                      <li>Old or unsupported appraisals</li>
+                      <li>Receivables subject to disputes or offsets</li>
+                      <li>Guarantees without financial substance</li>
                     </ul>
                   </article>
-
-                  <article class="overview-card">
-                    <h3>Financing Stress</h3>
-                    <ul>
-                      <li>Interest rates increase</li>
-                      <li>Debt refinancing becomes more difficult</li>
-                      <li>Debt-service requirements increase</li>
-                    </ul>
-                  </article>
-
-                </div>
-
-                <div class="connection-flow" aria-label="Stress testing process">
-
-                  <div class="flow-item">
-                    <strong>Base Case</strong>
-                    <span>Expected performance</span>
-                  </div>
-
-                  <div class="flow-item">
-                    <strong>Downside Case</strong>
-                    <span>Adverse assumptions</span>
-                  </div>
-
-                  <div class="flow-item">
-                    <strong>Reassess</strong>
-                    <span>DSCR · Liquidity · Leverage</span>
-                  </div>
 
                 </div>
 
                 <div class="callout-box">
-                  <p style="margin:0;">
+                  <p style="margin: 0;">
                     <strong>
-                      A borrower that can repay only under optimistic assumptions
-                      represents greater credit risk than one with sufficient
-                      financial cushion to absorb reasonable downside scenarios.
+                      Collateral is normally a secondary repayment source. Strong
+                      collateral does not correct inadequate operating cash flow.
                     </strong>
                   </p>
+                </div>
+
+                <div class="assessment-output">
+                  <h4>Output of Step 10</h4>
+                  <ul>
+                    <li>Collateral description and conservative value</li>
+                    <li>Estimated loan-to-value and recovery position</li>
+                    <li>Security priority and registration requirements</li>
+                    <li>Value and enforceability of guarantees</li>
+                  </ul>
                 </div>
 
               </div>
             </details>
 
-
             <!-- =====================================================
-         STEP 11 — CREDIT STRENGTHS, RISKS & MITIGANTS
+         STEP 11
          ===================================================== -->
 
             <details class="learning-section" id="assessment-step-11" data-section="assessment-process">
 
               <summary class="learning-summary" aria-expanded="false">
-                <h4>11. Credit Strengths, Risks &amp; Mitigants</h4>
+                <h4>11. Structure the Facility and Establish Covenants</h4>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </summary>
 
               <div class="learning-body">
 
                 <p>
-                  At this stage, the analyst brings together the findings from the
-                  entire assessment. The objective is not simply to list positive
-                  and negative factors, but to determine the borrower's
-                  <strong>overall credit position and residual risk</strong>.
+                  Design facility terms that match the financing purpose, asset life,
+                  cash-flow cycle and identified risks.
                 </p>
+
+                <aside class="central-question">
+                  <div class="central-question-icon" aria-hidden="true">?</div>
+                  <div class="central-question-content">
+                    <h4>Central Question</h4>
+                    <p>
+                      What structure supports the borrower’s financing need while
+                      appropriately controlling the lender’s risk?
+                    </p>
+                  </div>
+                </aside>
 
                 <div class="overview-grid">
 
                   <article class="overview-card">
-                    <h3>Credit Strengths</h3>
+                    <h4>Facility Terms</h4>
                     <ul>
-                      <li>Strong and stable operating cash flow</li>
-                      <li>Consistent profitability</li>
-                      <li>Moderate leverage</li>
-                      <li>Strong liquidity</li>
-                      <li>Experienced management</li>
-                      <li>Diversified customer base</li>
-                      <li>Strong equity support</li>
+                      <li>Facility type and amount</li>
+                      <li>Term and amortization period</li>
+                      <li>Interest rate and fees</li>
+                      <li>Payment frequency</li>
+                      <li>Grace period where justified</li>
+                      <li>Availability period and staged advances</li>
+                      <li>Borrowing-base or clean-up requirements</li>
                     </ul>
                   </article>
 
                   <article class="overview-card">
-                    <h3>Key Risks</h3>
+                    <h4>Conditions and Covenants</h4>
                     <ul>
-                      <li>High leverage</li>
-                      <li>Weak liquidity</li>
-                      <li>Declining margins</li>
-                      <li>Customer concentration</li>
-                      <li>Volatile cash flow</li>
-                      <li>Industry cyclicality</li>
-                      <li>Management succession risk</li>
+                      <li>Owner equity invested before funding</li>
+                      <li>Required security and insurance</li>
+                      <li>Minimum DSCR</li>
+                      <li>Maximum leverage</li>
+                      <li>Minimum tangible net worth</li>
+                      <li>Restrictions on distributions and new debt</li>
+                      <li>Financial reporting requirements</li>
                     </ul>
                   </article>
 
                   <article class="overview-card">
-                    <h3>Risk Mitigants</h3>
+                    <h4>Practical Questions</h4>
                     <ul>
-                      <li>Lower facility amount</li>
-                      <li>Additional owner equity</li>
-                      <li>Conservative amortization</li>
-                      <li>Financial covenants</li>
-                      <li>Collateral</li>
-                      <li>Guarantees</li>
-                      <li>Additional reporting requirements</li>
+                      <li>Does amortization reflect expected cash generation?</li>
+                      <li>Are covenants measurable and clearly defined?</li>
+                      <li>Do thresholds provide sufficient early warning?</li>
+                      <li>Can compliance be monitored promptly?</li>
+                      <li>Can the borrower comply at the time of approval?</li>
+                      <li>Are exceptions and approval authorities documented?</li>
                     </ul>
                   </article>
 
                 </div>
 
-
-                <!-- RISK / MITIGANT EXAMPLES -->
-
-                <div class="ratio-card">
-
-                  <h4>Examples: Connecting Risks with Mitigants</h4>
-
-                  <div style="overflow-x:auto;">
-
-                    <table>
-
-                      <thead>
-                        <tr>
-                          <th>Identified Risk</th>
-                          <th>Possible Mitigant</th>
-                        </tr>
-                      </thead>
-
-                      <tbody>
-
-                        <tr>
-                          <td>High leverage</td>
-                          <td>Lower facility amount / additional owner equity</td>
-                        </tr>
-
-                        <tr>
-                          <td>Weak liquidity</td>
-                          <td>Liquidity requirements / working-capital controls</td>
-                        </tr>
-
-                        <tr>
-                          <td>Customer concentration</td>
-                          <td>Long-term contracts / diversification / conservative assumptions</td>
-                        </tr>
-
-                        <tr>
-                          <td>Volatile cash flow</td>
-                          <td>Greater cash-flow cushion / stronger DSCR requirement</td>
-                        </tr>
-
-                        <tr>
-                          <td>Weak collateral coverage</td>
-                          <td>Lower advance rate / additional security</td>
-                        </tr>
-
-                        <tr>
-                          <td>Increasing debt</td>
-                          <td>Maximum leverage covenant</td>
-                        </tr>
-
-                        <tr>
-                          <td>Industry cyclicality</td>
-                          <td>Conservative structure / additional liquidity</td>
-                        </tr>
-
-                        <tr>
-                          <td>Management succession risk</td>
-                          <td>Formal succession plan / additional support where appropriate</td>
-                        </tr>
-
-                      </tbody>
-
-                    </table>
-
-                  </div>
-                </div>
-
-
-                <div class="callout-box">
-                  <p style="margin:0;">
-                    <strong>
-                      A mitigant reduces a risk; it does not necessarily eliminate it.
-                      The analyst must determine whether the remaining or residual risk
-                      is acceptable.
-                    </strong>
-                  </p>
+                <div class="assessment-output">
+                  <h4>Output of Step 11</h4>
+                  <ul>
+                    <li>Recommended facility structure and pricing</li>
+                    <li>Security and conditions precedent</li>
+                    <li>Financial and restrictive covenants</li>
+                    <li>Reporting requirements and monitoring triggers</li>
+                  </ul>
                 </div>
 
               </div>
             </details>
 
-
             <!-- =====================================================
-         STEP 12 — FINAL CREDIT RECOMMENDATION
+         STEP 12
          ===================================================== -->
 
             <details class="learning-section" id="assessment-step-12" data-section="assessment-process">
 
               <summary class="learning-summary" aria-expanded="false">
-                <h4>12. Final Credit Recommendation</h4>
+                <h4>12. Form the Credit Recommendation and Monitoring Plan</h4>
                 <span class="chevron" aria-hidden="true">⌄</span>
               </summary>
 
               <div class="learning-body">
+
+                <p>
+                  Bring the financial and qualitative evidence together and make a clear
+                  recommendation to approve, modify or decline the financing request.
+                </p>
+
+                <aside class="central-question">
+                  <div class="central-question-icon" aria-hidden="true">?</div>
+                  <div class="central-question-content">
+                    <h4>Central Question</h4>
+                    <p>
+                      Is the residual credit risk acceptable under the recommended
+                      terms, and how should the exposure be monitored after approval?
+                    </p>
+                  </div>
+                </aside>
+
+                <div class="overview-grid">
+
+                  <article class="overview-card">
+                    <h4>Credit Recommendation</h4>
+                    <ul>
+                      <li>Borrower and financing-request summary</li>
+                      <li>Primary and secondary repayment sources</li>
+                      <li>Historical and projected repayment capacity</li>
+                      <li>Important credit strengths</li>
+                      <li>Material risks and corresponding mitigants</li>
+                      <li>Remaining risk after mitigation</li>
+                      <li>Approve, approve with changes or decline</li>
+                    </ul>
+                  </article>
+
+                  <article class="overview-card">
+                    <h4>Monitoring Plan</h4>
+                    <ul>
+                      <li>Annual and interim financial statements</li>
+                      <li>Covenant-compliance certificates</li>
+                      <li>Receivable, inventory and borrowing-base reports</li>
+                      <li>Operating-account and line-utilization monitoring</li>
+                      <li>Customer-contract renewals</li>
+                      <li>Project completion and use-of-funds confirmation</li>
+                      <li>Annual review and risk-rating updates</li>
+                    </ul>
+                  </article>
+
+                  <article class="overview-card">
+                    <h4>Early-Warning Triggers</h4>
+                    <ul>
+                      <li>Late financial reporting</li>
+                      <li>Covenant breach or declining covenant headroom</li>
+                      <li>Returned payments or unauthorized excesses</li>
+                      <li>Loss of a major customer or manager</li>
+                      <li>Declining margins, liquidity or DSCR</li>
+                      <li>Tax arrears, lawsuits or new liens</li>
+                      <li>Unapproved debt or owner withdrawals</li>
+                    </ul>
+                  </article>
+
+                </div>
+
+                <div class="assessment-output">
+                  <h4>Output of Step 12</h4>
+                  <ul>
+                    <li>Evidence-based credit recommendation</li>
+                    <li>Approved structure, conditions and exceptions</li>
+                    <li>Documented risk rating and decision rationale</li>
+                    <li>Monitoring schedule and escalation triggers</li>
+                  </ul>
+                </div>
+
+                <div class="callout-box">
+                  <p style="margin: 0;">
+                    <strong>
+                      The recommendation should clearly explain how the borrower will
+                      repay, what could prevent repayment, how the identified risks are
+                      mitigated and which risks remain.
+                    </strong>
+                  </p>
+                </div>
+
 
                 <p>
                   The final recommendation synthesizes the complete analysis.
@@ -4125,89 +4591,82 @@
                 </div>
 
 
-                <!-- CREDIT RECOMMENDATION TEMPLATE -->
+                <!-- =====================================================
+     PRACTICAL CREDIT RECOMMENDATION TEMPLATE
+     ===================================================== -->
 
                 <div class="ratio-card">
 
-                  <h4>Credit Recommendation Template</h4>
+                  <h4>Practical Credit Recommendation Template</h4>
 
                   <div class="ratio-field">
-                    <span class="rf-label">Borrower</span>
-                    <p>Company / borrower name and brief business description</p>
-                  </div>
-
-                  <div class="ratio-field">
-                    <span class="rf-label">Purpose</span>
-                    <p>Reason financing is requested</p>
-                  </div>
-
-                  <div class="ratio-field">
-                    <span class="rf-label">Facility</span>
-                    <p>Amount, type, term, and repayment structure</p>
-                  </div>
-
-                  <div class="ratio-field">
-                    <span class="rf-label">Primary Source of Repayment</span>
-                    <p>Expected cash generated through normal business operations</p>
-                  </div>
-
-                  <div class="ratio-field">
-                    <span class="rf-label">Secondary Source of Repayment</span>
-                    <p>Collateral, guarantees, or other recovery sources where applicable</p>
-                  </div>
-
-                  <div class="ratio-field">
-                    <span class="rf-label">Financial Performance</span>
+                    <span class="rf-label">Borrower and Request</span>
                     <p>
-                      Summary of revenue, profitability, cash flow,
-                      leverage, liquidity, and historical trends
+                      Brief description of the borrower, financing purpose, requested amount,
+                      facility type and proposed term.
                     </p>
                   </div>
 
                   <div class="ratio-field">
-                    <span class="rf-label">Repayment Capacity</span>
+                    <span class="rf-label">Business and Management</span>
                     <p>
-                      Assessment of cash generation, DSCR, interest coverage,
-                      and ability to meet scheduled debt service
+                      Summary of the business model, ownership, management capability, credit
+                      history and important customer or supplier dependencies.
+                    </p>
+                  </div>
+
+                  <div class="ratio-field">
+                    <span class="rf-label">Financial Assessment</span>
+                    <p>
+                      Decision-relevant findings concerning historical and projected
+                      profitability, liquidity, leverage, cash flow and debt-service capacity.
+                    </p>
+                  </div>
+
+                  <div class="ratio-field">
+                    <span class="rf-label">Repayment Sources</span>
+                    <p>
+                      Primary repayment source from normal business cash flow and secondary
+                      support from collateral or guarantees.
                     </p>
                   </div>
 
                   <div class="ratio-field">
                     <span class="rf-label">Key Strengths</span>
-                    <p>Major positive credit factors</p>
-                  </div>
-
-                  <div class="ratio-field">
-                    <span class="rf-label">Key Risks</span>
-                    <p>Major credit concerns identified through the analysis</p>
-                  </div>
-
-                  <div class="ratio-field">
-                    <span class="rf-label">Risk Mitigants</span>
                     <p>
-                      Structure, security, covenants, guarantees, equity support,
-                      or other factors that reduce identified risks
+                      The most important factors supporting repayment and the proposed credit.
                     </p>
                   </div>
 
                   <div class="ratio-field">
-                    <span class="rf-label">Stress Analysis</span>
+                    <span class="rf-label">Key Risks and Mitigants</span>
                     <p>
-                      Summary of repayment capacity under reasonable downside assumptions
+                      Material risks, downside-analysis results and the factors or structural
+                      protections that reduce those risks.
+                    </p>
+                  </div>
+
+                  <div class="ratio-field">
+                    <span class="rf-label">Recommended Structure</span>
+                    <p>
+                      Recommended facility amount, type, term, amortization, pricing, security,
+                      guarantees, conditions and financial covenants.
                     </p>
                   </div>
 
                   <div class="ratio-field">
                     <span class="rf-label">Recommendation</span>
                     <p>
-                      Approve / Approve with Conditions / Decline
+                      Approve as proposed / Approve with modified terms or conditions / Decline,
+                      followed by a concise explanation of the decision.
                     </p>
                   </div>
 
                   <div class="ratio-field">
-                    <span class="rf-label">Conditions / Covenants</span>
+                    <span class="rf-label">Monitoring</span>
                     <p>
-                      Relevant requirements attached to the recommendation
+                      Required reporting, covenant testing, annual review requirements and
+                      important early-warning triggers.
                     </p>
                   </div>
 
@@ -4246,14 +4705,781 @@
 
                 </div>
 
+
               </div>
             </details>
+
+
+
 
           </div>
         </details>
 
+        <!-- =====================================================
+     HYPOTHETICAL COMMERCIAL FINANCING APPLICATION
+     ===================================================== -->
+        <details class="learning-section subsection-card" data-section="Example">
+          <summary class="learning-summary subsection-summary" aria-expanded="false">
+            <h3>B. Hypothetical Financing Application</h3>
+            <span class="chevron" aria-hidden="true">⌄</span>
+          </summary>
+
+
+          <section class="credit-case" aria-labelledby="credit-case-title">
+
+            <header class="credit-case-header">
+              <div>
+                <p class="credit-case-label">Hypothetical Financing Application</p>
+                <h3 id="credit-case-title">Maple Ridge Manufacturing Ltd.</h3>
+                <p>
+                  A practical case that will be assessed throughout the 12-step
+                  commercial credit assessment process.
+                </p>
+              </div>
+
+              <span class="credit-case-badge">Case Study</span>
+            </header>
+
+            <!-- FINANCING REQUEST -->
+            <div class="case-request">
+              <div class="case-request-icon" aria-hidden="true">$</div>
+
+              <div>
+                <h4>Financing Request</h4>
+                <p>
+                  Maple Ridge Manufacturing Ltd. is requesting a
+                  <strong>$750,000 five-year term loan</strong> to purchase automated
+                  production equipment and a <strong>$250,000 operating line of
+                    credit</strong> to support its growing working-capital requirements.
+                </p>
+              </div>
+            </div>
+
+            <!-- BORROWER AND FACILITY SUMMARY -->
+            <div class="case-summary-grid">
+
+              <article class="case-summary-card">
+                <span class="case-card-number">01</span>
+                <h4>Borrower</h4>
+
+                <dl class="case-facts">
+                  <div>
+                    <dt>Business</dt>
+                    <dd>Commercial packaging manufacturer</dd>
+                  </div>
+
+                  <div>
+                    <dt>Location</dt>
+                    <dd>Ontario, Canada</dd>
+                  </div>
+
+                  <div>
+                    <dt>Operating history</dt>
+                    <dd>12 years</dd>
+                  </div>
+
+                  <div>
+                    <dt>Ownership</dt>
+                    <dd>Privately owned by two shareholders</dd>
+                  </div>
+
+                  <div>
+                    <dt>Employees</dt>
+                    <dd>38</dd>
+                  </div>
+                </dl>
+              </article>
+
+              <article class="case-summary-card">
+                <span class="case-card-number">02</span>
+                <h4>Proposed Facilities</h4>
+
+                <dl class="case-facts">
+                  <div>
+                    <dt>Term loan</dt>
+                    <dd>$750,000</dd>
+                  </div>
+
+                  <div>
+                    <dt>Operating line</dt>
+                    <dd>$250,000</dd>
+                  </div>
+
+                  <div>
+                    <dt>Total request</dt>
+                    <dd>$1,000,000</dd>
+                  </div>
+
+                  <div>
+                    <dt>Term</dt>
+                    <dd>Five years</dd>
+                  </div>
+
+                  <div>
+                    <dt>Primary repayment source</dt>
+                    <dd>Operating cash flow</dd>
+                  </div>
+                </dl>
+              </article>
+
+              <article class="case-summary-card">
+                <span class="case-card-number">03</span>
+                <h4>Proposed Security</h4>
+
+                <ul class="case-point-list">
+                  <li>General security agreement over business assets</li>
+                  <li>First-ranking security interest in the new equipment</li>
+                  <li>Assignment of eligible accounts receivable</li>
+                  <li>Personal guarantees from both shareholders</li>
+                </ul>
+              </article>
+
+            </div>
+
+            <!-- HISTORICAL FINANCIAL INFORMATION -->
+            <div class="case-panel">
+              <div class="case-panel-heading">
+                <div>
+                  <p class="case-panel-label">Quantitative Information</p>
+                  <h4>Historical Financial Summary</h4>
+                </div>
+
+                <span>CAD, $000s</span>
+              </div>
+
+              <div class="case-table-wrapper">
+                <table class="case-financial-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Financial measure</th>
+                      <th scope="col">2024</th>
+                      <th scope="col">2025</th>
+                      <th scope="col">2026</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <th scope="row">Revenue</th>
+                      <td>4,800</td>
+                      <td>5,350</td>
+                      <td>5,900</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">EBITDA</th>
+                      <td>610</td>
+                      <td>620</td>
+                      <td>600</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Net income</th>
+                      <td>285</td>
+                      <td>260</td>
+                      <td>215</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Operating cash flow</th>
+                      <td>470</td>
+                      <td>390</td>
+                      <td>325</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Current assets</th>
+                      <td>1,350</td>
+                      <td>1,490</td>
+                      <td>1,620</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Current liabilities</th>
+                      <td>820</td>
+                      <td>980</td>
+                      <td>1,180</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Total debt</th>
+                      <td>1,100</td>
+                      <td>1,280</td>
+                      <td>1,460</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Shareholders’ equity</th>
+                      <td>1,600</td>
+                      <td>1,710</td>
+                      <td>1,780</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Annual debt service</th>
+                      <td>250</td>
+                      <td>285</td>
+                      <td>320</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- QUALITATIVE INFORMATION AND RISKS -->
+            <div class="case-details-grid">
+
+              <article class="case-panel">
+                <p class="case-panel-label">Business Information</p>
+                <h4>Management and Operations</h4>
+
+                <ul class="case-point-list">
+                  <li>
+                    The two shareholders have managed the company since it was founded.
+                  </li>
+                  <li>
+                    The company has maintained a satisfactory repayment history with its
+                    current lender.
+                  </li>
+                  <li>
+                    The new equipment is expected to increase production capacity by 25%.
+                  </li>
+                  <li>
+                    Management expects the equipment to reduce production costs and
+                    improve operating margins.
+                  </li>
+                  <li>
+                    The owners will contribute $150,000 toward the equipment purchase.
+                  </li>
+                </ul>
+              </article>
+
+              <article class="case-panel case-risk-panel">
+                <p class="case-panel-label">Initial Risk Information</p>
+                <h4>Matters Requiring Investigation</h4>
+
+                <ul class="case-point-list">
+                  <li>
+                    EBITDA has declined despite continued revenue growth.
+                  </li>
+                  <li>
+                    Current liabilities and total debt have increased.
+                  </li>
+                  <li>
+                    Approximately 30% of revenue comes from one major customer.
+                  </li>
+                  <li>
+                    The major customer’s contract expires in 10 months and has not yet
+                    been renewed.
+                  </li>
+                  <li>
+                    The new equipment has an estimated liquidation value of $500,000,
+                    below the requested term-loan amount.
+                  </li>
+                  <li>
+                    Management’s forecasts depend on continued sales growth and expected
+                    cost savings from the new equipment.
+                  </li>
+                </ul>
+              </article>
+
+            </div>
+
+            <!-- TRANSITION TO THE 12 STEPS -->
+            <aside class="case-analysis-prompt">
+              <div class="case-analysis-icon" aria-hidden="true">?</div>
+
+              <div>
+                <h4>Assessment Objective</h4>
+                <p>
+                  Should the lender approve, modify, or decline this financing request?
+                  We will apply the 12-step commercial credit assessment process to
+                  evaluate the borrower, repayment capacity, key risks, collateral,
+                  proposed loan structure, and appropriate credit recommendation.
+                </p>
+              </div>
+            </aside>
+
+            <p class="case-disclaimer">
+              This is a fictional case created for educational purposes. The financial
+              information has been simplified to demonstrate the credit-analysis process.
+            </p>
+
+          </section>
+
+
+
+
+        </details>
+
+
+        <details class="learning-section subsection-card" data-section="Example">
+          <summary class="learning-summary subsection-summary" aria-expanded="false">
+            <h3>C. Completed Credit Assessment and Recommendation</h3>
+            <span class="chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <!-- =====================================================
+     COMPLETED COMMERCIAL CREDIT REPORT
+     ===================================================== -->
+
+          <section class="bank-credit-report" aria-labelledby="credit-report-title">
+
+            <!-- REPORT HEADER -->
+
+            <header class="bank-report-header">
+
+              <div>
+                <p class="bank-report-type">Commercial Credit Report</p>
+                <h3 id="credit-report-title">Maple Ridge Manufacturing Ltd.</h3>
+              </div>
+
+              <div class="bank-report-decision">
+                <span>Preliminary Recommendation</span>
+                <strong>Decline as Proposed</strong>
+              </div>
+
+            </header>
+
+            <!-- TRANSACTION SUMMARY -->
+
+            <table class="bank-summary-table">
+              <tbody>
+
+                <tr>
+                  <th scope="row">Borrower</th>
+                  <td>Maple Ridge Manufacturing Ltd.</td>
+
+                  <th scope="row">Industry</th>
+                  <td>Commercial packaging manufacturing</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Location</th>
+                  <td>Ontario, Canada</td>
+
+                  <th scope="row">Operating History</th>
+                  <td>12 years</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Term Loan</th>
+                  <td>$750,000</td>
+
+                  <th scope="row">Operating Line</th>
+                  <td>$250,000</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Total Request</th>
+                  <td>$1,000,000</td>
+
+                  <th scope="row">Owner Contribution</th>
+                  <td>$150,000</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Purpose</th>
+                  <td colspan="3">
+                    Purchase of automated production equipment and additional
+                    working-capital financing
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Primary Repayment Source</th>
+                  <td>Operating cash flow</td>
+
+                  <th scope="row">Secondary Repayment Source</th>
+                  <td>Business assets, equipment and personal guarantees</td>
+                </tr>
+
+              </tbody>
+            </table>
+
+            <!-- BORROWER AND REQUEST -->
+
+            <section class="bank-report-section">
+
+              <h4>Borrower and Financing Request</h4>
+
+              <p>
+                Maple Ridge Manufacturing Ltd. is an Ontario-based commercial packaging
+                manufacturer owned and managed by its two founding shareholders. The
+                company employs 38 people and has a reported satisfactory repayment
+                history with its current lender.
+              </p>
+
+              <p>
+                The borrower is requesting a <strong>$750,000 five-year term loan</strong>
+                to purchase automated production equipment and a
+                <strong>$250,000 operating line of credit</strong> to support increased
+                working-capital requirements.
+              </p>
+
+              <p>
+                The owners propose to contribute <strong>$150,000</strong> toward the
+                equipment purchase. Management expects the equipment to increase
+                production capacity by 25% and reduce operating costs. These expected
+                benefits have not yet been independently verified.
+              </p>
+
+            </section>
+
+            <!-- HISTORICAL FINANCIAL ASSESSMENT -->
+
+            <section class="bank-report-section">
+
+              <h4>Historical Financial Assessment</h4>
+
+              <div class="bank-table-wrapper">
+
+                <table class="bank-financial-table">
+
+                  <thead>
+                    <tr>
+                      <th scope="col">Financial Measure</th>
+                      <th scope="col">2024</th>
+                      <th scope="col">2025</th>
+                      <th scope="col">2026</th>
+                      <th scope="col">Assessment</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    <tr>
+                      <th scope="row">Revenue</th>
+                      <td>$4.80M</td>
+                      <td>$5.35M</td>
+                      <td>$5.90M</td>
+                      <td>Increasing</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">EBITDA</th>
+                      <td>$610K</td>
+                      <td>$620K</td>
+                      <td>$600K</td>
+                      <td>Declined in 2026</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">EBITDA Margin</th>
+                      <td>12.71%</td>
+                      <td>11.59%</td>
+                      <td>10.17%</td>
+                      <td>Consistently declining</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Net Income</th>
+                      <td>$285K</td>
+                      <td>$260K</td>
+                      <td>$215K</td>
+                      <td>Consistently declining</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Operating Cash Flow</th>
+                      <td>$470K</td>
+                      <td>$390K</td>
+                      <td>$325K</td>
+                      <td>Consistently declining</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Current Ratio</th>
+                      <td>1.65</td>
+                      <td>1.52</td>
+                      <td>1.37</td>
+                      <td>Liquidity weakening</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Debt-to-Equity</th>
+                      <td>0.69</td>
+                      <td>0.75</td>
+                      <td>0.82</td>
+                      <td>Leverage increasing</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">
+                        Operating Cash Flow ÷ Debt Service
+                      </th>
+                      <td>1.88×</td>
+                      <td>1.37×</td>
+                      <td>1.02×</td>
+                      <td>Minimal repayment cushion</td>
+                    </tr>
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+              <p>
+                Revenue increased by approximately 23% between 2024 and 2026. However,
+                this growth did not produce stronger earnings or cash flow. EBITDA margin
+                declined from 12.71% to 10.17%, net income declined to $215,000 and
+                operating cash flow declined to $325,000.
+              </p>
+
+              <p>
+                The current ratio declined from 1.65 to 1.37, indicating a weakening
+                short-term financial cushion. Debt-to-equity increased from 0.69 to 0.82,
+                indicating greater reliance on debt financing.
+              </p>
+
+              <p class="bank-report-note">
+                Operating cash flow divided by annual debt service is shown as a
+                simplified coverage indicator. It should not be treated as the lender’s
+                formal DSCR without confirming the applicable DSCR definition.
+              </p>
+
+            </section>
+
+            <!-- REPAYMENT CAPACITY -->
+
+            <section class="bank-report-section">
+
+              <h4>Repayment Capacity</h4>
+
+              <p>
+                The primary repayment source would be cash generated through normal
+                business operations. In 2026, operating cash flow of
+                <strong>$325,000</strong> was only slightly higher than existing annual
+                debt service of <strong>$320,000</strong>.
+              </p>
+
+              <p>
+                This represents simplified cash-flow coverage of approximately
+                <strong>1.02×</strong> and leaves little capacity to absorb weaker
+                performance, unexpected expenses or additional debt payments.
+              </p>
+
+              <p>
+                A $750,000 loan amortized over five years would require at least
+                <strong>$150,000 of annual principal repayment</strong> before interest.
+                Based on current historical cash flow, the borrower does not demonstrate
+                sufficient capacity to service the proposed additional term debt.
+              </p>
+
+              <p>
+                Repayment therefore depends heavily on the expected production growth and
+                cost savings from the new equipment. These benefits should not be relied
+                upon without supportable pro forma financial statements and sensitivity
+                analysis.
+              </p>
+
+            </section>
+
+            <!-- CREDIT STRENGTHS -->
+
+            <section class="bank-report-section">
+
+              <h4>Key Credit Strengths</h4>
+
+              <ul>
+                <li>Established 12-year operating history</li>
+                <li>Experienced owner-management team</li>
+                <li>Satisfactory reported repayment history</li>
+                <li>Consistent revenue growth</li>
+                <li>Continued positive EBITDA, net income and operating cash flow</li>
+                <li>Increasing shareholders’ equity</li>
+                <li>$150,000 proposed owner contribution</li>
+              </ul>
+
+            </section>
+
+            <!-- CREDIT RISKS -->
+
+            <section class="bank-report-section">
+
+              <h4>Key Credit Risks</h4>
+
+              <ul>
+                <li>Declining EBITDA margin, net income and operating cash flow</li>
+                <li>Weakening liquidity</li>
+                <li>Increasing leverage</li>
+                <li>Minimal historical debt-service cushion</li>
+
+                <li>
+                  Approximately 30% of revenue comes from one major customer whose
+                  contract expires in 10 months and has not been renewed.
+                </li>
+
+                <li>
+                  Expected production increases and cost savings from the new equipment
+                  have not been independently verified.
+                </li>
+
+                <li>
+                  The equipment’s estimated liquidation value of $500,000 represents
+                  approximately 66.7% of the requested term loan before realization costs.
+                </li>
+              </ul>
+
+            </section>
+
+            <!-- SECURITY -->
+
+            <section class="bank-report-section">
+
+              <h4>Security and Guarantees</h4>
+
+              <p>
+                The proposed security consists of a general security agreement over
+                business assets, a first-ranking security interest in the financed
+                equipment, assignment of eligible accounts receivable and personal
+                guarantees from both shareholders.
+              </p>
+
+              <p>
+                The equipment value, lien priority, receivable eligibility and guarantor
+                financial strength remain subject to verification. The proposed
+                collateral does not eliminate the weakness in primary repayment capacity.
+              </p>
+
+            </section>
+
+            <!-- RECOMMENDATION -->
+
+            <section class="bank-report-section">
+
+              <h4>Recommendation</h4>
+
+              <p>
+                <strong>
+                  Decline the $1,000,000 financing request as currently proposed.
+                </strong>
+              </p>
+
+              <p>
+                Historical cash flow does not support the proposed additional debt.
+                Revenue is increasing, but margins, net income, operating cash flow,
+                liquidity and debt-service coverage are deteriorating while leverage is
+                increasing.
+              </p>
+
+              <p>
+                A smaller or restructured facility may be reconsidered if additional
+                analysis demonstrates acceptable repayment capacity. The term-loan amount
+                should be determined by stressed cash-flow capacity rather than solely by
+                the equipment purchase price. Any operating line should be limited by a
+                borrowing base calculated from eligible receivables and, where
+                appropriate, eligible inventory.
+              </p>
+
+            </section>
+
+            <!-- REQUIREMENTS FOR RECONSIDERATION -->
+
+            <section class="bank-report-section">
+
+              <h4>Requirements for Reconsideration</h4>
+
+              <ol>
+                <li>
+                  Integrated projected income statements, balance sheets and cash-flow
+                  statements.
+                </li>
+
+                <li>
+                  A complete schedule of existing and proposed debt service.
+                </li>
+
+                <li>
+                  Acceptable DSCR under base-case and reasonable downside assumptions.
+                </li>
+
+                <li>
+                  Evidence supporting the projected production increase and cost savings.
+                </li>
+
+                <li>
+                  Confirmation of the major customer’s contract renewal or a credible
+                  customer-replacement plan.
+                </li>
+
+                <li>
+                  Current receivable, payable and inventory reports.
+                </li>
+
+                <li>
+                  A borrowing-base calculation supporting the operating-line amount.
+                </li>
+
+                <li>
+                  An independent equipment appraisal and confirmation of first-ranking
+                  security.
+                </li>
+
+                <li>
+                  Current personal financial statements and credit reports for both
+                  guarantors.
+                </li>
+
+                <li>
+                  Evidence that the owners’ $150,000 contribution will be invested
+                  before or alongside lender funding.
+                </li>
+              </ol>
+
+            </section>
+
+            <!-- APPROVAL RECORD -->
+
+            <table class="bank-approval-table">
+
+              <tbody>
+
+                <tr>
+                  <th scope="row">Prepared By</th>
+                  <td></td>
+
+                  <th scope="row">Date</th>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Recommended Decision</th>
+                  <td colspan="3">
+                    Decline as proposed; reconsider subject to additional analysis
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Approved By</th>
+                  <td></td>
+
+                  <th scope="row">Date</th>
+                  <td></td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
+            <p class="bank-report-disclaimer">
+              This report is a fictional educational example based on simplified and
+              unverified information. A real credit decision would require the lender’s
+              applicable credit policies, due diligence, documentation, risk rating and
+              delegated approval.
+            </p>
+
+          </section>
+
+        </details>
+
+
+
       </div>
     </details>
+
+
+
 
 
     <!-- ============ SECTION  5.  ractise With a Credit Case ================================= -->
@@ -4287,7 +5513,7 @@
   </main>
 
 
-  <script src="scripts.js"></script>
+  <script src="cra_scripts.js"></script>
 
 </body>
 
