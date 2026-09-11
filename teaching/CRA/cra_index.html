@@ -62,7 +62,7 @@
 
         <nav class="journey-steps" aria-label="Learning journey">
 
-          <a class="journey-step is-active" href="#introduction-section" data-nav-section="introduction">
+          <a class="journey-step " href="#introduction-section" data-nav-section="introduction">
 
             <span class="journey-number">1</span>
 
@@ -151,7 +151,7 @@
 
               <p class="credit-intro-lead">
                 When a business requests credit, the lender must determine whether the
-                loan can be repaid as agreed—not simply whether the business is profitable
+                loan can be repaid as agreed - not simply whether the business is profitable
                 or owns valuable assets. Commercial credit analysis provides a structured
                 process for making that determination.
               </p>
@@ -210,8 +210,7 @@
         <section class="intro-section" aria-labelledby="financial-statements-heading">
           <p class="lead">
             <strong>Financial statements</strong> are formal accounting reports that provide information about a
-            company's
-            financial position, financial performance, cash flows, and changes in equity.
+            company's financial position, financial performance, cash flows, and changes in equity.
           </p>
         </section>
 
@@ -233,14 +232,13 @@
             <div class="overview-grid">
 
 
-              <article class="overview-card">
+              <article class="overview-card balance-sheet">
                 <h3 style="color: var(--balance-sheet);">Balance Sheet</h3>
                 <p>Shows the company's financial position at a specific point in time - what it owns, what it owes,
-                  and
-                  the
-                  owners' residual interest.</p>
+                  and the owners' residual interest.</p>
                 <div class="key"><strong>Key information</strong><br>Assets = Liabilities + Shareholders’ Equity</div>
-                <div class="credit-question"><strong>Credit question:</strong><br>How liquid, leveraged, and
+                <div class="credit-question  balance-sheet"><strong>Credit question:</strong><br>How liquid, leveraged,
+                  and
                   financially
                   strong is the borrower?</div>
                 <figure style="text-align: center; max-width: 900px; margin: 10px auto 0 auto;">
@@ -250,7 +248,7 @@
                 </figure>
               </article>
 
-              <article class="overview-card">
+              <article class="overview-card cash-flow-statement">
                 <h3 style="color: var(--cash-flow);">Cash Flow Statement</h3>
                 <p>Shows the company's actual cash inflows and outflows during a period.</p>
                 <div class="key"><strong>Key information</strong><br>Operating activities<br>Investing
@@ -267,7 +265,7 @@
                 </figure>
               </article>
 
-              <article class="overview-card">
+              <article class="overview-card income-statement">
                 <h3 style="color:var(--income-statement);">Income Statement</h3>
                 <p>Shows the company's financial performance over a period and whether its operations generate profit.
                 </p>
@@ -286,7 +284,7 @@
                 </figure>
               </article>
 
-              <article class="overview-card">
+              <article class="overview-card equity">
                 <h3 style="color: var(--equity-statement);">Statement of Changes in Equity</h3>
                 <p>Explains how shareholders’ equity changed during the period.</p>
                 <div class="key"><strong>Key information</strong><br>Net income · Dividends · Share issuance · Share
@@ -333,7 +331,8 @@
           </summary>
 
           <div class="learning-body">
-            <p>The four statements below use financial data from <strong>Apple Inc.'s FY2025 financial
+            <p class="section-intro">The four statements below use financial data from <strong>Apple Inc.'s FY2025
+                financial
                 statements</strong>.
               Explore them together to see how information flows from one statement to another.</p>
             <div class="instruction"><strong>How to use this section:</strong> Start by viewing each complete statement.
@@ -343,7 +342,7 @@
               financial information connects across statements.</div>
 
             <header class="page-head">
-              <h1>Apple Inc. — Four Financial Statements</h1>
+              <h1>Apple Inc. - Four Financial Statements</h1>
               <p>Fiscal year ended September 27, 2025 · USD millions</p>
             </header>
 
@@ -356,7 +355,7 @@
             <section class="statements-grid">
 
               <!-- BALANCE SHEET -->
-              <article class="statement-card statement-card--wide" data-viewer="balance">
+              <article class="statement-card" data-viewer="balance">
                 <header class="statement-head balance-sheet-head">
                   <h2>Balance Sheet</h2>
                   <p>Consolidated Balance Sheet · September 27, 2025</p>
@@ -1618,6 +1617,253 @@
                   </div>
                 </div>
               </details>
+
+
+              <!-- BOOK LEVERAGE -->
+              <details class="learning-section ratio-details leverage-ratio" data-section="book-leverage">
+                <summary class="learning-summary" aria-expanded="false">
+                  <h4>Book Leverage</h4>
+                  <span class="chevron" aria-hidden="true">⌄</span>
+                </summary>
+
+                <div class="ratio-card">
+                  <div class="ratio-columns">
+
+                    <div class="apple-example">
+                      <span class="ae-label">Illustrative Commercial Borrower</span>
+
+                      <p class="ae-line">
+                        Reported Total Liabilities = $<span class="ae-num">3,200,000</span>
+                      </p>
+                      <p class="ae-line">
+                        Reported Shareholders’ Equity = $<span class="ae-num">1,400,000</span>
+                      </p>
+                      <p class="ae-line">
+                        Less: Goodwill and Intangible Assets = $<span class="ae-num">300,000</span>
+                      </p>
+                      <p class="ae-line">
+                        Less: Unacceptable Related-Party Receivable = $<span class="ae-num">100,000</span>
+                      </p>
+                      <p class="ae-line">
+                        Add: Postponed Shareholder Loan = $<span class="ae-num">200,000</span>
+                      </p>
+
+                      <div class="ae-step">
+                        Adjusted Tangible Net Worth<br>
+                        = 1,400,000 − 300,000 − 100,000 + 200,000<br>
+                        = $1,200,000
+                        <br><br>
+                        Adjusted Liabilities<br>
+                        = 3,200,000 − 200,000<br>
+                        = $3,000,000
+                        <br><br>
+                        Book Leverage = 3,000,000 ÷ 1,200,000
+                      </div>
+
+                      <div class="ae-result">
+                        = <strong>2.50×</strong>
+                      </div>
+
+                      <p class="ae-note">
+                        <strong>Interpretation:</strong>
+                        The borrower has $2.50 of adjusted liabilities for every $1.00 of
+                        adjusted tangible net worth. Creditors therefore provide substantially
+                        more capital than the owners’ adjusted tangible investment.
+                      </p>
+
+                      <p class="ae-note">
+                        <strong>Note:</strong>
+                        This is an illustrative example. A postponed shareholder loan is treated
+                        as quasi-equity here and is therefore removed from adjusted liabilities
+                        and added to adjusted tangible net worth. Treatment varies by lender.
+                      </p>
+                    </div>
+
+                    <div class="ratio-explanation">
+                      <div class="ratio-formula">
+                        \[
+                        \text{Book Leverage}
+                        =
+                        \frac{
+                        \color{#1b59df}{\text{Adjusted Total Liabilities}}
+                        }{
+                        \color{#1b59df}{\text{Adjusted Tangible Net Worth}}
+                        }
+                        \]
+                      </div>
+
+                      <div class="ratio-field">
+                        <span class="rf-label">Meaning</span>
+                        <p>
+                          Book leverage measures creditor claims relative to the owners’
+                          adjusted tangible capital. It shows the borrower’s balance-sheet
+                          leverage and the tangible equity cushion available to absorb losses.
+                        </p>
+                        <p>
+                          A higher ratio generally indicates greater dependence on creditors
+                          and less tangible owner capital supporting the business.
+                        </p>
+                      </div>
+
+                      <div class="ratio-field">
+                        <span class="rf-label">Typical Adjustments</span>
+                        <ul>
+                          <li>Deduct goodwill and other intangible assets from equity.</li>
+                          <li>Deduct related-party or shareholder receivables of uncertain value.</li>
+                          <li>Remove asset revaluation amounts not accepted by the lender.</li>
+                          <li>
+                            Treat properly postponed shareholder debt as quasi-equity when
+                            permitted by lender policy.
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div class="ratio-field">
+                        <span class="rf-label">Potential Warning Signals</span>
+                        <ul>
+                          <li>Book leverage is high or increasing materially.</li>
+                          <li>Adjusted tangible net worth is very low or negative.</li>
+                          <li>Reported equity consists largely of goodwill or other intangibles.</li>
+                          <li>Owners regularly withdraw capital or make substantial distributions.</li>
+                          <li>Liabilities grow faster than the borrower’s tangible capital base.</li>
+                          <li>The ratio materially exceeds historical results or industry norms.</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </details>
+
+
+              <!-- CASH-FLOW LEVERAGE -->
+              <details class="learning-section ratio-details leverage-ratio" data-section="cash-flow-leverage">
+                <summary class="learning-summary" aria-expanded="false">
+                  <h4>Cash-Flow Leverage</h4>
+                  <span class="chevron" aria-hidden="true">⌄</span>
+                </summary>
+
+                <div class="ratio-card">
+                  <div class="ratio-columns">
+
+                    <div class="apple-example">
+                      <span class="ae-label">Illustrative Commercial Borrower</span>
+
+                      <p class="ae-line">
+                        Operating Line Balance = $<span class="ae-num">700,000</span>
+                      </p>
+                      <p class="ae-line">
+                        Term Debt = $<span class="ae-num">2,600,000</span>
+                      </p>
+                      <p class="ae-line">
+                        Finance Lease Obligations = $<span class="ae-num">700,000</span>
+                      </p>
+                      <p class="ae-line">
+                        Adjusted EBITDA = $<span class="ae-num">1,000,000</span>
+                      </p>
+
+                      <div class="ae-step">
+                        Total Funded Debt<br>
+                        = 700,000 + 2,600,000 + 700,000<br>
+                        = $4,000,000
+                        <br><br>
+                        Cash-Flow Leverage = 4,000,000 ÷ 1,000,000
+                      </div>
+
+                      <div class="ae-result">
+                        = <strong>4.00×</strong>
+                      </div>
+
+                      <p class="ae-note">
+                        <strong>Interpretation:</strong>
+                        The borrower has $4.00 of funded debt for every $1.00 of annual
+                        adjusted EBITDA. This indicates significant debt relative to its
+                        operating earnings and should be compared with lender limits,
+                        historical performance and industry norms.
+                      </p>
+
+                      <p class="ae-note">
+                        <strong>Important:</strong>
+                        A result of 4.00× does not mean the debt can necessarily be repaid in
+                        four years. EBITDA excludes interest, taxes, working-capital needs,
+                        capital expenditures and distributions.
+                      </p>
+                    </div>
+
+                    <div class="ratio-explanation">
+                      <div class="ratio-formula">
+                        \[
+                        \text{Cash-Flow Leverage}
+                        =
+                        \frac{
+                        \color{#1b59df}{\text{Total Funded Debt}}
+                        }{
+                        \color{#1b59df}{\text{Adjusted EBITDA}}
+                        }
+                        \]
+                      </div>
+
+                      <div class="ratio-field">
+                        <span class="rf-label">Meaning</span>
+                        <p>
+                          Cash-flow leverage compares funded debt with the borrower’s adjusted
+                          operating earnings. It indicates whether the amount of debt is
+                          reasonable relative to the earnings available to support it.
+                        </p>
+                        <p>
+                          Unlike book leverage, this ratio focuses on earnings capacity rather
+                          than the borrower’s balance-sheet equity cushion.
+                        </p>
+                      </div>
+
+                      <div class="ratio-field">
+                        <span class="rf-label">Typical Adjustments</span>
+                        <ul>
+                          <li>Include operating lines, term debt and debt-like lease obligations.</li>
+                          <li>Include acquisition debt and other funded obligations where applicable.</li>
+                          <li>Remove unsupported, non-recurring or overly optimistic EBITDA add-backs.</li>
+                          <li>Normalize unusual owner compensation and legitimate one-time items.</li>
+                          <li>
+                            Use net debt instead of total funded debt only when permitted by
+                            lender policy and the cash is unrestricted and available.
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div class="ratio-field">
+                        <span class="rf-label">Potential Warning Signals</span>
+                        <ul>
+                          <li>Cash-flow leverage is high or rising significantly.</li>
+                          <li>Adjusted EBITDA depends heavily on aggressive add-backs.</li>
+                          <li>Debt increases without a sustainable increase in earnings.</li>
+                          <li>EBITDA is volatile, declining or concentrated in a few customers.</li>
+                          <li>Working-capital requirements or maintenance capital expenditures consume substantial cash.
+                          </li>
+                          <li>The borrower has limited covenant headroom under a downside scenario.</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </details>
+
+
+              <div class="callout-box">
+                <h4>Assess Book and Cash-Flow Leverage Together</h4>
+                <p>
+                  <strong>Book leverage</strong> evaluates debt or liabilities relative to the
+                  borrower’s adjusted tangible capital, while <strong>cash-flow leverage</strong>
+                  evaluates funded debt relative to adjusted EBITDA. Reviewing both provides a
+                  more complete view of balance-sheet strength and earnings-based debt capacity.
+                </p>
+                <p style="margin-bottom: 0;">
+                  <strong>Formula caution:</strong> Banks do not use one universal definition.
+                  The credit analysis should state exactly which liabilities, debt obligations,
+                  equity adjustments and EBITDA adjustments are included.
+                </p>
+              </div>
+
 
               <!-- DEBT VS TOTAL LIABILITIES -->
 
@@ -2983,7 +3229,6 @@
                         }
                         \]
                       </div>
-                      apple 6.37
 
                       <div class="ratio-field">
                         <span class="rf-label">Meaning</span>
@@ -3583,6 +3828,440 @@
                     </p>
                   </div>
                 </aside>
+
+                <details class="learning-section purpose-of-financing" id="assessment-step-2-purpose"
+                  data-section="assessment-process">
+
+                  <summary class="learning-summary purpose-of-financing" aria-expanded="false">
+                    <div class="section-introduction purpose-of-financing">
+                      <h4>Commercial Financing Types and Key Credit Considerations</h4>
+
+                      <p>
+                        Commercial financing takes different forms depending on how the funds will
+                        be used, repaid and secured. Each financing type requires particular attention
+                        to specific cash-flow, collateral and transaction risks. Accordingly, common
+                        financing types can be organized into the categories presented in the table
+                        below.
+                      </p>
+                    </div>
+                    <span class="chevron" aria-hidden="true">⌄</span>
+                  </summary>
+                  <div class="table-wrapper">
+
+                    <table class="specialization-table">
+
+                      <thead>
+                        <tr>
+                          <th scope="col">Financing Type</th>
+                          <th scope="col">Characteristics</th>
+                          <th scope="col">Purpose</th>
+                          <th scope="col">Key Credit Considerations</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+
+                        <tr>
+                          <td><strong>Operating Line / Working-Capital Financing</strong></td>
+                          <td>
+                            <span class="finance-tag working-capital">Working Capital</span>
+                            <span class="finance-tag revolving">Revolving</span>
+                          </td>
+                          <td>
+                            Funds recurring short-term needs such as payroll, inventory and
+                            accounts receivable.
+                          </td>
+                          <td>
+                            Examine the operating cycle, seasonality, receivable quality,
+                            inventory turnover and whether the line regularly revolves.
+                            Permanent full utilization may indicate a structural cash-flow problem.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Term Lending</strong></td>
+                          <td>
+                            <span class="finance-tag asset-financing">Asset Financing</span>
+                            <span class="finance-tag term">Term</span>
+                          </td>
+                          <td>
+                            Finances equipment, renovations, expansion or other long-term
+                            business investments.
+                          </td>
+                          <td>
+                            Match amortization to the asset’s useful life and assess whether
+                            projected operating cash flow can support scheduled principal and
+                            interest payments.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Equipment Financing</strong></td>
+                          <td>
+                            <span class="finance-tag asset-financing">Asset Financing</span>
+                            <span class="finance-tag asset-supported">Asset-Supported</span>
+                          </td>
+                          <td>
+                            Funds vehicles, machinery and production equipment.
+                          </td>
+                          <td>
+                            Consider depreciation, technological obsolescence, maintenance,
+                            equipment condition, useful life, resale market and whether the asset
+                            is highly specialized.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Asset-Based Lending (ABL)</strong></td>
+                          <td>
+                            <span class="finance-tag asset-supported">Asset-Supported</span>
+                            <span class="finance-tag revolving">Revolving</span>
+                          </td>
+                          <td>
+                            Provides financing primarily supported by receivables, inventory,
+                            equipment or other identifiable assets.
+                          </td>
+                          <td>
+                            Review collateral eligibility, advance rates, borrowing-base
+                            calculations, reporting quality, field examinations, appraisal
+                            frequency and potential collateral fraud.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Cash-Flow Lending</strong></td>
+                          <td>
+                            <span class="finance-tag cash-flow">Cash-Flow Based</span>
+                            <span class="finance-tag structured">Structured</span>
+                          </td>
+                          <td>
+                            Provides financing based mainly on sustainable EBITDA and repayment
+                            capacity rather than hard collateral.
+                          </td>
+                          <td>
+                            Carefully assess adjusted EBITDA, permitted add-backs, cash conversion,
+                            maintenance capital expenditures, distributions, leverage, debt-service
+                            coverage and covenant protection.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Commercial Real-Estate Financing</strong></td>
+                          <td>
+                            <span class="finance-tag real-estate">Real Estate</span>
+                            <span class="finance-tag asset-supported">Asset-Supported</span>
+                          </td>
+                          <td>
+                            Finances owner-occupied or income-producing commercial properties.
+                          </td>
+                          <td>
+                            Review property appraisal, loan-to-value, property cash flow,
+                            occupancy, tenant concentration, lease expirations, environmental
+                            condition, zoning, title and refinancing risk.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Construction Financing</strong></td>
+                          <td>
+                            <span class="finance-tag real-estate">Real Estate</span>
+                            <span class="finance-tag structured">Structured</span>
+                          </td>
+                          <td>
+                            Funds construction, redevelopment or land-development costs through
+                            staged advances.
+                          </td>
+                          <td>
+                            Focus on permits, budget adequacy, borrower equity, cost overruns,
+                            contingency funds, contractor capability, lien risk, cost-to-complete
+                            calculations and the project’s repayment or exit strategy.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Bridge Financing</strong></td>
+                          <td>
+                            <span class="finance-tag transaction">Transaction</span>
+                            <span class="finance-tag short-term">Short Term</span>
+                          </td>
+                          <td>
+                            Provides temporary financing until permanent financing, an asset sale
+                            or another defined repayment event occurs.
+                          </td>
+                          <td>
+                            Verify the certainty and timing of the exit. Assess what happens if
+                            refinancing, sale proceeds or another expected repayment event is
+                            delayed or does not occur.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Trade Finance</strong></td>
+                          <td>
+                            <span class="finance-tag working-capital">Working Capital</span>
+                            <span class="finance-tag trade">Trade</span>
+                          </td>
+                          <td>
+                            Supports imports and exports through letters of credit, guarantees
+                            and related financing products.
+                          </td>
+                          <td>
+                            Consider buyer and supplier risk, country risk, foreign-exchange
+                            exposure, sanctions, shipping risk and compliance of transaction
+                            documents with the facility’s requirements.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Receivables Financing</strong></td>
+                          <td>
+                            <span class="finance-tag working-capital">Working Capital</span>
+                            <span class="finance-tag asset-supported">Asset-Supported</span>
+                          </td>
+                          <td>
+                            Provides credit secured by accounts receivable.
+                          </td>
+                          <td>
+                            Review aging, customer concentration, disputes, offsets, dilution,
+                            bad-debt history, related-party accounts and the eligibility of foreign
+                            or government receivables.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Floor-Plan Financing</strong></td>
+                          <td>
+                            <span class="finance-tag working-capital">Working Capital</span>
+                            <span class="finance-tag asset-supported">Asset-Supported</span>
+                          </td>
+                          <td>
+                            Allows dealerships to purchase vehicles, boats, machinery or other
+                            high-value inventory held for resale.
+                          </td>
+                          <td>
+                            Monitor individual financed units, inventory aging, regular floor-plan
+                            inspections and the risk that inventory is sold without proceeds being
+                            remitted to the lender.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Lease-Line Financing</strong></td>
+                          <td>
+                            <span class="finance-tag asset-financing">Asset Financing</span>
+                            <span class="finance-tag revolving">Revolving</span>
+                          </td>
+                          <td>
+                            Provides a facility for purchasing equipment or other assets that will
+                            be leased to customers.
+                          </td>
+                          <td>
+                            Assess lessee credit quality, lessee concentration, lease terms,
+                            equipment useful life, residual-value assumptions, remarketing risk
+                            and the assignment of lease payments.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Project Finance</strong></td>
+                          <td>
+                            <span class="finance-tag structured">Structured</span>
+                            <span class="finance-tag cash-flow">Cash-Flow Based</span>
+                          </td>
+                          <td>
+                            Finances a major project primarily from the future cash flow generated
+                            by that project.
+                          </td>
+                          <td>
+                            Review construction and completion risk, projected cash flow,
+                            contractual arrangements, cost overruns, operator capability,
+                            counterparty risk and sensitivity to price, volume and delays.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Franchise Financing</strong></td>
+                          <td>
+                            <span class="finance-tag specialized">Specialized</span>
+                            <span class="finance-tag asset-financing">Asset Financing</span>
+                          </td>
+                          <td>
+                            Finances the purchase, opening, renovation or expansion of a
+                            franchise location.
+                          </td>
+                          <td>
+                            Review the franchise agreement, franchisor strength, location,
+                            royalties, required renovations, store-level performance, operator
+                            experience and restrictions on transfer or termination.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Acquisition Financing</strong></td>
+                          <td>
+                            <span class="finance-tag transaction">Transaction</span>
+                            <span class="finance-tag cash-flow">Cash-Flow Based</span>
+                          </td>
+                          <td>
+                            Finances the purchase of another company, business division or group
+                            of operating assets.
+                          </td>
+                          <td>
+                            Analyze purchase-price reasonableness, goodwill, normalized EBITDA,
+                            post-acquisition leverage, integration risk, expected synergies,
+                            management capacity and downside projections.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Management Buyout Financing</strong></td>
+                          <td>
+                            <span class="finance-tag transaction">Transaction</span>
+                            <span class="finance-tag cash-flow">Cash-Flow Based</span>
+                          </td>
+                          <td>
+                            Helps the existing management team acquire the business from its
+                            current owners.
+                          </td>
+                          <td>
+                            Assess management’s equity contribution, leadership capability,
+                            reliance on the departing owner, seller financing, post-closing
+                            leverage and whether debt service leaves sufficient operating liquidity.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Leveraged or Sponsor-Backed Lending</strong></td>
+                          <td>
+                            <span class="finance-tag transaction">Transaction</span>
+                            <span class="finance-tag structured">Structured</span>
+                          </td>
+                          <td>
+                            Finances highly leveraged businesses, often in connection with a
+                            private-equity acquisition.
+                          </td>
+                          <td>
+                            Examine total leverage, EBITDA adjustments, sponsor equity,
+                            subordinated debt, covenant headroom, distributions, refinancing risk
+                            and repayment capacity under downside scenarios.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Syndicated Lending</strong></td>
+                          <td>
+                            <span class="finance-tag structured">Structured</span>
+                            <span class="finance-tag large-exposure">Large Exposure</span>
+                          </td>
+                          <td>
+                            Allows several financial institutions to share a large credit facility.
+                          </td>
+                          <td>
+                            Review the agent bank’s responsibilities, voting rights, shared
+                            security, inter-lender arrangements, information rights, hold level
+                            and the lender’s ability to influence amendments or enforcement.
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><strong>Government-Supported Lending</strong></td>
+                          <td>
+                            <span class="finance-tag government">Government Supported</span>
+                            <span class="finance-tag specialized">Specialized</span>
+                          </td>
+                          <td>
+                            Provides financing supported by a government guarantee, insurance
+                            program or risk-sharing arrangement.
+                          </td>
+                          <td>
+                            Confirm borrower and loan eligibility, permitted uses of funds,
+                            documentation, registration, reporting and claim requirements. A
+                            government guarantee does not eliminate the need to assess repayment
+                            capacity.
+                          </td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+
+                    <div class="tag-legend" aria-label="Explanation of financing tags">
+
+                      <span class="tag-legend-title">Tags:</span>
+
+                      <span>
+                        <span class="finance-tag working-capital">Working Capital</span>
+                        short-term operating needs
+                      </span>
+
+                      <span>
+                        <span class="finance-tag asset-financing">Asset Financing</span>
+                        purchase of long-term assets
+                      </span>
+
+                      <span>
+                        <span class="finance-tag asset-supported">Asset-Supported</span>
+                        lending supported by collateral
+                      </span>
+
+                      <span>
+                        <span class="finance-tag cash-flow">Cash-Flow Based</span>
+                        repayment primarily from earnings
+                      </span>
+
+                      <span>
+                        <span class="finance-tag real-estate">Real Estate</span>
+                        property-related financing
+                      </span>
+
+                      <span>
+                        <span class="finance-tag transaction">Transaction</span>
+                        acquisitions or ownership changes
+                      </span>
+
+                      <span>
+                        <span class="finance-tag revolving">Revolving</span>
+                        repaid amounts may be borrowed again
+                      </span>
+
+                      <span>
+                        <span class="finance-tag term">Term</span>
+                        scheduled repayment over a fixed period
+                      </span>
+
+                      <span>
+                        <span class="finance-tag short-term">Short Term</span>
+                        temporary financing with a defined exit
+                      </span>
+
+                      <span>
+                        <span class="finance-tag structured">Structured</span>
+                        customized terms and controls
+                      </span>
+
+                      <span>
+                        <span class="finance-tag trade">Trade</span>
+                        import and export transactions
+                      </span>
+
+                      <span>
+                        <span class="finance-tag specialized">Specialized</span>
+                        industry-specific lending knowledge
+                      </span>
+
+                      <span>
+                        <span class="finance-tag large-exposure">Large Exposure</span>
+                        financing potentially shared by lenders
+                      </span>
+
+                      <span>
+                        <span class="finance-tag government">Government Supported</span>
+                        government guarantee or risk sharing
+                      </span>
+
+                    </div>
+                  </div>
+                </details>
+
 
                 <div class="overview-grid">
 
@@ -4356,6 +5035,40 @@
                     </strong>
                   </p>
                 </div>
+
+                <p class="terminology-paragraph">
+                  This step may involve reviewing
+                  <button type="button" class="term-button" data-term="appraisal">
+                    property appraisals
+                  </button>,
+                  <button type="button" class="term-button" data-term="phase-one">
+                    Phase I environmental assessments
+                  </button>,
+                  <button type="button" class="term-button" data-term="phase-two">
+                    Phase II environmental assessments
+                  </button>,
+                  <button type="button" class="term-button" data-term="sub-search">
+                    sub-searches
+                  </button>,
+                  <button type="button" class="term-button" data-term="slo">
+                    SLOs
+                  </button>
+                  and
+                  <button type="button" class="term-button" data-term="regulatory-due-diligence">
+                    regulatory due diligence
+                  </button>.
+                </p>
+
+                <dialog class="term-dialog" id="term-dialog">
+                  <button type="button" class="term-dialog-close" aria-label="Close definition">
+                    ×
+                  </button>
+
+                  <h4 id="term-dialog-title"></h4>
+                  <p id="term-dialog-definition"></p>
+                </dialog>
+
+
 
                 <div class="assessment-output">
                   <h4>Output of Step 10</h4>

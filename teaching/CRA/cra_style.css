@@ -134,37 +134,7 @@ body {
   overflow: hidden;
 }
 
-.document-stage-balance-sheet {
-  background: #98d0e6;
-}
 
-.document-stage-income-statement {
-  background: #ccebc6;
-}
-
-.document-stage-cash-flow {
-  background: #e2c9de;
-}
-
-.document-stage-equity-statement {
-  background: #ffd29f
-}
-
-.balance-sheet-head {
-  background: #1a7497;
-}
-
-.income-statement-head {
-  background: rgb(44, 114, 110);
-}
-
-.cash-flow-head {
-  background: #9c5090;
-}
-
-.equity-statement-head {
-  background: #e28232;
-}
 
 .real-company-intro .balance-sheet-head h2,
 .real-company-intro .balance-sheet-head p,
@@ -1806,61 +1776,63 @@ tr.flash-highlight td {
     border-color 0.18s ease;
 }
 
+
+
 /* Step progression */
 
 .assessment-flow .step-1 {
-  background: #f0fdfa;
-  border-color: #ccfbf1;
+  background: #d6fca4;
+  border-color: #0f3d3a;
 }
 
 .assessment-flow .step-2 {
-  background: #e6fffb;
-  border-color: #99f6e4;
+  background: #c5ee8f;
+  border-color: #0f3d3a;
 }
 
 .assessment-flow .step-3 {
-  background: #ccfbf1;
-  border-color: #5eead4;
+  background: #afe668;
+  border-color: #0f3d3a;
 }
 
 .assessment-flow .step-4 {
-  background: #a7f3d0;
-  border-color: #34d399;
+  background: #88df8c;
+  border-color: #0f3d3a;
 }
 
 .assessment-flow .step-5 {
   background: #6ee7b7;
-  border-color: #10b981;
+  border-color: #0f3d3a;
 }
 
 .assessment-flow .step-6 {
   background: #5eead4;
-  border-color: #14b8a6;
+  border-color: #0f3d3a;
 }
 
 .assessment-flow .step-7 {
   background: #2dd4bf;
-  border-color: #0d9488;
+  border-color: #0f3d3a;
 }
 
 .assessment-flow .step-8 {
   background: #22c1b5;
-  border-color: #0f8f87;
+  border-color: #0f3d3a;
 }
 
 .assessment-flow .step-9 {
   background: #14a99e;
-  border-color: #0f766e;
+  border-color: #0f3d3a;
 }
 
 .assessment-flow .step-10 {
   background: #0f8f87;
-  border-color: #115e59;
+  border-color: #0f3d3a;
 }
 
 .assessment-flow .step-11 {
   background: #0f766e;
-  border-color: #134e4a;
+  border-color: #0f3d3a;
 }
 
 .assessment-flow .step-12 {
@@ -1938,68 +1910,68 @@ tr.flash-highlight td {
 
 /* Step 1 */
 #assessment-step-1>.learning-summary {
-  background: #f0fdfa;
-  border-color: #ccfbf1;
+  background: #d6fca4;
+  border-color: #0f3d3a;
 }
 
 /* Step 2 */
 #assessment-step-2>.learning-summary {
-  background: #e6fffb;
-  border-color: #99f6e4;
+  background: #c5ee8f;
+  border-color: #0f3d3a;
 }
 
 /* Step 3 */
 #assessment-step-3>.learning-summary {
-  background: #ccfbf1;
-  border-color: #5eead4;
+  background: #afe668;
+  border-color: #0f3d3a;
 }
 
 /* Step 4 */
 #assessment-step-4>.learning-summary {
-  background: #a7f3d0;
-  border-color: #34d399;
+  background: #88df8c;
+  border-color: #0f3d3a;
 }
 
 /* Step 5 */
 #assessment-step-5>.learning-summary {
   background: #6ee7b7;
-  border-color: #10b981;
+  border-color: #0f3d3a;
 }
 
 /* Step 6 */
 #assessment-step-6>.learning-summary {
   background: #5eead4;
-  border-color: #14b8a6;
+  border-color: #0f3d3a;
 }
 
 /* Step 7 */
 #assessment-step-7>.learning-summary {
   background: #2dd4bf;
-  border-color: #0d9488;
+  border-color: #0f3d3a;
 }
 
 /* Step 8 */
 #assessment-step-8>.learning-summary {
   background: #22c1b5;
-  border-color: #0f8f87;
+  border-color: #0f3d3a;
 }
 
 /* Step 9 */
 #assessment-step-9>.learning-summary {
   background: #14a99e;
-  border-color: #0f766e;
+  border-color: #0f3d3a;
 }
 
 /* Step 10 */
 #assessment-step-10>.learning-summary {
   background: #0f8f87;
-  border-color: #115e59;
+  border-color: #0f3d3a;
 }
 
 /* Step 11 */
 #assessment-step-11>.learning-summary {
   background: #0f766e;
-  border-color: #134e4a;
+  border-color: #0f3d3a;
 }
 
 /* Step 12 */
@@ -4207,4 +4179,428 @@ details.learning-section.subsection-card > .learning-body {
   .bank-approval-table {
     break-inside: avoid;
   }
+}
+
+.term-button {
+  padding: 0;
+  border: 0;
+  border-bottom: 1px dashed currentColor;
+  background: transparent;
+  color: #1f5f55;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.term-button:hover,
+.term-button:focus-visible {
+  color: #123f39;
+  border-bottom-style: solid;
+}
+
+.term-dialog {
+  width: min(90%, 500px);
+  padding: 1.5rem;
+  border: 0;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgb(0 0 0 / 20%);
+}
+
+.term-dialog::backdrop {
+  background: rgb(0 0 0 / 45%);
+}
+
+.term-dialog h4 {
+  margin-top: 0;
+  padding-right: 2rem;
+}
+
+.term-dialog-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.9rem;
+  border: 0;
+  background: transparent;
+  font-size: 1.75rem;
+  cursor: pointer;
+}
+
+
+
+/* Purpose of finianicng */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid #dce4e1;
+  border-radius: 16px;
+}
+
+.specialization-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #f3f4f6;
+}
+
+.specialization-table th,
+.specialization-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #cbd0d6;
+  text-align: left;
+  vertical-align: top;
+}
+
+.specialization-table th {
+  color: #ffffff;
+  background: #3f464d;
+  font-size: 0.84rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+
+
+.specialization-table tbody tr:hover {
+  background: #cfd5d9;
+}
+.specialization-table tbody tr:nth-child(even) {
+  background: #f7faf8;
+}
+
+.specialization-table tbody tr:hover {
+  background: #edf6f2;
+}
+
+
+.finance-tag {
+  display: inline-block;
+  margin: 0.15rem 0.2rem 0.15rem 0;
+  padding: 0.24rem 0.58rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 750;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.working-capital {
+  color: #155e52;
+  background: #dcece7;
+}
+
+.asset-financing,
+.asset-supported {
+  color: #315a84;
+  background: #e3edf7;
+}
+
+.cash-flow {
+  color: #6d4a12;
+  background: #fbf0d7;
+}
+
+.real-estate {
+  color: #734425;
+  background: #f6e6d8;
+}
+
+.transaction {
+  color: #6a397c;
+  background: #eee2f3;
+}
+
+.revolving,
+.term,
+.short-term {
+  color: #3f5060;
+  background: #e8edf1;
+}
+
+.structured,
+.large-exposure {
+  color: #8a3434;
+  background: #f6dfdf;
+}
+
+.trade,
+.specialized,
+.government {
+  color: #315768;
+  background: #deedf2;
+}
+
+.tag-explanation {
+  margin-top: 2rem;
+}
+
+.tag-definition-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.tag-definition {
+  padding: 1rem;
+  border: 1px solid #dce4e1;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.tag-definition p {
+  margin: 0.55rem 0 0;
+  color: #5d6b6f;
+}
+
+@media (max-width: 700px) {
+  .tag-definition-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tag-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.1rem;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 0.9rem 1rem;
+  color: #5d6b6f;
+  background: #f7faf8;
+  border: 1px solid #dce4e1;
+  border-radius: 12px;
+  font-size: 0.78rem;
+}
+
+.tag-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.tag-legend-title {
+  color: #17252a;
+  font-weight: 750;
+}
+
+.purpose-of-financing {
+    background: #b4b4b0;
+  border-color: #333332;
+}
+
+
+@media (max-width: 800px) {
+
+  .table-wrapper {
+    overflow-x: visible;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .specialization-table {
+    min-width: 0;
+    background: transparent;
+  }
+
+  .specialization-table thead {
+    display: none;
+  }
+
+  .specialization-table,
+  .specialization-table tbody,
+  .specialization-table tr,
+  .specialization-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .specialization-table tbody tr {
+    margin-bottom: 1rem;
+    overflow: hidden;
+    background: #f1f3f5;
+    border: 1px solid #cbd0d6;
+    border-radius: 12px;
+  }
+
+  .specialization-table tbody tr:nth-child(even) {
+    background: #dfe3e6;
+  }
+
+  .specialization-table td {
+    min-width: 0;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #cbd0d6;
+  }
+
+  .specialization-table td:last-child {
+    border-bottom: 0;
+  }
+
+  .specialization-table td::before {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: #4b5563;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .specialization-table td:nth-child(1)::before {
+    content: "Financing Type";
+  }
+
+  .specialization-table td:nth-child(2)::before {
+    content: "Characteristics";
+  }
+
+  .specialization-table td:nth-child(3)::before {
+    content: "Purpose";
+  }
+
+  .specialization-table td:nth-child(4)::before {
+    content: "Key Credit Considerations";
+  }
+}
+
+
+
+/* Space and left border around credit-assessment steps */
+
+.learning-section[data-section="assessment-process"] {
+  width: auto;
+  margin: 0 18px 10px;
+  background: #ffffff;
+  border: 1px solid #f0f2f4;
+  border-left: 3px solid #0f3d3a;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   FINANCIAL STATEMENT COLOURS
+   ========================================================= */
+
+/* #
+#
+# */
+/* Balance Sheet — Blue */
+.overview-card.balance-sheet {
+  --document-color: #183d8b;
+  border: 2px solid var(--document-color);
+}
+
+/* Income Statement — Green */
+.overview-card.income-statement {
+  --document-color: #0f523c;
+  border: 2px solid var(--document-color);
+}
+
+/* Cash Flow Statement — Orange */
+.overview-card.cash-flow-statement {
+  --document-color: #5216b9;
+  border: 2px solid var(--document-color);
+}
+
+/* Notes to Financial Statements — Purple */
+.overview-card.equity {
+  --document-color: #5f3b12;
+  border: 2px solid var(--document-color);
+}
+
+/* Apply each article's colour to its heading */
+.overview-card.balance-sheet h3,
+.overview-card.income-statement h3,
+.overview-card.cash-flow-statement h3,
+.overview-card.financial-notes h3 {
+  color: var(--document-color);
+}
+
+/* Apply the same colour to the credit-question left border */
+.overview-card .credit-question {
+  border-left: 5px solid var(--document-color);
+}
+
+
+
+
+
+/* =========================================================
+   MATCH APPLE STATEMENTS WITH OVERVIEW-CARD COLOURS
+   ========================================================= */
+
+/* Assign one colour and background to each statement */
+.statement-card[data-viewer="balance"] {
+  --document-color: #183c8b;
+  --document-background: #a4c9f8;
+}
+
+.statement-card[data-viewer="income"] {
+  --document-color: #0f523c;
+  --document-background: #edf9f5;
+}
+
+.statement-card[data-viewer="cashflow"] {
+  --document-color: #5216b9;
+  --document-background: #f5f0fe;
+}
+
+.statement-card[data-viewer="equity"] {
+  --document-color: #5f3b12;
+  --document-background: #fff6eb;
+}
+
+
+/* Main border around each Apple statement */
+.statement-card {
+  overflow: hidden;
+  background: var(--document-background);
+  border: 2px solid var(--document-color);
+  border-radius: 14px;
+}
+
+
+/* Statement title area */
+.statement-card .statement-head {
+  padding: 16px 18px;
+  background: var(--document-color);
+  border-bottom: 2px solid var(--document-color);
+}
+
+
+/* Title and subtitle */
+.statement-card .statement-head h2,
+.statement-card .statement-head p {
+  color: #ffffff;
+}
+
+.statement-card .statement-head h2 {
+  margin: 0 0 3px;
+}
+
+.statement-card .statement-head p {
+  margin: 0;
+  opacity: 0.92;
+}
+
+
+/* Background surrounding the financial document */
+.statement-card .document-stage {
+  background: var(--document-background);
+}
+
+
+/* Border around the white financial document */
+.statement-card .financial-document {
+  background: #ffffff;
+  border: 1px solid var(--document-color);
+  border-radius: 8px;
+}
+
+
+/* Financial-document title */
+.statement-card .document-title {
+  color: var(--document-color);
+  border-bottom: 2px solid var(--document-color);
 }

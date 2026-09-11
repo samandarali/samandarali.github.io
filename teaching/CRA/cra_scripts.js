@@ -874,3 +874,72 @@
 
   setActive(sections[0]?.id || 'introduction-section');
 })();
+
+
+//////////////////////////////
+// For collateral //////////////////
+////////////////////////
+
+  const collateralTerms = {
+    appraisal: {
+      title: "Property Appraisal",
+      definition:
+        "An independent estimate of a property's value used to assess collateral coverage and calculate the loan-to-value ratio."
+    },
+
+    "phase-one": {
+      title: "Phase I Environmental Assessment",
+      definition:
+        "A review of the property's history, records and physical condition to identify possible environmental contamination. It normally does not include physical testing."
+    },
+
+    "phase-two": {
+      title: "Phase II Environmental Assessment",
+      definition:
+        "A detailed investigation involving tests of soil, groundwater or building materials when a potential environmental concern has been identified."
+    },
+
+    "sub-search": {
+      title: "Sub-search",
+      definition:
+        "An updated legal search conducted around the funding date to identify new liens, registrations or competing claims against the borrower or collateral."
+    },
+
+    slo: {
+      title: "Solicitor's Letter of Opinion (SLO)",
+      definition:
+        "A legal opinion addressing matters such as the validity of the loan documents and the registration and enforceability of the lender's security. Its precise scope may differ by lender."
+    },
+
+    "regulatory-due-diligence": {
+      title: "Regulatory Due Diligence",
+      definition:
+        "Verification that the borrower, property and proposed activities comply with relevant zoning, permits, licences, environmental rules and other legal requirements."
+    }
+  };
+
+  const termDialog = document.getElementById("term-dialog");
+  const termDialogTitle = document.getElementById("term-dialog-title");
+  const termDialogDefinition = document.getElementById(
+    "term-dialog-definition"
+  );
+
+  document.querySelectorAll(".term-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const term = collateralTerms[button.dataset.term];
+
+      termDialogTitle.textContent = term.title;
+      termDialogDefinition.textContent = term.definition;
+      termDialog.showModal();
+    });
+  });
+
+  document
+    .querySelector(".term-dialog-close")
+    .addEventListener("click", () => termDialog.close());
+
+  termDialog.addEventListener("click", (event) => {
+    if (event.target === termDialog) {
+      termDialog.close();
+    }
+  });
