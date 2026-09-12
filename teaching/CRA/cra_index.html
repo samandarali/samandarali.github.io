@@ -2037,23 +2037,27 @@
                       <span class="ae-label">Apple FY2025 Example</span>
 
                       <p class="ae-line">
-                        Net Operating Income (Operating Income) =
-                        $<span class="ae-num">133,050</span>M
+                        EBITDA = 133,050 + 11,698 = 144,748
                       </p>
 
                       <p class="ae-line">
-                        Repayments of Term Debt =
-                        $<span class="ae-num">10,932</span>M
+                        Unfinanced Capital Expenditures =
+                        <em>not separately identified</em>
+                      </p>
+
+                      <p class="ae-line">
+                        Distributions =
+                        <em>not separately identified for this DSCR definition</em>
+                      </p>
+
+                      <p class="ae-line">
+                        Required Principal Repayments =
+                        <em>not separately identified</em>
                       </p>
 
                       <p class="ae-line">
                         Interest Expense =
-                        $<span class="ae-num">[insert amount]</span>M
-                      </p>
-
-                      <p class="ae-line">
-                        Estimated Total Debt Service =
-                        Interest Expense + $10,932M
+                        <em>not separately disclosed</em>
                       </p>
 
                       <div class="ae-result">
@@ -2061,12 +2065,12 @@
                       </div>
 
                       <p class="ae-note">
-                        Apple reports operating income and actual repayments of term debt.
-                        However, actual repayments reported in the cash flow statement are
-                        not necessarily the same as scheduled required principal repayments.
-                        Because interest expense and required principal repayments are not
-                        separately identified in the figures used here, total debt service—and
-                        therefore DSCR—cannot be calculated reliably.
+                        Apple FY2025 EBITDA can be calculated from the financial statements shown
+                        earlier on this page and equals $144,748M. However, the lender-style DSCR
+                        used here also requires unfinanced capital expenditures, distributions,
+                        required principal repayments, and interest expense. These inputs are not
+                        all separately identifiable from the figures presented here, so the full
+                        DSCR cannot be calculated reliably.
                       </p>
                     </div>
 
@@ -2078,9 +2082,19 @@
                         \text{DSCR}
                         =
                         \frac{
-                        \color{#0c7973}{\text{Net Operating Income (NOI)}}
+                        \color{#0c7973}{
+                        \text{EBITDA}
+                        -
+                        \text{Unfinanced CapEx}
+                        -
+                        \text{Distributions}
+                        }
                         }{
-                        \color{#0c7973}{\text{Total Debt Service}}
+                        \color{#0c7973}{
+                        \text{Required Principal Repayments}
+                        +
+                        \text{Interest Expense}
+                        }
                         }
                         \]
                       </div>
@@ -2088,13 +2102,25 @@
                       <!-- COMPONENTS -->
                       <div class="ratio-field">
                         <div class="ae-line">
-                          <strong>Net Operating Income (NOI)</strong>
-                          = Operating Revenue − Operating Expenses
+                          <strong>EBITDA</strong>
+                          = Earnings Before Interest, Taxes, Depreciation and Amortization
+                        </div>
+
+                        <div class="ae-line">
+                          <strong>Unfinanced CapEx</strong>
+                          = Capital expenditures funded from the borrower’s own cash rather
+                          than from new financing
+                        </div>
+
+                        <div class="ae-line">
+                          <strong>Distributions</strong>
+                          = Cash withdrawn from the business by owners or shareholders,
+                          including dividends and other owner distributions
                         </div>
 
                         <div class="ae-line">
                           <strong>Total Debt Service</strong>
-                          = Interest Expense + Required Principal Repayments
+                          = Required Principal Repayments + Interest Expense
                         </div>
                       </div>
 
@@ -2103,8 +2129,9 @@
                         <span class="rf-label">What it shows</span>
 
                         <p>
-                          DSCR measures whether the borrower’s net operating income is
-                          sufficient to cover its scheduled interest and principal payments.
+                          DSCR measures whether the cash earnings available after necessary
+                          unfinanced capital expenditures and owner distributions are sufficient
+                          to cover the borrower’s required principal and interest payments.
                         </p>
                       </div>
 
@@ -2114,9 +2141,9 @@
 
                         <p>
                           A higher DSCR generally indicates stronger repayment capacity and
-                          a larger cushion against declining income or unexpected expenses.
-                          A lower DSCR indicates tighter repayment capacity and greater
-                          credit risk.
+                          a larger financial buffer against weaker earnings, higher expenses,
+                          or other adverse changes. A lower DSCR indicates tighter repayment
+                          capacity and greater credit risk.
                         </p>
                       </div>
 
@@ -2127,19 +2154,18 @@
                         <ul>
                           <li>
                             <strong>DSCR &gt; 1:</strong>
-                            net operating income exceeds scheduled debt service under the
-                            selected definition.
+                            adjusted cash available for debt service exceeds required debt service.
                           </li>
 
                           <li>
                             <strong>DSCR = 1:</strong>
-                            net operating income exactly covers scheduled debt service.
+                            adjusted cash available for debt service exactly covers required debt service.
                           </li>
 
                           <li>
                             <strong>DSCR &lt; 1:</strong>
-                            net operating income is insufficient to cover scheduled debt
-                            service under the selected definition.
+                            adjusted cash available for debt service is insufficient to cover
+                            required debt service.
                           </li>
                         </ul>
                       </div>
@@ -2154,8 +2180,15 @@
                           <li>A consistently declining DSCR.</li>
 
                           <li>
-                            Net operating income growing more slowly than scheduled debt
-                            service.
+                            EBITDA growing more slowly than required debt service.
+                          </li>
+
+                          <li>
+                            High unfinanced capital expenditures reducing cash available for repayment.
+                          </li>
+
+                          <li>
+                            Significant owner distributions weakening debt-service capacity.
                           </li>
 
                           <li>
@@ -2167,7 +2200,7 @@
                           </li>
 
                           <li>
-                            Dependence on unusually high or non-recurring operating income.
+                            Dependence on unusually high or non-recurring EBITDA.
                           </li>
                         </ul>
                       </div>
@@ -2177,19 +2210,20 @@
                         <span class="rf-label">Important note</span>
 
                         <p>
-                          DSCR definitions may differ across lenders and credit agreements.
-                          The definition of net operating income and the items included in
-                          total debt service should therefore be confirmed before calculating
-                          or comparing the ratio.
+                          DSCR definitions vary across lenders, industries, and credit agreements.
+                          Some lenders may use different adjustments to EBITDA, capital expenditures,
+                          distributions, taxes, or debt-service obligations. The applicable lender
+                          definition should therefore always be confirmed before calculating or
+                          comparing DSCR.
                         </p>
                       </div>
 
                       <!-- ACCEPTABLE LEVEL -->
                       <div class="ratio-field">
                         <p>
-                          No fixed value (e.g. 1.20 or 1.25) is universally acceptable -the
-                          required level is typically set by the specific lender or credit
-                          agreement.
+                          No single DSCR threshold is universally acceptable. Requirements such
+                          as 1.20x or 1.25x are common examples, but the actual minimum is typically
+                          set by the lender, industry, borrower risk profile, and credit agreement.
                         </p>
                       </div>
 
