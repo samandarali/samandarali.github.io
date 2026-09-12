@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Commercial credit risk report-writing exercise for Cedar Valley Foods Ltd.">
+  <title>Exercise 1 | Cedar Valley Foods Ltd.</title>
+  <style>
+    :root {
+      --navy: #17324d;
+      --blue: #2f6fa3;
+      --blue-soft: #eaf3fa;
+      --green: #19705d;
+      --green-soft: #e9f6f2;
+      --amber: #9a5d00;
+      --amber-soft: #fff5dc;
+      --red: #9b3434;
+      --red-soft: #fff0f0;
+      --ink: #263442;
+      --muted: #607080;
+      --line: #d8e1e8;
+      --page: #f4f7f9;
+      --white: #fff;
+      --shadow: 0 12px 30px rgba(26, 49, 70, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--page);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .page-shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 32px auto 64px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 48px;
+      color: var(--white);
+      border-radius: 22px;
+      background: linear-gradient(135deg, #17324d 0%, #205d78 65%, #19705d 100%);
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      bottom: -130px;
+      width: 330px;
+      height: 330px;
+      border: 55px solid rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: #bfe6dc;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.08;
+      letter-spacing: -.035em;
+    }
+
+    .hero p {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 20px 0 0;
+      color: #eaf4f7;
+      font-size: 1.08rem;
+    }
+
+    .decision-pills {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .decision-pills span {
+      padding: 7px 13px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .instruction {
+      margin: 24px 0;
+      padding: 19px 22px;
+      border-left: 5px solid var(--amber);
+      border-radius: 12px;
+      background: var(--amber-soft);
+      box-shadow: var(--shadow);
+    }
+
+    .instruction strong { color: #744700; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    main { min-width: 0; }
+
+    nav {
+      position: sticky;
+      top: 20px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    nav h2 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: .82rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      display: block;
+      padding: 6px 0;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      line-height: 1.35;
+    }
+
+    nav a:hover { color: var(--blue); }
+
+    .card {
+      margin-bottom: 22px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .section-number {
+      display: inline-grid;
+      width: 32px;
+      height: 32px;
+      margin-right: 9px;
+      place-items: center;
+      border-radius: 9px;
+      color: var(--white);
+      background: var(--blue);
+      font-size: .88rem;
+      vertical-align: 3px;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      color: var(--navy);
+      font-size: 1.45rem;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 24px 0 8px;
+      color: var(--green);
+      font-size: 1.06rem;
+    }
+
+    p { margin: 10px 0; }
+    ul, ol { margin: 10px 0; padding-left: 24px; }
+    li + li { margin-top: 5px; }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0;
+    }
+
+    .fact {
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: var(--blue-soft);
+    }
+
+    .fact dt {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .fact dd {
+      margin: 2px 0 0;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0 4px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      font-variant-numeric: tabular-nums;
+    }
+
+    caption {
+      padding: 12px 15px;
+      color: var(--muted);
+      background: #f7fafc;
+      text-align: left;
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    th, td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child, td:first-child { text-align: left; }
+    thead th { color: var(--white); background: var(--navy); }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:nth-child(even) { background: #f9fbfc; }
+    .total td { color: var(--navy); background: var(--blue-soft); font-weight: 800; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .note-box {
+      padding: 17px 18px;
+      border-radius: 12px;
+      background: var(--green-soft);
+    }
+
+    .note-box.warning { background: var(--red-soft); }
+    .note-box h3 { margin-top: 0; }
+    .note-box.warning h3 { color: var(--red); }
+
+    .formula {
+      margin: 18px 0;
+      padding: 18px;
+      border: 1px dashed var(--blue);
+      border-radius: 12px;
+      color: var(--navy);
+      background: var(--blue-soft);
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+
+    .assignment {
+      border-top: 6px solid var(--green);
+    }
+
+    .assignment ol {
+      columns: 2;
+      column-gap: 40px;
+    }
+
+    .assignment li { break-inside: avoid; }
+
+    .writing-area {
+      min-height: 170px;
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px dashed #b8c5cf;
+      border-radius: 12px;
+      color: var(--muted);
+      background: #fbfcfd;
+    }
+
+    footer {
+      margin-top: 26px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .84rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: static; order: -1; }
+      nav div { columns: 2; }
+      .hero { padding: 34px 28px; }
+    }
+
+    @media (max-width: 600px) {
+      .page-shell { width: min(100% - 20px, 1120px); margin-top: 10px; }
+      .hero, .card { border-radius: 13px; }
+      .card { padding: 22px 17px; }
+      .facts, .two-col { grid-template-columns: 1fr; }
+      .assignment ol { columns: 1; }
+      nav div { columns: 1; }
+      th, td { padding: 10px 11px; font-size: .88rem; }
+    }
+
+    @media print {
+      @page { size: letter; margin: .55in; }
+      body { background: white; font-size: 10.5pt; }
+      .page-shell { width: 100%; margin: 0; }
+      .hero { padding: 28px; border-radius: 0; box-shadow: none; }
+      .hero h1 { font-size: 26pt; }
+      .layout { display: block; }
+      nav { display: none; }
+      .card, .instruction { break-inside: avoid; box-shadow: none; }
+      .table-wrap { overflow: visible; }
+      .writing-area { min-height: 130px; }
+      footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">Daily Commercial Credit Practice · Exercise 1</p>
+      <h1>Cedar Valley Foods Ltd.</h1>
+      <p>Analyze the borrower, structure the facilities, and prepare a formal credit report focused on repayment risk—not ratio calculation alone.</p>
+      <div class="decision-pills" aria-label="Available recommendations">
+        <span>Approve</span><span>Approve with Conditions</span><span>Decline</span>
+      </div>
+    </header>
+
+    <aside class="instruction">
+      <strong>Your role:</strong> Act as the commercial credit analyst. Review the complete application, calculate the relevant ratios, identify risks and mitigants, and support one final credit decision. The solution is intentionally omitted.
+    </aside>
+
+    <div class="layout">
+      <main>
+        <section class="card" id="borrower">
+          <h2><span class="section-number">1</span>Borrower Profile</h2>
+          <dl class="facts">
+            <div class="fact"><dt>Borrower</dt><dd>Cedar Valley Foods Ltd.</dd></div>
+            <div class="fact"><dt>Industry</dt><dd>Frozen prepared-food manufacturing</dd></div>
+            <div class="fact"><dt>Location</dt><dd>Mississauga, Ontario</dd></div>
+            <div class="fact"><dt>Operating history</dt><dd>14 years</dd></div>
+            <div class="fact"><dt>Employees</dt><dd>58</dd></div>
+            <div class="fact"><dt>Ownership</dt><dd>Priya Sharma 70%; Arjun Sharma 30%</dd></div>
+          </dl>
+          <p>The company supplies frozen meals to grocery chains, independent supermarkets, and institutional customers.</p>
+          <h3>Customer concentration</h3>
+          <ul>
+            <li>Customer A: 24% of revenue</li>
+            <li>Customer B: 17% of revenue</li>
+            <li>Customer C: 11% of revenue</li>
+          </ul>
+        </section>
+
+        <section class="card" id="request">
+          <h2><span class="section-number">2</span>Financing Request and Purpose</h2>
+          <ol>
+            <li><strong>$1,200,000 six-year term loan</strong> to purchase and install an automated packaging line costing $1,500,000.</li>
+            <li>Increase the operating line from <strong>$700,000 to $1,100,000</strong>.</li>
+          </ol>
+          <p>The borrower will contribute <strong>$300,000</strong> from company cash toward the equipment purchase.</p>
+          <h3>Management's objectives</h3>
+          <ul>
+            <li>Increase production capacity by 20%.</li>
+            <li>Reduce packaging labour costs by approximately $240,000 annually.</li>
+            <li>Reduce product waste and support a new contract with Customer A.</li>
+            <li>Complete installation in four months, with partial production interruption for approximately three weeks.</li>
+          </ul>
+        </section>
+
+        <section class="card" id="structure">
+          <h2><span class="section-number">3</span>Proposed Credit Structure</h2>
+          <div class="two-col">
+            <div class="note-box">
+              <h3>Term loan</h3>
+              <ul>
+                <li>Amount: $1,200,000</li>
+                <li>Amortization: six years</li>
+                <li>Interest rate: 7.0%</li>
+                <li>Annual payments: $251,700</li>
+                <li>First-ranking charge over new equipment</li>
+              </ul>
+            </div>
+            <div class="note-box">
+              <h3>Operating line</h3>
+              <ul>
+                <li>Requested limit: $1,100,000</li>
+                <li>Rate: prime + 1.75%</li>
+                <li>General security agreement</li>
+                <li>75% of eligible A/R under 90 days</li>
+                <li>50% of eligible inventory</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" id="income">
+          <h2><span class="section-number">4</span>Income Statement</h2>
+          <div class="table-wrap">
+            <table>
+              <caption>Amounts in $000s</caption>
+              <thead><tr><th>Item</th><th>2024</th><th>2025</th><th>2026</th></tr></thead>
+              <tbody>
+                <tr><td>Revenue</td><td>8,400</td><td>9,100</td><td>9,750</td></tr>
+                <tr><td>Cost of goods sold</td><td>6,050</td><td>6,620</td><td>7,210</td></tr>
+                <tr class="total"><td>Gross profit</td><td>2,350</td><td>2,480</td><td>2,540</td></tr>
+                <tr><td>Operating expenses excluding depreciation</td><td>1,540</td><td>1,670</td><td>1,820</td></tr>
+                <tr class="total"><td>EBITDA</td><td>810</td><td>810</td><td>720</td></tr>
+                <tr><td>Depreciation</td><td>190</td><td>205</td><td>220</td></tr>
+                <tr><td>Interest expense</td><td>105</td><td>127</td><td>158</td></tr>
+                <tr><td>Income before tax</td><td>515</td><td>478</td><td>342</td></tr>
+                <tr><td>Income tax</td><td>135</td><td>126</td><td>90</td></tr>
+                <tr class="total"><td>Net income</td><td>380</td><td>352</td><td>252</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card" id="balance">
+          <h2><span class="section-number">5</span>Balance Sheet</h2>
+          <div class="table-wrap">
+            <table>
+              <caption>Amounts in $000s</caption>
+              <thead><tr><th>Item</th><th>2024</th><th>2025</th><th>2026</th></tr></thead>
+              <tbody>
+                <tr><td>Cash</td><td>310</td><td>260</td><td>390</td></tr>
+                <tr><td>Accounts receivable</td><td>1,080</td><td>1,260</td><td>1,520</td></tr>
+                <tr><td>Inventory</td><td>920</td><td>1,090</td><td>1,340</td></tr>
+                <tr><td>Prepaid expenses</td><td>90</td><td>100</td><td>110</td></tr>
+                <tr class="total"><td>Total current assets</td><td>2,400</td><td>2,710</td><td>3,360</td></tr>
+                <tr><td>Net fixed assets</td><td>2,300</td><td>2,480</td><td>2,610</td></tr>
+                <tr><td>Other assets</td><td>100</td><td>110</td><td>130</td></tr>
+                <tr class="total"><td>Total assets</td><td>4,800</td><td>5,300</td><td>6,100</td></tr>
+                <tr><td>Accounts payable</td><td>790</td><td>960</td><td>1,230</td></tr>
+                <tr><td>Operating line utilization</td><td>430</td><td>590</td><td>680</td></tr>
+                <tr><td>Current portion of long-term debt</td><td>180</td><td>210</td><td>240</td></tr>
+                <tr class="total"><td>Total current liabilities</td><td>1,400</td><td>1,760</td><td>2,150</td></tr>
+                <tr><td>Long-term debt</td><td>1,050</td><td>1,180</td><td>1,390</td></tr>
+                <tr><td>Shareholders' loans</td><td>150</td><td>150</td><td>150</td></tr>
+                <tr class="total"><td>Total liabilities</td><td>2,600</td><td>3,090</td><td>3,690</td></tr>
+                <tr class="total"><td>Shareholders' equity</td><td>2,200</td><td>2,210</td><td>2,410</td></tr>
+                <tr class="total"><td>Total liabilities and equity</td><td>4,800</td><td>5,300</td><td>6,100</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <aside class="note-box warning">
+            <h3>Structural issue to assess</h3>
+            <p>The $150,000 shareholders' loans are unsecured, interest-free, and have no fixed repayment terms. The owners have not agreed to postpone repayment.</p>
+          </aside>
+        </section>
+
+        <section class="card" id="cashflow">
+          <h2><span class="section-number">6</span>Cash-Flow Information</h2>
+          <div class="table-wrap">
+            <table>
+              <caption>Amounts in $000s</caption>
+              <thead><tr><th>Item</th><th>2024</th><th>2025</th><th>2026</th></tr></thead>
+              <tbody>
+                <tr><td>Cash generated from operations before working-capital changes</td><td>650</td><td>620</td><td>510</td></tr>
+                <tr><td>Change in working capital</td><td>(170)</td><td>(250)</td><td>(390)</td></tr>
+                <tr class="total"><td>Cash flow from operating activities</td><td>480</td><td>370</td><td>120</td></tr>
+                <tr><td>Total capital expenditures</td><td>260</td><td>340</td><td>410</td></tr>
+                <tr><td>Portion financed with new long-term debt</td><td>100</td><td>180</td><td>250</td></tr>
+                <tr class="total"><td>Unfinanced capital expenditures</td><td>160</td><td>160</td><td>160</td></tr>
+                <tr><td>Shareholder distributions</td><td>90</td><td>120</td><td>150</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Management estimates annual maintenance CapEx at approximately <strong>$140,000</strong>. Remaining capital expenditures primarily relate to expansion and productivity improvements.</p>
+        </section>
+
+        <section class="card" id="debt">
+          <h2><span class="section-number">7</span>Existing Debt Obligations</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Debt</th><th>Balance</th><th>Annual debt service</th></tr></thead>
+              <tbody>
+                <tr><td>Existing equipment loans</td><td>$910,000</td><td>$225,000</td></tr>
+                <tr><td>Commercial mortgage</td><td>$720,000</td><td>$118,000</td></tr>
+                <tr class="total"><td>Total existing funded term debt</td><td>$1,630,000</td><td>$343,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>After the proposed loan, total annual term-debt service would be approximately <strong>$594,700</strong> ($343,000 + $251,700). Operating-line interest is not included.</p>
+        </section>
+
+        <section class="card" id="working-capital">
+          <h2><span class="section-number">8</span>Accounts Receivable and Inventory</h2>
+          <h3>Accounts receivable aging</h3>
+          <div class="table-wrap">
+            <table>
+              <caption>Amounts in $000s</caption>
+              <thead><tr><th>Aging category</th><th>Amount</th></tr></thead>
+              <tbody>
+                <tr><td>Current</td><td>880</td></tr>
+                <tr><td>31–60 days</td><td>350</td></tr>
+                <tr><td>61–90 days</td><td>170</td></tr>
+                <tr><td>Over 90 days</td><td>120</td></tr>
+                <tr class="total"><td>Total</td><td>1,520</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Of the receivables over 90 days, <strong>$85,000</strong> relates to one customer disputing product-quality issues. Management expects collection but has not provided written confirmation.</p>
+          <h3>Inventory composition</h3>
+          <div class="table-wrap">
+            <table>
+              <caption>Amounts in $000s</caption>
+              <thead><tr><th>Inventory type</th><th>Amount</th></tr></thead>
+              <tbody>
+                <tr><td>Raw materials</td><td>460</td></tr>
+                <tr><td>Work in progress</td><td>170</td></tr>
+                <tr><td>Finished goods</td><td>710</td></tr>
+                <tr class="total"><td>Total</td><td>1,340</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>An inventory inspection identified approximately <strong>$110,000</strong> of slow-moving finished products that may require discounting.</p>
+        </section>
+
+        <section class="card" id="collateral">
+          <h2><span class="section-number">9</span>Collateral and Guarantees</h2>
+          <div class="two-col">
+            <div>
+              <h3>New equipment</h3>
+              <ul>
+                <li>Purchase and installation cost: $1,500,000</li>
+                <li>Orderly liquidation value: $825,000</li>
+                <li>Specialized for food-packaging operations</li>
+                <li>First-ranking bank charge</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Existing assets</h3>
+              <ul>
+                <li>Eligible A/R before adjustments: $1,400,000</li>
+                <li>Inventory before adjustments: $1,340,000</li>
+                <li>Current line utilization: $680,000</li>
+                <li>Some older equipment already pledged</li>
+                <li>Commercial property secures the mortgage</li>
+              </ul>
+            </div>
+          </div>
+          <h3>Personal guarantees</h3>
+          <p>The owners will provide joint and several guarantees limited to <strong>$300,000</strong>. Combined reported personal net worth is approximately $1.4 million, mostly consisting of their principal-residence equity and interests in the company.</p>
+        </section>
+
+        <section class="card" id="management">
+          <h2><span class="section-number">10</span>Management and Operations</h2>
+          <div class="two-col">
+            <aside class="note-box">
+              <h3>Positive information</h3>
+              <ul>
+                <li>Priya Sharma has managed the company for 14 years.</li>
+                <li>No missed scheduled loan payments.</li>
+                <li>Product demand has grown steadily.</li>
+                <li>Experienced operations manager.</li>
+                <li>New Customer A contract has a three-year initial term.</li>
+              </ul>
+            </aside>
+            <aside class="note-box warning">
+              <h3>Concerns</h3>
+              <ul>
+                <li>EBITDA declined despite revenue growth.</li>
+                <li>Gross margin declined.</li>
+                <li>A/R and inventory grew faster than revenue.</li>
+                <li>Significant customer concentration.</li>
+                <li>Customer A may terminate for performance failures.</li>
+                <li>Installation delays could affect production.</li>
+                <li>No formal succession plan.</li>
+              </ul>
+            </aside>
+          </div>
+        </section>
+
+        <section class="card" id="projections">
+          <h2><span class="section-number">11</span>Management Projections</h2>
+          <div class="table-wrap">
+            <table>
+              <caption>Amounts in $000s</caption>
+              <thead><tr><th>Item</th><th>2027 projected</th><th>2028 projected</th></tr></thead>
+              <tbody>
+                <tr><td>Revenue</td><td>11,500</td><td>12,300</td></tr>
+                <tr class="total"><td>EBITDA</td><td>1,080</td><td>1,260</td></tr>
+                <tr><td>Net income</td><td>410</td><td>520</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Projection assumptions</h3>
+          <ul>
+            <li>Full realization of $240,000 in annual labour savings.</li>
+            <li>No material installation delays.</li>
+            <li>Successful completion of the new Customer A contract.</li>
+            <li>Gross-margin improvement and no increase in raw-material prices.</li>
+          </ul>
+          <aside class="note-box warning">
+            <h3>Lender downside scenario</h3>
+            <p>Revenue is 10% below management's projection and only 50% of expected labour savings are achieved. Under these assumptions, 2027 EBITDA would be approximately <strong>$760,000</strong>.</p>
+          </aside>
+        </section>
+
+        <section class="card assignment" id="assignment">
+          <h2>Your Credit-Report Assignment</h2>
+          <p>Prepare a formal report covering:</p>
+          <ol>
+            <li>Borrower and business overview</li>
+            <li>Financing request and purpose</li>
+            <li>Historical financial performance</li>
+            <li>Liquidity and working capital</li>
+            <li>Leverage and capitalization</li>
+            <li>Cash flow and debt-service capacity</li>
+            <li>Projections and downside scenario</li>
+            <li>Primary and secondary repayment sources</li>
+            <li>Collateral and line availability</li>
+            <li>Key risks</li>
+            <li>Risk mitigants</li>
+            <li>Recommended structure and conditions</li>
+            <li>Final recommendation</li>
+          </ol>
+
+          <p>Calculate the relevant ratios yourself. Also determine whether the requested operating line is adequately supported after excluding ineligible receivables and slow-moving inventory.</p>
+          <div class="writing-area"><strong>Final recommendation:</strong> Approve / Approve with Conditions / Decline<br><br>Support your decision with repayment capacity, risks, mitigants, security, and proposed conditions.</div>
+        </section>
+      </main>
+
+      <nav aria-label="Exercise sections">
+        <h2>Case contents</h2>
+        <div>
+          <a href="#borrower">1. Borrower</a>
+          <a href="#request">2. Request</a>
+          <a href="#structure">3. Structure</a>
+          <a href="#income">4. Income statement</a>
+          <a href="#balance">5. Balance sheet</a>
+          <a href="#cashflow">6. Cash flow</a>
+          <a href="#debt">7. Existing debt</a>
+          <a href="#working-capital">8. Working capital</a>
+          <a href="#collateral">9. Collateral</a>
+          <a href="#management">10. Management</a>
+          <a href="#projections">11. Projections</a>
+          <a href="#assignment">Write your report</a>
+        </div>
+      </nav>
+    </div>
+
+    <footer>Fictional case created for educational commercial credit-analysis practice.</footer>
+  </div>
+</body>
+</html>
