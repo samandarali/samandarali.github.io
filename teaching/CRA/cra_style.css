@@ -1420,7 +1420,7 @@ tr.flash-highlight td {
 
 /* 1. CREDIT RISK CONCEPTS — SKY BLUE */
 
- {
+  {
   background: #f0f9ff;
   border-color: #7dd3fc;
 }
@@ -1429,11 +1429,10 @@ tr.flash-highlight td {
 
 .intro-accordion,
 .stage-statements,
-.stage-ratios ,
+.stage-ratios,
 .stage-credit-risk,
-.stage-assessment ,
-.stage-practice
-{
+.stage-assessment,
+.stage-practice {
   background: #f5f8fd;
   border-color: #b9cbea;
 }
@@ -2195,7 +2194,7 @@ tr.flash-highlight td {
   border-top: 1px solid #dfe6ef;
 }
 
-.intro-learning > h3 {
+.intro-learning>h3 {
   margin: 3px 0 14px;
   color: #203f77;
   font-size: 1rem;
@@ -2216,7 +2215,7 @@ tr.flash-highlight td {
   align-items: flex-start;
 }
 
-.intro-learning-grid li > span {
+.intro-learning-grid li>span {
   display: grid;
   flex: 0 0 25px;
   width: 25px;
@@ -2647,7 +2646,7 @@ tr.flash-highlight td {
   background: var(--stage-practice) !important;
 }
 
-.intro-accordion{
+.intro-accordion {
   background: #edf3fc;
   border-left-color: var(--stage-statements);
 }
@@ -2656,17 +2655,16 @@ tr.flash-highlight td {
 .stage-summary-statements,
 .stage-summary-ratios,
 .stage-summary-assessment,
-.stage-summary-practice
-{
+.stage-summary-practice {
   background: #edf3fc;
   border-left-color: var(--stage-statements);
 }
 
 
-.intro-accordion h2, 
-.stage-summary-practice h2 ,
-.stage-summary-assessment h2 ,
-.stage-summary-ratios h2 ,
+.intro-accordion h2,
+.stage-summary-practice h2,
+.stage-summary-assessment h2,
+.stage-summary-ratios h2,
 .stage-summary-statements h2 {
   color: #203f77;
 }
@@ -2703,10 +2701,9 @@ tr.flash-highlight td {
 
 .ratio-details.liquidity-ratio>.learning-summary h4,
 .ratio-details.leverage-ratio>.learning-summary h4,
-.ratio-details.coverage-ratio>.learning-summary h4 ,
-.ratio-details.profitability-ratio>.learning-summary h4 ,
-.ratio-details.efficiency-ratio>.learning-summary h4 
-{
+.ratio-details.coverage-ratio>.learning-summary h4,
+.ratio-details.profitability-ratio>.learning-summary h4,
+.ratio-details.efficiency-ratio>.learning-summary h4 {
   color: #075985;
 }
 
@@ -2935,11 +2932,9 @@ tr.flash-highlight td {
   padding: 42px;
 
   background:
-    radial-gradient(
-      circle at 88% 15%,
+    radial-gradient(circle at 88% 15%,
       rgba(65, 105, 180, 0.12),
-      transparent 30%
-    ),
+      transparent 30%),
     #fff;
 
   border: 1px solid #dce4ee;
@@ -3191,11 +3186,10 @@ tr.flash-highlight td {
 
 .page-overview {
   padding: 22px 26px;
-  border: 1px solid solid #
-px;
+  border: 1px solid solid # px;
   border-radius: 14px;
-  background:px;
-  background:px: #px;
+  background: px;
+  background: px: #px;
 }
 
 .page-overview-heading {
@@ -3240,9 +3234,10 @@ px;
   place-items: center;
   border-radius: 50%;
   color: #fff;
-  background:}
+  background:
+}
 
-  .course-hero-visual {
+.course-hero-visual {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3451,7 +3446,7 @@ details.learning-section.subsection-card {
   box-shadow: none;
 }
 
-details.learning-section.subsection-card > .subsection-summary {
+details.learning-section.subsection-card>.subsection-summary {
   width: 100%;
   min-height: 58px;
   padding: 14px 18px;
@@ -3460,7 +3455,7 @@ details.learning-section.subsection-card > .subsection-summary {
   color: #18345f;
 }
 
-details.learning-section.subsection-card > .subsection-summary h3 {
+details.learning-section.subsection-card>.subsection-summary h3 {
   flex: 1;
   margin: 0;
   color: #18345f;
@@ -3470,7 +3465,7 @@ details.learning-section.subsection-card > .subsection-summary h3 {
   text-align: left;
 }
 
-details.learning-section.subsection-card > .subsection-summary .chevron {
+details.learning-section.subsection-card>.subsection-summary .chevron {
   flex-shrink: 0;
   margin-left: auto;
   color: #285493;
@@ -3479,11 +3474,11 @@ details.learning-section.subsection-card > .subsection-summary .chevron {
 }
 
 /* Slight visual feedback */
-details.learning-section.subsection-card > .subsection-summary:hover {
+details.learning-section.subsection-card>.subsection-summary:hover {
   background: #dce8f7;
 }
 
-details.learning-section.subsection-card[open] > .subsection-summary {
+details.learning-section.subsection-card[open]>.subsection-summary {
   background: #dce8f7;
   border-left-color: #285493;
 }
@@ -3500,20 +3495,20 @@ details.learning-section.subsection-card[open] > .subsection-summary {
 }
 
 /* Keep the main section body the same color as its header */
-.intro-accordion > .learning-body,
-.stage-statements > .learning-body,
-.stage-ratios > .learning-body,
-.stage-assessment > .learning-body,
-.stage-practice > .learning-body {
+.intro-accordion>.learning-body,
+.stage-statements>.learning-body,
+.stage-ratios>.learning-body,
+.stage-assessment>.learning-body,
+.stage-practice>.learning-body {
   background: #edf3fc;
 }
 
 /* Preserve the stronger accent beside the main header */
-.intro-accordion > .stage-summary,
-.stage-statements > .stage-summary,
-.stage-ratios > .stage-summary,
-.stage-assessment > .stage-summary,
-.stage-practice > .stage-summary {
+.intro-accordion>.stage-summary,
+.stage-statements>.stage-summary,
+.stage-ratios>.stage-summary,
+.stage-assessment>.stage-summary,
+.stage-practice>.stage-summary {
   background: #edf3fc;
   border-left: 5px solid #285493;
 }
@@ -3523,7 +3518,7 @@ details.learning-section.subsection-card {
   background: #ffffff;
 }
 
-details.learning-section.subsection-card > .learning-body {
+details.learning-section.subsection-card>.learning-body {
   background: #ffffff;
 }
 
@@ -3537,7 +3532,8 @@ details.learning-section.subsection-card > .learning-body {
   margin: 0 18px 10px;
   background: hwb(0 100% 0%);
   border: 1px solid #f7faf0;
-  border-left: 3px solid hsl(236, 57%, 22%);;
+  border-left: 3px solid hsl(236, 57%, 22%);
+  ;
   border-radius: 12px;
 }
 
@@ -4274,6 +4270,7 @@ details.learning-section.subsection-card > .learning-body {
 .specialization-table tbody tr:hover {
   background: #cfd5d9;
 }
+
 .specialization-table tbody tr:nth-child(even) {
   background: #f7faf8;
 }
@@ -4383,7 +4380,7 @@ details.learning-section.subsection-card > .learning-body {
   font-size: 0.78rem;
 }
 
-.tag-legend > span {
+.tag-legend>span {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
@@ -4395,10 +4392,17 @@ details.learning-section.subsection-card > .learning-body {
 }
 
 .purpose-of-financing {
-    background: #b4b4b0;
-  border-color: #333332;
+  background: #c3d6d1;
+  border-color: #c3d6d1;
+  margin-bottom: 0%;
 }
 
+/* Purpose of Financing only — remove gap before table */
+details.purpose-of-financing>.table-wrapper {
+  margin-top: 0;
+  margin-left: 5px;
+  margin-right: 10px;
+}
 
 @media (max-width: 800px) {
 
@@ -4406,6 +4410,7 @@ details.learning-section.subsection-card > .learning-body {
     overflow-x: visible;
     border: 0;
     border-radius: 0;
+
   }
 
   .specialization-table {
@@ -4691,4 +4696,48 @@ details.learning-section.subsection-card > .learning-body {
   .credit-introduction {
     padding: 18px 15px;
   }
+}
+
+
+
+
+
+/* --------------------- */
+.practice-title {
+  margin-bottom: 1rem;
+}
+
+.exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.exercise-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 210px;
+  padding: 1rem;
+  color: #17324d;
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid #d8e2ea;
+  border-radius: 10px;
+  transition: 0.2s ease;
+}
+
+.exercise-card:hover {
+  transform: translateY(-3px);
+  border-color: #2f6fa3;
+  box-shadow: 0 6px 16px rgba(23, 50, 77, 0.1);
+}
+
+.exercise-card span {
+  color: #2f6fa3;
+  font-size: 0.8rem;
+}
+
+.exercise-card strong {
+  font-size: 1rem;
 }
