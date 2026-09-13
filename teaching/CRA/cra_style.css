@@ -4704,40 +4704,72 @@ details.purpose-of-financing>.table-wrapper {
 
 /* --------------------- */
 .practice-title {
-  margin-bottom: 1rem;
+  margin: 1.5rem 0 0.8rem;
+  color: #17324d;
 }
 
 .exercise-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 280px));
   gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .exercise-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  width: 210px;
-  padding: 1rem;
+  min-height: 125px;
+  padding: 1.1rem;
+  overflow: hidden;
   color: #17324d;
   text-decoration: none;
-  background: #fff;
+  background: linear-gradient(145deg, #ffffff, #f5f9fc);
   border: 1px solid #d8e2ea;
+  border-left: 4px solid #2f6fa3;
   border-radius: 10px;
-  transition: 0.2s ease;
+  box-shadow: 0 3px 10px rgba(23, 50, 77, 0.07);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .exercise-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   border-color: #2f6fa3;
-  box-shadow: 0 6px 16px rgba(23, 50, 77, 0.1);
+  box-shadow: 0 8px 20px rgba(23, 50, 77, 0.14);
 }
 
-.exercise-card span {
+.exercise-number {
+  margin-bottom: 0.5rem;
   color: #2f6fa3;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .exercise-card strong {
+  color: #17324d;
   font-size: 1rem;
+  line-height: 1.4;
+}
+
+.exercise-action {
+  margin-top: auto;
+  padding-top: 1rem;
+  color: #2f6fa3;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .exercise-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exercise-card {
+    width: auto;
+  }
 }
