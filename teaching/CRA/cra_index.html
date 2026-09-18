@@ -1307,6 +1307,178 @@
               </p>
 
 
+              <!-- DEBT-TO-EBITDA -->
+              <details class="learning-section ratio-details leverage-ratio" data-section="debt-to-ebitda">
+                <summary class="learning-summary" aria-expanded="false">
+                  <h4>Debt-to-EBITDA</h4>
+                  <span class="chevron" aria-hidden="true">⌄</span>
+                </summary>
+
+                <div class="ratio-card">
+                  <div class="ratio-columns">
+
+                    <!-- APPLE EXAMPLE -->
+                    <div class="apple-example">
+                      <span class="ae-label">Apple FY2025 Example</span>
+
+                      <p class="ae-line">
+                        Commercial paper = $<span class="ae-num">7,979</span>M
+                      </p>
+
+                      <p class="ae-line">
+                        Term debt (current) = $<span class="ae-num">12,350</span>M
+                      </p>
+
+                      <p class="ae-line">
+                        Term debt (non-current) = $<span class="ae-num">78,328</span>M
+                      </p>
+
+                      <p class="ae-line">
+                        EBITDA = $<span class="ae-num">144,748</span>M
+                      </p>
+
+                      <div class="ae-step">
+                        Total Interest-Bearing Debt =
+                        7,979 + 12,350 + 78,328 = 98,657
+                        <br>
+                        Debt-to-EBITDA = 98,657 ÷ 144,748
+                      </div>
+
+                      <div class="ae-result">
+                        = <strong>0.68×</strong>
+                      </div>
+
+                      <p class="ae-note">
+                        <strong>Interpretation:</strong>
+                        Apple had approximately $0.68 of interest-bearing debt for every
+                        $1.00 of EBITDA in FY2025. This indicates that its debt was relatively
+                        low compared with its annual operating earnings before interest,
+                        taxes, depreciation and amortization. However, Debt-to-EBITDA should
+                        be assessed alongside cash flow, debt-service coverage, debt maturity
+                        schedule, historical leverage and industry norms.
+                      </p>
+
+                      <p class="ae-note">
+                        <strong>Important:</strong>
+                        A Debt-to-EBITDA ratio should not be interpreted as the exact number
+                        of years required to repay debt. EBITDA is not fully available for
+                        debt repayment because the business must also fund taxes,
+                        working-capital requirements, capital expenditures, distributions
+                        and other cash obligations.
+                      </p>
+
+                    </div>
+
+
+                    <!-- EXPLANATION -->
+                    <div class="ratio-explanation">
+
+                      <div class="ratio-formula">
+                        \[
+                        \text{Debt-to-EBITDA}
+                        =
+                        \frac{
+                        \color{#1b59df}{\text{Total Interest-Bearing Debt}}
+                        }{
+                        \color{#1b59df}{\text{EBITDA}}
+                        }
+                        \]
+                      </div>
+
+                      <div class="ratio-field">
+
+                        <p class="ae-line">
+                          <strong>Total interest-bearing debt</strong>
+                          combines commercial paper and current and non-current term debt
+                          from the balance sheet.
+                        </p>
+
+                        <p class="ae-line">
+                          <strong>EBITDA</strong>
+                          represents earnings before interest, taxes, depreciation and
+                          amortization.
+                        </p>
+
+                      </div>
+
+
+                      <!-- MEANING -->
+                      <div class="ratio-field">
+                        <span class="rf-label">Meaning</span>
+
+                        <p>
+                          Debt-to-EBITDA compares the borrower's interest-bearing debt with
+                          its operating earnings before interest, taxes, depreciation and
+                          amortization.
+                        </p>
+
+                        <p>
+                          It is a cash-flow leverage measure that helps assess how large the
+                          borrower's debt burden is relative to its earnings capacity.
+                          A higher ratio generally indicates greater leverage and potentially
+                          greater repayment risk.
+                        </p>
+                      </div>
+
+
+                      <!-- WARNING SIGNALS -->
+                      <div class="ratio-field">
+                        <span class="rf-label">Potential Warning Signals</span>
+
+                        <ul>
+                          <li>
+                            Debt-to-EBITDA is high or increasing significantly over time.
+                          </li>
+
+                          <li>
+                            Debt increases without a sustainable increase in EBITDA.
+                          </li>
+
+                          <li>
+                            EBITDA is declining, volatile or dependent on non-recurring
+                            earnings.
+                          </li>
+
+                          <li>
+                            Adjusted EBITDA relies heavily on aggressive or unsupported
+                            add-backs.
+                          </li>
+
+                          <li>
+                            The borrower is taking on additional debt while debt-service
+                            coverage is weakening.
+                          </li>
+
+                          <li>
+                            Maintenance capital expenditures or working-capital requirements
+                            consume a substantial portion of operating cash flow.
+                          </li>
+
+                          <li>
+                            Debt-to-EBITDA is materially higher than the borrower's
+                            historical level or relevant industry peers.
+                          </li>
+                        </ul>
+                      </div>
+
+
+                      <!-- IMPORTANT NOTE -->
+                      <div class="ratio-field">
+                        <span class="rf-label">Important Note</span>
+
+                        <p>
+                          The definition of debt and EBITDA may differ across lenders and
+                          credit agreements. Analysts should confirm which debt obligations
+                          are included and whether any EBITDA adjustments or add-backs are
+                          permitted before calculating or comparing the ratio.
+                        </p>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </details>
+
               <!-- DEBT-TO-EQUITY -->
               <details class="learning-section ratio-details leverage-ratio" data-section="debt-to-equity">
                 <summary class="learning-summary" aria-expanded="false">
@@ -2083,11 +2255,8 @@
                         =
                         \frac{
                         \color{#0c7973}{
-                        \text{EBITDA}
-                        -
-                        \text{Unfinanced CapEx}
-                        -
-                        \text{Distributions}
+                          \text{Cash flow available for debt service​}
+                        
                         }
                         }{
                         \color{#0c7973}{
@@ -2100,7 +2269,14 @@
                       <!-- COMPONENTS -->
                       <div class="ratio-field">
                         <div class="ae-line">
-                          <strong>EBITDA</strong>
+                          <p>
+                          <strong>Cash flow available for debt service</strong>   = EBITDA - Unfinanced CapEx -Distributions
+                          </p>
+                          <p>or</p>
+                          <p>
+                          <strong>Cash flow available for debt service</strong>   = Net Income + Deferred Taxes + Depreciation + Interest on Debt
+                          </p>
+                                                    <strong>EBITDA</strong>
                           = Earnings Before Interest, Taxes, Depreciation and Amortization
                         </div>
 
@@ -5184,11 +5360,96 @@
                     <h4>Facility Terms</h4>
                     <ul>
                       <li>Facility type and amount</li>
-                      <li>Term and amortization period</li>
+                      <li>
+                        <span class="loan-term-tooltip" tabindex="0">
+                          Term and amortization period
+
+                          <span class="loan-term-popup">
+                            <strong>Term</strong>
+                            <p>
+                              The period until the loan matures and the remaining balance becomes due
+                              or must be refinanced.
+                            </p>
+
+                            <strong>Amortization</strong>
+                            <p>
+                              The period over which payments are calculated to fully repay the loan.
+                            </p>
+
+                            <strong>Balloon Payment</strong>
+                            <p>
+                              The remaining loan balance due at the end of the term when the
+                              amortization period is longer than the term.
+                            </p>
+
+                            <div class="loan-term-example">
+                              <strong>Example</strong>
+                              <p>
+                                A $500,000 loan has a <b>5-year term</b> and a
+                                <b>10-year amortization</b>. Payments are calculated over 10 years,
+                                but after 5 years the loan matures. The remaining balance is the
+                                <b>balloon payment</b> and must be repaid or refinanced.
+                              </p>
+                            </div>
+                          </span>
+                        </span>
+                      </li>
                       <li>Interest rate and fees</li>
                       <li>Payment frequency</li>
-                      <li>Grace period where justified</li>
-                      <li>Availability period and staged advances</li>
+
+                      <li>
+                        <span class="loan-term-tooltip" tabindex="0">
+                          Grace period where justified
+                          <span class="loan-term-popup">
+
+                            <strong>Grace Period</strong>
+                            <p>
+                              Grace Period: A specified period at the beginning of a loan during which the borrower is
+                              temporarily not required to make principal payments, or in some cases any payments.
+                              Interest
+                              may continue to accrue or remain payable during this period.
+                            </p>
+                            <div class="loan-term-example">
+                              <strong>Example</strong>
+                              <p>
+                                A company receives an equipment loan with a 6-month principal grace
+                                period. During the first 6 months, it pays interest only. Regular
+                                principal repayments begin after the grace period.
+                              </p>
+                            </div>
+                          </span>
+                        </span>
+                      </li>
+
+
+
+                      <li>
+                        <span class="loan-term-tooltip" tabindex="0">
+                          Availability period and staged advances
+                          <span class="loan-term-popup">
+
+                            <p>
+                              <strong>Availability Period</strong>: The specified period during which the borrower may
+                              draw approved funds under the facility.
+                            </p>
+
+                            <p>
+                              <strong>Staged Advances </strong>: Loan funds are released in portions rather than all
+                              at once, usually as specified conditions or project milestones are satisfied.
+
+                            </p>
+                            <div class="loan-term-example">
+                              <p>
+                                <strong>Example</strong>: A $2M construction loan has a 12-month availability period.
+                                Instead of receiving $2M immediately, the borrower receives advances as construction
+                                milestones are completed and verified.
+                              </p>
+                            </div>
+
+                          </span>
+                        </span>
+                      </li>
+
                       <li>Borrowing-base or clean-up requirements</li>
                     </ul>
                   </article>
@@ -5202,6 +5463,18 @@
                       <li>Maximum leverage</li>
                       <li>Minimum tangible net worth</li>
                       <li>Restrictions on distributions and new debt</li>
+                      <li>
+                        <span class="loan-term-tooltip" tabindex="0">
+                          Maximum loan-to-value (LTV), where applicable
+
+                          <span class="loan-term-popup">
+                            Applicable to asset-backed financing, such as
+                            <strong>Commercial Real Estate / Mortgage Lending</strong>
+                            and <strong>Equipment Financing</strong>, where the loan amount is assessed
+                            relative to the value of the underlying asset.
+                          </span>
+                        </span>
+                      </li>
                       <li>Financial reporting requirements</li>
                     </ul>
                   </article>
@@ -5528,21 +5801,21 @@
           <h3 class="practice-title">Exercises</h3>
 
 
-<h3 class="practice-title">Exercises</h3>
+          <h3 class="practice-title">Exercises</h3>
 
-<div class="exercise-grid">
-  <a class="exercise-card" href="excercises/Exercise_1_Cedar_Valley_Foods_Ltd.html">
-    <span class="exercise-number">Exercise 1</span>
-    <strong>Cedar Valley Foods Ltd.</strong>
-    <span class="exercise-action">Open case →</span>
-  </a>
+          <div class="exercise-grid">
+            <a class="exercise-card" href="excercises/Exercise_1_Cedar_Valley_Foods_Ltd.html">
+              <span class="exercise-number">Exercise 1</span>
+              <strong>Cedar Valley Foods Ltd.</strong>
+              <span class="exercise-action">Open case →</span>
+            </a>
 
-  <a class="exercise-card" href="excercises/Excercise_2_Maple_Ridge_Manufacturing_Ltd.html">
-    <span class="exercise-number">Exercise 2</span>
-    <strong>Maple Ridge Manufacturing Ltd.</strong>
-    <span class="exercise-action">Open case →</span>
-  </a>
-</div>
+            <a class="exercise-card" href="excercises/Excercise_2_Maple_Ridge_Manufacturing_Ltd.html">
+              <span class="exercise-number">Exercise 2</span>
+              <strong>Maple Ridge Manufacturing Ltd.</strong>
+              <span class="exercise-action">Open case →</span>
+            </a>
+          </div>
 
 
 
