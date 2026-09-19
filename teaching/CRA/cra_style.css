@@ -3246,8 +3246,8 @@ tr.flash-highlight td {
 
 .course-hero-visual img {
   display: block;
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 400px;
   object-fit: cover;
   object-position: center 35%;
   border-radius: 8px;
