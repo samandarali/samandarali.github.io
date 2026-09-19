@@ -3239,19 +3239,15 @@ tr.flash-highlight td {
 
 .course-hero-visual {
   display: flex;
-  align-items: center;
   justify-content: center;
-  min-height: 0;
+  align-items: center;
 }
 
 .course-hero-visual img {
   display: block;
-  width: 300px;
-  height: 400px;
-  object-fit: cover;
-  object-position: center 35%;
+  width: 200px;
+  height: auto;
   border-radius: 8px;
-  display: block;
 }
 
 
