@@ -4249,6 +4249,8 @@ details.learning-section.subsection-card>.learning-body {
   background: #f3f4f6;
 }
 
+
+
 .specialization-table th,
 .specialization-table td {
   padding: 1rem;
@@ -4279,6 +4281,24 @@ details.learning-section.subsection-card>.learning-body {
   background: #edf6f2;
 }
 
+.specialization-table {
+  width: 100%;
+  /* min-width: 900px; */
+  table-layout: fixed;
+}
+
+.specialization-table th:nth-child(1) { width: 10%; }
+.specialization-table th:nth-child(2) { width: 12%; }
+.specialization-table th:nth-child(3) { width: 12%; }
+.specialization-table th:nth-child(4) { width: 18%; }
+.specialization-table th:nth-child(5) { width: 20%; }
+
+.specialization-table th,
+.specialization-table td {
+  box-sizing: border-box;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
 
 .finance-tag {
   display: inline-block;
