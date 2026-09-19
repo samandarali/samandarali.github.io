@@ -3249,8 +3249,9 @@ tr.flash-highlight td {
   width: 200px;
   height: 200px;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 35%;
   border-radius: 8px;
+  display: block;
 }
 
 
