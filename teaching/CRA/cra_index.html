@@ -7,8 +7,6 @@
   <title>Commercial Credit Risk Analysis</title>
   <link rel="stylesheet" href="cra_style.css">
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-
 </head>
 
 <body>
@@ -120,17 +118,13 @@
 
 
 
-    <!-- <details id="financial-statements-section" class="learning-section stage-statements"
-      data-section="financial-statements" open>
-      <summary class="learning-summary stage-summary stage-summary-statements" aria-expanded="true">
-        <span class="stage-number stage-number-statements">2</span>
-
-        <h2 id="commercial-credit-assessment-heading">
-          Understand the Financial Statements
-        </h2>
-
-        <span class="chevron" aria-hidden="true">⌄</span>
-      </summary> -->
+    <nav class="section-nav" aria-label="Course sections">
+      <a href="#introduction-section" data-nav-section="introduction">1. Introduction</a>
+      <a href="#financial-statements-section" data-nav-section="financial-statements">2. Statements</a>
+      <a href="#financial-ratios-section" data-nav-section="financial-ratios">3. Ratios</a>
+      <a href="#credit-assessment-section" data-nav-section="credit-assessment">4. Assessment</a>
+      <a href="#practice-section" data-nav-section="practice">5. Practice</a>
+    </nav>
 
     <!-- 1. INTRODUCTION TO COMMERCIAL CREDIT RISK -->
     <details id="introduction-section" class="learning-section intro-accordion" data-section="introduction" open>
@@ -242,7 +236,7 @@
                   financially
                   strong is the borrower?</div>
                 <figure style="text-align: center; max-width: 900px; margin: 10px auto 0 auto;">
-                  <img src="images/balance_sheet.png" style="width: 100%; height: auto;" alt="Balence Sheet">
+                  <img src="images/balance_sheet.png" style="width: 100%; height: auto;" alt="Balance Sheet">
                   <figcaption style="font-size: 0.9em; color: #555; margin-top: 8px;">
                   </figcaption>
                 </figure>
@@ -278,7 +272,7 @@
                   and sustainable earnings?</div>
 
                 <figure style="text-align: center; max-width: 900px; margin: 10px auto 0 auto;">
-                  <img src="images/income_statement.png" style="width: 100%; height: auto;" alt="Incme Statement">
+                  <img src="images/income_statement.png" style="width: 100%; height: auto;" alt="Income Statement">
                   <figcaption style="font-size: 0.9em; color: #555; margin-top: 8px;">
                   </figcaption>
                 </figure>
@@ -295,7 +289,7 @@
 
                 <figure style="text-align: center; max-width: 900px; margin: 10px auto 0 auto;">
                   <img src="images/changes_in_equaity.png" style="width: 100%; height: auto;"
-                    alt="Statement of Changes in Equityt">
+                    alt="Statement of Changes in Equity">
                   <figcaption style="font-size: 0.9em; color: #555; margin-top: 8px;">
                   </figcaption>
                 </figure>
@@ -3779,7 +3773,7 @@
                   <li>Cash-flow stability</li>
                 </ul>
                 <figure>
-                  <img src="images/5C_capacity.jpg" style="width: 100%; height: auto;" alt="5-Cs">
+                  <img src="images/5C_capacity.jpg" style="width: 100%; height: auto;" alt="5 Cs: Capacity">
                   <figcaption style="font-size: 0.9em; color: #555; margin-top: 8px;">
                   </figcaption>
                 </figure>
@@ -3800,7 +3794,7 @@
                   <li>Owner equity contributions</li>
                 </ul>
                 <figure>
-                  <img src="images/5C_capital.jpg" alt="5-Cs Character">
+                  <img src="images/5C_capital.jpg" alt="5 Cs: Capital">
                 </figure>
               </article>
 
@@ -3824,7 +3818,7 @@
                   existing liens, recovery costs, and time required to realize the asset.
                 </p>
                 <figure>
-                  <img src="images/5C_collateral.jpg" alt="5-Cs Character">
+                  <img src="images/5C_collateral.jpg" alt="5 Cs: Collateral">
                 </figure>
               </article>
 
@@ -3842,7 +3836,7 @@
                   <li>Purpose of the loan</li>
                 </ul>
                 <figure>
-                  <img src="images/5C_condition.jpg" alt="5-Cs Character">
+                  <img src="images/5C_condition.jpg" alt="5 Cs: Conditions">
                 </figure>
               </article>
             </div>
@@ -6095,9 +6089,6 @@
         <div>
           <h3 class="practice-title">Exercises</h3>
 
-
-          <h3 class="practice-title">Exercises</h3>
-
           <div class="exercise-grid">
             <a class="exercise-card" href="excercises/Exercise_1_Cedar_Valley_Foods_Ltd.html">
               <span class="exercise-number">Exercise 1</span>
@@ -6128,13 +6119,16 @@
 
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white mt-12">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
-        <p class="text-sm">&copy; 2026 Mojgan Samandar. All rights reserved.</p>
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <p>&copy; 2026 Mojgan Samandar. All rights reserved.</p>
       </div>
     </footer>
   </main>
 
+  <button class="scroll-to-top" type="button" aria-label="Scroll to top" title="Scroll to top">
+    <span aria-hidden="true">↑</span>
+  </button>
 
   <script src="cra_scripts.js"></script>
 

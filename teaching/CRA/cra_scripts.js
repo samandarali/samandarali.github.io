@@ -875,6 +875,25 @@
   setActive(sections[0]?.id || 'introduction-section');
 })();
 
+/* -----------------------------------------------------------------
+   SCROLL TO TOP
+   ----------------------------------------------------------------- */
+(function () {
+  const button = document.querySelector('.scroll-to-top');
+  if (!button) return;
+
+  function updateVisibility() {
+    button.classList.toggle('is-visible', window.scrollY > 500);
+  }
+
+  button.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', updateVisibility, { passive: true });
+  updateVisibility();
+})();
+
 
 //////////////////////////////
 // For collateral //////////////////
@@ -946,3 +965,4 @@
 
 
   
+
