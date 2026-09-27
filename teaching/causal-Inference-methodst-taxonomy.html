@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Causal Inference Methods Taxonomy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../styles/causal-inference.css" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+
+  </style>
+</head>
+
+<body>
+
+<header class="top-header">
+  <div class="header-content">
+    <div class="header-text">
+      <a href="../index.html#teaching">&larr; Back to Knowledge Sharing page</a>
+
+      <h1>Causal Inference Methods Taxonomy</h1>
+
+      <p class="sub">
+        An explorable decision tree for choosing a causal-inference method.
+        Follow the branches from the central question down to a specific
+        technique, or jump straight to a method for a plain-language briefing.
+      </p>
+
+      <div class="toolbar">
+        <button id="expandAll" type="button">Expand all</button>
+        <button id="collapseAll" type="button">Collapse all</button>
+        <button id="openReferenceDiagram" type="button">
+          View complete reference diagram
+        </button>
+      </div>
+
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--root)"></i>Root topic</span>
+        <span><i class="swatch" style="background:var(--dec-magenta)"></i>Main decision</span>
+        <span><i class="swatch" style="background:var(--data-1)"></i>Data / design category</span>
+        <span><i class="swatch" style="background:var(--method-bg);border-color:var(--method-border)"></i>Method (click for details)</span>
+      </div>
+    </div>
+
+    <div class="course-hero-visual">
+      <img src="../images/mojgan.png" alt="Mojgan Samandar" class="hero-photo">
+    </div>
+  </div>
+</header>
+
+  <nav class="breadcrumb" aria-label="Selected path">
+    <span>Your path:</span>
+    <ol id="breadcrumbList">
+      <li><span>Causal Inference Methods</span></li>
+    </ol>
+  </nav>
+  <main>
+    <ul class="tree" id="tree" role="tree" aria-label="Causal inference methods taxonomy"></ul>
+  </main>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" id="modalBox">
+      <span class="tag" id="modalTag">Method</span>
+      <h2 id="modalTitle"></h2>
+      <div id="methodSections">
+        <h3>What it is</h3>
+        <p id="modalExplain"></p>
+        <h3>When to use it</h3>
+        <p id="modalWhen"></p>
+        <h3>Key assumptions &amp; limitations</h3>
+        <p id="modalAssume"></p>
+        <p class="placeholder-note">Placeholder content — replace with your team's vetted write-up before publishing.
+        </p>
+      </div>
+      <div id="defSections">
+        <p id="defIntro"></p>
+        <ul id="defBullets" class="def-bullets"></ul>
+        <div id="defVisualization" class="def-visualization" hidden></div>
+        <p id="defOutro"></p>
+      </div>
+      <div class="modal-actions">
+        <a id="modalLink" href="#" target="_blank" rel="noopener">Learn more →</a>
+        <button id="modalClose" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="diagram-backdrop" id="diagramBackdrop" aria-hidden="true">
+    <section class="diagram-modal" role="dialog" aria-modal="true" aria-labelledby="diagramTitle">
+
+      <div class="diagram-modal-header">
+        <div>
+          <p class="diagram-eyebrow">Reference diagram</p>
+          <h2 id="diagramTitle">Causal Inference Methods Taxonomy</h2>
+        </div>
+
+        <button class="diagram-close" id="diagramClose" type="button" aria-label="Close reference diagram">
+          ×
+        </button>
+      </div>
+
+      <div class="diagram-controls" aria-label="Diagram zoom controls">
+        <button id="zoomOut" type="button" aria-label="Zoom out">−</button>
+        <span id="zoomLevel" aria-live="polite">100%</span>
+        <button id="zoomIn" type="button" aria-label="Zoom in">+</button>
+        <button id="resetZoom" type="button">Reset view</button>
+      </div>
+
+      <div class="diagram-viewport" id="diagramViewport">
+        <img id="referenceDiagram" src="../images/causal-inference-taxonomy.png"
+          alt="Complete causal inference methods taxonomy reference diagram" />
+      </div>
+
+      <p class="diagram-help">
+        Use the mouse wheel to zoom and drag the image to move around.
+      </p>
+    </section>
+  </div>
+
+  <script>
+    // ---- Data ----------------------------------------------------------
+    const m = (name, d, w, a, slug) => ({ type: 'method', name, d, w, a, link: 'methodologies/' + slug + '.html' });
+    const data = {
+      name: 'Causal Inference Methods', type: 'root', children: [
+        {
+          name: 'Known Treatment', type: 'decision', color: 'magenta', def: {
+            intro: 'You know the treatment when exposure or intervention status is recorded and reliable for each unit. This is the standard setting assumed by most causal inference methods.',
+            bullets: [
+              'Documented administration: a program, drug, policy, or intervention was formally assigned and recorded — e.g. trial arm, program enrollment, purchase log.',
+              'Clear, verifiable exposure: exposure status comes from reliable administrative records, sensors, or verified logs rather than self-report.',
+              'Well-defined treatment: the treatment has a clear definition, start/stop dates, and, where relevant, dosage or intensity.',
+              'Known assignment mechanism: you know how units came to be treated — randomized, rule-based, or self-selected — even if that mechanism itself still needs to be modeled.'
+            ],
+            outro: 'Knowing the treatment lets you directly compare treated and untreated (or differently-treated) units, using experimental or quasi-experimental designs, without first having to model or infer who was actually treated.'
+          }, children: [
+            {
+              name: 'No Comparison / Control Units Available', type: 'decision', color: 'teal', children: [
+                {
+                  name: 'Time Series', type: 'data1', children: [
+                    {
+                      name: 'No Intervention', type: 'data2', children: [
+                        m('Granger Causality', 'Tests whether past values of one time series help predict another, beyond that series\' own past.', 'Two or more time series with no explicit intervention to compare.', 'Assumes linearity and stationarity; shows predictive precedence, not true causation.', 'granger-causality'),
+                        m('Forecasting / Counterfactual Prediction', 'Builds a model of the pre-period series to project what would have happened absent an event.', 'Estimating impact when there is no separate control series.', 'Forecast accuracy depends heavily on model fit and stable dynamics.', 'forecasting-counterfactual'),
+                        m('Time-Series Causal Discovery', 'Algorithmic methods that infer causal structure among multiple time series from observational data.', 'Exploratory discovery of lead-lag causal links across many series.', 'Sensitive to sampling frequency, confounding and nonstationarity.', 'time-series-causal-discovery')
+                      ]
+                    },
+                    {
+                      name: 'Before/After Intervention', type: 'data2', children: [
+                        m('Bayesian Structural Time Series', 'A Bayesian state-space model that forecasts the counterfactual and quantifies uncertainty around the effect.', 'Estimating the impact of a single intervention on one series.', 'Requires a well-fitting pre-period model and no concurrent shocks.', 'bayesian-structural-time-series'),
+                        m('Interrupted Time Series', 'Compares the level and trend of an outcome before and after a known intervention point.', 'Single-series before/after designs, e.g. policy changes.', 'Vulnerable to co-occurring events and requires enough pre/post points.', 'interrupted-time-series'),
+                        m('Causal Impact', 'Google\'s BSTS-based package for estimating causal effect of an intervention on a time series.', 'Practical implementation of counterfactual forecasting.', 'Same assumptions as BSTS; needs informative predictor series.', 'causal-impact'),
+                        m('ARIMA Intervention Analysis', 'Extends ARIMA models with intervention indicator variables to capture level/trend shifts.', 'Structured time series with a clear intervention date.', 'Requires correct ARIMA order specification and stationarity.', 'arima-intervention-analysis'),
+                        m('Transfer Function Models', 'Models how an input series dynamically influences an output series over time.', 'Quantifying lagged effects of one series on another.', 'Needs correct lag structure; sensitive to misspecification.', 'transfer-function-models'),
+                        m('Segmented Regression', 'Fits separate regression lines before and after the intervention to compare level and slope.', 'Simple, interpretable before/after trend comparison.', 'Assumes correct breakpoint and no other concurrent changes.', 'segmented-regression')
+                      ]
+                    }
+                  ]
+                },
+                {
+                  name: 'Panel', type: 'data1', children: [
+                    m('Random Effects', 'Models unit-specific intercepts as random draws from a distribution shared across units.', 'Panel data with no comparison group but repeated observations.', 'Requires effects uncorrelated with regressors; efficiency loss if violated.', 'random-effects'),
+                    m('Latent Growth Models', 'Estimates individual trajectories over time via latent intercept and slope factors.', 'Studying within-person change trajectories without a control arm.', 'Assumes correctly specified growth form and missing-at-random data.', 'latent-growth-models'),
+                    m('Growth Mixture Models', 'Extends latent growth models to identify unobserved subgroups with distinct trajectories.', 'Heterogeneous trajectory patterns suspected within a single sample.', 'Class enumeration is sensitive to model choices and sample size.', 'growth-mixture-models')
+                  ]
+                },
+                {
+                  name: 'Cross Sectional', type: 'data1', children: [
+                    m('Selection Models', 'Jointly models the selection/treatment process and the outcome to correct selection bias.', 'Single cross-section, no comparable untreated group.', 'Requires a credible exclusion restriction and correct functional form.', 'selection-models'),
+                    m('Heckman Selection Models', 'Two-step correction using an inverse Mills ratio from a selection equation.', 'Outcome observed only for a non-randomly selected subsample.', 'Sensitive to the exclusion restriction and normality assumption.', 'heckman-selection-models'),
+                    m('Causal Assumption-Based Regression', 'Regression adjustment justified by explicit structural/causal assumptions rather than design.', 'When only strong assumptions, not comparison data, identify the effect.', 'Entirely reliant on the stated causal assumptions holding.', 'causal-assumption-based-regression')
+                  ]
+                }
+              ]
+            },
+            {
+              name: 'Comparison / Control Units Available', type: 'decision', color: 'teal', children: [
+                {
+                  name: 'Randomized', type: 'data3', children: [
+                    m('PCT', 'Parallel/randomized controlled trial comparing randomly assigned treatment and control groups.', 'Gold-standard setting where randomization is feasible.', 'Requires proper randomization, compliance and no attrition bias.', 'pct'),
+                    m('A/B Testing', 'Online randomized experiment comparing two or more variants on a live metric.', 'Digital products with enough traffic to detect effects quickly.', 'Needs stable units, no interference/spillover between arms.', 'ab-testing'),
+                    m('Cluster RCT', 'Randomizes at the group/cluster level rather than the individual level.', 'When individual randomization is impractical or contamination is a risk.', 'Requires enough clusters; intra-cluster correlation reduces power.', 'cluster-rct')
+                  ]
+                },
+                {
+                  name: 'Non-Randomized', type: 'data3', children: [
+                    {
+                      name: 'Cross-Sectional', type: 'data1', children: [
+                        {
+                          name: 'Observed Confounders', type: 'data2', children: [
+                            m('Matching', 'Pairs treated and control units with similar covariate values before comparing outcomes.', 'Rich observed covariates, moderate sample sizes.', 'Assumes no unobserved confounding and good covariate overlap.', 'matching'),
+                            m('Regression Adjustment', 'Controls for observed covariates directly in an outcome regression model.', 'Simple adjustment when covariates are believed sufficient.', 'Sensitive to functional form and omitted-variable bias.', 'regression-adjustment'),
+                            m('IPW', 'Weights observations by the inverse of their estimated treatment propensity.', 'Estimating population-level effects with observed confounders.', 'Extreme weights from poor overlap can destabilize estimates.', 'ipw'),
+                            m('CEM', 'Coarsened exact matching prunes data to improve covariate balance across groups.', 'Improving balance before an outcome model, with interpretable strata.', 'Coarsening choices affect bias-variance trade-off and matched sample size.', 'cem'),
+                            m('PSM', 'Matches units on an estimated propensity score summarizing observed covariates.', 'Many covariates that can be summarized into one score.', 'Requires correct propensity model and common support.', 'psm')
+                          ]
+                        },
+                        {
+                          name: 'Unobserved Confounders', type: 'data2', children: [
+                            m('2SLS', 'Two-stage least squares uses instruments to purge endogenous regressors of bias.', 'A valid instrument is available for the treatment variable.', 'Instrument must be relevant and satisfy the exclusion restriction.', '2sls'),
+                            m("Control Function", "Models the treatment's residual from a first-stage equation to control endogeneity in the outcome model.", "Similar settings to IV with nonlinear or heterogeneous effects.", "Depends on correct first-stage specification and instrument validity.", "control-function"),
+                            m('IV', 'Instrumental variables identify causal effects using variation exogenous to unobserved confounders.', 'Unobserved confounding suspected and an instrument exists.', 'Weak or invalid instruments badly bias estimates.', 'iv')
+                          ]
+                        },
+                        {
+                          name: 'Heterogeneous Effects', type: 'data2', children: [
+                            m('DML', 'Double/debiased machine learning combines ML nuisance estimation with orthogonal moment conditions.', 'High-dimensional covariates with flexible functional forms.', 'Requires sample splitting and well-behaved nuisance estimators.', 'dml'),
+                            m('Causal Forest', 'Random-forest-based estimator of heterogeneous treatment effects across covariates.', 'Exploring how effects vary across subgroups.', 'Needs large samples; honest splitting required for valid inference.', 'causal-forest'),
+                            m('X-Learner', 'Meta-learner that models treated/control outcomes separately then combines via a propensity-weighted blend.', 'Imbalanced treatment groups with heterogeneous effects.', 'Performance depends on base-learner quality and propensity estimates.', 'x-learner'),
+                            m('T-Learner', 'Meta-learner that fits two separate outcome models for treated and control units.', 'Simple heterogeneous-effect estimation with enough data per arm.', 'Can be biased if base learners overfit or arms are imbalanced.', 't-learner'),
+                            m('S-Learner', 'Meta-learner that fits one outcome model with treatment as a feature.', 'Baseline heterogeneous-effect approach, simple to implement.', 'May underestimate treatment effect if the model regularizes it away.', 's-learner')
+                          ]
+                        },
+                        {
+                          name: 'Threshold Assignment', type: 'data2', children: [
+                            m('RCC', 'Regression discontinuity around a continuous running-variable cutoff (sharp RDD).', 'Treatment assigned by a known threshold on a continuous variable.', 'Effect is local to the cutoff; requires continuity of other factors.', 'rcc'),
+                            m('Fuzzy RDD', 'Regression discontinuity where the cutoff only shifts treatment probability, not certainty.', 'Threshold rules with imperfect compliance.', 'Requires an instrument-like interpretation of the discontinuity.', 'fuzzy-rdd')
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      name: 'Panel Data', type: 'data1', children: [
+                        {
+                          name: 'Before/After Available', type: 'data2', children: [
+                            m('Difference-in-Differences', 'Compares the change in outcomes over time between treated and control groups.', 'Panel data with treatment starting at a known time for some units.', 'Requires parallel trends absent treatment.', 'difference-in-differences'),
+                            m('Event Study', 'Extends DiD by estimating effects separately for each period relative to treatment.', 'Testing pre-trends and dynamic treatment effects.', 'Needs enough pre/post periods; sensitive to reference period choice.', 'event-study'),
+                            m('Staggered DiD', 'Modern DiD estimators for settings where units are treated at different times.', 'Rollouts where treatment timing varies across units.', 'Classic two-way fixed effects can be biased; needs robust estimators.', 'staggered-did'),
+                            m('Triple Difference', 'Adds a third comparison dimension to DiD to net out an additional confounding trend.', 'When a second control dimension can absorb a remaining confound.', 'Requires the added comparison to be unaffected by treatment.', 'triple-difference')
+                          ]
+                        },
+                        {
+                          name: 'No Before/After', type: 'data2', children: [
+                            m('Fixed Effects', 'Controls for all time-invariant unit-level confounding via unit dummies/demeaning.', 'Panel data without a clean pre/post structure.', 'Cannot address time-varying unobserved confounding.', 'fixed-effects'),
+                            m('Random Effects', 'Models unit heterogeneity as a random draw, gaining efficiency over fixed effects.', 'Unit effects plausibly uncorrelated with regressors.', 'Biased if the independence assumption is violated.', 'random-effects-panel'),
+                            m('Dynamic Panel Models', 'Includes lagged dependent variables, typically estimated via GMM (e.g. Arellano-Bond).', 'Outcomes with strong persistence/feedback over time.', 'Instrument proliferation and weak instruments are common pitfalls.', 'dynamic-panel-models')
+                          ]
+                        },
+                        {
+                          name: 'Time-Varying Treatment', type: 'data2', children: [
+                            m('TMLE', 'Targeted maximum likelihood estimation doubly-robustly estimates effects under time-varying treatment.', 'Longitudinal data with treatment and confounders evolving together.', 'Requires correct specification of at least one of two models.', 'tmle'),
+                            m('G-Computation', 'Simulates counterfactual outcome trajectories under hypothetical treatment regimes.', 'Complex time-varying confounding affected by prior treatment.', 'Highly sensitive to correct specification of the outcome model.', 'g-computation'),
+                            m('MSM', 'Marginal structural models use inverse-probability weighting to handle time-varying confounding.', 'Time-varying treatment with confounders influenced by past treatment.', 'Sensitive to positivity violations and weight instability.', 'msm')
+                          ]
+                        },
+                        {
+                          name: 'Heterogeneous Effects', type: 'data2', children: [
+                            m('DML', 'Applies double machine learning within a panel setting to flexibly estimate heterogeneous effects.', 'High-dimensional panel covariates.', 'Requires sample splitting and well-behaved nuisance models.', 'dml-panel'),
+                            m('Causal Forest', 'Estimates heterogeneous effects across units and time using tree ensembles.', 'Exploring effect heterogeneity in panel settings.', 'Needs large samples; honest splitting required.', 'causal-forest-panel')
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      name: 'Time Series', type: 'data1', children: [
+                        {
+                          name: 'One Treated Unit', type: 'data2', children: [
+                            m('Synthetic Control Method (SCM)', 'Builds a weighted combination of control units to approximate the treated unit\'s pre-treatment path.', 'A single treated unit (e.g. region) with several potential donor units.', 'Requires a good pre-treatment fit and no anticipation effects.', 'synthetic-control-method'),
+                            m('Bayesian Synthetic Control', 'Bayesian formulation of synthetic control providing full posterior uncertainty on the effect.', 'Same setting as SCM, wanting probabilistic inference.', 'Sensitive to prior choice and donor pool relevance.', 'bayesian-synthetic-control'),
+                            m('Augmented Synthetic Control (ASCM)', 'Adds a ridge-regression correction to synthetic control to reduce pre-treatment fit bias.', 'SCM settings where the donor pool fit is imperfect.', 'Regularization choice affects bias-variance trade-off.', 'augmented-synthetic-control')
+                          ]
+                        },
+                        {
+                          name: 'Multiple Treated Units', type: 'data2', children: [
+                            m('Synthetic DiD', 'Combines synthetic control weighting with a difference-in-differences estimator.', 'Several treated units with a suitable donor pool.', 'Requires overlap and stable donor pool composition over time.', 'synthetic-did'),
+                            m('Generalized Synthetic Control (GSC)', 'Extends synthetic control to multiple treated units and staggered adoption using factor models.', 'Staggered rollouts across many treated units.', 'Relies on correct factor-model specification.', 'generalized-synthetic-control')
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          name: 'No Known Treatment', type: 'decision', color: 'magenta', def: {
+            intro: 'You may not know the treatment in several situations:',
+            bullets: [
+              'Observational data with missing records: some people received a program, drug, policy exposure, or training, but the dataset does not record it.',
+              'Unobserved or informal exposure: for example, people may use a health supplement, receive informal mentoring, or change behaviour after a policy announcement without reporting it.',
+              'Treatment is measured with error: you observe a treatment variable, but it is inaccurate — such as self-reported medication use or an incorrect participation record.',
+              'The treatment is not clearly defined: "received better management," "was exposed to advertising," or "experienced economic uncertainty" may involve many different versions and intensities.',
+              'Unknown treatment timing or dosage: you may know someone was treated, but not when, how long, or how much treatment they received.',
+              'Hidden treatment assignment: in some administrative, medical, or proprietary datasets, the mechanism assigning treatment is unavailable or partly confidential.'
+            ],
+            outro: 'This is a serious problem because causal inference needs to compare outcomes under treatment versus no treatment. If treatment status is unknown, you generally cannot estimate a standard treatment effect without extra assumptions, better measurement, or methods designed for missing/misclassified treatment data.'
+          }, children: [
+            {
+              name: 'Expert Specifies DAG', type: 'decision', color: 'teal', children: [
+                m('DAGs', 'A directed acyclic graph encoding expert assumptions about causal relationships between variables.', 'A domain expert can specify plausible causal structure.', 'Conclusions only as valid as the assumed graph.', 'dags'),
+                m('Backdoor Criterion', 'A graphical rule for choosing a covariate set that blocks all confounding paths.', 'Identifying which variables to adjust for, given a DAG.', 'Requires the DAG to be correctly specified.', 'backdoor-criterion'),
+                m('Frontdoor Criterion', 'Identifies causal effects via a mediator when confounders are unobserved but a full mediating path is measured.', 'Unobserved confounding but a complete mediator path is available.', 'Requires no unblocked backdoor paths through the mediator.', 'frontdoor-criterion')
+              ]
+            },
+            {
+              name: 'Discover DAG', type: 'decision', color: 'teal', children: [
+                {
+                  name: 'Constraint-Based', type: 'data1', children: [
+                    m('PC', 'Uses conditional independence tests to prune and orient edges into a causal skeleton.', 'Moderate-dimensional data with reliable independence tests.', 'Assumes faithfulness and no unmeasured confounders (unless using FCI).', 'pc-algorithm'),
+                    m('FCI', 'Extends PC to allow for latent confounders, producing a partial ancestral graph.', 'Suspected latent confounding in the discovery process.', 'Output can be less fully oriented; still assumes faithfulness.', 'fci-algorithm')
+                  ]
+                },
+                {
+                  name: 'Score-Based', type: 'data1', children: [
+                    m('NOTEARS', 'Formulates DAG learning as a continuous optimization problem with an acyclicity constraint.', 'Continuous data where a differentiable search is desirable.', 'Sensitive to variable scaling and optimization local minima.', 'notears'),
+                    m('GES', 'Greedy equivalence search adds/removes edges to optimize a score over Markov equivalence classes.', 'Score-based structure learning with a well-defined scoring function.', 'Greedy search can miss the global optimum; assumes faithfulness.', 'ges')
+                  ]
+                },
+                {
+                  name: 'Functional Models', type: 'data1', children: [
+                    m('LiNGAM', 'Linear non-Gaussian acyclic models use non-Gaussianity to fully identify causal direction.', 'Linear relationships with non-Gaussian noise.', 'Fails if data are close to Gaussian or relationships are nonlinear.', 'lingam'),
+                    m('ANM', 'Additive noise models exploit asymmetries between cause and effect to infer direction.', 'Nonlinear bivariate or small causal-direction problems.', 'Sensitive to noise model misspecification.', 'anm')
+                  ]
+                },
+                {
+                  name: 'Hybrid', type: 'data1', children: [
+                    m('MMHC', 'Max-min hill-climbing combines constraint-based skeleton discovery with score-based edge orientation.', 'Larger variable sets needing a scalable hybrid approach.', 'Inherits assumptions from both constraint- and score-based methods.', 'mmhc'),
+                    m('FGES', 'Fast greedy equivalence search scales GES to high-dimensional data.', 'Large-scale score-based discovery problems.', 'Still assumes faithfulness and a well-specified score.', 'fges')
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    // Plain-language guidance for every branch.  Methods already carry their
+    // own detailed briefing in d (what), w (when), and a (limitations).
+    const definitions = {
+      'Causal Inference Methods': ['A family of approaches for estimating what would have happened if the same unit had received a different exposure or intervention.', ['Start by defining a treatment, an outcome, the target population, and the causal effect you want.', 'The central challenge is the missing counterfactual: a person cannot simultaneously be both treated and untreated.'], 'A method is credible only when its design and assumptions make the comparison group a reasonable stand-in for that missing counterfactual.'],
+      'No Comparison / Control Units Available': ['There is no observed untreated group that can directly represent the outcome without treatment.', ['You may rely on the unit’s own history, a forecasting model, or strong structural assumptions.', 'This is weaker than a well-designed treated-versus-control comparison because unrelated changes can look like treatment effects.'], 'Use the methods below cautiously and state clearly what makes the counterfactual believable.'],
+      'Comparison / Control Units Available': ['You have untreated, differently treated, or not-yet-treated units that may serve as a comparison group.', ['The key question is whether these units would have followed a similar outcome path without treatment.', 'Random assignment is strongest; non-randomized designs need adjustment, a rule, or a time pattern to reduce bias.'], 'Having controls does not automatically remove confounding; the design determines whether the comparison is valid.'],
+      'Time Series': ['The data follow one or more outcomes at regular times, such as daily sales, monthly unemployment, or weekly hospital admissions.', ['Time ordering helps you study changes around an intervention.', 'You must account for trend, seasonality, autocorrelation, and other events occurring at the same time.'], 'A time-series method estimates an effect from how the outcome evolves over time, not from a single before/after comparison.'],
+      'No Intervention': ['There is no defined intervention date to evaluate. The goal is usually exploratory: learn temporal relationships or predict an outcome.', ['Granger causality tests predictive lead–lag relationships.', 'Causal discovery methods add assumptions to orient possible causal links.'], 'Prediction alone is not proof of causation. A variable can predict another because both respond to an unmeasured common cause.'],
+      'Before/After Intervention': ['A specific intervention date is known, so the outcome can be compared before and after that date.', ['Look for a change in level, slope, or both.', 'Use sufficient observations on both sides of the intervention and check for seasonality and concurrent shocks.'], 'A visible change after the date is not automatically caused by the intervention.'],
+      'Panel': ['The same units are observed repeatedly over time—for example, firms by year or patients by month.', ['Panel data can separate persistent differences between units from within-unit change.', 'Repeated measurements also allow modelling of individual trajectories.'], 'Without a control group, panel methods still rely on assumptions about trends and unobserved changes.'],
+      'Cross Sectional': ['Each unit is observed at one point in time, with no repeated before/after observations.', ['You compare units that differ in exposure and measured characteristics.', 'Because timing is limited, causal claims depend heavily on the causal model and confounder measurement.'], 'Cross-sectional associations are particularly vulnerable to selection bias and omitted variables.'],
+      'Randomized': ['Treatment is assigned by chance, so—on average—treated and control units are comparable before treatment.', ['Randomization breaks the link between treatment and both observed and unobserved baseline confounders.', 'Analyse according to the assignment rule and check compliance, attrition, and interference between units.'], 'Randomization identifies the causal effect of assignment when it is implemented and analysed correctly.'],
+      'Non-Randomized': ['Treatment was self-selected, assigned by policy, or determined by circumstances rather than chance.', ['Treated and untreated units can differ before treatment.', 'Choose a design that addresses the most plausible source of bias: observed confounders, hidden confounders, a threshold rule, or pre-treatment trends.'], 'A non-randomized comparison needs an explicit identification strategy; an ordinary comparison of group averages is not enough.'],
+      'Observed Confounders': ['You believe the variables that jointly affect treatment and outcome are measured well enough to adjust for them.', ['Use matching, regression, weighting, or balancing methods to make treatment groups comparable on those variables.', 'Check overlap: each treated unit needs plausible comparison units with similar covariates.'], 'These methods cannot correct confounding from important unmeasured variables.'],
+      'Unobserved Confounders': ['Important common causes of treatment and outcome may be missing from the data.', ['Instrumental-variable approaches use an external source of treatment variation that affects the outcome only through treatment.', 'The validity of that instrument is the critical, usually untestable, assumption.'], 'Without a credible instrument or another design feature, unobserved confounding generally prevents causal identification.'],
+      'Heterogeneous Effects': ['The treatment effect may differ across people, firms, places, or baseline conditions.', ['Estimate conditional effects, not only one overall average.', 'Use subgroup results carefully: large flexible models need enough data and honest validation.'], 'Finding different effects is useful only if the groups and modelling choices were specified or validated responsibly.'],
+      'Threshold Assignment': ['Treatment is determined, fully or partly, by whether a measured score crosses a known cutoff.', ['Compare units just above and just below the cutoff; they should be very similar except for treatment probability.', 'The estimated effect is local: it applies near the threshold.'], 'The design fails if people can precisely manipulate the score or if other factors also jump at the cutoff.'],
+      'Panel Data': ['The same entities are measured in several periods, allowing you to use changes within entities and differences across entities.', ['This branch is for non-randomized designs with control units.', 'Choose based on whether a pre/post intervention structure, changing treatment, or staggered timing is available.'], 'Panel data do not solve time-varying confounding by themselves.'],
+      'Before/After Available': ['Outcomes are observed before and after treatment for treated and comparison units.', ['Difference-in-differences asks whether the treated group changed more than the comparison group.', 'Pre-treatment periods are used to assess whether the groups had similar trends.'], 'The key assumption is parallel trends: without treatment, the groups would have evolved similarly.'],
+      'No Before/After': ['You have repeated observations but not a clean intervention event with a usable pre/post comparison.', ['Fixed or random effects can handle stable differences between units.', 'Dynamic panels help when past outcomes affect current outcomes.'], 'These approaches cannot remove unobserved factors that change over time and affect both treatment and outcome.'],
+      'Time-Varying Treatment': ['Treatment, confounders, or both change over time, and past treatment can influence future confounders.', ['Standard regression can be biased if it controls for variables affected by earlier treatment.', 'Methods such as TMLE and marginal structural models are designed for this feedback structure.'], 'You need correctly measured treatment histories, positivity, and a credible model for treatment assignment over time.'],
+      'One Treated Unit': ['Only one unit receives the intervention, such as a city, country, company, or policy jurisdiction.', ['Construct a counterfactual from a weighted combination of untreated donor units.', 'Assess fit before treatment and use placebo or robustness checks.'], 'The method is persuasive only if the donor pool can closely reproduce the treated unit before treatment.'],
+      'Multiple Treated Units': ['Several units receive treatment, often at different times or with different intensity.', ['Methods can pool treated units while accounting for differences in their timing and pre-treatment patterns.', 'Check that the donor pool remains unaffected and comparable.'], 'Avoid estimators that inadvertently use already-treated units as controls when effects vary over time.'],
+      'Expert Specifies DAG': ['A domain expert draws a directed acyclic graph (DAG) that states the assumed causal relationships before estimation. This does not mean the treatment is unknown: treatment and outcome must still be defined and measured.', ['Example: for the effect of job training on income, education may affect both training participation and income, while training may improve skills, which then improve income.', 'The DAG says to adjust for education (a confounder), but not skills when estimating the total effect of training, because skills lie on the pathway from training to income.', 'Use the graph to select a valid adjustment set, then estimate the effect with regression, matching, weighting, or another suitable method.'], 'A DAG makes assumptions explicit; it does not prove that its arrows are correct.'],
+      'Discover DAG': ['Algorithms infer parts of a causal graph from patterns in observational data, often conditional independencies, fit scores, or functional asymmetries.', ['Use this for exploratory structure learning when expert knowledge is incomplete.', 'Treat the output as a hypothesis to challenge with expert knowledge, new data, and sensitivity analysis.'], 'Observational data alone often identify an equivalence class of possible graphs, not one proven causal graph.'],
+      'Constraint-Based': ['These algorithms use conditional-independence tests to remove impossible connections and orient edges where the data allow.', ['PC assumes no important hidden confounders; FCI relaxes that but often returns partially oriented edges.', 'Results depend on reliable independence tests and adequate sample size.'], 'Small changes in tests or data can change the learned graph.'],
+      'Score-Based': ['These algorithms search for a graph that best balances fit to the data and model complexity according to a scoring rule.', ['They compare many candidate DAGs and retain high-scoring structures.', 'They usually identify a Markov-equivalence class rather than every causal direction.'], 'A good score does not establish a causal interpretation without the modelling assumptions.'],
+      'Functional Models': ['These approaches use assumptions about the functional form and noise distribution to identify causal direction.', ['LiNGAM uses linear relationships with non-Gaussian noise.', 'Additive-noise models use asymmetry between cause-to-effect and effect-to-cause equations.'], 'Their extra identifying power comes directly from assumptions that can be wrong in real data.'],
+      'Hybrid': ['Hybrid algorithms combine constraint-based filtering with score-based search to improve speed or stability.', ['They commonly use independence tests to narrow possible edges, then optimize a score to orient them.', 'They can be useful for many variables but inherit assumptions from both components.'], 'Interpret the learned graph as a constrained proposal, not a verified causal map.']
+    };
+
+    function applyDefinitions(node) {
+      if (node.type !== 'method' && !node.def && definitions[node.name]) {
+        const [intro, bullets, outro] = definitions[node.name];
+        node.def = { intro, bullets, outro };
+      }
+      (node.children || []).forEach(applyDefinitions);
+    }
+    applyDefinitions(data);
+
+    // ---- Render ----------------------------------------------------------
+    const treeEl = document.getElementById('tree');
+    let idCounter = 0;
+
+    function colorClass(node, depth) {
+      if (node.type === 'root') return 'root';
+      if (node.type === 'decision') return 'decision ' + node.color;
+      if (node.type === 'data1') return 'data1';
+      if (node.type === 'data2') return 'data2';
+      if (node.type === 'data3') return 'data3';
+      if (node.type === 'method') return 'method';
+      return 'data2';
+    }
+
+    function buildNode(node, depth, path) {
+      const li = document.createElement('li');
+      li.setAttribute('role', 'treeitem');
+      const hasKids = !!(node.children && node.children.length);
+      if (!hasKids) li.classList.add('no-children');
+
+      const row = document.createElement('div');
+      row.className = 'node-row';
+
+      const myId = 'n' + (idCounter++);
+      const fullPath = path.concat([node.name]);
+
+      const toggle = document.createElement('button');
+      toggle.className = 'toggle';
+      toggle.type = 'button';
+      toggle.setAttribute('aria-label', hasKids ? ('Toggle ' + node.name + ' branch') : '');
+      toggle.textContent = '▸';
+      if (hasKids) {
+        const startOpen = depth < 2; // root(0) + first decision level(1) visible open
+        toggle.setAttribute('aria-expanded', startOpen ? 'true' : 'false');
+      }
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'node ' + colorClass(node, depth) + (hasKids ? '' : ' leaf');
+      btn.textContent = node.name;
+      btn.dataset.id = myId;
+
+      row.appendChild(toggle);
+      row.appendChild(btn);
+      // Every box has an information button. Branches open a definition;
+      // methods open the same detailed briefing as the method box itself.
+      {
+        const infoBtn = document.createElement('button');
+        infoBtn.type = 'button';
+        infoBtn.className = 'info-btn';
+        infoBtn.textContent = 'i';
+        infoBtn.setAttribute('aria-label', 'What does "' + node.name + '" mean?');
+        infoBtn.setAttribute('aria-haspopup', 'dialog');
+        infoBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          setActive(li, fullPath);
+          node.type === 'method' ? openModal(node) : openDefModal(node);
+        });
+        row.appendChild(infoBtn);
+      }
+      li.appendChild(row);
+
+      let childrenWrap;
+      if (hasKids) {
+        childrenWrap = document.createElement('div');
+        childrenWrap.className = 'children';
+        const inner = document.createElement('div');
+        inner.className = 'inner';
+        const ul = document.createElement('ul');
+        ul.setAttribute('role', 'group');
+        node.children.forEach(c => ul.appendChild(buildNode(c, depth + 1, fullPath)));
+        inner.appendChild(ul);
+        childrenWrap.appendChild(inner);
+        const startOpen = depth < 2;
+        if (!startOpen) childrenWrap.classList.add('collapsed');
+        li.appendChild(childrenWrap);
+
+        const doToggle = () => {
+          const open = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+          childrenWrap.classList.toggle('collapsed', open);
+          setActive(li, fullPath);
+        };
+        toggle.addEventListener('click', doToggle);
+        btn.addEventListener('click', doToggle);
+      } else {
+        btn.setAttribute('aria-haspopup', 'dialog');
+        btn.addEventListener('click', () => { setActive(li, fullPath); openModal(node); });
+      }
+
+      return li;
+    }
+
+    function setActive(li, fullPath) {
+      document.querySelectorAll('.node.active').forEach(n => n.classList.remove('active'));
+      document.querySelectorAll('li.on-path').forEach(n => n.classList.remove('on-path'));
+      const target = li.querySelector(':scope > .node-row > .node');
+      if (target) target.classList.add('active');
+      let cur = li;
+      while (cur) { cur.classList && cur.classList.add('on-path'); cur = cur.parentElement && cur.parentElement.closest('li'); }
+      renderBreadcrumb(fullPath);
+    }
+
+    function renderBreadcrumb(pathArr) {
+      const list = document.getElementById('breadcrumbList');
+      list.innerHTML = '';
+      pathArr.forEach((p, i) => {
+        const li = document.createElement('li');
+        if (i === pathArr.length - 1) { const sp = document.createElement('span'); sp.textContent = p; li.appendChild(sp); }
+        else li.textContent = p;
+        list.appendChild(li);
+      });
+    }
+
+    data.children && (function () {
+      const rootLi = buildNode(data, 0, []);
+      treeEl.appendChild(rootLi);
+    })();
+
+    document.getElementById('expandAll').addEventListener('click', () => {
+      document.querySelectorAll('.toggle[aria-expanded]').forEach(t => t.setAttribute('aria-expanded', 'true'));
+      document.querySelectorAll('.children').forEach(c => c.classList.remove('collapsed'));
+    });
+    document.getElementById('collapseAll').addEventListener('click', () => {
+      document.querySelectorAll('.toggle[aria-expanded]').forEach((t, i) => { if (i > 0) t.setAttribute('aria-expanded', 'false'); });
+      document.querySelectorAll('.children').forEach((c, i) => { if (i > 0) c.classList.add('collapsed'); });
+      document.querySelector('.tree > li > .children') && document.querySelector('.tree > li > .children').classList.remove('collapsed');
+      document.querySelector('.tree > li > .node-row > .toggle') && document.querySelector('.tree > li > .node-row > .toggle').setAttribute('aria-expanded', 'true');
+    });
+
+    // ---- Modal ----------------------------------------------------------
+    const backdrop = document.getElementById('modalBackdrop');
+    const modalBox = document.getElementById('modalBox');
+    let lastFocused = null;
+
+    function openModal(node) {
+      document.getElementById('modalTag').textContent = 'Method';
+
+      document.getElementById('methodSections').style.display = 'block';
+      document.getElementById('defSections').style.display = 'none';
+      document.getElementById('modalLink').style.display = 'inline-flex';
+
+      document.getElementById('modalTitle').textContent = node.name;
+      document.getElementById('modalExplain').textContent = node.d;
+      document.getElementById('modalWhen').textContent = node.w;
+      document.getElementById('modalAssume').textContent = node.a;
+      document.getElementById('modalLink').href = node.link;
+
+      showModal();
+    }
+
+    function openDefModal(node) {
+      document.getElementById('modalTag').textContent = 'Definition';
+
+      document.getElementById('methodSections').style.display = 'none';
+      document.getElementById('defSections').style.display = 'block';
+      document.getElementById('modalLink').style.display = 'none';
+
+      document.getElementById('modalTitle').textContent = node.name;
+      document.getElementById('defIntro').textContent = node.def.intro;
+      document.getElementById('defOutro').textContent = node.def.outro;
+      const visualization = document.getElementById('defVisualization');
+      visualization.hidden = node.name !== 'Expert Specifies DAG';
+      visualization.innerHTML = node.name === 'Expert Specifies DAG' ? `
+        <p class="visualization-label">Example: effect of job training on income</p>
+        <svg viewBox="0 0 620 210" role="img" aria-label="Education affects job training and income; job training affects skills, which affect income.">
+          <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 Z"/></marker></defs>
+          <path d="M160 73 L255 73 M380 73 L438 73 M317 100 L317 125 M380 152 L438 92" marker-end="url(#arrow)"/>
+          <rect x="20" y="45" width="140" height="55" rx="12"/><text x="90" y="78">Education</text>
+          <rect x="255" y="45" width="125" height="55" rx="12"/><text x="317" y="78">Job training</text>
+          <rect x="438" y="45" width="130" height="55" rx="12"/><text x="503" y="78">Income</text>
+          <rect x="255" y="125" width="125" height="55" rx="12"/><text x="317" y="158">Skills</text>
+          <path class="curve" d="M90 100 C90 205, 503 205, 503 100" marker-end="url(#arrow)"/>
+        </svg>
+        <p class="visualization-note"><strong>Adjust for education.</strong> Do not adjust for skills when estimating the total effect of training on income.</p>` : '';
+
+      const list = document.getElementById('defBullets');
+      list.innerHTML = '';
+
+      node.def.bullets.forEach((bullet) => {
+        const li = document.createElement('li');
+        li.textContent = bullet;
+        list.appendChild(li);
+      });
+
+      showModal();
+    }
+
+    function showModal() {
+      lastFocused = document.activeElement;
+      backdrop.classList.add('show');
+      document.getElementById('modalClose').focus();
+      document.addEventListener('keydown', onKeydown);
+    }
+    function closeModal() {
+      backdrop.classList.remove('show');
+      document.removeEventListener('keydown', onKeydown);
+      if (lastFocused) lastFocused.focus();
+    }
+    function onKeydown(e) {
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Tab') {
+        const focusables = modalBox.querySelectorAll('a,button');
+        const first = focusables[0], last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
+
+
+    const openReferenceDiagram = document.getElementById('openReferenceDiagram');
+    const diagramBackdrop = document.getElementById('diagramBackdrop');
+    const diagramClose = document.getElementById('diagramClose');
+    const diagramViewport = document.getElementById('diagramViewport');
+    const referenceDiagram = document.getElementById('referenceDiagram');
+    const zoomIn = document.getElementById('zoomIn');
+    const zoomOut = document.getElementById('zoomOut');
+    const resetZoom = document.getElementById('resetZoom');
+    const zoomLevel = document.getElementById('zoomLevel');
+
+    let scale = 1;
+    let x = 20;
+    let y = 20;
+    let dragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    function updateDiagram() {
+      referenceDiagram.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+      zoomLevel.textContent = `${Math.round(scale * 100)}%`;
+    }
+
+    function resetDiagram() {
+      scale = 1;
+      x = 20;
+      y = 20;
+      updateDiagram();
+    }
+
+    function closeDiagram() {
+      diagramBackdrop.classList.remove('is-open');
+      diagramBackdrop.setAttribute('aria-hidden', 'true');
+      openReferenceDiagram.focus();
+    }
+
+    openReferenceDiagram.addEventListener('click', () => {
+      diagramBackdrop.classList.add('is-open');
+      diagramBackdrop.setAttribute('aria-hidden', 'false');
+      resetDiagram();
+      diagramClose.focus();
+    });
+
+    diagramClose.addEventListener('click', closeDiagram);
+
+    diagramBackdrop.addEventListener('click', (event) => {
+      if (event.target === diagramBackdrop) closeDiagram();
+    });
+
+    zoomIn.addEventListener('click', () => {
+      scale = Math.min(scale + 0.2, 3);
+      updateDiagram();
+    });
+
+    zoomOut.addEventListener('click', () => {
+      scale = Math.max(scale - 0.2, 0.4);
+      updateDiagram();
+    });
+
+    resetZoom.addEventListener('click', resetDiagram);
+
+    diagramViewport.addEventListener('wheel', (event) => {
+      event.preventDefault();
+      scale = Math.min(Math.max(scale - event.deltaY * 0.001, 0.4), 3);
+      updateDiagram();
+    }, { passive: false });
+
+    diagramViewport.addEventListener('pointerdown', (event) => {
+      dragging = true;
+      startX = event.clientX - x;
+      startY = event.clientY - y;
+      diagramViewport.classList.add('is-dragging');
+      diagramViewport.setPointerCapture(event.pointerId);
+    });
+
+    diagramViewport.addEventListener('pointermove', (event) => {
+      if (!dragging) return;
+      x = event.clientX - startX;
+      y = event.clientY - startY;
+      updateDiagram();
+    });
+
+    diagramViewport.addEventListener('pointerup', () => {
+      dragging = false;
+      diagramViewport.classList.remove('is-dragging');
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && diagramBackdrop.classList.contains('is-open')) {
+        closeDiagram();
+      }
+    });
+
+  </script>
+</body>
+
+</html>
