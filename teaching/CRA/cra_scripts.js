@@ -966,3 +966,81 @@
 
   
 
+
+
+
+  /* 12 steps */
+document.querySelectorAll('[data-assessment-jump]').forEach(item=> {
+    item.addEventListener('click', event=> {
+        event.preventDefault();
+
+        const target=document.getElementById(item.dataset.assessmentJump);
+        if ( !target) return;
+
+        target.setAttribute('open', '');
+
+        const summary=target.querySelector('.learning-summary');
+        if (summary) summary.setAttribute('aria-expanded', 'true');
+
+        document.querySelectorAll('.assessment-step-link').forEach(link=> {
+            link.classList.remove('is-active');
+          });
+        item.classList.add('is-active');
+
+        setTimeout(()=> {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+        }
+
+        , 80);
+
+      target.classList.add('assessment-target-highlight');
+
+      setTimeout(()=> {
+          target.classList.remove('assessment-target-highlight');
+        }
+
+        , 1800);
+    });
+});
+
+
+const stepLinks = document.querySelectorAll('.assessment-step-link');
+const stepEls = [...stepLinks].map(l => document.getElementById(l.dataset.assessmentJump));
+
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    stepLinks.forEach(l =>
+      l.classList.toggle('is-active', l.dataset.assessmentJump === entry.target.id));
+  });
+}, { rootMargin: '-25% 0px -65% 0px' });   // triggers when a step is near the top third
+
+stepEls.forEach(el => el && spy.observe(el));
+
+
+
+/* Floating 12-step nav */
+(function () {
+  const staticNav = document.querySelector('.assessment-step-nav');
+  const lastStep  = document.getElementById('assessment-step-12');
+  if (!staticNav || !lastStep) return;
+
+  const floatNav = staticNav.cloneNode(true);
+  floatNav.classList.remove('assessment-step-nav');
+  floatNav.classList.add('assessment-floating-nav');
+  floatNav.setAttribute('aria-label', 'Assessment steps (floating)');
+  document.body.appendChild(floatNav);
+
+  function update() {
+    const pastStaticNav = staticNav.getBoundingClientRect().bottom < 0;
+    const beforeEnd     = lastStep.getBoundingClientRect().bottom > window.innerHeight * 0.4;
+    floatNav.classList.toggle('is-visible', pastStaticNav && beforeEnd);
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();

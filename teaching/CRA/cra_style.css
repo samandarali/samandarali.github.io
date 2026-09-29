@@ -4354,11 +4354,25 @@ details.learning-section.subsection-card>.learning-body {
   table-layout: fixed;
 }
 
-.specialization-table th:nth-child(1) { width: 10%; }
-.specialization-table th:nth-child(2) { width: 12%; }
-.specialization-table th:nth-child(3) { width: 12%; }
-.specialization-table th:nth-child(4) { width: 18%; }
-.specialization-table th:nth-child(5) { width: 20%; }
+.specialization-table th:nth-child(1) {
+  width: 10%;
+}
+
+.specialization-table th:nth-child(2) {
+  width: 12%;
+}
+
+.specialization-table th:nth-child(3) {
+  width: 12%;
+}
+
+.specialization-table th:nth-child(4) {
+  width: 18%;
+}
+
+.specialization-table th:nth-child(5) {
+  width: 20%;
+}
 
 .specialization-table th,
 .specialization-table td {
@@ -4909,4 +4923,169 @@ details.purpose-of-financing>.table-wrapper {
 .loan-term-tooltip:focus .loan-term-popup {
   visibility: visible;
   opacity: 1;
+}
+
+
+
+/* 12 steps */
+
+.assessment-layout {
+  display: grid;
+  grid-template-columns: 255px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  margin-top: 22px;
+}
+
+.assessment-step-nav {
+  padding: 16px 12px;
+  background: #f7fbfa;
+  border: 1px solid #b9d8d2;
+  border-radius: 14px;
+  box-shadow: 0 5px 16px rgba(15, 61, 58, 0.08);
+}
+
+.assessment-step-nav-title {
+  margin: 0 0 10px;
+  padding: 0 8px 10px;
+  border-bottom: 1px solid #cfe2de;
+  color: #0f3d3a;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.assessment-step-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 8px;
+  color: #294a47;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 650;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.assessment-step-link span {
+  display: grid;
+  flex: 0 0 25px;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  color: #fff;
+  background: #0f766e;
+  border-radius: 50%;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.assessment-step-link:hover,
+.assessment-step-link:focus-visible,
+.assessment-step-link.is-active {
+  color: #fff;
+  background: #0f3d3a;
+  outline: none;
+}
+
+.assessment-step-link:hover span,
+.assessment-step-link:focus-visible span,
+.assessment-step-link.is-active span {
+  color: #0f3d3a;
+  background: #d6fca4;
+}
+
+.assessment-steps {
+  min-width: 0;
+}
+
+/* Do not apply the old side margins once steps are in the right column */
+.assessment-steps > .learning-section[data-section="assessment-process"] {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (max-width: 900px) {
+  .assessment-layout {
+    display: block;
+  }
+
+  .assessment-step-nav {
+    position: static;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    white-space: nowrap;
+  }
+
+  .assessment-step-nav-title {
+    display: none;
+  }
+
+  .assessment-step-link {
+    flex: 0 0 auto;
+    padding: 7px 10px;
+  }
+}
+
+.assessment-step-nav {
+  position: sticky;
+  top: 84px;                       /* sits below the sticky .section-nav (top:10px + its height) */
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+/* sticky breaks if any ancestor clips overflow */
+#credit-assessment-section,
+#credit-assessment-section > .learning-body {
+  overflow: visible;
+}
+
+
+/* Floating copy of the 12-step nav (created by JS) */
+.assessment-floating-nav {
+  position: fixed;
+  right: 16px;
+  top: 50%;
+  z-index: 60;
+  width: 235px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 16px 12px;
+  background: #f7fbfa;
+  border: 1px solid #b9d8d2;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(15, 61, 58, 0.18);
+
+  /* hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-50%) translateX(24px);
+  transition: opacity .25s ease, transform .25s ease, visibility .25s;
+}
+
+.assessment-floating-nav.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Narrower screens: show only the number circles so it doesn't cover the content */
+@media (max-width: 1500px) {
+  .assessment-floating-nav { width: auto; padding: 10px 8px; }
+  .assessment-floating-nav .assessment-step-nav-title { display: none; }
+  .assessment-floating-nav .assessment-step-link { font-size: 0; gap: 0; }   /* hides label text */
+  .assessment-floating-nav .assessment-step-link span { font-size: .72rem; }
+}
+
+/* On tablets/phones the original horizontal bar is enough */
+@media (max-width: 900px) {
+  .assessment-floating-nav { display: none; }
 }
