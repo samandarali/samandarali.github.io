@@ -2567,9 +2567,7 @@ tr.flash-highlight td {
 
 /* Sticky navigation for the five major destinations. */
 .section-nav {
-  position: sticky;
-  top: 10px;
-  z-index: 40;
+  position: static;
   display: flex;
   justify-content: center;
   gap: 6px;
@@ -5003,7 +5001,7 @@ details.purpose-of-financing>.table-wrapper {
 }
 
 /* Do not apply the old side margins once steps are in the right column */
-.assessment-steps > .learning-section[data-section="assessment-process"] {
+.assessment-steps>.learning-section[data-section="assessment-process"] {
   margin-left: 0;
   margin-right: 0;
 }
@@ -5033,16 +5031,11 @@ details.purpose-of-financing>.table-wrapper {
   }
 }
 
-.assessment-step-nav {
-  position: sticky;
-  top: 84px;                       /* sits below the sticky .section-nav (top:10px + its height) */
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
-}
+
 
 /* sticky breaks if any ancestor clips overflow */
 #credit-assessment-section,
-#credit-assessment-section > .learning-body {
+#credit-assessment-section>.learning-body {
   overflow: visible;
 }
 
@@ -5079,13 +5072,29 @@ details.purpose-of-financing>.table-wrapper {
 
 /* Narrower screens: show only the number circles so it doesn't cover the content */
 @media (max-width: 1500px) {
-  .assessment-floating-nav { width: auto; padding: 10px 8px; }
-  .assessment-floating-nav .assessment-step-nav-title { display: none; }
-  .assessment-floating-nav .assessment-step-link { font-size: 0; gap: 0; }   /* hides label text */
-  .assessment-floating-nav .assessment-step-link span { font-size: .72rem; }
+  .assessment-floating-nav {
+    width: auto;
+    padding: 10px 8px;
+  }
+
+  .assessment-floating-nav .assessment-step-nav-title {
+    display: none;
+  }
+
+  .assessment-floating-nav .assessment-step-link {
+    font-size: 0;
+    gap: 0;
+  }
+
+  /* hides label text */
+  .assessment-floating-nav .assessment-step-link span {
+    font-size: .72rem;
+  }
 }
 
 /* On tablets/phones the original horizontal bar is enough */
 @media (max-width: 900px) {
-  .assessment-floating-nav { display: none; }
+  .assessment-floating-nav {
+    display: none;
+  }
 }
