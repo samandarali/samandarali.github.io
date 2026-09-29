@@ -2567,7 +2567,9 @@ tr.flash-highlight td {
 
 /* Sticky navigation for the five major destinations. */
 .section-nav {
-  position: static;
+  position: sticky; /* not fixed */
+  top: 0;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   gap: 6px;
