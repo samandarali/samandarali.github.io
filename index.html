@@ -23,6 +23,7 @@
     <!-- <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" /> -->
 
 
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles/style-teaching.css" />
     <style>
         :root {
@@ -35,7 +36,7 @@
             --slate-mid: #312e81;
             --slate-soft: #6d28d9;
             --mint: #ede9fe;
-            --cream: #fafafa;
+            --cream: #fbf9f6;
             --text-main: #1f2937;
             --text-muted: #6b7280;
         }
@@ -95,7 +96,8 @@
 
         .image-div {
             border: none;
-            height: 100%;
+            height: auto;
+            align-self: start;
         }
 
         /* ── PROJECT CARDS ── */
@@ -177,6 +179,391 @@
             border-color: #7c3aed;
             box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
         }
+
+        /* ── ABOUT PAGE (editorial redesign) ── */
+        body {
+            overflow-x: clip;
+        }
+
+        .about-page {
+            --navy: #14173d;
+            --ink: #4b5068;
+            --lav: #e4daf7;
+            --purple: #6d3bd2;
+            --purple-dark: #5527b0;
+            --warm: #fbf9f6;
+        }
+
+        .about-page h2,
+        .about-page h3 {
+            font-family: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+            color: var(--navy);
+            font-weight: 400;
+        }
+
+        .about-card,
+        .cta-card {
+            background: #fff;
+            border: 1px solid #f0eaf9;
+            border-radius: 24px;
+            box-shadow: 0 1px 2px rgba(20, 23, 61, .04), 0 12px 36px rgba(109, 59, 210, .08);
+        }
+
+        .about-card {
+            padding: clamp(24px, 4vw, 48px);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        @media (min-width: 768px) {
+            .about-grid {
+                grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+                gap: 56px;
+            }
+        }
+
+        .about-text h2 {
+            font-size: clamp(2.2rem, 4vw, 3rem);
+            line-height: 1.1;
+            margin: 0;
+        }
+
+        .about-rule {
+            height: 1px;
+            width: 100%;
+            background: linear-gradient(90deg, var(--lav), transparent);
+            margin: 18px 0 24px;
+        }
+
+        .about-rule.center {
+            width: 120px;
+            margin: 14px auto 0;
+            background: var(--lav);
+        }
+
+        .about-text p {
+            font-size: 1.075rem;
+            line-height: 1.75;
+            color: var(--ink);
+            margin: 0 0 1.1em;
+            max-width: 62ch;
+        }
+
+        .about-text .about-lead {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 1.4rem;
+            color: var(--navy);
+        }
+
+        .about-photo {
+            align-self: start;
+        }
+
+        .about-photo img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 20px;
+            border: 6px solid #fff;
+            box-shadow: 0 14px 40px rgba(20, 23, 61, .16);
+        }
+
+        /* Full-bleed services band */
+        .services-band {
+            width: 100vw;
+            margin: 56px 0 56px calc(50% - 50vw);
+            padding: 56px 0 40px;
+            background: linear-gradient(180deg, #f6f1ff 0%, #f1eafd 100%);
+            border-block: 1px solid var(--lav);
+        }
+
+        .services-inner {
+            max-width: 1152px;
+            margin: 0 auto;
+            padding: 0 16px;
+            text-align: center;
+        }
+
+        .services-title {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            line-height: 1.1;
+            margin: 0;
+        }
+
+        .carousel3d {
+            position: relative;
+            margin-top: 28px;
+            outline-offset: 6px;
+            border-radius: 24px;
+        }
+
+        .svc-stage {
+            position: relative;
+            height: 340px;
+            perspective: 1100px;
+            touch-action: pan-y;
+        }
+
+        .svc-card {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            width: 260px;
+            height: 290px;
+            margin-left: -130px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 10px;
+            padding: 24px 22px;
+            background: #fff;
+            border: 1px solid #ece4fb;
+            border-radius: 22px;
+            box-shadow: 0 10px 30px rgba(20, 23, 61, .10);
+            cursor: pointer;
+            transition: transform .55s cubic-bezier(.2, .7, .2, 1), opacity .4s, box-shadow .4s, border-color .4s;
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+
+        .svc-card.is-active {
+            border-color: #b79af0;
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, .14), 0 24px 50px rgba(109, 59, 210, .22);
+            cursor: default;
+        }
+
+        .svc-icon {
+            width: 52px;
+            height: 52px;
+            fill: none;
+            stroke: var(--purple);
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .svc-card h3 {
+            font-size: 1.3rem;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .svc-card p {
+            font-size: .93rem;
+            line-height: 1.55;
+            color: var(--ink);
+            margin: 0;
+        }
+
+        .svc-card::after {
+            content: "";
+            width: 44px;
+            height: 2px;
+            border-radius: 2px;
+            background: #c4a8f5;
+            margin-top: 6px;
+        }
+
+        .svc-arrow {
+            position: absolute;
+            top: 50%;
+            z-index: 20;
+            width: 48px;
+            height: 48px;
+            margin-top: -32px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid #eadff9;
+            box-shadow: 0 6px 18px rgba(20, 23, 61, .15);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: transform .2s, background .2s;
+        }
+
+        .svc-arrow:hover {
+            background: #f6f1ff;
+            transform: scale(1.06);
+        }
+
+        .svc-arrow:focus-visible,
+        .svc-dot:focus-visible,
+        .cta-btn:focus-visible {
+            outline: 3px solid var(--purple);
+            outline-offset: 3px;
+        }
+
+        .svc-arrow svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: var(--navy);
+            stroke-width: 2.4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .svc-arrow.prev {
+            left: 0;
+        }
+
+        .svc-arrow.next {
+            right: 0;
+        }
+
+        .svc-dots {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .svc-dot {
+            width: 24px;
+            height: 24px;
+            display: grid;
+            place-items: center;
+            background: none;
+            border: 0;
+            cursor: pointer;
+        }
+
+        .svc-dot::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #cbb8f2;
+            transition: all .3s;
+        }
+
+        .svc-dot[aria-current="true"]::before {
+            width: 22px;
+            border-radius: 4px;
+            background: var(--purple);
+        }
+
+        .cta-card {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px 32px;
+            padding: 28px clamp(24px, 4vw, 48px);
+        }
+
+        .cta-card p {
+            margin: 6px 0 0;
+            color: var(--ink);
+            max-width: 46ch;
+            line-height: 1.6;
+        }
+
+        .cta-title {
+            font-size: 1.9rem;
+            line-height: 1.15;
+            margin: 0;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--purple-dark);
+            color: #fff;
+            font-weight: 600;
+            padding: 14px 26px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(85, 39, 176, .28);
+            transition: background .2s, transform .2s;
+        }
+
+        .cta-btn:hover {
+            background: #451f93;
+            transform: translateY(-1px);
+        }
+
+        .cta-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        @media (max-width: 640px) {
+            .svc-stage {
+                height: 330px;
+            }
+
+            .svc-card {
+                width: 232px;
+                margin-left: -116px;
+                height: 280px;
+            }
+
+            .svc-arrow {
+                width: 44px;
+                height: 44px;
+            }
+
+            .services-inner {
+                padding: 0 8px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .svc-card,
+            .svc-arrow,
+            .cta-btn {
+                transition: none !important;
+            }
+        }
+
+
+
+
+
+        /* contact */
+        .contact-info-panel {
+    background:
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.18), transparent 28%),
+        linear-gradient(145deg, #312e81, #7c3aed);
+}
+
+.contact-field {
+    width: 100%;
+    height: 54px;
+    padding: 0 16px;
+    border: 1px solid #d7ddeb;
+    border-radius: 7px;
+    background: #fff;
+    color: #1f2937;
+}
+
+textarea.contact-field {
+    height: 150px;
+    padding: 14px 16px;
+    resize: vertical;
+}
+
+.contact-field:focus {
+    outline: none;
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.13);
+}
     </style>
 </head>
 
@@ -217,114 +604,130 @@
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
         <!-- About Me -->
-        <section id="content-about" class="tab-content bg-white p-8 shadow-xl rounded-xl">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-                <div class="md:col-span-2">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-2">About Me</h2>
-                    <p class="text-lg text-gray-600 mb-4"><strong>Hi, I’m Mojgan.</strong></p>
-                    <p class="text-lg text-gray-600 mb-4">
-                        My background combines commercial credit risk analysis, economics, and data and research
-                        analytics.
-                    </p>
+        <section id="content-about" class="tab-content about-page" aria-labelledby="about-heading">
 
-                    <p class="text-lg text-gray-600 mb-4">
-                        This website brings together knowledge-sharing resources and selected policy, research, and data
-                        analytics projects developed throughout my professional experience. It shows how I approach
-                        complex
-                        questions through clear analysis, useful tools, and practical solutions.
-                    </p>
+            <!-- 1. Hero / About -->
+            <div class="about-card">
+                <div class="about-grid">
+                    <div class="about-text">
+                        <h2 id="about-heading">About Me</h2>
+                        <div class="about-rule" aria-hidden="true"></div>
+                        <p class="about-lead">Hi, I’m Mojgan.</p>
+                        <p>
+                            I combine commercial credit risk analysis, economics, and data analytics to help
+                            organizations make informed decisions.
 
-                    <p class="text-lg text-gray-600 mb-4">
-                        I also help small businesses address practical technical needs, including websites, simple apps
-                        and
-                        tools that save time, data analysis, dashboards, and reporting that supports better decisions.
-                    </p>
-
-                    <p class="text-lg text-gray-600">
-                        I combine business understanding with analytical and technical skills to create solutions that
-                        are
-                        clear, practical, and aligned with the real needs of an organization. Whether the task involves
-                        assessing financial risk, interpreting data, or improving a business process, the focus is on
-                        producing work that supports informed decisions and measurable results.
-                    </p>
-
-
-                </div>
-
-
-
-
-                <div class="image-div">
-                    <img src="images/MyPhoto3.png" alt="Mojgan Samandar"
-                        class="w-full h-full object-cover rounded-xl shadow-lg" />
+                        </p>
+                        <p>
+                            This site brings together selected policy, research, and analytics projects, along with
+                            practical learning resources. I also help small businesses with websites, reporting, data
+                            analysis, and simple tools that reduce manual work.
+                        </p>
+                        <!-- <p>
+                            I also help small businesses address practical technical needs, including websites, simple
+                            apps and tools that save time, data analysis, dashboards, and reporting that supports better
+                            decisions.
+                        </p>
+                        <p>
+                            I combine business understanding with analytical and technical skills to create solutions
+                            that are clear, practical, and aligned with the real needs of an organization. Whether the
+                            task involves assessing financial risk, interpreting data, or improving a business process,
+                            the focus is on producing work that supports informed decisions and measurable results.
+                        </p> -->
+                    </div>
+                    <div class="about-photo">
+                        <img src="images/MyPhoto3.png" alt="Portrait of Mojgan Samandar" />
+                    </div>
                 </div>
             </div>
-            <div class="mt-8 pt-7 border-t border-gray-200">
-                <h3 class="text-2xl font-bold text-gray-800 mb-5">Get in Touch</h3>
 
-                <form class="grid grid-cols-1 sm:grid-cols-2 gap-4"
-                    action="https://formsubmit.co/mojgan.samandar@outlook.com" method="POST">
+            <!-- 2. Services carousel -->
+            <div class="services-band">
+                <div class="services-inner">
+                    <h2 id="services-heading" class="services-title">What I Can Help With</h2>
+                    <div class="about-rule center" aria-hidden="true"></div>
 
-                    <input type="hidden" name="_subject" value="New website inquiry">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
+                    <div class="carousel3d" id="svc-carousel" role="region" aria-roledescription="carousel"
+                        aria-labelledby="services-heading" tabindex="0">
+                        <button type="button" class="svc-arrow prev" id="svc-prev" aria-label="Previous service">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M15 5l-7 7 7 7" />
+                            </svg>
+                        </button>
 
-                    <div>
-                        <label for="home-first-name" class="sr-only">First Name</label>
-                        <input id="home-first-name" name="first_name" type="text" required class="contact-input"
-                            placeholder="First Name">
-                    </div>
+                        <div class="svc-stage" id="svc-stage">
+                            <article class="svc-card" role="group" aria-roledescription="slide" aria-label="1 of 5">
+                                <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
+                                    <path
+                                        d="M6 42h36M10 42V30h6v12M21 42V22h6v20M32 42V12h6v30M10 20l10-8 8 4 12-10M34 6h6v6" />
+                                </svg>
+                                <h3>Commercial Credit Analysis</h3>
+                                <p>Financial statement analysis, credit risk assessment, and lending analysis.</p>
+                            </article>
+                            <article class="svc-card" role="group" aria-roledescription="slide" aria-label="2 of 5">
+                                <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
+                                    <rect x="5" y="6" width="38" height="26" rx="3" />
+                                    <path d="M24 32v8M16 41h16M11 25l8-8 6 5 10-10M30 12h5v5" />
+                                </svg>
+                                <h3>Data Analysis &amp; Dashboards</h3>
+                                <p>Turn business data into useful reports, dashboards, and insights.</p>
+                            </article>
+                            <article class="svc-card" role="group" aria-roledescription="slide" aria-label="3 of 5">
+                                <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
+                                    <rect x="9" y="8" width="30" height="22" rx="3" />
+                                    <path d="M4 36h40l-3 4H7z" />
+                                    <circle cx="24" cy="19" r="8" />
+                                    <path d="M16 19h16M24 11c-4 4-4 12 0 16M24 11c4 4 4 12 0 16" />
+                                </svg>
+                                <h3>Websites</h3>
+                                <p>Clear, mobile-friendly websites for small businesses and professionals.</p>
+                            </article>
+                            <article class="svc-card" role="group" aria-roledescription="slide" aria-label="4 of 5">
+                                <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
+                                    <circle cx="19" cy="19" r="5" />
+                                    <path
+                                        d="M19 7v4M19 27v4M7 19h4M27 19h4M10.5 10.5l3 3M24.5 24.5l3 3M27.5 10.5l-3 3M13.5 24.5l-3 3" />
+                                    <circle cx="34" cy="34" r="4" />
+                                    <path d="M34 26v3M34 39v3M26 34h3M39 34h3M28.3 28.3l2.1 2.1M37.6 37.6l2.1 2.1" />
+                                </svg>
+                                <h3>Simple Apps &amp; Automation</h3>
+                                <p>Practical tools that reduce repetitive manual work and improve business processes.
+                                </p>
+                            </article>
+                            <article class="svc-card" role="group" aria-roledescription="slide" aria-label="5 of 5">
+                                <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
+                                    <path
+                                        d="M24 12c-4-3-10-4-17-4v28c7 0 13 1 17 4 4-3 10-4 17-4V8c-7 0-13 1-17 4zM24 12v28M12 15h7M12 21h7M12 27h7M29 15h7M29 21h7M29 27h7" />
+                                </svg>
+                                <h3>Teaching &amp; Learning Resources</h3>
+                                <p>Interactive learning tools and practical educational resources.</p>
+                            </article>
+                        </div>
 
-                    <div>
-                        <label for="home-last-name" class="sr-only">Last Name</label>
-                        <input id="home-last-name" name="last_name" type="text" required class="contact-input"
-                            placeholder="Last Name">
-                    </div>
-
-                    <div>
-                        <label for="home-email" class="sr-only">Email</label>
-                        <input id="home-email" name="email" type="email" required class="contact-input"
-                            placeholder="Email">
-                    </div>
-
-                    <div>
-                        <label for="home-phone" class="sr-only">Phone Number</label>
-                        <input id="home-phone" name="phone" type="tel" class="contact-input" placeholder="Phone Number">
-                    </div>
-
-                    <div>
-                        <label for="home-contact-method" class="sr-only">Preferred contact method</label>
-                        <select id="home-contact-method" name="preferred_contact_method" class="contact-input">
-                            <option value="" selected>Preferred contact method</option>
-                            <option value="Email">Email</option>
-                            <option value="Phone">Phone</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label for="home-service" class="sr-only">What do you need?</label>
-                        <select id="home-service" name="service_needed" class="contact-input">
-                            <option value="" selected>What do you need?</option>
-                            <option value="Website">Website</option>
-                            <option value="App or internal tool">App or internal tool</option>
-                            <option value="Data analysis or reporting">Data analysis or reporting</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <label for="home-message" class="sr-only">Message</label>
-                        <textarea id="home-message" name="message" required class="contact-input"
-                            placeholder="Message"></textarea>
-                    </div>
-
-                    <div class="sm:col-span-2 flex justify-end">
-                        <button type="submit"
-                            class="bg-purple-600 text-white font-bold py-3 px-7 rounded-lg shadow-md hover:bg-purple-700 transition uppercase tracking-wider text-sm">
-                            Submit
+                        <button type="button" class="svc-arrow next" id="svc-next" aria-label="Next service">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M9 5l7 7-7 7" />
+                            </svg>
                         </button>
                     </div>
-                </form>
+
+                    <div class="svc-dots" id="svc-dots" role="group" aria-label="Choose a service"></div>
+                    <p class="sr-only" id="svc-live" aria-live="polite"></p>
+                </div>
+            </div>
+
+            <!-- 3. Contact CTA -->
+            <div class="cta-card">
+                <div>
+                    <h2 class="cta-title">Let’s Work Together</h2>
+                    <p>For professional inquiries, collaboration, or technical support for your business, please get in touch.</p>
+                </div>
+                <a href="mailto:mojgan.samandar@outlook.com" class="cta-btn" id="about-cta">
+                    Get in Touch
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                </a>
             </div>
         </section>
 
@@ -762,31 +1165,105 @@
         </section>
 
         <!-- Contact -->
-        <section id="content-contact" class="tab-content hidden bg-white p-8 shadow-xl rounded-xl">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-2">Get In Touch</h2>
-            <div class="space-y-4 text-lg text-gray-700">
-                <p>
-                    <strong>Email:</strong>
+<section id="content-contact" class="tab-content hidden overflow-hidden bg-white shadow-xl rounded-xl">
+    <div class="grid grid-cols-1 lg:grid-cols-5">
+
+        <div class="lg:col-span-3 p-8">
+            <p class="text-sm font-bold uppercase tracking-widest text-purple-600 mb-2">Contact</p>
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Let’s Get Started</h2>
+
+            <form class="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                action="https://formsubmit.co/mojgan.samandar@outlook.com"
+                method="POST">
+
+                <input type="hidden" name="_subject"
+                    value="New inquiry from Mojgan Samandar’s website">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+
+                <input name="first_name" type="text" required
+                    class="contact-field" placeholder="First Name">
+
+                <input name="last_name" type="text"
+                    class="contact-field" placeholder="Last Name">
+
+                <input name="email" type="email" required
+                    class="contact-field" placeholder="Email">
+
+                <input name="phone" type="tel"
+                    class="contact-field" placeholder="Phone Number (optional)">
+
+                <select name="preferred_contact_method" class="contact-field">
+                    <option value="">Preferred contact method</option>
+                    <option value="Email">Email</option>
+                    <option value="Phone">Phone</option>
+                </select>
+
+                <select name="inquiry_topic" class="contact-field">
+                    <option value="">What is your inquiry about?</option>
+                    <option value="Commercial credit and finance">Commercial credit and finance</option>
+                    <option value="Data analysis and dashboards">Data analysis and dashboards</option>
+                    <option value="Website or technical support">Website or technical support</option>
+                    <option value="Collaboration or other">Collaboration or other</option>
+                </select>
+
+                <div class="sm:col-span-2">
+                    <textarea name="message" required class="contact-field"
+                        placeholder="Message"></textarea>
+                </div>
+
+                <div class="sm:col-span-2 flex justify-end">
+                    <button type="submit"
+                        class="bg-purple-600 text-white font-bold py-3 px-7 rounded-lg shadow-md hover:bg-purple-700 transition uppercase tracking-wider text-sm">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <aside class="contact-info-panel lg:col-span-2 p-8 text-white">
+            <h3 class="text-3xl font-bold mb-8">Contact Info</h3>
+
+            <div class="space-y-6">
+                <div>
+                    <p class="text-purple-200 text-sm uppercase tracking-wider mb-1">Location</p>
+                    <p class="font-semibold">Toronto, Ontario</p>
+                </div>
+
+                <div>
+                    <p class="text-purple-200 text-sm uppercase tracking-wider mb-1">Email</p>
                     <a href="mailto:mojgan.samandar@outlook.com"
-                        class="text-purple-600 hover:text-purple-800 font-medium">
+                        class="font-semibold hover:text-purple-200 transition">
                         mojgan.samandar@outlook.com
                     </a>
-                </p>
-                <p>
-                    <strong>LinkedIn:</strong>
-                    <a href="https://www.linkedin.com/in/mojgan-samandar" target="_blank"
-                        class="text-purple-600 hover:text-purple-800 font-medium">
-                        linkedin.com/in/mojgan-samandar
-                    </a>
-                </p>
-                <p>
-                    <strong>GitHub:</strong>
-                    <a href="#" class="text-purple-600 hover:text-purple-800 font-medium">
-                        https://github.com/samandarali?tab=repositories
-                    </a>
-                </p>
+                </div>
+
+                <div>
+                    <p class="text-purple-200 text-sm uppercase tracking-wider mb-1">Professional Profiles</p>
+
+                    <div class="flex flex-col gap-3">
+                        <a href="https://www.linkedin.com/in/mojgan-samandar"
+                            target="_blank" rel="noopener"
+                            class="font-semibold hover:text-purple-200 transition">
+                            LinkedIn →
+                        </a>
+
+                        <a href="https://github.com/samandarali?tab=repositories"
+                            target="_blank" rel="noopener"
+                            class="font-semibold hover:text-purple-200 transition">
+                            GitHub →
+                        </a>
+                    </div>
+                </div>
             </div>
-        </section>
+
+            <p class="mt-12 text-purple-100 leading-relaxed">
+                For professional inquiries, collaboration, or technical support for your business,
+                please get in touch.
+            </p>
+        </aside>
+    </div>
+</section>
 
     </main>
 
@@ -827,6 +1304,89 @@
         if (window.location.hash === '#teaching') {
             switchTab('content-teaching');
         }
+
+        // ── Services 3D carousel ──
+        (function () {
+            const root = document.getElementById('svc-carousel');
+            if (!root) return;
+            const cards = [...root.querySelectorAll('.svc-card')];
+            const dotsBox = document.getElementById('svc-dots');
+            const live = document.getElementById('svc-live');
+            const n = cards.length;
+            let idx = 2; // start on "Websites", the middle card
+
+            const dots = cards.map((c, i) => {
+                const b = document.createElement('button');
+                b.type = 'button'; b.className = 'svc-dot';
+                b.setAttribute('aria-label', 'Show ' + c.querySelector('h3').textContent);
+                b.addEventListener('click', () => go(i));
+                dotsBox.appendChild(b);
+                return b;
+            });
+
+            function layout() {
+                const small = window.innerWidth <= 640;
+                const half = Math.floor(n / 2);
+                const step = small ? 118 : 250;
+                cards.forEach((card, i) => {
+                    let o = ((i - idx + n + half) % n) - half;           // shortest signed offset: -2..2
+                    const a = Math.abs(o), s = Math.sign(o);
+                    const visible = small ? a <= 1 : a <= 2;
+                    const x = s * (a === 0 ? 0 : step * (a === 1 ? 1 : 1.78));
+                    const z = a === 0 ? 60 : a === 1 ? -80 : -190;
+                    const ry = -s * (a === 1 ? 32 : 38);
+                    const sc = a === 0 ? 1.04 : a === 1 ? .9 : .8;
+                    card.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${ry}deg) scale(${sc})`;
+                    card.style.zIndex = 10 - a;
+                    card.style.opacity = visible ? (a === 2 ? .75 : 1) : 0;
+                    card.style.pointerEvents = visible ? 'auto' : 'none';
+                    card.classList.toggle('is-active', a === 0);
+                    card.setAttribute('aria-hidden', a === 0 ? 'false' : 'true');
+                    card.tabIndex = -1;
+                    dots[i].setAttribute('aria-current', a === 0 ? 'true' : 'false');
+                });
+            }
+
+            function go(i, announce = true) {
+                idx = (i + n) % n;
+                layout();
+                if (announce) live.textContent = cards[idx].querySelector('h3').textContent + ', ' + (idx + 1) + ' of ' + n;
+            }
+
+            document.getElementById('svc-prev').addEventListener('click', () => go(idx - 1));
+            document.getElementById('svc-next').addEventListener('click', () => go(idx + 1));
+            cards.forEach((c, i) => c.addEventListener('click', () => { if (i !== idx) go(i); }));
+
+            root.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx - 1); }
+                if (e.key === 'ArrowRight') { e.preventDefault(); go(idx + 1); }
+            });
+
+            // Swipe / drag
+            let sx = null, swiped = false;
+            const stage = document.getElementById('svc-stage');
+            stage.addEventListener('pointerdown', (e) => { sx = e.clientX; });
+            stage.addEventListener('pointerup', (e) => {
+                if (sx === null) return;
+                const dx = e.clientX - sx; sx = null;
+                if (Math.abs(dx) > 40) { swiped = true; go(idx + (dx < 0 ? 1 : -1)); setTimeout(() => { swiped = false; }, 0); }
+            });
+            stage.addEventListener('pointercancel', () => { sx = null; });
+            // swallow the click that follows a swipe so it doesn't also select a card
+            stage.addEventListener('click', (e) => { if (swiped) { e.stopPropagation(); swiped = false; } }, true);
+
+            window.addEventListener('resize', layout);
+            go(idx, false);
+
+            // CTA: jump to existing "Contact & Links" tab
+            const cta = document.getElementById('about-cta');
+            cta.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchTab('content-contact');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+
     </script>
 
 </body>
