@@ -152,6 +152,31 @@
             color: var(--teal-mid);
             font-style: italic;
         }
+
+
+
+        .contact-input {
+            width: 100%;
+            height: 56px;
+            padding: 0 16px;
+            border: 1px solid #d7ddeb;
+            border-radius: 6px;
+            background: #fff;
+            color: #1f2937;
+            font-size: 1rem;
+        }
+
+        textarea.contact-input {
+            height: 150px;
+            padding: 14px 16px;
+            resize: vertical;
+        }
+
+        .contact-input:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+        }
     </style>
 </head>
 
@@ -198,22 +223,108 @@
                     <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-2">About Me</h2>
                     <p class="text-lg text-gray-600 mb-4"><strong>Hi, I’m Mojgan.</strong></p>
                     <p class="text-lg text-gray-600 mb-4">
-                        I started my career as an economist and researcher, and over time I moved toward
-                        data science, analytics, and building interactive tools with code.
+                        My background combines commercial credit risk analysis, economics, and data and research
+                        analytics.
                     </p>
+
                     <p class="text-lg text-gray-600 mb-4">
-                        I enjoy working with data  from research and policy analysis to dashboards,
-                        visual storytelling, and small web-based projects.
+                        This website brings together knowledge-sharing resources and selected policy, research, and data
+                        analytics projects developed throughout my professional experience. It shows how I approach
+                        complex
+                        questions through clear analysis, useful tools, and practical solutions.
                     </p>
+
+                    <p class="text-lg text-gray-600 mb-4">
+                        I also help small businesses address practical technical needs, including websites, simple apps
+                        and
+                        tools that save time, data analysis, dashboards, and reporting that supports better decisions.
+                    </p>
+
                     <p class="text-lg text-gray-600">
-                        This site brings together my policy work, research projects, and interactive dashboard videos.
+                        I combine business understanding with analytical and technical skills to create solutions that
+                        are
+                        clear, practical, and aligned with the real needs of an organization. Whether the task involves
+                        assessing financial risk, interpreting data, or improving a business process, the focus is on
+                        producing work that supports informed decisions and measurable results.
                     </p>
+
+
                 </div>
+
+
+
 
                 <div class="image-div">
                     <img src="images/MyPhoto3.png" alt="Mojgan Samandar"
                         class="w-full h-full object-cover rounded-xl shadow-lg" />
                 </div>
+            </div>
+            <div class="mt-8 pt-7 border-t border-gray-200">
+                <h3 class="text-2xl font-bold text-gray-800 mb-5">Get in Touch</h3>
+
+                <form class="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                    action="https://formsubmit.co/mojgan.samandar@outlook.com" method="POST">
+
+                    <input type="hidden" name="_subject" value="New website inquiry">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+
+                    <div>
+                        <label for="home-first-name" class="sr-only">First Name</label>
+                        <input id="home-first-name" name="first_name" type="text" required class="contact-input"
+                            placeholder="First Name">
+                    </div>
+
+                    <div>
+                        <label for="home-last-name" class="sr-only">Last Name</label>
+                        <input id="home-last-name" name="last_name" type="text" required class="contact-input"
+                            placeholder="Last Name">
+                    </div>
+
+                    <div>
+                        <label for="home-email" class="sr-only">Email</label>
+                        <input id="home-email" name="email" type="email" required class="contact-input"
+                            placeholder="Email">
+                    </div>
+
+                    <div>
+                        <label for="home-phone" class="sr-only">Phone Number</label>
+                        <input id="home-phone" name="phone" type="tel" class="contact-input" placeholder="Phone Number">
+                    </div>
+
+                    <div>
+                        <label for="home-contact-method" class="sr-only">Preferred contact method</label>
+                        <select id="home-contact-method" name="preferred_contact_method" class="contact-input">
+                            <option value="" selected>Preferred contact method</option>
+                            <option value="Email">Email</option>
+                            <option value="Phone">Phone</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="home-service" class="sr-only">What do you need?</label>
+                        <select id="home-service" name="service_needed" class="contact-input">
+                            <option value="" selected>What do you need?</option>
+                            <option value="Website">Website</option>
+                            <option value="App or internal tool">App or internal tool</option>
+                            <option value="Data analysis or reporting">Data analysis or reporting</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label for="home-message" class="sr-only">Message</label>
+                        <textarea id="home-message" name="message" required class="contact-input"
+                            placeholder="Message"></textarea>
+                    </div>
+
+                    <div class="sm:col-span-2 flex justify-end">
+                        <button type="submit"
+                            class="bg-purple-600 text-white font-bold py-3 px-7 rounded-lg shadow-md hover:bg-purple-700 transition uppercase tracking-wider text-sm">
+                            Submit
+                        </button>
+                    </div>
+                </form>
             </div>
         </section>
 
@@ -357,7 +468,7 @@
                                     Credit Analysis
                                 </span>
 
-                                <span style="background:#f3f4f6; color:#6b7280; font-size:11px; padding:2px 9px;
+                                <span style="background:#e07e0d; color:#ebeef3; font-size:11px; padding:2px 9px;
                     border-radius:9999px; font-weight:500;">
                                     Commercial Banking
                                 </span>
@@ -396,11 +507,11 @@
                             </div>
 
                             <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:2px;">
-    
+
 
                                 <span
                                     style="background:#0c3381; color:#e4e5e7; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">
-                                    Data cleaning
+                                    Data Analysis
                                 </span>
 
                                 <span
