@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,400&display=swap");
 :root {
   --page-bg: #f1f5f9;
   --panel: #ffffff;
@@ -3370,126 +3371,6 @@ tr.flash-highlight td {
   }
 }
 
-/*  */
-
-.journey-step {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  min-width: 0;
-  padding: 13px;
-
-  color: #475569;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-
-  text-decoration: none;
-  transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
-}
-
-.journey-step:hover {
-  transform: translateY(-2px);
-  border-color: #9fb8df;
-  background: #f3f7fd;
-}
-
-.journey-step.is-active {
-  color: #18345f;
-  background: #edf3fc;
-  border-color: #90add7;
-}
-
-.journey-number {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 30px;
-
-  width: 30px;
-  height: 30px;
-
-  color: #fff;
-  background: #285493;
-  border-radius: 50%;
-
-  font-size: 0.75rem;
-  font-weight: 800;
-}
-
-.journey-text {
-  min-width: 0;
-}
-
-.journey-text strong,
-.journey-text small {
-  display: block;
-}
-
-.journey-text strong {
-  color: inherit;
-  font-size: 0.8rem;
-}
-
-.journey-text small {
-  margin-top: 2px;
-  overflow: hidden;
-
-  color: #718096;
-  font-size: 0.67rem;
-  line-height: 1.3;
-  text-overflow: ellipsis;
-}
-
-@media (max-width: 900px) {
-  .course-hero {
-    min-height: auto;
-    padding: 72px 30px 30px;
-  }
-
-  .course-hero .journey-steps {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 600px) {
-  .course-hero {
-    padding: 64px 19px 20px;
-    border-radius: 14px;
-  }
-
-  .course-hero-background img {
-    object-position: 68% center;
-  }
-
-  .course-hero-background::after {
-    background: linear-gradient(
-      90deg,
-      rgba(3, 18, 32, 0.95),
-      rgba(3, 18, 32, 0.72)
-    );
-  }
-
-  .course-hero h1 {
-    font-size: clamp(2.65rem, 13vw, 4rem);
-  }
-
-  .course-hero .learning-journey {
-    margin-top: 50px;
-    padding: 17px;
-    border-radius: 14px;
-  }
-
-  .journey-heading {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .course-hero .journey-steps {
-    grid-template-columns: 1fr;
-  }
-}
 
 
 /*==================================
@@ -5462,6 +5343,789 @@ details.purpose-of-financing>.table-wrapper {
   }
 }
 
+
+
+
+/* ===================================================================
+   Commercial Credit Risk Analysis — Learning Platform UI
+   Layered on top of cra_style.css; preserves all educational markup.
+   =================================================================== */
+
+
+.cra-platform {
+  --bank-navy: #0c2340;
+  --bank-blue: #1e4d8c;
+  --bank-teal: #0d6e6e;
+  --bank-gold: #b8860b;
+  --bank-slate: #475569;
+  --bank-mist: #f4f7fb;
+  --bank-card: #ffffff;
+  --bank-line: #d7e0ea;
+  --bank-accent: #2563eb;
+  --bank-accent-soft: #e8f0fe;
+  --bank-success: #0f766e;
+  --bank-warn: #b45309;
+  --bank-danger: #b91c1c;
+  --header-h: 64px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --shadow-card: 0 4px 24px rgba(12, 35, 64, 0.07);
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Source Serif 4", Georgia, serif;
+  scroll-behavior: smooth;
+}
+
+body.cra-platform {
+  font-family: var(--font-sans);
+  background: var(--bank-mist);
+  color: #1e293b;
+}
+
+.cra-platform .page {
+  width: min(calc(100% - 28px), 1180px);
+  padding-top: calc(var(--header-h) + 20px);
+}
+
+/* ---- Fixed top bar ---- */
+.platform-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  height: var(--header-h);
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid var(--bank-line);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(12, 35, 64, 0.04);
+}
+
+.platform-header-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 1180px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.platform-brand {
+  flex: 0 0 auto;
+  color: var(--bank-navy);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.platform-brand span {
+  display: block;
+  color: var(--bank-slate);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.platform-nav {
+  display: flex;
+  flex: 1 1 auto;
+  gap: 4px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.platform-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.platform-nav a {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: var(--bank-slate);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.platform-nav a:hover {
+  color: var(--bank-blue);
+  background: var(--bank-accent-soft);
+}
+
+.platform-nav a.is-active {
+  color: #fff;
+  background: var(--bank-blue);
+}
+
+.platform-progress-compact {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+}
+
+.platform-progress-label {
+  display: none;
+  color: var(--bank-slate);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.platform-progress-track {
+  flex: 1 1 72px;
+  width: 72px;
+  height: 6px;
+  overflow: hidden;
+  background: #e2e8f0;
+  border-radius: 999px;
+}
+
+.platform-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--bank-teal), var(--bank-blue));
+  border-radius: inherit;
+  transition: width 0.35s ease;
+}
+
+.platform-progress-pct {
+  min-width: 2.5rem;
+  color: var(--bank-navy);
+  font-size: 0.72rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+@media (min-width: 960px) {
+  .platform-progress-label {
+    display: block;
+  }
+
+  .platform-progress-track {
+    width: 100px;
+  }
+}
+
+.cra-platform .section-nav {
+  display: none;
+}
+
+/* ---- Stage modules (main sections) ---- */
+.cra-platform .learning-section.intro-accordion,
+.cra-platform .learning-section.stage-statements,
+.cra-platform .learning-section.stage-ratios,
+.cra-platform .learning-section.stage-assessment,
+.cra-platform .learning-section.stage-practice,
+.cra-platform details#commercial-banking-section {
+  margin-bottom: 20px;
+  background: var(--bank-card);
+  border: 1px solid var(--bank-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.cra-platform .stage-summary,
+.cra-platform details#commercial-banking-section > .learning-summary {
+  background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
+  border-left: 4px solid var(--bank-blue);
+  min-height: 72px;
+  padding: 18px 22px;
+}
+
+.cra-platform .stage-summary .stage-number {
+  background: var(--bank-blue);
+}
+
+.cra-platform .stage-summary h2,
+.cra-platform details#commercial-banking-section > .learning-summary h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 2vw, 1.28rem);
+  color: var(--bank-navy);
+}
+
+.cra-platform .learning-section > .learning-body,
+.cra-platform details#commercial-banking-section > .learning-body {
+  background: #fafbfd;
+  padding: 22px 24px 28px;
+}
+
+.cra-platform .learning-section {
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+/* Subsections */
+.cra-platform details.learning-section.subsection-card > .subsection-summary,
+.cra-platform details.learning-section.subsection-card > .learning-summary.subsection-summary {
+  background: #eef4fb;
+  border-left: 4px solid #5b8fd4;
+}
+
+.cra-platform details.learning-section.subsection-card {
+  border-color: #cdd9ea;
+  border-radius: var(--radius-md);
+}
+
+.cra-platform .chevron {
+  border-color: #b8c9de;
+  background: #fff;
+}
+
+/* ---- Five Cs: interactive explorer ---- */
+.five-cs-explorer {
+  max-width: 1100px;
+  margin: 0 auto 28px;
+  padding: 22px;
+  background: #fff;
+  border: 1px solid var(--bank-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.five-cs-explorer-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.five-cs-explorer-header h3 {
+  margin: 0;
+  font-family: var(--font-serif);
+  color: var(--bank-navy);
+  font-size: 1.2rem;
+}
+
+.five-cs-explorer-header p {
+  margin: 4px 0 0;
+  color: var(--bank-slate);
+  font-size: 0.86rem;
+  max-width: 52ch;
+}
+
+.five-c-tablist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.five-c-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--bank-line);
+  border-radius: 999px;
+  background: #f8fafc;
+  color: var(--bank-navy);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.five-c-tab:hover {
+  border-color: #94b4db;
+  background: #edf3fc;
+}
+
+.five-c-tab[aria-selected="true"] {
+  color: #fff;
+  background: var(--bank-blue);
+  border-color: var(--bank-blue);
+}
+
+.five-c-tab-icon {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+.five-c-tab[aria-selected="false"] .five-c-tab-icon {
+  background: var(--bank-accent-soft);
+  color: var(--bank-blue);
+}
+
+.five-c-panel {
+  display: none;
+  padding: 18px 20px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #f0f7ff 0%, #f8fafc 100%);
+  border: 1px solid #c9d9ef;
+  animation: platformFadeIn 0.25s ease;
+}
+
+.five-c-panel.is-visible {
+  display: block;
+}
+
+.five-c-panel h4 {
+  margin: 0 0 8px;
+  color: var(--bank-navy);
+  font-size: 1.05rem;
+}
+
+.five-c-panel p {
+  margin: 0 0 10px;
+  color: #334155;
+  line-height: 1.65;
+  font-size: 0.9rem;
+}
+
+.five-c-panel .credit-hook {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--bank-teal);
+  background: #fff;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.82rem;
+  color: #475569;
+}
+
+@keyframes platformFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Mini quiz ---- */
+.platform-quiz {
+  max-width: 1100px;
+  margin: 0 auto 28px;
+  padding: 22px;
+  background: #fff;
+  border: 1px solid var(--bank-line);
+  border-radius: var(--radius-lg);
+}
+
+.platform-quiz h3 {
+  margin: 0 0 6px;
+  font-family: var(--font-serif);
+  color: var(--bank-navy);
+}
+
+.platform-quiz-intro {
+  margin: 0 0 18px;
+  color: var(--bank-slate);
+  font-size: 0.88rem;
+}
+
+.quiz-item {
+  padding: 16px 0;
+  border-top: 1px solid #e8edf3;
+}
+
+.quiz-item:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.quiz-question {
+  margin: 0 0 10px;
+  font-weight: 700;
+  color: var(--bank-navy);
+  font-size: 0.92rem;
+}
+
+.quiz-options {
+  display: grid;
+  gap: 8px;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--bank-line);
+  border-radius: 10px;
+  background: #fafbfd;
+  cursor: pointer;
+  font-size: 0.86rem;
+  text-align: left;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.quiz-option:hover {
+  border-color: #94b4db;
+  background: #f0f6ff;
+}
+
+.quiz-option.is-correct {
+  border-color: #059669;
+  background: #ecfdf5;
+}
+
+.quiz-option.is-wrong {
+  border-color: #dc2626;
+  background: #fef2f2;
+}
+
+.quiz-feedback {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: var(--bank-slate);
+  line-height: 1.5;
+}
+
+.quiz-score {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--bank-accent-soft);
+  color: var(--bank-navy);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+/* ---- Assessment journey (12 steps) ---- */
+.cra-platform .assessment-flow .assessment-flow-item {
+  border-radius: 10px;
+  border-width: 1px;
+}
+
+.cra-platform .assessment-flow .step-1 { background: #e8f4ea; border-color: #86b891; }
+.cra-platform .assessment-flow .step-2 { background: #dcefe0; border-color: #6fa87a; }
+.cra-platform .assessment-flow .step-3 { background: #d0ead6; border-color: #5a9c68; }
+.cra-platform .assessment-flow .step-4 { background: #c4e5cc; border-color: #4a9060; }
+.cra-platform .assessment-flow .step-5 { background: #b8e0c2; border-color: #3d8558; }
+.cra-platform .assessment-flow .step-6 { background: #acdab8; border-color: #357a50; }
+.cra-platform .assessment-flow .step-7 { background: #9fd4ad; border-color: #2d6f48; color: #0f2918; }
+.cra-platform .assessment-flow .step-8 { background: #92cea2; border-color: #256440; }
+.cra-platform .assessment-flow .step-9 { background: #85c897; border-color: #1e5938; }
+.cra-platform .assessment-flow .step-10 { background: #78c28c; border-color: #174e30; }
+.cra-platform .assessment-flow .step-11 { background: #6bbc81; border-color: #104328; }
+.cra-platform .assessment-flow .step-12 { background: #5eb576; border-color: #0a3820; }
+
+.cra-platform .assessment-flow .step-7 strong,
+.cra-platform .assessment-flow .step-8 strong,
+.cra-platform .assessment-flow .step-9 strong,
+.cra-platform .assessment-flow .step-10 strong,
+.cra-platform .assessment-flow .step-11 strong,
+.cra-platform .assessment-flow .step-12 strong {
+  color: #0c2340;
+}
+
+.cra-platform .assessment-flow .step-7 span,
+.cra-platform .assessment-flow .step-8 span,
+.cra-platform .assessment-flow .step-9 span,
+.cra-platform .assessment-flow .step-10 span,
+.cra-platform .assessment-flow .step-11 span,
+.cra-platform .assessment-flow .step-12 span {
+  color: #334155;
+}
+
+.cra-platform #assessment-step-1 > .learning-summary { background: #e8f4ea; }
+.cra-platform #assessment-step-2 > .learning-summary { background: #dcefe0; }
+.cra-platform #assessment-step-3 > .learning-summary { background: #d0ead6; }
+.cra-platform #assessment-step-4 > .learning-summary { background: #c4e5cc; }
+.cra-platform #assessment-step-5 > .learning-summary { background: #b8e0c2; }
+.cra-platform #assessment-step-6 > .learning-summary { background: #acdab8; }
+.cra-platform #assessment-step-7 > .learning-summary { background: #9fd4ad; }
+.cra-platform #assessment-step-8 > .learning-summary { background: #92cea2; }
+.cra-platform #assessment-step-9 > .learning-summary { background: #85c897; }
+.cra-platform #assessment-step-10 > .learning-summary { background: #78c28c; }
+.cra-platform #assessment-step-11 > .learning-summary { background: #6bbc81; }
+.cra-platform #assessment-step-12 > .learning-summary { background: #5eb576; }
+
+.cra-platform #assessment-step-7 > .learning-summary h4,
+.cra-platform #assessment-step-8 > .learning-summary h4,
+.cra-platform #assessment-step-9 > .learning-summary h4,
+.cra-platform #assessment-step-10 > .learning-summary h4,
+.cra-platform #assessment-step-11 > .learning-summary h4,
+.cra-platform #assessment-step-12 > .learning-summary h4 {
+  color: #0c2340;
+}
+
+.cra-platform .assessment-step-nav {
+  background: #fff;
+  border-color: var(--bank-line);
+}
+
+.cra-platform .assessment-step-link span {
+  background: var(--bank-teal);
+}
+
+/* ---- DSCR sensitivity ---- */
+.dscr-lab {
+  margin: 20px 0 8px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid var(--bank-line);
+  border-radius: var(--radius-md);
+}
+
+.dscr-lab h4 {
+  margin: 0 0 6px;
+  color: var(--bank-navy);
+}
+
+.dscr-lab p {
+  margin: 0 0 16px;
+  color: var(--bank-slate);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.dscr-sliders {
+  display: grid;
+  gap: 16px;
+}
+
+.dscr-slider-row label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.dscr-slider-row input[type="range"] {
+  width: 100%;
+  accent-color: var(--bank-blue);
+}
+
+.dscr-result {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.dscr-result-card {
+  padding: 14px;
+  text-align: center;
+  background: #f0f6ff;
+  border: 1px solid #c5d9f5;
+  border-radius: 10px;
+}
+
+.dscr-result-card strong {
+  display: block;
+  font-size: 1.35rem;
+  color: var(--bank-blue);
+}
+
+.dscr-result-card span {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--bank-slate);
+}
+
+.dscr-result-card.is-weak strong {
+  color: var(--bank-danger);
+}
+
+.dscr-result-card.is-strong strong {
+  color: var(--bank-success);
+}
+
+/* ---- Credit decision workshop ---- */
+.decision-workshop {
+  margin: 28px 0 8px;
+  padding: 24px;
+  background: #fff;
+  border: 2px solid var(--bank-navy);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.decision-workshop-header {
+  margin-bottom: 18px;
+}
+
+.decision-workshop-header h4 {
+  margin: 0 0 6px;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--bank-navy);
+}
+
+.decision-workshop-header p {
+  margin: 0;
+  color: var(--bank-slate);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.decision-choice-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.decision-choice {
+  flex: 1 1 160px;
+  padding: 14px 16px;
+  border: 2px solid var(--bank-line);
+  border-radius: var(--radius-md);
+  background: #fafbfd;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.decision-choice strong {
+  display: block;
+  color: var(--bank-navy);
+  font-size: 0.92rem;
+}
+
+.decision-choice span {
+  display: block;
+  margin-top: 4px;
+  color: var(--bank-slate);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.decision-choice:hover {
+  border-color: #94b4db;
+}
+
+.decision-choice.is-selected {
+  border-color: var(--bank-blue);
+  background: #edf3fc;
+}
+
+.decision-checklist {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.decision-checklist label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--bank-line);
+  border-radius: 10px;
+  background: #fafbfd;
+  font-size: 0.84rem;
+  cursor: pointer;
+}
+
+.decision-checklist input {
+  margin-top: 3px;
+  accent-color: var(--bank-blue);
+}
+
+.decision-output {
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #f0fdfa;
+  border: 1px solid #99d5cf;
+  color: #134e4a;
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.decision-output:empty {
+  display: none;
+}
+
+/* ---- Practice cases ---- */
+.cra-platform .exercise-card {
+  border-left-color: var(--bank-teal);
+  border-radius: var(--radius-md);
+}
+
+.cra-platform .practice-heading h3 {
+  font-family: var(--font-serif);
+  color: var(--bank-navy);
+}
+
+.cra-platform .site-footer {
+  background: var(--bank-navy);
+}
+
+.cra-platform .scroll-to-top {
+  background: var(--bank-blue);
+}
+
+.cra-platform .btn-primary {
+  background: var(--bank-blue);
+  border-color: var(--bank-blue);
+}
+
+.cra-platform .chip {
+  border-radius: 999px;
+}
+
+.cra-platform .chip.is-active-chip {
+  background: var(--bank-blue);
+  border-color: var(--bank-blue);
+  color: #fff;
+}
+
+.cra-platform .central-question {
+  border-left-color: var(--bank-teal);
+}
+
+.cra-platform .five-cs-overview {
+  background: #fff;
+  border-color: var(--bank-line);
+  box-shadow: var(--shadow-card);
+}
+
+.cra-platform .five-cs-list li {
+  border-left-color: var(--bank-teal);
+}
+
+@media (max-width: 720px) {
+  .platform-brand span {
+    display: none;
+  }
+
+
+  .decision-choice {
+    flex-basis: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cra-platform {
+    scroll-behavior: auto;
+  }
+
+  .five-c-panel.is-visible {
+    animation: none;
+  }
+
+  .platform-progress-fill {
+    transition: none;
+  }
+}
 
 
 
