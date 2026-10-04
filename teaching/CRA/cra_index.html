@@ -6,133 +6,161 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Commercial Credit Risk Analysis</title>
   <link rel="stylesheet" href="cra_style.css">
+  <link rel="stylesheet" href="cra_platform.css">
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
-<body>
+<body class="cra-platform">
+  <header class="platform-header" id="platform-header">
+    <div class="platform-header-inner">
+      <a class="platform-brand" href="#hero_section">
+        Commercial Credit
+        <span>Learning platform</span>
+      </a>
+      <nav class="platform-nav" aria-label="Course sections">
+        <a href="#introduction-section" data-nav-section="introduction">Intro</a>
+        <a href="#commercial-banking-section" data-nav-section="commercial-banking">Banking</a>
+        <a href="#financial-statements-section" data-nav-section="financial-statements">Statements</a>
+        <a href="#financial-ratios-section" data-nav-section="financial-ratios">Ratios</a>
+        <a href="#credit-assessment-section" data-nav-section="credit-assessment">Assessment</a>
+        <a href="#practice-section" data-nav-section="practice">Practice</a>
+      </nav>
+      <div class="platform-progress-compact" aria-live="polite">
+        <span class="platform-progress-label">Progress</span>
+        <div class="platform-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+          id="course-progress-bar">
+          <div class="platform-progress-fill" id="course-progress-fill"></div>
+        </div>
+        <span class="platform-progress-pct" id="course-progress-pct">0%</span>
+      </div>
+    </div>
+  </header>
+
   <main class="page">
 
 
-    <section class="course-hero" aria-labelledby="main-page-title">
+<section class="course-hero "  id="hero_section" aria-labelledby="main-page-title">
 
-      <div class="course-hero-content">
+  <div class="course-hero-background" aria-hidden="true">
+    <img src="images/cra-hero-credit-analysis.png" alt="">
+  </div>
 
-        <span class="course-label">Interactive Learning Guide</span>
+  <div class="course-hero-visual">
+    <div class="hero-photo-frame">
+      <img src="../../images/mojgan.png" alt="Mojgan Samandar">
+    </div>
+  </div>
 
-        <h1 id="main-page-title">
-          Commercial Credit Risk Analysis
-        </h1>
+  <div class="course-hero-content">
 
-        <p class="course-description">
-          Learn how to evaluate a business borrower’s financial capacity,
-          repayment ability, credit risks, and proposed loan structure.
-        </p>
+    <span class="course-label">
+      <span aria-hidden="true">◆</span>
+      Interactive Learning Guide
+    </span>
 
-        <a class="start-learning-button" href="#introduction-section">
-          Start Learning
-          <span aria-hidden="true">→</span>
-        </a>
+    <h1 id="main-page-title">
+      Commercial <span>Credit Risk Analysis</span>
+    </h1>
 
+    <p class="course-description">
+      Learn how to evaluate a business borrower’s financial capacity,
+      repayment ability, credit risks, and proposed loan structure.
+    </p>
 
-        <p><a href="../../index.html#teaching" style="display:inline-block; margin-top:24px; color:#1f2937;">
-            ← Back to Teaching
-          </a> </p>
+    <div class="hero-actions">
+      <a class="start-learning-button" href="#introduction-section">
+        Start Learning
+        <span aria-hidden="true">→</span>
+      </a>
 
+      <a class="back-to-teaching" href="../../index.html#teaching">
+        <span aria-hidden="true">←</span>
+        Back to Teaching
+      </a>
+    </div>
+
+    <div class="hero-highlights" aria-label="Course topics">
+      <span>Financial statements</span>
+      <span>Credit ratios</span>
+      <span>Loan decisions</span>
+    </div>
+
+  </div>
+
+  <div class="learning-journey">
+
+    <div class="journey-heading">
+      <div>
+        <span class="journey-eyebrow">Course Progress</span>
+        <h2>Learning Journey</h2>
       </div>
 
+      <div class="journey-controls">
+        <button type="button" class="journey-control" id="expand-all-btn">
+          Expand all
+        </button>
+
+        <button type="button" class="journey-control" id="collapse-all-btn">
+          Collapse all
+        </button>
       </div>
+    </div>
 
-      <div class="course-hero-visual">
-        <img src="../../images/mojgan.png" alt="Mojgan Samandar" class="hero-photo">
-      </div>
+    <nav class="journey-steps" aria-label="Learning journey">
 
-      <div class="learning-journey">
+      <a class="journey-step" href="#introduction-section" data-nav-section="introduction">
+        <span class="journey-number">1</span>
+        <span class="journey-text">
+          <strong>Introduction</strong>
+          <small>Credit fundamentals</small>
+        </span>
+      </a>
 
-        <div class="journey-heading">
-          <div>
-            <span class="journey-eyebrow">Course Progress</span>
-            <h2>Learning Journey</h2>
-          </div>
+      <a class="journey-step" href="#commercial-banking-section" data-nav-section="commercial-banking">
+        <span class="journey-number">2</span>
+        <span class="journey-text">
+          <strong>Banking</strong>
+          <small>Roles &amp; context</small>
+        </span>
+      </a>
 
-          <div class="journey-controls">
-            <button type="button" class="journey-control" id="expand-all-btn">
-              Expand all
-            </button>
+      <a class="journey-step" href="#financial-statements-section" data-nav-section="financial-statements">
+        <span class="journey-number">3</span>
+        <span class="journey-text">
+          <strong>Statements</strong>
+          <small>Financial information</small>
+        </span>
+      </a>
 
-            <button type="button" class="journey-control" id="collapse-all-btn">
-              Collapse all
-            </button>
-          </div>
-        </div>
+      <a class="journey-step" href="#financial-ratios-section" data-nav-section="financial-ratios">
+        <span class="journey-number">4</span>
+        <span class="journey-text">
+          <strong>Ratios</strong>
+          <small>Analysis and interpretation</small>
+        </span>
+      </a>
 
-        <nav class="journey-steps" aria-label="Learning journey">
+      <a class="journey-step" href="#credit-assessment-section" data-nav-section="credit-assessment">
+        <span class="journey-number">5</span>
+        <span class="journey-text">
+          <strong>Assessment</strong>
+          <small>Credit recommendation</small>
+        </span>
+      </a>
 
-          <a class="journey-step " href="#introduction-section" data-nav-section="introduction">
+      <a class="journey-step" href="#practice-section" data-nav-section="practice">
+        <span class="journey-number">6</span>
+        <span class="journey-text">
+          <strong>Practice</strong>
+          <small>Apply your knowledge</small>
+        </span>
+      </a>
 
-            <span class="journey-number">1</span>
-
-            <span class="journey-text">
-              <strong>Introduction</strong>
-              <small>Credit fundamentals</small>
-            </span>
-          </a>
-
-          <a class="journey-step" href="#financial-statements-section" data-nav-section="financial-statements">
-
-            <span class="journey-number">2</span>
-
-            <span class="journey-text">
-              <strong>Statements</strong>
-              <small>Financial information</small>
-            </span>
-          </a>
-
-          <a class="journey-step" href="#financial-ratios-section" data-nav-section="financial-ratios">
-
-            <span class="journey-number">3</span>
-
-            <span class="journey-text">
-              <strong>Ratios</strong>
-              <small>Analysis and interpretation</small>
-            </span>
-          </a>
-
-          <a class="journey-step" href="#credit-assessment-section" data-nav-section="credit-assessment">
-
-            <span class="journey-number">4</span>
-
-            <span class="journey-text">
-              <strong>Assessment</strong>
-              <small>Credit recommendation</small>
-            </span>
-          </a>
-
-          <a class="journey-step" href="#practice-section" data-nav-section="practice">
-
-            <span class="journey-number">5</span>
-
-            <span class="journey-text">
-              <strong>Practice</strong>
-              <small>Apply your knowledge</small>
-            </span>
-          </a>
-
-        </nav>
-
-      </div>
-
-    </section>
-
-
-
-    <nav class="section-nav" aria-label="Course sections">
-      <a href="#introduction-section" data-nav-section="introduction">1. Introduction</a>
-      <a href="#commercial-banking-section" data-nav-section="commercial-banking">2. Commercial Banking</a>
-      <a href="#financial-statements-section" data-nav-section="financial-statements">3. Statements</a>
-      <a href="#financial-ratios-section" data-nav-section="financial-ratios">4. Ratios</a>
-      <a href="#credit-assessment-section" data-nav-section="credit-assessment">5. Assessment</a>
-      <a href="#practice-section" data-nav-section="practice">6. Practice</a>
     </nav>
+
+  </div>
+
+</section>
 
     <!-- 1. INTRODUCTION TO COMMERCIAL CREDIT RISK -->
     <details id="introduction-section" class="learning-section intro-accordion" data-section="introduction" open>
@@ -3784,6 +3812,30 @@ efficiency.
                 <button type="button" class="btn-secondary" id="ratio-clear-btn">Clear</button>
               </div>
 
+              <aside class="dscr-lab" id="dscr-sensitivity-lab" aria-labelledby="dscr-lab-title">
+                <h4 id="dscr-lab-title">DSCR sensitivity (illustrative)</h4>
+                <p>Adjust cash available for debt service and scheduled interest + principal to see how coverage changes.
+                  Covenant definitions vary by lender — this uses a simple cash ÷ (interest + principal) view.</p>
+                <div class="dscr-sliders">
+                  <div class="dscr-slider-row">
+                    <label><span>Cash available for debt service</span> <span id="dscr-cash-val">$500,000</span></label>
+                    <input type="range" id="dscr-cash-slider" min="100000" max="1200000" step="10000" value="500000"
+                      aria-valuetext="500000" />
+                  </div>
+                  <div class="dscr-slider-row">
+                    <label><span>Interest + principal (annual)</span> <span id="dscr-debt-val">$400,000</span></label>
+                    <input type="range" id="dscr-debt-slider" min="100000" max="900000" step="10000" value="400000" />
+                  </div>
+                </div>
+                <div class="dscr-result">
+                  <div class="dscr-result-card">
+                    <span>Estimated DSCR</span>
+                    <strong id="dscr-live-value">1.25×</strong>
+                    <span id="dscr-live-band">—</span>
+                  </div>
+                </div>
+              </aside>
+
               <div class="result-groups" id="ratio-results"></div>
             </div>
           </div>
@@ -3894,6 +3946,97 @@ efficiency.
 
         </div>
 
+        <section class="five-cs-explorer" id="five-cs-explorer" aria-labelledby="five-c-explorer-title">
+          <div class="five-cs-explorer-header">
+            <div>
+              <h3 id="five-c-explorer-title">Explore the 5 Cs interactively</h3>
+              <p>Same framework as above — select each component to focus your study. Use this before the 12-step process.</p>
+            </div>
+          </div>
+          <div class="five-c-tablist" role="tablist" aria-label="Five Cs of credit">
+            <button type="button" class="five-c-tab" role="tab" data-panel="five-c-panel-character" aria-selected="false">
+              <span class="five-c-tab-icon">C</span> Character
+            </button>
+            <button type="button" class="five-c-tab" role="tab" data-panel="five-c-panel-capacity" aria-selected="false">
+              <span class="five-c-tab-icon">C</span> Capacity
+            </button>
+            <button type="button" class="five-c-tab" role="tab" data-panel="five-c-panel-capital" aria-selected="false">
+              <span class="five-c-tab-icon">C</span> Capital
+            </button>
+            <button type="button" class="five-c-tab" role="tab" data-panel="five-c-panel-collateral" aria-selected="false">
+              <span class="five-c-tab-icon">C</span> Collateral
+            </button>
+            <button type="button" class="five-c-tab" role="tab" data-panel="five-c-panel-conditions" aria-selected="false">
+              <span class="five-c-tab-icon">C</span> Conditions
+            </button>
+          </div>
+          <div class="five-c-panel" id="five-c-panel-character" role="tabpanel">
+            <h4>Character</h4>
+            <p>The borrower’s integrity, reliability, experience, and history of meeting financial obligations.</p>
+            <p class="credit-hook"><strong>Credit hook:</strong> Management quality, payment history, and transparency affect whether you trust projections and covenant compliance.</p>
+          </div>
+          <div class="five-c-panel" id="five-c-panel-capacity" role="tabpanel">
+            <h4>Capacity</h4>
+            <p>The business’s ability to generate sufficient cash flow to repay the proposed loan.</p>
+            <p class="credit-hook"><strong>Credit hook:</strong> Tie to operating cash flow, DSCR, and whether earnings convert to cash — not profit alone.</p>
+          </div>
+          <div class="five-c-panel" id="five-c-panel-capital" role="tabpanel">
+            <h4>Capital</h4>
+            <p>The owners’ financial investment in the business and the borrower’s overall financial strength.</p>
+            <p class="credit-hook"><strong>Credit hook:</strong> Equity cushion, retained earnings, and skin-in-the-game relative to total debt.</p>
+          </div>
+          <div class="five-c-panel" id="five-c-panel-collateral" role="tabpanel">
+            <h4>Collateral</h4>
+            <p>Assets and guarantees available to provide secondary repayment support if the borrower defaults.</p>
+            <p class="credit-hook"><strong>Credit hook:</strong> LTV, enforceability, PPSA/security perfection, and realizable value — not book value alone.</p>
+          </div>
+          <div class="five-c-panel" id="five-c-panel-conditions" role="tabpanel">
+            <h4>Conditions</h4>
+            <p>Purpose and terms of the financing, plus industry, market, and economic conditions affecting the borrower.</p>
+            <p class="credit-hook"><strong>Credit hook:</strong> Purpose of funds, facility type, cycle sensitivity, and whether structure matches risk.</p>
+          </div>
+        </section>
+
+        <section class="platform-quiz" id="platform-quiz-5cs" aria-labelledby="quiz-5cs-title">
+          <h3 id="quiz-5cs-title">Quick check: 5 Cs</h3>
+          <p class="platform-quiz-intro">Three questions — answers draw on the definitions above. This is formative practice, not a graded test.</p>
+
+          <div class="quiz-item" data-question="q1">
+            <p class="quiz-question">1. Which “C” is most directly linked to debt-service coverage and operating cash flow?</p>
+            <div class="quiz-options">
+              <button type="button" class="quiz-option" data-value="capacity"
+                data-correct-msg="Yes — capacity is about repayment ability from cash flow.">Capacity</button>
+              <button type="button" class="quiz-option" data-value="collateral"
+                data-wrong-msg="Collateral is secondary support; primary repayment is usually cash flow (capacity).">Collateral</button>
+              <button type="button" class="quiz-option" data-value="conditions">Conditions</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-item" data-question="q2">
+            <p class="quiz-question">2. Payment history and management integrity belong under which “C”?</p>
+            <div class="quiz-options">
+              <button type="button" class="quiz-option" data-value="capital">Capital</button>
+              <button type="button" class="quiz-option" data-value="character"
+                data-correct-msg="Correct — character covers willingness and reliability in meeting obligations.">Character</button>
+              <button type="button" class="quiz-option" data-value="capacity">Capacity</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-item" data-question="q3">
+            <p class="quiz-question">3. Registered security, guarantees, and LTV analysis primarily support which “C”?</p>
+            <div class="quiz-options">
+              <button type="button" class="quiz-option" data-value="collateral"
+                data-correct-msg="Right — collateral is secondary repayment support if primary cash flow fails.">Collateral</button>
+              <button type="button" class="quiz-option" data-value="conditions">Conditions</button>
+              <button type="button" class="quiz-option" data-value="capital">Capital</button>
+            </div>
+            <p class="quiz-feedback" aria-live="polite"></p>
+          </div>
+
+          <p class="quiz-score" aria-live="polite">Answer the questions to see your score.</p>
+        </section>
 
         <p class="section-intro">
           The 5 Cs help analysts <strong>organize and evaluate the evidence</strong> gathered during a credit
@@ -6321,6 +6464,35 @@ efficiency.
                 </div>
 
 
+                <section class="decision-workshop" id="credit-decision-workshop" aria-labelledby="decision-workshop-title">
+                  <div class="decision-workshop-header">
+                    <h4 id="decision-workshop-title">Interactive credit recommendation workshop</h4>
+                    <p>Practice structuring a decision like step 12 and the recommendation template above. Select an outcome and tick the evidence you would document — this mirrors a credit committee memo, not an automated approve/decline engine.</p>
+                  </div>
+                  <div class="decision-choice-row" role="group" aria-label="Recommendation type">
+                    <button type="button" class="decision-choice" data-decision="approve">
+                      <strong>Approve as proposed</strong>
+                      <span>Repayment capacity and residual risk are acceptable.</span>
+                    </button>
+                    <button type="button" class="decision-choice" data-decision="conditional">
+                      <strong>Approve with conditions</strong>
+                      <span>Acceptable only with mitigants or modified structure.</span>
+                    </button>
+                    <button type="button" class="decision-choice" data-decision="decline">
+                      <strong>Decline</strong>
+                      <span>Risk or repayment remains unacceptable after alternatives.</span>
+                    </button>
+                  </div>
+                  <div class="decision-checklist" aria-label="Supporting evidence">
+                    <label><input type="checkbox" value="Historical and projected cash flow support debt service" /> Historical and projected cash flow support debt service</label>
+                    <label><input type="checkbox" value="Key ratios reviewed in context (liquidity, leverage, coverage)" /> Key ratios reviewed in context (liquidity, leverage, coverage)</label>
+                    <label><input type="checkbox" value="Collateral / guarantees provide acceptable secondary support" /> Collateral / guarantees provide acceptable secondary support</label>
+                    <label><input type="checkbox" value="Covenants and monitoring address material risks" /> Covenants and monitoring address material risks</label>
+                    <label><input type="checkbox" value="Industry and management risks identified with mitigants" /> Industry and management risks identified with mitigants</label>
+                  </div>
+                  <div class="decision-output" aria-live="polite"></div>
+                </section>
+
                 <!-- FINAL DECISION LOGIC -->
 
                 <div class="callout-box">
@@ -6438,6 +6610,7 @@ efficiency.
   </button>
 
   <script src="cra_scripts.js"></script>
+  <script src="cra_platform.js"></script>
 
 </body>
 

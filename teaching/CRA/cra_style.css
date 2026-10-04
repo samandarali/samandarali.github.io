@@ -2990,102 +2990,215 @@ tr.flash-highlight td {
 
 
 
-/* heading */
+/* ===== Course hero ===== */
+
+/* ===== Course hero: portrait left, learning content right ===== */
 
 .course-hero {
+  position: relative;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
-  gap: 32px;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
+  gap: 32px 56px;
 
-  max-width: 1180px;
-  margin: 0 auto 28px;
-  padding: 42px;
+  max-width: 1280px;
+  margin: 0 auto 32px;
+  padding: clamp(48px, 6vw, 78px) clamp(24px, 6vw, 76px) 34px;
+  overflow: hidden;
 
-  background:
-    radial-gradient(circle at 88% 15%,
-      rgba(65, 105, 180, 0.12),
-      transparent 30%),
-    #fff;
-
-  border: 1px solid #dce4ee;
-  border-radius: 20px;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+  background: #f8f8f5;
+  border: 1px solid #e3e7e7;
+  border-radius: 22px;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.10);
 }
 
+.course-hero-background,
+.course-hero-background::after {
+  position: absolute;
+  inset: 0;
+}
+
+.course-hero-background {
+  z-index: 0;
+}
+
+.course-hero-background img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.course-hero-background::after {
+  content: "";
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 253, 0.14) 0%,
+    rgba(255, 255, 253, 0.24) 38%,
+    rgba(255, 255, 253, 0.42) 66%,
+    rgba(255, 255, 253, 0.54) 100%
+  );
+}
+
+/* Large portrait */
+
+.course-hero-visual {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-photo-frame {
+  width: min(100%, 320px);
+  padding: 9px;
+
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(29, 59, 82, 0.14);
+  border-radius: 26px;
+  box-shadow: 0 16px 32px rgba(23, 45, 61, 0.15);
+}
+
+.hero-photo-frame img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 0.82;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 19px;
+}
+
+/* Text area */
+
 .course-hero-content {
+  position: relative;
+  z-index: 1;
   align-self: center;
+  max-width: 660px;
 }
 
 .course-label {
-  display: inline-block;
-  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 14px;
 
   color: #285493;
-  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(40, 84, 147, 0.20);
+  border-radius: 999px;
+
+  font-size: 0.76rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
 }
 
-.course-hero h1 {
-  max-width: 720px;
-  margin: 0;
+.course-label span {
+  color: #bd8b31;
+  font-size: 0.7rem;
+}
 
+.course-hero h1 {
+  margin: 24px 0 18px;
   color: #102447;
-  font-size: clamp(2rem, 4vw, 3.3rem);
-  line-height: 1.12;
-  letter-spacing: -0.035em;
+  font-size: clamp(2.75rem, 5vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.course-hero h1 span {
+  display: block;
+  color: #285493;
 }
 
 .course-description {
-  max-width: 680px;
-  margin: 18px 0 0;
-
-  color: #526176;
-  font-size: 1rem;
+  max-width: 590px;
+  margin: 0;
+  color: #455b6e;
+  font-size: clamp(1rem, 1.45vw, 1.18rem);
   line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  margin-top: 32px;
 }
 
 .start-learning-button {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-
-  margin-top: 22px;
-  padding: 11px 17px;
+  gap: 18px;
+  padding: 15px 21px;
 
   color: #fff;
   background: #285493;
-  border-radius: 9px;
+  border-radius: 10px;
+  box-shadow: 0 12px 24px rgba(40, 84, 147, 0.20);
 
-  font-size: 0.86rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.start-learning-button:hover {
+  transform: translateY(-3px);
+  color: #fff;
+  background: #183b70;
+}
+
+.start-learning-button span {
+  font-size: 1.2rem;
+}
+
+.back-to-teaching {
+  color: #3d5872;
+  font-size: 0.93rem;
   font-weight: 700;
   text-decoration: none;
 }
 
-.start-learning-button:hover {
-  background: #1f4378;
+.back-to-teaching:hover {
+  color: #183b70;
+  text-decoration: underline;
 }
 
-.course-hero-visual {
+.hero-highlights {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 220px;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 38px;
 }
 
-.course-hero-visual img {
-  display: block;
-  width: 100%;
-  max-width: 330px;
-  height: auto;
-  object-fit: contain;
+.hero-highlights span {
+  padding: 8px 11px;
+  color: #36536d;
+  background: rgba(255, 255, 255, 0.60);
+  border: 1px solid rgba(54, 83, 109, 0.17);
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
-.learning-journey {
+/* Learning journey */
+
+.course-hero .learning-journey {
+  position: relative;
+  z-index: 1;
   grid-column: 1 / -1;
-  padding-top: 24px;
-  border-top: 1px solid #e2e8f0;
+
+  margin-top: 18px;
+  padding: 24px;
+
+  background: rgba(255, 255, 255, 0.48);
+  border: 1px solid rgba(31, 62, 91, 0.20);
+  border-radius: 18px;
 }
 
 .journey-heading {
@@ -3117,12 +3230,10 @@ tr.flash-highlight td {
 
 .journey-control {
   padding: 7px 12px;
-
   color: #475569;
   background: #fff;
   border: 1px solid #cbd5e1;
   border-radius: 7px;
-
   font-size: 0.75rem;
   font-weight: 650;
   cursor: pointer;
@@ -3134,14 +3245,134 @@ tr.flash-highlight td {
   border-color: #9fb8df;
 }
 
-.journey-steps {
+.course-hero .journey-steps {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 10px;
 }
 
 .journey-step {
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 13px;
+
+  color: #475569;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+
+  text-decoration: none;
+  transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.journey-step:hover {
+  transform: translateY(-2px);
+  border-color: #9fb8df;
+  background: #f3f7fd;
+}
+
+.journey-step.is-active {
+  color: #18345f;
+  background: #edf3fc;
+  border-color: #90add7;
+}
+
+.journey-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 30px;
+
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  background: #285493;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.journey-text {
+  min-width: 0;
+}
+
+.journey-text strong,
+.journey-text small {
+  display: block;
+}
+
+.journey-text strong {
+  color: inherit;
+  font-size: 0.8rem;
+}
+
+.journey-text small {
+  margin-top: 2px;
+  overflow: hidden;
+  color: #718096;
+  font-size: 0.67rem;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 900px) {
+  .course-hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 42px 30px 28px;
+  }
+
+  .course-hero-visual {
+    order: 2;
+  }
+
+  .course-hero-content {
+    order: 1;
+  }
+
+  .hero-photo-frame {
+    width: min(100%, 285px);
+  }
+
+  .course-hero .learning-journey {
+    order: 3;
+  }
+
+  .course-hero .journey-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .course-hero {
+    padding: 38px 18px 18px;
+    border-radius: 14px;
+  }
+
+  .course-hero h1 {
+    font-size: clamp(2.55rem, 13vw, 3.8rem);
+  }
+
+  .course-hero .learning-journey {
+    padding: 17px;
+    border-radius: 14px;
+  }
+
+  .journey-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .course-hero .journey-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*  */
+
+.journey-step {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -3155,10 +3386,7 @@ tr.flash-highlight td {
   border-radius: 10px;
 
   text-decoration: none;
-  transition:
-    transform 0.18s ease,
-    border-color 0.18s ease,
-    background-color 0.18s ease;
+  transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
 }
 
 .journey-step:hover {
@@ -3216,27 +3444,41 @@ tr.flash-highlight td {
 
 @media (max-width: 900px) {
   .course-hero {
-    grid-template-columns: 1fr;
-    padding: 30px;
-  }
-
-  .course-hero-visual {
-    grid-row: 2;
     min-height: auto;
+    padding: 72px 30px 30px;
   }
 
-  .course-hero-visual img {
-    max-width: 280px;
-  }
-
-  .journey-steps {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .course-hero .journey-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 600px) {
   .course-hero {
-    padding: 24px 18px;
+    padding: 64px 19px 20px;
+    border-radius: 14px;
+  }
+
+  .course-hero-background img {
+    object-position: 68% center;
+  }
+
+  .course-hero-background::after {
+    background: linear-gradient(
+      90deg,
+      rgba(3, 18, 32, 0.95),
+      rgba(3, 18, 32, 0.72)
+    );
+  }
+
+  .course-hero h1 {
+    font-size: clamp(2.65rem, 13vw, 4rem);
+  }
+
+  .course-hero .learning-journey {
+    margin-top: 50px;
+    padding: 17px;
+    border-radius: 14px;
   }
 
   .journey-heading {
@@ -3244,80 +3486,9 @@ tr.flash-highlight td {
     flex-direction: column;
   }
 
-  .journey-steps {
+  .course-hero .journey-steps {
     grid-template-columns: 1fr;
   }
-
-  .journey-step {
-    width: 100%;
-  }
-}
-
-
-.page-overview {
-  padding: 22px 26px;
-  border: 1px solid solid # px;
-  border-radius: 14px;
-  background: px;
-  background: px: #px;
-}
-
-.page-overview-heading {
-  margin-bottom: 16px;
-}
-
-.page-overview-heading h3 {
-  margin: 5px 0 0;
-  colorpx: 720px;
-  color: #px;
-  font-size: 1.05rem;
-  line-height: 1.45;
-}
-
-.page-overview-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px 28px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.page-overview-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  color: #526176;
-  font-size: 0.88rem;
-  line-height: 1.55;
-}
-
-.page-overview-list strong {
-  color: #203f77;
-}
-
-.overview-number {
-  display: grid;
-  flex: 0 0 25px;
-  width: 25px;
-  height: 25px;
-  place-items: center;
-  border-radius: 50%;
-  color: #fff;
-  background:
-}
-
-.course-hero-visual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.course-hero-visual img {
-  display: block;
-  width: 200px;
-  height: auto;
-  border-radius: 8px;
 }
 
 
@@ -5290,3 +5461,7 @@ details.purpose-of-financing>.table-wrapper {
     flex-basis: 100%;
   }
 }
+
+
+
+
