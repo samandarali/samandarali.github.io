@@ -564,6 +564,103 @@ textarea.contact-field {
     border-color: #7c3aed;
     box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.13);
 }
+
+
+
+
+/* dynamic hero */
+
+/* ── DYNAMIC HERO & TYPING EFFECT ── */
+.hero-gradient-bg {
+    background: radial-gradient(circle at 10% 20%, rgba(216, 180, 254, 0.4) 0%, rgba(243, 232, 255, 0.2) 40%, rgba(251, 249, 246, 1) 90%);
+}
+
+.glass-hero-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(228, 218, 247, 0.8);
+    box-shadow: 0 20px 50px rgba(109, 59, 210, 0.08);
+}
+
+.typewriter-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background-color: var(--teal-deep);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Dynamic Glow Ring around Profile Photo */
+.profile-ring-glow {
+    position: relative;
+}
+
+.profile-ring-glow::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #7c3aed, #a855f7, #60a5fa);
+    opacity: 0.45;
+    filter: blur(12px);
+    z-index: 0;
+    animation: pulseGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(0.98); opacity: 0.35; }
+    100% { transform: scale(1.02); opacity: 0.65; }
+}
+
+
+
+/* dfd */
+.svc-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 12px;
+    padding: 8px 12px;
+    border: 1px solid #fed7aa;
+    border-radius: 999px;
+    color: #9a3412;
+    background: #fff7ed;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(5px);
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease, background .2s ease;
+}
+
+.svc-card.is-active .svc-card-link {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.svc-card-link:hover {
+    background: #ea580c;
+    border-color: #ea580c;
+    color: white;
+}
+
+.svc-card-link span {
+    transition: transform .2s ease;
+}
+
+.svc-card-link:hover span {
+    transform: translateX(3px);
+}
     </style>
 </head>
 
@@ -607,39 +704,41 @@ textarea.contact-field {
         <section id="content-about" class="tab-content about-page" aria-labelledby="about-heading">
 
             <!-- 1. Hero / About -->
-            <div class="about-card">
-                <div class="about-grid">
-                    <div class="about-text">
-                        <h2 id="about-heading">About Me</h2>
-                        <div class="about-rule" aria-hidden="true"></div>
-                        <p class="about-lead">Hi, I’m Mojgan.</p>
-                        <p>
-                            I combine commercial credit risk analysis, economics, and data analytics to help
-                            organizations make informed decisions.
-
-                        </p>
-                        <p>
-                            This site brings together selected policy, research, and analytics projects, along with
-                            practical learning resources. I also help small businesses with websites, reporting, data
-                            analysis, and simple tools that reduce manual work.
-                        </p>
-                        <!-- <p>
-                            I also help small businesses address practical technical needs, including websites, simple
-                            apps and tools that save time, data analysis, dashboards, and reporting that supports better
-                            decisions.
-                        </p>
-                        <p>
-                            I combine business understanding with analytical and technical skills to create solutions
-                            that are clear, practical, and aligned with the real needs of an organization. Whether the
-                            task involves assessing financial risk, interpreting data, or improving a business process,
-                            the focus is on producing work that supports informed decisions and measurable results.
-                        </p> -->
-                    </div>
-                    <div class="about-photo">
-                        <img src="images/MyPhoto3.png" alt="Portrait of Mojgan Samandar" />
-                    </div>
-                </div>
+<!-- 1. Dynamic Hero / About Card -->
+<div class="about-card glass-hero-card hero-gradient-bg relative overflow-hidden">
+    <div class="about-grid relative z-10">
+        <div class="about-text">
+            <h2 id="about-heading" class="flex items-center gap-2">About Me</h2>
+            <div class="about-rule" aria-hidden="true"></div>
+            
+            <p class="about-lead font-semibold text-2xl text-indigo-950">
+                Hi, I’m <span class="text-purple-700">Mojgan</span>.
+            </p>
+            
+            <!-- Dynamic Typing Subtitle -->
+            <div class="text-lg font-medium text-purple-900 my-3 flex items-center h-8">
+                <span>I am a&nbsp;</span>
+                <span id="typed-text" class="text-purple-600 font-bold"></span>
+                <span class="typewriter-cursor"></span>
             </div>
+
+            <p>
+                I combine commercial credit risk analysis, economics, and data analytics to help
+                organizations make informed decisions.
+            </p>
+            <p>
+                This site brings together selected policy, research, and analytics projects, along with
+                practical learning resources. I also help small businesses with websites, reporting, data
+                analysis, and simple tools that reduce manual work.
+            </p>
+        </div>
+
+        <!-- Glowing Photo Container -->
+        <div class="about-photo profile-ring-glow">
+            <img src="images/MyPhoto3.png" alt="Portrait of Mojgan Samandar" class="relative z-10" />
+        </div>
+    </div>
+</div>
 
             <!-- 2. Services carousel -->
             <div class="services-band">
@@ -656,13 +755,19 @@ textarea.contact-field {
                         </button>
 
                         <div class="svc-stage" id="svc-stage">
-                            <article class="svc-card" role="group" aria-roledescription="slide" aria-label="1 of 5">
+                            <article class="svc-card" role="group" aria-roledescription="slide" aria-label="1 of 5" onclick="window.location.href='teaching/CRA/cra_index.html'">
                                 <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
                                     <path
                                         d="M6 42h36M10 42V30h6v12M21 42V22h6v20M32 42V12h6v30M10 20l10-8 8 4 12-10M34 6h6v6" />
                                 </svg>
                                 <h3>Commercial Credit Analysis</h3>
                                 <p>Financial statement analysis, credit risk assessment, and lending analysis.</p>
+
+<a class="svc-card-link" href="teaching/CRA/cra_index.html">
+    Explore credit analysis
+    <span aria-hidden="true">→</span>
+</a>
+
                             </article>
                             <article class="svc-card" role="group" aria-roledescription="slide" aria-label="2 of 5">
                                 <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
@@ -739,7 +844,7 @@ textarea.contact-field {
 
                 <!-- Policy & Research -->
                 <div class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-teal-500 hover:shadow-2xl">
-                    <h3 class="text-xl font-semibold mb-3 text-teal-800">Policy & Research Articles</h3>
+                    <h3 class="text-xl font-semibold mb-3 text-teal-800">Policy & Research Projects</h3>
                     <p class="text-gray-600 mb-4">
                         Published and applied research across economics, data analytics, and public policy, focused on
                         turning complex data into clear, evidence-based insights.
@@ -1313,7 +1418,7 @@ textarea.contact-field {
             const dotsBox = document.getElementById('svc-dots');
             const live = document.getElementById('svc-live');
             const n = cards.length;
-            let idx = 2; // start on "Websites", the middle card
+            let idx = 0; // start on "Websites", the middle card
 
             const dots = cards.map((c, i) => {
                 const b = document.createElement('button');
@@ -1386,6 +1491,50 @@ textarea.contact-field {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         })();
+
+
+// dynamic hero
+// Dynamic Typewriter Effect for Hero
+(function () {
+    const titles = [
+        "Economist",
+        "Data Analyst",
+        // "Commercial Credit Risk Specialist",
+        "Problem Solver"
+    ];
+    let titleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typedTextEl = document.getElementById("typed-text");
+
+    function type() {
+        if (!typedTextEl) return;
+        const currentTitle = titles[titleIndex];
+
+        if (isDeleting) {
+            typedTextEl.textContent = currentTitle.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typedTextEl.textContent = currentTitle.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        let speed = isDeleting ? 40 : 80;
+
+        if (!isDeleting && charIndex === currentTitle.length) {
+            speed = 2000; // Pause at end of phrase
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            titleIndex = (titleIndex + 1) % titles.length;
+            speed = 500; // Pause before typing next phrase
+        }
+
+        setTimeout(type, speed);
+    }
+
+    document.addEventListener("DOMContentLoaded", type);
+})();
 
     </script>
 
