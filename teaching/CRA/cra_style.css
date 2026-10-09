@@ -6129,3 +6129,317 @@ body.cra-platform {
 
 
 
+
+/* ==========================================================
+   Financial Ratios: contextual ratio navigation
+   Mirrors the look of the 12-step navigation (.assessment-step-nav).
+   Markup: <nav id="ratio-nav"> inside #financial-ratios-section > .stage-content
+   Behaviour: cra_scripts.js ("Financial Ratios contextual navigation").
+   Default (phones/tablets): compact horizontally scrollable row, in normal flow.
+   >= 1100px: sticky left rail beside the ratio content.
+   ========================================================== */
+
+.ratio-nav {
+  margin: 0 0 16px;
+  padding: 8px 10px;
+  background: #fff;
+  border: 1px solid var(--bank-line, #d7e0ea);
+  border-radius: 14px;
+  box-shadow: 0 5px 16px rgba(15, 61, 58, 0.08);
+  font-family: inherit;
+}
+
+.ratio-nav[hidden] {
+  display: none;
+}
+
+.ratio-nav-title {
+  display: none;
+}
+
+.ratio-nav-list,
+.ratio-nav-sublist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* compact row */
+.ratio-nav-list {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  padding-bottom: 2px;
+}
+
+.ratio-nav-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+}
+
+.ratio-nav-cat {
+  display: flex;
+  align-items: center;
+}
+
+.ratio-nav-toggle {
+  display: none;
+}
+
+/* On the row, only the active category shows its ratios, inline after it */
+.ratio-nav-sublist {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  padding-left: 8px;
+  border-left: 2px solid #cfe2de;
+}
+
+.ratio-nav-group.is-active>.ratio-nav-sublist,
+.ratio-nav-group.is-active>.ratio-nav-sublist[hidden] {
+  display: flex;
+}
+
+.ratio-nav-sublist li {
+  flex: 0 0 auto;
+}
+
+.ratio-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 10px;
+  color: #294a47;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  line-height: 1.25;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* Category: slightly larger and bolder */
+.ratio-nav-cat-link {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: #0f3d3a;
+  background: #f7fbfa;
+  border-color: #cfe2de;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.ratio-nav-count {
+  display: none;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  color: #fff;
+  background: #0f766e;
+  border-radius: 50%;
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* Ratio: smaller, restrained */
+.ratio-nav-ratio-link {
+  color: #4a625f;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 6px 9px;
+  background: #f7fbfa;
+  border-color: #e1ece9;
+}
+
+.ratio-nav-cat-link:hover,
+.ratio-nav-cat-link.is-active {
+  color: #fff;
+  background: #0f3d3a;
+  border-color: #0f3d3a;
+}
+
+.ratio-nav-cat-link:hover .ratio-nav-count,
+.ratio-nav-cat-link.is-active .ratio-nav-count {
+  color: #0f3d3a;
+  background: #d6fca4;
+}
+
+.ratio-nav-ratio-link:hover {
+  color: #0f3d3a;
+  background: #eef5f4;
+  border-color: #cfe2de;
+}
+
+.ratio-nav-ratio-link.is-active {
+  color: #0f3d3a;
+  background: #e4f1ee;
+  border-color: #cfe2de;
+  font-weight: 700;
+  box-shadow: inset 2px 0 0 #0f766e;
+}
+
+.ratio-nav-link:focus-visible,
+.ratio-nav-toggle:focus-visible {
+  outline: 2px solid var(--bank-accent, #2563eb);
+  outline-offset: 2px;
+}
+
+.ratio-nav-toggle {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  place-items: center;
+  color: #294a47;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.ratio-nav-toggle:hover {
+  background: #eef5f4;
+  color: #0f3d3a;
+}
+
+.ratio-nav-toggle span {
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.ratio-nav-toggle[aria-expanded="true"] span {
+  transform: rotate(180deg);
+}
+
+/* ---- Desktop: sticky left rail beside the ratio content ---- */
+@media (min-width: 1100px) {
+
+  /* `overflow: hidden` on this one section would stop sticky positioning;
+     `clip` keeps the same rounded-corner clipping without making it a scroll container. */
+  .cra-platform .learning-section.stage-ratios#financial-ratios-section {
+    overflow: clip;
+  }
+
+  .stage-ratios>.stage-content.has-ratio-nav {
+    display: grid;
+    grid-template-columns: 214px minmax(0, 1fr);
+    column-gap: 20px;
+    align-items: start;
+  }
+
+  .stage-ratios>.stage-content.has-ratio-nav>.learning-section {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  .ratio-nav {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    position: sticky;
+    top: calc(var(--header-h, 64px) + 16px);
+    z-index: 5;
+    align-self: start;
+    max-height: calc(100vh - var(--header-h, 64px) - 32px);
+    margin: 0;
+    padding: 14px 10px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+
+    /* fades in only while the section is in view (class set by JS) */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  }
+
+  .ratio-nav.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .ratio-nav-title {
+    display: block;
+    margin: 0 0 8px;
+    padding: 0 8px 10px;
+    border-bottom: 1px solid #cfe2de;
+    color: #0f3d3a;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .ratio-nav-list {
+    display: block;
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  .ratio-nav-group {
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .ratio-nav-cat-link,
+  .ratio-nav-ratio-link {
+    background: transparent;
+    border-color: transparent;
+    white-space: normal;
+  }
+
+  .ratio-nav-count {
+    display: grid;
+  }
+
+  .ratio-nav-toggle {
+    display: grid;
+  }
+
+  .ratio-nav-sublist,
+  .ratio-nav-group.is-active>.ratio-nav-sublist,
+  .ratio-nav-group.is-active>.ratio-nav-sublist[hidden] {
+    display: block;
+    margin: 2px 0 6px 19px;
+    padding: 0 0 0 8px;
+    border-left: 1px solid #cfe2de;
+  }
+
+  /* collapsed state is controlled by the `hidden` attribute on desktop */
+  .ratio-nav-sublist[hidden],
+  .ratio-nav-group.is-active>.ratio-nav-sublist[hidden] {
+    display: none;
+  }
+
+  .ratio-nav-ratio-link:hover {
+    transform: translateX(2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .ratio-nav,
+  .ratio-nav-link,
+  .ratio-nav-toggle,
+  .ratio-nav-toggle span {
+    transition: none;
+  }
+
+  .ratio-nav-ratio-link:hover {
+    transform: none;
+  }
+}

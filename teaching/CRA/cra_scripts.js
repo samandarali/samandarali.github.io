@@ -1059,3 +1059,249 @@
 
 
 
+
+/* =====================================================================
+   Financial Ratios contextual navigation
+   - Targets are found by data-section (ratio cards/categories have no ids).
+   - Desktop (>=1100px): sticky left rail, fades in while the section is in view.
+   - Below that: compact horizontal row at the top of the section.
+   ===================================================================== */
+(function () {
+  'use strict';
+
+  const section = document.getElementById('financial-ratios-section');
+  const nav = document.getElementById('ratio-nav');
+  if (!section || !nav) return;
+
+  const body = nav.parentElement;                 // .stage-content
+  const list = nav.querySelector('.ratio-nav-list');
+  const desktopMQ = window.matchMedia('(min-width: 1100px)');
+  const reducedMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const byKey = key => section.querySelector('.learning-section[data-section="' + key + '"]');
+
+  /* ---- Build model from the markup; drop any link whose target is missing ---- */
+  const groups = [...nav.querySelectorAll('.ratio-nav-group')].map(el => {
+    const key = el.dataset.ratioNavGroup;
+    const items = [...el.querySelectorAll('.ratio-nav-ratio-link')].map(link => {
+      const target = byKey(link.dataset.ratioNavTarget);
+      if (!target) { link.closest('li').remove(); return null; }
+      return { key: link.dataset.ratioNavTarget, link, target };
+    }).filter(Boolean);
+    return {
+      key, el, items,
+      target: byKey(key),
+      catLink: el.querySelector('.ratio-nav-cat-link'),
+      toggle: el.querySelector('.ratio-nav-toggle'),
+      sublist: el.querySelector('.ratio-nav-sublist'),
+      expanded: false,
+      pinned: false            // expanded by the user while not the active category
+    };
+  }).filter(g => {
+    if (!g.target) { g.el.remove(); return false; }
+    return true;
+  });
+  if (!groups.length) return;
+
+  const intro = byKey('ratios-intro');
+  let activeCat = null;
+  let activeRatio = null;
+
+  /* ---- Reveal nav (progressive enhancement: markup ships `hidden`) ---- */
+  body.classList.add('has-ratio-nav');
+  nav.removeAttribute('hidden');
+
+  /* ---- Expand / collapse ---- */
+  function setExpanded(g, expanded) {
+    g.expanded = expanded;
+    g.sublist.hidden = !expanded;
+    g.toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    g.el.classList.toggle('is-expanded', expanded);
+  }
+
+  groups.forEach(g => {
+    g.toggle.addEventListener('click', () => {
+      const next = !g.expanded;
+      setExpanded(g, next);
+      g.pinned = next && g.key !== activeCat;
+    });
+  });
+
+  setExpanded(groups[0], true);   // sensible default before the first scroll
+
+  /* ---- Active state ---- */
+  function keepInView(link) {
+    if (!link || !link.offsetParent) return;
+    requestAnimationFrame(() => {
+      const lr = link.getBoundingClientRect();
+      if (desktopMQ.matches) {
+        const nr = nav.getBoundingClientRect();
+        if (lr.top < nr.top + 8) nav.scrollTop -= (nr.top + 8 - lr.top);
+        else if (lr.bottom > nr.bottom - 8) nav.scrollTop += lr.bottom - (nr.bottom - 8);
+      } else {
+        const nr = list.getBoundingClientRect();
+        list.scrollTo({
+          left: list.scrollLeft + (lr.left + lr.width / 2) - (nr.left + nr.width / 2),
+          behavior: reducedMQ.matches ? 'auto' : 'smooth'
+        });
+      }
+    });
+  }
+
+  function setActive(catKey, ratioKey) {
+    if (catKey === activeCat && ratioKey === activeRatio) return;
+    const catChanged = catKey !== activeCat;
+    activeCat = catKey;
+    activeRatio = ratioKey;
+
+    let focusLink = null;
+    groups.forEach(g => {
+      const isCat = g.key === catKey;
+      g.el.classList.toggle('is-active', isCat);
+      g.catLink.classList.toggle('is-active', isCat);
+      g.catLink.removeAttribute('aria-current');
+      if (isCat && !ratioKey) { g.catLink.setAttribute('aria-current', 'location'); focusLink = g.catLink; }
+      if (catChanged && catKey) setExpanded(g, isCat || g.pinned);
+      g.items.forEach(it => {
+        const on = isCat && it.key === ratioKey;
+        it.link.classList.toggle('is-active', on);
+        if (on) { it.link.setAttribute('aria-current', 'location'); focusLink = it.link; }
+        else it.link.removeAttribute('aria-current');
+      });
+    });
+    keepInView(focusLink);
+  }
+
+  /* ---- Scroll spy ---- */
+  const headerEl = document.getElementById('platform-header');
+  const headerH = () => (headerEl ? headerEl.offsetHeight : 64);
+  const rendered = el => el.getClientRects().length > 0;
+
+  function computeActive() {
+    const probe = headerH() + 24;
+    if (intro && rendered(intro) && intro.getBoundingClientRect().bottom <= probe) return [null, null];
+
+    let cat = null;
+    groups.forEach(g => {
+      if (rendered(g.target) && g.target.getBoundingClientRect().top <= probe) cat = g;
+    });
+    if (!cat) return [null, null];
+    if (cat.target.getBoundingClientRect().bottom <= probe - 12) return [null, null];
+
+    let ratio = null;
+    cat.items.forEach(it => {
+      if (!rendered(it.target)) return;
+      const r = it.target.getBoundingClientRect();
+      if (r.top <= probe && r.bottom + 12 > probe) ratio = it.key;
+    });
+    return [cat.key, ratio];
+  }
+
+  let programmatic = false;
+  let idleTimer = null;
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    if (programmatic) return;
+    const [c, r] = computeActive();
+    setActive(c, r);
+  }
+
+  function requestUpdate() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener('scroll', () => {
+    if (programmatic) {
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => { programmatic = false; requestUpdate(); }, 160);
+      return;
+    }
+    requestUpdate();
+  }, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+  section.addEventListener('toggle', requestUpdate, true);   // accordions change layout
+
+  /* ---- Visibility: only while the Financial Ratios area is in the viewport ---- */
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      entries.forEach(en => nav.classList.toggle('is-visible', en.isIntersecting));
+      if (nav.classList.contains('is-visible')) requestUpdate();
+    }, { rootMargin: '-' + headerH() + 'px 0px 0px 0px', threshold: 0 }).observe(body);
+  } else {
+    nav.classList.add('is-visible');
+  }
+
+  /* ---- Navigate ---- */
+  function openChain(target) {
+    const chain = [];
+    for (let el = target; el && el !== document.body; el = el.parentElement) {
+      if (el.tagName === 'DETAILS') chain.push(el);
+    }
+    chain.reverse().forEach(d => { if (!d.open) d.open = true; });   // fires existing 'toggle' handlers
+  }
+
+  nav.addEventListener('click', e => {
+    const link = e.target.closest('.ratio-nav-link');
+    if (!link || !nav.contains(link)) return;
+    const target = byKey(link.dataset.ratioNavTarget);
+    if (!target) return;
+    e.preventDefault();
+
+    const isRatio = link.classList.contains('ratio-nav-ratio-link');
+    const catKey = isRatio ? link.dataset.ratioNavParent : link.dataset.ratioNavTarget;
+    const viaKeyboard = e.detail === 0;
+
+    programmatic = true;
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => { programmatic = false; requestUpdate(); }, 600); // if nothing scrolls
+
+    openChain(target);
+    setActive(catKey, isRatio ? link.dataset.ratioNavTarget : null);
+
+    requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: reducedMQ.matches ? 'auto' : 'smooth', block: 'start' });
+      if (viaKeyboard) {
+        const summary = target.querySelector(':scope > .learning-summary');
+        if (summary) summary.focus({ preventScroll: true });
+      }
+    });
+  });
+
+  /* ---- Keyboard: arrows move through visible links; left/right expand/collapse ---- */
+  nav.addEventListener('keydown', e => {
+    const link = e.target.closest('.ratio-nav-link');
+    if (!link) return;
+    const visible = [...nav.querySelectorAll('.ratio-nav-link')].filter(l => l.offsetParent !== null);
+    const i = visible.indexOf(link);
+    const row = !desktopMQ.matches;
+    const g = groups.find(x => x.el.contains(link));
+    const isCat = link.classList.contains('ratio-nav-cat-link');
+    let next = null;
+
+    switch (e.key) {
+      case row ? 'ArrowRight' : 'ArrowDown': next = visible[i + 1]; break;
+      case row ? 'ArrowLeft' : 'ArrowUp': next = visible[i - 1]; break;
+      case 'Home': next = visible[0]; break;
+      case 'End': next = visible[visible.length - 1]; break;
+      case 'ArrowRight':
+        if (!row && isCat && g) {
+          if (!g.expanded) setExpanded(g, true); else next = g.items[0] && g.items[0].link;
+          if (!g.expanded || g.key !== activeCat) g.pinned = g.key !== activeCat;
+        }
+        break;
+      case 'ArrowLeft':
+        if (!row && g) {
+          if (isCat) { if (g.expanded) { setExpanded(g, false); g.pinned = false; } }
+          else next = g.catLink;
+        }
+        break;
+      default: return;
+    }
+    e.preventDefault();
+    if (next) next.focus();
+  });
+})();
