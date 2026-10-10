@@ -1305,3 +1305,132 @@
     if (next) next.focus();
   });
 })();
+
+
+/* =====================================================================
+   SINGLE-SECTION VIEW (tab behaviour)
+   Shows only one top-level course section at a time:
+   Intro / Banking / Statements / Ratios / Assessment / Practice.
+   Load AFTER cra_scripts.js and cra_platform.js:
+     <script src="cra_tabs.js"></script>
+   ===================================================================== */
+(function () {
+  'use strict';
+
+  const SECTION_IDS = [
+    'introduction-section',
+    'commercial-banking-section',
+    'financial-statements-section',
+    'financial-ratios-section',
+    'credit-assessment-section',
+    'practice-section'
+  ];
+
+  const sections = SECTION_IDS.map(id => document.getElementById(id)).filter(Boolean);
+  if (!sections.length) return;
+
+  /* Hidden sections are removed from layout (beats any display rule in the CSS) */
+  const style = document.createElement('style');
+  style.textContent = '.cra-platform [data-tab-hidden]{display:none !important;}';
+  document.head.appendChild(style);
+
+  const navLinks = Array.from(document.querySelectorAll('a[data-nav-section]'));
+  const headerEl = document.getElementById('platform-header');
+  const headerH = () => (headerEl ? headerEl.offsetHeight : 64);
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let current = null;
+
+  function sectionOf(el) {
+    return el ? sections.find(s => s === el || s.contains(el)) : null;
+  }
+
+  function markNav(sectionId) {
+    navLinks.forEach(link => {
+      const on = link.getAttribute('href') === '#' + sectionId;
+      link.classList.toggle('is-active', on);
+      if (on) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  }
+
+  /* Show one section, hide the others. Returns true if something changed. */
+  function show(section) {
+    if (!section) return false;
+    const changed = section !== current;
+
+    sections.forEach(s => {
+      if (s === section) s.removeAttribute('data-tab-hidden');
+      else s.setAttribute('data-tab-hidden', '');
+    });
+
+    if (!section.open) section.open = true;
+    const summary = section.querySelector(':scope > .learning-summary');
+    if (summary) summary.setAttribute('aria-expanded', 'true');
+
+    current = section;
+    markNav(section.id);
+
+    // let scroll-spy / observers (e.g. the ratio side-nav) recalculate
+    if (changed) requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
+    return changed;
+  }
+
+  function scrollToSection(section, smooth) {
+    const top = section.getBoundingClientRect().top + window.scrollY - headerH() - 12;
+    window.scrollTo({ top: Math.max(0, top), behavior: smooth && !reducedMotion ? 'smooth' : 'auto' });
+  }
+
+  /* ---- Clicks on any in-page link that points into the course ---- */
+  document.addEventListener('click', e => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const hash = link.getAttribute('href');
+    if (hash.length < 2) return;
+
+    let target = null;
+    try { target = document.querySelector(hash); } catch (_) { return; }
+    const owner = sectionOf(target);
+    if (!owner) return;
+
+    const isMainNav = link.hasAttribute('data-nav-section') || SECTION_IDS.includes(hash.slice(1));
+
+    if (isMainNav) {
+      // Intro / Banking / ... buttons: switch the view and go to the top of that section
+      e.preventDefault();
+      e.stopImmediatePropagation();       // stop older handlers from re-opening/scrolling
+      const changed = show(owner);
+      history.replaceState(null, '', hash);
+      scrollToSection(owner, !changed);   // jump when switching, smooth if already there
+      return;
+    }
+
+    // Links to something inside a section that is currently hidden: reveal it first,
+    // then let the browser / existing handlers scroll to it as usual.
+    if (owner !== current) show(owner);
+  }, true);
+
+  /* ---- Programmatic jumps (chips, step flow, etc.) into hidden sections ---- */
+  const nativeScrollIntoView = Element.prototype.scrollIntoView;
+  Element.prototype.scrollIntoView = function () {
+    const owner = sectionOf(this);
+    if (owner && owner !== current) show(owner);
+    return nativeScrollIntoView.apply(this, arguments);
+  };
+
+  /* ---- Back / forward buttons and manual hash edits ---- */
+  window.addEventListener('hashchange', () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const owner = sectionOf(id && document.getElementById(id));
+    if (owner && show(owner)) scrollToSection(owner, false);
+  });
+
+  /* ---- Initial state: section from the URL hash, otherwise the Introduction ---- */
+  const startId = decodeURIComponent(location.hash.slice(1));
+  const start = sectionOf(startId && document.getElementById(startId)) || sections[0];
+  show(start);
+  if (startId) requestAnimationFrame(() => {
+    const t = document.getElementById(startId);
+    if (t) t.scrollIntoView({ block: 'start' });
+  });
+})();
