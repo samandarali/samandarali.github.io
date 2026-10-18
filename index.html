@@ -180,6 +180,9 @@
             box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
         }
 
+
+
+
         /* ── ABOUT PAGE (editorial redesign) ── */
         body {
             overflow-x: clip;
@@ -537,130 +540,334 @@
 
 
         /* contact */
-        .contact-info-panel {
-    background:
-        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.18), transparent 28%),
-        linear-gradient(145deg, #312e81, #7c3aed);
+
+        /* Full-bleed section; photo lives on ::before so mobile can show it as a top strip */
+        #content-contact.contact-section-bg {
+            --contact-max: 1600px;
+            margin-left: calc(50% - min(100vw, var(--contact-max)) / 2);
+            width: min(100vw, var(--contact-max));
+            position: relative;
+            isolation: isolate;
+            border-radius: 0;
+            background: linear-gradient(160deg, #4c1d95 0%, #1e1b4b 100%);
+            padding: 13rem 1rem 2.5rem;
+            /* mobile: ~13rem of photo shows above the panel */
+        }
+
+        .contact-section-bg::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            inset: 0 0 auto 0;
+            height: 17rem;
+            background: url('images/toronto.webp') 78% center / cover no-repeat;
+            -webkit-mask-image: linear-gradient(#000 65%, transparent);
+            mask-image: linear-gradient(#000 65%, transparent);
+        }
+
+        /* Mobile: softer copy of the photo behind the whole panel, so the glass has something to blur */
+        .contact-section-bg::after {
+            content: "";
+            position: absolute;
+            z-index: -2;
+            /* sits under the sharp top strip (::before is -1) */
+            inset: 0;
+            background: url('images/toronto.webp') 78% center / cover no-repeat;
+            opacity: 0.55;
+            /* higher = more photo, lower = more purple */
+        }
+
+        /* Frosted-glass panel */
+        .contact-card {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 2rem;
+            padding: 1.5rem;
+            color: #fff;
+            background: rgba(20, 28, 90, 0.42);
+            /* deep navy tint */
+            -webkit-backdrop-filter: blur(14px) saturate(120%);
+            backdrop-filter: blur(14px) saturate(120%);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 24px;
+            box-shadow: 0 24px 60px rgba(5, 8, 40, 0.35);
+        }
+
+        @media (min-width: 640px) {
+            .contact-card {
+                padding: 2rem;
+            }
+        }
+
+        /* Desktop: photo fills the section, panel sits left at ~62% width */
+        @media (min-width: 1024px) {
+            #content-contact.contact-section-bg {
+                min-height: 680px;
+                padding: 4rem clamp(1.5rem, 4vw, 4rem);
+            }
+
+            .contact-section-bg::before {
+                inset: 0;
+                height: auto;
+                background-position: 78% 25%;
+                /* 25% shows the top of the tower */
+                -webkit-mask-image: none;
+                mask-image: none;
+            }
+            .contact-section-bg::after { display: none; }
+
+            .contact-card {
+                width: 62%;
+                max-width: 980px;
+                /* the panel never gets wider than this */
+                grid-template-columns: minmax(0, 1fr) 260px;
+                /* wider info column */
+                column-gap: 1.75rem;
+                padding: 2.25rem;
+            }
+
+            .contact-info-col {
+                border-left: 1px solid rgba(255, 255, 255, 0.22);
+                /* subtle vertical divider */
+                padding-left: 1.75rem;
+            }
+        }
+
+        /* Mobile / tablet: more transparent glass */
+@media (max-width: 1023.98px) {
+
+    /* show the photo behind the panel almost at full strength */
+    .contact-section-bg::after {
+        opacity: 0.9;
+        background-position: 78% 40%;
+    }
+
+    /* lighter tint + lighter blur = more see-through */
+    .contact-card {
+        background: rgba(20, 28, 90, 0.22);
+        -webkit-backdrop-filter: blur(8px) saturate(130%);
+        backdrop-filter: blur(8px) saturate(130%);
+        border-color: rgba(255, 255, 255, 0.30);
+    }
+
+    /* keep text readable on the brighter photo */
+    .contact-card h2,
+    .contact-card h3,
+    .contact-card .contact-label,
+    .contact-card .contact-kicker {
+        text-shadow: 0 1px 8px rgba(8, 10, 50, 0.65);
+    }
 }
 
-.contact-field {
-    width: 100%;
-    height: 54px;
-    padding: 0 16px;
-    border: 1px solid #d7ddeb;
-    border-radius: 7px;
-    background: #fff;
-    color: #1f2937;
-}
+        /* Form grid: 2 columns only when the form column is wide enough */
+        .contact-form-col {
+            container-type: inline-size;
+        }
 
-textarea.contact-field {
-    height: 150px;
-    padding: 14px 16px;
-    resize: vertical;
-}
+        .contact-form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
 
-.contact-field:focus {
-    outline: none;
-    border-color: #7c3aed;
-    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.13);
-}
+        @container (min-width: 420px) {
+            .contact-form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .contact-span-2 {
+            grid-column: 1 / -1;
+        }
+
+        /* Text colours on glass */
+        .contact-card h2,
+        .contact-card h3 {
+            color: #fff;
+        }
+
+        .contact-card .contact-kicker {
+            color: #a78bfa;
+        }
+
+        .contact-card .contact-label {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .contact-card a {
+            color: #fff;
+            transition: color .2s;
+        }
+
+        .contact-card a:hover {
+            color: #c4b5fd;
+        }
+
+        /* Info items with round icon badges */
+        .contact-item {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            flex: none;
+            width: 36px;
+            height: 36px;
+            display: grid;
+            place-items: center;
+            border-radius: 999px;
+            background: rgba(124, 92, 255, 0.28);
+            color: #c4b5fd;
+        }
+
+        .contact-icon svg {
+            width: 17px;
+            height: 17px;
+        }
+
+        /* Inputs */
+        .contact-field {
+            width: 100%;
+            height: 50px;
+            padding: 0 16px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            color: #fff;
+        }
+
+        .contact-field::placeholder {
+            color: rgba(255, 255, 255, 0.62);
+        }
+
+        textarea.contact-field {
+            height: 130px;
+            padding: 14px 16px;
+            resize: vertical;
+        }
+
+        .contact-field:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.14);
+            border-color: #a78bfa;
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.25);
+        }
+
+        select.contact-field option {
+            color: #1f2937;
+        }
+
+        /* readable dropdown list */
+
+
+        /* dynamic hero */
+
+        /* ── DYNAMIC HERO & TYPING EFFECT ── */
+        .hero-gradient-bg {
+            background: radial-gradient(circle at 10% 20%, rgba(216, 180, 254, 0.4) 0%, rgba(243, 232, 255, 0.2) 40%, rgba(251, 249, 246, 1) 90%);
+        }
+
+        .glass-hero-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(228, 218, 247, 0.8);
+            box-shadow: 0 20px 50px rgba(109, 59, 210, 0.08);
+        }
+
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background-color: var(--teal-deep);
+            margin-left: 2px;
+            vertical-align: middle;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Dynamic Glow Ring around Profile Photo */
+        .profile-ring-glow {
+            position: relative;
+        }
+
+        .profile-ring-glow::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #7c3aed, #a855f7, #60a5fa);
+            opacity: 0.45;
+            filter: blur(12px);
+            z-index: 0;
+            animation: pulseGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                transform: scale(0.98);
+                opacity: 0.35;
+            }
+
+            100% {
+                transform: scale(1.02);
+                opacity: 0.65;
+            }
+        }
 
 
 
+        /* dfd */
+        .svc-card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 12px;
+            padding: 8px 12px;
+            border: 1px solid #fed7aa;
+            border-radius: 999px;
+            color: #9a3412;
+            background: #fff7ed;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(5px);
+            pointer-events: none;
+            transition: opacity .25s ease, transform .25s ease, background .2s ease;
+        }
 
-/* dynamic hero */
+        .svc-card.is-active .svc-card-link {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
 
-/* ── DYNAMIC HERO & TYPING EFFECT ── */
-.hero-gradient-bg {
-    background: radial-gradient(circle at 10% 20%, rgba(216, 180, 254, 0.4) 0%, rgba(243, 232, 255, 0.2) 40%, rgba(251, 249, 246, 1) 90%);
-}
+        .svc-card-link:hover {
+            background: #ea580c;
+            border-color: #ea580c;
+            color: white;
+        }
 
-.glass-hero-card {
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(228, 218, 247, 0.8);
-    box-shadow: 0 20px 50px rgba(109, 59, 210, 0.08);
-}
+        .svc-card-link span {
+            transition: transform .2s ease;
+        }
 
-.typewriter-cursor {
-    display: inline-block;
-    width: 2px;
-    height: 1.1em;
-    background-color: var(--teal-deep);
-    margin-left: 2px;
-    vertical-align: middle;
-    animation: blink 0.8s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
-/* Dynamic Glow Ring around Profile Photo */
-.profile-ring-glow {
-    position: relative;
-}
-
-.profile-ring-glow::before {
-    content: '';
-    position: absolute;
-    inset: -6px;
-    border-radius: 24px;
-    background: linear-gradient(135deg, #7c3aed, #a855f7, #60a5fa);
-    opacity: 0.45;
-    filter: blur(12px);
-    z-index: 0;
-    animation: pulseGlow 4s ease-in-out infinite alternate;
-}
-
-@keyframes pulseGlow {
-    0% { transform: scale(0.98); opacity: 0.35; }
-    100% { transform: scale(1.02); opacity: 0.65; }
-}
-
-
-
-/* dfd */
-.svc-card-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    margin-top: 12px;
-    padding: 8px 12px;
-    border: 1px solid #fed7aa;
-    border-radius: 999px;
-    color: #9a3412;
-    background: #fff7ed;
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-decoration: none;
-    opacity: 0;
-    transform: translateY(5px);
-    pointer-events: none;
-    transition: opacity .25s ease, transform .25s ease, background .2s ease;
-}
-
-.svc-card.is-active .svc-card-link {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.svc-card-link:hover {
-    background: #ea580c;
-    border-color: #ea580c;
-    color: white;
-}
-
-.svc-card-link span {
-    transition: transform .2s ease;
-}
-
-.svc-card-link:hover span {
-    transform: translateX(3px);
-}
+        .svc-card-link:hover span {
+            transform: translateX(3px);
+        }
     </style>
 </head>
 
@@ -704,41 +911,41 @@ textarea.contact-field {
         <section id="content-about" class="tab-content about-page" aria-labelledby="about-heading">
 
             <!-- 1. Hero / About -->
-<!-- 1. Dynamic Hero / About Card -->
-<div class="about-card glass-hero-card hero-gradient-bg relative overflow-hidden">
-    <div class="about-grid relative z-10">
-        <div class="about-text">
-            <h2 id="about-heading" class="flex items-center gap-2">About Me</h2>
-            <div class="about-rule" aria-hidden="true"></div>
-            
-            <p class="about-lead font-semibold text-2xl text-indigo-950">
-                Hi, I’m <span class="text-purple-700">Mojgan</span>.
-            </p>
-            
-            <!-- Dynamic Typing Subtitle -->
-            <div class="text-lg font-medium text-purple-900 my-3 flex items-center h-8">
-                <span>I am a&nbsp;</span>
-                <span id="typed-text" class="text-purple-600 font-bold"></span>
-                <span class="typewriter-cursor"></span>
+            <!-- 1. Dynamic Hero / About Card -->
+            <div class="about-card glass-hero-card hero-gradient-bg relative overflow-hidden">
+                <div class="about-grid relative z-10">
+                    <div class="about-text">
+                        <h2 id="about-heading" class="flex items-center gap-2">About Me</h2>
+                        <div class="about-rule" aria-hidden="true"></div>
+
+                        <p class="about-lead font-semibold text-2xl text-indigo-950">
+                            Hi, I’m <span class="text-purple-700">Mojgan</span>.
+                        </p>
+
+                        <!-- Dynamic Typing Subtitle -->
+                        <div class="text-lg font-medium text-purple-900 my-3 flex items-center h-8">
+                            <span>I am a&nbsp;</span>
+                            <span id="typed-text" class="text-purple-600 font-bold"></span>
+                            <span class="typewriter-cursor"></span>
+                        </div>
+
+                        <p>
+                            I combine commercial credit risk analysis, economics, and data analytics to help
+                            organizations make informed decisions.
+                        </p>
+                        <p>
+                            This site brings together selected policy, research, and analytics projects, along with
+                            practical learning resources. I also help small businesses with websites, reporting, data
+                            analysis, and simple tools that reduce manual work.
+                        </p>
+                    </div>
+
+                    <!-- Glowing Photo Container -->
+                    <div class="about-photo profile-ring-glow">
+                        <img src="images/MyPhoto3.png" alt="Portrait of Mojgan Samandar" class="relative z-10" />
+                    </div>
+                </div>
             </div>
-
-            <p>
-                I combine commercial credit risk analysis, economics, and data analytics to help
-                organizations make informed decisions.
-            </p>
-            <p>
-                This site brings together selected policy, research, and analytics projects, along with
-                practical learning resources. I also help small businesses with websites, reporting, data
-                analysis, and simple tools that reduce manual work.
-            </p>
-        </div>
-
-        <!-- Glowing Photo Container -->
-        <div class="about-photo profile-ring-glow">
-            <img src="images/MyPhoto3.png" alt="Portrait of Mojgan Samandar" class="relative z-10" />
-        </div>
-    </div>
-</div>
 
             <!-- 2. Services carousel -->
             <div class="services-band">
@@ -755,18 +962,18 @@ textarea.contact-field {
                         </button>
 
                         <div class="svc-stage" id="svc-stage">
-                            <article class="svc-card" role="group" aria-roledescription="slide" aria-label="1 of 5" onclick="window.location.href='teaching/CRA/cra_index.html'">
-                                <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                    <path
-                                        d="M6 42h36M10 42V30h6v12M21 42V22h6v20M32 42V12h6v30M10 20l10-8 8 4 12-10M34 6h6v6" />
+                            <article class="svc-card" role="group" aria-roledescription="slide" aria-label="1 of 5" ">
+                                <svg class=" svc-icon" viewBox="0 0 48 48" aria-hidden="true">
+                                <path
+                                    d="M6 42h36M10 42V30h6v12M21 42V22h6v20M32 42V12h6v30M10 20l10-8 8 4 12-10M34 6h6v6" />
                                 </svg>
                                 <h3>Commercial Credit Analysis</h3>
                                 <p>Financial statement analysis, credit risk assessment, and lending analysis.</p>
 
-<a class="svc-card-link" href="teaching/CRA/cra_index.html">
-    Explore credit analysis
-    <span aria-hidden="true">→</span>
-</a>
+                                <a class="svc-card-link" href="teaching/CRA/cra_index.html">
+                                    Explore credit analysis
+                                    <span aria-hidden="true">→</span>
+                                </a>
 
                             </article>
                             <article class="svc-card" role="group" aria-roledescription="slide" aria-label="2 of 5">
@@ -806,6 +1013,10 @@ textarea.contact-field {
                                 </svg>
                                 <h3>Teaching &amp; Learning Resources</h3>
                                 <p>Interactive learning tools and practical educational resources.</p>
+                                <a class="svc-card-link" href="#teaching">
+                                    Explore Knowledge Sharing
+                                    <span aria-hidden="true">→</span>
+                                </a>
                             </article>
                         </div>
 
@@ -825,7 +1036,8 @@ textarea.contact-field {
             <div class="cta-card">
                 <div>
                     <h2 class="cta-title">Let’s Work Together</h2>
-                    <p>For professional inquiries, collaboration, or technical support for your business, please get in touch.</p>
+                    <p>For professional inquiries, collaboration, or technical support for your business, please get in
+                        touch.</p>
                 </div>
                 <a href="mailto:mojgan.samandar@outlook.com" class="cta-btn" id="about-cta">
                     Get in Touch
@@ -1257,118 +1469,113 @@ textarea.contact-field {
 
         </section>
 
-        <!-- Articles -->
-        <section id="content-articles" class="tab-content hidden bg-white p-8 shadow-xl rounded-xl">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-2">My Publications</h2>
-            <p class="text-gray-700 text-lg">
-                You can view my articles on
-                <a href="https://scholar.google.com/citations?user=fYvemsMAAAAJ&hl=en" target="_blank"
-                    class="text-purple-600 hover:text-purple-800 font-medium">
-                    Google Scholar
-                </a>.
-            </p>
-        </section>
-
         <!-- Contact -->
-<section id="content-contact" class="tab-content hidden overflow-hidden bg-white shadow-xl rounded-xl">
-    <div class="grid grid-cols-1 lg:grid-cols-5">
+        <section id="content-contact" class="tab-content hidden overflow-hidden contact-section-bg">
+            <div class="contact-card">
 
-        <div class="lg:col-span-3 p-8">
-            <p class="text-sm font-bold uppercase tracking-widest text-purple-600 mb-2">Contact</p>
-            <h2 class="text-3xl font-bold text-gray-800 mb-6">Let’s Get Started</h2>
+                <!-- Form -->
+                <div class="contact-form-col">
+                    <p class="contact-kicker text-sm font-bold uppercase tracking-widest mb-2">Contact</p>
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-6">Let’s Get Started</h2>
 
-            <form class="grid grid-cols-1 sm:grid-cols-2 gap-4"
-                action="https://formsubmit.co/mojgan.samandar@outlook.com"
-                method="POST">
+                    <form class="contact-form-grid" action="https://formsubmit.co/mojgan.samandar@outlook.com"
+                        method="POST">
 
-                <input type="hidden" name="_subject"
-                    value="New inquiry from Mojgan Samandar’s website">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_subject" value="New inquiry from Mojgan Samandar’s website">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
 
-                <input name="first_name" type="text" required
-                    class="contact-field" placeholder="First Name">
+                        <input name="first_name" type="text" required class="contact-field" placeholder="First Name">
 
-                <input name="last_name" type="text"
-                    class="contact-field" placeholder="Last Name">
+                        <input name="last_name" type="text" class="contact-field" placeholder="Last Name">
 
-                <input name="email" type="email" required
-                    class="contact-field" placeholder="Email">
+                        <input name="email" type="email" required class="contact-field" placeholder="Email">
 
-                <input name="phone" type="tel"
-                    class="contact-field" placeholder="Phone Number (optional)">
+                        <input name="phone" type="tel" class="contact-field" placeholder="Phone Number (optional)">
 
-                <select name="preferred_contact_method" class="contact-field">
-                    <option value="">Preferred contact method</option>
-                    <option value="Email">Email</option>
-                    <option value="Phone">Phone</option>
-                </select>
+                        <select name="preferred_contact_method" class="contact-field">
+                            <option value="">Preferred contact method</option>
+                            <option value="Email">Email</option>
+                            <option value="Phone">Phone</option>
+                        </select>
 
-                <select name="inquiry_topic" class="contact-field">
-                    <option value="">What is your inquiry about?</option>
-                    <option value="Commercial credit and finance">Commercial credit and finance</option>
-                    <option value="Data analysis and dashboards">Data analysis and dashboards</option>
-                    <option value="Website or technical support">Website or technical support</option>
-                    <option value="Collaboration or other">Collaboration or other</option>
-                </select>
+                        <select name="inquiry_topic" class="contact-field">
+                            <option value="">What is your inquiry about?</option>
+                            <option value="Commercial credit and finance">Commercial credit and finance</option>
+                            <option value="Data analysis and dashboards">Data analysis and dashboards</option>
+                            <option value="Website or technical support">Website or technical support</option>
+                            <option value="Collaboration or other">Collaboration or other</option>
+                        </select>
 
-                <div class="sm:col-span-2">
-                    <textarea name="message" required class="contact-field"
-                        placeholder="Message"></textarea>
+                        <div class="contact-span-2">
+                            <textarea name="message" required class="contact-field" placeholder="Message"></textarea>
+                        </div>
+
+                        <div class="contact-span-2 flex justify-end">
+                            <button type="submit"
+                                class="bg-[#6E3EEF] text-white font-bold py-3 px-7 rounded-xl shadow-md hover:bg-[#5F32D6] transition uppercase tracking-wider text-sm">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
                 </div>
 
-                <div class="sm:col-span-2 flex justify-end">
-                    <button type="submit"
-                        class="bg-purple-600 text-white font-bold py-3 px-7 rounded-lg shadow-md hover:bg-purple-700 transition uppercase tracking-wider text-sm">
-                        Submit
-                    </button>
-                </div>
-            </form>
-        </div>
+                <!-- Contact info (same glass panel, right column) -->
+                <aside class="contact-info-col space-y-6 lg:pt-14">
+                    <h3 class="text-2xl font-bold">Contact Info</h3>
 
-        <aside class="contact-info-panel lg:col-span-2 p-8 text-white">
-            <h3 class="text-3xl font-bold mb-8">Contact Info</h3>
-
-            <div class="space-y-6">
-                <div>
-                    <p class="text-purple-200 text-sm uppercase tracking-wider mb-1">Location</p>
-                    <p class="font-semibold">Toronto, Ontario</p>
-                </div>
-
-                <div>
-                    <p class="text-purple-200 text-sm uppercase tracking-wider mb-1">Email</p>
-                    <a href="mailto:mojgan.samandar@outlook.com"
-                        class="font-semibold hover:text-purple-200 transition">
-                        mojgan.samandar@outlook.com
-                    </a>
-                </div>
-
-                <div>
-                    <p class="text-purple-200 text-sm uppercase tracking-wider mb-1">Professional Profiles</p>
-
-                    <div class="flex flex-col gap-3">
-                        <a href="https://www.linkedin.com/in/mojgan-samandar"
-                            target="_blank" rel="noopener"
-                            class="font-semibold hover:text-purple-200 transition">
-                            LinkedIn →
-                        </a>
-
-                        <a href="https://github.com/samandarali?tab=repositories"
-                            target="_blank" rel="noopener"
-                            class="font-semibold hover:text-purple-200 transition">
-                            GitHub →
-                        </a>
+                    <div class="contact-item">
+                        <span class="contact-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" />
+                            </svg>
+                        </span>
+                        <div>
+                            <p class="contact-label text-xs uppercase tracking-wider mb-1">Location</p>
+                            <p class="font-semibold">Toronto, Ontario</p>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <p class="mt-12 text-purple-100 leading-relaxed">
-                For professional inquiries, collaboration, or technical support for your business,
-                please get in touch.
-            </p>
-        </aside>
-    </div>
-</section>
+                    <div class="contact-item">
+                        <span class="contact-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M3 5h18a1 1 0 0 1 1 1v.4l-10 6.2L2 6.4V6a1 1 0 0 1 1-1Zm19 3.75V18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8.75l10 6.2 10-6.2Z" />
+                            </svg>
+                        </span>
+                        <div class="min-w-0">
+                            <p class="contact-label text-xs uppercase tracking-wider mb-1">Email</p>
+                            <a href="mailto:mojgan.samandar@outlook.com" class="font-semibold text-sm break-all">
+                                samandar.mojgan@gmail.com
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <span class="contact-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4V21H3V9.75Zm6.5 0h3.8v1.55h.05c.53-1 1.82-2.05 3.75-2.05 4 0 4.75 2.63 4.75 6.05V21h-4v-4.9c0-1.17-.02-2.67-1.63-2.67-1.63 0-1.87 1.27-1.87 2.59V21h-4V9.75Z" />
+                            </svg>
+                        </span>
+                        <div>
+                            <p class="contact-label text-xs uppercase tracking-wider mb-1">Professional Profiles</p>
+                            <a href="https://www.linkedin.com/in/mojgan-samandar" target="_blank" rel="noopener"
+                                class="font-semibold text-sm">
+                                LinkedIn →
+                            </a>
+                        </div>
+                    </div>
+
+                    <p class="contact-label text-sm leading-relaxed pt-2">
+                        For professional inquiries, collaboration, or technical support for your business,
+                        please get in touch.
+                    </p>
+                </aside>
+
+            </div>
+        </section>
 
     </main>
 
@@ -1397,6 +1604,17 @@ textarea.contact-field {
         tabButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 switchTab(btn.getAttribute('data-target'));
+            });
+        });
+
+
+        document.querySelectorAll('a[href="#teaching"]').forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                switchTab('content-teaching');
+                history.replaceState(null, '', '#teaching');
+                document.getElementById('content-teaching')
+                    .scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
@@ -1493,48 +1711,48 @@ textarea.contact-field {
         })();
 
 
-// dynamic hero
-// Dynamic Typewriter Effect for Hero
-(function () {
-    const titles = [
-        "Economist",
-        "Data Analyst",
-        // "Commercial Credit Risk Specialist",
-        "Problem Solver"
-    ];
-    let titleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typedTextEl = document.getElementById("typed-text");
+        // dynamic hero
+        // Dynamic Typewriter Effect for Hero
+        (function () {
+            const titles = [
+                "Economist",
+                "Data Analyst",
+                // "Commercial Credit Risk Specialist",
+                "Problem Solver"
+            ];
+            let titleIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            const typedTextEl = document.getElementById("typed-text");
 
-    function type() {
-        if (!typedTextEl) return;
-        const currentTitle = titles[titleIndex];
+            function type() {
+                if (!typedTextEl) return;
+                const currentTitle = titles[titleIndex];
 
-        if (isDeleting) {
-            typedTextEl.textContent = currentTitle.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            typedTextEl.textContent = currentTitle.substring(0, charIndex + 1);
-            charIndex++;
-        }
+                if (isDeleting) {
+                    typedTextEl.textContent = currentTitle.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    typedTextEl.textContent = currentTitle.substring(0, charIndex + 1);
+                    charIndex++;
+                }
 
-        let speed = isDeleting ? 40 : 80;
+                let speed = isDeleting ? 40 : 80;
 
-        if (!isDeleting && charIndex === currentTitle.length) {
-            speed = 2000; // Pause at end of phrase
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            titleIndex = (titleIndex + 1) % titles.length;
-            speed = 500; // Pause before typing next phrase
-        }
+                if (!isDeleting && charIndex === currentTitle.length) {
+                    speed = 2000; // Pause at end of phrase
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    titleIndex = (titleIndex + 1) % titles.length;
+                    speed = 500; // Pause before typing next phrase
+                }
 
-        setTimeout(type, speed);
-    }
+                setTimeout(type, speed);
+            }
 
-    document.addEventListener("DOMContentLoaded", type);
-})();
+            document.addEventListener("DOMContentLoaded", type);
+        })();
 
     </script>
 
