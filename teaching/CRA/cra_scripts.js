@@ -1461,104 +1461,62 @@
 
 /* =====================================================================
    FINANCING JOURNEY (Banking tab)
-   Each step box opens a small pop-up with its explanation. The pop-up
-   goes to the right of the box, or the left if only that side has room;
-   when neither side fits (tablet / phone) it opens below the box and
-   pushes the following steps down, so it never covers another step.
+   Stage-banded stepper: the seven step tiles form a tab list and one
+   detail panel shows the selected step. Tiles respond to click and to
+   arrow keys / Home / End; Previous / Next buttons sit in each panel.
    ===================================================================== */
 (function () {
   'use strict';
 
-  const flow = document.querySelector('.bk-flow');
-  if (!flow) return;
+  const stepper = document.querySelector('.bk-stepper');
+  if (!stepper) return;
 
-  const POP_WIDTH = 300;   // keep in sync with .bk-pop width in cra_style.css
-  const GAP = 20;          // space between box and pop-up
-  const boxes = Array.from(flow.querySelectorAll('.bk-flow-box'));
-  let openBox = null;
-
-  const popOf = box => document.getElementById(box.getAttribute('aria-controls'));
-
-  function place(box) {
-    const pop = popOf(box);
-    const bounds = (flow.closest('.bk') || flow).getBoundingClientRect();
-    const rect = box.getBoundingClientRect();
-    const need = POP_WIDTH + GAP;
-
-    let side = 'below';
-    if (bounds.right - rect.right >= need) side = 'right';
-    else if (rect.left - bounds.left >= need) side = 'left';
-
-    pop.classList.remove('bk-pop--right', 'bk-pop--left', 'bk-pop--below');
-    pop.classList.add('bk-pop--' + side);
-    pop.style.top = '';
-    pop.style.removeProperty('--pointer-top');
-    if (side === 'below') return;
-
-    // line the pop-up up with the top of its box (the stage label may sit above it) ...
-    let top = box.offsetTop;
-    pop.style.top = top + 'px';
-
-    // ... but keep it inside the flow: the section clips anything below it,
-    // so near the last steps shift it up until its bottom meets the flow's bottom
-    const overflow = pop.getBoundingClientRect().bottom - flow.getBoundingClientRect().bottom;
-    if (overflow > 0) {
-      top -= overflow;
-      pop.style.top = top + 'px';
-    }
-
-    // keep the small pointer aimed at the middle of the box
-    const pointer = box.offsetTop + box.offsetHeight / 2 - top - 6;
-    pop.style.setProperty('--pointer-top', Math.max(14, pointer) + 'px');
-  }
-
-  function close(box, returnFocus) {
-    if (!box) return;
-    popOf(box).hidden = true;
-    box.setAttribute('aria-expanded', 'false');
-    box.closest('.bk-flow-step').classList.remove('is-open');
-    if (returnFocus) box.focus();
-    if (openBox === box) openBox = null;
-  }
-
-  function open(box) {
-    if (openBox && openBox !== box) close(openBox, false);
-    const pop = popOf(box);
-    pop.hidden = false;
-    box.setAttribute('aria-expanded', 'true');
-    box.closest('.bk-flow-step').classList.add('is-open');
-    place(box);
-    openBox = box;
-  }
-
-  boxes.forEach(box => {
-    box.addEventListener('click', () => (openBox === box ? close(box, false) : open(box)));
-    popOf(box).querySelector('.bk-pop-close').addEventListener('click', () => close(box, true));
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && openBox) close(openBox, true);
-  });
-
-  document.addEventListener('click', e => {
-    if (openBox && !e.target.closest('.bk-flow-step.is-open, .bk-stage-chip')) close(openBox, false);
-  });
-
-  // stage overview: each "Step n" chip jumps to that step and opens its details
+  const tiles = Array.from(stepper.querySelectorAll('.bk-tile[role="tab"]'));
+  const bands = Array.from(stepper.querySelectorAll('.bk-band'));
+  const panelOf = tile => document.getElementById(tile.getAttribute('aria-controls'));
+  const narrow = window.matchMedia('(max-width: 900px)');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('.bk-stage-chip[data-step]').forEach(chip => {
-    chip.addEventListener('click', e => {
-      const box = document.getElementById('bk-flow-btn-' + chip.dataset.step);
-      if (!box) return;
+
+  function select(index, focusTile) {
+    const i = Math.max(0, Math.min(tiles.length - 1, index));
+    tiles.forEach((tile, k) => {
+      const on = k === i;
+      tile.setAttribute('aria-selected', on ? 'true' : 'false');
+      tile.tabIndex = on ? 0 : -1;
+      panelOf(tile).hidden = !on;
+    });
+    const stage = tiles[i].dataset.stage;
+    bands.forEach(band => band.classList.toggle('is-active', band.dataset.stage === stage));
+    if (focusTile) tiles[i].focus();
+    return panelOf(tiles[i]);
+  }
+
+  tiles.forEach((tile, i) => {
+    tile.addEventListener('click', () => {
+      const panel = select(i, false);
+      // on phones the panel sits below the list: bring it into view
+      if (narrow.matches) panel.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'nearest' });
+    });
+
+    tile.addEventListener('keydown', e => {
+      const keys = { ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: tiles.length - 1 };
+      if (!(e.key in keys)) return;
       e.preventDefault();
-      box.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
-      open(box);
-      box.focus({ preventScroll: true });
+      select(keys[e.key], true);
     });
   });
 
-  window.addEventListener('resize', () => {
-    if (openBox) place(openBox);
+  stepper.addEventListener('click', e => {
+    const btn = e.target.closest('.bk-detail-nav[data-go]');
+    if (!btn) return;
+    const goingNext = Number(btn.dataset.go) > Number(btn.closest('.bk-detail').id.replace('bk-detail-', ''));
+    const panel = select(Number(btn.dataset.go) - 1, false);
+    // keep keyboard users on the same kind of button in the new panel
+    const navs = panel.querySelectorAll('.bk-detail-nav');
+    const same = goingNext ? navs[navs.length - 1] : navs[0];
+    (same && same.dataset.go ? same : panel.querySelector('.bk-detail-nav') || tiles[0]).focus();
   });
+
+  select(0, false);
 })();
 
