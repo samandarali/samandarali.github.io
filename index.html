@@ -279,13 +279,51 @@
         }
 
         /* Full-bleed services band */
-        .services-band {
-            width: 100vw;
-            margin: 56px 0 56px calc(50% - 50vw);
-            padding: 56px 0 40px;
-            background: linear-gradient(180deg, #f6f1ff 0%, #f1eafd 100%);
-            border-block: 1px solid var(--lav);
-        }
+/* Full-bleed services band with video background */
+.services-band {
+    position: relative;
+    isolation: isolate;          /* keeps video/overlay layers inside this band */
+    overflow: hidden;
+    width: 100vw;
+    margin: 56px 0 56px calc(50% - 50vw);
+    padding: 56px 0 40px;
+    background: linear-gradient(180deg, #f6f1ff 0%, #f1eafd 100%); /* fallback while video loads */
+    border-block: 1px solid var(--lav);
+}
+
+.services-bg-video {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* Soft lavender wash so the title, cards and dots stay readable */
+.services-band::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg,
+            rgba(246, 241, 255, 0.55) 0%,
+            rgba(241, 234, 253, 0.35) 100%);
+    pointer-events: none;
+}
+
+.services-inner {
+    position: relative;
+    z-index: 1;
+}
+
+/* Respect users who prefer no motion: fall back to the gradient */
+@media (prefers-reduced-motion: reduce) {
+    .services-bg-video {
+        display: none;
+    }
+}
 
         .services-inner {
             max-width: 1152px;
@@ -836,10 +874,10 @@
             gap: 7px;
             margin-top: 12px;
             padding: 8px 12px;
-            border: 1px solid #fed7aa;
+            border: 1px solid #6E3EEF;
             border-radius: 999px;
-            color: #9a3412;
-            background: #fff7ed;
+            color: #edecf0;
+            background: #6E3EEF;
             font-size: 0.78rem;
             font-weight: 700;
             text-decoration: none;
@@ -856,8 +894,8 @@
         }
 
         .svc-card-link:hover {
-            background: #ea580c;
-            border-color: #ea580c;
+            background: #3B168C;
+            border-color: #3B168C;
             color: white;
         }
 
@@ -948,7 +986,10 @@
             </div>
 
             <!-- 2. Services carousel -->
-            <div class="services-band">
+<div class="services-band">
+    <video class="services-bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+        <source src="images/what-i-can-help-breeze-loop-noticeable.mp4" type="video/mp4">
+    </video>
                 <div class="services-inner">
                     <h2 id="services-heading" class="services-title">What I Can Help With</h2>
                     <div class="about-rule center" aria-hidden="true"></div>
@@ -1032,20 +1073,113 @@
                 </div>
             </div>
 
-            <!-- 3. Contact CTA -->
-            <div class="cta-card">
-                <div>
-                    <h2 class="cta-title">Let’s Work Together</h2>
-                    <p>For professional inquiries, collaboration, or technical support for your business, please get in
-                        touch.</p>
+        <!-- 3. Contact (moved under "What I Can Help With") -->
+            <section id="content-contact" class="overflow-hidden contact-section-bg">
+            <div class="contact-card">
+
+                <!-- Form -->
+                <div class="contact-form-col">
+                    <p class="contact-kicker text-sm font-bold uppercase tracking-widest mb-2">Contact</p>
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-6">Let’s Get Started</h2>
+
+                    <form class="contact-form-grid" action="https://formsubmit.co/mojgan.samandar@outlook.com"
+                        method="POST">
+
+                        <input type="hidden" name="_subject" value="New inquiry from Mojgan Samandar’s website">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+
+                        <input name="first_name" type="text" required class="contact-field" placeholder="First Name">
+
+                        <input name="last_name" type="text" class="contact-field" placeholder="Last Name">
+
+                        <input name="email" type="email" required class="contact-field" placeholder="Email">
+
+                        <input name="phone" type="tel" class="contact-field" placeholder="Phone Number (optional)">
+
+                        <select name="preferred_contact_method" class="contact-field">
+                            <option value="">Preferred contact method</option>
+                            <option value="Email">Email</option>
+                            <option value="Phone">Phone</option>
+                        </select>
+
+                        <select name="inquiry_topic" class="contact-field">
+                            <option value="">What is your inquiry about?</option>
+                            <option value="Commercial credit and finance">Commercial credit and finance</option>
+                            <option value="Data analysis and dashboards">Data analysis and dashboards</option>
+                            <option value="Website or technical support">Website or technical support</option>
+                            <option value="Collaboration or other">Collaboration or other</option>
+                        </select>
+
+                        <div class="contact-span-2">
+                            <textarea name="message" required class="contact-field" placeholder="Message"></textarea>
+                        </div>
+
+                        <div class="contact-span-2 flex justify-end">
+                            <button type="submit"
+                                class="bg-[#6E3EEF] text-white font-bold py-3 px-7 rounded-xl shadow-md hover:bg-[#5F32D6] transition uppercase tracking-wider text-sm">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <a href="mailto:mojgan.samandar@outlook.com" class="cta-btn" id="about-cta">
-                    Get in Touch
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                </a>
+
+                <!-- Contact info (same glass panel, right column) -->
+                <aside class="contact-info-col space-y-6 lg:pt-14">
+                    <h3 class="text-2xl font-bold">Contact Info</h3>
+
+                    <div class="contact-item">
+                        <span class="contact-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" />
+                            </svg>
+                        </span>
+                        <div>
+                            <p class="contact-label text-xs uppercase tracking-wider mb-1">Location</p>
+                            <p class="font-semibold">Toronto, Ontario</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <span class="contact-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M3 5h18a1 1 0 0 1 1 1v.4l-10 6.2L2 6.4V6a1 1 0 0 1 1-1Zm19 3.75V18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8.75l10 6.2 10-6.2Z" />
+                            </svg>
+                        </span>
+                        <div class="min-w-0">
+                            <p class="contact-label text-xs uppercase tracking-wider mb-1">Email</p>
+                            <a href="mailto:mojgan.samandar@outlook.com" class="font-semibold text-sm break-all">
+                                samandar.mojgan@gmail.com
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <span class="contact-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4V21H3V9.75Zm6.5 0h3.8v1.55h.05c.53-1 1.82-2.05 3.75-2.05 4 0 4.75 2.63 4.75 6.05V21h-4v-4.9c0-1.17-.02-2.67-1.63-2.67-1.63 0-1.87 1.27-1.87 2.59V21h-4V9.75Z" />
+                            </svg>
+                        </span>
+                        <div>
+                            <p class="contact-label text-xs uppercase tracking-wider mb-1">Professional Profiles</p>
+                            <a href="https://www.linkedin.com/in/mojgan-samandar" target="_blank" rel="noopener"
+                                class="font-semibold text-sm">
+                                LinkedIn →
+                            </a>
+                        </div>
+                    </div>
+
+                    <p class="contact-label text-sm leading-relaxed pt-2">
+                        For professional inquiries, collaboration, or technical support for your business,
+                        please get in touch.
+                    </p>
+                </aside>
+
             </div>
+        </section>
         </section>
 
         <!-- Projects -->
@@ -1469,114 +1603,6 @@
 
         </section>
 
-        <!-- Contact -->
-        <section id="content-contact" class="tab-content hidden overflow-hidden contact-section-bg">
-            <div class="contact-card">
-
-                <!-- Form -->
-                <div class="contact-form-col">
-                    <p class="contact-kicker text-sm font-bold uppercase tracking-widest mb-2">Contact</p>
-                    <h2 class="text-3xl sm:text-4xl font-bold mb-6">Let’s Get Started</h2>
-
-                    <form class="contact-form-grid" action="https://formsubmit.co/mojgan.samandar@outlook.com"
-                        method="POST">
-
-                        <input type="hidden" name="_subject" value="New inquiry from Mojgan Samandar’s website">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_template" value="table">
-
-                        <input name="first_name" type="text" required class="contact-field" placeholder="First Name">
-
-                        <input name="last_name" type="text" class="contact-field" placeholder="Last Name">
-
-                        <input name="email" type="email" required class="contact-field" placeholder="Email">
-
-                        <input name="phone" type="tel" class="contact-field" placeholder="Phone Number (optional)">
-
-                        <select name="preferred_contact_method" class="contact-field">
-                            <option value="">Preferred contact method</option>
-                            <option value="Email">Email</option>
-                            <option value="Phone">Phone</option>
-                        </select>
-
-                        <select name="inquiry_topic" class="contact-field">
-                            <option value="">What is your inquiry about?</option>
-                            <option value="Commercial credit and finance">Commercial credit and finance</option>
-                            <option value="Data analysis and dashboards">Data analysis and dashboards</option>
-                            <option value="Website or technical support">Website or technical support</option>
-                            <option value="Collaboration or other">Collaboration or other</option>
-                        </select>
-
-                        <div class="contact-span-2">
-                            <textarea name="message" required class="contact-field" placeholder="Message"></textarea>
-                        </div>
-
-                        <div class="contact-span-2 flex justify-end">
-                            <button type="submit"
-                                class="bg-[#6E3EEF] text-white font-bold py-3 px-7 rounded-xl shadow-md hover:bg-[#5F32D6] transition uppercase tracking-wider text-sm">
-                                Submit
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Contact info (same glass panel, right column) -->
-                <aside class="contact-info-col space-y-6 lg:pt-14">
-                    <h3 class="text-2xl font-bold">Contact Info</h3>
-
-                    <div class="contact-item">
-                        <span class="contact-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" />
-                            </svg>
-                        </span>
-                        <div>
-                            <p class="contact-label text-xs uppercase tracking-wider mb-1">Location</p>
-                            <p class="font-semibold">Toronto, Ontario</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <span class="contact-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M3 5h18a1 1 0 0 1 1 1v.4l-10 6.2L2 6.4V6a1 1 0 0 1 1-1Zm19 3.75V18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8.75l10 6.2 10-6.2Z" />
-                            </svg>
-                        </span>
-                        <div class="min-w-0">
-                            <p class="contact-label text-xs uppercase tracking-wider mb-1">Email</p>
-                            <a href="mailto:mojgan.samandar@outlook.com" class="font-semibold text-sm break-all">
-                                samandar.mojgan@gmail.com
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <span class="contact-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4V21H3V9.75Zm6.5 0h3.8v1.55h.05c.53-1 1.82-2.05 3.75-2.05 4 0 4.75 2.63 4.75 6.05V21h-4v-4.9c0-1.17-.02-2.67-1.63-2.67-1.63 0-1.87 1.27-1.87 2.59V21h-4V9.75Z" />
-                            </svg>
-                        </span>
-                        <div>
-                            <p class="contact-label text-xs uppercase tracking-wider mb-1">Professional Profiles</p>
-                            <a href="https://www.linkedin.com/in/mojgan-samandar" target="_blank" rel="noopener"
-                                class="font-semibold text-sm">
-                                LinkedIn →
-                            </a>
-                        </div>
-                    </div>
-
-                    <p class="contact-label text-sm leading-relaxed pt-2">
-                        For professional inquiries, collaboration, or technical support for your business,
-                        please get in touch.
-                    </p>
-                </aside>
-
-            </div>
-        </section>
-
     </main>
 
     <!-- Footer -->
@@ -1591,14 +1617,23 @@
         const tabContents = document.querySelectorAll('.tab-content');
 
         function switchTab(targetId) {
+            // Contact now lives at the bottom of the About page
+            const isContact = targetId === 'content-contact';
+            const panelId = isContact ? 'content-about' : targetId;
+
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabContents.forEach(content => content.classList.add('hidden'));
 
             const activeButton = document.querySelector(`[data-target="${targetId}"]`);
-            const activeContent = document.getElementById(targetId);
+            const activeContent = document.getElementById(panelId);
 
             if (activeButton) activeButton.classList.add('active');
             if (activeContent) activeContent.classList.remove('hidden');
+
+            if (isContact) {
+                document.getElementById('content-contact')
+                    .scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         tabButtons.forEach(btn => {
@@ -1700,14 +1735,6 @@
 
             window.addEventListener('resize', layout);
             go(idx, false);
-
-            // CTA: jump to existing "Contact & Links" tab
-            const cta = document.getElementById('about-cta');
-            cta.addEventListener('click', (e) => {
-                e.preventDefault();
-                switchTab('content-contact');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
         })();
 
 
