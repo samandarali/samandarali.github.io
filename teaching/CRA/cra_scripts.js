@@ -1343,6 +1343,16 @@
   style.textContent = '.cra-platform [data-tab-hidden]{display:none !important;}';
   document.head.appendChild(style);
 
+  /* Main section headers are titles, not toggles: the open section always stays open */
+  sections.forEach(section => {
+    const summary = section.querySelector(':scope > summary');
+    if (!summary) return;
+    summary.classList.add('is-static');
+    summary.setAttribute('tabindex', '-1');
+    summary.setAttribute('aria-expanded', 'true');
+    summary.addEventListener('click', e => e.preventDefault());
+  });
+
   const navLinks = Array.from(document.querySelectorAll('a[data-nav-section]'));
   const headerEl = document.getElementById('platform-header');
   const headerH = () => (headerEl ? headerEl.offsetHeight : 64);

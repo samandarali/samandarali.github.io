@@ -2059,15 +2059,6 @@ tr.flash-highlight td {
   color: #ffffff;
 }
 
-#assessment-step-7>.learning-summary .chevron,
-#assessment-step-8>.learning-summary .chevron,
-#assessment-step-9>.learning-summary .chevron,
-#assessment-step-10>.learning-summary .chevron,
-#assessment-step-11>.learning-summary .chevron,
-#assessment-step-12>.learning-summary .chevron {
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, .65);
-}
 
 /* Make the Apple example use the full width of the Financial Statements section */
 .stage-statements>.real-company-intro {
@@ -2171,11 +2162,6 @@ tr.flash-highlight td {
 }
 
 /* Chevron when open */
-.learning-section[data-section="pro-forma"][open]>.learning-summary .chevron {
-  background: var(--c-pale-line);
-  border-color: var(--c-blue);
-  color: var(--c-blue-mid);
-}
 
 
 .practice {
@@ -6817,6 +6803,89 @@ body.cra-platform {
   }
 }
 
+
+/* Main section headers are static titles (toggling disabled in cra_scripts.js) */
+.cra-platform .learning-summary.is-static {
+  cursor: default;
+}
+
+/* without a chevron, the title must fill the row so it stays left-aligned */
+.cra-platform .learning-summary.is-static > :is(h2, h3) {
+  flex: 1 1 0%;
+}
+
+/* =====================================================================
+   ACCORDION TOGGLE ICON
+   Plus / minus drawn in a small rounded tile; replaces the text glyph
+   (kept in the HTML, aria-hidden). Closed: pale tile, blue "+".
+   Open: blue tile, white "−" (the vertical bar folds away).
+   ===================================================================== */
+
+.cra-platform details.learning-section > .learning-summary .chevron {
+  position: relative;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  margin-left: auto;
+  color: var(--c-blue);
+  background: var(--c-pale);
+  border: 1px solid var(--c-pale-line);
+  border-radius: 8px;
+  box-shadow: none;
+  font-size: 0;
+  line-height: 0;
+  transform: none;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.cra-platform details.learning-section > .learning-summary .chevron::before,
+.cra-platform details.learning-section > .learning-summary .chevron::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* vertical bar of the "+" */
+.cra-platform details.learning-section > .learning-summary .chevron::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.cra-platform details.learning-section > .learning-summary:hover .chevron {
+  background: var(--c-pale-strong);
+  border-color: var(--c-blue-line);
+}
+
+.cra-platform details.learning-section[open] > .learning-summary .chevron {
+  color: #ffffff;
+  background: var(--c-blue);
+  border-color: var(--c-blue);
+}
+
+/* open: fold the vertical bar flat so "+" becomes "−" */
+.cra-platform details.learning-section[open] > .learning-summary .chevron::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+  opacity: 0;
+}
+
+.cra-platform details.learning-section > .learning-summary:focus-visible .chevron {
+  outline: 2px solid var(--c-blue);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cra-platform details.learning-section > .learning-summary .chevron,
+  .cra-platform details.learning-section > .learning-summary .chevron::before,
+  .cra-platform details.learning-section > .learning-summary .chevron::after {
+    transition: none;
+  }
+}
 
 /* =====================================================================
    SECTION CONTROLS BAR (below the shared hero)
