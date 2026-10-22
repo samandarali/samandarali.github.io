@@ -1390,6 +1390,10 @@
     current = section;
     markNav(section.id);
 
+    // Expand / Collapse all only makes sense when the open section has subsections
+    const controls = document.querySelector('.section-controls');
+    if (controls) controls.hidden = !section.querySelector('details');
+
     // let scroll-spy / observers (e.g. the ratio side-nav) recalculate
     if (changed) requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
     return changed;
