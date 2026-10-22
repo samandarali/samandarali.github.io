@@ -5384,7 +5384,7 @@ details.purpose-of-financing>.table-wrapper {
   stroke-linejoin: round;
 }
 
-/* ---- Financing journey: five-stage overview ---- */
+/* ---- Financing journey: centred flow of steps with pop-up details ---- */
 .bk-journey {
   display: grid;
   gap: 16px;
@@ -5392,81 +5392,6 @@ details.purpose-of-financing>.table-wrapper {
 
 .bk-journey > .bk-title {
   margin-bottom: 0;
-}
-
-.bk-stages {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 12px;
-  margin: 8px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.bk-stages::before {
-  content: "";
-  position: absolute;
-  top: 21px;
-  left: 10%;
-  right: 10%;
-  height: 2px;
-  background: var(--c-pale-line);
-}
-
-.bk-stage-link {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 0 6px 6px;
-  color: inherit;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 10px;
-}
-
-.bk-stage-num {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  color: #ffffff;
-  background: var(--c-blue);
-  border-radius: 50%;
-  box-shadow: 0 0 0 5px #ffffff;
-  font-weight: 700;
-}
-
-.bk-stage-link strong {
-  color: var(--c-navy);
-  font-size: 0.92rem;
-  line-height: 1.3;
-}
-
-.bk-stage-steps {
-  padding: 2px 10px;
-  color: var(--c-blue);
-  background: var(--c-pale);
-  border: 1px solid var(--c-pale-line);
-  border-radius: 999px;
-  font-size: 0.76rem;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.bk-stage-link:hover strong {
-  color: var(--c-blue);
-}
-
-.bk-stage-link:hover .bk-stage-num {
-  background: var(--c-navy);
-}
-
-.bk-stage-link:focus-visible {
-  outline: 3px solid var(--c-blue);
-  outline-offset: 3px;
 }
 
 .bk-note {
@@ -5488,99 +5413,265 @@ details.purpose-of-financing>.table-wrapper {
   color: var(--c-navy);
 }
 
-/* ---- Financing journey: seven steps grouped by stage ---- */
-.bk-timeline {
-  display: grid;
-  gap: 26px;
-  margin-top: 8px;
+.bk .bk-flow-hint {
+  margin-top: 6px;
+  color: var(--c-muted);
+  font-size: 0.88rem;
+  text-align: center;
 }
 
-.bk-group {
-  display: grid;
-  gap: 12px;
-  scroll-margin-top: calc(var(--header-h, 64px) + 20px);
+.cra-platform .learning-body .bk-flow-hint {
+  max-width: none;
 }
 
-.bk-group-title {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
+.bk-flow {
+  display: grid;
+  justify-items: center;
+  row-gap: 58px;
   margin: 0;
-  color: var(--c-navy);
-  font-family: var(--font-serif);
-  font-size: 1.08rem;
-  font-weight: 700;
+  padding: 30px 0 8px;
+  list-style: none;
 }
 
-.bk-group-num {
-  padding: 3px 10px;
+.bk-flow-step {
+  position: relative;
+  width: min(100%, 420px);
+}
+
+/* one-way arrow from the previous step */
+.bk-flow-step + .bk-flow-step::before {
+  content: "";
+  position: absolute;
+  top: -58px;
+  left: 50%;
+  width: 2px;
+  height: 48px;
+  background: var(--c-blue);
+  transform: translateX(-50%);
+}
+
+.bk-flow-step + .bk-flow-step::after {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  border-top: 10px solid var(--c-blue);
+  border-right: 7px solid transparent;
+  border-left: 7px solid transparent;
+  transform: translateX(-50%);
+}
+
+/* stage label sits on the arrow, centred, the line running behind it */
+.bk-flow-stage {
+  position: absolute;
+  z-index: 1;
+  top: -29px;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;            /* absolute + left:50% would otherwise wrap at half width */
+  max-width: calc(100% - 8px);
+  padding: 3px 12px 3px 3px;
+  color: var(--c-navy);
+  background: #ffffff;
+  border: 1px solid var(--c-pale-line);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+}
+
+.bk-flow-step:first-child .bk-flow-stage {
+  top: -15px;
+}
+
+.bk-flow-stage-num {
+  padding: 3px 9px;
   color: #ffffff;
   background: var(--c-blue);
   border-radius: 999px;
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 700;
+  font-size: 0.68rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-.bk-steps {
+.bk-flow-box {
   display: grid;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.bk-step {
-  display: grid;
-  grid-template-columns: 34px minmax(0, 1fr) 132px;
+  grid-template-columns: 34px minmax(0, 1fr) 76px;
   align-items: center;
-  gap: 14px 18px;
-  padding: 16px 18px;
-  background: var(--c-surface);
+  gap: 14px;
+  width: 100%;
+  min-height: 84px;
+  padding: 12px 14px 12px 16px;
+  color: inherit;
+  background: #ffffff;
   border: 1px solid var(--c-border);
-  border-left: 3px solid var(--c-blue-line);
-  border-radius: 12px;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(12, 35, 64, 0.06);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
-.bk-step-num {
-  align-self: start;
+.bk-flow-box:hover {
+  border-color: var(--c-blue-line);
+  box-shadow: 0 6px 18px rgba(12, 35, 64, 0.1);
+}
+
+.bk-flow-box[aria-expanded="true"] {
+  background: var(--c-pale);
+  border-color: var(--c-blue);
+}
+
+.bk-flow-box:focus-visible {
+  outline: 3px solid var(--c-blue);
+  outline-offset: 3px;
+}
+
+.bk-flow-num {
   display: grid;
   place-items: center;
   width: 34px;
   height: 34px;
-  color: var(--c-blue);
-  background: var(--c-pale);
-  border: 1px solid var(--c-blue-line);
+  color: #ffffff;
+  background: var(--c-blue);
   border-radius: 50%;
-  font-size: 0.9rem;
   font-weight: 700;
 }
 
-.bk-step-body h6 {
-  margin: 5px 0 6px;
+.bk-flow-title {
   color: var(--c-navy);
-  font-size: 1rem;
+  font-size: 0.98rem;
+  font-weight: 700;
   line-height: 1.3;
 }
 
-.bk-step-body p {
-  font-size: 0.93rem;
-}
-
-.bk-step-img {
+.bk-flow-img {
   justify-self: end;
-  width: 132px;
-  height: 116px;
+  width: 76px;
+  height: 64px;
   object-fit: contain;
 }
 
-.bk-step-img--scene {
-  height: 88px;
+.bk-flow-img--scene {
+  height: 52px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 8px;
+}
+
+/* pop-up beside (or below) the selected step */
+.bk-pop {
+  position: absolute;
+  z-index: 5;
+  width: 300px;
+  padding: 14px 40px 14px 16px;
+  background: #ffffff;
+  border: 1px solid var(--c-pale-line);
+  border-left: 3px solid var(--c-blue);
+  border-radius: 12px;
+  box-shadow: 0 14px 34px rgba(12, 35, 64, 0.16);
+}
+
+.bk-pop[hidden] {
+  display: none;
+}
+
+.bk-pop--right {
+  left: calc(100% + 20px);
+}
+
+.bk-pop--left {
+  right: calc(100% + 20px);
+  border-right: 3px solid var(--c-blue);
+  border-left: 1px solid var(--c-pale-line);
+}
+
+.bk-pop--below {
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* small pointer toward the box */
+.bk-pop--right::before,
+.bk-pop--left::before {
+  content: "";
+  position: absolute;
+  top: var(--pointer-top, 30px);
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border: 1px solid var(--c-pale-line);
+  transform: rotate(45deg);
+}
+
+.bk-pop--right::before {
+  left: -8px;
+  border-top: 0;
+  border-right: 0;
+  border-bottom-color: var(--c-blue);
+  border-left: 3px solid var(--c-blue);
+  border-bottom-width: 3px;
+}
+
+.bk-pop--left::before {
+  right: -8px;
+  border-bottom: 0;
+  border-left: 0;
+  border-top-color: var(--c-blue);
+  border-right: 3px solid var(--c-blue);
+  border-top-width: 3px;
+}
+
+.bk .bk-pop p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.bk .bk-pop .bk-pop-kicker {
+  margin-bottom: 6px;
+  color: var(--c-blue);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bk-pop-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  color: var(--c-muted);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.bk-pop-close:hover {
+  color: var(--c-navy);
+  background: var(--c-pale);
+}
+
+.bk-pop-close:focus-visible {
+  outline: 2px solid var(--c-blue);
+  outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bk-flow-box {
+    transition: none;
+  }
 }
 
 /* ---- Tablet ---- */
@@ -5646,49 +5737,27 @@ details.purpose-of-financing>.table-wrapper {
     height: 220px;
   }
 
-  /* overview becomes a vertical list */
-  .bk-stages {
-    grid-template-columns: minmax(0, 1fr);
+  /* financing journey: smaller boxes, labels may wrap */
+  .bk-flow-box {
+    grid-template-columns: 30px minmax(0, 1fr) 60px;
     gap: 10px;
+    padding: 10px 12px;
   }
 
-  .bk-stages::before {
-    top: 22px;
-    bottom: 22px;
-    left: 21px;
-    right: auto;
-    width: 2px;
-    height: auto;
+  .bk-flow-num {
+    width: 30px;
+    height: 30px;
   }
 
-  .bk-stage-link {
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-    min-height: 44px;
-    padding: 0;
-    text-align: left;
+  .bk-flow-img {
+    width: 60px;
+    height: 52px;
   }
 
-  .bk-stage-link strong {
-    flex: 1 1 auto;
-  }
-
-  .bk-step {
-    grid-template-columns: 34px minmax(0, 1fr);
-    padding: 14px;
-  }
-
-  .bk-step-img {
-    grid-column: 2;
-    justify-self: start;
-    width: 110px;
-    height: 96px;
-  }
-
-  .bk-step-img--scene {
-    width: 150px;
-    height: 100px;
+  .bk-flow-stage {
+    gap: 6px;
+    padding-right: 10px;
+    font-size: 0.72rem;
   }
 }
 

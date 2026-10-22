@@ -1457,3 +1457,95 @@
     if (t) t.scrollIntoView({ block: 'start' });
   });
 })();
+
+
+/* =====================================================================
+   FINANCING JOURNEY (Banking tab)
+   Each step box opens a small pop-up with its explanation. The pop-up
+   goes to the right of the box, or the left if only that side has room;
+   when neither side fits (tablet / phone) it opens below the box and
+   pushes the following steps down, so it never covers another step.
+   ===================================================================== */
+(function () {
+  'use strict';
+
+  const flow = document.querySelector('.bk-flow');
+  if (!flow) return;
+
+  const POP_WIDTH = 300;   // keep in sync with .bk-pop width in cra_style.css
+  const GAP = 20;          // space between box and pop-up
+  const boxes = Array.from(flow.querySelectorAll('.bk-flow-box'));
+  let openBox = null;
+
+  const popOf = box => document.getElementById(box.getAttribute('aria-controls'));
+
+  function place(box) {
+    const pop = popOf(box);
+    const bounds = (flow.closest('.bk') || flow).getBoundingClientRect();
+    const rect = box.getBoundingClientRect();
+    const need = POP_WIDTH + GAP;
+
+    let side = 'below';
+    if (bounds.right - rect.right >= need) side = 'right';
+    else if (rect.left - bounds.left >= need) side = 'left';
+
+    pop.classList.remove('bk-pop--right', 'bk-pop--left', 'bk-pop--below');
+    pop.classList.add('bk-pop--' + side);
+    pop.style.top = '';
+    pop.style.removeProperty('--pointer-top');
+    if (side === 'below') return;
+
+    // line the pop-up up with the top of its box (the stage label may sit above it) ...
+    let top = box.offsetTop;
+    pop.style.top = top + 'px';
+
+    // ... but keep it inside the flow: the section clips anything below it,
+    // so near the last steps shift it up until its bottom meets the flow's bottom
+    const overflow = pop.getBoundingClientRect().bottom - flow.getBoundingClientRect().bottom;
+    if (overflow > 0) {
+      top -= overflow;
+      pop.style.top = top + 'px';
+    }
+
+    // keep the small pointer aimed at the middle of the box
+    const pointer = box.offsetTop + box.offsetHeight / 2 - top - 6;
+    pop.style.setProperty('--pointer-top', Math.max(14, pointer) + 'px');
+  }
+
+  function close(box, returnFocus) {
+    if (!box) return;
+    popOf(box).hidden = true;
+    box.setAttribute('aria-expanded', 'false');
+    box.closest('.bk-flow-step').classList.remove('is-open');
+    if (returnFocus) box.focus();
+    if (openBox === box) openBox = null;
+  }
+
+  function open(box) {
+    if (openBox && openBox !== box) close(openBox, false);
+    const pop = popOf(box);
+    pop.hidden = false;
+    box.setAttribute('aria-expanded', 'true');
+    box.closest('.bk-flow-step').classList.add('is-open');
+    place(box);
+    openBox = box;
+  }
+
+  boxes.forEach(box => {
+    box.addEventListener('click', () => (openBox === box ? close(box, false) : open(box)));
+    popOf(box).querySelector('.bk-pop-close').addEventListener('click', () => close(box, true));
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && openBox) close(openBox, true);
+  });
+
+  document.addEventListener('click', e => {
+    if (openBox && !e.target.closest('.bk-flow-step.is-open')) close(openBox, false);
+  });
+
+  window.addEventListener('resize', () => {
+    if (openBox) place(openBox);
+  });
+})();
+
