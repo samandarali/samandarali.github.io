@@ -40,14 +40,16 @@
 
     <section class="course-hero " id="hero_section" aria-labelledby="main-page-title">
 
+      <!-- Decorative soft 3D scene -->
       <div class="course-hero-background" aria-hidden="true">
-        <img src="images/cra-hero-credit-analysis.png" alt="">
+        <img src="images/hero-img.webp" alt="" width="2172" height="724" fetchpriority="high" decoding="async">
       </div>
 
       <div class="course-hero-visual">
         <div class="hero-photo-frame">
-          <img src="../../images/mojgan.png" alt="Mojgan Samandar">
+          <img src="../../images/mojgan.png" alt="Mojgan Samandar" width="220" height="220">
         </div>
+        <span class="hero-pedestal" aria-hidden="true"></span>
       </div>
 
       <div class="course-hero-content">
@@ -78,88 +80,24 @@
           </a>
         </div>
 
-        <div class="hero-highlights" aria-label="Course topics">
-          <span>Financial statements</span>
-          <span>Credit ratios</span>
-          <span>Loan decisions</span>
-        </div>
-
-      </div>
-
-      <div class="learning-journey">
-
-        <div class="journey-heading">
-          <div>
-            <span class="journey-eyebrow">Course Progress</span>
-            <h2>Learning Journey</h2>
-          </div>
-
-          <div class="journey-controls">
-            <button type="button" class="journey-control" id="expand-all-btn">
-              Expand all
-            </button>
-
-            <button type="button" class="journey-control" id="collapse-all-btn">
-              Collapse all
-            </button>
-          </div>
-        </div>
-
-        <nav class="journey-steps" aria-label="Learning journey">
-
-          <a class="journey-step" href="#introduction-section" data-nav-section="introduction">
-            <span class="journey-number">1</span>
-            <span class="journey-text">
-              <strong>Introduction</strong>
-              <small>Credit fundamentals</small>
-            </span>
-          </a>
-
-          <a class="journey-step" href="#commercial-banking-section" data-nav-section="commercial-banking">
-            <span class="journey-number">2</span>
-            <span class="journey-text">
-              <strong>Banking</strong>
-              <small>Roles &amp; context</small>
-            </span>
-          </a>
-
-          <a class="journey-step" href="#financial-statements-section" data-nav-section="financial-statements">
-            <span class="journey-number">3</span>
-            <span class="journey-text">
-              <strong>Statements</strong>
-              <small>Financial information</small>
-            </span>
-          </a>
-
-          <a class="journey-step" href="#financial-ratios-section" data-nav-section="financial-ratios">
-            <span class="journey-number">4</span>
-            <span class="journey-text">
-              <strong>Ratios</strong>
-              <small>Analysis and interpretation</small>
-            </span>
-          </a>
-
-          <a class="journey-step" href="#credit-assessment-section" data-nav-section="credit-assessment">
-            <span class="journey-number">5</span>
-            <span class="journey-text">
-              <strong>Assessment</strong>
-              <small>Credit recommendation</small>
-            </span>
-          </a>
-
-          <a class="journey-step" href="#practice-section" data-nav-section="practice">
-            <span class="journey-number">6</span>
-            <span class="journey-text">
-              <strong>Practice</strong>
-              <small>Apply your knowledge</small>
-            </span>
-          </a>
-
-        </nav>
-
       </div>
 
     </section>
+
+    <!-- Section expand / collapse controls (below the shared hero) -->
+    <div class="section-controls" role="group" aria-labelledby="section-controls-label"
+      aria-describedby="section-controls-note">
+      <div class="section-controls-text">
+        <span id="section-controls-label" class="section-controls-label">Section controls</span>
+        <span id="section-controls-note" class="section-controls-note">Applies to the open section.</span>
+      </div>
+      <div class="section-controls-buttons">
+        <button type="button" class="section-control" id="section-expand-all-btn"
+          data-section-action="expand">Expand all</button>
+        <button type="button" class="section-control" id="section-collapse-all-btn"
+          data-section-action="collapse">Collapse all</button>
+      </div>
+    </div>
 
     <!-- 1. INTRODUCTION TO COMMERCIAL CREDIT RISK -->
     <details id="introduction-section" class="learning-section intro-accordion" data-section="introduction" open>
@@ -172,55 +110,200 @@
       </summary>
 
       <div class="learning-body">
-        <section class="credit-introduction" aria-labelledby="credit-question">
+        <div class="ci-intro">
 
-          <div class="credit-intro-top">
-
-            <div class="credit-intro-content">
-
-              <p class="credit-intro-lead">
-                When a business requests credit, the lender must determine whether the
-                loan can be repaid as agreed - not simply whether the business is profitable
-                or owns valuable assets. Commercial credit analysis provides a structured
-                process for making that determination.
-              </p>
-
-
-
-              <div class="credit-intro-overview">
-                <h4>What this page covers</h4>
-
-                <p>
-                  This page introduces the main stages of commercial credit analysis and the
-                  commercial-banking context in which that work is performed. We begin by explaining
-                  how commercial banking teams work together—from relationship management and credit
-                  analysis to independent credit adjudication and client service.
-
-                  We then examine the four principal financial statements, using a real-company
-                  example to understand what each statement reveals about financial performance,
-                  financial position, and cash flow. Next, we calculate and interpret key ratios used
-                  to assess profitability, liquidity, leverage, debt-service coverage, and operating
-                  efficiency.
-                </p>
-
-                <p>
-                  Building on this financial foundation, we bring the findings together in a
-                  complete credit assessment. This includes understanding the borrower and the
-                  purpose of the financing, evaluating repayment capacity, identifying financial
-                  and qualitative risks, reviewing projections and collateral, assessing the
-                  proposed loan structure, and forming an evidence-based credit recommendation.
-                  Finally, a practical credit case provides an opportunity to apply the complete
-                  process.
-                </p>
-              </div>
+          <!-- Introduction banner -->
+          <div class="ci-banner">
+            <div class="ci-banner-text">
+              <p class="ci-eyebrow">Interactive learning guide</p>
+              <p class="ci-banner-title">Introduction to Commercial Credit Analysis</p>
+              <p class="ci-banner-lead">Understand how lenders assess a business’s ability to repay.</p>
+              <a class="ci-banner-button" href="#commercial-banking-section">
+                Start learning
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
-
-            <figure class="credit-intro-visual">
-              <img src="images/commercial-credit-analysis.png"
-                alt="Illustration of commercial credit analysis and responsible lending">
+            <figure class="ci-banner-media">
+              <img src="images/collaborative-credit.webp" width="800" height="447" loading="lazy" decoding="async"
+                alt="Illustration of a lender and a business owner discussing financial data, surrounded by charts and growth symbols">
             </figure>
           </div>
-        </section>
+
+          <!-- How commercial credit supports business growth -->
+          <section class="ci-growth" aria-labelledby="ci-growth-title">
+            <figure class="ci-growth-media">
+              <img src="images/bank-business-growth-illustration.webp" width="628" height="447" loading="lazy"
+                decoding="async"
+                alt="A small business and a bank connected by a bridge, with a tree growing on the bridge to symbolise partnership and growth">
+            </figure>
+
+            <div class="ci-growth-text">
+              <h3 id="ci-growth-title" class="ci-title">How commercial credit supports business growth</h3>
+              <p>
+                Thoughtful lending can help viable businesses invest in people, equipment, and new
+                opportunities, manage cash flow, and grow over time. Banks assess repayment risk and
+                structure financing responsibly, balancing the needs of the business with sound risk
+                management.
+              </p>
+            </div>
+          </section>
+
+          <!-- Who can use this guide? -->
+          <section class="ci-audience" aria-labelledby="ci-audience-title">
+            <h3 id="ci-audience-title" class="ci-title">Who can use this guide?</h3>
+
+            <div class="ci-audience-grid">
+              <article class="ci-panel">
+                <svg class="ci-panel-icon" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true"
+                  focusable="false">
+                  <rect x="5" y="14" width="38" height="26" rx="4" />
+                  <path d="M17 14v-4a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v4M5 25h38M21 22h6v6h-6z" />
+                </svg>
+                <div class="ci-panel-body">
+                  <h4>Future credit professionals</h4>
+                  <p>
+                    This guide is for people preparing for commercial credit, credit risk, or lending
+                    roles. It introduces the main steps in commercial credit analysis, from reviewing
+                    financial statements and repayment capacity to identifying risks and making a credit
+                    recommendation.
+                  </p>
+                </div>
+              </article>
+
+              <article class="ci-panel">
+                <svg class="ci-panel-icon" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true"
+                  focusable="false">
+                  <path d="M6 18l4-10h28l4 10M6 18c0 3 2.5 5 5 5s5-2 5-5c0 3 2.5 5 5 5h6c2.5 0 5-2 5-5 0 3 2.5 5 5 5s5-2 5-5M6 18h36" />
+                  <path d="M9 23v18h30V23M19 41V31h10v10" />
+                </svg>
+                <div class="ci-panel-body">
+                  <h4>Business owners</h4>
+                  <p>
+                    This guide is for business owners who want to better understand how lenders assess
+                    financing requests.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <!-- Scope and limitations -->
+          <aside class="ci-scope" aria-labelledby="ci-scope-title">
+            <svg class="ci-scope-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"
+              focusable="false">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 11v6M12 7.5v.5" />
+            </svg>
+            <div class="ci-scope-body">
+              <h3 id="ci-scope-title">Scope and limitations</h3>
+              <p>
+                This guide presents general commercial credit analysis concepts for learning purposes.
+                Banks do not all use the same forms, calculations, approval processes, thresholds, or
+                risk criteria. Their requirements can also vary by borrower, industry, financing
+                product, and transaction.
+              </p>
+              <p>
+                A bank’s policies and risk appetite may change over time in response to its strategy,
+                economic conditions, regulatory expectations, portfolio performance, and past credit
+                events.
+              </p>
+              <p>
+                The examples on this site illustrate common analytical methods; they do not represent a
+                specific bank’s current policy or guarantee a particular lending decision. Borrowers
+                should confirm current requirements directly with their lender.
+              </p>
+            </div>
+          </aside>
+
+          <!-- What this page covers -->
+          <section class="ci-pathway" aria-labelledby="ci-pathway-title">
+            <h3 id="ci-pathway-title" class="ci-title">What this page covers</h3>
+
+            <ol class="ci-pathway-list">
+              <li class="ci-step">
+                <a class="ci-step-link" href="#commercial-banking-section">
+                  <span class="ci-step-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="24" height="24" focusable="false">
+                      <circle cx="12" cy="8" r="3" />
+                      <circle cx="5.5" cy="10" r="2.2" />
+                      <circle cx="18.5" cy="10" r="2.2" />
+                      <path d="M6.5 19a5.5 5.5 0 0 1 11 0M1.5 18a4 4 0 0 1 5-3.6M22.5 18a4 4 0 0 0-5-3.6" />
+                    </svg>
+                    <span class="ci-step-num">1</span>
+                  </span>
+                  <strong>Banking teams</strong>
+                  <span class="ci-step-desc">Meet the people involved in commercial credit and their roles.</span>
+                </a>
+              </li>
+              <li class="ci-step">
+                <a class="ci-step-link" href="#financial-statements-section">
+                  <span class="ci-step-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="24" height="24" focusable="false">
+                      <path d="M6 2.5h9l4 4v15H6z" />
+                      <path d="M14.5 2.5v4.5H19M9 11h7M9 14.5h7M9 18h4.5" />
+                    </svg>
+                    <span class="ci-step-num">2</span>
+                  </span>
+                  <strong>Financial statements</strong>
+                  <span class="ci-step-desc">Learn how to read and analyze key financial statements.</span>
+                </a>
+              </li>
+              <li class="ci-step">
+                <a class="ci-step-link" href="#financial-ratios-section">
+                  <span class="ci-step-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="24" height="24" focusable="false">
+                      <path d="M3 21h18M6 21v-7h3v7M10.5 21V9h3v12M15 21V4h3v17" />
+                    </svg>
+                    <span class="ci-step-num">3</span>
+                  </span>
+                  <strong>Credit ratios</strong>
+                  <span class="ci-step-desc">Use key ratios to assess performance, leverage, and cash flow.</span>
+                </a>
+              </li>
+              <li class="ci-step">
+                <a class="ci-step-link" href="#credit-assessment-section">
+                  <span class="ci-step-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="24" height="24" focusable="false">
+                      <rect x="5" y="4" width="14" height="18" rx="2" />
+                      <path d="M9 2.5h6v3H9zM8.5 11l1.5 1.5 2.5-2.5M14 11.5h2M8.5 17l1.5 1.5 2.5-2.5M14 17.5h2" />
+                    </svg>
+                    <span class="ci-step-num">4</span>
+                  </span>
+                  <strong>Credit assessment</strong>
+                  <span class="ci-step-desc">Bring the analysis together to evaluate repayment capacity and risk.</span>
+                </a>
+              </li>
+              <li class="ci-step">
+                <a class="ci-step-link" href="#assessment-step-11">
+                  <span class="ci-step-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="24" height="24" focusable="false">
+                      <ellipse cx="12" cy="5.5" rx="7" ry="2.5" />
+                      <path d="M5 5.5v4c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-4M5 9.5v4c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-4M5 13.5v4c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-4" />
+                    </svg>
+                    <span class="ci-step-num">5</span>
+                  </span>
+                  <strong>Loan structure</strong>
+                  <span class="ci-step-desc">Explore common loan structures, terms, and covenants.</span>
+                </a>
+              </li>
+              <li class="ci-step">
+                <a class="ci-step-link" href="#practice-section">
+                  <span class="ci-step-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="24" height="24" focusable="false">
+                      <circle cx="12" cy="12" r="9" />
+                      <circle cx="12" cy="12" r="5" />
+                      <circle cx="12" cy="12" r="1.2" />
+                    </svg>
+                    <span class="ci-step-num">6</span>
+                  </span>
+                  <strong>Practice case</strong>
+                  <span class="ci-step-desc">Apply what you’ve learned to a realistic business scenario.</span>
+                </a>
+              </li>
+            </ol>
+          </section>
+
+        </div>
       </div>
     </details>
 
@@ -455,7 +538,7 @@
                   strong is the borrower?</div>
                 <figure style="text-align: center; max-width: 900px; margin: 10px auto 0 auto;">
                   <img src="images/balance_sheet.png" style="width: 100%; height: auto;" alt="Balance Sheet">
-                  <figcaption style="font-size: 0.9em; color: #555; margin-top: 8px;">
+                  <figcaption style="font-size: 0.9em; color: var(--c-muted); margin-top: 8px;">
                   </figcaption>
                 </figure>
               </article>
@@ -472,7 +555,7 @@
                 <figure style="text-align: center; max-width: 900px; margin: 10px auto 0 auto;">
                   <img src="images/cash_flow_statement.png" style="width: 100%; height: auto;"
                     alt="Cash Flow Statement">
-                  <figcaption style="font-size: 0.9em; color: #555; margin-top: 8px;">
+                  <figcaption style="font-size: 0.9em; color: var(--c-muted); margin-top: 8px;">
                   </figcaption>
                 </figure>
               </article>
@@ -491,7 +574,7 @@
 
                 <figure style="text-align: center; max-width: 900px; margin: 10px auto 0 auto;">
                   <img src="images/income_statement.png" style="width: 100%; height: auto;" alt="Income Statement">
-                  <figcaption style="font-size: 0.9em; color: #555; margin-top: 8px;">
+                  <figcaption style="font-size: 0.9em; color: var(--c-muted); margin-top: 8px;">
                   </figcaption>
                 </figure>
               </article>
@@ -508,7 +591,7 @@
                 <figure style="text-align: center; max-width: 900px; margin: 10px auto 0 auto;">
                   <img src="images/changes_in_equaity.png" style="width: 100%; height: auto;"
                     alt="Statement of Changes in Equity">
-                  <figcaption style="font-size: 0.9em; color: #555; margin-top: 8px;">
+                  <figcaption style="font-size: 0.9em; color: var(--c-muted); margin-top: 8px;">
                   </figcaption>
                 </figure>
               </article>
@@ -1205,7 +1288,7 @@
               <div class="ratio-nav-cat">
                 <a class="ratio-nav-link ratio-nav-cat-link" href="#financial-ratios-section"
                   data-ratio-nav-target="liquidity">
-                  <span class="ratio-nav-count" aria-hidden="true">4</span>Liquidity
+                  Liquidity
                 </a>
                 <button type="button" class="ratio-nav-toggle" aria-expanded="false"
                   aria-controls="ratio-nav-sub-liquidity" aria-label="Liquidity ratios">
@@ -1227,7 +1310,7 @@
               <div class="ratio-nav-cat">
                 <a class="ratio-nav-link ratio-nav-cat-link" href="#financial-ratios-section"
                   data-ratio-nav-target="leverage">
-                  <span class="ratio-nav-count" aria-hidden="true">6</span>Leverage
+                  Leverage
                 </a>
                 <button type="button" class="ratio-nav-toggle" aria-expanded="false"
                   aria-controls="ratio-nav-sub-leverage" aria-label="Leverage ratios">
@@ -1255,7 +1338,7 @@
               <div class="ratio-nav-cat">
                 <a class="ratio-nav-link ratio-nav-cat-link" href="#financial-ratios-section"
                   data-ratio-nav-target="coverage">
-                  <span class="ratio-nav-count" aria-hidden="true">3</span>Coverage
+                  Coverage
                 </a>
                 <button type="button" class="ratio-nav-toggle" aria-expanded="false"
                   aria-controls="ratio-nav-sub-coverage" aria-label="Coverage ratios">
@@ -1277,7 +1360,7 @@
               <div class="ratio-nav-cat">
                 <a class="ratio-nav-link ratio-nav-cat-link" href="#financial-ratios-section"
                   data-ratio-nav-target="profitability">
-                  <span class="ratio-nav-count" aria-hidden="true">6</span>Profitability
+                  Profitability
                 </a>
                 <button type="button" class="ratio-nav-toggle" aria-expanded="false"
                   aria-controls="ratio-nav-sub-profitability" aria-label="Profitability ratios">
@@ -1306,7 +1389,7 @@
               <div class="ratio-nav-cat">
                 <a class="ratio-nav-link ratio-nav-cat-link" href="#financial-ratios-section"
                   data-ratio-nav-target="efficiency">
-                  <span class="ratio-nav-count" aria-hidden="true">8</span>Efficiency
+                  Efficiency
                 </a>
                 <button type="button" class="ratio-nav-toggle" aria-expanded="false"
                   aria-controls="ratio-nav-sub-efficiency" aria-label="Efficiency ratios">
@@ -1407,9 +1490,9 @@
                         \text{Current Ratio}
                         =
                         \frac{
-                        \color{#1b59df}{\text{Current Assets}}
+                        \color{#1f5fc4}{\text{Current Assets}}
                         }{
-                        \color{#1b59df}{\text{Current Liabilities}}
+                        \color{#1f5fc4}{\text{Current Liabilities}}
                         }
                         \]
 
@@ -1474,9 +1557,9 @@
                         \text{Quick Ratio}
                         =
                         \frac{
-                        \color{#1b59df}{\text{Quick Assets}}
+                        \color{#1f5fc4}{\text{Quick Assets}}
                         }{
-                        \color{#1b59df}{\text{Current Liabilities}}
+                        \color{#1f5fc4}{\text{Current Liabilities}}
                         }
                         \]
                       </div>
@@ -1549,11 +1632,11 @@
                         \text{Cash Ratio}
                         =
                         \frac{
-                        \color{#1b59df}{\text{Cash and Cash Equivalents}}
+                        \color{#1f5fc4}{\text{Cash and Cash Equivalents}}
                         +
-                        \color{#1b59df}{\text{Current Marketable Securities}}
+                        \color{#1f5fc4}{\text{Current Marketable Securities}}
                         }{
-                        \color{#1b59df}{\text{Current Liabilities}}
+                        \color{#1f5fc4}{\text{Current Liabilities}}
                         }
                         \]
                       </div>
@@ -1620,9 +1703,9 @@
                         \[
                         \text{Working Capital}
                         =
-                        \color{#1b59df}{\text{Current Assets}}
+                        \color{#1f5fc4}{\text{Current Assets}}
                         -
-                        \color{#1b59df}{\text{Current Liabilities}}
+                        \color{#1f5fc4}{\text{Current Liabilities}}
                         \]
                       </div>
                       <div class="ratio-field">
@@ -1735,10 +1818,10 @@
                         \text{Debt-to-EBITDA}
                         =
                         \frac{
-                        \color{#1b59df}{\text{Total Interest-Bearing Debt}}
+                        \color{#1f5fc4}{\text{Total Interest-Bearing Debt}}
                         }{
-                        \color{#0c7973}{\text{EBIT}}
-                        \color{#a73193}{\text{DA}}
+                        \color{#0f7a5c}{\text{EBIT}}
+                        \color{#8b3a8f}{\text{DA}}
                         }
                         \]
                       </div>
@@ -1874,9 +1957,9 @@
                         \text{Debt-to-Equity}
                         =
                         \frac{
-                        \color{#1b59df}{\text{Total Interest-Bearing Debt}}
+                        \color{#1f5fc4}{\text{Total Interest-Bearing Debt}}
                         }{
-                        \color{#1b59df}{\text{Shareholders' Equity}}
+                        \color{#1f5fc4}{\text{Shareholders' Equity}}
                         }
                         \]
                       </div>
@@ -1971,9 +2054,9 @@
                         \text{Debt-to-Assets}
                         =
                         \frac{
-                        \color{#1b59df}{\text{Total Interest-Bearing Debt}}
+                        \color{#1f5fc4}{\text{Total Interest-Bearing Debt}}
                         }{
-                        \color{#1b59df}{\text{Total Assets}}
+                        \color{#1f5fc4}{\text{Total Assets}}
                         }
                         \]
                       </div>
@@ -2081,9 +2164,9 @@
                         \text{Total Liabilities-to-Equity}
                         =
                         \frac{
-                        \color{#1b59df}{\text{Total Liabilities}}
+                        \color{#1f5fc4}{\text{Total Liabilities}}
                         }{
-                        \color{#1b59df}{\text{Shareholders' Equity}}
+                        \color{#1f5fc4}{\text{Shareholders' Equity}}
                         }
                         \]
                       </div>
@@ -2215,9 +2298,9 @@
                         \text{Book Leverage}
                         =
                         \frac{
-                        \color{#1b59df}{\text{Adjusted Total Liabilities}}
+                        \color{#1f5fc4}{\text{Adjusted Total Liabilities}}
                         }{
-                        \color{#1b59df}{\text{Adjusted Tangible Net Worth}}
+                        \color{#1f5fc4}{\text{Adjusted Tangible Net Worth}}
                         }
                         \]
                       </div>
@@ -2326,9 +2409,9 @@
                         \text{Cash-Flow Leverage}
                         =
                         \frac{
-                        \color{#1b59df}{\text{Total Funded Debt}}
+                        \color{#1f5fc4}{\text{Total Funded Debt}}
                         }{
-                        \color{#1b59df}{\text{Adjusted EBITDA}}
+                        \color{#1f5fc4}{\text{Adjusted EBITDA}}
                         }
                         \]
                       </div>
@@ -2465,9 +2548,9 @@
                         \text{Interest Coverage Ratio}
                         =
                         \frac{
-                        \color{#0c7973}{\text{EBIT}}
+                        \color{#0f7a5c}{\text{EBIT}}
                         }{
-                        \color{#0c7973}{\text{Interest Expense}}
+                        \color{#0f7a5c}{\text{Interest Expense}}
                         }
                         \]
                       </div>
@@ -2528,10 +2611,10 @@
                         \text{EBITDA Interest Coverage Ratio}
                         =
                         \frac{
-                        \color{#0c7973}{\text{EBIT}}
-                        \color{#a73193}{\text{DA}}
+                        \color{#0f7a5c}{\text{EBIT}}
+                        \color{#8b3a8f}{\text{DA}}
                         }{
-                        \color{#0c7973}{\text{Interest Expense}}
+                        \color{#0f7a5c}{\text{Interest Expense}}
                         }
                         \]
                       </div>
@@ -2612,12 +2695,12 @@
                         \text{DSCR}
                         =
                         \frac{
-                        \color{#0c7973}{
+                        \color{#0f7a5c}{
                         \text{Cash flow available for debt service​}
 
                         }
                         }{
-                        \color{#0c7973}{
+                        \color{#0f7a5c}{
                         \text{Total Debt Service }
                         }
                         }
@@ -2843,9 +2926,9 @@
                         \text{Gross Profit Margin}
                         =
                         \frac{
-                        \color{#16a34a}{\text{Gross Profit}}
+                        \color{#0f7a5c}{\text{Gross Profit}}
                         }{
-                        \color{#16a34a}{\text{Revenue}}
+                        \color{#0f7a5c}{\text{Revenue}}
                         }
                         \times 100\%
                         \]
@@ -2893,9 +2976,9 @@
                         \text{Operating Profit Margin}
                         =
                         \frac{
-                        \color{#16a34a}{\text{EBIT}}
+                        \color{#0f7a5c}{\text{EBIT}}
                         }{
-                        \color{#16a34a}{\text{Revenue}}
+                        \color{#0f7a5c}{\text{Revenue}}
                         }
                         \times 100\%
                         \]
@@ -2954,9 +3037,9 @@
                         \text{Net Profit Margin}
                         =
                         \frac{
-                        \color{#16a34a}{\text{Net Income}}
+                        \color{#0f7a5c}{\text{Net Income}}
                         }{
-                        \color{#16a34a}{\text{Revenue}}
+                        \color{#0f7a5c}{\text{Revenue}}
                         }
                         \times 100\%
                         \]
@@ -3036,10 +3119,10 @@
                         \text{EBITDA Margin}
                         =
                         \frac{
-                        \color{#16a34a}{\text{EBIT}}
-                        \color{#a73193}{\text{DA}}
+                        \color{#0f7a5c}{\text{EBIT}}
+                        \color{#8b3a8f}{\text{DA}}
                         }{
-                        \color{#16a34a}{\text{Revenue}}
+                        \color{#0f7a5c}{\text{Revenue}}
                         }
                         \times 100\%
                         \]
@@ -3158,9 +3241,9 @@
                         \text{ROA}
                         =
                         \frac{
-                        \color{#16a34a}{\text{Net Income}}
+                        \color{#0f7a5c}{\text{Net Income}}
                         }{
-                        \color{#1b59df}{\text{Average Total Assets}}
+                        \color{#1f5fc4}{\text{Average Total Assets}}
                         }
                         \times 100\%
                         \]
@@ -3223,9 +3306,9 @@
                         \text{ROE}
                         =
                         \frac{
-                        \color{#16a34a}{\text{Net Income}}
+                        \color{#0f7a5c}{\text{Net Income}}
                         }{
-                        \color{#1b59df}{\text{Average Shareholders' Equity}}
+                        \color{#1f5fc4}{\text{Average Shareholders' Equity}}
                         }
                         \times 100\%
                         \]
@@ -3300,9 +3383,9 @@
                           \text{ROCE}
                           =
                           \frac{
-                          \color{#0c7973}{\text{EBIT}}
+                          \color{#0f7a5c}{\text{EBIT}}
                           }{
-                          \color{#1b59df}{\text{Capital Employed}}
+                          \color{#1f5fc4}{\text{Capital Employed}}
                           }
                           \times 100\%
                           \]
@@ -3378,9 +3461,9 @@
                         \text{Inventory Turnover}
                         =
                         \frac{
-                        \color{#0c7973}{\text{COGS}}
+                        \color{#0f7a5c}{\text{COGS}}
                         }{
-                        \color{#1b59df}{\text{Average Inventory}}
+                        \color{#1f5fc4}{\text{Average Inventory}}
                         }
                         \]
                       </div>
@@ -3507,9 +3590,9 @@
                         \text{Days Inventory Outstanding (DIO)}
                         =
                         \frac{
-                        \color{#1b59df}{\text{Average Inventory}}
+                        \color{#1f5fc4}{\text{Average Inventory}}
                         }{
-                        \color{#0c7973}{\text{COGS}}
+                        \color{#0f7a5c}{\text{COGS}}
                         }
                         \times 365
                         \]
@@ -3568,9 +3651,9 @@
                         \text{Receivables Turnover}
                         =
                         \frac{
-                        \color{#0c7973}{\text{Net Credit Sales}}
+                        \color{#0f7a5c}{\text{Net Credit Sales}}
                         }{
-                        \color{#1b59df}{\text{Average Accounts Receivable}}
+                        \color{#1f5fc4}{\text{Average Accounts Receivable}}
                         }
                         \]
                       </div>
@@ -3641,9 +3724,9 @@
                         \text{Days Sales Outstanding (DSO)}
                         =
                         \frac{
-                        \color{#1b59df}{\text{Average Accounts Receivable}}
+                        \color{#1f5fc4}{\text{Average Accounts Receivable}}
                         }{
-                        \color{#0c7973}{\text{Net Credit Sales}}
+                        \color{#0f7a5c}{\text{Net Credit Sales}}
                         }
                         \times 365
                         \]
@@ -3709,9 +3792,9 @@
                         \text{Accounts Payable Turnover}
                         =
                         \frac{
-                        \color{#0c7973}{\text{Purchases}}
+                        \color{#0f7a5c}{\text{Purchases}}
                         }{
-                        \color{#1b59df}{\text{Average Accounts Payable}}
+                        \color{#1f5fc4}{\text{Average Accounts Payable}}
                         }
                         \]
                       </div>
@@ -3769,9 +3852,9 @@
                         \text{Total Asset Turnover}
                         =
                         \frac{
-                        \color{#0c7973}{\text{Revenue}}
+                        \color{#0f7a5c}{\text{Revenue}}
                         }{
-                        \color{#1b59df}{\text{Average Total Assets}}
+                        \color{#1f5fc4}{\text{Average Total Assets}}
                         }
                         \]
                       </div>
@@ -3827,9 +3910,9 @@
                         \text{Equity Turnover}
                         =
                         \frac{
-                        \color{#0c7973}{\text{Net Sales (or Revenue)}}
+                        \color{#0f7a5c}{\text{Net Sales (or Revenue)}}
                         }{
-                        \color{#1b59df}{\text{Average Shareholders' Equity}}
+                        \color{#1f5fc4}{\text{Average Shareholders' Equity}}
                         }
                         \]
                       </div>
@@ -4275,7 +4358,7 @@
                 </ul>
                 <figure>
                   <img src="images/5C_capacity.jpg" style="width: 100%; height: auto;" alt="5 Cs: Capacity">
-                  <figcaption style="font-size: 0.9em; color: #555; margin-top: 8px;">
+                  <figcaption style="font-size: 0.9em; color: var(--c-muted); margin-top: 8px;">
                   </figcaption>
                 </figure>
               </article>

@@ -349,19 +349,28 @@
 
   updateProgressUI();
 
-  const expandAllBtn = document.getElementById('expand-all-btn');
-  const collapseAllBtn = document.getElementById('collapse-all-btn');
+  // Expand / Collapse all (controls bar below the hero).
+  // Acts only on the expandable subsections of the section that is currently open
+  // in the single-section view (the one without data-tab-hidden).
+  function openCourseSection() {
+    const sections = Array.from(document.querySelectorAll('.platform-nav a[data-nav-section]'))
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+    return sections.find(s => !s.hasAttribute('data-tab-hidden')) || null;
+  }
 
-  if (expandAllBtn) {
-    expandAllBtn.addEventListener('click', () => {
-      learningSections.forEach(s => { if (!s.hasAttribute('open')) s.setAttribute('open', ''); });
+  document.querySelectorAll('.section-control[data-section-action]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const section = openCourseSection();
+      if (!section) return;
+
+      const expand = btn.dataset.sectionAction === 'expand';
+      section.querySelectorAll('details').forEach(d => {
+        if (expand) { if (!d.hasAttribute('open')) d.setAttribute('open', ''); }
+        else d.removeAttribute('open');
+      });
     });
-  }
-  if (collapseAllBtn) {
-    collapseAllBtn.addEventListener('click', () => {
-      learningSections.forEach(s => s.removeAttribute('open'));
-    });
-  }
+  });
 
   /* -----------------------------------------------------------------
      4. RATIO CATEGORY CHIPS
