@@ -5413,6 +5413,148 @@ details.purpose-of-financing>.table-wrapper {
   color: var(--c-navy);
 }
 
+/* five-stage overview: each card explains its stage and links to its steps */
+.bk .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.bk-stagecards {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 22px;
+  margin: 6px 0 4px;
+  padding: 0;
+  list-style: none;
+}
+
+.cra-platform .learning-body .bk .bk-stagecard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: none;
+  padding: 18px 16px 16px;
+  background: linear-gradient(180deg, var(--c-pale) 0%, #ffffff 70%);
+  border: 1px solid var(--c-pale-line);
+  border-top: 3px solid var(--c-blue);
+  border-radius: 14px;
+}
+
+/* arrow to the next stage */
+.bk-stagecard + .bk-stagecard::before {
+  content: "";
+  position: absolute;
+  top: 34px;
+  left: -17px;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 10px solid var(--c-blue);
+}
+
+.bk-stagecard-num {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  color: #ffffff;
+  background: var(--c-blue);
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+.bk-stagecard-title {
+  margin: 2px 0 0;
+  color: var(--c-navy);
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.bk .bk-stagecard-text {
+  flex: 1 1 auto;
+  color: var(--c-muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.bk-stagecard-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.bk-stage-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 4px 12px;
+  color: var(--c-blue);
+  background: #ffffff;
+  border: 1px solid var(--c-blue-line);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.bk-stage-chip:hover {
+  color: #ffffff;
+  background: var(--c-blue);
+  border-color: var(--c-blue);
+}
+
+.bk-stage-chip:focus-visible {
+  outline: 3px solid var(--c-blue);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bk-stage-chip {
+    transition: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .bk-stagecards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bk-stagecard + .bk-stagecard::before {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .bk-stagecards {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+  }
+
+  /* stacked: arrows point down between cards */
+  .bk-stagecard + .bk-stagecard::before {
+    display: block;
+    top: -20px;
+    left: 50%;
+    border-top: 10px solid var(--c-blue);
+    border-right: 7px solid transparent;
+    border-bottom: 0;
+    border-left: 7px solid transparent;
+    transform: translateX(-50%);
+  }
+
+  .bk-stage-chip {
+    min-height: 36px;
+  }
+}
+
 .bk .bk-flow-hint {
   margin-top: 6px;
   color: var(--c-muted);

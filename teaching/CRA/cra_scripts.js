@@ -1541,7 +1541,20 @@
   });
 
   document.addEventListener('click', e => {
-    if (openBox && !e.target.closest('.bk-flow-step.is-open')) close(openBox, false);
+    if (openBox && !e.target.closest('.bk-flow-step.is-open, .bk-stage-chip')) close(openBox, false);
+  });
+
+  // stage overview: each "Step n" chip jumps to that step and opens its details
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.bk-stage-chip[data-step]').forEach(chip => {
+    chip.addEventListener('click', e => {
+      const box = document.getElementById('bk-flow-btn-' + chip.dataset.step);
+      if (!box) return;
+      e.preventDefault();
+      box.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+      open(box);
+      box.focus({ preventScroll: true });
+    });
   });
 
   window.addEventListener('resize', () => {
