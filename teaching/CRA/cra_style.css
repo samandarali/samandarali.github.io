@@ -5170,13 +5170,42 @@ details.purpose-of-financing>.table-wrapper {
   aspect-ratio: 1942 / 809;
 }
 
-/* the team stands on the right of a wide frame: trim only the empty sky */
-.bk-media--team {
-  aspect-ratio: 1.6;
+/* five-role lending team, shown whole so the role labels stay readable */
+.bk-media--lending {
+  aspect-ratio: 1033 / 809;
 }
 
-.bk-media--team img {
-  object-position: 100% 50%;
+/* transition from the service panels to the lending-team sections */
+.bk .bk-transition {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 4px 0 0;
+  color: var(--c-navy);
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+}
+
+/* a full-width divider, not running text: exempt from the paragraph line-length cap */
+.cra-platform .learning-body .bk-transition {
+  max-width: none;
+}
+
+.bk .bk-transition::before,
+.bk .bk-transition::after {
+  content: "";
+  flex: 1 1 0;
+  min-width: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--c-blue-line));
+  border-radius: 2px;
+}
+
+.bk .bk-transition::after {
+  background: linear-gradient(90deg, var(--c-blue-line), transparent);
 }
 
 /* ---- Services ---- */
@@ -5185,53 +5214,159 @@ details.purpose-of-financing>.table-wrapper {
   gap: 22px;
 }
 
-.bk-services-head {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 400px);
-  gap: clamp(24px, 4vw, 48px);
-  align-items: center;
+.bk-text--wide {
+  max-width: 82ch;
 }
 
-.bk-service-grid {
+/* "What commercial banks provide": two panels, each with a character on the right */
+.bk-offer {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.bk-panel {
+  --tone: var(--c-blue);
+  --tone-soft: var(--c-pale);
+  --tone-line: var(--c-pale-line);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 18px;
+  padding: 26px 24px 0;
+  background: linear-gradient(160deg, var(--tone-soft) 0%, #ffffff 70%);
+  border: 1px solid var(--tone-line);
+  border-radius: 16px;
+}
+
+.bk-panel--cash {
+  --tone: var(--c-cat-2);
+  --tone-soft: var(--c-cat-2-soft);
+  --tone-line: #c9dfe7;
+}
+
+/* header spans the panel; rows and picture sit side by side below it */
+.bk-panel-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 46%);
+  align-items: end;
   gap: 16px;
+}
+
+.bk-panel-body .bk-rows {
+  align-self: start;
+  padding-bottom: 24px;
+}
+
+.bk .bk-eyebrow {
+  margin: 0 0 8px;
+  color: var(--tone);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.bk-panel-title {
+  margin: 0 0 10px;
+  color: var(--c-navy);
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.bk .bk-panel-lead {
+  max-width: 52ch;
+  color: var(--c-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.bk-panel-figure {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  margin: 0;
+}
+
+.bk-panel-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.bk-panel-figure--person img {
+  width: auto;
+  max-width: 100%;
+  height: 300px;
+}
+
+.bk-rows {
+  display: grid;
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-/* 3 + 2 layout with the second row centred */
-.bk-service {
-  grid-column: span 2;
+.bk-row {
   display: grid;
-  align-content: start;
-  gap: 8px;
-  padding: 18px 20px;
-  background: var(--c-surface);
+  grid-template-columns: 40px minmax(0, 1fr) 12px;
+  align-items: center;
+  gap: 14px;
+  min-height: 56px;
+  padding: 8px 14px 8px 8px;
+  background: #ffffff;
   border: 1px solid var(--c-border);
   border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(12, 35, 64, 0.05);
 }
 
-.bk-service:nth-child(4) {
-  grid-column: 2 / span 2;
+.bk-row-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  width: 40px;
+  height: 40px;
+  color: var(--tone);
+  background: var(--tone-soft);
+  border-radius: 10px;
 }
 
-.bk-service:nth-child(5) {
-  grid-column: 4 / span 2;
+.bk-row-icon--pair {
+  width: auto;
+  min-width: 40px;
+  padding: 0 4px;
 }
 
-.bk-service h5 {
-  margin: 4px 0 0;
+.bk-row-icon svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bk-row-text {
+  min-width: 0;
   color: var(--c-navy);
-  font-size: 0.98rem;
+  font-size: 0.94rem;
+  font-weight: 600;
   line-height: 1.3;
 }
 
-.bk-service p {
-  color: var(--c-muted);
-  font-size: 0.9rem;
-  line-height: 1.55;
+/* decorative chevron, matching the reference design */
+.bk-row-chevron {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--c-border-strong);
+  border-bottom: 2px solid var(--c-border-strong);
+  transform: rotate(-45deg);
 }
 
 .bk-icon {
@@ -5452,8 +5587,7 @@ details.purpose-of-financing>.table-wrapper {
 @media (max-width: 960px) {
   .bk-split,
   .bk-split--reverse,
-  .bk-split--team,
-  .bk-services-head {
+  .bk-split--team {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -5465,26 +5599,51 @@ details.purpose-of-financing>.table-wrapper {
     width: min(100%, 360px);
   }
 
-  .bk-services-head .bk-media,
   .bk-split--team .bk-media {
     width: min(100%, 520px);
   }
 
-  .bk-service-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .bk-service,
-  .bk-service:nth-child(4),
-  .bk-service:nth-child(5) {
-    grid-column: auto;
+  .bk-offer {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
   }
 }
 
 /* ---- Mobile ---- */
 @media (max-width: 760px) {
-  .bk-service-grid {
+  /* transition: short rules above and below so the text gets the full width */
+  .bk .bk-transition {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bk .bk-transition::before,
+  .bk .bk-transition::after {
+    flex: 0 0 auto;
+    width: 64px;
+    background: var(--c-blue-line);
+  }
+
+  .bk-panel {
+    padding: 18px 16px 0;
+  }
+
+  .bk-panel-body {
     grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+
+  .bk-panel-body .bk-rows {
+    padding-bottom: 8px;
+  }
+
+  .bk-panel-figure img {
+    max-width: 320px;
+    max-height: 220px;
+  }
+
+  .bk-panel-figure--person img {
+    height: 220px;
   }
 
   /* overview becomes a vertical list */
