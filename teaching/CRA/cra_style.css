@@ -5556,8 +5556,8 @@ details.purpose-of-financing>.table-wrapper {
 }
 
 .bk-tile-img {
-  width: 64px;
-  height: 56px;
+  width: 56px;
+  height: 48px;
   object-fit: contain;
 }
 
@@ -5608,6 +5608,11 @@ details.purpose-of-financing>.table-wrapper {
   display: grid;
   gap: 8px;
   min-width: 0;
+}
+
+/* the panel is already a bounded box: let its text use the full width so it stays short */
+.cra-platform .learning-body .bk-detail p {
+  max-width: none;
 }
 
 .bk .bk-detail-kicker {
