@@ -1,0 +1,129 @@
+/* ds-progress.css */
+
+.knowledge-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #dedad0;
+  border-radius: 999px;
+  padding: 5px 10px;
+  background: #ffffff;
+  color: #565f6d;
+  font-size: 11px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.knowledge-button:hover {
+  border-color: #c1611a;
+  transform: translateY(-1px);
+}
+
+.knowledge-button.status-know {
+  background: #d1fae5;
+  border-color: #34d399;
+  color: #065f46;
+}
+
+.knowledge-button.status-practice {
+  background: #ede9fe;
+  border-color: #a78bfa;
+  color: #4c1d95;
+}
+
+.knowledge-button.status-dontknow {
+  background: #fce7f3;
+  border-color: #f472b6;
+  color: #9d174d;
+}
+
+.knowledge-popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.knowledge-popup-overlay.open {
+  display: flex;
+}
+
+.knowledge-popup {
+  position: relative;
+  width: min(420px, 100%);
+  padding: 24px;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #20242b;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
+}
+
+.knowledge-popup-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: 0;
+  background: transparent;
+  color: #6b7280;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.knowledge-popup h3 {
+  margin: 0 30px 8px 0;
+  font-size: 20px;
+}
+
+.knowledge-topic-name {
+  margin-bottom: 18px;
+  color: #7a3d0f;
+  font-weight: 700;
+}
+
+.knowledge-status-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.knowledge-status-button {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid;
+  border-radius: 9px;
+  text-align: left;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.knowledge-status-button.know {
+  background: #d1fae5;
+  border-color: #34d399;
+  color: #065f46;
+}
+
+.knowledge-status-button.practice {
+  background: #ede9fe;
+  border-color: #a78bfa;
+  color: #4c1d95;
+}
+
+.knowledge-status-button.dontknow {
+  background: #fce7f3;
+  border-color: #f472b6;
+  color: #9d174d;
+}
+
+.knowledge-login-message {
+  padding: 12px;
+  border: 1px solid #f3c78a;
+  border-radius: 8px;
+  background: #fff7ed;
+  color: #7a3d0f;
+  font-size: 14px;
+}

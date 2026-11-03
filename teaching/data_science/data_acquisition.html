@@ -337,7 +337,9 @@ df = pd.read_csv(path)
 print(df.head())`},
 {id:"spark",name:"Spark DataFrames",category:"Big Data Sources",subcategory:"Distributed Data",level:"Advanced",prereqs:["Python basics","DataFrames","Spark basics"],explanation:"Spark reads and processes large datasets across multiple machines. It is used when pandas is too slow or the data is too large for memory.",best:["Use Spark for large datasets, not small files.","Avoid collecting huge Spark DataFrames to pandas.","Partition data for performance."],code:`from pyspark.sql import SparkSession
 
-spark = SparkSession.builder.appName("DataAcquisition").getOrCreate()
+spark = SparkSession.builder. \ 
+    appName("DataAcquisition"). \ 
+    getOrCreate()
 
 # Read CSV with Spark
 df = spark.read.csv("data/large_file.csv", header=True, inferSchema=True)
@@ -346,10 +348,10 @@ df.printSchema()
 df.show(5)`},
 {id:"hive",name:"Hive Tables",category:"Big Data Sources",subcategory:"Distributed Data",level:"Advanced",prereqs:["SQL basics","Spark basics","Data warehouse basics"],explanation:"Hive tables are often used in big data warehouses. Spark can query Hive tables using SQL-like commands.",best:["Filter partitions in your query.","Avoid SELECT * on very large tables.","Check table schema before loading."],code:`from pyspark.sql import SparkSession
 
-spark = SparkSession.builder \
-    .appName("HiveRead") \
-    .enableHiveSupport() \
-    .getOrCreate()
+spark = SparkSession.builder. \\
+    appName("HiveRead"). \\
+    enableHiveSupport(). \\
+    getOrCreate() 
 
 query = """
 SELECT customer_id, amount, transaction_date
@@ -363,11 +365,13 @@ df.show(5)`},
 
 spark = SparkSession.builder.appName("KafkaRead").getOrCreate()
 
-stream_df = spark.readStream.format("kafka") \
-    .option("kafka.bootstrap.servers", "localhost:9092") \
-    .option("subscribe", "transactions") \
+stream_df = spark.readStream.format("kafka") \\
+    .option("kafka.bootstrap.servers", "localhost:9092") \\
+    .option("subscribe", "transactions") \\
     .load()
 
+    
+    
 # Kafka value is binary, so cast it to string
 messages = stream_df.selectExpr("CAST(value AS STRING) as message")`},
 {id:"quality-check",name:"Initial Quality Checks",category:"Data Quality Checks",subcategory:"After Loading",level:"Beginner",prereqs:["pandas","Data types"],explanation:"After acquiring data, always run basic checks before analysis. This confirms that the data was loaded correctly.",best:["Check shape, columns, dtypes, and missing values.","Look at sample rows.","Confirm the expected unit of observation."],code:`# Basic checks after loading data

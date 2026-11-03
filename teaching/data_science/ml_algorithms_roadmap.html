@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Machine Learning Algorithms Roadmap</title>
+<link rel="stylesheet" href="../ds-progress.css">
 <style>
   /* ============================================================
      DESIGN TOKENS
@@ -306,7 +307,11 @@
     font-weight:700;
     font-family:var(--sans);
   }
-  .card-tags{display:flex; gap:6px; flex-wrap:wrap;}
+  .card-tags{display:flex; gap:6px; flex-wrap:wrap;
+  
+  
+  
+  }
   .badge{
     font-family:var(--mono);
     font-size:10.5px;
@@ -1284,7 +1289,27 @@ function renderCard(a){
       <div class="card-title-wrap">
         <div class="card-title">${a.name}</div>
         <div class="card-tags">
-          <span class="badge path">${a.category} · ${a.subcategory}</span>
+          <span class="badge path">
+            ${a.category} · ${a.subcategory}
+          </span>
+
+          <button
+            type="button"
+            class="knowledge-button"
+            data-progress-page="machine-learning"
+            data-progress-topic="${a.id}"
+            onclick="openKnowledgePopup(
+              'machine-learning',
+              '${a.id}',
+              '${escapeAttribute(a.name)}',
+              event
+            )"
+          >
+            <span>●</span>
+            <span class="knowledge-label">
+              Set knowledge level
+            </span>
+          </button>
         </div>
       </div>
       <span class="chevron"></span>
@@ -1307,6 +1332,20 @@ function renderCard(a){
     </div>
   </article>`;
 }
+
+
+function escapeAttribute(value) {
+  return String(value)
+    .replace(/\\/g, "\\\\")
+    .replace(/'/g, "\\'")
+    .replace(/\r?\n/g, " ");
+}
+
+setTimeout(() => {
+  if (window.refreshKnowledgeProgress) {
+    window.refreshKnowledgeProgress();
+  }
+}, 0);
 
 renderAll();
 
@@ -1440,5 +1479,72 @@ window.addEventListener("scroll", ()=>{
   });
 }, {passive:true});
 </script>
+
+<div
+  class="knowledge-popup-overlay"
+  id="knowledge-popup"
+  onclick="
+    if (event.target === this) {
+      closeKnowledgePopup();
+    }
+  "
+>
+  <div class="knowledge-popup">
+    <button
+      class="knowledge-popup-close"
+      type="button"
+      onclick="closeKnowledgePopup()"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+    <h3>Knowledge level</h3>
+
+    <div
+      class="knowledge-topic-name"
+      id="knowledge-topic-name"
+    ></div>
+
+    <div
+      class="knowledge-status-buttons"
+      id="knowledge-status-buttons"
+    >
+      <button
+        class="knowledge-status-button know"
+        type="button"
+        onclick="selectKnowledgeStatus('know')"
+      >
+        ✓ I know this
+      </button>
+
+      <button
+        class="knowledge-status-button practice"
+        type="button"
+        onclick="selectKnowledgeStatus('practice')"
+      >
+        ⟳ I need more practice
+      </button>
+
+      <button
+        class="knowledge-status-button dontknow"
+        type="button"
+        onclick="selectKnowledgeStatus('dontknow')"
+      >
+        ✗ I do not know this yet
+      </button>
+    </div>
+
+    <div
+      class="knowledge-login-message"
+      id="knowledge-login-message"
+      style="display: none"
+    >
+      Log in from the main Data Science page to save your progress.
+    </div>
+  </div>
+</div>
+
+<script type="module" src="../ds-progress.js"></script>
 </body>
 </html>
