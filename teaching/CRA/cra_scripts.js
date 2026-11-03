@@ -1416,6 +1416,12 @@
     const owner = sectionOf(target);
     if (!owner) return;
 
+    // Ratio-nav links point at their section as a no-JS fallback; their own handler does the jump
+    if (link.hasAttribute('data-ratio-nav-target')) {
+      if (owner !== current) show(owner);
+      return;
+    }
+
     const isMainNav = link.hasAttribute('data-nav-section') || SECTION_IDS.includes(hash.slice(1));
 
     if (isMainNav) {
