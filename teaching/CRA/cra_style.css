@@ -4849,6 +4849,64 @@ details.purpose-of-financing>.table-wrapper {
   font-weight: 600;
 }
 
+/* Exercise card with model-solution links (case → analysis → dashboard → memo) */
+.exercise-card.has-solution:hover {
+  transform: none;
+}
+
+.exercise-card.has-solution .exercise-action {
+  margin-top: 0.8rem;
+  padding-top: 0;
+  text-decoration: none;
+}
+
+.exercise-card.has-solution .exercise-action:hover {
+  text-decoration: underline;
+}
+
+.exercise-solution {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.8rem;
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--c-border);
+}
+
+.exercise-solution-label {
+  color: var(--c-muted, #607080);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.exercise-solution a {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--c-navy);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.exercise-solution a span {
+  display: inline-grid;
+  place-items: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: var(--c-blue-mid);
+  color: #fff;
+  font-size: 0.68rem;
+}
+
+.exercise-solution a:hover {
+  color: var(--c-blue-mid);
+  text-decoration: underline;
+}
+
 @media (max-width: 600px) {
   .exercise-grid {
     grid-template-columns: 1fr;

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Credit memorandum to the relationship manager and independent credit approval for Exercise 1 – Cedar Valley Foods Ltd.">
+<title>Credit Memo | Cedar Valley Foods Ltd.</title>
+<style>
+    :root {
+      --navy: #17324d;
+      --blue: #2f6fa3;
+      --blue-soft: #eaf3fa;
+      --green: #19705d;
+      --green-soft: #e9f6f2;
+      --amber: #9a5d00;
+      --amber-soft: #fff5dc;
+      --red: #9b3434;
+      --red-soft: #fff0f0;
+      --ink: #263442;
+      --muted: #607080;
+      --line: #d8e1e8;
+      --page: #f4f7f9;
+      --white: #fff;
+      --shadow: 0 12px 30px rgba(26, 49, 70, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--page);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .page-shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 32px auto 64px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 48px;
+      color: var(--white);
+      border-radius: 22px;
+      background: linear-gradient(135deg, #17324d 0%, #205d78 65%, #19705d 100%);
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      bottom: -130px;
+      width: 330px;
+      height: 330px;
+      border: 55px solid rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: #bfe6dc;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.08;
+      letter-spacing: -.035em;
+    }
+
+    .hero p {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 20px 0 0;
+      color: #eaf4f7;
+      font-size: 1.08rem;
+    }
+
+    .decision-pills {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .decision-pills span {
+      padding: 7px 13px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .instruction {
+      margin: 24px 0;
+      padding: 19px 22px;
+      border-left: 5px solid var(--amber);
+      border-radius: 12px;
+      background: var(--amber-soft);
+      box-shadow: var(--shadow);
+    }
+
+    .instruction strong { color: #744700; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    main { min-width: 0; }
+
+    nav {
+      position: sticky;
+      top: 20px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    nav h2 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: .82rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      display: block;
+      padding: 6px 0;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      line-height: 1.35;
+    }
+
+    nav a:hover { color: var(--blue); }
+
+    .card {
+      margin-bottom: 22px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .section-number {
+      display: inline-grid;
+      width: 32px;
+      height: 32px;
+      margin-right: 9px;
+      place-items: center;
+      border-radius: 9px;
+      color: var(--white);
+      background: var(--blue);
+      font-size: .88rem;
+      vertical-align: 3px;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      color: var(--navy);
+      font-size: 1.45rem;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 24px 0 8px;
+      color: var(--green);
+      font-size: 1.06rem;
+    }
+
+    p { margin: 10px 0; }
+    ul, ol { margin: 10px 0; padding-left: 24px; }
+    li + li { margin-top: 5px; }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0;
+    }
+
+    .fact {
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: var(--blue-soft);
+    }
+
+    .fact dt {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .fact dd {
+      margin: 2px 0 0;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0 4px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      font-variant-numeric: tabular-nums;
+    }
+
+    caption {
+      padding: 12px 15px;
+      color: var(--muted);
+      background: #f7fafc;
+      text-align: left;
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    th, td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child, td:first-child { text-align: left; }
+    thead th { color: var(--white); background: var(--navy); }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:nth-child(even) { background: #f9fbfc; }
+    .total td { color: var(--navy); background: var(--blue-soft); font-weight: 800; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .note-box {
+      padding: 17px 18px;
+      border-radius: 12px;
+      background: var(--green-soft);
+    }
+
+    .note-box.warning { background: var(--red-soft); }
+    .note-box h3 { margin-top: 0; }
+    .note-box.warning h3 { color: var(--red); }
+
+    .formula {
+      margin: 18px 0;
+      padding: 18px;
+      border: 1px dashed var(--blue);
+      border-radius: 12px;
+      color: var(--navy);
+      background: var(--blue-soft);
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+
+    .assignment {
+      border-top: 6px solid var(--green);
+    }
+
+    .assignment ol {
+      columns: 2;
+      column-gap: 40px;
+    }
+
+    .assignment li { break-inside: avoid; }
+
+    .writing-area {
+      min-height: 170px;
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px dashed #b8c5cf;
+      border-radius: 12px;
+      color: var(--muted);
+      background: #fbfcfd;
+    }
+
+    footer {
+      margin-top: 26px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .84rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: static; order: -1; }
+      nav div { columns: 2; }
+      .hero { padding: 34px 28px; }
+    }
+
+    @media (max-width: 600px) {
+      .page-shell { width: min(100% - 20px, 1120px); margin-top: 10px; }
+      .hero, .card { border-radius: 13px; }
+      .card { padding: 22px 17px; }
+      .facts, .two-col { grid-template-columns: 1fr; }
+      .assignment ol { columns: 1; }
+      nav div { columns: 1; }
+      th, td { padding: 10px 11px; font-size: .88rem; }
+    }
+
+    @media print {
+      @page { size: letter; margin: .55in; }
+      body { background: white; font-size: 10.5pt; }
+      .page-shell { width: 100%; margin: 0; }
+      .hero { padding: 28px; border-radius: 0; box-shadow: none; }
+      .hero h1 { font-size: 26pt; }
+      .layout { display: block; }
+      nav { display: none; }
+      .card, .instruction { break-inside: avoid; box-shadow: none; }
+      .table-wrap { overflow: visible; }
+      .writing-area { min-height: 130px; }
+      footer { display: none; }
+    }
+    /* Compact layout: keep the full case intact while showing more content at once. */
+    body { font-size: 14px; line-height: 1.48; }
+    .page-shell { width: min(1480px, calc(100% - 28px)); margin: 16px auto 28px; }
+    .hero { padding: 26px 30px; border-radius: 16px; }
+    .hero::after { right: -110px; bottom: -170px; width: 270px; height: 270px; border-width: 42px; }
+    .eyebrow { margin-bottom: 5px; font-size: .7rem; }
+    h1 { font-size: clamp(1.7rem, 3.6vw, 2.7rem); }
+    .hero p { margin-top: 10px; font-size: 1rem; }
+    .decision-pills { gap: 7px; margin-top: 14px; }
+    .decision-pills span { padding: 5px 10px; font-size: .8rem; }
+    .instruction { margin: 12px 0; padding: 11px 15px; border-radius: 9px; }
+    .layout { grid-template-columns: minmax(0, 1fr) 205px; gap: 14px; }
+    nav { top: 12px; padding: 14px; border-radius: 12px; }
+    nav h2 { margin-bottom: 6px; font-size: .75rem; }
+    nav a { padding: 4px 0; font-size: .82rem; }
+    .card { margin-bottom: 12px; padding: 18px; border-radius: 12px; }
+    .section-number { width: 26px; height: 26px; margin-right: 6px; border-radius: 7px; font-size: .78rem; }
+    h2 { margin-bottom: 10px; font-size: 1.2rem; }
+    h3 { margin: 14px 0 5px; font-size: .96rem; }
+    p { margin: 6px 0; }
+    ul, ol { margin: 6px 0; padding-left: 20px; }
+    li + li { margin-top: 2px; }
+    .facts { gap: 8px; }
+    .fact { padding: 8px 10px; border-radius: 8px; }
+    .fact dt { font-size: .68rem; }
+    .fact dd { margin-top: 1px; }
+    .table-wrap { margin: 9px 0 3px; border-radius: 8px; }
+    caption { padding: 7px 9px; font-size: .75rem; }
+    th, td { padding: 5px 8px; font-size: .82rem; }
+    th:first-child, td:first-child { white-space: normal; }
+    .two-col { gap: 10px; }
+    .note-box { padding: 10px 12px; border-radius: 9px; }
+    .formula { margin: 10px 0; padding: 10px; font-size: 1rem; }
+    .assignment { border-top-width: 4px; }
+    .assignment ol { column-gap: 24px; }
+    .writing-area { min-height: 105px; margin-top: 12px; padding: 12px; }
+    footer { margin-top: 14px; font-size: .76rem; }
+
+    @media (min-width: 1100px) {
+      .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 960px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: static; order: -1; }
+      nav div { columns: 3; }
+    }
+    @media (max-width: 600px) {
+      .page-shell { width: calc(100% - 16px); margin: 8px auto 18px; }
+      .hero { padding: 20px 18px; }
+      .card { padding: 14px 12px; }
+      .facts, .two-col { grid-template-columns: 1fr; }
+      .assignment ol { columns: 1; }
+      nav div { columns: 2; }
+      th, td { padding: 5px 6px; font-size: .76rem; }
+    }
+    @media print {
+      @page { size: letter; margin: .3in; }
+      body { font-size: 8.5pt; line-height: 1.28; }
+      .page-shell { width: 100%; margin: 0; }
+      .hero { padding: 14px 18px; border-radius: 0; box-shadow: none; }
+      .hero h1 { font-size: 19pt; }
+      .hero p { margin-top: 5px; font-size: 9pt; }
+      .decision-pills { margin-top: 7px; }
+      .instruction { margin: 7px 0; padding: 8px 10px; box-shadow: none; }
+      .layout { display: block; }
+      nav { display: none; }
+      .card { margin-bottom: 7px; padding: 10px; border-radius: 0; box-shadow: none; }
+      h2 { margin-bottom: 6px; font-size: 11pt; }
+      h3 { margin: 8px 0 3px; font-size: 9pt; }
+      p { margin: 4px 0; }
+      ul, ol { margin: 4px 0; }
+      li + li { margin-top: 1px; }
+      .fact, .note-box { padding: 6px 8px; }
+      .table-wrap { margin: 5px 0 2px; }
+      caption { padding: 4px 6px; }
+      th, td { padding: 3px 5px; font-size: 7.5pt; }
+      .writing-area { min-height: 70px; margin-top: 7px; padding: 8px; }
+      .card, .instruction { break-inside: avoid; }
+      footer { display: none; }
+    }
+  
+    .exec { border-top: 4px solid var(--green); }
+    .verdict { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin: 4px 0 10px; }
+    .verdict .badge { padding: 6px 14px; border-radius: 999px; background: var(--amber-soft); color: #744700;
+      border: 1px solid #e7c77a; font-weight: 800; letter-spacing:.02em; }
+    .kpis { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; margin: 10px 0; }
+    .kpi { padding: 9px 11px; border-radius: 9px; background: var(--blue-soft); }
+    .kpi .k { color: var(--muted); font-size: .68rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .kpi .v { color: var(--navy); font-size: 1.25rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .kpi .s { color: var(--muted); font-size: .76rem; }
+    td.good { color: var(--green); background: var(--green-soft) !important; font-weight: 700; }
+    td.warn { color: var(--amber); background: var(--amber-soft) !important; font-weight: 700; }
+    td.bad  { color: var(--red); background: var(--red-soft) !important; font-weight: 700; }
+    td.muted { color: var(--muted); }
+    .grid td, .grid th { text-align: center; }
+    .grid td:first-child, .grid th:first-child { text-align: left; }
+    .legend { display:flex; flex-wrap:wrap; gap:12px; font-size:.78rem; color: var(--muted); margin: 4px 0 8px; }
+    .legend span::before { content:""; display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
+    .legend .lg::before { background: var(--green-soft); border:1px solid var(--green); }
+    .legend .lw::before { background: var(--amber-soft); border:1px solid var(--amber); }
+    .legend .lb::before { background: var(--red-soft); border:1px solid var(--red); }
+    .small { font-size: .8rem; color: var(--muted); }
+    .assume li { font-size: .84rem; }
+    .risk-table td { white-space: normal; text-align: left; vertical-align: top; }
+    .risk-table td:nth-child(2) { white-space: nowrap; }
+    .cond-list li { margin-top: 4px; }
+    @media (max-width: 760px) { .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media print { .kpis { grid-template-columns: repeat(4, 1fr); } }
+
+.exnav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;padding:8px 10px;border:1px solid #d8e1e8;border-radius:12px;background:#fff;box-shadow:0 6px 18px rgba(26,49,70,.06);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.exnav .exhome{color:#607080;text-decoration:none;font-size:.8rem;font-weight:700;padding:4px 8px}
+.exnav .exhome:hover{color:#2f6fa3}
+.exnav .extitle{color:#17324d;font-weight:800;font-size:.86rem;margin-right:auto}
+.exnav ol{display:flex;gap:4px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+.exnav li{margin:0}
+.exnav a.step{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;color:#2f4255;text-decoration:none;font-size:.8rem;font-weight:700;border:1px solid #d8e1e8;background:#f7fafc}
+.exnav a.step:hover{border-color:#2f6fa3;color:#2f6fa3}
+.exnav a.step .n{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#d8e1e8;color:#17324d;font-size:.7rem}
+.exnav a.step.on{background:#17324d;border-color:#17324d;color:#fff}
+.exnav a.step.on .n{background:#19705d;color:#fff}
+@media print{.exnav{display:none}}
+@media (max-width:600px){.exnav .extitle{width:100%}}
+
+body{background:#eef2f5}
+.memo{width:min(1000px,calc(100% - 28px));margin:16px auto 32px}
+.paper{background:#fff;border:1px solid #d8e1e8;border-radius:10px;box-shadow:0 12px 30px rgba(26,49,70,.08);padding:34px 40px}
+.letterhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;border-bottom:3px solid #17324d;padding-bottom:12px;margin-bottom:14px}
+.letterhead .org{color:#17324d;font-weight:800;font-size:1.05rem;letter-spacing:.02em}
+.letterhead .org small{display:block;color:#607080;font-weight:600;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase}
+.letterhead .cls{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#9b3434;border:1px solid #e4b4b4;padding:4px 8px;border-radius:5px;background:#fff7f7}
+.memo h1{margin:4px 0 12px;color:#17324d;font-size:1.5rem;letter-spacing:-.01em}
+.mhdr{display:grid;grid-template-columns:150px 1fr 150px 1fr;border:1px solid #d8e1e8;border-radius:8px;overflow:hidden;font-size:.86rem;margin-bottom:14px}
+.mhdr div{padding:6px 10px;border-bottom:1px solid #e6ecf1}
+.mhdr .k{background:#f4f7f9;color:#607080;font-weight:700;font-size:.74rem;letter-spacing:.04em;text-transform:uppercase}
+.decision{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px 14px;border-left:5px solid #9a5d00;background:#fff5dc;border-radius:8px;margin:10px 0 16px}
+.decision strong{color:#744700;font-size:1.02rem}
+.memo h2{font-size:1.02rem;color:#17324d;border-bottom:1px solid #d8e1e8;padding-bottom:4px;margin:22px 0 8px}
+.memo h2 .num{color:#19705d;margin-right:6px}
+.memo p,.memo li{font-size:.9rem;line-height:1.55}
+.memo td{white-space:normal}
+.memo-fac td:nth-child(n+6){text-align:left;font-size:.78rem}
+.sign{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px}
+.sigbox{border:1px solid #d8e1e8;border-radius:8px;padding:12px;font-size:.84rem;background:#fbfcfd}
+.sigbox h3{margin:0 0 6px;color:#17324d;font-size:.86rem}
+.sigline{border-bottom:1px solid #9aa5b1;height:26px;margin:8px 0 2px}
+.sigcap{color:#607080;font-size:.72rem}
+.chk{display:block;margin:3px 0}
+.chk::before{content:"☐";margin-right:6px;font-size:1rem}
+.commentbox{border:1px dashed #b8c5cf;border-radius:6px;min-height:70px;margin-top:6px;padding:6px;color:#9aa5b1;font-size:.78rem}
+.printbar{display:flex;justify-content:flex-end;gap:8px;margin:0 0 10px}
+.printbar button{border:1px solid #17324d;background:#17324d;color:#fff;border-radius:7px;padding:6px 12px;font:600 .82rem inherit;cursor:pointer}
+@media (max-width:760px){.paper{padding:20px 16px}.mhdr{grid-template-columns:110px 1fr}.sign{grid-template-columns:1fr}}
+@media print{body{background:#fff}.memo{width:100%;margin:0}.paper{border:0;box-shadow:none;padding:0}.printbar{display:none}.memo h2{break-after:avoid}.sigbox,.table-wrap{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="memo">
+<nav class="exnav" aria-label="Exercise 1 pages"><a class="exhome" href="../cra_index.html#practice-section">← Exercises</a><span class="extitle">Exercise 1 · Cedar Valley Foods Ltd.</span><ol><li><a class="step" href="Exercise_1_Cedar_Valley_Foods_Ltd.html"><span class="n">1</span>Case</a></li><li><a class="step" href="Exercise_1_Cedar_Valley_Foods_Ltd_Analysis.html"><span class="n">2</span>Credit analysis</a></li><li><a class="step" href="Exercise_1_Cedar_Valley_Foods_Ltd_Dashboard.html"><span class="n">3</span>Model dashboard</a></li><li><a class="step on" href="Exercise_1_Cedar_Valley_Foods_Ltd_Credit_Memo.html" aria-current="page"><span class="n">4</span>Credit memo</a></li></ol></nav>
+
+<div class="printbar"><button type="button" onclick="window.print()">Print / save as PDF</button></div>
+<article class="paper">
+<header class="letterhead">
+  <div class="org">Commercial Banking – Credit Risk Management<small>Credit Application &amp; Approval Memorandum</small></div>
+  <div class="cls">Confidential – Internal use only</div>
+</header>
+<h1>Credit Memorandum – Cedar Valley Foods Ltd.</h1>
+<div class="mhdr">
+  <div class="k">To</div><div>Relationship Manager, Commercial Banking<br>Independent Credit Approval (Credit Adjudication)</div>
+  <div class="k">From</div><div>Credit Risk Analyst</div>
+  <div class="k">Date</div><div>[dd mmm yyyy]</div>
+  <div class="k">Review type</div><div>New money and limit increase</div>
+  <div class="k">Borrower</div><div>Cedar Valley Foods Ltd., Mississauga ON</div>
+  <div class="k">Industry</div><div>Frozen prepared-food manufacturing</div>
+  <div class="k">Request</div><div>$1.2M equipment term loan; line $700k → $1.1M</div>
+  <div class="k">Total connection</div><div>$2,330k → <strong>$3,930k</strong> (+$1,600k)</div>
+  <div class="k">Risk rating</div><div>Proposed 6 – Satisfactory / Watch</div>
+  <div class="k">Financials</div><div>FY2024–FY2026 annual; FY2027–28 projections</div>
+</div>
+<div class="decision"><strong>Recommendation: APPROVE WITH CONDITIONS</strong><span>Term loan restructured to 7-year amortization with interest-only during installation; distributions suspended; shareholder loans postponed; line available against borrowing base.</span></div>
+
+<h2><span class="num">1.</span>Purpose and summary</h2>
+<p>We request approval of a new $1,200,000 equipment term loan to finance 80% of a $1,500,000 automated packaging line, and an increase in the
+operating line from $700,000 to $1,100,000 to fund working capital for the growth the new line supports, including a new three-year contract with
+the borrower's largest customer.</p>
+<p>The borrower has a 14-year operating history, an experienced owner-manager and no missed payments. However, FY2026 results show falling margins
+(EBITDA margin 7.4%), lengthening working-capital cycles and negative free cash flow of $190k after distributions. On FY2026 earnings,
+the historical business cannot carry the new debt (lender DSCR 0.84x). Repayment therefore relies on the project delivering
+labour savings and on distributions being stopped. The operating line is well covered by the borrowing base (1.45x). The term loan
+is under-secured by $375k. We support the request with a modified structure and the conditions below.</p>
+
+<h2><span class="num">2.</span>Facilities</h2>
+<div class="table-wrap"><table class="memo-fac"><caption>Facility summary ($000s)</caption><thead><tr><th>Facility</th><th>Existing authorized</th><th>Outstanding</th><th>Proposed authorized</th><th>Change</th><th>Pricing</th><th>Term / amortization</th><th>Security</th></tr></thead><tbody><tr><td>Operating line (revolving)</td><td>700</td><td>680</td><td>1,100</td><td>+400</td><td>Prime + 1.75%</td><td>Demand; annual review</td><td>GSA; margined 75% A/R / 50% inventory</td></tr><tr><td>Equipment loans (existing)</td><td>910</td><td>910</td><td>910</td><td>—</td><td>Existing</td><td>Existing</td><td>Specific equipment charges</td></tr><tr><td>Commercial mortgage (existing)</td><td>720</td><td>720</td><td>720</td><td>—</td><td>Existing</td><td>Existing</td><td>First mortgage – commercial property</td></tr><tr><td>Equipment term loan (new)</td><td>—</td><td>—</td><td>1,200</td><td>+1,200</td><td>7.00% fixed</td><td>7-yr amortization; 4 months interest-only during install</td><td>First-ranking PMSI on new line; GSA</td></tr><tr class="total"><td>Total connection</td><td>2,330</td><td>2,310</td><td>3,930</td><td>+1,600</td><td></td><td></td><td></td></tr></tbody></table></div>
+<p class="small">Assumes the existing equipment loans and mortgage are held with the Bank. If they are held elsewhere, the Bank's connection is the line and new term loan only ($2,300k).</p>
+
+<h2><span class="num">3.</span>Borrower and management</h2>
+<p>Cedar Valley Foods manufactures frozen meals for grocery chains, independent supermarkets and institutional buyers (58 employees). It is owned
+by Priya Sharma (70%), who has run the business since it started, and Arjun Sharma (30%). Three customers make up 52% of sales (A 24%, B 17%, C 11%).
+Management is experienced, but there is no formal succession plan.</p>
+
+<h2><span class="num">4.</span>Financial analysis</h2>
+<div class="table-wrap"><table class=""><caption>Financial summary ($000s)</caption><thead><tr><th></th><th>FY2024</th><th>FY2025</th><th>FY2026</th><th>Pro forma / 2027</th></tr></thead><tbody><tr><td>Revenue</td><td>8,400</td><td>9,100</td><td>9,750</td><td>11,500 mgmt</td></tr><tr><td>Gross margin</td><td>28.0%</td><td>27.3%</td><td>26.1%</td><td>—</td></tr><tr><td>EBITDA</td><td>810</td><td>810</td><td>720</td><td>1,080 mgmt / 760 downside</td></tr><tr><td>EBITDA margin</td><td>9.6%</td><td>8.9%</td><td>7.4%</td><td>9.4%</td></tr><tr><td>Net income</td><td>380</td><td>352</td><td>252</td><td>334 (lender est.)</td></tr><tr><td>Free cash flow after distributions</td><td>230</td><td>90</td><td class="bad">(190)</td><td>—</td></tr><tr><td>Current ratio</td><td>1.71x</td><td>1.54x</td><td>1.56x</td><td>1.32x</td></tr><tr><td>Quick ratio</td><td>0.99x</td><td>0.86x</td><td>0.89x</td><td class="bad">0.69x</td></tr><tr><td>Cash conversion cycle (days)</td><td>54.8</td><td>57.7</td><td>62.5</td><td>—</td></tr><tr><td>Funded debt / EBITDA</td><td>2.05x</td><td>2.44x</td><td>3.21x</td><td class="bad">4.88x</td></tr><tr><td>Total liabilities / TNW</td><td>1.24x</td><td>1.47x</td><td>1.62x</td><td>2.14x</td></tr><tr><td>EBITDA / interest</td><td>7.71x</td><td>6.38x</td><td>4.56x</td><td>2.82x</td></tr><tr><td>DSCR – lender basis</td><td>n/a</td><td>1.32x</td><td class="bad">0.87x</td><td>see repayment table</td></tr></tbody></table></div>
+<p>Revenue grew 16% over two years, but EBITDA fell from $810k to $720k because gross margin and cost
+control both weakened. A/R and inventory grew faster than sales (CCC 55 → 62 days), and the gap was funded by stretching suppliers
+and by debt. After closing, cash falls to $90k and funded debt/EBITDA rises to 4.88x. Equity does not reconcile
+with net income less distributions (FY2025 −$222k, FY2026 +$98k); an explanation is a condition precedent.
+Full ratio detail is in the <a href="Exercise_1_Cedar_Valley_Foods_Ltd_Analysis.html">credit analysis</a> and the <a href="Exercise_1_Cedar_Valley_Foods_Ltd_Dashboard.html">model dashboard</a>.</p>
+
+<h2><span class="num">5.</span>Repayment capacity</h2>
+<p><strong>Primary source:</strong> operating cash flow, improved by $240k of annual labour savings and extra capacity from the new line.
+<strong>Secondary sources:</strong> equipment and GSA collateral, and limited personal guarantees.</p>
+<div class="table-wrap"><table class=""><caption>Repayment capacity – first year after closing ($000s)</caption><thead><tr><th>Scenario</th><th>EBITDA</th><th>EBITDA ÷ term DS (as requested)</th><th>Lender DSCR (as requested)</th><th>Lender DSCR (recommended structure)</th></tr></thead><tbody><tr><td>2026 run-rate, no project benefit</td><td>720</td><td class="warn">1.21x</td><td class="bad">0.84x</td><td class="bad">0.94x</td></tr><tr><td>Management plan 2027</td><td>1,080</td><td class="good">1.82x</td><td class="warn">1.24x</td><td class="good">1.39x</td></tr><tr><td>Lender downside 2027</td><td>760</td><td class="good">1.28x</td><td class="bad">0.88x</td><td class="bad">0.99x</td></tr><tr><td>Loss of Customer A</td><td>600</td><td class="warn">1.01x</td><td class="bad">0.69x</td><td>—</td></tr></tbody></table></div>
+<p>Lender DSCR = (EBITDA − cash taxes − $140k maintenance CapEx − distributions) ÷ (term debt service + line interest), with distributions
+suspended. Term debt service as requested is $594.8k a year. The recommended structure (7-year amortization with 4 months interest-only)
+brings first-year service down to $519.4k. Coverage is acceptable on plan but thin in the downside. The remaining gap of about
+$50k a year at steady state can be absorbed by line availability while performance is monitored.</p>
+
+<h2><span class="num">6.</span>Security and margin</h2>
+<div class="table-wrap"><table class=""><caption>Security and margin ($000s)</caption><thead><tr><th>Item</th><th>Value</th><th>Coverage / comment</th></tr></thead><tbody><tr><td>Borrowing base – eligible A/R × 75%</td><td>1,050.0</td><td>A/R over 90 days excluded (incl. $85k disputed)</td></tr><tr><td>Borrowing base – eligible inventory × 50% (capped $550k)</td><td>550.0</td><td>Slow-moving stock excluded</td></tr><tr><td>Borrowing base total vs $1,100k limit</td><td>1,600.0</td><td class="good">1.45x – adequately supported</td></tr><tr><td>Borrowing base – severe case</td><td>1,452.5</td><td class="good">1.32x – still covers limit</td></tr><tr><td>New equipment OLV vs $1,200k term loan</td><td>825</td><td class="bad">69% – shortfall $375k</td></tr><tr><td>OLV + limited personal guarantees</td><td>1,125</td><td class="warn">94%</td></tr><tr><td>Personal net worth of guarantors (reported)</td><td>1,400</td><td>Mostly principal residence and company shares</td></tr></tbody></table></div>
+<p>Security: GSA over all present and after-acquired property; first-ranking PMSI on the new packaging line; existing equipment charges and
+commercial mortgage; joint and several guarantees of the shareholders; postponement of shareholder loans; assignment of insurance.
+The term loan and line are to be cross-collateralized and cross-defaulted.</p>
+
+<h2><span class="num">7.</span>Risk rating</h2>
+<div class="table-wrap"><table class="risk-table"><caption>Borrower risk rating rationale</caption><thead><tr><th>Factor</th><th>Assessment</th><th>Comment</th></tr></thead><tbody><tr><td>Repayment capacity</td><td class="bad">Weak</td><td>Lender DSCR 0.87x in 2026; depends on project delivering savings</td></tr><tr><td>Profitability trend</td><td class="bad">Weak</td><td>EBITDA margin 9.6% → 7.4%; gross margin falling</td></tr><tr><td>Leverage</td><td class="bad">Weak</td><td>Pro forma funded debt/EBITDA 4.88x</td></tr><tr><td>Liquidity and working capital</td><td class="warn">Weak–Acceptable</td><td>Quick ratio 0.69x; CCC lengthening</td></tr><tr><td>Management and track record</td><td class="good">Strong</td><td>14 years; no missed payments; experienced operations manager</td></tr><tr><td>Industry and business position</td><td class="warn">Acceptable</td><td>Non-discretionary food category; input-cost and buyer-power pressure</td></tr><tr><td>Customer concentration</td><td class="bad">Weak</td><td>Top 3 = 52% of revenue; Customer A 24%</td></tr><tr><td>Security</td><td class="warn">Acceptable</td><td>Line well margined; term loan under-secured</td></tr><tr class="total"><td>Overall borrower risk rating</td><td class="warn">6 – Satisfactory / Watch</td><td>Current rating assumed 5; one-notch downgrade recommended</td></tr></tbody></table></div>
+
+<h2><span class="num">8.</span>Key risks and mitigants</h2>
+<div class="table-wrap"><table class="risk-table"><caption>Key risks and mitigants</caption><thead><tr><th>Risk</th><th>Mitigant / structure response</th></tr></thead><tbody><tr><td>Thin cash-flow coverage; 2026 free cash flow negative</td><td>Distributions suspended; 7-yr amortization with interest-only during installation; fixed-charge coverage covenant</td></tr><tr><td>Project execution and installation delay</td><td>Progress draws against invoices; 10% holdback until commissioning; vendor warranty; business-interruption insurance</td></tr><tr><td>Gross-margin erosion from input costs</td><td>Customer A contract reviewed for price pass-through; 6-month review of actual margins and savings</td></tr><tr><td>Customer concentration (Customer A 24%)</td><td>Debtor concentration cap 30% in borrowing base; contract terms reviewed before funding</td></tr><tr><td>Working-capital deterioration</td><td>Monthly borrowing-base reporting; exclusions for aged, disputed and cross-aged A/R; annual field exam</td></tr><tr><td>Term-loan collateral shortfall</td><td>Guarantees increased; cross-collateralization and cross-default with line; GSA over all assets</td></tr><tr><td>Shareholder loans withdrawable</td><td>Postponement and subordination agreement as a condition precedent</td></tr><tr><td>Key-person and succession</td><td>Key-person life insurance assigned; written succession plan within 12 months</td></tr><tr><td>Unexplained equity movements</td><td>Accountant's reconciliation required before funding</td></tr></tbody></table></div>
+
+<h2><span class="num">9.</span>Policy exceptions</h2>
+<div class="table-wrap"><table class="risk-table"><caption>Policy exceptions requested</caption><thead><tr><th>Exception</th><th>Policy guideline</th><th>Proposal</th><th>Justification</th></tr></thead><tbody><tr><td>Leverage above guideline</td><td>Funded debt/EBITDA ≤ 3.50x</td><td>4.88x at close on FY2026 EBITDA</td><td>Falls to 3.25x on plan; covenant steps down to 3.50x by FY2028</td></tr><tr><td>Debt service coverage in downside</td><td>DSCR ≥ 1.25x</td><td>Lender DSCR 0.99x in downside (recommended structure)</td><td>EBITDA basis 1.46x; shortfall covered by $420k line availability</td></tr><tr><td>Term loan under-secured</td><td>Loan ≤ 100% of collateral value</td><td>Loan = 145% of equipment OLV</td><td>Guarantees, GSA surplus and cross-collateralization narrow the gap; productive asset</td></tr></tbody></table></div>
+
+<h2><span class="num">10.</span>Terms and conditions</h2>
+<p><strong>Conditions precedent to first advance</strong></p>
+<ol>
+<li>Postponement and subordination of $150k shareholder loans.</li>
+<li>Evidence that the $300k equity contribution has been paid toward the equipment before the first advance.</li>
+<li>Executed equipment purchase contract, installation schedule and vendor warranty.</li>
+<li>Accountant's written reconciliation of FY2025 and FY2026 equity movements.</li>
+<li>Bank review of the Customer A contract (term, termination, performance standards, price pass-through).</li>
+<li>Resolution or exclusion of the $85k disputed receivable; inventory field exam before the increased line is available.</li>
+<li>Joint and several guarantees of the shareholders increased to $500k, with current personal net worth statements.</li>
+<li>Insurance assigned to the Bank (first loss payee), including business-interruption cover; key-person life insurance of $500k on the principal shareholder.</li></ol>
+<div class="table-wrap"><table class=""><caption>Financial covenants</caption><thead><tr><th>Covenant</th><th>Requirement</th><th>Testing</th></tr></thead><tbody><tr><td>Fixed-charge coverage</td><td>≥ 1.20x</td><td>Annual (FY2027 onward); quarterly reporting</td></tr><tr><td>Funded debt / EBITDA</td><td>≤ 4.25x FY2027; ≤ 3.50x FY2028 onward</td><td>Annual</td></tr><tr><td>Current ratio</td><td>≥ 1.20x</td><td>Quarterly</td></tr><tr><td>Total liabilities / (TNW + postponed shareholder loans)</td><td>≤ 2.25x</td><td>Annual</td></tr><tr><td>Distributions</td><td>Nil until FY2027 FCC ≥ 1.25x after distribution; then ≤ 50% of prior-year net income</td><td>Ongoing</td></tr><tr><td>Capital expenditure</td><td>Bank consent required above $250k a year (excluding this project)</td><td>Ongoing</td></tr></tbody></table></div>
+<div class="table-wrap"><table class=""><caption>Reporting requirements</caption><thead><tr><th>Report</th><th>Frequency</th><th>Due</th></tr></thead><tbody><tr><td>Borrowing-base certificate with aged A/R and A/P listings</td><td>Monthly</td><td>20 days after month-end</td></tr><tr><td>Internal financial statements with covenant calculation</td><td>Quarterly</td><td>45 days after quarter-end</td></tr><tr><td>Review-engagement (or audited) annual financial statements</td><td>Annual</td><td>120 days after year-end</td></tr><tr><td>Installation progress report</td><td>Monthly until commissioning</td><td>With borrowing-base certificate</td></tr><tr><td>Personal net worth statements of guarantors</td><td>Annual</td><td>With annual statements</td></tr></tbody></table></div>
+
+<h2><span class="num">11.</span>Recommendation</h2>
+<p>We recommend <strong>approval with conditions</strong> of the $1,200,000 equipment term loan (7-year amortization, 4 months interest-only during
+installation, 7.00% fixed) and the increase of the operating line to $1,100,000, margined as above, for a total connection of
+$3,930k. The borrower risk rating should move to 6 (Satisfactory / Watch) and be reviewed six months after the new line is commissioned.
+If FY2027 results fall below the lender downside case, the Bank should require an equity injection or a reduction in the line.</p>
+
+<h2><span class="num">12.</span>Sign-off</h2>
+<div class="sign">
+  <div class="sigbox"><h3>Prepared by – Credit Risk Analyst</h3>
+    <span class="chk">Analysis complete; recommendation as above</span>
+    <div class="sigline"></div><div class="sigcap">Name / signature</div>
+    <div class="sigline"></div><div class="sigcap">Date</div></div>
+  <div class="sigbox"><h3>Relationship Manager</h3>
+    <span class="chk">Concur with recommendation</span>
+    <span class="chk">Do not concur (comments below)</span>
+    <div class="sigline"></div><div class="sigcap">Name / signature</div>
+    <div class="sigline"></div><div class="sigcap">Date</div>
+    <div class="commentbox">RM comments</div></div>
+  <div class="sigbox"><h3>Independent Credit Approval</h3>
+    <span class="chk">Approved as recommended</span>
+    <span class="chk">Approved with amendments</span>
+    <span class="chk">Declined</span>
+    <div class="sigline"></div><div class="sigcap">Approver / authority level</div>
+    <div class="sigline"></div><div class="sigcap">Date</div>
+    <div class="commentbox">Approval conditions / comments</div></div>
+</div>
+<p class="small" style="margin-top:16px">Fictional case prepared for commercial credit-analysis teaching. Amounts in $000s unless stated. Assumptions not given in
+the case (prime 4.45%, tax rate 26.5%, 10-year depreciation of the new line) are listed in the credit analysis appendix.</p>
+</article>
+
+</div>
+</body>
+</html>

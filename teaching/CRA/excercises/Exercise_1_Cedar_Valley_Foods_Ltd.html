@@ -347,10 +347,25 @@
       .writing-area { min-height: 130px; }
       footer { display: none; }
     }
+    /* Exercise step navigation */
+.exnav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;padding:8px 10px;border:1px solid #d8e1e8;border-radius:12px;background:#fff;box-shadow:0 6px 18px rgba(26,49,70,.06);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.exnav .exhome{color:#607080;text-decoration:none;font-size:.8rem;font-weight:700;padding:4px 8px}
+.exnav .exhome:hover{color:#2f6fa3}
+.exnav .extitle{color:#17324d;font-weight:800;font-size:.86rem;margin-right:auto}
+.exnav ol{display:flex;gap:4px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+.exnav li{margin:0}
+.exnav a.step{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;color:#2f4255;text-decoration:none;font-size:.8rem;font-weight:700;border:1px solid #d8e1e8;background:#f7fafc}
+.exnav a.step:hover{border-color:#2f6fa3;color:#2f6fa3}
+.exnav a.step .n{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#d8e1e8;color:#17324d;font-size:.7rem}
+.exnav a.step.on{background:#17324d;border-color:#17324d;color:#fff}
+.exnav a.step.on .n{background:#19705d;color:#fff}
+@media print{.exnav{display:none}}
+@media (max-width:600px){.exnav .extitle{width:100%}}
   </style>
 </head>
 <body>
   <div class="page-shell">
+    <nav class="exnav" aria-label="Exercise 1 pages"><a class="exhome" href="../cra_index.html#practice-section">← Exercises</a><span class="extitle">Exercise 1 · Cedar Valley Foods Ltd.</span><ol><li><a class="step on" href="Exercise_1_Cedar_Valley_Foods_Ltd.html" aria-current="page"><span class="n">1</span>Case</a></li><li><a class="step" href="Exercise_1_Cedar_Valley_Foods_Ltd_Analysis.html"><span class="n">2</span>Credit analysis</a></li><li><a class="step" href="Exercise_1_Cedar_Valley_Foods_Ltd_Dashboard.html"><span class="n">3</span>Model dashboard</a></li><li><a class="step" href="Exercise_1_Cedar_Valley_Foods_Ltd_Credit_Memo.html"><span class="n">4</span>Credit memo</a></li></ol></nav>
     <header class="hero">
       <p class="eyebrow">Daily Commercial Credit Practice · Exercise 1</p>
       <h1>Cedar Valley Foods Ltd.</h1>
@@ -361,7 +376,7 @@
     </header>
 
     <aside class="instruction">
-      <strong>Your role:</strong> Act as the commercial credit analyst. Review the complete application, calculate the relevant ratios, identify risks and mitigants, and support one final credit decision. The solution is intentionally omitted.
+      <strong>Your role:</strong> Act as the commercial credit analyst. Review the complete application, calculate the relevant ratios, identify risks and mitigants, and support one final credit decision. Try the case yourself first, then compare your work with the model solution: the <a href="Exercise_1_Cedar_Valley_Foods_Ltd_Analysis.html">credit analysis</a>, the <a href="Exercise_1_Cedar_Valley_Foods_Ltd_Dashboard.html">model dashboard</a> and the <a href="Exercise_1_Cedar_Valley_Foods_Ltd_Credit_Memo.html">credit memo</a> (steps 2–4).
     </aside>
 
     <div class="layout">

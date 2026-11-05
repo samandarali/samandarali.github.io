@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Credit analysis for Exercise 1 – Cedar Valley Foods Ltd.: ratio, pro forma and sensitivity analysis.">
+  <title>Credit Analysis | Cedar Valley Foods Ltd.</title>
+  <style>
+    :root {
+      --navy: #17324d;
+      --blue: #2f6fa3;
+      --blue-soft: #eaf3fa;
+      --green: #19705d;
+      --green-soft: #e9f6f2;
+      --amber: #9a5d00;
+      --amber-soft: #fff5dc;
+      --red: #9b3434;
+      --red-soft: #fff0f0;
+      --ink: #263442;
+      --muted: #607080;
+      --line: #d8e1e8;
+      --page: #f4f7f9;
+      --white: #fff;
+      --shadow: 0 12px 30px rgba(26, 49, 70, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--page);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .page-shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 32px auto 64px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 48px;
+      color: var(--white);
+      border-radius: 22px;
+      background: linear-gradient(135deg, #17324d 0%, #205d78 65%, #19705d 100%);
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      bottom: -130px;
+      width: 330px;
+      height: 330px;
+      border: 55px solid rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: #bfe6dc;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.08;
+      letter-spacing: -.035em;
+    }
+
+    .hero p {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 20px 0 0;
+      color: #eaf4f7;
+      font-size: 1.08rem;
+    }
+
+    .decision-pills {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .decision-pills span {
+      padding: 7px 13px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .instruction {
+      margin: 24px 0;
+      padding: 19px 22px;
+      border-left: 5px solid var(--amber);
+      border-radius: 12px;
+      background: var(--amber-soft);
+      box-shadow: var(--shadow);
+    }
+
+    .instruction strong { color: #744700; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    main { min-width: 0; }
+
+    nav {
+      position: sticky;
+      top: 20px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    nav h2 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: .82rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      display: block;
+      padding: 6px 0;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      line-height: 1.35;
+    }
+
+    nav a:hover { color: var(--blue); }
+
+    .card {
+      margin-bottom: 22px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .section-number {
+      display: inline-grid;
+      width: 32px;
+      height: 32px;
+      margin-right: 9px;
+      place-items: center;
+      border-radius: 9px;
+      color: var(--white);
+      background: var(--blue);
+      font-size: .88rem;
+      vertical-align: 3px;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      color: var(--navy);
+      font-size: 1.45rem;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 24px 0 8px;
+      color: var(--green);
+      font-size: 1.06rem;
+    }
+
+    p { margin: 10px 0; }
+    ul, ol { margin: 10px 0; padding-left: 24px; }
+    li + li { margin-top: 5px; }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0;
+    }
+
+    .fact {
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: var(--blue-soft);
+    }
+
+    .fact dt {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .fact dd {
+      margin: 2px 0 0;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0 4px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      font-variant-numeric: tabular-nums;
+    }
+
+    caption {
+      padding: 12px 15px;
+      color: var(--muted);
+      background: #f7fafc;
+      text-align: left;
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    th, td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child, td:first-child { text-align: left; }
+    thead th { color: var(--white); background: var(--navy); }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:nth-child(even) { background: #f9fbfc; }
+    .total td { color: var(--navy); background: var(--blue-soft); font-weight: 800; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .note-box {
+      padding: 17px 18px;
+      border-radius: 12px;
+      background: var(--green-soft);
+    }
+
+    .note-box.warning { background: var(--red-soft); }
+    .note-box h3 { margin-top: 0; }
+    .note-box.warning h3 { color: var(--red); }
+
+    .formula {
+      margin: 18px 0;
+      padding: 18px;
+      border: 1px dashed var(--blue);
+      border-radius: 12px;
+      color: var(--navy);
+      background: var(--blue-soft);
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+
+    .assignment {
+      border-top: 6px solid var(--green);
+    }
+
+    .assignment ol {
+      columns: 2;
+      column-gap: 40px;
+    }
+
+    .assignment li { break-inside: avoid; }
+
+    .writing-area {
+      min-height: 170px;
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px dashed #b8c5cf;
+      border-radius: 12px;
+      color: var(--muted);
+      background: #fbfcfd;
+    }
+
+    footer {
+      margin-top: 26px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .84rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: static; order: -1; }
+      nav div { columns: 2; }
+      .hero { padding: 34px 28px; }
+    }
+
+    @media (max-width: 600px) {
+      .page-shell { width: min(100% - 20px, 1120px); margin-top: 10px; }
+      .hero, .card { border-radius: 13px; }
+      .card { padding: 22px 17px; }
+      .facts, .two-col { grid-template-columns: 1fr; }
+      .assignment ol { columns: 1; }
+      nav div { columns: 1; }
+      th, td { padding: 10px 11px; font-size: .88rem; }
+    }
+
+    @media print {
+      @page { size: letter; margin: .55in; }
+      body { background: white; font-size: 10.5pt; }
+      .page-shell { width: 100%; margin: 0; }
+      .hero { padding: 28px; border-radius: 0; box-shadow: none; }
+      .hero h1 { font-size: 26pt; }
+      .layout { display: block; }
+      nav { display: none; }
+      .card, .instruction { break-inside: avoid; box-shadow: none; }
+      .table-wrap { overflow: visible; }
+      .writing-area { min-height: 130px; }
+      footer { display: none; }
+    }
+    /* Compact layout: keep the full case intact while showing more content at once. */
+    body { font-size: 14px; line-height: 1.48; }
+    .page-shell { width: min(1480px, calc(100% - 28px)); margin: 16px auto 28px; }
+    .hero { padding: 26px 30px; border-radius: 16px; }
+    .hero::after { right: -110px; bottom: -170px; width: 270px; height: 270px; border-width: 42px; }
+    .eyebrow { margin-bottom: 5px; font-size: .7rem; }
+    h1 { font-size: clamp(1.7rem, 3.6vw, 2.7rem); }
+    .hero p { margin-top: 10px; font-size: 1rem; }
+    .decision-pills { gap: 7px; margin-top: 14px; }
+    .decision-pills span { padding: 5px 10px; font-size: .8rem; }
+    .instruction { margin: 12px 0; padding: 11px 15px; border-radius: 9px; }
+    .layout { grid-template-columns: minmax(0, 1fr) 205px; gap: 14px; }
+    nav { top: 12px; padding: 14px; border-radius: 12px; }
+    nav h2 { margin-bottom: 6px; font-size: .75rem; }
+    nav a { padding: 4px 0; font-size: .82rem; }
+    .card { margin-bottom: 12px; padding: 18px; border-radius: 12px; }
+    .section-number { width: 26px; height: 26px; margin-right: 6px; border-radius: 7px; font-size: .78rem; }
+    h2 { margin-bottom: 10px; font-size: 1.2rem; }
+    h3 { margin: 14px 0 5px; font-size: .96rem; }
+    p { margin: 6px 0; }
+    ul, ol { margin: 6px 0; padding-left: 20px; }
+    li + li { margin-top: 2px; }
+    .facts { gap: 8px; }
+    .fact { padding: 8px 10px; border-radius: 8px; }
+    .fact dt { font-size: .68rem; }
+    .fact dd { margin-top: 1px; }
+    .table-wrap { margin: 9px 0 3px; border-radius: 8px; }
+    caption { padding: 7px 9px; font-size: .75rem; }
+    th, td { padding: 5px 8px; font-size: .82rem; }
+    th:first-child, td:first-child { white-space: normal; }
+    .two-col { gap: 10px; }
+    .note-box { padding: 10px 12px; border-radius: 9px; }
+    .formula { margin: 10px 0; padding: 10px; font-size: 1rem; }
+    .assignment { border-top-width: 4px; }
+    .assignment ol { column-gap: 24px; }
+    .writing-area { min-height: 105px; margin-top: 12px; padding: 12px; }
+    footer { margin-top: 14px; font-size: .76rem; }
+
+    @media (min-width: 1100px) {
+      .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 960px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: static; order: -1; }
+      nav div { columns: 3; }
+    }
+    @media (max-width: 600px) {
+      .page-shell { width: calc(100% - 16px); margin: 8px auto 18px; }
+      .hero { padding: 20px 18px; }
+      .card { padding: 14px 12px; }
+      .facts, .two-col { grid-template-columns: 1fr; }
+      .assignment ol { columns: 1; }
+      nav div { columns: 2; }
+      th, td { padding: 5px 6px; font-size: .76rem; }
+    }
+    @media print {
+      @page { size: letter; margin: .3in; }
+      body { font-size: 8.5pt; line-height: 1.28; }
+      .page-shell { width: 100%; margin: 0; }
+      .hero { padding: 14px 18px; border-radius: 0; box-shadow: none; }
+      .hero h1 { font-size: 19pt; }
+      .hero p { margin-top: 5px; font-size: 9pt; }
+      .decision-pills { margin-top: 7px; }
+      .instruction { margin: 7px 0; padding: 8px 10px; box-shadow: none; }
+      .layout { display: block; }
+      nav { display: none; }
+      .card { margin-bottom: 7px; padding: 10px; border-radius: 0; box-shadow: none; }
+      h2 { margin-bottom: 6px; font-size: 11pt; }
+      h3 { margin: 8px 0 3px; font-size: 9pt; }
+      p { margin: 4px 0; }
+      ul, ol { margin: 4px 0; }
+      li + li { margin-top: 1px; }
+      .fact, .note-box { padding: 6px 8px; }
+      .table-wrap { margin: 5px 0 2px; }
+      caption { padding: 4px 6px; }
+      th, td { padding: 3px 5px; font-size: 7.5pt; }
+      .writing-area { min-height: 70px; margin-top: 7px; padding: 8px; }
+      .card, .instruction { break-inside: avoid; }
+      footer { display: none; }
+    }
+  
+    .exec { border-top: 4px solid var(--green); }
+    .verdict { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin: 4px 0 10px; }
+    .verdict .badge { padding: 6px 14px; border-radius: 999px; background: var(--amber-soft); color: #744700;
+      border: 1px solid #e7c77a; font-weight: 800; letter-spacing:.02em; }
+    .kpis { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; margin: 10px 0; }
+    .kpi { padding: 9px 11px; border-radius: 9px; background: var(--blue-soft); }
+    .kpi .k { color: var(--muted); font-size: .68rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .kpi .v { color: var(--navy); font-size: 1.25rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .kpi .s { color: var(--muted); font-size: .76rem; }
+    td.good { color: var(--green); background: var(--green-soft) !important; font-weight: 700; }
+    td.warn { color: var(--amber); background: var(--amber-soft) !important; font-weight: 700; }
+    td.bad  { color: var(--red); background: var(--red-soft) !important; font-weight: 700; }
+    td.muted { color: var(--muted); }
+    .grid td, .grid th { text-align: center; }
+    .grid td:first-child, .grid th:first-child { text-align: left; }
+    .legend { display:flex; flex-wrap:wrap; gap:12px; font-size:.78rem; color: var(--muted); margin: 4px 0 8px; }
+    .legend span::before { content:""; display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
+    .legend .lg::before { background: var(--green-soft); border:1px solid var(--green); }
+    .legend .lw::before { background: var(--amber-soft); border:1px solid var(--amber); }
+    .legend .lb::before { background: var(--red-soft); border:1px solid var(--red); }
+    .small { font-size: .8rem; color: var(--muted); }
+    .assume li { font-size: .84rem; }
+    .risk-table td { white-space: normal; text-align: left; vertical-align: top; }
+    .risk-table td:nth-child(2) { white-space: nowrap; }
+    .cond-list li { margin-top: 4px; }
+    @media (max-width: 760px) { .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media print { .kpis { grid-template-columns: repeat(4, 1fr); } }
+
+.exnav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;padding:8px 10px;border:1px solid #d8e1e8;border-radius:12px;background:#fff;box-shadow:0 6px 18px rgba(26,49,70,.06);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.exnav .exhome{color:#607080;text-decoration:none;font-size:.8rem;font-weight:700;padding:4px 8px}
+.exnav .exhome:hover{color:#2f6fa3}
+.exnav .extitle{color:#17324d;font-weight:800;font-size:.86rem;margin-right:auto}
+.exnav ol{display:flex;gap:4px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+.exnav li{margin:0}
+.exnav a.step{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;color:#2f4255;text-decoration:none;font-size:.8rem;font-weight:700;border:1px solid #d8e1e8;background:#f7fafc}
+.exnav a.step:hover{border-color:#2f6fa3;color:#2f6fa3}
+.exnav a.step .n{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#d8e1e8;color:#17324d;font-size:.7rem}
+.exnav a.step.on{background:#17324d;border-color:#17324d;color:#fff}
+.exnav a.step.on .n{background:#19705d;color:#fff}
+@media print{.exnav{display:none}}
+@media (max-width:600px){.exnav .extitle{width:100%}}
+</style>
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="exnav" aria-label="Exercise 1 pages"><a class="exhome" href="../cra_index.html#practice-section">← Exercises</a><span class="extitle">Exercise 1 · Cedar Valley Foods Ltd.</span><ol><li><a class="step" href="Exercise_1_Cedar_Valley_Foods_Ltd.html"><span class="n">1</span>Case</a></li><li><a class="step on" href="Exercise_1_Cedar_Valley_Foods_Ltd_Analysis.html" aria-current="page"><span class="n">2</span>Credit analysis</a></li><li><a class="step" href="Exercise_1_Cedar_Valley_Foods_Ltd_Dashboard.html"><span class="n">3</span>Model dashboard</a></li><li><a class="step" href="Exercise_1_Cedar_Valley_Foods_Ltd_Credit_Memo.html"><span class="n">4</span>Credit memo</a></li></ol></nav>
+    <header class="hero">
+      <p class="eyebrow">Daily Commercial Credit Practice · Exercise 1 · Model Solution · Step 2 of 4</p>
+      <h1>Credit Analysis – Cedar Valley Foods Ltd.</h1>
+      <p>$1.2M equipment term loan and operating-line increase to $1.1M. Full ratio analysis, pro forma capital structure, projections, sensitivity testing and a structured recommendation.</p>
+      <div class="decision-pills" aria-label="Recommendation"><span>Recommendation: Approve with Conditions</span><span>Risk rating 6 – Satisfactory/Watch</span><span>Amounts in $000s</span></div>
+    </header>
+    <aside class="instruction"><strong>How to use this analysis:</strong> This is the worked analysis behind the <a href="Exercise_1_Cedar_Valley_Foods_Ltd_Credit_Memo.html">credit memo</a> for <a href="Exercise_1_Cedar_Valley_Foods_Ltd.html">Exercise 1</a>. The live calculations are in the <a href="Exercise_1_Cedar_Valley_Foods_Ltd_Dashboard.html">model dashboard</a>.
+    Every figure is calculated from the case data; colour coding marks coverage that meets policy (green), is thin (amber) or falls short (red). Assumptions the case does not give (prime rate, tax rate, depreciation of the new line) are listed in the Appendix.</aside>
+    <div class="layout">
+      <main>
+<section class="card exec" id="summary"><h2><span class="section-number">★</span>Executive Summary</h2>
+<div class="verdict"><span class="badge">Recommendation: APPROVE WITH CONDITIONS</span>
+<span class="small">Term loan $1,200,000 (restructured to 7-year amortization) · Operating line $1,100,000 (margined) · Risk rating: 6 / Satisfactory–Watch on a 1–10 scale</span></div>
+<div class="kpis">
+  <div class="kpi"><div class="k">2026 EBITDA margin</div><div class="v">7.4%</div><div class="s">down from 9.6% in 2024</div></div>
+  <div class="kpi"><div class="k">Pro forma debt / EBITDA</div><div class="v">4.88x</div><div class="s">3.25x on 2027 mgmt EBITDA</div></div>
+  <div class="kpi"><div class="k">DSCR – mgmt / downside</div><div class="v">1.82x / 1.28x</div><div class="s">EBITDA ÷ term debt service $595k</div></div>
+  <div class="kpi"><div class="k">Lender DSCR – downside</div><div class="v">0.88x</div><div class="s">after tax, maint. CapEx, line interest</div></div>
+  <div class="kpi"><div class="k">Free cash flow 2026</div><div class="v">$(190)k</div><div class="s">CFO − unfinanced CapEx − distributions</div></div>
+  <div class="kpi"><div class="k">Borrowing base</div><div class="v">$1,600k</div><div class="s">supports $1,100k limit (1.45x)</div></div>
+  <div class="kpi"><div class="k">Equipment OLV coverage</div><div class="v">69%</div><div class="s">$825k OLV vs $1,200k loan</div></div>
+  <div class="kpi"><div class="k">Cash after closing</div><div class="v">$90k</div><div class="s">quick ratio 0.69x</div></div>
+</div>
+<p>Cedar Valley Foods is an established, 14-year borrower with an unblemished payment record and steadily growing demand. The weakness is not
+sales but <strong>conversion of sales into cash</strong>: EBITDA fell from $810k to $720k while revenue grew
+16.1%, the cash conversion cycle stretched from 55 days to 62 days, and 2026 operating cash flow
+($120k) did not cover unfinanced CapEx and distributions, producing negative free cash flow of $190k.</p>
+<p>On the case's headline measure (EBITDA ÷ term debt service of $595k) coverage is adequate in every scenario — 1.21x on
+2026 actual EBITDA, 1.82x on management's 2027 projection and 1.28x in the lender downside. After cash taxes,
+maintenance CapEx and operating-line interest, however, coverage is only 1.24x in the management case and 0.88x
+in the downside — and that is <em>with distributions stopped</em>. Repayment therefore depends on the new line delivering its labour savings,
+on the Customer A contract, and on distributions being suspended. Collateral leaves a $375k shortfall on the term loan, only
+partly covered by the $300k limited guarantees.</p>
+<p>The request is supportable because the operating line is well covered by the borrowing base, the equipment is productive (not speculative),
+management is experienced, and the downside still shows EBITDA above term debt service. It is <strong>not supportable as requested</strong>:
+approval is conditional on a 7-year amortization, suspension of distributions, postponement of shareholder loans, staged draws against the
+installation, and tight reporting and covenants (Section 14).</p>
+</section><section class="card" id="scorecard"><h2><span class="section-number">R</span>Financial Ratio Scorecard</h2>
+<p>All core ratio groups in one place — <strong>liquidity, efficiency, leverage, coverage and profitability</strong> — for 2024–2026 and pro forma
+after the transaction. The detailed discussion follows in Sections 3–7.</p>
+<div class="table-wrap"><table class=""><caption>Scorecard summary</caption><thead><tr><th>Category</th><th>Rating</th><th>Direction</th><th>Key ratio</th></tr></thead><tbody><tr><td>Liquidity</td><td class="warn">Weak–Acceptable</td><td class="bad">Weakening</td><td>Quick ratio 0.69x pro forma</td></tr><tr><td>Efficiency</td><td class="bad">Weak</td><td class="bad">Weakening</td><td>CCC 55 → 62 days</td></tr><tr><td>Leverage</td><td class="bad">Weak</td><td class="bad">Weakening</td><td>FD/EBITDA 4.88x pro forma</td></tr><tr><td>Coverage</td><td class="bad">Weak</td><td class="bad">Weakening</td><td>Lender DSCR 0.87x (2026)</td></tr><tr><td>Profitability</td><td class="warn">Acceptable</td><td class="bad">Weakening</td><td>EBITDA margin 7.4%</td></tr></tbody></table></div>
+<h3>1. Liquidity – can the company meet short-term obligations?</h3><div class="table-wrap"><table class=""><caption>1. Liquidity ratios</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Pro forma</th><th>Typical lender guideline</th><th>Assessment*</th></tr></thead><tbody><tr><td>Current ratio</td><td>1.71x</td><td>1.54x</td><td>1.56x</td><td>1.32x</td><td class="muted">≥ 1.20x</td><td class="warn">Acceptable</td></tr><tr><td>Quick ratio</td><td>0.99x</td><td>0.86x</td><td>0.89x</td><td>0.69x</td><td class="muted">≥ 1.00x</td><td class="bad">Weak</td></tr><tr><td>Cash ratio</td><td>0.22x</td><td>0.15x</td><td>0.18x</td><td>0.04x</td><td class="muted">≥ 0.20x</td><td class="bad">Weak</td></tr><tr><td>Working capital ($000s)</td><td>1,000</td><td>950</td><td>1,210</td><td>742</td><td class="muted">Positive and growing with sales</td><td class="warn">Acceptable</td></tr></tbody></table></div><p class="small"><strong>Reading:</strong> Liquidity looks adequate on the current ratio but weak on cash: the quick ratio has been under 1.0x since 2025 and falls to 0.69x after closing, with cash of only $90k. The company depends on the operating line for day-to-day liquidity.</p><h3>2. Efficiency (activity) – how well are assets and working capital managed?</h3><div class="table-wrap"><table class=""><caption>2. Efficiency (activity) ratios</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Pro forma</th><th>Typical lender guideline</th><th>Assessment*</th></tr></thead><tbody><tr><td>Total asset turnover</td><td>1.75x</td><td>1.72x</td><td>1.60x</td><td>1.34x</td><td class="muted">Stable or rising</td><td class="bad">Weak</td></tr><tr><td>Fixed-asset turnover</td><td>3.65x</td><td>3.67x</td><td>3.74x</td><td>2.37x</td><td class="muted">Stable or rising</td><td class="bad">Weak</td></tr><tr><td>Receivables turnover</td><td>7.78x</td><td>7.22x</td><td>6.41x</td><td>—</td><td class="muted">≥ 8.0x (≈ 45 days)</td><td class="bad">Weak</td></tr><tr><td>Days sales outstanding</td><td>46.9</td><td>50.5</td><td>56.9</td><td>—</td><td class="muted">≤ 45 days</td><td class="bad">Weak</td></tr><tr><td>Inventory turnover</td><td>6.58x</td><td>6.07x</td><td>5.38x</td><td>—</td><td class="muted">Stable or rising</td><td class="bad">Weak</td></tr><tr><td>Days inventory outstanding</td><td>55.5</td><td>60.1</td><td>67.8</td><td>—</td><td class="muted">≤ 60 days (perishable)</td><td class="bad">Weak</td></tr><tr><td>Payables turnover</td><td>7.66x</td><td>6.90x</td><td>5.86x</td><td>—</td><td class="muted">Close to supplier terms</td><td class="bad">Weak</td></tr><tr><td>Days payables outstanding</td><td>47.7</td><td>52.9</td><td>62.3</td><td>—</td><td class="muted">≈ 30–50 days (terms)</td><td class="bad">Weak</td></tr><tr><td>Cash conversion cycle (days)</td><td>54.8</td><td>57.7</td><td>62.5</td><td>—</td><td class="muted">Stable or shortening</td><td class="bad">Weak</td></tr><tr><td>Working-capital turnover</td><td>8.40x</td><td>9.58x</td><td>8.06x</td><td>13.14x</td><td class="muted">Stable</td><td class="bad">Weakening</td></tr></tbody></table></div><p class="small"><strong>Reading:</strong> Efficiency is deteriorating. Receivables turnover fell from 7.78x to 6.41x and inventory turnover from 6.58x to 5.38x, so cash is collected more slowly and stock is held longer. The company offset this by paying suppliers more slowly (payables turnover 7.66x → 5.86x), which cannot continue indefinitely. Asset turnover falls to 1.34x after closing until the new line produces extra sales.</p><h3>3. Leverage – how much debt relative to earnings and equity?</h3><div class="table-wrap"><table class=""><caption>3. Leverage ratios</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Pro forma</th><th>Typical lender guideline</th><th>Assessment*</th></tr></thead><tbody><tr><td>Funded debt / EBITDA</td><td>2.05x</td><td>2.44x</td><td>3.21x</td><td>4.88x</td><td class="muted">≤ 3.00–3.50x</td><td class="bad">Weak</td></tr><tr><td>Total liabilities / tangible net worth</td><td>1.24x</td><td>1.47x</td><td>1.62x</td><td>2.14x</td><td class="muted">≤ 2.50x</td><td class="warn">Acceptable</td></tr><tr><td>Total liabilities / equity</td><td>1.18x</td><td>1.40x</td><td>1.53x</td><td>2.03x</td><td class="muted">≤ 2.00x</td><td class="bad">Weak</td></tr><tr><td>Funded debt / equity</td><td>0.75x</td><td>0.90x</td><td>0.96x</td><td>1.46x</td><td class="muted">≤ 1.50x</td><td class="warn">Acceptable</td></tr><tr><td>Equity / total assets</td><td>45.8%</td><td>41.7%</td><td>39.5%</td><td>33.0%</td><td class="muted">≥ 30%</td><td class="warn">Acceptable</td></tr></tbody></table></div><p class="small"><strong>Reading:</strong> Leverage is rising and becomes high after the transaction: 4.88x funded debt/EBITDA on 2026 earnings (3.25x if management's 2027 EBITDA is achieved). Balance-sheet leverage (TL/TNW 2.14x) is still within a normal range.</p><h3>4. Coverage – can earnings and cash flow service the debt?</h3><div class="table-wrap"><table class=""><caption>4. Coverage ratios</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Pro forma</th><th>Typical lender guideline</th><th>Assessment*</th></tr></thead><tbody><tr><td>EBITDA interest coverage</td><td>7.71x</td><td>6.38x</td><td>4.56x</td><td>2.82x</td><td class="muted">≥ 3.00x</td><td class="bad">Weak</td></tr><tr><td>EBIT interest coverage</td><td>5.90x</td><td>4.76x</td><td>3.16x</td><td>1.37x</td><td class="muted">≥ 2.00x</td><td class="bad">Weak</td></tr><tr><td>DSCR – EBITDA ÷ debt service</td><td>—</td><td>2.64x</td><td>1.96x</td><td>1.21x</td><td class="muted">≥ 1.25x</td><td class="bad">Weak</td></tr><tr><td>DSCR – lender basis (fixed-charge)</td><td>—</td><td>1.32x</td><td>0.87x</td><td>0.84x</td><td class="muted">≥ 1.20–1.25x</td><td class="bad">Weak</td></tr><tr><td>Free cash flow after distributions ($000s)</td><td>230</td><td>90</td><td>(190)</td><td>—</td><td class="muted">Positive</td><td class="bad">Weak</td></tr></tbody></table></div><p class="small"><strong>Reading:</strong> Interest coverage is still acceptable, but coverage of total debt service is the weakest area. On a lender basis (after tax, CapEx and distributions) 2026 coverage was 0.87x, and on 2026 earnings the new structure gives 0.84x. Coverage reaches 1.24x only if management's 2027 plan is achieved and distributions stop (see Sections 6–9).</p><h3>5. Profitability – is the business earning an adequate return?</h3><div class="table-wrap"><table class=""><caption>5. Profitability ratios</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Pro forma</th><th>Typical lender guideline</th><th>Assessment*</th></tr></thead><tbody><tr><td>Revenue growth</td><td>—</td><td>8.3%</td><td>7.1%</td><td>—</td><td class="muted">Positive</td><td class="warn">Slowing</td></tr><tr><td>Gross margin</td><td>28.0%</td><td>27.3%</td><td>26.1%</td><td>—</td><td class="muted">Stable or rising</td><td class="bad">Weak</td></tr><tr><td>EBITDA margin</td><td>9.6%</td><td>8.9%</td><td>7.4%</td><td>—</td><td class="muted">≥ 8–10% (food manufacturing)</td><td class="bad">Weak</td></tr><tr><td>Net profit margin</td><td>4.5%</td><td>3.9%</td><td>2.6%</td><td>—</td><td class="muted">≥ 3%</td><td class="bad">Weak</td></tr><tr><td>Return on assets</td><td>7.9%</td><td>6.6%</td><td>4.1%</td><td>—</td><td class="muted">≥ 5%</td><td class="bad">Weak</td></tr><tr><td>Return on equity</td><td>17.3%</td><td>15.9%</td><td>10.5%</td><td>—</td><td class="muted">≥ 12%</td><td class="bad">Weak</td></tr></tbody></table></div><p class="small"><strong>Reading:</strong> Profitability is weakening even though sales are growing: gross margin is down 1.9 pts, EBITDA margin 2.3 pts and ROE from 17.3% to 10.5%. This is the main reason repayment capacity has fallen.</p>
+<p class="small">*Assessment applies to the pro forma figure where shown, otherwise to 2026. Guidelines are typical commercial-lending reference
+points for teaching purposes, not a specific bank's policy or published industry data. Days ratios use year-end balances and a 365-day year;
+turnover ratios use revenue (A/R, assets) or COGS (inventory, A/P).</p>
+</section><section class="card" id="overview"><h2><span class="section-number">1</span>Borrower and Business Overview</h2>
+<dl class="facts">
+<div class="fact"><dt>Borrower</dt><dd>Cedar Valley Foods Ltd.</dd></div>
+<div class="fact"><dt>Business</dt><dd>Frozen prepared-food manufacturer, Mississauga ON</dd></div>
+<div class="fact"><dt>History / staff</dt><dd>14 years · 58 employees</dd></div>
+<div class="fact"><dt>Ownership</dt><dd>Priya Sharma 70% · Arjun Sharma 30%</dd></div>
+<div class="fact"><dt>Customers</dt><dd>Grocery chains, independents, institutional</dd></div>
+<div class="fact"><dt>Top-3 concentration</dt><dd>52% of revenue (A 24%, B 17%, C 11%)</dd></div>
+</dl>
+<p>The company sells frozen meals to grocery chains, independent supermarkets and institutional buyers. Demand has grown every year
+(revenue CAGR 7.7% over 2024–2026) and the company has never missed a scheduled loan payment. Priya Sharma has run the
+business for its whole 14-year history, supported by an experienced operations manager.</p>
+<p><strong>Business risk assessment:</strong> Frozen food is a non-discretionary, relatively recession-resistant category, but it is a low-margin
+business exposed to (i) raw-material and protein price swings, (ii) the buying power of large grocery chains, (iii) food-safety and recall
+risk, and (iv) capacity limits. Three customers account for 52% of revenue, and the largest (24%) can end its new contract for performance
+failures. That is high concentration for a borrower of this size. Key-person dependence on Priya Sharma, with no formal succession plan, is
+a further qualitative weakness.</p>
+</section><section class="card" id="request"><h2><span class="section-number">2</span>Financing Request and Purpose</h2>
+<div class="two-col">
+<div class="note-box"><h3>Facility 1 – Term loan</h3><ul>
+<li>$1,200,000, 6-year amortization, 7.0% fixed</li>
+<li>Annual blended payment: <strong>$251,755</strong> (PMT check: 1,200 × 7% ÷ (1 − 1.07<sup>−6</sup>))</li>
+<li>Year-1 split: interest $84.0k / principal $167.8k</li>
+<li>First-ranking charge on the new equipment</li>
+<li>Loan-to-cost: 80%; borrower equity 20%</li></ul></div>
+<div class="note-box"><h3>Facility 2 – Operating line</h3><ul>
+<li>Increase from $700,000 to <strong>$1,100,000</strong> (+$400,000)</li>
+<li>Prime + 1.75% (prime assumed 4.45% → 6.20% all-in)</li>
+<li>Margined: 75% of eligible A/R &lt; 90 days, 50% of eligible inventory</li>
+<li>General security agreement (GSA)</li>
+<li>Purpose: fund working capital for ~18% revenue growth in 2027</li></ul></div>
+</div>
+<div class="table-wrap"><table class=""><caption>Sources and uses of funds ($000s)</caption><thead><tr><th>Uses</th><th>Amount</th><th>Sources</th><th>Amount</th></tr></thead><tbody><tr><td>Automated packaging line (purchase & install)</td><td>1,500</td><td>New term loan</td><td>1,200</td></tr><tr><td></td><td></td><td>Company cash (equity contribution)</td><td>300</td></tr><tr class="total"><td>Total uses</td><td>1,500</td><td>Total sources</td><td>1,500</td></tr></tbody></table></div>
+<p><strong>Purpose assessment:</strong> The term loan funds a productivity asset with a clear payback: the $240k annual labour saving alone
+repays the $1,500k cost in about 6.2 years, before waste reduction and extra capacity. That is a sound use of term debt.
+The line increase is logical because a 20% capacity increase and the new Customer A contract will need more receivables and inventory —
+at the 2026 net working-capital intensity of 16.7% of sales, the management plan needs about $293k of extra working capital
+in 2027. The concern is that the $300k cash contribution brings cash down to $90k at closing, so the company will rely on the line from day one.</p>
+</section><section class="card" id="performance"><h2><span class="section-number">3</span>Historical Financial Performance</h2>
+<div class="table-wrap"><table class=""><caption>Profitability and growth ratios</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Trend</th><th>Formula</th></tr></thead><tbody><tr><td>Revenue growth</td><td>—</td><td>8.3%</td><td>7.1%</td><td class="warn">Slowing</td><td class="muted">Revₜ ÷ Revₜ₋₁ − 1</td></tr><tr><td>EBITDA growth</td><td>—</td><td>0.0%</td><td>-11.1%</td><td class="bad">Weakening</td><td class="muted">EBITDAₜ ÷ EBITDAₜ₋₁ − 1</td></tr><tr><td>Gross margin</td><td>28.0%</td><td>27.3%</td><td>26.1%</td><td class="bad">Weakening</td><td class="muted">Gross profit ÷ Revenue</td></tr><tr><td>Operating expenses / revenue</td><td>18.3%</td><td>18.4%</td><td>18.7%</td><td class="bad">Weakening</td><td class="muted">Opex (excl. dep.) ÷ Revenue</td></tr><tr><td>EBITDA margin</td><td>9.6%</td><td>8.9%</td><td>7.4%</td><td class="bad">Weakening</td><td class="muted">EBITDA ÷ Revenue</td></tr><tr><td>Net profit margin</td><td>4.5%</td><td>3.9%</td><td>2.6%</td><td class="bad">Weakening</td><td class="muted">Net income ÷ Revenue</td></tr><tr><td>Return on assets</td><td>7.9%</td><td>6.6%</td><td>4.1%</td><td class="bad">Weakening</td><td class="muted">Net income ÷ Total assets</td></tr><tr><td>Return on equity</td><td>17.3%</td><td>15.9%</td><td>10.5%</td><td class="bad">Weakening</td><td class="muted">Net income ÷ Shareholders' equity</td></tr><tr><td>Effective tax rate</td><td>26.2%</td><td>26.4%</td><td>26.3%</td><td class="">Stable</td><td class="muted">Tax ÷ Income before tax</td></tr></tbody></table></div>
+<p><strong>Analysis:</strong> Revenue grew 8.3% and 7.1%, but profitability fell. Gross margin dropped
+1.9 percentage points — at 2026 sales, that alone cost about <strong>$188k</strong> of gross profit, which explains
+most of the EBITDA decline. At the same time operating expenses rose from 18.3% to 18.7% of sales (+$280k), so the business
+has negative operating leverage: each extra dollar of sales has brought in less profit. Likely causes are raw-material inflation that could not be
+passed on to large grocery buyers, labour-heavy packaging (which the new line is meant to fix), and spoilage/waste. Interest expense rose
+50% over the period because debt grew while EBITDA did not, so net income fell 34% to $252k and ROE dropped
+from 17.3% to 10.5%.</p>
+<p>Earnings quality is reasonable — earnings are operating, with no unusual gains — but the trend runs against what the projections assume: management
+projects EBITDA up 50% in 2027 after two years of flat-to-declining results.</p>
+</section><section class="card" id="liquidity"><h2><span class="section-number">4</span>Liquidity and Working Capital</h2>
+<div class="table-wrap"><table class=""><caption>Liquidity and working-capital efficiency</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Pro forma*</th><th>Trend</th><th>Formula</th></tr></thead><tbody><tr><td>Current ratio</td><td>1.71x</td><td>1.54x</td><td>1.56x</td><td>1.32x</td><td class="bad">Weakening</td><td class="muted">Current assets ÷ Current liabilities</td></tr><tr><td>Quick ratio</td><td>0.99x</td><td>0.86x</td><td>0.89x</td><td>0.69x</td><td class="bad">Weakening</td><td class="muted">(Cash + A/R) ÷ Current liabilities</td></tr><tr><td>Cash ratio</td><td>0.22x</td><td>0.15x</td><td>0.18x</td><td>0.04x</td><td class="bad">Weakening</td><td class="muted">Cash ÷ Current liabilities</td></tr><tr><td>Working capital ($000s)</td><td>1,000</td><td>950</td><td>1,210</td><td>742</td><td class="good">Improving</td><td class="muted">Current assets − Current liabilities</td></tr><tr><td>Days sales outstanding (DSO)</td><td>46.9</td><td>50.5</td><td>56.9</td><td>—</td><td class="bad">Weakening</td><td class="muted">A/R ÷ Revenue × 365</td></tr><tr><td>Days inventory outstanding (DIO)</td><td>55.5</td><td>60.1</td><td>67.8</td><td>—</td><td class="bad">Weakening</td><td class="muted">Inventory ÷ COGS × 365</td></tr><tr><td>Days payables outstanding (DPO)</td><td>47.7</td><td>52.9</td><td>62.3</td><td>—</td><td class="good">Improving</td><td class="muted">A/P ÷ COGS × 365</td></tr><tr><td>Cash conversion cycle (days)</td><td>54.8</td><td>57.7</td><td>62.5</td><td>—</td><td class="bad">Weakening</td><td class="muted">DSO + DIO − DPO</td></tr><tr><td>Operating line usage / A/R</td><td>39.8%</td><td>46.8%</td><td>44.7%</td><td>44.7%</td><td class="bad">Weakening</td><td class="muted">Line balance ÷ A/R</td></tr></tbody></table></div>
+<p class="small">*Pro forma = 31 Dec 2026 balance sheet adjusted for the transaction: −$300k cash, +$1,500k equipment, +$1,200k term loan
+($167.8k shown as current portion). Line utilization held at $680k.</p>
+<p><strong>Analysis:</strong> The current ratio looks acceptable (~1.5x), but it is made up of receivables and inventory, not cash. The quick
+ratio has been below 1.0x since 2025 and falls to <strong>0.69x</strong> after closing, when cash drops to $90k
+— about 4 days of cash operating costs.</p>
+<p>Working-capital management is the main operating weakness. Between 2024 and 2026, A/R grew 41% and inventory 46%,
+against revenue growth of 16%. Had they grown in line with sales and COGS, the company would carry about $266k less receivables
+and $244k less inventory — roughly <strong>$510k of cash tied up</strong>. DSO lengthened by 10 days and DIO by
+12 days. The cycle was funded by stretching suppliers (DPO up 15 days to 62) and by the line.
+Stretching payables cannot go on indefinitely and may already be straining supplier relationships. The aging and inventory review confirm
+that some of this build-up is low quality: $120k of A/R is over 90 days ($85k disputed over product quality), and $110k of
+finished goods is slow-moving.</p>
+</section><section class="card" id="leverage"><h2><span class="section-number">5</span>Leverage and Capitalization</h2>
+<div class="table-wrap"><table class=""><caption>Leverage and capitalization</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Pro forma</th><th>Trend</th><th>Formula</th></tr></thead><tbody><tr><td>Funded debt ($000s)</td><td>1,660</td><td>1,980</td><td>2,310</td><td>3,510</td><td class="bad">Weakening</td><td class="muted">Line + CPLTD + LTD (excl. shareholder loans)</td></tr><tr><td>Funded debt / EBITDA</td><td>2.05x</td><td>2.44x</td><td>3.21x</td><td>4.88x</td><td class="bad">Weakening</td><td class="muted">Funded debt ÷ EBITDA</td></tr><tr><td>Funded debt incl. SH loans / EBITDA</td><td>2.23x</td><td>2.63x</td><td>3.42x</td><td>5.08x</td><td class="bad">Weakening</td><td class="muted">(Funded debt + SH loans) ÷ EBITDA</td></tr><tr><td>Total liabilities / equity</td><td>1.18x</td><td>1.40x</td><td>1.53x</td><td>2.03x</td><td class="bad">Weakening</td><td class="muted">Total liabilities ÷ Equity</td></tr><tr><td>Funded debt / equity</td><td>0.75x</td><td>0.90x</td><td>0.96x</td><td>1.46x</td><td class="bad">Weakening</td><td class="muted">Funded debt ÷ Equity</td></tr><tr><td>Total liabilities / tangible net worth</td><td>1.24x</td><td>1.47x</td><td>1.62x</td><td>2.14x</td><td class="bad">Weakening</td><td class="muted">TL ÷ (Equity − Other assets)</td></tr><tr><td>Funded debt / total assets</td><td>34.6%</td><td>37.4%</td><td>37.9%</td><td>48.1%</td><td class="bad">Weakening</td><td class="muted">Funded debt ÷ Total assets</td></tr><tr><td>Equity / total assets</td><td>45.8%</td><td>41.7%</td><td>39.5%</td><td>33.0%</td><td class="bad">Weakening</td><td class="muted">Equity ÷ Total assets</td></tr><tr><td>EBITDA interest coverage</td><td>7.71x</td><td>6.38x</td><td>4.56x</td><td>2.82x</td><td class="bad">Weakening</td><td class="muted">EBITDA ÷ Interest expense</td></tr><tr><td>EBIT interest coverage</td><td>5.90x</td><td>4.76x</td><td>3.16x</td><td>1.37x</td><td class="bad">Weakening</td><td class="muted">(EBITDA − Depreciation) ÷ Interest</td></tr></tbody></table></div>
+<p class="small">Pro forma coverage uses 2026 EBITDA against 2027 pro forma interest of $255k (existing term $103k + new loan $84k + line $68.2k fully drawn) and depreciation of $370k.</p>
+<p><strong>Analysis:</strong> Leverage has risen every year: funded debt/EBITDA went from 2.05x to 3.21x, and on 2026 EBITDA the
+transaction takes it to <strong>4.88x</strong> — above the 3.0–3.5x that is typical for a mid-market manufacturer. It only comes back
+to 3.25x if management's 2027 EBITDA of $1,080k is achieved (4.62x in the downside). Total
+liabilities/equity goes from 1.53x to 2.03x, and equity's share of assets falls to 33%. The balance sheet can carry the
+debt, but the cushion is much thinner after the transaction.</p>
+<div class="two-col">
+<div class="note-box warning"><h3>Shareholder loans – structural issue</h3>
+<p>The $150k shareholder loans are unsecured, interest-free and have no repayment terms, and the owners have <strong>not</strong> agreed to postpone
+them. As things stand they could be withdrawn at any time, ahead of the bank, out of the same thin cash flow. They count as debt — not as quasi-equity —
+until a postponement and subordination agreement is signed. With postponement, adjusted equity becomes $2,560k and pro forma TL/adjusted
+equity improves to 1.85x.</p></div>
+<div class="note-box warning"><h3>Equity does not reconcile</h3>
+<p>Opening equity + net income − distributions does not equal reported equity (table below): equity is $222k lower than expected in 2025
+and $98k higher in 2026. Possible explanations are share redemptions, dividends recorded separately from "distributions", prior-period
+adjustments or a capital injection. The accountant must explain this before funding, because it affects tangible net worth and the reliability of the statements.</p></div>
+</div>
+<div class="table-wrap"><table class=""><caption>Equity roll-forward check ($000s)</caption><thead><tr><th></th><th>2025</th><th>2026</th></tr></thead><tbody><tr><td>Opening equity</td><td>2,200</td><td>2,210</td></tr><tr><td>+ Net income</td><td>352</td><td>252</td></tr><tr><td>− Shareholder distributions</td><td>(120)</td><td>(150)</td></tr><tr><td>= Expected closing equity</td><td>2,432</td><td>2,312</td></tr><tr><td>Reported closing equity</td><td>2,210</td><td>2,410</td></tr><tr class="total"><td>Unexplained difference</td><td class="bad">(222)</td><td class="warn">98</td></tr></tbody></table></div>
+</section><section class="card" id="cashflow"><h2><span class="section-number">6</span>Cash Flow and Debt-Service Capacity</h2>
+<div class="table-wrap"><table class=""><caption>Historical cash flow and debt-service capacity ($000s)</caption><thead><tr><th>Item</th><th>2024</th><th>2025</th><th>2026</th><th>Comment</th></tr></thead><tbody><tr><td>EBITDA</td><td>810</td><td>810</td><td>720</td><td></td></tr><tr><td>Cash from operations before WC</td><td>650</td><td>620</td><td>510</td><td>Falling with margins</td></tr><tr><td>Change in working capital</td><td>(170)</td><td>(250)</td><td>(390)</td><td>WC absorbed 76% of 2026 operating cash</td></tr><tr><td>Cash flow from operations (CFO)</td><td>480</td><td>370</td><td>120</td><td></td></tr><tr><td>− Unfinanced CapEx</td><td>(160)</td><td>(160)</td><td>(160)</td><td>Maintenance CapEx est. $140k</td></tr><tr><td>− Shareholder distributions</td><td>(90)</td><td>(120)</td><td>(150)</td><td>Rising while NI falls</td></tr><tr class="total"><td>= Free cash flow after distributions</td><td class="good">230</td><td class="warn">90</td><td class="bad">(190)</td><td>Funded by debt in 2026</td></tr><tr><td>Distribution payout (% of NI)</td><td>24%</td><td>34%</td><td class="bad">60%</td><td></td></tr><tr><td>Debt service (interest + prior-year CPLTD)</td><td>n/a</td><td>307</td><td>368</td><td>Principal falling due in the year</td></tr><tr><td>DSCR – EBITDA basis</td><td>n/a</td><td class="good">2.64x</td><td class="good">1.96x</td><td>EBITDA ÷ debt service</td></tr><tr><td>DSCR – lender basis</td><td>n/a</td><td class="good">1.32x</td><td class="bad">0.87x</td><td>(EBITDA − tax − unfin. CapEx − dist.) ÷ DS</td></tr><tr><td>DSCR – cash-flow basis</td><td>n/a</td><td class="bad">0.71x</td><td class="bad">-0.09x</td><td>(CFO + interest − unfin. CapEx − dist.) ÷ DS</td></tr></tbody></table></div>
+<p><strong>Analysis:</strong> Cash flow is clearly weakening. CFO fell from $480k to $120k as falling margins and the growing
+working-capital build hit at the same time. In 2026 the company did not generate enough cash to cover its own unfinanced CapEx ($160k) and its
+distributions ($150k, 60% of net income). The $190k gap was filled with debt: the line rose $90k and term debt
+$240k. On a lender basis — after tax, CapEx and distributions — 2026 coverage of existing debt service was only
+<strong>0.87x</strong>, already below 1.0x <em>before</em> the new loan. The EBITDA-basis ratio (1.96x) looks comfortable only
+because it ignores these cash outflows.</p>
+<div class="table-wrap"><table class=""><caption>Pro forma annual debt service after the new loan ($000s)</caption><thead><tr><th>Obligation</th><th>Balance</th><th>Annual service</th></tr></thead><tbody><tr><td>Existing equipment loans</td><td>910</td><td>225.0</td></tr><tr><td>Commercial mortgage</td><td>720</td><td>118.0</td></tr><tr><td>New term loan (6-yr, 7%)</td><td>1,200</td><td>251.8</td></tr><tr class="total"><td>Total term-debt service</td><td>2,830</td><td>594.8</td></tr><tr><td>Operating line interest ($1,100k × 6.20%)</td><td>1,100</td><td>68.2</td></tr><tr class="total"><td>Total debt service incl. line interest</td><td>3,930</td><td>663.0</td></tr></tbody></table></div>
+<p>The new loan raises term-debt service by 73%, from $343k to <strong>$594.8k</strong>. Measured against 2026
+actual EBITDA with no benefit from the new line, coverage is 1.21x on EBITDA and 0.84x on a lender basis
+(no distributions). The historical business on its own cannot carry the new debt; repayment depends on the projected improvement.</p>
+</section><section class="card" id="proforma"><h2><span class="section-number">7</span>Pro Forma Analysis</h2>
+<p>The pro forma has two parts: (a) the balance sheet immediately after closing, and (b) 2027 earnings, cash flow and coverage on the new
+capital structure in three cases. Section 8 tests the projections and Section 9 tests sensitivity.</p>
+<div class="table-wrap"><table class=""><caption>Pro forma balance sheet at closing ($000s)</caption><thead><tr><th>Item</th><th>31 Dec 2026</th><th>Adjustment</th><th>Pro forma</th></tr></thead><tbody><tr><td>Cash</td><td>390</td><td>(300)</td><td>90</td></tr><tr><td>Accounts receivable</td><td>1,520</td><td></td><td>1,520</td></tr><tr><td>Inventory</td><td>1,340</td><td></td><td>1,340</td></tr><tr><td>Prepaid expenses</td><td>110</td><td></td><td>110</td></tr><tr class="total"><td>Total current assets</td><td>3,360</td><td>(300)</td><td>3,060</td></tr><tr><td>Net fixed assets</td><td>2,610</td><td>1,500</td><td>4,110</td></tr><tr><td>Other assets</td><td>130</td><td></td><td>130</td></tr><tr class="total"><td>Total assets</td><td>6,100</td><td>1,200</td><td>7,300</td></tr><tr><td>Accounts payable</td><td>1,230</td><td></td><td>1,230</td></tr><tr><td>Operating line</td><td>680</td><td></td><td>680</td></tr><tr><td>Current portion of LTD</td><td>240</td><td>167.8</td><td>407.8</td></tr><tr class="total"><td>Total current liabilities</td><td>2,150</td><td>167.8</td><td>2,317.8</td></tr><tr><td>Long-term debt</td><td>1,390</td><td>1,032.2</td><td>2,422.2</td></tr><tr><td>Shareholders' loans</td><td>150</td><td></td><td>150</td></tr><tr class="total"><td>Total liabilities</td><td>3,690</td><td>1,200</td><td>4,890</td></tr><tr><td>Shareholders' equity</td><td>2,410</td><td></td><td>2,410</td></tr><tr class="total"><td>Total liabilities and equity</td><td>6,100</td><td>1,200</td><td>7,300</td></tr></tbody></table></div>
+<ul class="assume">
+<li>Depreciation 2027: $220k existing + $150k on the new line (10-year straight line) = $370k.</li>
+<li>Interest 2027: existing term $103k (implied: $343k service − $240k CPLTD) + new loan $84k + line $68.2k (limit fully drawn, conservative) = $255.2k.</li>
+<li>Working-capital investment = revenue growth vs 2026 × 2026 net WC intensity (16.7% = (A/R + inventory − A/P) ÷ revenue).</li>
+<li>Maintenance CapEx $140k (management estimate); no expansion CapEx in 2027.</li></ul>
+<div class="table-wrap"><table class=""><caption>Pro forma 2027 earnings, cash flow and coverage (distributions suspended)</caption><thead><tr><th>($000s)</th><th>2026 actual run-rate (no benefit from new line)</th><th>Management 2027</th><th>Lender downside 2027</th></tr></thead><tbody><tr><td>Revenue</td><td>9,750</td><td>11,500</td><td>10,350</td></tr><tr><td>EBITDA</td><td>720</td><td>1,080</td><td>760</td></tr><tr><td>− Depreciation (existing + new line)</td><td>(370)</td><td>(370)</td><td>(370)</td></tr><tr><td>− Interest (existing, new loan, line)</td><td>-255.2</td><td>-255.2</td><td>-255.2</td></tr><tr class="total"><td>= Income before tax</td><td>95</td><td>455</td><td>135</td></tr><tr><td>− Income tax @ 26.5%</td><td>(25)</td><td>(121)</td><td>(36)</td></tr><tr class="total"><td>= Net income (lender estimate)</td><td>70</td><td>334</td><td>99</td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td>EBITDA</td><td>720</td><td>1,080</td><td>760</td></tr><tr><td>− Cash taxes</td><td>(25)</td><td>(121)</td><td>(36)</td></tr><tr><td>− Maintenance CapEx</td><td>(140)</td><td>(140)</td><td>(140)</td></tr><tr><td>− Distributions (assumed suspended)</td><td>0</td><td>0</td><td>0</td></tr><tr class="total"><td>= Cash available for debt service</td><td>555</td><td>819</td><td>584</td></tr><tr><td>− Term debt service</td><td>-594.8</td><td>-594.8</td><td>-594.8</td></tr><tr><td>− Line interest</td><td>-68.2</td><td>-68.2</td><td>-68.2</td></tr><tr class="total"><td>= Surplus / (deficit) before WC growth</td><td class="bad">(108)</td><td class="good">157</td><td class="bad">(79)</td></tr><tr><td>− Working-capital investment</td><td>0</td><td>(293)</td><td>(100)</td></tr><tr class="total"><td>= Surplus / (deficit) after WC growth</td><td class="bad">(108)</td><td class="bad">(136)</td><td class="bad">(179)</td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td>DSCR – EBITDA ÷ term DS (case basis)</td><td class="warn">1.21x</td><td class="good">1.82x</td><td class="good">1.28x</td></tr><tr><td>DSCR – EBITDA ÷ total DS incl. line interest</td><td class="warn">1.09x</td><td class="good">1.63x</td><td class="warn">1.15x</td></tr><tr><td>DSCR – lender basis, no distributions</td><td class="bad">0.84x</td><td class="warn">1.24x</td><td class="bad">0.88x</td></tr><tr><td>DSCR – lender basis, distributions at 2026 level ($150k)</td><td class="bad">0.61x</td><td class="warn">1.01x</td><td class="bad">0.66x</td></tr><tr><td>Funded debt at close / EBITDA</td><td class="bad">4.88x</td><td class="warn">3.25x</td><td class="bad">4.62x</td></tr><tr><td>EBITDA ÷ interest</td><td>2.82x</td><td>4.23x</td><td>2.98x</td></tr></tbody></table></div>
+<p><strong>Analysis:</strong> The balance sheet at closing is more leveraged (TL/equity 2.03x) and less liquid (cash $90k,
+quick ratio 0.69x), but still solvent. The pro forma P&amp;L shows how much rests on 2027 performance:</p>
+<ul>
+<li><strong>2026 run-rate:</strong> EBITDA covers term debt service only 1.21x, and after tax and CapEx there is a $108k
+deficit. Without the project's benefits the company cannot service the new structure.</li>
+<li><strong>Management case:</strong> EBITDA coverage of 1.82x is healthy and the lender-basis DSCR is 1.24x — only just at a 1.25x
+standard, and only if distributions stop. The 18% sales growth also needs about $293k of working capital, which leaves a $136k deficit
+funded on the line. Our net income estimate ($334k) is below management's $410k, which suggests management has not fully reflected the extra
+depreciation and interest from the new financing.</li>
+<li><strong>Downside:</strong> EBITDA still covers term debt service 1.28x, but on a lender basis coverage is 0.88x — a
+$79k annual shortfall that would have to come out of line availability.</li></ul>
+</section><section class="card" id="projections"><h2><span class="section-number">8</span>Projections and Downside Scenario</h2>
+<div class="table-wrap"><table class=""><caption>Historical vs projected performance ($000s)</caption><thead><tr><th>Item</th><th>2025A</th><th>2026A</th><th>2027 Mgmt</th><th>2028 Mgmt</th><th>2027 Downside</th></tr></thead><tbody><tr><td>Revenue</td><td>9,100</td><td>9,750</td><td>11,500</td><td>12,300</td><td>10,350</td></tr><tr><td>Revenue growth</td><td>8.3%</td><td>7.1%</td><td class="warn">17.9%</td><td>7.0%</td><td>6.2%</td></tr><tr><td>EBITDA</td><td>810</td><td>720</td><td>1,080</td><td>1,260</td><td>760</td></tr><tr><td>EBITDA growth</td><td>0.0%</td><td>-11.1%</td><td class="bad">50.0%</td><td>16.7%</td><td>5.6%</td></tr><tr><td>EBITDA margin</td><td>8.9%</td><td>7.4%</td><td class="warn">9.4%</td><td>10.2%</td><td>7.3%</td></tr><tr><td>Net income (as given / lender est.)</td><td>352</td><td>252</td><td>410 / 334</td><td>520</td><td>— / 99</td></tr><tr><td>EBITDA ÷ term debt service</td><td>—</td><td>1.21x</td><td>1.82x</td><td>2.12x</td><td>1.28x</td></tr></tbody></table></div>
+<div class="table-wrap"><table class=""><caption>2026 → 2027 management EBITDA bridge ($000s)</caption><thead><tr><th>Driver</th><th>Amount</th><th>Comment</th></tr></thead><tbody><tr><td>2026 actual EBITDA</td><td>720</td><td></td></tr><tr><td>+ Labour savings (100%)</td><td>240</td><td>Depends on on-time install and full staffing reduction</td></tr><tr><td>+ Volume, margin and waste improvement</td><td>120</td><td>Only 6.9% incremental margin on +$1,750k sales</td></tr><tr class="total"><td>= 2027 management EBITDA</td><td>1,080</td><td></td></tr><tr><td>− Revenue 10% short</td><td>(200)</td><td>Implied contribution margin 17.4% on lost sales</td></tr><tr><td>− Half of labour savings missed</td><td>(120)</td><td></td></tr><tr class="total"><td>= Lender downside EBITDA</td><td>760</td><td></td></tr></tbody></table></div>
+<p><strong>Assessment of management's case:</strong> The projection rests on four assumptions that must <em>all</em> hold: full $240k savings, no
+installation delay, a successful Customer A contract, and better gross margin with no raw-material inflation. Several of these run against
+recent results — gross margin has fallen two years running, and EBITDA has not grown since 2024. An 18% jump in revenue in the very year the
+plant loses about three weeks of production to installation is ambitious. It is encouraging that only $120k
+of the uplift comes from volume and margin, with most coming from the labour saving, which is more within management's control.</p>
+<p><strong>Downside:</strong> The lender downside (revenue 10% below plan, 50% of savings) gives EBITDA of $760k — only
+$40k above 2026 — and coverage of 1.28x on term debt service. The company can still meet its
+contractual payments, but only by using all its free cash flow, with no distributions and no buffer. We treat the downside as the
+<strong>base case for structuring</strong> and the management case as the upside.</p>
+</section><section class="card" id="sensitivity"><h2><span class="section-number">9</span>Sensitivity Analysis</h2>
+<p>The model is calibrated to the case: starting from management's $1,080k, every 1% revenue shortfall costs
+$20.0k of EBITDA (implied contribution margin 17.4%), and every 25% of labour savings missed costs $60k. With these inputs the 10% / 50%
+cell reproduces the lender downside of $760k exactly. "Lender DSCR" deducts cash taxes at 26.5%, $140k maintenance CapEx
+and line interest, with distributions suspended.</p>
+<div class="legend"><span class="lg">≥ 1.25x (meets policy)</span><span class="lw">1.00x–1.24x (thin)</span><span class="lb">&lt; 1.00x (shortfall)</span></div>
+<div class="table-wrap"><table class="grid"><caption>Sensitivity A – 2027 EBITDA ($000s) by revenue shortfall and labour savings</caption><thead><tr><th>Revenue vs plan ↓ / Savings →</th><th>100%</th><th>75%</th><th>50%</th><th>25%</th><th>0%</th></tr></thead><tbody><tr><td>−0%</td><td class="good">1,080</td><td class="good">1,020</td><td class="good">960</td><td class="good">900</td><td class="good">840</td></tr><tr><td>−5%</td><td class="good">980</td><td class="good">920</td><td class="good">860</td><td class="good">800</td><td class="warn">740</td></tr><tr><td>−10%</td><td class="good">880</td><td class="good">820</td><td class="good">760</td><td class="warn">700</td><td class="warn">640</td></tr><tr><td>−15%</td><td class="good">780</td><td class="warn">720</td><td class="warn">660</td><td class="warn">600</td><td class="bad">540</td></tr><tr><td>−20%</td><td class="warn">680</td><td class="warn">620</td><td class="bad">560</td><td class="bad">500</td><td class="bad">440</td></tr></tbody></table></div><div class="table-wrap"><table class="grid"><caption>Sensitivity B – DSCR, EBITDA ÷ term debt service ($594.7k)</caption><thead><tr><th>Revenue vs plan ↓ / Labour savings achieved →</th><th>100%</th><th>75%</th><th>50%</th><th>25%</th><th>0%</th></tr></thead><tbody><tr><td>−0%  ($11,500k)</td><td class="good">1.82x</td><td class="good">1.71x</td><td class="good">1.61x</td><td class="good">1.51x</td><td class="good">1.41x</td></tr><tr><td>−5%  ($10,925k)</td><td class="good">1.65x</td><td class="good">1.55x</td><td class="good">1.45x</td><td class="good">1.35x</td><td class="warn">1.24x</td></tr><tr><td>−10%  ($10,350k)</td><td class="good">1.48x</td><td class="good">1.38x</td><td class="good">1.28x</td><td class="warn">1.18x</td><td class="warn">1.08x</td></tr><tr><td>−15%  ($9,775k)</td><td class="good">1.31x</td><td class="warn">1.21x</td><td class="warn">1.11x</td><td class="warn">1.01x</td><td class="bad">0.91x</td></tr><tr><td>−20%  ($9,200k)</td><td class="warn">1.14x</td><td class="warn">1.04x</td><td class="bad">0.94x</td><td class="bad">0.84x</td><td class="bad">0.74x</td></tr></tbody></table></div><div class="table-wrap"><table class="grid"><caption>Sensitivity C – Lender DSCR (after tax, maint. CapEx, line interest; no distributions)</caption><thead><tr><th>Revenue vs plan ↓ / Labour savings achieved →</th><th>100%</th><th>75%</th><th>50%</th><th>25%</th><th>0%</th></tr></thead><tbody><tr><td>−0%  ($11,500k)</td><td class="warn">1.24x</td><td class="warn">1.17x</td><td class="warn">1.10x</td><td class="warn">1.04x</td><td class="bad">0.97x</td></tr><tr><td>−5%  ($10,925k)</td><td class="warn">1.13x</td><td class="warn">1.06x</td><td class="bad">0.99x</td><td class="bad">0.93x</td><td class="bad">0.86x</td></tr><tr><td>−10%  ($10,350k)</td><td class="warn">1.01x</td><td class="bad">0.95x</td><td class="bad">0.88x</td><td class="bad">0.81x</td><td class="bad">0.75x</td></tr><tr><td>−15%  ($9,775k)</td><td class="bad">0.90x</td><td class="bad">0.84x</td><td class="bad">0.77x</td><td class="bad">0.69x</td><td class="bad">0.60x</td></tr><tr><td>−20%  ($9,200k)</td><td class="bad">0.79x</td><td class="bad">0.72x</td><td class="bad">0.63x</td><td class="bad">0.54x</td><td class="bad">0.45x</td></tr></tbody></table></div><div class="table-wrap"><table class="grid"><caption>Sensitivity D – Gross-margin erosion (raw-material inflation not passed through)</caption><thead><tr><th>GM decline (pts)</th><th>Mgmt EBITDA</th><th>Mgmt EBITDA DSCR</th><th>Mgmt lender DSCR</th><th>Downside EBITDA</th><th>Downside EBITDA DSCR</th><th>Downside lender DSCR</th></tr></thead><tbody><tr><td>0.0</td><td>1,080</td><td class="good">1.82x</td><td class="warn">1.24x</td><td>760</td><td class="good">1.28x</td><td class="bad">0.88x</td></tr><tr><td>0.5</td><td>1,022</td><td class="good">1.72x</td><td class="warn">1.17x</td><td>708</td><td class="warn">1.19x</td><td class="bad">0.82x</td></tr><tr><td>1.0</td><td>965</td><td class="good">1.62x</td><td class="warn">1.11x</td><td>656</td><td class="warn">1.10x</td><td class="bad">0.77x</td></tr><tr><td>1.5</td><td>908</td><td class="good">1.53x</td><td class="warn">1.04x</td><td>605</td><td class="warn">1.02x</td><td class="bad">0.70x</td></tr><tr><td>2.0</td><td>850</td><td class="good">1.43x</td><td class="bad">0.98x</td><td>553</td><td class="bad">0.93x</td><td class="bad">0.62x</td></tr></tbody></table></div><div class="table-wrap"><table class="grid"><caption>Sensitivity E – Interest-rate shock on the floating operating line</caption><thead><tr><th>Prime shock</th><th>Line interest</th><th>Total DS</th><th>Mgmt lender DSCR</th><th>Downside lender DSCR</th></tr></thead><tbody><tr><td>+0 bp</td><td>68.2</td><td>663.0</td><td class="warn">1.24x</td><td class="bad">0.88x</td></tr><tr><td>+100 bp</td><td>79.2</td><td>674.0</td><td class="warn">1.22x</td><td class="bad">0.87x</td></tr><tr><td>+200 bp</td><td>90.2</td><td>685.0</td><td class="warn">1.20x</td><td class="bad">0.86x</td></tr><tr><td>+300 bp</td><td>101.2</td><td>696.0</td><td class="warn">1.19x</td><td class="bad">0.85x</td></tr></tbody></table></div><div class="table-wrap"><table class="grid"><caption>Sensitivity F – Event stresses (from management 2027 case)</caption><thead><tr><th>Event</th><th>EBITDA</th><th>EBITDA ÷ term DS</th><th>Lender DSCR</th></tr></thead><tbody><tr><td>Management case</td><td>1,080</td><td class="good">1.82x</td><td class="warn">1.24x</td></tr><tr><td>Installation delayed 3 months (savings lost, 75% output)</td><td>895</td><td class="good">1.50x</td><td class="warn">1.03x</td></tr><tr><td>Installation delayed 6 months (savings lost, 75% output)</td><td>710</td><td class="warn">1.19x</td><td class="bad">0.83x</td></tr><tr><td>Loss of Customer B (17% of revenue)</td><td>740</td><td class="warn">1.24x</td><td class="bad">0.86x</td></tr><tr><td>Loss of Customer A (24% of revenue)</td><td>600</td><td class="warn">1.01x</td><td class="bad">0.69x</td></tr><tr><td>No improvement – 2026 EBITDA repeats</td><td>720</td><td class="warn">1.21x</td><td class="bad">0.84x</td></tr></tbody></table></div><div class="table-wrap"><table class=""><caption>Sensitivity G – Break-even analysis</caption><thead><tr><th>Threshold</th><th>EBITDA required</th><th>vs 2026A</th><th>vs Mgmt 2027</th><th>Revenue shortfall tolerated (100% / 50% savings)</th></tr></thead><tbody><tr><td>EBITDA ÷ term DS = 1.00x</td><td>595</td><td>(125)</td><td>(485)</td><td>24.3% / 18.3%</td></tr><tr><td>EBITDA ÷ term DS = 1.25x</td><td>743</td><td>23</td><td>(337)</td><td>16.8% / 10.8%</td></tr><tr><td>Lender DSCR = 1.00x</td><td>867</td><td>147</td><td>(213)</td><td>10.6% / 4.6%</td></tr><tr><td>Lender DSCR = 1.25x</td><td>1,093</td><td>373</td><td>13</td><td>Not achievable even at plan</td></tr></tbody></table></div><div class="table-wrap"><table class="grid"><caption>Sensitivity H – Structuring alternatives (first full year)</caption><thead><tr><th>Structure</th><th>New-loan payment</th><th>Total DS incl. line</th><th>Mgmt EBITDA DSCR</th><th>Downside EBITDA DSCR</th><th>Mgmt lender DSCR</th><th>Downside lender DSCR</th></tr></thead><tbody><tr><td>As requested: $1.2M, 6-yr</td><td>251.8</td><td>663.0</td><td class="good">1.82x</td><td class="good">1.28x</td><td class="warn">1.24x</td><td class="bad">0.88x</td></tr><tr><td>$1.2M, 7-yr amortization</td><td>222.7</td><td>633.9</td><td class="good">1.91x</td><td class="good">1.34x</td><td class="good">1.29x</td><td class="bad">0.92x</td></tr><tr><td>$1.2M, 8-yr amortization</td><td>201.0</td><td>612.2</td><td class="good">1.99x</td><td class="good">1.40x</td><td class="good">1.34x</td><td class="bad">0.95x</td></tr><tr><td>$1.0M, 6-yr (extra $200k equity)</td><td>209.8</td><td>621.0</td><td class="good">1.95x</td><td class="good">1.37x</td><td class="good">1.31x</td><td class="bad">0.93x</td></tr><tr><td>$1.2M, 7-yr + 4-month interest-only during install</td><td>176.4</td><td>587.6</td><td class="good">2.08x</td><td class="good">1.46x</td><td class="good">1.39x</td><td class="bad">0.99x</td></tr></tbody></table></div>
+<h3>What the sensitivities tell us</h3>
+<ul>
+<li><strong>EBITDA-basis coverage holds up well.</strong> Coverage stays above 1.0x unless revenue misses plan by more than about 18% with half the savings,
+and stays above 1.25x down to roughly a 11% miss — the exercise's downside sits inside that range.</li>
+<li><strong>Lender-basis coverage is fragile.</strong> To reach 1.25x after tax and maintenance CapEx the company needs about $1,093k of EBITDA —
+above management's own plan. Even 1.0x needs ~$867k: revenue within ~11% of plan with full savings, or within ~5% with half the savings.</li>
+<li><strong>Gross margin is the biggest single risk.</strong> Each 1-point drop in gross margin removes ~$115k of EBITDA — almost half the labour
+saving. A 2-point drop, about the same as 2024–2026, cuts management-case EBITDA to $850k and its lender DSCR to 0.98x.</li>
+<li><strong>Interest-rate risk is small</strong> because the term debt is fixed; +300 bp on prime costs only $33k a year.</li>
+<li><strong>Customer concentration is the tail risk.</strong> Losing Customer A brings EBITDA down to about $600k — 1.01x on term debt service and
+below 1.0x on a lender basis — so the loan would rely on collateral and guarantees.</li>
+<li><strong>Structure helps somewhat.</strong> Moving to a 7-year amortization (the equipment's useful life is well over 7 years) lowers annual service by
+$29.1k; adding 4 months interest-only during installation improves first-year coverage further. Neither fixes a downside
+shortfall on its own, so they must be combined with suspended distributions and close monitoring.</li></ul>
+</section><section class="card" id="repayment"><h2><span class="section-number">10</span>Primary and Secondary Repayment Sources</h2>
+<div class="two-col">
+<div class="note-box"><h3>Primary – operating cash flow</h3>
+<p>Repayment of the term loan comes from operating cash flow strengthened by the new packaging line: $240k of labour savings, lower waste and
+20% more capacity for the Customer A contract. On the case basis, coverage is 1.82x (management) and 1.28x (downside).
+The operating line is repaid by converting receivables and inventory to cash over the trading cycle (~62 days).
+<strong>Assessment: adequate but thin</strong> — it depends on carrying out the project and suspending distributions.</p></div>
+<div class="note-box warning"><h3>Secondary – collateral and guarantees</h3>
+<ul>
+<li>New equipment OLV $825k → 69% of the term loan ($375k shortfall); specialized assets with few buyers.</li>
+<li>GSA over A/R and inventory: once the line is fully drawn, about $500k of margin value remains above it to support the term loan.</li>
+<li>Limited joint &amp; several guarantees of $300k; personal net worth $1.4M, mostly home equity and shares in the company — limited real value as an independent source.</li>
+<li>Tertiary: the owners' ability to inject equity or postpone shareholder loans.</li></ul>
+<p><strong>Assessment: partial.</strong> Secondary sources cover about 94% of the term loan at day one.</p></div>
+</div>
+</section><section class="card" id="collateral"><h2><span class="section-number">11</span>Collateral and Line Availability</h2>
+<div class="table-wrap"><table class=""><caption>Borrowing-base calculation at 31 Dec 2026 ($000s)</caption><thead><tr><th>Component</th><th>Standard (per terms)</th><th>Conservative</th><th>Severe</th></tr></thead><tbody><tr><td>Total A/R</td><td>1,520</td><td>1,520</td><td>1,520</td></tr><tr><td>− A/R over 90 days (incl. $85k disputed)</td><td>(120)</td><td>(120)</td><td>(120)</td></tr><tr><td>− A/R 61–90 days (aging deterioration)</td><td>—</td><td>—</td><td>(170)</td></tr><tr><td>Eligible A/R</td><td>1,400</td><td>1,400</td><td>1,230</td></tr><tr class="total"><td>A/R availability @ 75%</td><td>1,050.0</td><td>1,050.0</td><td>922.5</td></tr><tr><td>Total inventory</td><td>1,340</td><td>1,340</td><td>1,340</td></tr><tr><td>− Slow-moving finished goods</td><td>(110)</td><td>(110)</td><td>(110)</td></tr><tr><td>− Work in progress (no ready market)</td><td>—</td><td>(170)</td><td>(170)</td></tr><tr><td>Eligible inventory</td><td>1,230</td><td>1,060</td><td>1,060</td></tr><tr class="total"><td>Inventory availability @ 50%</td><td>615.0</td><td>530.0</td><td>530.0</td></tr><tr><td>Inventory availability capped at 50% of limit ($550k)</td><td>550.0</td><td>530.0</td><td>530.0</td></tr><tr class="total"><td>Total borrowing base (with cap)</td><td>1,600.0</td><td>1,580.0</td><td>1,452.5</td></tr><tr><td>Requested limit</td><td>1,100</td><td>1,100</td><td>1,100</td></tr><tr><td>Borrowing base ÷ limit</td><td class="good">1.45x</td><td class="good">1.44x</td><td class="good">1.32x</td></tr><tr><td>Excess margin over full limit</td><td>500.0</td><td>480.0</td><td>352.5</td></tr><tr><td>Availability vs current $680k usage</td><td>420.0</td><td>420.0</td><td>420.0</td></tr></tbody></table></div>
+<p><strong>Is the $1.1M line adequately supported?</strong> <strong>Yes.</strong> After excluding the $120k of receivables over 90 days (which
+already covers the $85k disputed balance) and the $110k of slow-moving inventory, the borrowing base is
+<strong>$1,600.0k</strong>, or 1.45x the requested limit. It remains above the limit (1.32x)
+even if WIP is excluded, inventory is capped at 50% of the limit, and 61–90 day receivables are also excluded. Availability over current usage is
+$420k, which roughly matches the ~$293k of working capital the 2027 plan needs.</p>
+<p>Points to watch: (i) inventory makes up 37% of the base — frozen food is perishable, so its value in
+liquidation is lower than book; (ii) customer concentration means one disputed or failed account can sharply reduce eligible A/R; apply a concentration limit
+(e.g. no single debtor above 30% of eligible A/R) and cross-aging (exclude all of a debtor's balance if more than 50% is over 90 days); (iii) reserves for
+priority payables (source deductions, HST, WSIB) and supplier rights over goods (30-day goods) must be deducted on every borrowing-base report.</p>
+<div class="table-wrap"><table class=""><caption>Term-loan collateral coverage ($000s)</caption><thead><tr><th>Measure</th><th>Value</th><th>Coverage</th></tr></thead><tbody><tr><td>Term loan at funding</td><td>1,200</td><td></td></tr><tr><td>New equipment – orderly liquidation value</td><td>825</td><td class="bad">69%</td></tr><tr><td>Collateral shortfall at funding</td><td>(375)</td><td></td></tr><tr><td>OLV + limited personal guarantees</td><td>1,125</td><td class="warn">94%</td></tr><tr><td>OLV ÷ cost</td><td>825 ÷ 1,500</td><td>55%</td></tr><tr><td>Loan after year 1 vs OLV</td><td>1,032.2</td><td>80%</td></tr></tbody></table></div><div class="table-wrap"><table class=""><caption>Loan balance vs equipment OLV (OLV assumed to decline 12% a year)</caption><thead><tr><th>Year-end</th><th>Loan balance</th><th>Est. OLV</th><th>OLV ÷ balance</th></tr></thead><tbody><tr><td>2027</td><td>1,032.2</td><td>726.0</td><td>70%</td></tr><tr><td>2028</td><td>852.7</td><td>638.9</td><td>75%</td></tr><tr><td>2029</td><td>660.7</td><td>562.2</td><td>85%</td></tr><tr><td>2030</td><td>455.2</td><td>494.7</td><td>109%</td></tr><tr><td>2031</td><td>235.3</td><td>435.4</td><td>185%</td></tr><tr><td>2032</td><td>0.0</td><td>383.1</td><td>Repaid</td></tr></tbody></table></div>
+<p><strong>Term-loan security is weak.</strong> The equipment is specialized food-packaging machinery whose OLV is only 55% of cost, leaving
+a $375k shortfall at funding. On the decline assumption shown, OLV only catches up with the loan balance near the end of the term, so the bank is
+under-secured for most of the life of the loan. Older equipment is already pledged and the property secures the mortgage, so additional hard security is limited.
+The $300k guarantees narrow but do not close the gap, and their value is doubtful because the owners' wealth is mostly home equity and shares in the borrower.
+Excess borrowing-base margin under the GSA (~$500k) gives some additional cover only if the term loan is cross-collateralized
+and cross-defaulted with the line.</p>
+</section><section class="card" id="risks"><h2><span class="section-number">12</span>Key Risks</h2><div class="table-wrap"><table class="risk-table"><caption>Key risk register</caption><thead><tr><th>Risk</th><th>Severity</th><th>Evidence</th></tr></thead><tbody><tr><td>Margin erosion</td><td class="bad">High</td><td>Gross margin −1.9 pts, EBITDA margin −2.3 pts despite growth; −1 pt GM ≈ −$115k EBITDA.</td></tr><tr><td>Thin cash-flow coverage</td><td class="bad">High</td><td>2026 lender DSCR 0.87x; pro forma downside lender DSCR 0.88x; negative FCF of $190k in 2026.</td></tr><tr><td>Project execution</td><td class="bad">High</td><td>4-month install with ~3-week partial shutdown; savings and the Customer A contract depend on on-time commissioning.</td></tr><tr><td>Customer concentration</td><td class="bad">High</td><td>Top 3 = 52% of sales; Customer A (24%) can end its contract for performance failures → EBITDA ≈ $600k.</td></tr><tr><td>Working-capital quality</td><td class="warn">Medium-High</td><td>CCC +8 days; $120k A/R > 90 days ($85k disputed); $110k slow inventory; DPO stretched to 62 days.</td></tr><tr><td>Leverage and liquidity</td><td class="warn">Medium-High</td><td>Pro forma debt/EBITDA 4.88x (2026 EBITDA); cash $90k; quick ratio 0.69x.</td></tr><tr><td>Collateral shortfall</td><td class="warn">Medium</td><td>Equipment OLV 69% of loan; specialized asset; limited $300k guarantees.</td></tr><tr><td>Distributions and shareholder loans</td><td class="warn">Medium</td><td>Distributions 60% of 2026 NI; $150k SH loans not postponed and withdrawable.</td></tr><tr><td>Projection risk</td><td class="warn">Medium</td><td>Mgmt assumes EBITDA +50% and margin recovery after two declining years; NI appears to understate new depreciation and interest.</td></tr><tr><td>Key-person and succession</td><td class="warn">Medium</td><td>Heavy reliance on Priya Sharma; no formal succession plan.</td></tr><tr><td>Financial reporting</td><td class="">Low-Medium</td><td>Equity roll-forward gaps of $222k (2025) and $98k (2026) are unexplained.</td></tr><tr><td>Input cost and food safety</td><td class="warn">Medium</td><td>Raw-material inflation, product recalls, quality disputes (already one $85k dispute).</td></tr></tbody></table></div></section><section class="card" id="mitigants"><h2><span class="section-number">13</span>Risk Mitigants</h2>
+<ul>
+<li><strong>Proven track record:</strong> 14 years of operations, the same leadership throughout, and no missed loan payments.</li>
+<li><strong>Productive, self-funding asset:</strong> labour savings alone repay the project in ~6.2 years; the investment directly addresses the cost problem that has been squeezing margins.</li>
+<li><strong>Meaningful owner equity:</strong> $300k (20% of cost) contributed in cash; book equity of $2,410k.</li>
+<li><strong>Contracted demand:</strong> three-year Customer A contract and steady growth in a non-discretionary food category.</li>
+<li><strong>Coverage holds on EBITDA:</strong> EBITDA covers term debt service 1.28x even in the lender downside.</li>
+<li><strong>Line well margined:</strong> borrowing base 1.45x the limit; monthly margining limits the bank's exposure to the working-capital cycle.</li>
+<li><strong>Fixed-rate term debt:</strong> limited interest-rate exposure (+300 bp ≈ $33k a year).</li>
+<li><strong>Controllable cash outflows:</strong> $150k of distributions can be stopped and redirected to debt service — the single most effective lever.</li>
+<li><strong>Experienced operations manager</strong> to run commissioning; vendor support and warranty on new equipment.</li>
+</ul>
+</section><section class="card" id="structure"><h2><span class="section-number">14</span>Recommended Structure and Conditions</h2>
+<div class="two-col">
+<div class="note-box"><h3>Term loan – $1,200,000</h3><ul>
+<li>Amortization extended to <strong>7 years</strong> (payment ≈ $222,664/yr), within the equipment's useful life; interest-only during the
+4-month installation, then blended payments.</li>
+<li>Advanced in <strong>progress draws</strong> against vendor invoices and confirmation of installation, with a 10% holdback until commissioning and a performance test. The $300k equity goes in first.</li>
+<li>First-ranking PMSI charge on the new equipment; cross-collateralized and cross-defaulted with the operating line and existing facilities.</li></ul></div>
+<div class="note-box"><h3>Operating line – $1,100,000</h3><ul>
+<li>Approved at the requested limit, <strong>available only up to the borrowing base</strong>: 75% of eligible A/R &lt; 90 days, plus 50% of eligible
+finished goods and raw materials (excluding WIP and slow-moving stock), with inventory capped at $550k.</li>
+<li>Exclusions: A/R over 90 days, disputed and contra accounts, cross-aged debtors (more than 50% over 90 days), single-debtor concentration above 30%; reserves for priority payables.</li>
+<li>Monthly borrowing-base certificate with aged A/R and A/P listings within 20 days of month-end.</li></ul></div>
+</div>
+<h3>Conditions precedent</h3>
+<ol class="cond-list">
+<li>Signed <strong>postponement and subordination agreement</strong> for the $150k shareholder loans (no repayment without the bank's written consent).</li>
+<li>Proof that the $300k equity contribution has been injected; signed equipment purchase contract, installation schedule and vendor warranty.</li>
+<li>Satisfactory written explanation of the <strong>equity reconciliation gaps</strong>, and review-engagement (or audited) year-end statements.</li>
+<li>Copy of the Customer A contract reviewed by the bank (termination clauses, performance standards, pricing and raw-material pass-through terms).</li>
+<li>Written resolution of the $85k disputed receivable (or confirmation that it is excluded from the base); inventory field exam before first advance under the increased limit.</li>
+<li>Joint and several guarantees of the owners (recommended increase to $500k, or unlimited for Priya Sharma), with current personal net worth statements.</li>
+<li>Assignment of insurance with the bank as first loss payee; business-interruption cover for the installation period; key-person life insurance on Priya Sharma (≥ $500k) assigned to the bank.</li></ol>
+<h3>Financial covenants (tested annually on year-end statements; quarterly reporting)</h3>
+<ul>
+<li><strong>Fixed-charge coverage ≥ 1.20x</strong> — (EBITDA − cash taxes − unfinanced CapEx − distributions) ÷ (term principal + interest); tested from FY2027.</li>
+<li><strong>Funded debt / EBITDA ≤ 4.25x at FY2027</strong>, stepping down to ≤ 3.50x at FY2028 (shareholder loans excluded once postponed).</li>
+<li><strong>Current ratio ≥ 1.20x</strong>; <strong>TL / (tangible net worth + postponed SH loans) ≤ 2.25x</strong>.</li>
+<li><strong>Distributions:</strong> none until FY2027 audited results show fixed-charge coverage ≥ 1.25x after the proposed distribution; thereafter capped at 50% of prior-year net income.</li>
+<li><strong>CapEx</strong> above $250k a year (excluding this project) requires the bank's consent; no additional debt or liens without consent.</li></ul>
+<h3>Monitoring</h3>
+<ul>
+<li>Quarterly internal statements with covenant calculations; monthly reports on installation progress until commissioning.</li>
+<li>Six-month review against the projections: actual labour savings, gross margin and Customer A volumes. Material variance triggers a structure review.</li>
+<li>Annual field exam of receivables and inventory; written succession plan within 12 months.</li></ul>
+</section><section class="card" id="recommendation"><h2><span class="section-number">15</span>Final Recommendation</h2>
+<div class="verdict"><span class="badge">APPROVE WITH CONDITIONS</span></div>
+<p>We recommend approving the $1,200,000 term loan and the increase of the operating line to $1,100,000, <strong>subject to the structure and conditions in Section 14</strong>.</p>
+<p><strong>Why not a straight approval:</strong> Historical cash flow does not support the new debt. In 2026, coverage of existing debt service after
+tax, CapEx and distributions was 0.87x, and free cash flow was negative $190k. Pro forma leverage of
+4.88x on 2026 EBITDA is high, margins and working-capital quality are deteriorating, and the term loan is under-secured by $375k.
+As requested — 6-year amortization, distributions continuing and shareholder loans not postponed — the downside lender DSCR falls to
+0.66x, which is not acceptable.</p>
+<p><strong>Why not a decline:</strong> The project directly fixes the cost problem behind the weak results, and the labour saving is largely within
+management's control. EBITDA covers term debt service even in the lender downside (1.28x). The operating line is well covered by the
+borrowing base (1.45x). The borrower has a 14-year clean repayment record and experienced management. The key risks can be
+reduced through structure: a longer amortization and interest-only period lower annual service, suspending distributions keeps ~$150k a year in the business,
+postponement locks in the shareholder loans, staged draws protect against installation failure, and covenants and monthly margining give early warning.</p>
+<p>With these conditions, first-year lender DSCR (7-year amortization with interest-only during installation) improves to about 1.39x in the
+management case and 0.99x in the downside; at steady state on the 7-year schedule it is 1.29x and 0.92x. The remaining
+downside gap (~$50k a year) can be absorbed by line availability of about $420k,
+while the bank monitors closely. If FY2027 results come in below the downside case, the bank should require an equity injection or a
+reduction in the line. <strong>Proposed risk rating: 6 (Satisfactory – Watch)</strong>, to be reviewed after the first six months of operating the new line.</p>
+</section><section class="card" id="appendix"><h2><span class="section-number">A</span>Appendix – Definitions and Key Assumptions</h2>
+<ul class="assume">
+<li><strong>Funded debt</strong> = operating line + current portion of LTD + long-term debt (shareholder loans shown separately until postponed).</li>
+<li><strong>Tangible net worth</strong> = shareholders' equity − other assets (treated conservatively as intangible).</li>
+<li><strong>Historical debt service</strong> = interest expense + prior-year current portion of LTD (the principal falling due in the year).</li>
+<li><strong>Case DSCR</strong> = EBITDA ÷ term-debt service (the exercise's measure). <strong>Lender DSCR</strong> = (EBITDA − cash taxes − maintenance CapEx − distributions) ÷ (term debt service + line interest).</li>
+<li>New loan payment = PMT(7%, 6, 1,200) = $251.8k; 7-year = $222.7k; 8-year = $201.0k.</li>
+<li>Prime assumed at 4.45% (line all-in 6.20%); line interest calculated on the full $1.1M limit to be conservative.</li>
+<li>Tax rate 26.5% (2026 effective rate 26.3%). New equipment depreciated straight-line over 10 years.</li>
+<li>Sensitivity EBITDA = 1,080 − 0.1739 × revenue shortfall − (1 − savings %) × 240 − GM points × revenue; calibrated to the lender downside of $760k.</li>
+<li>Days ratios use year-end balances and a 365-day year. All amounts in $000s unless stated.</li></ul>
+</section>
+      </main>
+      <nav aria-label="Report contents"><h2>Report contents</h2><div><a href="#summary">Executive summary</a><a href="#scorecard">Ratio scorecard</a><a href="#overview">1. Borrower</a><a href="#request">2. Request</a><a href="#performance">3. Performance</a><a href="#liquidity">4. Liquidity</a><a href="#leverage">5. Leverage</a><a href="#cashflow">6. Cash flow & DSCR</a><a href="#proforma">7. Pro forma</a><a href="#projections">8. Projections</a><a href="#sensitivity">9. Sensitivity</a><a href="#repayment">10. Repayment sources</a><a href="#collateral">11. Collateral & line</a><a href="#risks">12. Key risks</a><a href="#mitigants">13. Mitigants</a><a href="#structure">14. Structure & conditions</a><a href="#recommendation">15. Recommendation</a><a href="#appendix">Appendix</a></div></nav>
+    </div>
+    <footer>Fictional case created for educational commercial credit-analysis practice. Model solution prepared for teaching purposes.</footer>
+  </div>
+</body>
+</html>
