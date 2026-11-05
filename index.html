@@ -2,6 +2,18 @@
 <html lang="en">
 
 <head>
+    <!-- Light/dark theme: applied before the page draws so it never flashes the wrong mode.
+         Uses the visitor's saved choice, otherwise their device setting. -->
+    <script>
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('theme'); } catch (e) { }
+            if (t !== 'light' && t !== 'dark') {
+                t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9E4B200372"></script>
     <script>
@@ -17,13 +29,12 @@
     <title>Mojgan Samandar | Portfolio</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Inter+Tight:wght@200;300;400;500;600&display=swap"
         rel="stylesheet" />
 
     <!-- <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" /> -->
 
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles/style-teaching.css" />
     <style>
         :root {
@@ -54,7 +65,8 @@
         h1,
         h2,
         h3 {
-            font-family: 'DM Serif Display', serif;
+            font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
+            letter-spacing: -0.02em;
         }
 
 
@@ -62,9 +74,9 @@
         .tab-button {
             transition: all 0.2s ease-in-out;
             cursor: pointer;
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
             font-weight: 500;
-            letter-spacing: 0.01em;
+            letter-spacing: 0;
         }
 
         .tab-button.active {
@@ -199,7 +211,7 @@
 
         .about-page h2,
         .about-page h3 {
-            font-family: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+            font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
             color: var(--navy);
             font-weight: 400;
         }
@@ -258,7 +270,7 @@
         }
 
         .about-text .about-lead {
-            font-family: 'DM Serif Display', Georgia, serif;
+            font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
             font-size: 1.4rem;
             color: var(--navy);
         }
@@ -285,7 +297,7 @@
     isolation: isolate;          /* keeps video/overlay layers inside this band */
     overflow: hidden;
     width: 100vw;
-    margin: 56px 0 0 calc(50% - 50vw);   /* no bottom gap: the contact photo starts right below */
+    margin: -4px 0 0 calc(50% - 50vw);   /* no gaps: About Me sky above (4px overlap hides layer seams at any zoom), contact photo below */
     padding: 56px 0 40px;
     /* Night sky that continues into the Toronto photo below: the bottom edge uses the
        colours sampled from the photo's top edge (left / middle / right), and the sky
@@ -328,56 +340,64 @@
     pointer-events: none;
 }
 
-/* Drifting clouds: two layers at different speeds for depth. Each layer is twice the band
-   width with a tile that repeats every band width, so sliding it by half loops seamlessly. */
+/* Realistic drifting clouds.
+   Each cloud is three soft ellipses (body, shade, underside). An SVG fractal-noise
+   displacement filter (#cloud-f-*, defined in the page) breaks their edges into fluffy
+   cumulus shapes. The filters sit on the inner layers and only the outer .cloud moves,
+   so the browser draws each cloud once and just slides it: smooth and cheap. */
 .sky-clouds {
     position: absolute;
     inset: 0;
     z-index: -1;
     overflow: hidden;
     pointer-events: none;
-    /* keep the top of the sky clear and fade out before the seam with the photo */
-    -webkit-mask-image: linear-gradient(transparent 0%, #000 30%, #000 82%, transparent 100%);
-    mask-image: linear-gradient(transparent 0%, #000 30%, #000 82%, transparent 100%);
+    /* night colours: dim, lit faintly violet by the city */
+    --cloud-body: rgba(150, 150, 205, .30);
+    --cloud-shade: rgba(78, 80, 150, .32);
+    --cloud-under: rgba(12, 14, 45, .30);
+    /* fade out before the seam with the photo */
+    -webkit-mask-image: linear-gradient(transparent 0%, #000 10%, #000 80%, transparent 100%);
+    mask-image: linear-gradient(transparent 0%, #000 10%, #000 80%, transparent 100%);
 }
 
-.cloud-layer {
+.cloud {
     position: absolute;
-    top: 0;
     left: 0;
-    width: 200%;
-    height: 100%;
-    background-repeat: repeat-x;
-    background-size: 50% 100%;
-    animation: cloud-drift linear infinite;
+    width: 520px;
+    height: 230px;
     will-change: transform;
+    animation: cloud-drift linear infinite;
 }
 
-.cloud-far {
-    background-image:
-        radial-gradient(ellipse 18% 9% at 15% 55%, rgba(170, 160, 230, .30), transparent 70%),
-        radial-gradient(ellipse 22% 7% at 48% 70%, rgba(205, 170, 220, .24), transparent 70%),
-        radial-gradient(ellipse 15% 8% at 80% 48%, rgba(150, 165, 235, .28), transparent 70%);
-    filter: blur(14px);
-    animation-duration: 140s;
+.cloud > span {
+    position: absolute;
+    border-radius: 50%;
 }
 
-.cloud-near {
-    background-image:
-        radial-gradient(ellipse 26% 10% at 25% 82%, rgba(190, 175, 235, .32), transparent 70%),
-        radial-gradient(ellipse 20% 8% at 64% 88%, rgba(230, 180, 205, .22), transparent 70%),
-        radial-gradient(ellipse 14% 6% at 86% 66%, rgba(180, 190, 240, .24), transparent 70%);
-    filter: blur(10px);
-    animation-duration: 80s;
-}
+.cloud .c-body  { inset: 0; background: var(--cloud-body); filter: url(#cloud-f-body); }
+.cloud .c-shade { left: 12%; right: 10%; top: 38%; bottom: 4%; background: var(--cloud-shade); filter: url(#cloud-f-shade); }
+.cloud .c-under { left: 20%; right: 18%; top: 62%; bottom: -4%; background: var(--cloud-under); filter: url(#cloud-f-under); }
+
+/* five clouds: different sizes, heights and speeds; negative delays spread them out at load */
+.cloud-1 { top: 8%;  --s: 1.15; animation-duration: 150s; animation-delay: -20s; }
+.cloud-2 { top: 34%; --s: .8;   animation-duration: 110s; animation-delay: -70s; }
+.cloud-3 { top: 52%; --s: 1.35; animation-duration: 180s; animation-delay: -120s; }
+.cloud-4 { top: 18%; --s: .6;   animation-duration: 95s;  animation-delay: -45s; opacity: .8; }
+.cloud-5 { top: 60%; --s: .9;   animation-duration: 130s; animation-delay: -5s; }
 
 @keyframes cloud-drift {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    from { transform: translateX(calc(100vw + 120px)) scale(var(--s, 1)); }
+    to   { transform: translateX(-140%) scale(var(--s, 1)); }
+}
+
+.cloud-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+@media (max-width: 640px) {
+    .cloud { width: 300px; height: 140px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .cloud-layer { animation: none; }
+    .cloud { animation-play-state: paused; }
 }
 
 /* Glass service cards on the night sky: dark tint + blur keeps white text easy to read */
@@ -437,6 +457,57 @@
 
 .services-band .svc-arrow:hover { background: rgba(255, 255, 255, .26); }
 .services-band .svc-arrow svg { stroke: #fff; }
+
+/* About Me as the upper part of the same night sky: full width, starts right under the
+   navigation (pulls up over main's 2.5rem top padding) and ends in the exact colour the
+   services band starts with, so the two read as one continuous sky */
+.about-page .about-card {
+    position: relative;
+    width: 100vw;
+    margin: -2.5rem 0 0 calc(50% - 50vw);
+    padding: clamp(40px, 6vw, 72px) 0 clamp(40px, 5vw, 64px);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: linear-gradient(180deg, #0e1440 0%, #090e30 55%, rgb(5, 9, 32) 100%);
+}
+
+/* stars, continuing the pattern of the band below */
+.about-page .about-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(1px 1px at 8% 14%, rgba(255, 255, 255, .8), transparent),
+        radial-gradient(1.5px 1.5px at 22% 70%, rgba(255, 255, 255, .55), transparent),
+        radial-gradient(1px 1px at 37% 30%, rgba(255, 255, 255, .7), transparent),
+        radial-gradient(1px 1px at 49% 82%, rgba(255, 255, 255, .5), transparent),
+        radial-gradient(1.5px 1.5px at 56% 10%, rgba(255, 255, 255, .75), transparent),
+        radial-gradient(1px 1px at 63% 55%, rgba(255, 255, 255, .55), transparent),
+        radial-gradient(1px 1px at 92% 18%, rgba(255, 255, 255, .7), transparent),
+        radial-gradient(1px 1px at 96% 76%, rgba(255, 255, 255, .5), transparent),
+        radial-gradient(1px 1px at 3% 88%, rgba(255, 255, 255, .5), transparent);
+}
+
+/* content stays aligned with the rest of the page */
+.about-page .about-card > .about-grid {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding-inline: clamp(1rem, 3vw, 2rem);
+}
+
+.about-page .about-card h2 { color: #fff; }
+.about-page .about-card .about-rule { background: linear-gradient(90deg, rgba(255, 255, 255, .4), transparent); }
+.about-page .about-card .about-text .about-lead { color: #fff; }
+.about-page .about-card .about-lead span { color: #c4b5fd; }
+.about-page .about-card .about-text > div { color: rgba(230, 228, 255, .9); }
+.about-page .about-card #typed-text { color: #d8b4fe; }
+.about-page .about-card .typewriter-cursor { background-color: #d8b4fe; }
+.about-page .about-card .about-text p { color: rgba(232, 234, 255, .88); }
 
 /* Light text and controls on the night sky */
 .services-band .services-title { color: #fff; }
@@ -717,7 +788,8 @@
             /* Edge to edge: full viewport width, no gap above, and pulled down over
                main's bottom padding (2.5rem) and the footer's top margin (3rem) */
             width: 100vw;
-            margin: 0 0 calc(-2.5rem - 3rem) calc(50% - 50vw);
+            /* -4px top overlap: keeps layer edges hidden even with display scaling or browser zoom */
+            margin: -4px 0 calc(-2.5rem - 3rem) calc(50% - 50vw);
             position: relative;
             isolation: isolate;
             border-radius: 0;
@@ -748,7 +820,7 @@
             z-index: -2;
             /* sits under the sharp top strip (::before is -1) */
             inset: 0;
-            background: url('images/toronto.webp') 78% center / cover no-repeat;
+            background: url('images/toronto2.webp') 78% center / cover no-repeat;
             opacity: 0.55;
             /* higher = more photo, lower = more purple */
             /* fade in at the top so there is no hard edge under the sky above */
@@ -985,7 +1057,9 @@
             position: relative;
         }
 
+        /* purple glow around the profile photo removed at the owner's request */
         .profile-ring-glow::before {
+            display: none;
             content: '';
             position: absolute;
             inset: -6px;
@@ -1050,6 +1124,331 @@
         .svc-card-link:hover span {
             transform: translateX(3px);
         }
+
+        /* =========================================================
+           LIGHT / DARK MODE
+           Default styles above are the night version. Dark mode also
+           darkens the header and tabs so they flow into the night sky;
+           light mode swaps in a day sky and the daytime Toronto photo.
+           ========================================================= */
+
+        /* --- toggle button --- */
+        .theme-toggle {
+            flex: none;
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid #e4daf7;
+            background: #fff;
+            cursor: pointer;
+            transition: background .2s, border-color .2s, transform .2s;
+        }
+
+        .theme-toggle:hover { transform: scale(1.06); background: #f6f1ff; }
+        .theme-toggle:focus-visible { outline: 3px solid #a855f7; outline-offset: 3px; }
+
+        .theme-toggle svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .theme-toggle .icon-sun { stroke: #fbbf24; display: none; }
+        .theme-toggle .icon-moon { stroke: #6d28d9; fill: rgba(109, 40, 217, .12); }
+        html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+        html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+        /* --- dark mode: header and tabs join the night sky --- */
+        html[data-theme="dark"] body > header {
+            background: #0e1440;
+            border-bottom-color: rgba(255, 255, 255, .06);
+            box-shadow: none;
+        }
+
+        html[data-theme="dark"] body > header h1 { color: #fff; }
+        html[data-theme="dark"] body > header p { color: #c4b5fd; }
+
+        html[data-theme="dark"] .theme-toggle {
+            background: rgba(255, 255, 255, .08);
+            border-color: rgba(255, 255, 255, .22);
+        }
+
+        html[data-theme="dark"] .theme-toggle:hover { background: rgba(255, 255, 255, .16); }
+
+        html[data-theme="dark"] body > nav {
+            background: #0e1440;
+            border-bottom-color: rgba(255, 255, 255, .08);
+        }
+
+        html[data-theme="dark"] body > nav .tab-button { color: rgba(226, 232, 255, .72); }
+        html[data-theme="dark"] body > nav .tab-button.active { color: #c4b5fd; border-bottom-color: #a78bfa; }
+        html[data-theme="dark"] body > nav .tab-button:not(.active):hover { color: #fff; }
+
+        /* --- dark mode: the other tabs (Projects, Knowledge Sharing, My Articles) --- */
+        html[data-theme="dark"] body {
+            background-color: #0b1030;
+            color: #e5e8ff;
+        }
+
+        /* Projects */
+        html[data-theme="dark"] #content-projects h2 { color: #f1f4ff; }
+
+        html[data-theme="dark"] .project-card.bg-white {
+            background: #151b47;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+        }
+
+        html[data-theme="dark"] .project-card:hover { box-shadow: 0 20px 40px rgba(0, 0, 0, .45); }
+        html[data-theme="dark"] .project-card .text-gray-600 { color: #b8c0dc; }
+        html[data-theme="dark"] .project-card .text-teal-800 { color: #5eead4; }
+        html[data-theme="dark"] .project-card .text-indigo-800 { color: #a5b4fc; }
+        html[data-theme="dark"] .project-card .text-purple-800 { color: #d8b4fe; }
+
+        /* Knowledge Sharing: banners keep their artwork, dimmed by a dark wash so text stays readable */
+        html[data-theme="dark"] .teaching-hero,
+        html[data-theme="dark"] .kofi-banner {
+            box-shadow: inset 0 0 0 2000px rgba(11, 16, 48, .74);
+            border-color: rgba(255, 255, 255, .12);
+        }
+
+        html[data-theme="dark"] .teaching-hero h2 { color: #f1f4ff; }
+        html[data-theme="dark"] .teaching-hero p { color: #c3c9e6; }
+        html[data-theme="dark"] .teaching-hero .eyebrow { color: #c4b5fd; }
+        html[data-theme="dark"] .hero-accent { color: #f0abfc; }
+
+        /* inline text colours inside the Ko-fi banner and section */
+        html[data-theme="dark"] #content-teaching [style*="color:#7c3aed"] { color: #c4b5fd !important; }
+        html[data-theme="dark"] #content-teaching [style*="color:#111827"] { color: #f1f4ff !important; }
+        html[data-theme="dark"] #content-teaching [style*="color:#374151"] { color: #d3d8f0 !important; }
+        html[data-theme="dark"] #content-teaching [style*="color:#4b5563"] { color: #c3c9e6 !important; }
+        html[data-theme="dark"] #content-teaching [style*="color:#6b7280"]:not(span) { color: #aab3cf !important; }
+
+        /* filter pills */
+        html[data-theme="dark"] .filter-pill {
+            background: #151b47;
+            border-color: rgba(255, 255, 255, .18);
+            color: #cfd5f0;
+        }
+
+        html[data-theme="dark"] .filter-pill:hover { border-color: #c084fc; color: #e9d5ff; }
+        html[data-theme="dark"] .filter-pill.active { background: #9333ea; border-color: #9333ea; color: #fff; }
+
+        /* resource cards */
+        html[data-theme="dark"] .teach-card {
+            background: #151b47;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .35);
+        }
+
+        html[data-theme="dark"] .teach-card:hover { box-shadow: 0 10px 28px rgba(0, 0, 0, .5); }
+        html[data-theme="dark"] .card-title { color: #f1f4ff; }
+        html[data-theme="dark"] .card-desc { color: #aab3cf; }
+        html[data-theme="dark"] .card-footer { border-top-color: rgba(255, 255, 255, .08); }
+
+        /* coloured tag and footer labels: lighter shades of the same colours */
+        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#c2410c"] { color: #fdba74 !important; }
+        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#059669"] { color: #6ee7b7 !important; }
+        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#1d4ed8"] { color: #93c5fd !important; }
+        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#15803d"] { color: #86efac !important; }
+        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#a16207"] { color: #fcd34d !important; }
+        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#7e22ce"] { color: #d8b4fe !important; }
+
+        /* grey "coming soon" style chips */
+        html[data-theme="dark"] #content-teaching span[style*="background:#f3f4f6"] {
+            background: rgba(255, 255, 255, .08) !important;
+            color: #b8c0dc !important;
+        }
+
+        /* sky colours measured along the top edge of the daytime photo as displayed */
+        html[data-theme="light"] {
+            --day-l: rgb(113, 142, 221);
+            --day-m: rgb(114, 143, 222);
+            --day-r: rgb(110, 145, 225);
+        }
+
+        /* --- light mode: About Me as a bright day sky --- */
+        html[data-theme="light"] .about-page .about-card {
+            background:
+                radial-gradient(ellipse 45% 60% at 85% 40%, rgba(255, 255, 255, .6), transparent 70%),
+                linear-gradient(180deg, #f4f8ff 0%, #e6f0ff 55%, #d6e6ff 100%);
+        }
+
+        html[data-theme="light"] .about-page .about-card::before { display: none; }
+        html[data-theme="light"] .about-page .about-card h2 { color: #14173d; }
+        html[data-theme="light"] .about-page .about-card .about-rule { background: linear-gradient(90deg, #c9b8ee, transparent); }
+        html[data-theme="light"] .about-page .about-card .about-text .about-lead { color: #14173d; }
+        html[data-theme="light"] .about-page .about-card .about-lead span { color: #6d28d9; }
+        html[data-theme="light"] .about-page .about-card .about-text > div { color: #4c1d95; }
+        html[data-theme="light"] .about-page .about-card #typed-text { color: #7c3aed; }
+        html[data-theme="light"] .about-page .about-card .typewriter-cursor { background-color: #7c3aed; }
+        html[data-theme="light"] .about-page .about-card .about-text p { color: #3f4560; }
+
+        /* --- light mode: services band continues the day sky into the photo --- */
+        html[data-theme="light"] .services-band {
+            /* bottom edge = colours sampled from the top edge of the daytime photo */
+            background:
+                linear-gradient(180deg, rgba(214, 230, 255, 1) 0%, rgba(214, 230, 255, .55) 38%, rgba(214, 230, 255, 0) 100%),
+                linear-gradient(90deg, var(--day-l, rgb(140, 167, 227)) 0%, var(--day-m, rgb(139, 169, 229)) 50%, var(--day-r, rgb(134, 165, 228)) 100%);
+        }
+
+        html[data-theme="light"] .services-band::before { display: none; }
+
+        /* white daytime clouds with soft blue-grey shading underneath */
+        html[data-theme="light"] .sky-clouds {
+            --cloud-body: rgba(255, 255, 255, .92);
+            --cloud-shade: rgba(214, 224, 242, .85);
+            --cloud-under: rgba(150, 168, 205, .35);
+        }
+
+        html[data-theme="light"] .services-band .services-title { color: #14173d; }
+        html[data-theme="light"] .services-band .about-rule.center { background: rgba(20, 23, 61, .25); }
+        html[data-theme="light"] .services-band .svc-dot::before { background: rgba(20, 23, 61, .35); }
+        html[data-theme="light"] .services-band .svc-dot[aria-current="true"]::before { background: #4c1d95; }
+
+        /* light frosted-glass cards with dark text */
+        html[data-theme="light"] .services-band .svc-card {
+            background: linear-gradient(160deg, rgba(255, 255, 255, .78) 0%, rgba(255, 255, 255, .55) 100%);
+            border-color: rgba(255, 255, 255, .85);
+            box-shadow: 0 20px 45px rgba(30, 60, 140, .18), inset 0 1px 0 rgba(255, 255, 255, .9);
+        }
+
+        html[data-theme="light"] .services-band .svc-card.is-active {
+            background: linear-gradient(160deg, rgba(255, 255, 255, .9) 0%, rgba(255, 255, 255, .72) 100%);
+            border-color: #fff;
+            box-shadow: 0 0 0 3px rgba(109, 59, 210, .14), 0 26px 55px rgba(30, 60, 140, .24), inset 0 1px 0 #fff;
+        }
+
+        html[data-theme="light"] .services-band .svc-card h3 { color: #14173d; text-shadow: none; }
+        html[data-theme="light"] .services-band .svc-card p { color: #3f4560; text-shadow: none; }
+        html[data-theme="light"] .services-band .svc-icon { stroke: #6d28d9; }
+        html[data-theme="light"] .services-band .svc-card::after { background: #c4a8f5; }
+
+        html[data-theme="light"] .services-band .svc-card-link {
+            background: #6d28d9;
+            border-color: #6d28d9;
+            color: #fff;
+        }
+
+        html[data-theme="light"] .services-band .svc-card-link:hover {
+            background: #4c1d95;
+            border-color: #4c1d95;
+            color: #fff;
+        }
+
+        html[data-theme="light"] .services-band .svc-arrow {
+            background: rgba(255, 255, 255, .7);
+            border-color: rgba(255, 255, 255, .9);
+            box-shadow: 0 6px 18px rgba(30, 60, 140, .2);
+        }
+
+        html[data-theme="light"] .services-band .svc-arrow:hover { background: #fff; }
+        html[data-theme="light"] .services-band .svc-arrow svg { stroke: #14173d; }
+
+        /* --- light mode: daytime Toronto photo in the contact section --- */
+        html[data-theme="light"] #content-contact.contact-section-bg {
+            background:
+                linear-gradient(180deg, rgba(120, 150, 210, 0) 0%, #6f8fce 45%, #4c6fb3 100%),
+                linear-gradient(90deg, var(--day-l, rgb(140, 167, 227)) 0%, var(--day-m, rgb(139, 169, 229)) 50%, var(--day-r, rgb(134, 165, 228)) 100%);
+        }
+
+        html[data-theme="light"] .contact-section-bg::before {
+            background-image: url('images/toronto-day.webp');
+        }
+
+        html[data-theme="light"] .contact-section-bg::after {
+            background-image: url('images/toronto-day.webp');
+        }
+
+        /* the form panel is a little more solid over the bright photo so its text stays readable */
+        html[data-theme="light"] .contact-card {
+            background: rgba(20, 28, 90, .6);
+        }
+
+        @media (min-width: 1024px) {
+            html[data-theme="light"] #content-contact.contact-section-bg {
+                background: linear-gradient(90deg, var(--day-l, rgb(140, 167, 227)) 0%, var(--day-m, rgb(139, 169, 229)) 50%, var(--day-r, rgb(134, 165, 228)) 100%);
+            }
+
+            /* Desktop uses a wider version of the day photo (skyline on the right, open sky and
+               lake on the left) fitted to the full section height, so the whole tower, dome and
+               water show at every screen size and the tower stays to the right of the form */
+            html[data-theme="light"] .contact-section-bg::before {
+                background-image: url('images/toronto-day-wide.webp');
+                background-size: cover;
+                background-position: right center;
+                /* shorter fade: the colours above already match, and the antenna stays visible */
+                -webkit-mask-image: linear-gradient(transparent 0, #000 60px);
+                mask-image: linear-gradient(transparent 0, #000 60px);
+            }
+        }
+
+        /* narrower desktops: slide the photo right a little so the tower clears the form */
+        @media (min-width: 1024px) and (max-width: 1279px) {
+            html[data-theme="light"] .contact-section-bg::before {
+                background-position: right -260px center;
+            }
+        }
+
+        /* Knowledge Sharing filters: hidden cards leave the grid; shown cards fade in */
+        #cards-grid .card-item[hidden] { display: none !important; }
+
+        .card-reveal { animation: card-reveal .35s ease both; }
+
+        @keyframes card-reveal {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .card-reveal { animation: none; }
+        }
+
+        /* =========================================================
+           TYPOGRAPHY: clean modern sans (Inter Tight for headings,
+           Inter for text). Large headings are light with tight
+           spacing; small headings are medium weight.
+           ========================================================= */
+        body > header h1.font-extrabold {
+            font-weight: 500;
+            letter-spacing: -0.03em;
+        }
+
+        body > header p { font-weight: 400; }
+
+        /* big section headings: light and airy */
+        .about-text h2,
+        .services-band .services-title,
+        #content-projects h2.font-bold,
+        .teaching-hero h2,
+        #content-contact h2 {
+            font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
+            font-weight: 300;
+            letter-spacing: -0.035em;
+            line-height: 1.05;
+        }
+
+        .about-text h2 { font-size: clamp(2.6rem, 5vw, 3.8rem); }
+        .services-band .services-title { font-size: clamp(2.2rem, 4.2vw, 3.2rem); }
+
+        /* "Hi, I'm Mojgan." */
+        .about-text .about-lead {
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        /* card and panel titles */
+        .about-page h3,
+        .svc-card h3,
+        .project-card h3,
+        #content-contact h3 {
+            font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
     </style>
 </head>
 
@@ -1057,14 +1456,27 @@
 
     <!-- Header -->
     <header class="bg-white shadow-md">
-        <div class="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-            <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight">Mojgan Samandar</h1>
-            <p class="mt-2 text-xl text-purple-600 font-medium">Economist & Data Analyst</p>
+        <div class="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+            <div>
+                <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight">Mojgan Samandar</h1>
+                <p class="mt-2 text-xl text-purple-600 font-medium">Economist & Data Analyst</p>
+            </div>
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light mode">
+                <!-- sun: shown in dark mode (switches to light) -->
+                <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4.5" />
+                    <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" />
+                </svg>
+                <!-- moon: shown in light mode (switches to dark) -->
+                <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" />
+                </svg>
+            </button>
         </div>
     </header>
 
     <!-- Navigation Tabs -->
-    <nav class="bg-white border-b border-gray-200 sticky top-0 z-10">
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex space-x-4 sm:space-x-8">
                 <button id="tab-about" data-target="content-about" class="tab-button active py-3 px-2 text-gray-600">
@@ -1132,9 +1544,30 @@
             <!-- 2. Services carousel -->
 <div class="services-band">
                 <div class="sky-clouds" aria-hidden="true">
-                    <div class="cloud-layer cloud-far"></div>
-                    <div class="cloud-layer cloud-near"></div>
+                    <div class="cloud cloud-1"><span class="c-body"></span><span class="c-shade"></span><span class="c-under"></span></div>
+                    <div class="cloud cloud-2"><span class="c-body"></span><span class="c-shade"></span><span class="c-under"></span></div>
+                    <div class="cloud cloud-3"><span class="c-body"></span><span class="c-shade"></span><span class="c-under"></span></div>
+                    <div class="cloud cloud-4"><span class="c-body"></span><span class="c-shade"></span><span class="c-under"></span></div>
+                    <div class="cloud cloud-5"><span class="c-body"></span><span class="c-shade"></span><span class="c-under"></span></div>
                 </div>
+                <!-- noise filters that give the clouds their fluffy, irregular edges -->
+                <svg class="cloud-defs" aria-hidden="true" focusable="false">
+                    <filter id="cloud-f-body" x="-40%" y="-60%" width="180%" height="220%">
+                        <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4" seed="7" />
+                        <feDisplacementMap in="SourceGraphic" scale="150" />
+                        <feGaussianBlur stdDeviation="5" />
+                    </filter>
+                    <filter id="cloud-f-shade" x="-40%" y="-60%" width="180%" height="220%">
+                        <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="3" seed="3" />
+                        <feDisplacementMap in="SourceGraphic" scale="110" />
+                        <feGaussianBlur stdDeviation="9" />
+                    </filter>
+                    <filter id="cloud-f-under" x="-40%" y="-60%" width="180%" height="220%">
+                        <feTurbulence type="fractalNoise" baseFrequency="0.016" numOctaves="2" seed="11" />
+                        <feDisplacementMap in="SourceGraphic" scale="80" />
+                        <feGaussianBlur stdDeviation="12" />
+                    </filter>
+                </svg>
                 <div class="services-inner">
                     <h2 id="services-heading" class="services-title">What I Can Help With</h2>
                     <div class="about-rule center" aria-hidden="true"></div>
@@ -1169,6 +1602,11 @@
                                 </svg>
                                 <h3>Data Analysis &amp; Dashboards</h3>
                                 <p>Turn business data into useful reports, dashboards, and insights.</p>
+                                <a class="svc-card-link" href="https://pratechdigital.com/dashboards-insights"
+                                    target="_blank" rel="noopener">
+                                    Explore services
+                                    <span aria-hidden="true">→</span>
+                                </a>
                             </article>
                             <article class="svc-card" role="group" aria-roledescription="slide" aria-label="3 of 5">
                                 <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
@@ -1179,6 +1617,11 @@
                                 </svg>
                                 <h3>Websites</h3>
                                 <p>Clear, mobile-friendly websites for small businesses and professionals.</p>
+                                <a class="svc-card-link" href="https://pratechdigital.com/websites-digital-presence"
+                                    target="_blank" rel="noopener">
+                                    Explore services
+                                    <span aria-hidden="true">→</span>
+                                </a>
                             </article>
                             <article class="svc-card" role="group" aria-roledescription="slide" aria-label="4 of 5">
                                 <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
@@ -1191,6 +1634,11 @@
                                 <h3>Simple Apps &amp; Automation</h3>
                                 <p>Practical tools that reduce repetitive manual work and improve business processes.
                                 </p>
+                                <a class="svc-card-link" href="https://pratechdigital.com/apps-workflow-automation"
+                                    target="_blank" rel="noopener">
+                                    Explore services
+                                    <span aria-hidden="true">→</span>
+                                </a>
                             </article>
                             <article class="svc-card" role="group" aria-roledescription="slide" aria-label="5 of 5">
                                 <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
@@ -1430,20 +1878,20 @@
             </div>
             <!-- FILTER PILLS -->
             <div class="flex gap-2 flex-wrap mb-7" id="cat-filters">
-                <button class="filter-pill active" data-cat="all">All</button>
-                <button class="filter-pill" data-cat="sql">SQL</button>
-                <button class="filter-pill" data-cat="excel">Excel</button>
-                <button class="filter-pill" data-cat="powerbi">Power BI</button>
-                <button class="filter-pill" data-cat="math">Math (Gr. 1–2)</button>
-                <!-- <button class="filter-pill" data-cat="economics">Economics</button> -->
+                <button type="button" class="filter-pill active" data-cat="all" aria-pressed="true">All</button>
+                <button type="button" class="filter-pill" data-cat="finance" aria-pressed="false">Finance &amp; Credit Risk</button>
+                <button type="button" class="filter-pill" data-cat="data" aria-pressed="false">Data &amp; Analytics</button>
+                <button type="button" class="filter-pill" data-cat="research" aria-pressed="false">Research Methods</button>
+                <button type="button" class="filter-pill" data-cat="math" aria-pressed="false">Math for Kids</button>
+                <button type="button" class="filter-pill filter-pill-available" data-cat="available" aria-pressed="false">Available now</button>
             </div>
 
             <!-- CARDS GRID -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6" id="cards-grid">
 
 
-                <div class="card-item" data-cat="credit-risk" data-panel="credit-risk-panel">
-                    <div class="teach-card" onclick="togglePanel('credit-risk-panel', this.closest('.card-item'))">
+                <div class="card-item" data-cat="finance" data-panel="credit-risk-panel">
+                    <div class="teach-card">
 
                         <div class="card-thumb" style="background:#ecfdf5;">
                             <img src="images/commercial-credit-risk.png"
@@ -1488,7 +1936,7 @@
 
 
                 <!-- Analytics & Data Science card -->
-                <div class="card-item" data-cat="data-science" data-panel="data-science-panel">
+                <div class="card-item" data-cat="data research" data-panel="data-science-panel">
                     <div class="teach-card">
                         <div class="card-thumb" style="background:#ecfdf5;">
                             <img src="images/data_science.png" alt="Analytics and Data Science course" />
@@ -1530,7 +1978,7 @@
                 </div>
 
                 <!-- Causal Inference Methods Taxonomy -->
-                <div class="card-item" data-cat="causal-inference" data-panel="causal-inference-panel">
+                <div class="card-item" data-cat="research" data-panel="causal-inference-panel">
                     <div class="teach-card">
                         <div class="card-thumb" style="background:#ecfdf5;">
                             <img src="images/causal-inference-taxonomy.png"
@@ -1567,7 +2015,7 @@
                         </div>
 
                         <div class="card-footer" id="causal-inference-footer" style="color:#059669;">
-                            <a href="teaching\causal-Inference-methodst-taxonomy.html"
+                            <a href="teaching/causal-Inference-methodst-taxonomy.html"
                                 class="inline-block bg-emerald-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#dc23d1] transition">
                                 Explore taxonomy &rarr;
                             </a>
@@ -1576,8 +2024,8 @@
                 </div>
 
                 <!-- SQL card -->
-                <div class="card-item" data-cat="sql" data-panel="sql-panel">
-                    <div class="teach-card" onclick="togglePanel('sql-panel', this.closest('.card-item'))">
+                <div class="card-item" data-cat="data" data-panel="sql-panel">
+                    <div class="teach-card">
                         <div class="card-thumb">
                             <img src="images/sql.png" alt="SQL course" />
                         </div>
@@ -1607,7 +2055,7 @@
                 </div>
 
                 <!-- Excel card (coming soon) -->
-                <div class="card-item coming-soon" data-cat="excel" data-panel="excel-panel">
+                <div class="card-item coming-soon" data-cat="data" data-panel="excel-panel">
                     <div class="teach-card">
                         <div class="card-thumb" style="background:#f0fdf4;">
                             <img src="images/excel.png" alt="SQL course" />
@@ -1635,7 +2083,7 @@
                 </div>
 
                 <!-- Power BI card (coming soon) -->
-                <div class="card-item coming-soon" data-cat="powerbi">
+                <div class="card-item coming-soon" data-cat="data">
                     <div class="teach-card">
                         <div class="card-thumb" style="background:#f0fdf4;">
                             <img src="images/PowerBI.png" alt="PowerBI course" />
@@ -1700,8 +2148,8 @@
 
 
                 <!-- Economics & Finance card -->
-                <div class="card-item coming-soon " data-cat="economics" data-panel="econ-panel">
-                    <div class="teach-card" onclick="togglePanel('econ-panel', this.closest('.card-item'))">
+                <div class="card-item coming-soon " data-cat="finance" data-panel="econ-panel">
+                    <div class="teach-card">
 
                         <div class="card-thumb" style="background:#ecfdf5;">
                             <img src="images/economics-fiance.png" alt="Analytics and Data Science course" />
@@ -1754,10 +2202,74 @@
     <footer class="bg-gray-800 text-white mt-12">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
             <p class="text-sm">&copy; 2026 Mojgan Samandar. All rights reserved.</p>
+            <!-- required credit for the daytime photo (CC BY-SA 4.0) -->
+            <p class="text-xs text-gray-400 mt-1">
+                Daytime Toronto photo:
+                <a class="underline hover:text-white" href="https://commons.wikimedia.org/wiki/File:Toronto_Skyline_Summer_2020.jpg"
+                    target="_blank" rel="noopener">Aaron Davis</a>,
+                <a class="underline hover:text-white" href="https://creativecommons.org/licenses/by-sa/4.0/"
+                    target="_blank" rel="noopener">CC BY-SA 4.0</a>
+            </p>
         </div>
     </footer>
 
     <script>
+        // Light/dark toggle (the theme itself is applied by the script in <head>)
+        (function () {
+            const btn = document.getElementById('theme-toggle');
+            if (!btn) return;
+            const root = document.documentElement;
+            const label = () => btn.setAttribute('aria-label',
+                root.getAttribute('data-theme') === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+            label();
+            btn.addEventListener('click', () => {
+                const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', next);
+                try { localStorage.setItem('theme', next); } catch (e) { }
+                label();
+            });
+        })();
+
+        // Knowledge Sharing: topic filters and clickable cards
+        (function () {
+            const pills = document.querySelectorAll('#cat-filters .filter-pill');
+            const grid = document.getElementById('cards-grid');
+            if (!pills.length || !grid) return;
+            const cards = grid.querySelectorAll('.card-item');
+
+            function applyFilter(cat) {
+                pills.forEach(p => {
+                    const on = p.dataset.cat === cat;
+                    p.classList.toggle('active', on);
+                    p.setAttribute('aria-pressed', on ? 'true' : 'false');
+                });
+                cards.forEach(card => {
+                    const cats = (card.dataset.cat || '').split(/\s+/);
+                    const show = cat === 'all' ||
+                        (cat === 'available' ? !card.classList.contains('coming-soon') : cats.includes(cat));
+                    card.hidden = !show;
+                    if (show) {                       // replay the fade-in
+                        card.classList.remove('card-reveal');
+                        void card.offsetWidth;
+                        card.classList.add('card-reveal');
+                    }
+                });
+            }
+
+            pills.forEach(p => p.addEventListener('click', () => applyFilter(p.dataset.cat)));
+
+            // clicking anywhere on an available card opens its resource (same as its button)
+            grid.addEventListener('click', e => {
+                if (e.target.closest('a')) return;
+                const card = e.target.closest('.card-item');
+                if (!card || card.classList.contains('coming-soon')) return;
+                const link = card.querySelector('a[href]');
+                if (!link) return;
+                if (e.ctrlKey || e.metaKey) window.open(link.href, '_blank', 'noopener');
+                else link.click();
+            });
+        })();
+
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabContents = document.querySelectorAll('.tab-content');
 
