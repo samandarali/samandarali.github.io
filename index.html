@@ -285,10 +285,15 @@
     isolation: isolate;          /* keeps video/overlay layers inside this band */
     overflow: hidden;
     width: 100vw;
-    margin: 56px 0 56px calc(50% - 50vw);
+    margin: 56px 0 0 calc(50% - 50vw);   /* no bottom gap: the contact photo starts right below */
     padding: 56px 0 40px;
-    background: linear-gradient(180deg, #f6f1ff 0%, #f1eafd 100%); /* fallback while video loads */
-    border-block: 1px solid var(--lav);
+    /* Night sky that continues into the Toronto photo below: the bottom edge uses the
+       colours sampled from the photo's top edge (left / middle / right), and the sky
+       darkens toward the top of the band */
+    background:
+        linear-gradient(180deg, rgba(5, 9, 32, 1) 0%, rgba(5, 9, 32, .72) 38%, rgba(5, 9, 32, 0) 100%),
+        linear-gradient(90deg, rgb(22, 63, 148) 0%, rgb(18, 49, 126) 50%, rgb(31, 72, 160) 100%);
+    border: 0;
 }
 
 .services-bg-video {
@@ -301,17 +306,145 @@
     pointer-events: none;
 }
 
-/* Soft lavender wash so the title, cards and dots stay readable */
+/* Faint stars, strongest at the top and fading out before the seam with the photo */
 .services-band::before {
     content: "";
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(180deg,
-            rgba(246, 241, 255, 0.55) 0%,
-            rgba(241, 234, 253, 0.35) 100%);
+    background-image:
+        radial-gradient(1px 1px at 12% 18%, rgba(255, 255, 255, .85), transparent),
+        radial-gradient(1.5px 1.5px at 27% 9%, rgba(255, 255, 255, .7), transparent),
+        radial-gradient(1px 1px at 41% 27%, rgba(255, 255, 255, .6), transparent),
+        radial-gradient(1px 1px at 58% 12%, rgba(255, 255, 255, .8), transparent),
+        radial-gradient(1.5px 1.5px at 73% 22%, rgba(255, 255, 255, .65), transparent),
+        radial-gradient(1px 1px at 88% 8%, rgba(255, 255, 255, .75), transparent),
+        radial-gradient(1px 1px at 6% 40%, rgba(255, 255, 255, .5), transparent),
+        radial-gradient(1px 1px at 35% 46%, rgba(255, 255, 255, .45), transparent),
+        radial-gradient(1px 1px at 66% 38%, rgba(255, 255, 255, .5), transparent),
+        radial-gradient(1px 1px at 94% 44%, rgba(255, 255, 255, .45), transparent);
+    -webkit-mask-image: linear-gradient(#000 0%, #000 45%, transparent 75%);
+    mask-image: linear-gradient(#000 0%, #000 45%, transparent 75%);
     pointer-events: none;
 }
+
+/* Drifting clouds: two layers at different speeds for depth. Each layer is twice the band
+   width with a tile that repeats every band width, so sliding it by half loops seamlessly. */
+.sky-clouds {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    /* keep the top of the sky clear and fade out before the seam with the photo */
+    -webkit-mask-image: linear-gradient(transparent 0%, #000 30%, #000 82%, transparent 100%);
+    mask-image: linear-gradient(transparent 0%, #000 30%, #000 82%, transparent 100%);
+}
+
+.cloud-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-repeat: repeat-x;
+    background-size: 50% 100%;
+    animation: cloud-drift linear infinite;
+    will-change: transform;
+}
+
+.cloud-far {
+    background-image:
+        radial-gradient(ellipse 18% 9% at 15% 55%, rgba(170, 160, 230, .30), transparent 70%),
+        radial-gradient(ellipse 22% 7% at 48% 70%, rgba(205, 170, 220, .24), transparent 70%),
+        radial-gradient(ellipse 15% 8% at 80% 48%, rgba(150, 165, 235, .28), transparent 70%);
+    filter: blur(14px);
+    animation-duration: 140s;
+}
+
+.cloud-near {
+    background-image:
+        radial-gradient(ellipse 26% 10% at 25% 82%, rgba(190, 175, 235, .32), transparent 70%),
+        radial-gradient(ellipse 20% 8% at 64% 88%, rgba(230, 180, 205, .22), transparent 70%),
+        radial-gradient(ellipse 14% 6% at 86% 66%, rgba(180, 190, 240, .24), transparent 70%);
+    filter: blur(10px);
+    animation-duration: 80s;
+}
+
+@keyframes cloud-drift {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cloud-layer { animation: none; }
+}
+
+/* Glass service cards on the night sky: dark tint + blur keeps white text easy to read */
+.services-band .svc-card {
+    background:
+        linear-gradient(160deg, rgba(255, 255, 255, .16) 0%, rgba(255, 255, 255, .04) 100%),
+        rgba(16, 24, 68, .55);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, .26);
+    box-shadow: 0 20px 45px rgba(3, 6, 30, .45), inset 0 1px 0 rgba(255, 255, 255, .22);
+}
+
+/* the front card is a little more solid so the cards behind it never show through its text */
+.services-band .svc-card.is-active {
+    background:
+        linear-gradient(160deg, rgba(255, 255, 255, .18) 0%, rgba(255, 255, 255, .05) 100%),
+        rgba(16, 24, 68, .72);
+    border-color: rgba(255, 255, 255, .42);
+    box-shadow: 0 0 0 3px rgba(196, 181, 253, .18), 0 26px 55px rgba(3, 6, 30, .55), inset 0 1px 0 rgba(255, 255, 255, .3);
+}
+
+.services-band .svc-card h3 {
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+}
+
+.services-band .svc-card p {
+    color: rgba(238, 240, 255, .92);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+}
+
+.services-band .svc-icon { stroke: #c4b5fd; }
+.services-band .svc-card::after { background: rgba(255, 255, 255, .35); }
+
+/* white pill button, like the reference design */
+.services-band .svc-card-link {
+    background: #fff;
+    border-color: #fff;
+    color: #1e1b4b;
+}
+
+.services-band .svc-card-link:hover {
+    background: #ede9fe;
+    border-color: #ede9fe;
+    color: #1e1b4b;
+}
+
+/* glass arrows */
+.services-band .svc-arrow {
+    background: rgba(255, 255, 255, .14);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-color: rgba(255, 255, 255, .35);
+    box-shadow: 0 6px 18px rgba(3, 6, 30, .35);
+}
+
+.services-band .svc-arrow:hover { background: rgba(255, 255, 255, .26); }
+.services-band .svc-arrow svg { stroke: #fff; }
+
+/* Light text and controls on the night sky */
+.services-band .services-title { color: #fff; }
+.services-band .about-rule.center { background: rgba(255, 255, 255, .35); }
+.services-band .svc-dot::before { background: rgba(255, 255, 255, .45); }
+.services-band .svc-dot[aria-current="true"]::before { background: #c4b5fd; }
+.services-band .svc-arrow:focus-visible,
+.services-band .svc-dot:focus-visible { outline-color: #c4b5fd; }
 
 .services-inner {
     position: relative;
@@ -581,13 +714,17 @@
 
         /* Full-bleed section; photo lives on ::before so mobile can show it as a top strip */
         #content-contact.contact-section-bg {
-            --contact-max: 1600px;
-            margin-left: calc(50% - min(100vw, var(--contact-max)) / 2);
-            width: min(100vw, var(--contact-max));
+            /* Edge to edge: full viewport width, no gap above, and pulled down over
+               main's bottom padding (2.5rem) and the footer's top margin (3rem) */
+            width: 100vw;
+            margin: 0 0 calc(-2.5rem - 3rem) calc(50% - 50vw);
             position: relative;
             isolation: isolate;
             border-radius: 0;
-            background: linear-gradient(160deg, #4c1d95 0%, #1e1b4b 100%);
+            /* starts in the sky blue the services band ends with, so the photo can fade in seamlessly */
+            background:
+                linear-gradient(180deg, rgba(49, 46, 129, 0) 0%, #312e81 40%, #1e1b4b 100%),
+                linear-gradient(90deg, rgb(22, 63, 148) 0%, rgb(18, 49, 126) 50%, rgb(31, 72, 160) 100%);
             padding: 13rem 1rem 2.5rem;
             /* mobile: ~13rem of photo shows above the panel */
         }
@@ -599,8 +736,9 @@
             inset: 0 0 auto 0;
             height: 17rem;
             background: url('images/toronto2.webp') 78% center / cover no-repeat;
-            -webkit-mask-image: linear-gradient(#000 65%, transparent);
-            mask-image: linear-gradient(#000 65%, transparent);
+            /* fades in at the top (blends with the sky above) and out at the bottom */
+            -webkit-mask-image: linear-gradient(transparent 0, #000 3.5rem, #000 65%, transparent);
+            mask-image: linear-gradient(transparent 0, #000 3.5rem, #000 65%, transparent);
         }
 
         /* Mobile: softer copy of the photo behind the whole panel, so the glass has something to blur */
@@ -613,6 +751,9 @@
             background: url('images/toronto.webp') 78% center / cover no-repeat;
             opacity: 0.55;
             /* higher = more photo, lower = more purple */
+            /* fade in at the top so there is no hard edge under the sky above */
+            -webkit-mask-image: linear-gradient(transparent 0, #000 6rem);
+            mask-image: linear-gradient(transparent 0, #000 6rem);
         }
 
         /* Frosted-glass panel */
@@ -642,6 +783,8 @@
             #content-contact.contact-section-bg {
                 min-height: 680px;
                 padding: 4rem clamp(1.5rem, 4vw, 4rem);
+                /* same sky colours as the bottom edge of the services band */
+                background: linear-gradient(90deg, rgb(22, 63, 148) 0%, rgb(18, 49, 126) 50%, rgb(31, 72, 160) 100%);
             }
 
             .contact-section-bg::before {
@@ -649,8 +792,9 @@
                 height: auto;
                 background-position: 78% 25%;
                 /* 25% shows the top of the tower */
-                -webkit-mask-image: none;
-                mask-image: none;
+                /* photo fades in over the first 140px so the sky above flows into it */
+                -webkit-mask-image: linear-gradient(transparent 0, #000 140px);
+                mask-image: linear-gradient(transparent 0, #000 140px);
             }
             .contact-section-bg::after { display: none; }
 
@@ -987,9 +1131,10 @@
 
             <!-- 2. Services carousel -->
 <div class="services-band">
-    <video class="services-bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-        <source src="images/what-i-can-help-breeze-loop-noticeable.mp4" type="video/mp4">
-    </video>
+                <div class="sky-clouds" aria-hidden="true">
+                    <div class="cloud-layer cloud-far"></div>
+                    <div class="cloud-layer cloud-near"></div>
+                </div>
                 <div class="services-inner">
                     <h2 id="services-heading" class="services-title">What I Can Help With</h2>
                     <div class="about-rule center" aria-hidden="true"></div>
