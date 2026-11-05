@@ -5,23 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Credit memorandum to the relationship manager and independent credit approval for Exercise 2 – Maple Ridge Manufacturing Ltd.">
 <title>Credit Memo | Maple Ridge Manufacturing Ltd.</title>
+    <link rel="stylesheet" href="../../../styles/palette.css" />
 <style>
     :root {
-      --navy: #17324d;
-      --blue: #2f6fa3;
-      --blue-soft: #eaf3fa;
-      --green: #19705d;
-      --green-soft: #e9f6f2;
-      --amber: #9a5d00;
-      --amber-soft: #fff5dc;
-      --red: #9b3434;
-      --red-soft: #fff0f0;
-      --ink: #263442;
-      --muted: #607080;
-      --line: #d8e1e8;
-      --page: #f4f7f9;
+      --navy: #232845;
+      --blue: #2a74ab;
+      --blue-soft: #dfedf7;
+      --green: #047857;
+      --green-soft: #d1fae5;
+      --amber: #b45309;
+      --amber-soft: #fef3c7;
+      --red: #9f1239;
+      --red-soft: #fff1f2;
+      --ink: #232845;
+      --muted: #63698b;
+      --line: #bfdaed;
+      --page: #f4f4f4;
       --white: #fff;
-      --shadow: 0 12px 30px rgba(26, 49, 70, 0.08);
+      --shadow: 0 12px 30px rgba(35, 40, 69, 0.08);
     }
 
     * { box-sizing: border-box; }
@@ -48,7 +49,7 @@
       padding: 48px;
       color: var(--white);
       border-radius: 22px;
-      background: linear-gradient(135deg, #17324d 0%, #205d78 65%, #19705d 100%);
+      background: linear-gradient(135deg, #232845 0%, #4a5072 65%, #047857 100%);
       box-shadow: var(--shadow);
     }
 
@@ -69,7 +70,7 @@
       font-weight: 800;
       letter-spacing: .13em;
       text-transform: uppercase;
-      color: #bfe6dc;
+      color: #a7f3d0;
     }
 
     h1 {
@@ -87,7 +88,7 @@
       z-index: 1;
       max-width: 760px;
       margin: 20px 0 0;
-      color: #eaf4f7;
+      color: #dfedf7;
       font-size: 1.08rem;
     }
 
@@ -118,7 +119,7 @@
       box-shadow: var(--shadow);
     }
 
-    .instruction strong { color: #744700; }
+    .instruction strong { color: #92400e; }
 
     .layout {
       display: grid;
@@ -241,7 +242,7 @@
     caption {
       padding: 12px 15px;
       color: var(--muted);
-      background: #f7fafc;
+      background: #f4f4f4;
       text-align: left;
       font-size: .82rem;
       font-weight: 700;
@@ -257,7 +258,7 @@
     th:first-child, td:first-child { text-align: left; }
     thead th { color: var(--white); background: var(--navy); }
     tbody tr:last-child td { border-bottom: 0; }
-    tbody tr:nth-child(even) { background: #f9fbfc; }
+    tbody tr:nth-child(even) { background: #f4f4f4; }
     .total td { color: var(--navy); background: var(--blue-soft); font-weight: 800; }
 
     .two-col {
@@ -304,10 +305,10 @@
       min-height: 170px;
       margin-top: 20px;
       padding: 20px;
-      border: 2px dashed #b8c5cf;
+      border: 2px dashed #91bede;
       border-radius: 12px;
       color: var(--muted);
-      background: #fbfcfd;
+      background: #f4f4f4;
     }
 
     footer {
@@ -430,8 +431,8 @@
   
     .exec { border-top: 4px solid var(--green); }
     .verdict { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin: 4px 0 10px; }
-    .verdict .badge { padding: 6px 14px; border-radius: 999px; background: var(--amber-soft); color: #744700;
-      border: 1px solid #e7c77a; font-weight: 800; letter-spacing:.02em; }
+    .verdict .badge { padding: 6px 14px; border-radius: 999px; background: var(--amber-soft); color: #92400e;
+      border: 1px solid #fbbf24; font-weight: 800; letter-spacing:.02em; }
     .kpis { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; margin: 10px 0; }
     .kpi { padding: 9px 11px; border-radius: 9px; background: var(--blue-soft); }
     .kpi .k { color: var(--muted); font-size: .68rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
@@ -456,48 +457,48 @@
     @media (max-width: 760px) { .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); } }
     @media print { .kpis { grid-template-columns: repeat(4, 1fr); } }
 
-.exnav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;padding:8px 10px;border:1px solid #d8e1e8;border-radius:12px;background:#fff;box-shadow:0 6px 18px rgba(26,49,70,.06);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-.exnav .exhome{color:#607080;text-decoration:none;font-size:.8rem;font-weight:700;padding:4px 8px}
-.exnav .exhome:hover{color:#2f6fa3}
-.exnav .extitle{color:#17324d;font-weight:800;font-size:.86rem;margin-right:auto}
+.exnav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;padding:8px 10px;border:1px solid #bfdaed;border-radius:12px;background:#fff;box-shadow:0 6px 18px rgba(35, 40, 69, .06);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.exnav .exhome{color:#63698b;text-decoration:none;font-size:.8rem;font-weight:700;padding:4px 8px}
+.exnav .exhome:hover{color:#2a74ab}
+.exnav .extitle{color:#232845;font-weight:800;font-size:.86rem;margin-right:auto}
 .exnav ol{display:flex;gap:4px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
 .exnav li{margin:0}
-.exnav a.step{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;color:#2f4255;text-decoration:none;font-size:.8rem;font-weight:700;border:1px solid #d8e1e8;background:#f7fafc}
-.exnav a.step:hover{border-color:#2f6fa3;color:#2f6fa3}
-.exnav a.step .n{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#d8e1e8;color:#17324d;font-size:.7rem}
-.exnav a.step.on{background:#17324d;border-color:#17324d;color:#fff}
-.exnav a.step.on .n{background:#19705d;color:#fff}
+.exnav a.step{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;color:#353a5a;text-decoration:none;font-size:.8rem;font-weight:700;border:1px solid #bfdaed;background:#f4f4f4}
+.exnav a.step:hover{border-color:#2a74ab;color:#2a74ab}
+.exnav a.step .n{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#bfdaed;color:#232845;font-size:.7rem}
+.exnav a.step.on{background:#232845;border-color:#232845;color:#fff}
+.exnav a.step.on .n{background:#047857;color:#fff}
 @media print{.exnav{display:none}}
 @media (max-width:600px){.exnav .extitle{width:100%}}
 
-body{background:#eef2f5}
+body{background:#dfedf7}
 .memo{width:min(1000px,calc(100% - 28px));margin:16px auto 32px}
-.paper{background:#fff;border:1px solid #d8e1e8;border-radius:10px;box-shadow:0 12px 30px rgba(26,49,70,.08);padding:34px 40px}
-.letterhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;border-bottom:3px solid #17324d;padding-bottom:12px;margin-bottom:14px}
-.letterhead .org{color:#17324d;font-weight:800;font-size:1.05rem;letter-spacing:.02em}
-.letterhead .org small{display:block;color:#607080;font-weight:600;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase}
-.letterhead .cls{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#9b3434;border:1px solid #e4b4b4;padding:4px 8px;border-radius:5px;background:#fff7f7}
-.memo h1{margin:4px 0 12px;color:#17324d;font-size:1.5rem;letter-spacing:-.01em}
-.mhdr{display:grid;grid-template-columns:150px 1fr 150px 1fr;border:1px solid #d8e1e8;border-radius:8px;overflow:hidden;font-size:.86rem;margin-bottom:14px}
-.mhdr div{padding:6px 10px;border-bottom:1px solid #e6ecf1}
-.mhdr .k{background:#f4f7f9;color:#607080;font-weight:700;font-size:.74rem;letter-spacing:.04em;text-transform:uppercase}
-.decision{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px 14px;border-left:5px solid #9a5d00;background:#fff5dc;border-radius:8px;margin:10px 0 16px}
-.decision strong{color:#744700;font-size:1.02rem}
-.memo h2{font-size:1.02rem;color:#17324d;border-bottom:1px solid #d8e1e8;padding-bottom:4px;margin:22px 0 8px}
-.memo h2 .num{color:#19705d;margin-right:6px}
+.paper{background:#fff;border:1px solid #bfdaed;border-radius:10px;box-shadow:0 12px 30px rgba(35, 40, 69, .08);padding:34px 40px}
+.letterhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;border-bottom:3px solid #232845;padding-bottom:12px;margin-bottom:14px}
+.letterhead .org{color:#232845;font-weight:800;font-size:1.05rem;letter-spacing:.02em}
+.letterhead .org small{display:block;color:#63698b;font-weight:600;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase}
+.letterhead .cls{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#9f1239;border:1px solid #fda4af;padding:4px 8px;border-radius:5px;background:#f4f4f4}
+.memo h1{margin:4px 0 12px;color:#232845;font-size:1.5rem;letter-spacing:-.01em}
+.mhdr{display:grid;grid-template-columns:150px 1fr 150px 1fr;border:1px solid #bfdaed;border-radius:8px;overflow:hidden;font-size:.86rem;margin-bottom:14px}
+.mhdr div{padding:6px 10px;border-bottom:1px solid #dfedf7}
+.mhdr .k{background:#f4f4f4;color:#63698b;font-weight:700;font-size:.74rem;letter-spacing:.04em;text-transform:uppercase}
+.decision{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px 14px;border-left:5px solid #b45309;background:#fef3c7;border-radius:8px;margin:10px 0 16px}
+.decision strong{color:#92400e;font-size:1.02rem}
+.memo h2{font-size:1.02rem;color:#232845;border-bottom:1px solid #bfdaed;padding-bottom:4px;margin:22px 0 8px}
+.memo h2 .num{color:#047857;margin-right:6px}
 .memo p,.memo li{font-size:.9rem;line-height:1.55}
 .memo td{white-space:normal}
 .memo-fac td:nth-child(n+6){text-align:left;font-size:.78rem}
 .sign{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px}
-.sigbox{border:1px solid #d8e1e8;border-radius:8px;padding:12px;font-size:.84rem;background:#fbfcfd}
-.sigbox h3{margin:0 0 6px;color:#17324d;font-size:.86rem}
-.sigline{border-bottom:1px solid #9aa5b1;height:26px;margin:8px 0 2px}
-.sigcap{color:#607080;font-size:.72rem}
+.sigbox{border:1px solid #bfdaed;border-radius:8px;padding:12px;font-size:.84rem;background:#f4f4f4}
+.sigbox h3{margin:0 0 6px;color:#232845;font-size:.86rem}
+.sigline{border-bottom:1px solid #9c9c9c;height:26px;margin:8px 0 2px}
+.sigcap{color:#63698b;font-size:.72rem}
 .chk{display:block;margin:3px 0}
 .chk::before{content:"☐";margin-right:6px;font-size:1rem}
-.commentbox{border:1px dashed #b8c5cf;border-radius:6px;min-height:70px;margin-top:6px;padding:6px;color:#9aa5b1;font-size:.78rem}
+.commentbox{border:1px dashed #91bede;border-radius:6px;min-height:70px;margin-top:6px;padding:6px;color:#9c9c9c;font-size:.78rem}
 .printbar{display:flex;justify-content:flex-end;gap:8px;margin:0 0 10px}
-.printbar button{border:1px solid #17324d;background:#17324d;color:#fff;border-radius:7px;padding:6px 12px;font:600 .82rem inherit;cursor:pointer}
+.printbar button{border:1px solid #232845;background:#232845;color:#fff;border-radius:7px;padding:6px 12px;font:600 .82rem inherit;cursor:pointer}
 @media (max-width:760px){.paper{padding:20px 16px}.mhdr{grid-template-columns:110px 1fr}.sign{grid-template-columns:1fr}}
 @media print{body{background:#fff}.memo{width:100%;margin:0}.paper{border:0;box-shadow:none;padding:0}.printbar{display:none}.memo h2{break-after:avoid}.sigbox,.table-wrap{break-inside:avoid}}
 </style>
@@ -519,7 +520,7 @@ body{background:#eef2f5}
   <div class="k">Request</div><div>Line $1.4M; refinance $1.24M; equipment $1.5M</div><div class="k">Total requested</div><div><strong>$4,140k</strong></div>
   <div class="k">Recommended</div><div><strong>$2,240k</strong> (line $1.0M + refinance $1.24M)</div><div class="k">Risk rating</div><div>7 – Special mention</div>
 </div>
-<div class="decision" style="border-left-color:#9b3434;background:#fff0f0"><strong style="color:#9b3434">Recommendation: DECLINE AS PROPOSED – COUNTER-OFFER</strong>
+<div class="decision" style="border-left-color:#9f1239;background:#fff1f2"><strong style="color:#9f1239">Recommendation: DECLINE AS PROPOSED – COUNTER-OFFER</strong>
 <span>Approve a $1.0M margined line and a $1.24M refinance loan (6-year amortization) once the conditions precedent are met. Decline the $1.5M equipment loan for now.</span></div>
 
 <h2><span class="num">1.</span>Purpose and summary</h2>

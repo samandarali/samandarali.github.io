@@ -15,6 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Power BI — Knowledge, Shared Openly</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="../styles/palette.css" />
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap"
     rel="stylesheet">
@@ -22,38 +23,38 @@
     * { box-sizing: border-box; margin: 0; padding: 0 }
 
     :root {
-      --bg: #FAFAF8;
+      --bg: #f4f4f4;
       --surface: #FFFFFF;
-      --border: #E4E2DA;
-      --border-light: #EEECE6;
-      --text: #1A1A18;
-      --text-muted: #6B6B67;
-      --text-faint: #9B9B97;
+      --border: #bfdaed;
+      --border-light: #dfedf7;
+      --text: #151a3d;
+      --text-muted: #63698b;
+      --text-faint: #9c9c9c;
       --mono: 'DM Mono', monospace;
       --sans: 'DM Sans', sans-serif;
       --serif: 'DM Serif Display', serif;
 
       /* Power BI brand palette — exact logo colors */
       /* bar 1 lemon */
-      --pbi-1-bg:   #FEF9E0;
-      --pbi-1-mid:  #F9D84A;
-      --pbi-1-text: #7A5F00;
-      --pbi-1-dark: #5A4400;
+      --pbi-1-bg:   #f1f7fb;
+      --pbi-1-mid:  #91bede;
+      --pbi-1-text: #095489;
+      --pbi-1-dark: #074169;
       /* bar 2 golden */
-      --pbi-2-bg:   #FDF0C0;
-      --pbi-2-mid:  #F0B429;
-      --pbi-2-text: #7A5600;
-      --pbi-2-dark: #5A3E00;
+      --pbi-2-bg:   #dfedf7;
+      --pbi-2-mid:  #5e9dca;
+      --pbi-2-text: #095489;
+      --pbi-2-dark: #074169;
       /* bar 3 amber */
-      --pbi-3-bg:   #FADFB0;
-      --pbi-3-mid:  #C47D0E;
-      --pbi-3-text: #7A4A00;
-      --pbi-3-dark: #5A3500;
+      --pbi-3-bg:   #bfdaed;
+      --pbi-3-mid:  #2a74ab;
+      --pbi-3-text: #095489;
+      --pbi-3-dark: #074169;
       /* bar 4 bronze (expert) */
-      --pbi-4-bg:   #F5D090;
-      --pbi-4-mid:  #A35F00;
-      --pbi-4-text: #6B3A00;
-      --pbi-4-dark: #4A2800;
+      --pbi-4-bg:   #91bede;
+      --pbi-4-mid:  #095489;
+      --pbi-4-text: #074169;
+      --pbi-4-dark: #052b45;
     }
 
     body {
@@ -71,7 +72,7 @@
     .site-header { background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.08) }
     .site-header-inner { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 0 }
     .site-name {
-      font-size: 2rem; font-weight: 900; color: #111827;
+      font-size: 2rem; font-weight: 900; color: #0b1030;
       letter-spacing: -0.02em; font-family: 'Inter', var(--sans), sans-serif
     }
     .site-role {
@@ -120,7 +121,7 @@
     .hero-pitch strong { color: var(--text); font-weight: 500 }
     .hero-pitch code {
       font-family: var(--mono); font-size: 13px;
-      background: #F0EEE8; padding: 1px 6px; border-radius: 4px
+      background: #dfedf7; padding: 1px 6px; border-radius: 4px
     }
 
     /* ── FILTER BAR ── */
@@ -135,8 +136,8 @@
       border-radius: 20px; background: var(--surface); color: var(--text-muted);
       cursor: pointer; font-family: var(--sans); transition: all .15s; outline: none
     }
-    .pill:hover { background: #F0EEE8; border-color: #C8C6BE }
-    .pill.a-all    { background: #F0EEE8; color: var(--text); border-color: #C8C6BE; font-weight: 500 }
+    .pill:hover { background: #dfedf7; border-color: #91bede }
+    .pill.a-all    { background: #dfedf7; color: var(--text); border-color: #91bede; font-weight: 500 }
     .pill.a-beginner     { background: var(--pbi-1-bg); color: var(--pbi-1-dark); border-color: var(--pbi-1-mid); font-weight: 500 }
     .pill.a-intermediate { background: var(--pbi-2-bg); color: var(--pbi-2-dark); border-color: var(--pbi-2-mid); font-weight: 500 }
     .pill.a-advanced     { background: var(--pbi-3-bg); color: var(--pbi-3-dark); border-color: var(--pbi-3-mid); font-weight: 500 }
@@ -152,13 +153,13 @@
       padding: 1.1rem 1.25rem; cursor: pointer;
       background: var(--surface); user-select: none; transition: background .15s
     }
-    .level-header:hover { background: #FAFAF8 }
+    .level-header:hover { background: #f4f4f4 }
 
     .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0 }
-    .dot-beginner     { background: #F9D84A }
-    .dot-intermediate { background: #F0B429 }
-    .dot-advanced     { background: #C47D0E }
-    .dot-expert       { background: #A35F00 }
+    .dot-beginner     { background: #91bede }
+    .dot-intermediate { background: #5e9dca }
+    .dot-advanced     { background: #2a74ab }
+    .dot-expert       { background: #095489 }
 
     .lv-name { font-family: var(--serif); font-size: 1.2rem; color: var(--text); white-space: nowrap }
     .lv-summary { font-size: 13px; color: var(--text-muted); flex: 1 }
@@ -187,7 +188,7 @@
       letter-spacing: .1em; color: var(--text-faint); margin-bottom: .6rem
     }
     .video-placeholder {
-      background: #F4F2EC; border: 1px dashed var(--border); border-radius: 10px;
+      background: #dfedf7; border: 1px dashed var(--border); border-radius: 10px;
       height: 56px; display: flex; align-items: center; gap: 12px;
       padding: 0 1.1rem; color: var(--text-faint); font-size: 13px
     }
@@ -216,7 +217,7 @@
     }
     .chips { display: flex; flex-wrap: wrap; gap: 4px }
     .chip {
-      font-family: var(--mono); font-size: 11px; background: #F4F2EC;
+      font-family: var(--mono); font-size: 11px; background: #dfedf7;
       color: var(--text-muted); padding: 2px 7px; border-radius: 4px;
       border: 1px solid var(--border-light)
     }
@@ -234,12 +235,12 @@
       background: transparent; cursor: pointer; transition: all .15s;
       text-decoration: none; display: inline-block
     }
-    .mini-btn:hover { background: #F4F2EC; border-style: solid; color: var(--text-muted) }
-    .mini-btn.ex   { border-color: #F9D84A; color: var(--pbi-1-dark) }
+    .mini-btn:hover { background: #dfedf7; border-style: solid; color: var(--text-muted) }
+    .mini-btn.ex   { border-color: #91bede; color: var(--pbi-1-dark) }
     .mini-btn.ex:hover { background: var(--pbi-1-bg) }
-    .mini-btn.ans  { border-color: #F0B429; color: var(--pbi-2-dark) }
+    .mini-btn.ans  { border-color: #5e9dca; color: var(--pbi-2-dark) }
     .mini-btn.ans:hover { background: var(--pbi-2-bg) }
-    .mini-btn.vid  { border-color: #C47D0E; color: var(--pbi-3-dark) }
+    .mini-btn.vid  { border-color: #2a74ab; color: var(--pbi-3-dark) }
     .mini-btn.vid:hover { background: var(--pbi-3-bg) }
     .mini-btn.coming { opacity: .45; cursor: default; pointer-events: none; border-style: dashed }
 
@@ -252,18 +253,18 @@
     }
     .sec-ex-badge {
       font-size: 11px; font-family: var(--mono); padding: 2px 9px;
-      border-radius: 20px; background: #F4F2EC; color: var(--text-faint)
+      border-radius: 20px; background: #dfedf7; color: var(--text-faint)
     }
     .sec-ex-desc { font-size: 13px; color: var(--text-faint); margin-bottom: 1rem; line-height: 1.6 }
     .sec-ex-placeholder {
-      background: #F4F2EC; border: 1px dashed var(--border); border-radius: 10px;
+      background: #dfedf7; border: 1px dashed var(--border); border-radius: 10px;
       height: 52px; display: flex; align-items: center; gap: 10px;
       color: var(--text-faint); font-size: 13px; padding: 0 1rem
     }
     .sec-ex-placeholder svg { flex-shrink: 0; opacity: .45 }
     .q-list { display: flex; flex-direction: column; gap: .75rem }
     .q-item {
-      background: #FAFAF8; border: 1px solid var(--border-light);
+      background: #f4f4f4; border: 1px solid var(--border-light);
       border-radius: 8px; padding: .85rem 1rem;
       font-size: 13px; color: var(--text-muted); line-height: 1.6
     }
@@ -307,11 +308,11 @@
         <!-- Power BI logo — inline SVG, exact brand colors -->
         <svg class="pbi-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Power BI logo">
           <!-- bar 1: short / lemon -->
-          <rect x="8"  y="55" width="26" height="37" rx="5" fill="#F9D84A"/>
+          <rect x="8"  y="55" width="26" height="37" rx="5" fill="#91bede"/>
           <!-- bar 2: medium / golden -->
-          <rect x="38" y="32" width="26" height="60" rx="5" fill="#F0B429"/>
+          <rect x="38" y="32" width="26" height="60" rx="5" fill="#5e9dca"/>
           <!-- bar 3: tall / amber -->
-          <rect x="68" y="8"  width="26" height="84" rx="5" fill="#C47D0E"/>
+          <rect x="68" y="8"  width="26" height="84" rx="5" fill="#2a74ab"/>
         </svg>
         <h1>Learn Power BI.<br><em>From first report to full mastery.</em></h1>
       </div>
@@ -325,7 +326,7 @@
       </p>
       <script src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
       <script>
-                kofiwidget2.init('Buy me a Coffee', '#FFD700', 'H2H31ZM0W7');
+                kofiwidget2.init('Buy me a Coffee', '#91bede', 'H2H31ZM0W7');
         kofiwidget2.draw();
       </script>
     </div>

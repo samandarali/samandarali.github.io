@@ -8,6 +8,7 @@
 
   <!-- Tailwind (same approach as BMI_using_crowd) -->
   <script src="https://cdn.tailwindcss.com"></script>
+    <script>/* site palette (see styles/palette.css): brand = #095489 family, ink = neutral greys */ tailwind.config = { theme: { extend: { colors: { brand: { 50: '#f1f7fb', 100: '#dfedf7', 200: '#bfdaed', 300: '#91bede', 400: '#5e9dca', 500: '#2a74ab', 600: '#095489', 700: '#074169', 800: '#063556', 900: '#052b45', 950: '#031c2d' }, ink: { 50: '#f4f4f4', 100: '#e8e7e7', 200: '#c8cbcb', 300: '#b3b6b9', 400: '#9c9c9c', 500: '#63698b', 600: '#4a5072', 700: '#353a5a', 800: '#232845', 900: '#151a3d', 950: '#0b1030' } } } } };</script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
   <style>
@@ -16,8 +17,8 @@
     }
 
     .color-airbnb-sunset {
-      background: linear-gradient(135deg, #dd603e 0%, #e7c44f 100%);
-      color: #2b2b2b;
+      background: linear-gradient(135deg, #f43f5e 0%, #fbbf24 100%);
+      color: #232845;
     }
 
     .section-fade {
@@ -45,7 +46,7 @@
     }
 
     .tab-button.active {
-      background-color: #dd603e;
+      background-color: #f43f5e;
       color: white;
     }
 
@@ -63,7 +64,7 @@
     }
 
     .key-finding:hover {
-      border-left-color: #dd603e;
+      border-left-color: #f43f5e;
       background-color: #fff1f2;
     }
 
@@ -73,7 +74,7 @@
 
     .tool-badge:hover {
       transform: scale(1.03);
-      box-shadow: 0 8px 18px rgba(255, 56, 92, 0.25);
+      box-shadow: 0 8px 18px rgba(244, 63, 94, 0.25);
     }
 
     .pill {
@@ -96,7 +97,7 @@
   </style>
 </head>
 
-<body class="bg-gray-50">
+<body class="bg-ink-50">
   <!-- Navigation -->
   <nav class="bg-white shadow-sm sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -130,7 +131,7 @@
 
         <div class="flex flex-wrap gap-4">
           <a href="#tabs"
-            class="inline-flex items-center bg-white text-[#ff385c] font-semibold px-6 py-3 rounded-lg hover:bg-rose-50 transition shadow-lg">
+            class="inline-flex items-center bg-white text-[#f43f5e] font-semibold px-6 py-3 rounded-lg hover:bg-rose-50 transition shadow-lg">
             Explore the Project
             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -152,19 +153,19 @@
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
           <div class="text-4xl font-bold text-rose-600 mb-2">51,707</div>
-          <div class="text-gray-600 font-medium">Listings (10 Cities)</div>
+          <div class="text-ink-600 font-medium">Listings (10 Cities)</div>
         </div>
         <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
-          <div class="text-4xl font-bold text-gray-900 mb-2">10</div>
-          <div class="text-gray-600 font-medium">European Cities</div>
+          <div class="text-4xl font-bold text-ink-900 mb-2">10</div>
+          <div class="text-ink-600 font-medium">European Cities</div>
         </div>
         <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
           <div class="text-4xl font-bold text-emerald-600 mb-2">4×4</div>
-          <div class="text-gray-600 font-medium">Quantile Buckets (Price × Satisfaction)</div>
+          <div class="text-ink-600 font-medium">Quantile Buckets (Price × Satisfaction)</div>
         </div>
         <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
-          <div class="text-4xl font-bold text-cyan-700 mb-2">χ²</div>
-          <div class="text-gray-600 font-medium">Independence Test (Simulated p-values)</div>
+          <div class="text-4xl font-bold text-brand-700 mb-2">χ²</div>
+          <div class="text-ink-600 font-medium">Independence Test (Simulated p-values)</div>
         </div>
       </div>
     </div>
@@ -195,10 +196,10 @@
   <section id="tab-overview" class="tab-content active section-fade py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Project Overview</h2>
+        <h2 class="text-3xl font-bold text-ink-900 mb-6">Project Overview</h2>
 
         <div class="prose prose-lg max-w-none">
-          <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          <p class="text-lg text-ink-700 leading-relaxed mb-6">
             Airbnb is often described as a disruptive platform in the sharing economy. But from a traveler’s
             perspective,
             the decision is practical: <strong>does the price you pay predict the satisfaction you get?</strong>
@@ -208,15 +209,15 @@
 
           <div class="bg-rose-50 border-l-4 border-rose-600 p-6 my-8">
             <h3 class="text-xl font-bold text-rose-900 mb-3">Research Question</h3>
-            <p class="text-gray-800 leading-relaxed">
+            <p class="text-ink-800 leading-relaxed">
               Is tourist satisfaction independent of listing price, or does satisfaction vary systematically across
               price levels
               in popular European cities?
             </p>
           </div>
 
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">What the Literature Suggests</h3>
-          <p class="text-gray-700 leading-relaxed mb-6">
+          <h3 class="text-2xl font-bold text-ink-900 mb-4 mt-8">What the Literature Suggests</h3>
+          <p class="text-ink-700 leading-relaxed mb-6">
             Prior research indicates that price is shaped by listing attributes (size/quality), location and
             accessibility,
             neighborhood characteristics, and host-related signals. On the demand side, studies emphasize motivations
@@ -227,41 +228,41 @@
             with data.
           </p>
 
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">Study Scope</h3>
+          <h3 class="text-2xl font-bold text-ink-900 mb-4 mt-8">Study Scope</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div class="bg-gray-50 rounded-lg p-6">
-              <h4 class="font-bold text-lg text-gray-900 mb-3">Cities Covered</h4>
-              <p class="text-gray-700">
+            <div class="bg-ink-50 rounded-lg p-6">
+              <h4 class="font-bold text-lg text-ink-900 mb-3">Cities Covered</h4>
+              <p class="text-ink-700">
                 Amsterdam, Athens, Barcelona, Berlin, Budapest, Lisbon, London, Paris, Rome, Vienna.
               </p>
-              <p class="text-sm text-gray-600 mt-3">
+              <p class="text-sm text-ink-600 mt-3">
                 Listings include offers for weekdays and weekends.
               </p>
             </div>
-            <div class="bg-gray-50 rounded-lg p-6">
-              <h4 class="font-bold text-lg text-gray-900 mb-3">Two Core Variables</h4>
-              <ul class="text-gray-700 space-y-2">
+            <div class="bg-ink-50 rounded-lg p-6">
+              <h4 class="font-bold text-lg text-ink-900 mb-3">Two Core Variables</h4>
+              <ul class="text-ink-700 space-y-2">
                 <li><strong>Total price</strong> (listing-level)</li>
                 <li><strong>Overall guest satisfaction rating</strong> (0–100 scale in the dataset)</li>
               </ul>
-              <p class="text-sm text-gray-600 mt-3">
+              <p class="text-sm text-ink-600 mt-3">
                 The analysis focuses on the relationship between these two, controlling for city by splitting the
                 sample.
               </p>
             </div>
           </div>
 
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
-            <h4 class="text-lg font-bold text-gray-900 mb-2">Main Hypothesis</h4>
-            <p class="text-gray-700 leading-relaxed">
+          <div class="bg-ink-50 border border-ink-200 rounded-xl p-6">
+            <h4 class="text-lg font-bold text-ink-900 mb-2">Main Hypothesis</h4>
+            <p class="text-ink-700 leading-relaxed">
               <strong>H:</strong> Satisfaction level varies by price level (i.e., price and satisfaction are not
               independent).
             </p>
           </div>
 
           <div class="mt-10">
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">What “Value” Means Here</h3>
-            <p class="text-gray-700 leading-relaxed">
+            <h3 class="text-2xl font-bold text-ink-900 mb-4">What “Value” Means Here</h3>
+            <p class="text-ink-700 leading-relaxed">
               “Value for money” is interpreted as a statistical pattern: if higher price categories show
               a higher-than-expected concentration of high satisfaction (or low price shows a higher-than-expected
               concentration
@@ -281,15 +282,15 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
 
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">
+        <h2 class="text-3xl font-bold text-ink-900 mb-6">
           Systematic Literature Review
         </h2>
 
         <div class="prose prose-lg max-w-none">
 
           <!-- Purpose -->
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">Purpose</h3>
-          <p class="text-gray-700 leading-relaxed mb-6">
+          <h3 class="text-2xl font-bold text-ink-900 mb-4">Purpose</h3>
+          <p class="text-ink-700 leading-relaxed mb-6">
             The literature review contextualizes the empirical analysis by identifying
             the main determinants of Airbnb pricing and tourist satisfaction,
             and by assessing whether prior research finds consistent evidence
@@ -302,7 +303,7 @@
               Search Strategy
             </h3>
 
-            <ul class="text-gray-700 space-y-2">
+            <ul class="text-ink-700 space-y-2">
               <li><strong>Keywords:</strong> Airbnb pricing, tourist satisfaction, sharing economy, hedonic pricing,
                 guest reviews.</li>
               <li><strong>Focus:</strong> Peer-reviewed studies on determinants of listing prices and user satisfaction.
@@ -312,86 +313,86 @@
           </div>
 
           <!-- Screening -->
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">
+          <h3 class="text-2xl font-bold text-ink-900 mb-4">
             Study Selection & Screening
           </h3>
 
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 text-center">
 
-            <div class="bg-gray-50 p-5 rounded-lg">
-              <p class="text-3xl font-bold text-gray-900">Initial</p>
-              <p class="text-sm text-gray-600 mt-2">Studies identified through keyword search</p>
+            <div class="bg-ink-50 p-5 rounded-lg">
+              <p class="text-3xl font-bold text-ink-900">Initial</p>
+              <p class="text-sm text-ink-600 mt-2">Studies identified through keyword search</p>
             </div>
 
-            <div class="bg-gray-50 p-5 rounded-lg">
-              <p class="text-3xl font-bold text-gray-900">Screened</p>
-              <p class="text-sm text-gray-600 mt-2">After removing duplicates & irrelevant topics</p>
+            <div class="bg-ink-50 p-5 rounded-lg">
+              <p class="text-3xl font-bold text-ink-900">Screened</p>
+              <p class="text-sm text-ink-600 mt-2">After removing duplicates & irrelevant topics</p>
             </div>
 
-            <div class="bg-gray-50 p-5 rounded-lg">
-              <p class="text-3xl font-bold text-gray-900">Eligible</p>
-              <p class="text-sm text-gray-600 mt-2">Full-text reviewed</p>
+            <div class="bg-ink-50 p-5 rounded-lg">
+              <p class="text-3xl font-bold text-ink-900">Eligible</p>
+              <p class="text-sm text-ink-600 mt-2">Full-text reviewed</p>
             </div>
 
-            <div class="bg-gray-50 p-5 rounded-lg">
+            <div class="bg-ink-50 p-5 rounded-lg">
               <p class="text-3xl font-bold text-rose-600">Final</p>
-              <p class="text-sm text-gray-600 mt-2">Included in synthesis</p>
+              <p class="text-sm text-ink-600 mt-2">Included in synthesis</p>
             </div>
 
           </div>
 
           <!-- Thematic Findings -->
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">
+          <h3 class="text-2xl font-bold text-ink-900 mb-4">
             Thematic Synthesis
           </h3>
 
           <div class="space-y-5">
 
             <div class="bg-white border rounded-lg p-6 shadow-sm">
-              <h4 class="font-bold text-lg text-gray-900 mb-2">
+              <h4 class="font-bold text-lg text-ink-900 mb-2">
                 1. Listing Attributes
               </h4>
-              <p class="text-gray-700">
+              <p class="text-ink-700">
                 Property size, amenities, cleanliness, and interior quality
                 consistently increase both price and guest satisfaction.
               </p>
             </div>
 
             <div class="bg-white border rounded-lg p-6 shadow-sm">
-              <h4 class="font-bold text-lg text-gray-900 mb-2">
+              <h4 class="font-bold text-lg text-ink-900 mb-2">
                 2. Location Factors
               </h4>
-              <p class="text-gray-700">
+              <p class="text-ink-700">
                 Accessibility, proximity to tourist landmarks, and neighborhood
                 desirability significantly influence listing prices and perceived value.
               </p>
             </div>
 
             <div class="bg-white border rounded-lg p-6 shadow-sm">
-              <h4 class="font-bold text-lg text-gray-900 mb-2">
+              <h4 class="font-bold text-lg text-ink-900 mb-2">
                 3. Host Reputation & Trust
               </h4>
-              <p class="text-gray-700">
+              <p class="text-ink-700">
                 Superhost status, response time, and review history act as trust signals
                 that affect booking decisions and satisfaction.
               </p>
             </div>
 
             <div class="bg-white border rounded-lg p-6 shadow-sm">
-              <h4 class="font-bold text-lg text-gray-900 mb-2">
+              <h4 class="font-bold text-lg text-ink-900 mb-2">
                 4. Price Perception
               </h4>
-              <p class="text-gray-700">
+              <p class="text-ink-700">
                 Evidence is mixed: some studies find higher prices linked to higher satisfaction,
                 while others find weak or non-linear relationships.
               </p>
             </div>
 
             <div class="bg-white border rounded-lg p-6 shadow-sm">
-              <h4 class="font-bold text-lg text-gray-900 mb-2">
+              <h4 class="font-bold text-lg text-ink-900 mb-2">
                 5. Experience & Authenticity
               </h4>
-              <p class="text-gray-700">
+              <p class="text-ink-700">
                 Tourists often value “local experience” and uniqueness more than price,
                 especially in sharing-economy contexts.
               </p>
@@ -400,11 +401,11 @@
           </div>
 
           <!-- Research Gap -->
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 mt-10">
-            <h3 class="text-xl font-bold text-gray-900 mb-3">
+          <div class="bg-ink-50 border border-ink-200 rounded-xl p-6 mt-10">
+            <h3 class="text-xl font-bold text-ink-900 mb-3">
               Identified Research Gap
             </h3>
-            <p class="text-gray-700 leading-relaxed">
+            <p class="text-ink-700 leading-relaxed">
               Prior research extensively explains what drives prices and satisfaction
               separately, but offers limited cross-city evidence on whether higher price
               systematically delivers higher satisfaction.
@@ -422,11 +423,11 @@
   <section id="tab-methodology" class="tab-content section-fade py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Methodology</h2>
+        <h2 class="text-3xl font-bold text-ink-900 mb-6">Methodology</h2>
 
         <div class="prose prose-lg max-w-none">
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">1) Data & Preparation</h3>
-          <p class="text-gray-700 leading-relaxed mb-6">
+          <h3 class="text-2xl font-bold text-ink-900 mb-4">1) Data & Preparation</h3>
+          <p class="text-ink-700 leading-relaxed mb-6">
           <p>This study uses the data set introduced by Gyódi and Nawaro (2021b) and presented in <a
               href="https://www.kaggle.com/datasets/thedevastator/airbnb-prices-in-european-cities/data"> Kaggle </a> .
           </p>
@@ -438,41 +439,41 @@
 
           <div class="bg-rose-50 border-l-4 border-rose-600 p-6 my-8">
             <h4 class="text-xl font-bold text-rose-900 mb-3">Quantile Bucketing (4 Levels)</h4>
-            <p class="text-gray-700 leading-relaxed mb-4">
+            <p class="text-ink-700 leading-relaxed mb-4">
               Both variables are converted into 4 ordinal categories using quartiles:
             </p>
-            <ul class="space-y-2 text-gray-700">
+            <ul class="space-y-2 text-ink-700">
               <li><strong>Low</strong>: below the 25th percentile</li>
               <li><strong>Middle-Low</strong>: 25th–50th percentile</li>
               <li><strong>Middle-High</strong>: 50th–75th percentile</li>
               <li><strong>High</strong>: above the 75th percentile</li>
             </ul>
-            <p class="text-gray-700 mt-4">
+            <p class="text-ink-700 mt-4">
               This yields a <strong>4×4 contingency table</strong> of (price category × satisfaction category) for each
               city.
             </p>
           </div>
 
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">2) Statistical Test</h3>
-          <p class="text-gray-700 leading-relaxed mb-6">
+          <h3 class="text-2xl font-bold text-ink-900 mb-4 mt-8">2) Statistical Test</h3>
+          <p class="text-ink-700 leading-relaxed mb-6">
             For each city, a <strong>Chi-square (χ²) test of independence</strong> is run on the city’s contingency
             table to test:
           </p>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div class="bg-gray-50 rounded-lg p-6">
-              <h4 class="font-bold text-lg text-gray-900 mb-3">H₀ (Null)</h4>
-              <p class="text-gray-700">Tourist satisfaction and price category are independent.</p>
+            <div class="bg-ink-50 rounded-lg p-6">
+              <h4 class="font-bold text-lg text-ink-900 mb-3">H₀ (Null)</h4>
+              <p class="text-ink-700">Tourist satisfaction and price category are independent.</p>
             </div>
-            <div class="bg-gray-50 rounded-lg p-6">
-              <h4 class="font-bold text-lg text-gray-900 mb-3">H₁ (Alternative)</h4>
-              <p class="text-gray-700">Tourist satisfaction depends on price category.</p>
+            <div class="bg-ink-50 rounded-lg p-6">
+              <h4 class="font-bold text-lg text-ink-900 mb-3">H₁ (Alternative)</h4>
+              <p class="text-ink-700">Tourist satisfaction depends on price category.</p>
             </div>
           </div>
 
-          <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 my-8">
-            <h4 class="text-lg font-bold text-yellow-900 mb-2">Why Simulated p-values?</h4>
-            <p class="text-gray-700 leading-relaxed">
+          <div class="bg-amber-50 border-l-4 border-amber-500 p-6 my-8">
+            <h4 class="text-lg font-bold text-amber-900 mb-2">Why Simulated p-values?</h4>
+            <p class="text-ink-700 leading-relaxed">
               Some contingency-table cells can have small expected counts, which makes the usual χ² approximation less
               reliable.
               To address this, the test uses <strong>simulated p-values</strong> (Monte Carlo) for more robust
@@ -480,9 +481,9 @@
             </p>
           </div>
 
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-10">3) Interpreting Residuals (Where the Pattern Comes
+          <h3 class="text-2xl font-bold text-ink-900 mb-4 mt-10">3) Interpreting Residuals (Where the Pattern Comes
             From)</h3>
-          <p class="text-gray-700 leading-relaxed mb-6">
+          <p class="text-ink-700 leading-relaxed mb-6">
             After running χ², the analysis uses <strong>standardized residuals</strong> to identify the cells that
             deviate most from
             what independence would predict. Residual “heatmaps” make it easy to spot patterns like:
@@ -491,7 +492,7 @@
 
           <!-- Tools -->
           <div class="mt-12">
-            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Tools & Technologies</h3>
+            <h3 class="text-2xl font-bold text-ink-900 mb-6 text-center">Tools & Technologies</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div class="tool-badge bg-gradient-to-br from-rose-500 to-rose-700 text-white rounded-xl p-6 shadow-lg">
                 <div class="flex items-center gap-3 mb-3">
@@ -502,29 +503,29 @@
                   χ² tests.</p>
               </div>
 
-              <div class="tool-badge bg-gradient-to-br from-slate-700 to-slate-900 text-white rounded-xl p-6 shadow-lg">
+              <div class="tool-badge bg-gradient-to-br from-ink-700 to-ink-900 text-white rounded-xl p-6 shadow-lg">
                 <div class="flex items-center gap-3 mb-3">
                   <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">χ²</div>
                   <h4 class="text-lg font-bold">Statistical Testing</h4>
                 </div>
-                <p class="text-slate-100 text-sm">Independence testing with simulated p-values to handle small expected
+                <p class="text-ink-100 text-sm">Independence testing with simulated p-values to handle small expected
                   counts.</p>
               </div>
 
-              <div class="tool-badge bg-gradient-to-br from-cyan-600 to-cyan-800 text-white rounded-xl p-6 shadow-lg">
+              <div class="tool-badge bg-gradient-to-br from-brand-600 to-brand-800 text-white rounded-xl p-6 shadow-lg">
                 <div class="flex items-center gap-3 mb-3">
                   <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-2xl">📈</div>
                   <h4 class="text-lg font-bold">Visualization</h4>
                 </div>
-                <p class="text-cyan-100 text-sm">Residual heatmaps (corrplot) + city-level satisfaction/price
+                <p class="text-brand-100 text-sm">Residual heatmaps (corrplot) + city-level satisfaction/price
                   distributions.</p>
               </div>
             </div>
           </div>
 
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 mt-10">
-            <h4 class="text-lg font-bold text-gray-900 mb-2">Reproducibility Note</h4>
-            <p class="text-gray-700 leading-relaxed">
+          <div class="bg-ink-50 border border-ink-200 rounded-xl p-6 mt-10">
+            <h4 class="text-lg font-bold text-ink-900 mb-2">Reproducibility Note</h4>
+            <p class="text-ink-700 leading-relaxed">
               The workflow can be reproduced end-to-end: load the dataset → compute quartiles → create categories →
               build city tables →
               run χ² tests (simulate p-values) → plot residuals to interpret city-specific patterns.
@@ -540,21 +541,21 @@
   <section id="tab-findings" class="tab-content section-fade py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Key Findings</h2>
+        <h2 class="text-3xl font-bold text-ink-900 mb-6">Key Findings</h2>
 
         <div class="prose prose-lg max-w-none">
-          <p class="text-gray-700 leading-relaxed mb-6">
+          <p class="text-ink-700 leading-relaxed mb-6">
             Findings are presented in two layers:
             (1) city-level satisfaction distributions (who has more unhappy guests), and
             (2) city-specific price–satisfaction association patterns (where “value for money” shows up).
           </p>
 
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">A) Satisfaction Across Cities</h3>
+          <h3 class="text-2xl font-bold text-ink-900 mb-4">A) Satisfaction Across Cities</h3>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div class="key-finding bg-white rounded-lg p-6 shadow-sm">
               <p class="font-semibold text-rose-700 mb-2">Lowest satisfaction rates</p>
-              <p class="text-gray-700">
+              <p class="text-ink-700">
                 London and Barcelona show the highest shares of low satisfaction, with Lisbon also standing out as
                 relatively high.
               </p>
@@ -562,7 +563,7 @@
 
             <div class="key-finding bg-white rounded-lg p-6 shadow-sm">
               <p class="font-semibold text-emerald-700 mb-2">Highest satisfaction rates</p>
-              <p class="text-gray-700">
+              <p class="text-ink-700">
                 Athens and Budapest show the lowest shares of low satisfaction and the highest shares of high
                 satisfaction.
               </p>
@@ -571,24 +572,24 @@
 
             <div class="flex flex-col items-center">
               <img src="../images/airbnb/satisfaction.png" class="w-[50%] mx-auto">
-              <h4 class="font-semibold text-gray-800 mt-3 text-center">
+              <h4 class="font-semibold text-ink-800 mt-3 text-center">
                 Distribution of Guest Satisfaction Across Quartiles by City
               </h4>
             </div>
             
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">B) Prices Across Cities</h3>
+          <h3 class="text-2xl font-bold text-ink-900 mb-4">B) Prices Across Cities</h3>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div class="key-finding bg-white rounded-lg p-6 shadow-sm">
               <p class="font-semibold text-rose-700 mb-2">Highest price rates</p>
-              <p class="text-gray-700">
+              <p class="text-ink-700">
                 Amsterdam, Paris, and London have the largest proportions of listings in the highest price quartile.
               </p>
             </div>
 
             <div class="key-finding bg-white rounded-lg p-6 shadow-sm">
               <p class="font-semibold text-emerald-700 mb-2">Lowest price rates</p>
-              <p class="text-gray-700">
+              <p class="text-ink-700">
                 Athens and Budapest show the highest shares of low-price listings.
               </p>
             </div>
@@ -598,86 +599,86 @@
 
             <div class="flex flex-col items-center">
               <img src="../images/airbnb/price_categories.png" class="w-[60%] mx-auto">
-              <h4 class="font-semibold text-gray-800 mt-3 text-center">
+              <h4 class="font-semibold text-ink-800 mt-3 text-center">
                 Distribution of Listing Prices Across Quartiles by City
               </h4>
             </div>  
 
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">C) What Price Bands Look “Worth It” (By City)</h3>
-          <p class="text-gray-700 leading-relaxed mb-6">
+          <h3 class="text-2xl font-bold text-ink-900 mb-4 mt-8">C) What Price Bands Look “Worth It” (By City)</h3>
+          <p class="text-ink-700 leading-relaxed mb-6">
             The patterns below summarize the residual interpretation: which price categories are associated with
             higher-than-expected high satisfaction, and which are associated with low satisfaction.
           </p>
 
           <div class="space-y-5">
             <div class="key-finding bg-white rounded-lg p-6 shadow-sm border-l-4 border-rose-500">
-              <h4 class="font-bold text-lg text-gray-900 mb-2">London</h4>
-              <p class="text-gray-700">
+              <h4 class="font-bold text-lg text-ink-900 mb-2">London</h4>
+              <p class="text-ink-700">
                 Very cheap listings skew toward low satisfaction. Expensive listings are mixed (associated with both
                 high and low satisfaction),
                 so “high price” does not reliably buy satisfaction. Middle price bands trend toward middle-high
                 satisfaction.
               </p>
-              <p class="text-sm text-gray-600 mt-3"><strong>Practical takeaway:</strong> Avoid extremes; choose
+              <p class="text-sm text-ink-600 mt-3"><strong>Practical takeaway:</strong> Avoid extremes; choose
                 mid-priced options and set realistic expectations.</p>
             </div>
 
             <div class="key-finding bg-white rounded-lg p-6 shadow-sm border-l-4 border-emerald-500">
-              <h4 class="font-bold text-lg text-gray-900 mb-2">Athens</h4>
-              <p class="text-gray-700">
+              <h4 class="font-bold text-lg text-ink-900 mb-2">Athens</h4>
+              <p class="text-ink-700">
                 High satisfaction is less common at the lowest prices, and more common from middle-low upward.
                 Low satisfaction clusters at low price.
               </p>
-              <p class="text-sm text-gray-600 mt-3"><strong>Practical takeaway:</strong> Don’t pick the cheapest; almost
+              <p class="text-sm text-ink-600 mt-3"><strong>Practical takeaway:</strong> Don’t pick the cheapest; almost
                 any step up improves reliability.</p>
             </div>
 
             <div class="key-finding bg-white rounded-lg p-6 shadow-sm border-l-4 border-emerald-500">
-              <h4 class="font-bold text-lg text-gray-900 mb-2">Budapest</h4>
-              <p class="text-gray-700">
+              <h4 class="font-bold text-lg text-ink-900 mb-2">Budapest</h4>
+              <p class="text-ink-700">
                 High satisfaction increases from middle-low upward; low prices are where dissatisfaction concentrates.
               </p>
-              <p class="text-sm text-gray-600 mt-3"><strong>Practical takeaway:</strong> If you want consistent
+              <p class="text-sm text-ink-600 mt-3"><strong>Practical takeaway:</strong> If you want consistent
                 satisfaction, avoid the cheapest tier.</p>
             </div>
 
             <div class="key-finding bg-white rounded-lg p-6 shadow-sm border-l-4 border-rose-500">
-              <h4 class="font-bold text-lg text-gray-900 mb-2">Barcelona</h4>
-              <p class="text-gray-700">
+              <h4 class="font-bold text-lg text-ink-900 mb-2">Barcelona</h4>
+              <p class="text-ink-700">
                 High satisfaction is less likely for the lowest prices and more likely for middle and high price tiers.
                 Dissatisfaction clusters at low price.
               </p>
-              <p class="text-sm text-gray-600 mt-3"><strong>Practical takeaway:</strong> Middle-high price bands are the
+              <p class="text-sm text-ink-600 mt-3"><strong>Practical takeaway:</strong> Middle-high price bands are the
                 safer bet for strong experiences.</p>
             </div>
 
-            <div class="key-finding bg-white rounded-lg p-6 shadow-sm border-l-4 border-cyan-600">
-              <h4 class="font-bold text-lg text-gray-900 mb-2">Lisbon</h4>
-              <p class="text-gray-700">
+            <div class="key-finding bg-white rounded-lg p-6 shadow-sm border-l-4 border-brand-600">
+              <h4 class="font-bold text-lg text-ink-900 mb-2">Lisbon</h4>
+              <p class="text-ink-700">
                 Higher-priced listings are more strongly linked to high and middle-high satisfaction, while low price
                 links to lower satisfaction levels.
               </p>
-              <p class="text-sm text-gray-600 mt-3"><strong>Practical takeaway:</strong> If you can pay more, it
+              <p class="text-sm text-ink-600 mt-3"><strong>Practical takeaway:</strong> If you can pay more, it
                 meaningfully improves expected satisfaction.</p>
             </div>
 
-            <div class="key-finding bg-white rounded-lg p-6 shadow-sm border-l-4 border-slate-800">
-              <h4 class="font-bold text-lg text-gray-900 mb-2">Amsterdam, Paris, Rome, Vienna</h4>
-              <p class="text-gray-700">
+            <div class="key-finding bg-white rounded-lg p-6 shadow-sm border-l-4 border-ink-800">
+              <h4 class="font-bold text-lg text-ink-900 mb-2">Amsterdam, Paris, Rome, Vienna</h4>
+              <p class="text-ink-700">
                 These cities generally show a clearer “classic” pattern: high price aligns more with high satisfaction,
                 low price aligns more with low satisfaction.
               </p>
-              <p class="text-sm text-gray-600 mt-3"><strong>Practical takeaway:</strong> Cheap options are riskier;
+              <p class="text-sm text-ink-600 mt-3"><strong>Practical takeaway:</strong> Cheap options are riskier;
                 higher tiers are more reliable.</p>
             </div>
 
-            <div class="key-finding bg-white rounded-lg p-6 shadow-sm border-l-4 border-slate-500">
-              <h4 class="font-bold text-lg text-gray-900 mb-2">Berlin</h4>
-              <p class="text-gray-700">
+            <div class="key-finding bg-white rounded-lg p-6 shadow-sm border-l-4 border-ink-500">
+              <h4 class="font-bold text-lg text-ink-900 mb-2">Berlin</h4>
+              <p class="text-ink-700">
                 Patterns are less “monotonic”: extremes (high and low satisfaction) relate differently across middle-low
                 vs high price categories.
               </p>
-              <p class="text-sm text-gray-600 mt-3"><strong>Practical takeaway:</strong> Don’t assume linear value; read
+              <p class="text-sm text-ink-600 mt-3"><strong>Practical takeaway:</strong> Don’t assume linear value; read
                 reviews carefully and avoid over-relying on price alone.</p>
             </div>
           </div>
@@ -686,7 +687,7 @@
 
           <div class="bg-rose-50 border-l-4 border-rose-600 p-6 my-10">
             <h4 class="text-xl font-bold text-rose-900 mb-3">Conclusion (Value-for-Money Summary)</h4>
-            <p class="text-gray-700 leading-relaxed">
+            <p class="text-ink-700 leading-relaxed">
               “Worth it” depends on the city. In Athens and Budapest, paying above the cheapest tier tends to deliver
               reliably high satisfaction.
               In London, high price is not a guarantee (it is associated with both very high and very low satisfaction),
@@ -698,11 +699,11 @@
 
           <div class="mt-16">
 
-            <h3 class="text-2xl font-bold text-gray-900 text-center mb-3">
+            <h3 class="text-2xl font-bold text-ink-900 text-center mb-3">
               Price–Satisfaction Association by City
             </h3>
 
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">
+            <p class="text-center text-ink-600 max-w-3xl mx-auto mb-10">
               Residual heatmaps from Chi-square tests illustrating the association 
               between price quartiles and guest satisfaction quartiles across 
               European cities. Darker cells indicate stronger deviations from 
@@ -730,8 +731,8 @@
 
             
           </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Limitations (What This Does NOT Claim)</h3>
-          <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <h3 class="text-2xl font-bold text-ink-900 mb-4 mt-10">Limitations (What This Does NOT Claim)</h3>
+          <ul class="list-disc pl-6 space-y-2 text-ink-700">
             <li><strong>Not causal:</strong> price–satisfaction patterns are associations, not proof that price causes
               satisfaction.</li>
             <li><strong>Unobserved factors:</strong> amenities, location, and host behavior influence both price and
@@ -753,10 +754,10 @@
   <section id="tab-infographic" class="tab-content section-fade py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Infographic</h2>
+        <h2 class="text-3xl font-bold text-ink-900 mb-6">Infographic</h2>
 
         <div class="prose prose-lg max-w-none">
-          <p class="text-gray-700 leading-relaxed mb-6">
+          <p class="text-ink-700 leading-relaxed mb-6">
             The infographic below summarizes (1) satisfaction distributions by city and (2) the heatmap-style
             relationship
             between price tiers and satisfaction tiers for selected low/high-satisfaction cities.
@@ -764,14 +765,14 @@
 
 
 
-          <div class="rounded-xl overflow-hidden shadow-lg border border-gray-200">
+          <div class="rounded-xl overflow-hidden shadow-lg border border-ink-200">
             <img src="../images/airbnb/airbnb.png" alt="Airbnb Satisfaction & Value Across European Cities infographic"
               class="w-full" />
           </div>
 
-          <div class="mt-10 bg-gray-50 rounded-xl p-6 border border-gray-200">
-            <h3 class="text-xl font-bold text-gray-900 mb-3">Data & Reference</h3>
-            <p class="text-gray-700">
+          <div class="mt-10 bg-ink-50 rounded-xl p-6 border border-ink-200">
+            <h3 class="text-xl font-bold text-ink-900 mb-3">Data & Reference</h3>
+            <p class="text-ink-700">
               Dataset: Airbnb Prices in European Cities (Kaggle), originally collected via an automated scraping
               experiment described in Gyódi & Nawaro (2021).
             </p>
@@ -782,15 +783,15 @@
   </section>
   
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-8">
+  <footer class="bg-ink-800 text-white py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
-        <p class="text-gray-400 mb-2">&copy; 2025 Mojgan Samandar. All rights reserved.</p>
+        <p class="text-ink-400 mb-2">&copy; 2025 Mojgan Samandar. All rights reserved.</p>
 
         <div class="mt-4">
-          <a href="../index.html" class="text-orange-400 hover:text-teal-300 transition mx-3">Home</a>
+          <a href="../index.html" class="text-amber-400 hover:text-brand-300 transition mx-3">Home</a>
           <a href="../index.html#content-contact"
-            class="text-orange-400 hover:text-teal-300 transition mx-3">
+            class="text-amber-400 hover:text-brand-300 transition mx-3">
             Contact
           </a>        </div>
       </div>

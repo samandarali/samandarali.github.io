@@ -29,6 +29,7 @@
     <title>Mojgan Samandar | Portfolio</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>/* site palette (see styles/palette.css): brand = #095489 family, ink = neutral greys */ tailwind.config = { theme: { extend: { colors: { brand: { 50: '#f1f7fb', 100: '#dfedf7', 200: '#bfdaed', 300: '#91bede', 400: '#5e9dca', 500: '#2a74ab', 600: '#095489', 700: '#074169', 800: '#063556', 900: '#052b45', 950: '#031c2d' }, ink: { 50: '#f4f4f4', 100: '#e8e7e7', 200: '#c8cbcb', 300: '#b3b6b9', 400: '#9c9c9c', 500: '#63698b', 600: '#4a5072', 700: '#353a5a', 800: '#232845', 900: '#151a3d', 950: '#0b1030' } } } } };</script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Inter+Tight:wght@200;300;400;500;600&display=swap"
         rel="stylesheet" />
 
@@ -38,18 +39,18 @@
     <link rel="stylesheet" href="styles/style-teaching.css" />
     <style>
         :root {
-            --teal-deep: #7c3aed;
-            --teal-mid: #a913bd;
-            --teal-bright: #a855f7;
-            --teal-light: #d8b4fe;
-            --teal-pale: #f3e8ff;
-            --slate-dark: #1e1b4b;
-            --slate-mid: #312e81;
-            --slate-soft: #6d28d9;
-            --mint: #ede9fe;
-            --cream: #fbf9f6;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
+            --teal-deep: #2a74ab;
+            --teal-mid: #2a74ab;
+            --teal-bright: #2a74ab;
+            --teal-light: #91bede;
+            --teal-pale: #dfedf7;
+            --slate-dark: #151a3d;
+            --slate-mid: #074169;
+            --slate-soft: #095489;
+            --mint: #dfedf7;
+            --cream: #f4f4f4;
+            --text-main: #232845;
+            --text-muted: #63698b;
         }
 
         * {
@@ -94,7 +95,7 @@
             background: white;
             position: relative;
             overflow: hidden;
-            border-bottom: 1px solid #f0e8ff;
+            border-bottom: 1px solid #dfedf7;
         }
 
         .header-mountains {
@@ -119,14 +120,14 @@
 
         .project-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(13, 110, 110, 0.15);
+            box-shadow: 0 20px 40px rgba(42, 116, 171, 0.15);
         }
 
         /* ── SECTION CARDS ── */
         .section-card {
             background: white;
             border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(13, 110, 110, 0.08);
+            box-shadow: 0 4px 24px rgba(42, 116, 171, 0.08);
         }
 
         .teaching-hero {
@@ -141,14 +142,14 @@
         }
 
         .teaching-hero h2 {
-            color: #1f2937;
+            color: #232845;
             font-size: 2.6rem;
             line-height: 1.15;
             margin-bottom: 12px;
         }
 
         .teaching-hero p {
-            color: #4b5563;
+            color: #4a5072;
             max-width: 540px;
             line-height: 1.7;
         }
@@ -173,10 +174,10 @@
             width: 100%;
             height: 56px;
             padding: 0 16px;
-            border: 1px solid #d7ddeb;
+            border: 1px solid #bfdaed;
             border-radius: 6px;
             background: #fff;
-            color: #1f2937;
+            color: #232845;
             font-size: 1rem;
         }
 
@@ -188,8 +189,8 @@
 
         .contact-input:focus {
             outline: none;
-            border-color: #7c3aed;
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+            border-color: #2a74ab;
+            box-shadow: 0 0 0 3px rgba(42, 116, 171, 0.12);
         }
 
 
@@ -201,12 +202,12 @@
         }
 
         .about-page {
-            --navy: #14173d;
-            --ink: #4b5068;
-            --lav: #e4daf7;
-            --purple: #6d3bd2;
-            --purple-dark: #5527b0;
-            --warm: #fbf9f6;
+            --navy: #151a3d;
+            --ink: #4a5072;
+            --lav: #bfdaed;
+            --purple: #095489;
+            --purple-dark: #095489;
+            --warm: #f4f4f4;
         }
 
         .about-page h2,
@@ -219,9 +220,9 @@
         .about-card,
         .cta-card {
             background: #fff;
-            border: 1px solid #f0eaf9;
+            border: 1px solid #dfedf7;
             border-radius: 24px;
-            box-shadow: 0 1px 2px rgba(20, 23, 61, .04), 0 12px 36px rgba(109, 59, 210, .08);
+            box-shadow: 0 1px 2px rgba(21, 26, 61, .04), 0 12px 36px rgba(9, 84, 137, .08);
         }
 
         .about-card {
@@ -287,7 +288,7 @@
             object-position: center top;
             border-radius: 20px;
             border: 6px solid #fff;
-            box-shadow: 0 14px 40px rgba(20, 23, 61, .16);
+            box-shadow: 0 14px 40px rgba(21, 26, 61, .16);
         }
 
         /* Full-bleed services band */
@@ -404,20 +405,20 @@
 .services-band .svc-card {
     background:
         linear-gradient(160deg, rgba(255, 255, 255, .16) 0%, rgba(255, 255, 255, .04) 100%),
-        rgba(16, 24, 68, .55);
+        rgba(5, 43, 69, .55);
     -webkit-backdrop-filter: blur(16px) saturate(140%);
     backdrop-filter: blur(16px) saturate(140%);
     border: 1px solid rgba(255, 255, 255, .26);
-    box-shadow: 0 20px 45px rgba(3, 6, 30, .45), inset 0 1px 0 rgba(255, 255, 255, .22);
+    box-shadow: 0 20px 45px rgba(11, 16, 48, .45), inset 0 1px 0 rgba(255, 255, 255, .22);
 }
 
 /* the front card is a little more solid so the cards behind it never show through its text */
 .services-band .svc-card.is-active {
     background:
         linear-gradient(160deg, rgba(255, 255, 255, .18) 0%, rgba(255, 255, 255, .05) 100%),
-        rgba(16, 24, 68, .72);
+        rgba(5, 43, 69, .72);
     border-color: rgba(255, 255, 255, .42);
-    box-shadow: 0 0 0 3px rgba(196, 181, 253, .18), 0 26px 55px rgba(3, 6, 30, .55), inset 0 1px 0 rgba(255, 255, 255, .3);
+    box-shadow: 0 0 0 3px rgba(145, 190, 222, .18), 0 26px 55px rgba(11, 16, 48, .55), inset 0 1px 0 rgba(255, 255, 255, .3);
 }
 
 .services-band .svc-card h3 {
@@ -426,24 +427,24 @@
 }
 
 .services-band .svc-card p {
-    color: rgba(238, 240, 255, .92);
+    color: rgba(241, 247, 251, .92);
     text-shadow: 0 1px 2px rgba(0, 0, 0, .3);
 }
 
-.services-band .svc-icon { stroke: #c4b5fd; }
+.services-band .svc-icon { stroke: #91bede; }
 .services-band .svc-card::after { background: rgba(255, 255, 255, .35); }
 
 /* white pill button, like the reference design */
 .services-band .svc-card-link {
     background: #fff;
     border-color: #fff;
-    color: #1e1b4b;
+    color: #151a3d;
 }
 
 .services-band .svc-card-link:hover {
-    background: #ede9fe;
-    border-color: #ede9fe;
-    color: #1e1b4b;
+    background: #dfedf7;
+    border-color: #dfedf7;
+    color: #151a3d;
 }
 
 /* glass arrows */
@@ -452,7 +453,7 @@
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border-color: rgba(255, 255, 255, .35);
-    box-shadow: 0 6px 18px rgba(3, 6, 30, .35);
+    box-shadow: 0 6px 18px rgba(11, 16, 48, .35);
 }
 
 .services-band .svc-arrow:hover { background: rgba(255, 255, 255, .26); }
@@ -503,19 +504,19 @@
 .about-page .about-card h2 { color: #fff; }
 .about-page .about-card .about-rule { background: linear-gradient(90deg, rgba(255, 255, 255, .4), transparent); }
 .about-page .about-card .about-text .about-lead { color: #fff; }
-.about-page .about-card .about-lead span { color: #c4b5fd; }
-.about-page .about-card .about-text > div { color: rgba(230, 228, 255, .9); }
-.about-page .about-card #typed-text { color: #d8b4fe; }
-.about-page .about-card .typewriter-cursor { background-color: #d8b4fe; }
-.about-page .about-card .about-text p { color: rgba(232, 234, 255, .88); }
+.about-page .about-card .about-lead span { color: #91bede; }
+.about-page .about-card .about-text > div { color: rgba(223, 237, 247, .9); }
+.about-page .about-card #typed-text { color: #91bede; }
+.about-page .about-card .typewriter-cursor { background-color: #91bede; }
+.about-page .about-card .about-text p { color: rgba(223, 237, 247, .88); }
 
 /* Light text and controls on the night sky */
 .services-band .services-title { color: #fff; }
 .services-band .about-rule.center { background: rgba(255, 255, 255, .35); }
 .services-band .svc-dot::before { background: rgba(255, 255, 255, .45); }
-.services-band .svc-dot[aria-current="true"]::before { background: #c4b5fd; }
+.services-band .svc-dot[aria-current="true"]::before { background: #91bede; }
 .services-band .svc-arrow:focus-visible,
-.services-band .svc-dot:focus-visible { outline-color: #c4b5fd; }
+.services-band .svc-dot:focus-visible { outline-color: #91bede; }
 
 .services-inner {
     position: relative;
@@ -571,9 +572,9 @@
             gap: 10px;
             padding: 24px 22px;
             background: #fff;
-            border: 1px solid #ece4fb;
+            border: 1px solid #dfedf7;
             border-radius: 22px;
-            box-shadow: 0 10px 30px rgba(20, 23, 61, .10);
+            box-shadow: 0 10px 30px rgba(21, 26, 61, .10);
             cursor: pointer;
             transition: transform .55s cubic-bezier(.2, .7, .2, 1), opacity .4s, box-shadow .4s, border-color .4s;
             will-change: transform;
@@ -581,8 +582,8 @@
         }
 
         .svc-card.is-active {
-            border-color: #b79af0;
-            box-shadow: 0 0 0 3px rgba(168, 85, 247, .14), 0 24px 50px rgba(109, 59, 210, .22);
+            border-color: #5e9dca;
+            box-shadow: 0 0 0 3px rgba(42, 116, 171, .14), 0 24px 50px rgba(9, 84, 137, .22);
             cursor: default;
         }
 
@@ -614,7 +615,7 @@
             width: 44px;
             height: 2px;
             border-radius: 2px;
-            background: #c4a8f5;
+            background: #91bede;
             margin-top: 6px;
         }
 
@@ -627,8 +628,8 @@
             margin-top: -32px;
             border-radius: 50%;
             background: #fff;
-            border: 1px solid #eadff9;
-            box-shadow: 0 6px 18px rgba(20, 23, 61, .15);
+            border: 1px solid #dfedf7;
+            box-shadow: 0 6px 18px rgba(21, 26, 61, .15);
             display: grid;
             place-items: center;
             cursor: pointer;
@@ -636,7 +637,7 @@
         }
 
         .svc-arrow:hover {
-            background: #f6f1ff;
+            background: #f1f7fb;
             transform: scale(1.06);
         }
 
@@ -687,7 +688,7 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #cbb8f2;
+            background: #91bede;
             transition: all .3s;
         }
 
@@ -728,12 +729,12 @@
             font-weight: 600;
             padding: 14px 26px;
             border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(85, 39, 176, .28);
+            box-shadow: 0 8px 20px rgba(9, 84, 137, .28);
             transition: background .2s, transform .2s;
         }
 
         .cta-btn:hover {
-            background: #451f93;
+            background: #074169;
             transform: translateY(-1px);
         }
 
@@ -835,13 +836,13 @@
             gap: 2rem;
             padding: 1.5rem;
             color: #fff;
-            background: rgba(20, 28, 90, 0.42);
+            background: rgba(5, 43, 69, 0.5);
             /* deep navy tint */
             -webkit-backdrop-filter: blur(14px) saturate(120%);
             backdrop-filter: blur(14px) saturate(120%);
             border: 1px solid rgba(255, 255, 255, 0.22);
             border-radius: 24px;
-            box-shadow: 0 24px 60px rgba(5, 8, 40, 0.35);
+            box-shadow: 0 24px 60px rgba(11, 16, 48, 0.35);
         }
 
         @media (min-width: 640px) {
@@ -898,7 +899,7 @@
 
     /* lighter tint + lighter blur = more see-through */
     .contact-card {
-        background: rgba(20, 28, 90, 0.22);
+        background: rgba(5, 43, 69, 0.3);
         -webkit-backdrop-filter: blur(8px) saturate(130%);
         backdrop-filter: blur(8px) saturate(130%);
         border-color: rgba(255, 255, 255, 0.30);
@@ -909,7 +910,7 @@
     .contact-card h3,
     .contact-card .contact-label,
     .contact-card .contact-kicker {
-        text-shadow: 0 1px 8px rgba(8, 10, 50, 0.65);
+        text-shadow: 0 1px 8px rgba(11, 16, 48, 0.65);
     }
 }
 
@@ -941,7 +942,7 @@
         }
 
         .contact-card .contact-kicker {
-            color: #a78bfa;
+            color: #5e9dca;
         }
 
         .contact-card .contact-label {
@@ -954,7 +955,7 @@
         }
 
         .contact-card a:hover {
-            color: #c4b5fd;
+            color: #91bede;
         }
 
         /* Info items with round icon badges */
@@ -971,8 +972,8 @@
             display: grid;
             place-items: center;
             border-radius: 999px;
-            background: rgba(124, 92, 255, 0.28);
-            color: #c4b5fd;
+            background: rgba(42, 116, 171, 0.28);
+            color: #91bede;
         }
 
         .contact-icon svg {
@@ -1004,12 +1005,12 @@
         .contact-field:focus {
             outline: none;
             background: rgba(255, 255, 255, 0.14);
-            border-color: #a78bfa;
-            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.25);
+            border-color: #5e9dca;
+            box-shadow: 0 0 0 3px rgba(94, 157, 202, 0.25);
         }
 
         select.contact-field option {
-            color: #1f2937;
+            color: #232845;
         }
 
         /* readable dropdown list */
@@ -1019,15 +1020,15 @@
 
         /* ── DYNAMIC HERO & TYPING EFFECT ── */
         .hero-gradient-bg {
-            background: radial-gradient(circle at 10% 20%, rgba(216, 180, 254, 0.4) 0%, rgba(243, 232, 255, 0.2) 40%, rgba(251, 249, 246, 1) 90%);
+            background: radial-gradient(circle at 10% 20%, rgba(145, 190, 222, 0.4) 0%, rgba(223, 237, 247, 0.2) 40%, rgba(244, 244, 244, 1) 90%);
         }
 
         .glass-hero-card {
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(228, 218, 247, 0.8);
-            box-shadow: 0 20px 50px rgba(109, 59, 210, 0.08);
+            border: 1px solid rgba(191, 218, 237, 0.8);
+            box-shadow: 0 20px 50px rgba(9, 84, 137, 0.08);
         }
 
         .typewriter-cursor {
@@ -1064,7 +1065,7 @@
             position: absolute;
             inset: -6px;
             border-radius: 24px;
-            background: linear-gradient(135deg, #7c3aed, #a855f7, #60a5fa);
+            background: linear-gradient(135deg, #2a74ab, #2a74ab, #5e9dca);
             opacity: 0.45;
             filter: blur(12px);
             z-index: 0;
@@ -1092,10 +1093,10 @@
             gap: 7px;
             margin-top: 12px;
             padding: 8px 12px;
-            border: 1px solid #6E3EEF;
+            border: 1px solid #2a74ab;
             border-radius: 999px;
-            color: #edecf0;
-            background: #6E3EEF;
+            color: #dfedf7;
+            background: #2a74ab;
             font-size: 0.78rem;
             font-weight: 700;
             text-decoration: none;
@@ -1112,8 +1113,8 @@
         }
 
         .svc-card-link:hover {
-            background: #3B168C;
-            border-color: #3B168C;
+            background: #074169;
+            border-color: #074169;
             color: white;
         }
 
@@ -1140,14 +1141,14 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            border: 1px solid #e4daf7;
+            border: 1px solid #bfdaed;
             background: #fff;
             cursor: pointer;
             transition: background .2s, border-color .2s, transform .2s;
         }
 
-        .theme-toggle:hover { transform: scale(1.06); background: #f6f1ff; }
-        .theme-toggle:focus-visible { outline: 3px solid #a855f7; outline-offset: 3px; }
+        .theme-toggle:hover { transform: scale(1.06); background: #f1f7fb; }
+        .theme-toggle:focus-visible { outline: 3px solid #2a74ab; outline-offset: 3px; }
 
         .theme-toggle svg {
             width: 22px;
@@ -1159,7 +1160,7 @@
         }
 
         .theme-toggle .icon-sun { stroke: #fbbf24; display: none; }
-        .theme-toggle .icon-moon { stroke: #6d28d9; fill: rgba(109, 40, 217, .12); }
+        .theme-toggle .icon-moon { stroke: #095489; fill: rgba(9, 84, 137, .12); }
         html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
         html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
@@ -1171,7 +1172,7 @@
         }
 
         html[data-theme="dark"] body > header h1 { color: #fff; }
-        html[data-theme="dark"] body > header p { color: #c4b5fd; }
+        html[data-theme="dark"] body > header p { color: #91bede; }
 
         html[data-theme="dark"] .theme-toggle {
             background: rgba(255, 255, 255, .08);
@@ -1185,29 +1186,29 @@
             border-bottom-color: rgba(255, 255, 255, .08);
         }
 
-        html[data-theme="dark"] body > nav .tab-button { color: rgba(226, 232, 255, .72); }
-        html[data-theme="dark"] body > nav .tab-button.active { color: #c4b5fd; border-bottom-color: #a78bfa; }
+        html[data-theme="dark"] body > nav .tab-button { color: rgba(223, 237, 247, .72); }
+        html[data-theme="dark"] body > nav .tab-button.active { color: #91bede; border-bottom-color: #5e9dca; }
         html[data-theme="dark"] body > nav .tab-button:not(.active):hover { color: #fff; }
 
         /* --- dark mode: the other tabs (Projects, Knowledge Sharing, My Articles) --- */
         html[data-theme="dark"] body {
             background-color: #0b1030;
-            color: #e5e8ff;
+            color: #dfedf7;
         }
 
         /* Projects */
-        html[data-theme="dark"] #content-projects h2 { color: #f1f4ff; }
+        html[data-theme="dark"] #content-projects h2 { color: #f1f7fb; }
 
         html[data-theme="dark"] .project-card.bg-white {
-            background: #151b47;
+            background: #151a3d;
             box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
         }
 
         html[data-theme="dark"] .project-card:hover { box-shadow: 0 20px 40px rgba(0, 0, 0, .45); }
-        html[data-theme="dark"] .project-card .text-gray-600 { color: #b8c0dc; }
-        html[data-theme="dark"] .project-card .text-teal-800 { color: #5eead4; }
-        html[data-theme="dark"] .project-card .text-indigo-800 { color: #a5b4fc; }
-        html[data-theme="dark"] .project-card .text-purple-800 { color: #d8b4fe; }
+        html[data-theme="dark"] .project-card .text-ink-600 { color: #bfdaed; }
+        html[data-theme="dark"] .project-card .text-brand-800 { color: #6ee7b7; }
+        html[data-theme="dark"] .project-card .text-brand-800 { color: #91bede; }
+        html[data-theme="dark"] .project-card .text-brand-800 { color: #91bede; }
 
         /* Knowledge Sharing: banners keep their artwork, dimmed by a dark wash so text stays readable */
         html[data-theme="dark"] .teaching-hero,
@@ -1216,83 +1217,83 @@
             border-color: rgba(255, 255, 255, .12);
         }
 
-        html[data-theme="dark"] .teaching-hero h2 { color: #f1f4ff; }
-        html[data-theme="dark"] .teaching-hero p { color: #c3c9e6; }
-        html[data-theme="dark"] .teaching-hero .eyebrow { color: #c4b5fd; }
-        html[data-theme="dark"] .hero-accent { color: #f0abfc; }
+        html[data-theme="dark"] .teaching-hero h2 { color: #f1f7fb; }
+        html[data-theme="dark"] .teaching-hero p { color: #91bede; }
+        html[data-theme="dark"] .teaching-hero .eyebrow { color: #91bede; }
+        html[data-theme="dark"] .hero-accent { color: #91bede; }
 
         /* inline text colours inside the Ko-fi banner and section */
-        html[data-theme="dark"] #content-teaching [style*="color:#7c3aed"] { color: #c4b5fd !important; }
-        html[data-theme="dark"] #content-teaching [style*="color:#111827"] { color: #f1f4ff !important; }
-        html[data-theme="dark"] #content-teaching [style*="color:#374151"] { color: #d3d8f0 !important; }
-        html[data-theme="dark"] #content-teaching [style*="color:#4b5563"] { color: #c3c9e6 !important; }
-        html[data-theme="dark"] #content-teaching [style*="color:#6b7280"]:not(span) { color: #aab3cf !important; }
+        html[data-theme="dark"] #content-teaching [style*="color:#2a74ab"] { color: #91bede !important; }
+        html[data-theme="dark"] #content-teaching [style*="color:#0b1030"] { color: #f1f7fb !important; }
+        html[data-theme="dark"] #content-teaching [style*="color:#353a5a"] { color: #bfdaed !important; }
+        html[data-theme="dark"] #content-teaching [style*="color:#4a5072"] { color: #91bede !important; }
+        html[data-theme="dark"] #content-teaching [style*="color:#63698b"]:not(span) { color: #91bede !important; }
 
         /* filter pills */
         html[data-theme="dark"] .filter-pill {
-            background: #151b47;
+            background: #151a3d;
             border-color: rgba(255, 255, 255, .18);
-            color: #cfd5f0;
+            color: #bfdaed;
         }
 
-        html[data-theme="dark"] .filter-pill:hover { border-color: #c084fc; color: #e9d5ff; }
-        html[data-theme="dark"] .filter-pill.active { background: #9333ea; border-color: #9333ea; color: #fff; }
+        html[data-theme="dark"] .filter-pill:hover { border-color: #5e9dca; color: #bfdaed; }
+        html[data-theme="dark"] .filter-pill.active { background: #2a74ab; border-color: #2a74ab; color: #fff; }
 
         /* resource cards */
         html[data-theme="dark"] .teach-card {
-            background: #151b47;
+            background: #151a3d;
             box-shadow: 0 2px 10px rgba(0, 0, 0, .35);
         }
 
         html[data-theme="dark"] .teach-card:hover { box-shadow: 0 10px 28px rgba(0, 0, 0, .5); }
-        html[data-theme="dark"] .card-title { color: #f1f4ff; }
-        html[data-theme="dark"] .card-desc { color: #aab3cf; }
+        html[data-theme="dark"] .card-title { color: #f1f7fb; }
+        html[data-theme="dark"] .card-desc { color: #91bede; }
         html[data-theme="dark"] .card-footer { border-top-color: rgba(255, 255, 255, .08); }
 
         /* coloured tag and footer labels: lighter shades of the same colours */
-        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#c2410c"] { color: #fdba74 !important; }
+        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#b45309"] { color: #fbbf24 !important; }
         html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#059669"] { color: #6ee7b7 !important; }
-        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#1d4ed8"] { color: #93c5fd !important; }
-        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#15803d"] { color: #86efac !important; }
-        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#a16207"] { color: #fcd34d !important; }
-        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#7e22ce"] { color: #d8b4fe !important; }
+        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#4a5072"] { color: #bfdaed !important; }
+        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#047857"] { color: #6ee7b7 !important; }
+        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#b45309"] { color: #fcd34d !important; }
+        html[data-theme="dark"] :is(.card-tag, .card-footer)[style*="color:#095489"] { color: #91bede !important; }
 
         /* grey "coming soon" style chips */
-        html[data-theme="dark"] #content-teaching span[style*="background:#f3f4f6"] {
+        html[data-theme="dark"] #content-teaching span[style*="background:#f4f4f4"] {
             background: rgba(255, 255, 255, .08) !important;
-            color: #b8c0dc !important;
+            color: #bfdaed !important;
         }
 
         /* sky colours measured along the top edge of the daytime photo as displayed */
         html[data-theme="light"] {
-            --day-l: rgb(113, 142, 221);
-            --day-m: rgb(114, 143, 222);
-            --day-r: rgb(110, 145, 225);
+            --day-l: rgb(92, 149, 210);
+            --day-m: rgb(94, 151, 213);
+            --day-r: rgb(89, 151, 214);
         }
 
         /* --- light mode: About Me as a bright day sky --- */
         html[data-theme="light"] .about-page .about-card {
             background:
                 radial-gradient(ellipse 45% 60% at 85% 40%, rgba(255, 255, 255, .6), transparent 70%),
-                linear-gradient(180deg, #f4f8ff 0%, #e6f0ff 55%, #d6e6ff 100%);
+                linear-gradient(180deg, #f2f9fe 0%, #e2f1fc 55%, #d0e8fa 100%);
         }
 
         html[data-theme="light"] .about-page .about-card::before { display: none; }
-        html[data-theme="light"] .about-page .about-card h2 { color: #14173d; }
-        html[data-theme="light"] .about-page .about-card .about-rule { background: linear-gradient(90deg, #c9b8ee, transparent); }
-        html[data-theme="light"] .about-page .about-card .about-text .about-lead { color: #14173d; }
-        html[data-theme="light"] .about-page .about-card .about-lead span { color: #6d28d9; }
-        html[data-theme="light"] .about-page .about-card .about-text > div { color: #4c1d95; }
-        html[data-theme="light"] .about-page .about-card #typed-text { color: #7c3aed; }
-        html[data-theme="light"] .about-page .about-card .typewriter-cursor { background-color: #7c3aed; }
-        html[data-theme="light"] .about-page .about-card .about-text p { color: #3f4560; }
+        html[data-theme="light"] .about-page .about-card h2 { color: #151a3d; }
+        html[data-theme="light"] .about-page .about-card .about-rule { background: linear-gradient(90deg, #91bede, transparent); }
+        html[data-theme="light"] .about-page .about-card .about-text .about-lead { color: #151a3d; }
+        html[data-theme="light"] .about-page .about-card .about-lead span { color: #095489; }
+        html[data-theme="light"] .about-page .about-card .about-text > div { color: #074169; }
+        html[data-theme="light"] .about-page .about-card #typed-text { color: #2a74ab; }
+        html[data-theme="light"] .about-page .about-card .typewriter-cursor { background-color: #2a74ab; }
+        html[data-theme="light"] .about-page .about-card .about-text p { color: #353a5a; }
 
         /* --- light mode: services band continues the day sky into the photo --- */
         html[data-theme="light"] .services-band {
             /* bottom edge = colours sampled from the top edge of the daytime photo */
             background:
-                linear-gradient(180deg, rgba(214, 230, 255, 1) 0%, rgba(214, 230, 255, .55) 38%, rgba(214, 230, 255, 0) 100%),
-                linear-gradient(90deg, var(--day-l, rgb(140, 167, 227)) 0%, var(--day-m, rgb(139, 169, 229)) 50%, var(--day-r, rgb(134, 165, 228)) 100%);
+                linear-gradient(180deg, rgba(208, 232, 250, 1) 0%, rgba(208, 232, 250, .55) 38%, rgba(208, 232, 250, 0) 100%),
+                linear-gradient(90deg, var(--day-l, rgb(125, 172, 218)) 0%, var(--day-m, rgb(124, 174, 220)) 50%, var(--day-r, rgb(118, 171, 218)) 100%);
         }
 
         html[data-theme="light"] .services-band::before { display: none; }
@@ -1300,77 +1301,79 @@
         /* white daytime clouds with soft blue-grey shading underneath */
         html[data-theme="light"] .sky-clouds {
             --cloud-body: rgba(255, 255, 255, .92);
-            --cloud-shade: rgba(214, 224, 242, .85);
-            --cloud-under: rgba(150, 168, 205, .35);
+            --cloud-shade: rgba(209, 226, 239, .85);
+            --cloud-under: rgba(141, 171, 199, .35);
         }
 
-        html[data-theme="light"] .services-band .services-title { color: #14173d; }
-        html[data-theme="light"] .services-band .about-rule.center { background: rgba(20, 23, 61, .25); }
-        html[data-theme="light"] .services-band .svc-dot::before { background: rgba(20, 23, 61, .35); }
-        html[data-theme="light"] .services-band .svc-dot[aria-current="true"]::before { background: #4c1d95; }
+        html[data-theme="light"] .services-band .services-title { color: #151a3d; }
+        html[data-theme="light"] .services-band .about-rule.center { background: rgba(21, 26, 61, .25); }
+        html[data-theme="light"] .services-band .svc-dot::before { background: rgba(21, 26, 61, .35); }
+        html[data-theme="light"] .services-band .svc-dot[aria-current="true"]::before { background: #074169; }
 
         /* light frosted-glass cards with dark text */
         html[data-theme="light"] .services-band .svc-card {
             background: linear-gradient(160deg, rgba(255, 255, 255, .78) 0%, rgba(255, 255, 255, .55) 100%);
             border-color: rgba(255, 255, 255, .85);
-            box-shadow: 0 20px 45px rgba(30, 60, 140, .18), inset 0 1px 0 rgba(255, 255, 255, .9);
+            box-shadow: 0 20px 45px rgba(7, 65, 105, .18), inset 0 1px 0 rgba(255, 255, 255, .9);
         }
 
         html[data-theme="light"] .services-band .svc-card.is-active {
             background: linear-gradient(160deg, rgba(255, 255, 255, .9) 0%, rgba(255, 255, 255, .72) 100%);
             border-color: #fff;
-            box-shadow: 0 0 0 3px rgba(109, 59, 210, .14), 0 26px 55px rgba(30, 60, 140, .24), inset 0 1px 0 #fff;
+            box-shadow: 0 0 0 3px rgba(9, 84, 137, .14), 0 26px 55px rgba(7, 65, 105, .24), inset 0 1px 0 #fff;
         }
 
-        html[data-theme="light"] .services-band .svc-card h3 { color: #14173d; text-shadow: none; }
-        html[data-theme="light"] .services-band .svc-card p { color: #3f4560; text-shadow: none; }
-        html[data-theme="light"] .services-band .svc-icon { stroke: #6d28d9; }
-        html[data-theme="light"] .services-band .svc-card::after { background: #c4a8f5; }
+        html[data-theme="light"] .services-band .svc-card h3 { color: #151a3d; text-shadow: none; }
+        html[data-theme="light"] .services-band .svc-card p { color: #353a5a; text-shadow: none; }
+        html[data-theme="light"] .services-band .svc-icon { stroke: #095489; }
+        html[data-theme="light"] .services-band .svc-card::after { background: #91bede; }
 
         html[data-theme="light"] .services-band .svc-card-link {
-            background: #6d28d9;
-            border-color: #6d28d9;
+            background: #095489;
+            border-color: #095489;
             color: #fff;
         }
 
         html[data-theme="light"] .services-band .svc-card-link:hover {
-            background: #4c1d95;
-            border-color: #4c1d95;
+            background: #074169;
+            border-color: #074169;
             color: #fff;
         }
 
         html[data-theme="light"] .services-band .svc-arrow {
             background: rgba(255, 255, 255, .7);
             border-color: rgba(255, 255, 255, .9);
-            box-shadow: 0 6px 18px rgba(30, 60, 140, .2);
+            box-shadow: 0 6px 18px rgba(7, 65, 105, .2);
         }
 
         html[data-theme="light"] .services-band .svc-arrow:hover { background: #fff; }
-        html[data-theme="light"] .services-band .svc-arrow svg { stroke: #14173d; }
+        html[data-theme="light"] .services-band .svc-arrow svg { stroke: #151a3d; }
 
         /* --- light mode: daytime Toronto photo in the contact section --- */
         html[data-theme="light"] #content-contact.contact-section-bg {
             background:
-                linear-gradient(180deg, rgba(120, 150, 210, 0) 0%, #6f8fce 45%, #4c6fb3 100%),
-                linear-gradient(90deg, var(--day-l, rgb(140, 167, 227)) 0%, var(--day-m, rgb(139, 169, 229)) 50%, var(--day-r, rgb(134, 165, 228)) 100%);
+                linear-gradient(180deg, rgba(105, 155, 201, 0) 0%, #5f95c4 45%, #3b75a8 100%),
+                linear-gradient(90deg, var(--day-l, rgb(125, 172, 218)) 0%, var(--day-m, rgb(124, 174, 220)) 50%, var(--day-r, rgb(118, 171, 218)) 100%);
         }
 
         html[data-theme="light"] .contact-section-bg::before {
             background-image: url('images/toronto-day.webp');
+            filter: hue-rotate(-15deg);
         }
 
         html[data-theme="light"] .contact-section-bg::after {
             background-image: url('images/toronto-day.webp');
+            filter: hue-rotate(-15deg);
         }
 
         /* the form panel is a little more solid over the bright photo so its text stays readable */
         html[data-theme="light"] .contact-card {
-            background: rgba(20, 28, 90, .6);
+            background: rgba(9, 84, 137, .62);
         }
 
         @media (min-width: 1024px) {
             html[data-theme="light"] #content-contact.contact-section-bg {
-                background: linear-gradient(90deg, var(--day-l, rgb(140, 167, 227)) 0%, var(--day-m, rgb(139, 169, 229)) 50%, var(--day-r, rgb(134, 165, 228)) 100%);
+                background: linear-gradient(90deg, var(--day-l, rgb(125, 172, 218)) 0%, var(--day-m, rgb(124, 174, 220)) 50%, var(--day-r, rgb(118, 171, 218)) 100%);
             }
 
             /* Desktop uses a wider version of the day photo (skyline on the right, open sky and
@@ -1458,8 +1461,8 @@
     <header class="bg-white shadow-md">
         <div class="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
             <div>
-                <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight">Mojgan Samandar</h1>
-                <p class="mt-2 text-xl text-purple-600 font-medium">Economist & Data Analyst</p>
+                <h1 class="text-4xl font-extrabold text-ink-900 tracking-tight">Mojgan Samandar</h1>
+                <p class="mt-2 text-xl text-brand-600 font-medium">Economist & Data Analyst</p>
             </div>
             <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light mode">
                 <!-- sun: shown in dark mode (switches to light) -->
@@ -1476,22 +1479,22 @@
     </header>
 
     <!-- Navigation Tabs -->
-    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <nav class="bg-white border-b border-ink-200 sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex space-x-4 sm:space-x-8">
-                <button id="tab-about" data-target="content-about" class="tab-button active py-3 px-2 text-gray-600">
+                <button id="tab-about" data-target="content-about" class="tab-button active py-3 px-2 text-ink-600">
                     About Me
                 </button>
-                <button id="tab-projects" data-target="content-projects" class="tab-button py-3 px-2 text-gray-600">
+                <button id="tab-projects" data-target="content-projects" class="tab-button py-3 px-2 text-ink-600">
                     Projects
                 </button>
-                <button id="tab-teaching" data-target="content-teaching" class="tab-button py-3 px-2 text-gray-600">
+                <button id="tab-teaching" data-target="content-teaching" class="tab-button py-3 px-2 text-ink-600">
                     Knowledge Sharing
                 </button>
-                <button id="tab-articles" data-target="content-articles" class="tab-button py-3 px-2 text-gray-600">
+                <button id="tab-articles" data-target="content-articles" class="tab-button py-3 px-2 text-ink-600">
                     My Articles
                 </button>
-                <button id="tab-contact" data-target="content-contact" class="tab-button py-3 px-2 text-gray-600">
+                <button id="tab-contact" data-target="content-contact" class="tab-button py-3 px-2 text-ink-600">
                     Contact & Links
                 </button>
             </div>
@@ -1512,14 +1515,14 @@
                         <h2 id="about-heading" class="flex items-center gap-2">About Me</h2>
                         <div class="about-rule" aria-hidden="true"></div>
 
-                        <p class="about-lead font-semibold text-2xl text-indigo-950">
-                            Hi, I’m <span class="text-purple-700">Mojgan</span>.
+                        <p class="about-lead font-semibold text-2xl text-brand-950">
+                            Hi, I’m <span class="text-brand-700">Mojgan</span>.
                         </p>
 
                         <!-- Dynamic Typing Subtitle -->
-                        <div class="text-lg font-medium text-purple-900 my-3 flex items-center h-8">
+                        <div class="text-lg font-medium text-brand-900 my-3 flex items-center h-8">
                             <span>I am a&nbsp;</span>
-                            <span id="typed-text" class="text-purple-600 font-bold"></span>
+                            <span id="typed-text" class="text-brand-600 font-bold"></span>
                             <span class="typewriter-cursor"></span>
                         </div>
 
@@ -1710,7 +1713,7 @@
 
                         <div class="contact-span-2 flex justify-end">
                             <button type="submit"
-                                class="bg-[#6E3EEF] text-white font-bold py-3 px-7 rounded-xl shadow-md hover:bg-[#5F32D6] transition uppercase tracking-wider text-sm">
+                                class="bg-[#2a74ab] text-white font-bold py-3 px-7 rounded-xl shadow-md hover:bg-[#095489] transition uppercase tracking-wider text-sm">
                                 Submit
                             </button>
                         </div>
@@ -1777,33 +1780,33 @@
 
         <!-- Projects -->
         <section id="content-projects" class="tab-content hidden">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6">Featured Projects</h2>
+            <h2 class="text-3xl font-bold text-ink-800 mb-6">Featured Projects</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
                 <!-- Policy & Research -->
-                <div class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-teal-500 hover:shadow-2xl">
-                    <h3 class="text-xl font-semibold mb-3 text-teal-800">Policy & Research Projects</h3>
-                    <p class="text-gray-600 mb-4">
+                <div class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-brand-500 hover:shadow-2xl">
+                    <h3 class="text-xl font-semibold mb-3 text-brand-800">Policy & Research Projects</h3>
+                    <p class="text-ink-600 mb-4">
                         Published and applied research across economics, data analytics, and public policy, focused on
                         turning complex data into clear, evidence-based insights.
                     </p>
                     <a href="projects.html"
-                        class="inline-block bg-teal-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-teal-700 transition">
+                        class="inline-block bg-brand-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-brand-700 transition">
                         View Projects &rarr;
                     </a>
                 </div>
 
                 <!-- Interactive Dashboards -->
                 <div
-                    class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-indigo-500 hover:shadow-2xl">
-                    <h3 class="text-xl font-semibold mb-3 text-indigo-800">Interactive Data Dashboards</h3>
-                    <p class="text-gray-600 mb-4">
+                    class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-brand-500 hover:shadow-2xl">
+                    <h3 class="text-xl font-semibold mb-3 text-brand-800">Interactive Data Dashboards</h3>
+                    <p class="text-ink-600 mb-4">
                         A collection of dashboard demo videos showing healthcare and analytics projects,
                         with visual summaries and direct links to YouTube.
                     </p>
                     <a href="dashboard-videos.html"
-                        class="inline-block bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition">
+                        class="inline-block bg-brand-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-brand-700 transition">
                         View Dashboards &rarr;
                     </a>
                 </div>
@@ -1812,14 +1815,14 @@
 
                 <!-- Optional extra box -->
                 <div
-                    class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-purple-500 hover:shadow-2xl">
-                    <h3 class="text-xl font-semibold mb-3 text-purple-800">Games & Interactive Apps</h3>
-                    <p class="text-gray-600 mb-4">
+                    class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-brand-500 hover:shadow-2xl">
+                    <h3 class="text-xl font-semibold mb-3 text-brand-800">Games & Interactive Apps</h3>
+                    <p class="text-ink-600 mb-4">
                         A collection of games and interactive applications built using Python, R Shiny, and JavaScript,
                         ranging from small tools to data-driven projects.
                     </p>
                     <a href="projects-apps.html" target="_blank"
-                        class="inline-block bg-purple-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 transition">
+                        class="inline-block bg-brand-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-brand-700 transition">
                         View Apps &rarr;
                     </a>
                 </div>
@@ -1847,15 +1850,15 @@
                 <!-- centre: text block -->
                 <div style="flex:1; min-width:200px;">
                     <div
-                        style="font-size:0.8rem; font-weight:700; color:#7c3aed; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">
+                        style="font-size:0.8rem; font-weight:700; color:#2a74ab; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">
                         Find these resources useful?</div>
-                    <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:6px;">Support my work
+                    <div style="font-size:1.25rem; font-weight:800; color:#0b1030; margin-bottom:6px;">Support my work
                         💜</div>
-                    <div style="font-size:0.85rem; color:#374151; max-width:420px; line-height:1.6;">Your support helps
+                    <div style="font-size:0.85rem; color:#353a5a; max-width:420px; line-height:1.6;">Your support helps
                         me create more free tutorials and tools for students and educators around the world. Every
                         coffee makes a difference!</div>
                     <div
-                        style="display:flex; gap:20px; margin-top:10px; font-size:0.78rem; color:#4b5563; font-weight:500;">
+                        style="display:flex; gap:20px; margin-top:10px; font-size:0.78rem; color:#4a5072; font-weight:500;">
                         <span>🔒 <strong>Secure</strong><br><span style="font-weight:400;">Safe &amp;
                                 encrypted</span></span>
                         <span>⚡ <strong>Quick</strong><br><span style="font-weight:400;">Takes less than a
@@ -1870,7 +1873,7 @@
                     <a href="https://ko-fi.com/H2H31ZM0W7" target="_blank" class="kofi-btn">
                         ☕ Support me on Ko-fi
                     </a>
-                    <div style="font-size:0.78rem; color:#6b7280; text-align:center;">
+                    <div style="font-size:0.78rem; color:#63698b; text-align:center;">
                         <!-- 👤👤👤 Join 120+ supporters<br>Thank you! 🙏 -->
                         👤👤👤 Join supporters<br>Thank you! 🙏
                     </div>
@@ -1899,7 +1902,7 @@
                         </div>
 
                         <div class="card-body">
-                            <div class="card-tag" style="color:#c2410c;">Commercial Banking</div>
+                            <div class="card-tag" style="color:#b45309;">Commercial Banking</div>
 
                             <div class="card-title">Commercial Credit Risk Analysis</div>
 
@@ -1910,21 +1913,21 @@
                             </div>
 
                             <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:2px;">
-                                <span style="background:#fed7aa; color:#c2410c; font-size:11px; padding:2px 9px;
+                                <span style="background:#fcd34d; color:#b45309; font-size:11px; padding:2px 9px;
                     border-radius:9999px; font-weight:500;">
                                     Credit Analysis
                                 </span>
 
-                                <span style="background:#e07e0d; color:#ebeef3; font-size:11px; padding:2px 9px;
+                                <span style="background:#d97706; color:#dfedf7; font-size:11px; padding:2px 9px;
                     border-radius:9999px; font-weight:500;">
                                     Commercial Banking
                                 </span>
                             </div>
                         </div>
 
-                        <div class="card-footer" id="credit-risk-footer" style="color:#c2410c;">
+                        <div class="card-footer" id="credit-risk-footer" style="color:#b45309;">
                             <a href="teaching/CRA/cra_index.html"
-                                class="inline-block bg-emerald-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#dc23d1] transition">
+                                class="inline-block bg-emerald-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#2a74ab] transition">
                                 View resource &rarr;
                             </a>
                         </div>
@@ -1957,12 +1960,12 @@
 
 
                                 <span
-                                    style="background:#0c3381; color:#e4e5e7; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">
+                                    style="background:#353a5a; color:#bfdaed; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">
                                     Data Analysis
                                 </span>
 
                                 <span
-                                    style="background:#399cdf; color:#e9ecf3; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">
+                                    style="background:#5e9dca; color:#dfedf7; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">
                                     Machine learning
                                 </span>
                             </div>
@@ -1970,7 +1973,7 @@
 
                         <div class="card-footer" id="data-science-footer" style="color:#059669;">
                             <a href="teaching/data_science.html"
-                                class="inline-block bg-emerald-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#dc23d1] transition">
+                                class="inline-block bg-emerald-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#2a74ab] transition">
                                 View resource &rarr;
                             </a>
                         </div>
@@ -2003,12 +2006,12 @@
                                 </span>
 
                                 <span
-                                    style="background:#f3f4f6; color:#6b7280; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">
+                                    style="background:#f4f4f4; color:#63698b; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">
                                     DAGs
                                 </span> -->
 
                                 <span
-                                    style="background:#34a155; color:#0c0e0d; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">
+                                    style="background:#059669; color:#0b1030; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">
                                     Method selection
                                 </span>
                             </div>
@@ -2016,7 +2019,7 @@
 
                         <div class="card-footer" id="causal-inference-footer" style="color:#059669;">
                             <a href="teaching/causal-Inference-methodst-taxonomy.html"
-                                class="inline-block bg-emerald-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#dc23d1] transition">
+                                class="inline-block bg-emerald-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#2a74ab] transition">
                                 Explore taxonomy &rarr;
                             </a>
                         </div>
@@ -2030,24 +2033,24 @@
                             <img src="images/sql.png" alt="SQL course" />
                         </div>
                         <div class="card-body">
-                            <div class="card-tag" style="color:#1d4ed8;">SQL</div>
+                            <div class="card-tag" style="color:#4a5072;">SQL</div>
                             <div class="card-title">SQL - Beginner to Expert</div>
                             <div class="card-desc">A complete reference covering core syntax, joins, window functions,
                                 indexing, and performance tuning — organized by skill level with video.</div>
                             <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:2px;">
                                 <span
-                                    style="background:#dbeafe; color:#1e40af; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Beginner
+                                    style="background:#dfedf7; color:#353a5a; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Beginner
                                     → Expert</span>
                                 <span
-                                    style="background:#f3f4f6; color:#6b7280; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Reference
+                                    style="background:#f4f4f4; color:#63698b; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Reference
                                     table</span>
                                 <span
-                                    style="background:#f3f4f6; color:#6b7280; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Video</span>
+                                    style="background:#f4f4f4; color:#63698b; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Video</span>
                             </div>
                         </div>
-                        <div class="card-footer" id="sql-footer" style="color:#1d4ed8;">
+                        <div class="card-footer" id="sql-footer" style="color:#4a5072;">
                             <a href="teaching/sql_teaching_page.html"
-                                class="inline-block bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#dc23d1] transition">
+                                class="inline-block bg-brand-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#2a74ab] transition">
                                 View resource &rarr;
                             </a>
                         </div>
@@ -2057,25 +2060,25 @@
                 <!-- Excel card (coming soon) -->
                 <div class="card-item coming-soon" data-cat="data" data-panel="excel-panel">
                     <div class="teach-card">
-                        <div class="card-thumb" style="background:#f0fdf4;">
+                        <div class="card-thumb" style="background:#ecfdf5;">
                             <img src="images/excel.png" alt="SQL course" />
                         </div>
                         <div class="card-body">
-                            <div class="card-tag" style="color:#15803d;">Excel</div>
+                            <div class="card-tag" style="color:#047857;">Excel</div>
                             <div class="card-title">Excel Dashboard Walkthroughs</div>
                             <div class="card-desc">Pivot tables, Power Query, conditional formatting, and building
                                 interactive dashboards from raw data.</div>
                             <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:2px;">
                                 <span
-                                    style="background:#dcfce7; color:#15803d; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Intermediate</span>
+                                    style="background:#d1fae5; color:#047857; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Intermediate</span>
                                 <span
-                                    style="background:#f3f4f6; color:#9ca3af; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Coming
+                                    style="background:#f4f4f4; color:#9c9c9c; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Coming
                                     soon</span>
                             </div>
                         </div>
-                        <div class="card-footer" id="excel-footer" style="color:#166534;">
+                        <div class="card-footer" id="excel-footer" style="color:#065f46;">
                             <a href="teaching/excel_teaching_page.html"
-                                class="inline-block bg-teal-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#dc23d1] transition">
+                                class="inline-block bg-brand-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#2a74ab] transition">
                                 View resource &rarr;
                             </a>
                         </div>
@@ -2085,25 +2088,25 @@
                 <!-- Power BI card (coming soon) -->
                 <div class="card-item coming-soon" data-cat="data">
                     <div class="teach-card">
-                        <div class="card-thumb" style="background:#f0fdf4;">
+                        <div class="card-thumb" style="background:#ecfdf5;">
                             <img src="images/PowerBI.png" alt="PowerBI course" />
                         </div>
                         <div class="card-body">
-                            <div class="card-tag" style="color:#a16207;">Power BI</div>
+                            <div class="card-tag" style="color:#b45309;">Power BI</div>
                             <div class="card-title">Power BI for Analysts</div>
                             <div class="card-desc">Building interactive reports, writing DAX measures, and designing
                                 dashboards for business intelligence.</div>
                             <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:2px;">
                                 <span
-                                    style="background:#fef9c3; color:#854d0e; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Intermediate</span>
+                                    style="background:#fffbeb; color:#92400e; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Intermediate</span>
                                 <span
-                                    style="background:#f3f4f6; color:#9ca3af; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Coming
+                                    style="background:#f4f4f4; color:#9c9c9c; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Coming
                                     soon</span>
                             </div>
                         </div>
-                        <div class="card-footer" id="sql-footer" style="color:#dde016;">
+                        <div class="card-footer" id="sql-footer" style="color:#fcd34d;">
                             <a href="teaching/powerbi_teaching_page.html"
-                                class="inline-block bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#dc23d1] transition">
+                                class="inline-block bg-amber-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#2a74ab] transition">
                                 View resource &rarr;
                             </a>
                         </div>
@@ -2113,28 +2116,28 @@
                 <!-- Math card  -->
                 <div class="card-item " data-cat="math" data-panel="math-panel">
                     <div class="teach-card">
-                        <div class="card-thumb" style="background:#f0fdf4;">
+                        <div class="card-thumb" style="background:#ecfdf5;">
                             <img src="images/math.png" alt="math course" />
                         </div>
                         <div class="card-body">
-                            <div class="card-tag" style="color:#7e22ce;">Math for Kids</div>
+                            <div class="card-tag" style="color:#095489;">Math for Kids</div>
                             <div class="card-title">Math Activities — Grades 1 & 2</div>
                             <div class="card-desc">Playful, visual activities to build number sense, counting, addition,
                                 subtraction, and patterns for young learners.</div>
                             <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:2px;">
                                 <span
-                                    style="background:#f3e8ff; color:#7e22ce; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Grade
+                                    style="background:#dfedf7; color:#095489; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Grade
                                     1–2</span>
                                 <span
-                                    style="background:#f3f4f6; color:#9ca3af; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Interactive
+                                    style="background:#f4f4f4; color:#9c9c9c; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Interactive
                                     games</span>
                                 <span
-                                    style="background:#f3f4f6; color:#9ca3af; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Coming
+                                    style="background:#f4f4f4; color:#9c9c9c; font-size:11px; padding:2px 9px; border-radius:9999px; font-weight:500;">Coming
                                     soon</span>
                             </div>
-                            <div class="card-footer" id="math-footer" style="color:#1d4ed8;">
+                            <div class="card-footer" id="math-footer" style="color:#4a5072;">
                                 <a href="teaching/math_kids.html"
-                                    class="inline-block bg-purple-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#dc23d1] transition">
+                                    class="inline-block bg-brand-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#2a74ab] transition">
                                     View resource &rarr;
                                 </a>
                             </div>
@@ -2157,7 +2160,7 @@
 
 
                         <div class="card-body ">
-                            <div class="card-tag" style="color:#c2410c;">Economics & Finance</div>
+                            <div class="card-tag" style="color:#b45309;">Economics & Finance</div>
 
                             <div class="card-title">Economics & Finance</div>
 
@@ -2167,21 +2170,21 @@
                             </div>
 
                             <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:2px;">
-                                <span style="background:#fed7aa; color:#c2410c; font-size:11px; padding:2px 9px;
+                                <span style="background:#fcd34d; color:#b45309; font-size:11px; padding:2px 9px;
                                     border-radius:9999px; font-weight:500;">
                                     Economics
                                 </span>
 
-                                <span style="background:#f3f4f6; color:#6b7280; font-size:11px; padding:2px 9px;
+                                <span style="background:#f4f4f4; color:#63698b; font-size:11px; padding:2px 9px;
                                     border-radius:9999px; font-weight:500;">
                                     Finance & Risk
                                 </span>
                             </div>
                         </div>
 
-                        <div class="card-footer" id="econ-footer" style="color:#c2410c;">
+                        <div class="card-footer" id="econ-footer" style="color:#b45309;">
                             <a href=""
-                                class="inline-block bg-emerald-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#dc23d1] transition">
+                                class="inline-block bg-emerald-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#2a74ab] transition">
                                 View resource &rarr;
                             </a>
                         </div>
@@ -2199,11 +2202,11 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white mt-12">
+    <footer class="bg-ink-800 text-white mt-12">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
             <p class="text-sm">&copy; 2026 Mojgan Samandar. All rights reserved.</p>
             <!-- required credit for the daytime photo (CC BY-SA 4.0) -->
-            <p class="text-xs text-gray-400 mt-1">
+            <p class="text-xs text-ink-400 mt-1">
                 Daytime Toronto photo:
                 <a class="underline hover:text-white" href="https://commons.wikimedia.org/wiki/File:Toronto_Skyline_Summer_2020.jpg"
                     target="_blank" rel="noopener">Aaron Davis</a>,

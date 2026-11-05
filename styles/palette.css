@@ -1,0 +1,50 @@
+/* =====================================================================
+   SITE COLOUR PALETTE
+   Based on five colours:
+     #095489  primary blue      (brand-600)
+     #63698b  slate             (ink-500)
+     #9c9c9c  grey              (ink-400)
+     #c8cbcb  light grey        (ink-200)
+     #e8e7e7  very light grey   (ink-100)
+
+   Use these variables (or the matching Tailwind classes brand-*, ink-*)
+   instead of one-off colours.
+
+   brand    primary — buttons, links, active states, highlights, headings accents
+   ink      neutral — text, backgrounds, borders, dark mode
+   emerald / amber / rose — meaning only: good / caution / bad
+            (e.g. DSCR traffic lights); never for decoration
+
+   Rules of thumb
+   - Actions: brand-600 (#095489), hover brand-700.
+   - Text: ink-900 headings, ink-600 body, ink-500 (#63698b) secondary, ink-400 (#9c9c9c) muted.
+   - Borders: ink-200 (#c8cbcb). Panels / page tint: ink-100 (#e8e7e7).
+   - Dark mode: ink-950 page, ink-900 / brand-900 surfaces, brand-300 accents.
+   - Children's activity pages (Math Kids, Clock) keep their character colours.
+   ===================================================================== */
+:root {
+    --brand-50: #f1f7fb;  --brand-100: #dfedf7; --brand-200: #bfdaed; --brand-300: #91bede;
+    --brand-400: #5e9dca; --brand-500: #2a74ab; --brand-600: #095489; --brand-700: #074169;
+    --brand-800: #063556; --brand-900: #052b45; --brand-950: #031c2d;
+
+    --ink-50: #f4f4f4;  --ink-100: #e8e7e7; --ink-200: #c8cbcb; --ink-300: #b3b6b9;
+    --ink-400: #9c9c9c; --ink-500: #63698b; --ink-600: #4a5072; --ink-700: #353a5a;
+    --ink-800: #232845; --ink-900: #151a3d; --ink-950: #0b1030;
+
+    --emerald-50: #ecfdf5; --emerald-100: #d1fae5; --emerald-600: #059669; --emerald-700: #047857;
+    --amber-50: #fffbeb;   --amber-100: #fef3c7;   --amber-600: #d97706;   --amber-700: #b45309;
+    --rose-50: #fff1f2;    --rose-100: #ffe4e6;    --rose-600: #e11d48;    --rose-700: #be123c;
+
+    /* semantic aliases */
+    --color-primary: var(--brand-600);
+    --color-primary-hover: var(--brand-700);
+    --color-text: var(--ink-900);
+    --color-text-secondary: var(--ink-500);
+    --color-text-muted: var(--ink-400);
+    --color-border: var(--ink-200);
+    --color-panel: var(--ink-100);
+    --color-surface: #ffffff;
+    --color-good: var(--emerald-600);
+    --color-caution: var(--amber-600);
+    --color-bad: var(--rose-600);
+}

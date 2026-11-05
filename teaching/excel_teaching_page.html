@@ -15,6 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Excel — Knowledge, Shared Openly</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="../styles/palette.css" />
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap"
     rel="stylesheet">
@@ -26,33 +27,33 @@
     }
 
     :root {
-      --bg: #FAFAF8;
+      --bg: #f4f4f4;
       --surface: #FFFFFF;
-      --border: #E4E2DA;
-      --border-light: #EEECE6;
-      --text: #1A1A18;
-      --text-muted: #6B6B67;
-      --text-faint: #9B9B97;
+      --border: #bfdaed;
+      --border-light: #dfedf7;
+      --text: #151a3d;
+      --text-muted: #63698b;
+      --text-faint: #9c9c9c;
       --mono: 'DM Mono', monospace;
       --sans: 'DM Sans', sans-serif;
       --serif: 'DM Serif Display', serif;
 
-      --green-50: #EAF3DE;
-      --green-100: #C0DD97;
-      --green-600: #3B6D11;
-      --green-800: #27500A;
-      --blue-50: #E6F1FB;
-      --blue-100: #B5D4F4;
-      --blue-600: #185FA5;
-      --blue-800: #0C447C;
-      --amber-50: #FAEEDA;
-      --amber-100: #FAC775;
-      --amber-600: #854F0B;
-      --amber-800: #633806;
-      --red-50: #FCEBEB;
-      --red-100: #F7C1C1;
-      --red-600: #A32D2D;
-      --red-800: #791F1F;
+      --green-50: #d1fae5;
+      --green-100: #6ee7b7;
+      --green-600: #047857;
+      --green-800: #064e3b;
+      --blue-50: #dfedf7;
+      --blue-100: #bfdaed;
+      --blue-600: #2a74ab;
+      --blue-800: #353a5a;
+      --amber-50: #fef3c7;
+      --amber-100: #fbbf24;
+      --amber-600: #92400e;
+      --amber-800: #78350f;
+      --red-50: #ffe4e6;
+      --red-100: #fecdd3;
+      --red-600: #be123c;
+      --red-800: #881337;
     }
 
     body {
@@ -115,7 +116,7 @@
     .hero-pitch code {
       font-family: var(--mono);
       font-size: 13px;
-      background: #F0EEE8;
+      background: #dfedf7;
       padding: 1px 6px;
       border-radius: 4px
     }
@@ -150,14 +151,14 @@
     }
 
     .pill:hover {
-      background: #F0EEE8;
-      border-color: #C8C6BE
+      background: #dfedf7;
+      border-color: #91bede
     }
 
     .pill.a-all {
-      background: #F0EEE8;
+      background: #dfedf7;
       color: var(--text);
-      border-color: #C8C6BE;
+      border-color: #91bede;
       font-weight: 500
     }
 
@@ -210,7 +211,7 @@
     }
 
     .level-header:hover {
-      background: #FAFAF8
+      background: #f4f4f4
     }
 
     .dot {
@@ -283,7 +284,7 @@
     }
 
     .video-placeholder {
-      background: #F4F2EC;
+      background: #dfedf7;
       border: 1px dashed var(--border);
       border-radius: 10px;
       height: 56px;
@@ -345,7 +346,7 @@
     .chip {
       font-family: var(--mono);
       font-size: 11px;
-      background: #F4F2EC;
+      background: #dfedf7;
       color: var(--text-muted);
       padding: 2px 7px;
       border-radius: 4px;
@@ -383,12 +384,12 @@
       display: inline-block
     }
 
-    .mini-btn:hover { background: #F4F2EC; border-style: solid; color: var(--text-muted) }
-    .mini-btn.ex { border-color: #C0DD97; color: var(--green-600) }
+    .mini-btn:hover { background: #dfedf7; border-style: solid; color: var(--text-muted) }
+    .mini-btn.ex { border-color: #6ee7b7; color: var(--green-600) }
     .mini-btn.ex:hover { background: var(--green-50) }
     .mini-btn.ans { border-color: var(--blue-100); color: var(--blue-600) }
     .mini-btn.ans:hover { background: var(--blue-50) }
-    .mini-btn.vid { border-color: #FAC775; color: var(--amber-600) }
+    .mini-btn.vid { border-color: #fbbf24; color: var(--amber-600) }
     .mini-btn.vid:hover { background: var(--amber-50) }
 
     .mini-btn.coming {
@@ -424,7 +425,7 @@
       font-family: var(--mono);
       padding: 2px 9px;
       border-radius: 20px;
-      background: #F4F2EC;
+      background: #dfedf7;
       color: var(--text-faint)
     }
 
@@ -436,7 +437,7 @@
     }
 
     .sec-ex-placeholder {
-      background: #F4F2EC;
+      background: #dfedf7;
       border: 1px dashed var(--border);
       border-radius: 10px;
       height: 52px;
@@ -453,7 +454,7 @@
     .q-list { display: flex; flex-direction: column; gap: .75rem }
 
     .q-item {
-      background: #FAFAF8;
+      background: #f4f4f4;
       border: 1px solid var(--border-light);
       border-radius: 8px;
       padding: .85rem 1rem;
@@ -474,7 +475,7 @@
     .q-item code {
       font-family: var(--mono);
       font-size: 12px;
-      background: #EEECE6;
+      background: #dfedf7;
       padding: 1px 5px;
       border-radius: 3px
     }
@@ -534,14 +535,14 @@
     .site-name {
       font-size: 2rem;
       font-weight: 900;
-      color: #111827;
+      color: #0b1030;
       letter-spacing: -0.02em;
       font-family: 'Inter', var(--sans), sans-serif
     }
 
     .site-role {
       font-size: 1.1rem;
-      color: #27500A;
+      color: #064e3b;
       font-weight: 500;
       margin-top: 0.25rem;
       font-family: 'Inter', var(--sans), sans-serif
@@ -599,7 +600,7 @@
       </p>
       <script src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
       <script>
-        kofiwidget2.init('Buy me a Coffee', '#217346', 'H2H31ZM0W7');
+        kofiwidget2.init('Buy me a Coffee', '#047857', 'H2H31ZM0W7');
         kofiwidget2.draw();
       </script>
     </div>

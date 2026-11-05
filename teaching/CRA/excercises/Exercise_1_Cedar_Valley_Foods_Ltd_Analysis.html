@@ -5,23 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Credit analysis for Exercise 1 – Cedar Valley Foods Ltd.: ratio, pro forma and sensitivity analysis.">
   <title>Credit Analysis | Cedar Valley Foods Ltd.</title>
+    <link rel="stylesheet" href="../../../styles/palette.css" />
   <style>
     :root {
-      --navy: #17324d;
-      --blue: #2f6fa3;
-      --blue-soft: #eaf3fa;
-      --green: #19705d;
-      --green-soft: #e9f6f2;
-      --amber: #9a5d00;
-      --amber-soft: #fff5dc;
-      --red: #9b3434;
-      --red-soft: #fff0f0;
-      --ink: #263442;
-      --muted: #607080;
-      --line: #d8e1e8;
-      --page: #f4f7f9;
+      --navy: #232845;
+      --blue: #2a74ab;
+      --blue-soft: #dfedf7;
+      --green: #047857;
+      --green-soft: #d1fae5;
+      --amber: #b45309;
+      --amber-soft: #fef3c7;
+      --red: #9f1239;
+      --red-soft: #fff1f2;
+      --ink: #232845;
+      --muted: #63698b;
+      --line: #bfdaed;
+      --page: #f4f4f4;
       --white: #fff;
-      --shadow: 0 12px 30px rgba(26, 49, 70, 0.08);
+      --shadow: 0 12px 30px rgba(35, 40, 69, 0.08);
     }
 
     * { box-sizing: border-box; }
@@ -48,7 +49,7 @@
       padding: 48px;
       color: var(--white);
       border-radius: 22px;
-      background: linear-gradient(135deg, #17324d 0%, #205d78 65%, #19705d 100%);
+      background: linear-gradient(135deg, #232845 0%, #4a5072 65%, #047857 100%);
       box-shadow: var(--shadow);
     }
 
@@ -69,7 +70,7 @@
       font-weight: 800;
       letter-spacing: .13em;
       text-transform: uppercase;
-      color: #bfe6dc;
+      color: #a7f3d0;
     }
 
     h1 {
@@ -87,7 +88,7 @@
       z-index: 1;
       max-width: 760px;
       margin: 20px 0 0;
-      color: #eaf4f7;
+      color: #dfedf7;
       font-size: 1.08rem;
     }
 
@@ -118,7 +119,7 @@
       box-shadow: var(--shadow);
     }
 
-    .instruction strong { color: #744700; }
+    .instruction strong { color: #92400e; }
 
     .layout {
       display: grid;
@@ -241,7 +242,7 @@
     caption {
       padding: 12px 15px;
       color: var(--muted);
-      background: #f7fafc;
+      background: #f4f4f4;
       text-align: left;
       font-size: .82rem;
       font-weight: 700;
@@ -257,7 +258,7 @@
     th:first-child, td:first-child { text-align: left; }
     thead th { color: var(--white); background: var(--navy); }
     tbody tr:last-child td { border-bottom: 0; }
-    tbody tr:nth-child(even) { background: #f9fbfc; }
+    tbody tr:nth-child(even) { background: #f4f4f4; }
     .total td { color: var(--navy); background: var(--blue-soft); font-weight: 800; }
 
     .two-col {
@@ -304,10 +305,10 @@
       min-height: 170px;
       margin-top: 20px;
       padding: 20px;
-      border: 2px dashed #b8c5cf;
+      border: 2px dashed #91bede;
       border-radius: 12px;
       color: var(--muted);
-      background: #fbfcfd;
+      background: #f4f4f4;
     }
 
     footer {
@@ -430,8 +431,8 @@
   
     .exec { border-top: 4px solid var(--green); }
     .verdict { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin: 4px 0 10px; }
-    .verdict .badge { padding: 6px 14px; border-radius: 999px; background: var(--amber-soft); color: #744700;
-      border: 1px solid #e7c77a; font-weight: 800; letter-spacing:.02em; }
+    .verdict .badge { padding: 6px 14px; border-radius: 999px; background: var(--amber-soft); color: #92400e;
+      border: 1px solid #fbbf24; font-weight: 800; letter-spacing:.02em; }
     .kpis { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; margin: 10px 0; }
     .kpi { padding: 9px 11px; border-radius: 9px; background: var(--blue-soft); }
     .kpi .k { color: var(--muted); font-size: .68rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
@@ -456,17 +457,17 @@
     @media (max-width: 760px) { .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); } }
     @media print { .kpis { grid-template-columns: repeat(4, 1fr); } }
 
-.exnav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;padding:8px 10px;border:1px solid #d8e1e8;border-radius:12px;background:#fff;box-shadow:0 6px 18px rgba(26,49,70,.06);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-.exnav .exhome{color:#607080;text-decoration:none;font-size:.8rem;font-weight:700;padding:4px 8px}
-.exnav .exhome:hover{color:#2f6fa3}
-.exnav .extitle{color:#17324d;font-weight:800;font-size:.86rem;margin-right:auto}
+.exnav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;padding:8px 10px;border:1px solid #bfdaed;border-radius:12px;background:#fff;box-shadow:0 6px 18px rgba(35, 40, 69, .06);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.exnav .exhome{color:#63698b;text-decoration:none;font-size:.8rem;font-weight:700;padding:4px 8px}
+.exnav .exhome:hover{color:#2a74ab}
+.exnav .extitle{color:#232845;font-weight:800;font-size:.86rem;margin-right:auto}
 .exnav ol{display:flex;gap:4px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
 .exnav li{margin:0}
-.exnav a.step{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;color:#2f4255;text-decoration:none;font-size:.8rem;font-weight:700;border:1px solid #d8e1e8;background:#f7fafc}
-.exnav a.step:hover{border-color:#2f6fa3;color:#2f6fa3}
-.exnav a.step .n{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#d8e1e8;color:#17324d;font-size:.7rem}
-.exnav a.step.on{background:#17324d;border-color:#17324d;color:#fff}
-.exnav a.step.on .n{background:#19705d;color:#fff}
+.exnav a.step{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;color:#353a5a;text-decoration:none;font-size:.8rem;font-weight:700;border:1px solid #bfdaed;background:#f4f4f4}
+.exnav a.step:hover{border-color:#2a74ab;color:#2a74ab}
+.exnav a.step .n{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#bfdaed;color:#232845;font-size:.7rem}
+.exnav a.step.on{background:#232845;border-color:#232845;color:#fff}
+.exnav a.step.on .n{background:#047857;color:#fff}
 @media print{.exnav{display:none}}
 @media (max-width:600px){.exnav .extitle{width:100%}}
 </style>

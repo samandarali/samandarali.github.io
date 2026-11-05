@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Machine Learning Algorithms Roadmap</title>
+    <link rel="stylesheet" href="../../styles/palette.css" />
 <link rel="stylesheet" href="../ds-progress.css">
 <style>
   /* ============================================================
@@ -14,20 +15,20 @@
      Edit these variables to re-theme the whole page.
      ============================================================ */
   :root{
-    --paper:#f7f5f0;
+    --paper:#f4f4f4;
     --paper-raised:#ffffff;
-    --ink:#20242b;
-    --ink-soft:#565f6d;
-    --line:#dedad0;
-    --navy:#161b26;
-    --navy-soft:#232a3a;
-    --navy-line:#333c50;
-    --accent:#c1611a;
-    --accent-soft:#f3e2d1;
-    --accent-ink:#7a3d0f;
-    --teal:#2f7a6f;
-    --teal-soft:#e0efec;
-    --danger:#a6413a;
+    --ink:#232845;
+    --ink-soft:#4a5072;
+    --line:#bfdaed;
+    --navy:#151a3d;
+    --navy-soft:#232845;
+    --navy-line:#353a5a;
+    --accent:#b45309;
+    --accent-soft:#fde68a;
+    --accent-ink:#78350f;
+    --teal:#047857;
+    --teal-soft:#d1fae5;
+    --danger:#be123c;
     --radius:10px;
     --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     --sans: "Iowan Old Style","Charter","Georgia",serif;
@@ -58,7 +59,7 @@
   /* ---------- SIDEBAR ---------- */
   .sidebar{
     background:var(--navy);
-    color:#cfd4de;
+    color:#bfdaed;
     padding:22px 16px 40px;
     position:sticky;
     top:0;
@@ -87,14 +88,14 @@
   }
   .brand-sub{
     font-size:11.5px;
-    color:#8b93a3;
+    color:#9c9c9c;
     margin:6px 0 20px;
     font-family:var(--mono);
     letter-spacing:.03em;
   }
   .nav-count{
     font-size:11px;
-    color:#8b93a3;
+    color:#9c9c9c;
     margin-bottom:10px;
     font-family:var(--mono);
   }
@@ -108,7 +109,7 @@
     text-align:left;
     background:none;
     border:none;
-    color:#c3c9d4;
+    color:#91bede;
     font-size:13.5px;
     padding:8px 10px;
     border-radius:7px;
@@ -126,7 +127,7 @@
   .nav-link .count{
     font-family:var(--mono);
     font-size:10.5px;
-    color:#6d7688;
+    color:#63698b;
   }
 
   /* ---------- MAIN ---------- */
@@ -197,7 +198,7 @@
     background:var(--paper-raised);
     overflow:hidden;
     scroll-margin-top:90px;
-    box-shadow:0 1px 2px rgba(20,20,10,.03);
+    box-shadow:0 1px 2px rgba(69, 26, 3, .03);
   }
   /* Category headers are the strongest visual element on the page:
      deep navy band, large number badge, and an accent rule so the
@@ -235,7 +236,7 @@
   .category-count{
     font-family:var(--mono);
     font-size:11.5px;
-    color:#aeb5c4;
+    color:#91bede;
     white-space:nowrap;
   }
   .chevron{
@@ -320,7 +321,7 @@
     letter-spacing:.02em;
     white-space:nowrap;
   }
-  .badge.path{background:#eef1f4; color:#5b6473;}
+  .badge.path{background:#dfedf7; color:#63698b;}
   .card .chevron{margin-top:5px;}
   .card-detail{
     display:none;
@@ -374,10 +375,10 @@
     background:var(--paper-raised);
     cursor:pointer;
   }
-  .prereq.internal{border-color:#cfe0dc; color:var(--teal); background:var(--teal-soft);}
-  .prereq.internal:hover{background:#cfe6e0;}
-  .prereq.external{color:var(--accent-ink); background:var(--accent-soft); border-color:#e6c9a8;}
-  .prereq.external:hover{background:#eecfa9;}
+  .prereq.internal{border-color:#bfdaed; color:var(--teal); background:var(--teal-soft);}
+  .prereq.internal:hover{background:#a7f3d0;}
+  .prereq.external{color:var(--accent-ink); background:var(--accent-soft); border-color:#fbbf24;}
+  .prereq.external:hover{background:#fcd34d;}
   .prereq svg{width:10px; height:10px;}
 
   .also-in{font-size:12.5px; color:var(--ink-soft); margin-top:4px;}

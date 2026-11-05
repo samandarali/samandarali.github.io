@@ -16,26 +16,27 @@
     href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+    <script>/* site palette (see styles/palette.css): brand = #095489 family, ink = neutral greys */ tailwind.config = { theme: { extend: { colors: { brand: { 50: '#f1f7fb', 100: '#dfedf7', 200: '#bfdaed', 300: '#91bede', 400: '#5e9dca', 500: '#2a74ab', 600: '#095489', 700: '#074169', 800: '#063556', 900: '#052b45', 950: '#031c2d' }, ink: { 50: '#f4f4f4', 100: '#e8e7e7', 200: '#c8cbcb', 300: '#b3b6b9', 400: '#9c9c9c', 500: '#63698b', 600: '#4a5072', 700: '#353a5a', 800: '#232845', 900: '#151a3d', 950: '#0b1030' } } } } };</script>
 
 
 
   <style>
     :root {
-      --bg: #ebe3db;
-      --bg-2: #fffdf5;
-      --panel: #0f1730;
-      --panel-2: #0c1428;
-      --border: rgba(120, 140, 200, 0.14);
-      --border-2: rgba(139, 92, 246, 0.35);
-      --txt: #e6ecff;
-      --mute: #8b95b8;
-      --dim: #5a647f;
-      --violet: #a78bfa;
-      --violet-2: #8b5cf6;
-      --cyan: #22d3ee;
-      --blue: #3b82f6;
-      --grad-title: linear-gradient(90deg, #7a3d0f 0%, #c46319 35%, #c1611a 70%, #ec8b1b 100%);
-      --grad-node: linear-gradient(135deg, #8b5cf6, #22d3ee);
+      --bg: #bfdaed;
+      --bg-2: #f1f7fb;
+      --panel: #151a3d;
+      --panel-2: #0b1030;
+      --border: rgba(94, 157, 202, 0.14);
+      --border-2: rgba(42, 116, 171, 0.35);
+      --txt: #dfedf7;
+      --mute: #9c9c9c;
+      --dim: #63698b;
+      --violet: #5e9dca;
+      --violet-2: #2a74ab;
+      --cyan: #bfdaed;
+      --blue: #2a74ab;
+      --grad-title: linear-gradient(90deg, #074169 0%, #095489 35%, #095489 70%, #2a74ab 100%);
+      --grad-node: linear-gradient(135deg, #2a74ab, #bfdaed);
       --shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.7);
     }
 
@@ -56,8 +57,8 @@
 
     body {
       background:
-        radial-gradient(1200px 600px at 80% -10%, rgba(139, 92, 246, 0.18), transparent 60%),
-        radial-gradient(900px 500px at 10% 10%, rgba(34, 211, 238, 0.10), transparent 60%),
+        radial-gradient(1200px 600px at 80% -10%, rgba(42, 116, 171, 0.18), transparent 60%),
+        radial-gradient(900px 500px at 10% 10%, rgba(191, 218, 237, 0.10), transparent 60%),
         var(--bg);
     }
 
@@ -78,7 +79,7 @@
     }
 
     .hero-eyebrow {
-      color: #7a3d0f;
+      color: #074169;
       font-weight: 600;
       font-size: 18px;
       margin-bottom: 8px;
@@ -99,7 +100,7 @@
     }
 
     .hero p.sub {
-      color: #5d4037;
+      color: #4a5072;
       max-width: 640px;
       font-size: 16px;
       font-weight: 500;
@@ -117,7 +118,7 @@
       height: auto;
 
       filter:
-        drop-shadow(0 0 30px rgba(34, 211, 238, .35)) drop-shadow(0 0 80px rgba(139, 92, 246, .25));
+        drop-shadow(0 0 30px rgba(191, 218, 237, .35)) drop-shadow(0 0 80px rgba(42, 116, 171, .25));
     }
 
     .top-icons {
@@ -135,7 +136,7 @@
       border-radius: 50%;
       display: grid;
       place-items: center;
-      color: #cbd5ff;
+      color: #bfdaed;
       cursor: pointer
     }
 
@@ -170,7 +171,7 @@
       right: 6%;
       top: 62px;
       height: 2px;
-      background: repeating-linear-gradient(90deg, rgba(193, 97, 26, .45) 0 8px, transparent 8px 16px);
+      background: repeating-linear-gradient(90deg, rgba(180, 83, 9, .45) 0 8px, transparent 8px 16px);
       z-index: 0;
     }
 
@@ -200,12 +201,12 @@
       height: 24px;
       border-radius: 50%;
       background: #ffffff;
-      border: 1px solid rgba(193, 97, 26, .45);
+      border: 1px solid rgba(180, 83, 9, .45);
       display: grid;
       place-items: center;
       font-size: 11px;
       font-weight: 700;
-      color: #7a3d0f;
+      color: #074169;
       z-index: 3;
       transition: .25s;
     }
@@ -219,13 +220,13 @@
       border-radius: 50%;
       background:
         radial-gradient(circle at 50% 40%,
-          rgba(193, 97, 26, .12),
-          #fffaf5 70%);
+          rgba(180, 83, 9, .12),
+          #f1f7fb 70%);
 
-      border: 2px solid rgba(193, 97, 26, .35);
+      border: 2px solid rgba(180, 83, 9, .35);
       display: grid;
       place-items: center;
-      color: #7a3d0f;
+      color: #074169;
       transition: transform .25s, box-shadow .25s, border-color .25s;
     }
 
@@ -252,36 +253,36 @@
       font-weight: 600;
       font-size: 12.5px;
       text-align: center;
-      color: #7a3d0f;
+      color: #074169;
       line-height: 1.25;
     }
 
     /* Hover */
     .node:hover .circle {
       transform: translateY(-3px);
-      border-color: #c1611a;
-      box-shadow: 0 6px 20px rgba(226, 12, 12, 0.25);
+      border-color: #095489;
+      box-shadow: 0 6px 20px rgba(225, 29, 72, 0.25);
     }
 
     /* Active circle */
 
     .node.active .circle {
-      border-color: #7a3d0f;
-      box-shadow: 0 0 0 6px rgba(228, 205, 3, 0.16), 0 10px 30px rgba(233, 4, 4, 0.25);
+      border-color: #074169;
+      box-shadow: 0 0 0 6px rgba(251, 191, 36, 0.16), 0 10px 30px rgba(225, 29, 72, 0.25);
     }
 
     /* Active number */
 
     .node.active .num {
-      background: #c1611a;
+      background: #095489;
       color: white;
-      border-color: #c1611a;
+      border-color: #095489;
     }
 
     /* Active label */
 
     .node.active .label {
-      color: #0f766e;
+      color: #2a74ab;
       font-weight: 700;
     }
 
@@ -305,7 +306,7 @@
       gap: 12px;
       margin-bottom: 14px;
       padding-bottom: 12px;
-      border-bottom: 1px solid rgba(120, 140, 200, .14);
+      border-bottom: 1px solid rgba(94, 157, 202, .14);
     }
 
     .node-content-head h2 {
@@ -318,9 +319,9 @@
     .node-content-head .file-name {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
-      color: #a78bfa;
-      background: rgba(139, 92, 246, .14);
-      border: 1px solid rgba(139, 92, 246, .35);
+      color: #5e9dca;
+      background: rgba(42, 116, 171, .14);
+      border: 1px solid rgba(42, 116, 171, .35);
       padding: 5px 10px;
       border-radius: 999px;
     }
@@ -373,9 +374,9 @@
 
     .panel h2 .count {
       margin-left: auto;
-      background: rgba(139, 92, 246, .18);
-      color: #c4b5fd;
-      border: 1px solid rgba(139, 92, 246, .4);
+      background: rgba(42, 116, 171, .18);
+      color: #91bede;
+      border: 1px solid rgba(42, 116, 171, .4);
       font-size: 12px;
       padding: 2px 10px;
       border-radius: 999px;
@@ -383,7 +384,7 @@
     }
 
     .panel h2 .num-tag {
-      color: #a78bfa
+      color: #5e9dca
     }
 
     /* left */
@@ -401,7 +402,7 @@
       top: 8px;
       bottom: 8px;
       width: 1px;
-      background: linear-gradient(180deg, transparent, rgba(139, 92, 246, .35), transparent)
+      background: linear-gradient(180deg, transparent, rgba(42, 116, 171, .35), transparent)
     }
 
     .sub-item {
@@ -411,7 +412,7 @@
       padding: 11px 12px;
       border-radius: 12px;
       cursor: pointer;
-      color: #bfc8e6;
+      color: #bfdaed;
       font-size: 14px;
       font-weight: 500;
       transition: .2s;
@@ -422,28 +423,28 @@
       width: 30px;
       height: 30px;
       border-radius: 8px;
-      background: rgba(139, 92, 246, .10);
+      background: rgba(42, 116, 171, .10);
       display: grid;
       place-items: center;
-      color: #a78bfa;
+      color: #5e9dca;
       font-size: 14px;
       flex-shrink: 0;
       z-index: 1
     }
 
     .sub-item:hover {
-      background: rgba(139, 92, 246, .07);
+      background: rgba(42, 116, 171, .07);
       color: #fff
     }
 
     .sub-item.active {
-      background: linear-gradient(90deg, rgba(139, 92, 246, .22), rgba(34, 211, 238, .05));
+      background: linear-gradient(90deg, rgba(42, 116, 171, .22), rgba(191, 218, 237, .05));
       color: #fff;
-      border: 1px solid rgba(139, 92, 246, .45)
+      border: 1px solid rgba(42, 116, 171, .45)
     }
 
     .sub-item.active .ic {
-      background: rgba(139, 92, 246, .3);
+      background: rgba(42, 116, 171, .3);
       color: #fff
     }
 
@@ -451,10 +452,10 @@
       margin-top: 14px;
       padding: 10px;
       text-align: center;
-      color: #a78bfa;
+      color: #5e9dca;
       font-size: 13px;
       cursor: pointer;
-      border-top: 1px dashed rgba(139, 92, 246, .25)
+      border-top: 1px dashed rgba(42, 116, 171, .25)
     }
 
     /* middle */
@@ -466,14 +467,14 @@
     }
 
     .content .lede {
-      color: #b8c1dc;
+      color: #bfdaed;
       margin-bottom: 18px;
       font-size: 14.5px
     }
 
     .callout {
-      background: linear-gradient(135deg, rgba(139, 92, 246, .14), rgba(34, 211, 238, .06));
-      border: 1px solid rgba(139, 92, 246, .32);
+      background: linear-gradient(135deg, rgba(42, 116, 171, .14), rgba(191, 218, 237, .06));
+      border: 1px solid rgba(42, 116, 171, .32);
       border-radius: 14px;
       padding: 14px 16px;
       display: flex;
@@ -485,7 +486,7 @@
       width: 34px;
       height: 34px;
       border-radius: 9px;
-      background: rgba(139, 92, 246, .35);
+      background: rgba(42, 116, 171, .35);
       display: grid;
       place-items: center;
       color: #fff;
@@ -503,7 +504,7 @@
     }
 
     .callout .ex {
-      color: #9aa5c8;
+      color: #5e9dca;
       font-size: 13px
     }
 
@@ -511,7 +512,7 @@
       font-family: 'Sora', sans-serif;
       font-size: 16px;
       margin: 16px 0 10px;
-      color: #e8ecff
+      color: #dfedf7
     }
 
     .checklist {
@@ -525,7 +526,7 @@
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      color: #cfd6ef;
+      color: #bfdaed;
       font-size: 14px
     }
 
@@ -533,11 +534,11 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: rgba(139, 92, 246, .25);
-      border: 1px solid rgba(167, 139, 250, .6);
+      background: rgba(42, 116, 171, .25);
+      border: 1px solid rgba(94, 157, 202, .6);
       display: grid;
       place-items: center;
-      color: #a78bfa;
+      color: #5e9dca;
       font-size: 11px;
       flex-shrink: 0;
       margin-top: 2px
@@ -546,10 +547,10 @@
     .tbl {
       width: 100%;
       border-collapse: collapse;
-      background: rgba(11, 16, 32, .4);
+      background: rgba(11, 16, 48, .4);
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid rgba(120, 140, 200, .1)
+      border: 1px solid rgba(94, 157, 202, .1)
     }
 
     .tbl th,
@@ -557,17 +558,17 @@
       padding: 12px 16px;
       text-align: left;
       font-size: 13.5px;
-      border-bottom: 1px solid rgba(120, 140, 200, .08)
+      border-bottom: 1px solid rgba(94, 157, 202, .08)
     }
 
     .tbl th {
-      background: rgba(139, 92, 246, .10);
-      color: #cfd6ef;
+      background: rgba(42, 116, 171, .10);
+      color: #bfdaed;
       font-weight: 600
     }
 
     .tbl td {
-      color: #bfc8e6
+      color: #bfdaed
     }
 
     .tbl tr:last-child td {
@@ -583,13 +584,13 @@
       background: linear-gradient(90deg, rgba(245, 158, 11, .12), transparent);
       border: 1px solid rgba(245, 158, 11, .35);
       border-radius: 10px;
-      color: #fde68a;
+      color: #bfdaed;
       font-size: 13.5px
     }
 
     /* right code */
     .code-panel {
-      background: linear-gradient(180deg, #0b1124, #070b1a);
+      background: linear-gradient(180deg, #0b1030, #0b1030);
       padding: 18px;
       position: relative;
       overflow: hidden
@@ -598,12 +599,12 @@
     .code-tab {
       display: inline-block;
       padding: 6px 14px;
-      background: rgba(139, 92, 246, .22);
-      border: 1px solid rgba(139, 92, 246, .4);
+      background: rgba(42, 116, 171, .22);
+      border: 1px solid rgba(42, 116, 171, .4);
       border-radius: 8px;
       font-family: 'JetBrains Mono';
       font-size: 12px;
-      color: #c4b5fd;
+      color: #91bede;
       margin-bottom: 12px
     }
 
@@ -613,7 +614,7 @@
       right: 22px;
       background: rgba(255, 255, 255, .05);
       border: 1px solid rgba(255, 255, 255, .1);
-      color: #cfd6ef;
+      color: #bfdaed;
       padding: 5px 10px;
       border-radius: 6px;
       font-size: 12px;
@@ -624,14 +625,14 @@
     }
 
     .copy-btn:hover {
-      background: rgba(139, 92, 246, .18)
+      background: rgba(42, 116, 171, .18)
     }
 
     pre.code {
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
       line-height: 1.65;
-      color: #cdd6f4;
+      color: #bfdaed;
       white-space: pre;
       overflow: auto;
       max-height: 520px;
@@ -639,19 +640,19 @@
     }
 
     .code .com {
-      color: #65b58a
+      color: #10b981
     }
 
     .code .kw {
-      color: #c084fc
+      color: #5e9dca
     }
 
     .code .str {
-      color: #f9c97c
+      color: #91bede
     }
 
     .code .fn {
-      color: #7dd3fc
+      color: #bfdaed
     }
 
     .code .num {
@@ -686,8 +687,8 @@
   <svg width="0" height="0" style="position:absolute">
     <defs>
       <linearGradient id="nodeGrad" x1="0" x2="1" y1="0" y2="1">
-        <stop offset="0%" stop-color="#a78bfa" />
-        <stop offset="100%" stop-color="#22d3ee" />
+        <stop offset="0%" stop-color="#5e9dca" />
+        <stop offset="100%" stop-color="#bfdaed" />
       </linearGradient>
     </defs>
   </svg>
@@ -700,7 +701,7 @@
         <h1>Analytics &amp; Data Science</h1>
         <p class="sub">From raw data to real-world impact. Click any step below to explore the concepts, techniques, and
           code examples.</p>
-        <p><a href="../index.html#teaching" style="display:inline-block; margin-top:24px; color:#1f2937;">
+        <p><a href="../index.html#teaching" style="display:inline-block; margin-top:24px; color:#232845;">
             ← Back to Teaching
           </a> </p>
 
@@ -741,7 +742,7 @@
 
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white mt-12">
+  <footer class="bg-ink-800 text-white mt-12">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
       <p class="text-sm">&copy; 2026 Mojgan Samandar. All rights reserved.</p>
     </div>

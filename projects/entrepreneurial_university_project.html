@@ -8,6 +8,7 @@
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+    <script>/* site palette (see styles/palette.css): brand = #095489 family, ink = neutral greys */ tailwind.config = { theme: { extend: { colors: { brand: { 50: '#f1f7fb', 100: '#dfedf7', 200: '#bfdaed', 300: '#91bede', 400: '#5e9dca', 500: '#2a74ab', 600: '#095489', 700: '#074169', 800: '#063556', 900: '#052b45', 950: '#031c2d' }, ink: { 50: '#f4f4f4', 100: '#e8e7e7', 200: '#c8cbcb', 300: '#b3b6b9', 400: '#9c9c9c', 500: '#63698b', 600: '#4a5072', 700: '#353a5a', 800: '#232845', 900: '#151a3d', 950: '#0b1030' } } } } };</script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
   <style>
@@ -40,7 +41,7 @@
     }
 
     .tab-button.active {
-      background-color: #dd2476;
+      background-color: #2a74ab;
       color: white;
     }
 
@@ -67,15 +68,15 @@
     }
 
     .key-point:hover {
-      border-left-color: #dd2476;
-      background: rgba(255, 81, 47, .10);
+      border-left-color: #2a74ab;
+      background: rgba(244, 63, 94, .10);
     }
 
     .figure-box {
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      background: linear-gradient(135deg, #f4f4f4 0%, #dfedf7 100%);
       min-height: 260px;
       border-radius: 16px;
-      border: 2px dashed #cbd5e1;
+      border: 2px dashed #bfdaed;
     }
 
     .badge {
@@ -84,21 +85,21 @@
     }
 
     .pill {
-      background: #fff7ed;
-      color: #9a3412;
-      border: 1px solid #fed7aa;
+      background: #fffbeb;
+      color: #92400e;
+      border: 1px solid #fcd34d;
     }
   </style>
 </head>
 
-<body class="bg-slate-50">
+<body class="bg-ink-50">
 
   <!-- Nav -->
   <nav class="bg-white shadow-sm sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <!-- Adjust this path to match your site structure -->
       <a href="../projects.html"
-        class="text-slate-700 hover:text-slate-900 font-medium transition inline-flex items-center">
+        class="text-ink-700 hover:text-ink-900 font-medium transition inline-flex items-center">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
         </svg>
@@ -108,7 +109,7 @@
   </nav>
 
   <!-- Hero -->
-  <section class="bg-gradient-to-br from-[#dd2476] to-[#ff512f] text-white py-20">
+  <section class="bg-gradient-to-br from-[#2a74ab] to-[#f43f5e] text-white py-20">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl">
         <div class="inline-block badge px-4 py-2 rounded-full text-sm font-semibold mb-6">
@@ -129,7 +130,7 @@
 
         <div class="flex flex-wrap gap-4">
           <a href="https://nrisp.ac.ir/society-oriented-and-entrepreneurship-in-universities/" target="_blank"
-            class="inline-flex items-center bg-white text-slate-900 font-semibold px-6 py-3 rounded-lg hover:bg-slate-50 transition shadow-lg">
+            class="inline-flex items-center bg-white text-ink-900 font-semibold px-6 py-3 rounded-lg hover:bg-ink-50 transition shadow-lg">
             Initiative Page (NRISP)
             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -160,20 +161,20 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
-          <div class="text-4xl font-extrabold text-slate-900 mb-2">2</div>
-          <div class="text-slate-600 font-medium">National Policy Documents</div>
+          <div class="text-4xl font-extrabold text-ink-900 mb-2">2</div>
+          <div class="text-ink-600 font-medium">National Policy Documents</div>
         </div>
         <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
-          <div class="text-4xl font-extrabold text-slate-900 mb-2">5+</div>
-          <div class="text-slate-600 font-medium">Workshops & Roundtables</div>
+          <div class="text-4xl font-extrabold text-ink-900 mb-2">5+</div>
+          <div class="text-ink-600 font-medium">Workshops & Roundtables</div>
         </div>
         <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
-          <div class="text-4xl font-extrabold text-slate-900 mb-2">All</div>
-          <div class="text-slate-600 font-medium">University Leadership Invited</div>
+          <div class="text-4xl font-extrabold text-ink-900 mb-2">All</div>
+          <div class="text-ink-600 font-medium">University Leadership Invited</div>
         </div>
         <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center">
-          <div class="text-4xl font-extrabold text-slate-900 mb-2">2</div>
-          <div class="text-slate-600 font-medium">Peer-Reviewed Articles</div>
+          <div class="text-4xl font-extrabold text-ink-900 mb-2">2</div>
+          <div class="text-ink-600 font-medium">Peer-Reviewed Articles</div>
         </div>
       </div>
     </div>
@@ -202,9 +203,9 @@
   <section id="tab-overview" class="tab-content active section-fade py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-        <h2 class="text-3xl font-extrabold text-slate-900 mb-6">Project Overview</h2>
+        <h2 class="text-3xl font-extrabold text-ink-900 mb-6">Project Overview</h2>
 
-        <p class="text-lg text-slate-700 leading-relaxed mb-6">
+        <p class="text-lg text-ink-700 leading-relaxed mb-6">
           This initiative was commissioned by the Ministry of Science, Research and Technology of Iran to facilitate
           innovation
           and strengthen universities’ impact on society and industry. The goal was to accelerate the shift toward a
@@ -214,9 +215,9 @@
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-          <div class="bg-slate-50 border border-slate-200 p-6 rounded-xl">
-            <h3 class="font-extrabold text-slate-900 mb-3">What the project aimed to achieve</h3>
-            <ul class="text-slate-700 space-y-2">
+          <div class="bg-ink-50 border border-ink-200 p-6 rounded-xl">
+            <h3 class="font-extrabold text-ink-900 mb-3">What the project aimed to achieve</h3>
+            <ul class="text-ink-700 space-y-2">
               <li>• Provide a national policy direction for “society-oriented & entrepreneurial universities.”</li>
               <li>• Produce implementation-ready documents to guide universities and institutes.</li>
               <li>• Engage university leaders to surface concerns, barriers, and workable solutions.</li>
@@ -224,9 +225,9 @@
             </ul>
           </div>
 
-          <div class="bg-slate-50 border border-slate-200 p-6 rounded-xl">
-            <h3 class="font-extrabold text-slate-900 mb-3">What made it different</h3>
-            <ul class="text-slate-700 space-y-2">
+          <div class="bg-ink-50 border border-ink-200 p-6 rounded-xl">
+            <h3 class="font-extrabold text-ink-900 mb-3">What made it different</h3>
+            <ul class="text-ink-700 space-y-2">
               <li>• National scope (university leadership across the country).</li>
               <li>• COVID-era execution (virtual convening + remote coordination).</li>
               <li>• Focus on adoption: popularization, feedback capture, and implementation pathways.</li>
@@ -240,17 +241,17 @@
     <!-- My Role -->
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-        <h2 class="text-3xl font-extrabold text-slate-900 mb-6">My Role</h2>
+        <h2 class="text-3xl font-extrabold text-ink-900 mb-6">My Role</h2>
 
 
         <div class="grid grid-cols-1  gap-6">
-          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
-            <h3 class="text-xl font-extrabold text-slate-900 mb-3">Responsibilities</h3>
-              <ul class="text-slate-700 space-y-4">
+          <div class="bg-ink-50 border border-ink-200 rounded-2xl p-6">
+            <h3 class="text-xl font-extrabold text-ink-900 mb-3">Responsibilities</h3>
+              <ul class="text-ink-700 space-y-4">
 
                 <!-- Phase 1 -->
                 <li>
-                  <span class="font-semibold text-slate-900">
+                  <span class="font-semibold text-ink-900">
                     Phase 1 — Research & Strategy Architecture
                   </span>
                   <ul class="list-disc pl-5 mt-2 space-y-1">
@@ -262,7 +263,7 @@
 
                 <!-- Phase 2 -->
                 <li>
-                  <span class="font-semibold text-slate-900">
+                  <span class="font-semibold text-ink-900">
                     Phase 2 — Expert Validation & Policy Drafting
                   </span>
                   <ul class="list-disc pl-5 mt-2 space-y-1">
@@ -277,7 +278,7 @@
 
                 <!-- Phase 3 -->
                 <li>
-                  <span class="font-semibold text-slate-900">
+                  <span class="font-semibold text-ink-900">
                     Phase 3 — National Dissemination & Popularization
                   </span>
                   <ul class="list-disc pl-5 mt-2 space-y-1">
@@ -293,9 +294,9 @@
 
           </div>
 
-          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
-            <h3 class="text-xl font-extrabold text-slate-900 mb-3">Skills demonstrated</h3>
-            <ul class="text-slate-700 space-y-2">
+          <div class="bg-ink-50 border border-ink-200 rounded-2xl p-6">
+            <h3 class="text-xl font-extrabold text-ink-900 mb-3">Skills demonstrated</h3>
+            <ul class="text-ink-700 space-y-2">
               <li>• Primary research leadership: evidence synthesis, policy review, and strategy development.</li>
               <li>• Qualitative research design and execution (focus groups, expert consultations).</li>
               <li>• Strategy validation and refinement through iterative stakeholder feedback.</li>
@@ -323,10 +324,10 @@
   <section id="tab-policy" class="tab-content section-fade py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-        <h2 class="text-3xl font-extrabold text-slate-900 mb-6">Policy Context </h2>
+        <h2 class="text-3xl font-extrabold text-ink-900 mb-6">Policy Context </h2>
 
-        <div class="bg-slate-50 border border-slate-200 p-6 rounded-xl">
-          <p class="text-slate-800 leading-relaxed">
+        <div class="bg-ink-50 border border-ink-200 p-6 rounded-xl">
+          <p class="text-ink-800 leading-relaxed">
             Given the importance of accelerating the movement of the country’s universities toward society-orientation
             and entrepreneurship, the Ministry of Science, Research and Technology — with its overarching policy-making
             mandate in the field of higher education — formulated the statement “The Future of Universities in Iran:
@@ -335,17 +336,17 @@
             the Ministry of Science, Research and Technology assigned this mission — through official letter No. 34689
             dated January 16, 2021 — to the National Research Institute for Science Policy (NRISP).
           </p>
-          <p class="text-slate-600 text-sm mt-4">
-            Source: <a class="text-slate-900 underline underline-offset-4"
+          <p class="text-ink-600 text-sm mt-4">
+            Source: <a class="text-ink-900 underline underline-offset-4"
               href="https://nrisp.ac.ir/society-oriented-and-entrepreneurship-in-universities/" target="_blank">NRISP
               initiative page</a>
           </p>
         </div>
 
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="card bg-white border border-slate-200 rounded-2xl p-6">
-            <h3 class="text-xl font-extrabold text-slate-900 mb-2">English summary</h3>
-            <ul class="text-slate-700 space-y-2">
+          <div class="card bg-white border border-ink-200 rounded-2xl p-6">
+            <h3 class="text-xl font-extrabold text-ink-900 mb-2">English summary</h3>
+            <ul class="text-ink-700 space-y-2">
               <li>• National policy direction announced by the Ministry (June 2020).</li>
               <li>• NRISP tasked with operationalization and implementation planning (official letter no. 34689).</li>
               <li>• Focus: societal engagement + entrepreneurship as the future trajectory of universities.</li>
@@ -353,9 +354,9 @@
             </ul>
           </div>
 
-          <div class="card bg-white border border-slate-200 rounded-2xl p-6">
-            <h3 class="text-xl font-extrabold text-slate-900 mb-2">Project scope</h3>
-            <ul class="text-slate-700 space-y-2">
+          <div class="card bg-white border border-ink-200 rounded-2xl p-6">
+            <h3 class="text-xl font-extrabold text-ink-900 mb-2">Project scope</h3>
+            <ul class="text-ink-700 space-y-2">
               <li>• Policy documents + executive planning (implementation pathway).</li>
               <li>• Popularization and adoption through workshops and roundtables.</li>
               <li>• Capturing barriers, concerns, and practical feedback from universities.</li>
@@ -370,22 +371,22 @@
   <!-- Project Outputs -->
   <section id="tab-outputs" class="tab-content section-fade py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-slate-900 mb-10 text-center">Project Outputs</h2>
+      <h2 class="text-3xl font-extrabold text-ink-900 mb-10 text-center">Project Outputs</h2>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="card bg-white rounded-2xl shadow-lg p-8">
           <div
-            class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
+            class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-ink-700 bg-ink-100 px-3 py-1 rounded-full">
             National Document 1
           </div>
-          <!-- <h3 class="text-xl font-extrabold text-slate-900 mt-4" dir="rtl">
+          <!-- <h3 class="text-xl font-extrabold text-ink-900 mt-4" dir="rtl">
             بیانیه آینده دانشگاه‌ها در ایران؛ جامعه‌محوری و کارآفرینی
           </h3> -->
-          <p class="text-slate-700 mt-3">
+          <p class="text-ink-700 mt-3">
             National statement defining the strategic direction and expected transformation of universities.
           </p>
           <a href="https://nrisp.ac.ir/wp-content/uploads/2021/11/bayanie.pdf" target="_blank"
-            class="mt-6 inline-flex items-center px-4 py-2 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition">
+            class="mt-6 inline-flex items-center px-4 py-2 rounded-lg bg-ink-900 text-white font-semibold hover:bg-ink-800 transition">
             Link to the document
             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -395,18 +396,18 @@
 
         <div class="card bg-white rounded-2xl shadow-lg p-8">
           <div
-            class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
+            class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-ink-700 bg-ink-100 px-3 py-1 rounded-full">
             National Document 2
           </div>
-          <!-- <h3 class="text-xl font-extrabold text-slate-900 mt-4" dir="rtl">
+          <!-- <h3 class="text-xl font-extrabold text-ink-900 mt-4" dir="rtl">
             طرح تحول همکاری‌های دانشگاه‌ها و موسسات آموزشی، پژوهشی و فناوری با جامعه و صنعت
           </h3> -->
-          <p class="text-slate-700 mt-3">
+          <p class="text-ink-700 mt-3">
             Executive transformation plan describing collaboration structures between universities/institutes and
             society/industry.
           </p>
           <a href="https://nrisp.ac.ir/wp-content/uploads/2021/11/1592977890-.pdf" target="_blank"
-            class="mt-6 inline-flex items-center px-4 py-2 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition">
+            class="mt-6 inline-flex items-center px-4 py-2 rounded-lg bg-ink-900 text-white font-semibold hover:bg-ink-800 transition">
             Link to the document
             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -417,8 +418,8 @@
       </div>
 
       <div class="mt-8 bg-white rounded-2xl shadow-lg p-8">
-        <h3 class="text-xl font-extrabold text-slate-900 mb-3">Also produced</h3>
-        <ul class="text-slate-700 space-y-2">
+        <h3 class="text-xl font-extrabold text-ink-900 mb-3">Also produced</h3>
+        <ul class="text-ink-700 space-y-2">
           <li>• Policy notes and supporting research pieces.</li>
           <li>• A national engagement series (workshops, seminars, roundtables) to popularize the concept and support
             adoption.</li>
@@ -431,22 +432,22 @@
   <!-- Workshops & Seminars -->
   <section id="tab-events" class="tab-content section-fade py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-slate-900 mb-10 text-center">Workshops & Seminars</h2>
+      <h2 class="text-3xl font-extrabold text-ink-900 mb-10 text-center">Workshops & Seminars</h2>
 
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-        <p class="text-slate-700 text-lg leading-relaxed mb-8">
+        <p class="text-ink-700 text-lg leading-relaxed mb-8">
           During COVID, the project ran a national series of virtual sessions where heads of universities were invited
           by the Ministry
           to participate, share ideas, and raise concerns about implementation.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="card bg-slate-50 border border-slate-200 rounded-2xl p-6">
-            <h3 class="text-xl font-extrabold text-slate-900 mb-2">
+          <div class="card bg-ink-50 border border-ink-200 rounded-2xl p-6">
+            <h3 class="text-xl font-extrabold text-ink-900 mb-2">
               Past events (from the initiative page)
             </h3>
 
-            <ul class="list-disc pl-5 space-y-3 text-slate-800">
+            <ul class="list-disc pl-5 space-y-3 text-ink-800">
               <li class="key-point rounded-lg">
                 Entrepreneurial University: From Theory to Practice
               </li>
@@ -478,10 +479,10 @@
           </div>
 
 
-          <div class="card bg-white border border-slate-200 rounded-2xl p-6">
-            <h3 class="text-xl font-extrabold text-slate-900 mb-2"> What these sessions achieved
+          <div class="card bg-white border border-ink-200 rounded-2xl p-6">
+            <h3 class="text-xl font-extrabold text-ink-900 mb-2"> What these sessions achieved
             </h3>
-            <ul class="space-y-2 text-slate-700">
+            <ul class="space-y-2 text-ink-700">
               <li>• Created a national platform for alignment between the Ministry, NRISP, and universities.</li>
               <li>• Collected leadership feedback to identify barriers and implementation needs.</li>
               <li>• Supported popularization so the policy became operational, not just a document.</li>
@@ -498,8 +499,8 @@
           </div>
         </div>
 
-        <div class="mt-8 text-slate-600 text-sm">
-          Source page for the list of events and sections: <a class="text-slate-900 underline underline-offset-4"
+        <div class="mt-8 text-ink-600 text-sm">
+          Source page for the list of events and sections: <a class="text-ink-900 underline underline-offset-4"
             href="https://nrisp.ac.ir/society-oriented-and-entrepreneurship-in-universities/" target="_blank">NRISP
             initiative page</a>
         </div>
@@ -512,22 +513,22 @@
   <!-- Research Articles -->
   <section id="tab-research" class="tab-content section-fade py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-slate-900 mb-10 text-center">Research Articles</h2>
+      <h2 class="text-3xl font-extrabold text-ink-900 mb-10 text-center">Research Articles</h2>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="card bg-white rounded-2xl shadow-lg p-8">
           <div
-            class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-[#dd2476] bg-rose-50 px-3 py-1 rounded-full">
+            class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-[#2a74ab] bg-rose-50 px-3 py-1 rounded-full">
             Article 1
           </div>
-          <h3 class="text-xl font-extrabold text-slate-900 mt-4">
+          <h3 class="text-xl font-extrabold text-ink-900 mt-4">
             Strategies to Fulfill the Mission of Education in an Entrepreneurial University in Iran
           </h3>
-          <p class="text-sm text-slate-600 mt-2">
+          <p class="text-sm text-ink-600 mt-2">
             Systematic review + framework synthesis + focus group (strategy identification)
           </p>
           <a href="https://journal.irphe.ac.ir/article_703054.html?lang=en" target="_blank"
-            class="mt-6 inline-flex items-center px-4 py-2 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition">
+            class="mt-6 inline-flex items-center px-4 py-2 rounded-lg bg-ink-900 text-white font-semibold hover:bg-ink-800 transition">
             Link to the article
             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -537,17 +538,17 @@
 
         <div class="card bg-white rounded-2xl shadow-lg p-8">
           <div
-            class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-[#ff512f] bg-orange-50 px-3 py-1 rounded-full">
+            class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-[#f43f5e] bg-amber-50 px-3 py-1 rounded-full">
             Article 2
           </div>
-          <h3 class="text-xl font-extrabold text-slate-900 mt-4">
+          <h3 class="text-xl font-extrabold text-ink-900 mt-4">
             Structural-Interpretive Modeling of Strategies for Achieving the Education Mission
           </h3>
-          <p class="text-sm text-slate-600 mt-2">
+          <p class="text-sm text-ink-600 mt-2">
             Interpretive Structural Modeling (ISM) (strategy prioritization & dependencies)
           </p>
           <a href="https://sspp.iranjournals.ir/article_697072.html" target="_blank"
-            class="mt-6 inline-flex items-center px-4 py-2 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition">
+            class="mt-6 inline-flex items-center px-4 py-2 rounded-lg bg-ink-900 text-white font-semibold hover:bg-ink-800 transition">
             Link to the article
             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -557,8 +558,8 @@
       </div>
 
       <div class="mt-8 bg-white rounded-2xl shadow-lg p-8">
-        <h3 class="text-xl font-extrabold text-slate-900 mb-3">How the articles fit the project</h3>
-        <p class="text-slate-700 leading-relaxed">
+        <h3 class="text-xl font-extrabold text-ink-900 mb-3">How the articles fit the project</h3>
+        <p class="text-ink-700 leading-relaxed">
           These publications are research outputs linked to the broader national policy project. They provide analytical
           structure
           (strategy frameworks and dependency modeling) to support implementation planning.
@@ -570,12 +571,12 @@
   <!-- Figures -->
   <section id="tab-figures" class="tab-content section-fade py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-slate-900 mb-10 text-center">Figures </h2>
+      <h2 class="text-3xl font-extrabold text-ink-900 mb-10 text-center">Figures </h2>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="bg-white rounded-2xl shadow-lg p-8">
-          <h3 class="text-lg font-bold text-slate-900 mb-3">Conceptual Framework for Entrepreneurial University Strategies</h3>
-          <div class="figure-box flex items-center justify-center text-center p-6 text-slate-600">
+          <h3 class="text-lg font-bold text-ink-900 mb-3">Conceptual Framework for Entrepreneurial University Strategies</h3>
+          <div class="figure-box flex items-center justify-center text-center p-6 text-ink-600">
             <div>
               <div class="ism-image"><img src="../images/EUS_framework.png"></div>
             </div>
@@ -583,8 +584,8 @@
         </div>
 
         <div class="bg-white rounded-2xl shadow-lg p-8">
-          <h3 class="text-lg font-bold text-slate-900 mb-3">Framework / ISM Model</h3>
-          <div class="figure-box flex items-center justify-center text-center p-6 text-slate-600">
+          <h3 class="text-lg font-bold text-ink-900 mb-3">Framework / ISM Model</h3>
+          <div class="figure-box flex items-center justify-center text-center p-6 text-ink-600">
             <div>
               <div class="ism-image"><img src="../images/ISM.png"></div>
             </div>
@@ -603,8 +604,8 @@
       <div
         class="bg-white rounded-2xl shadow-lg p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div>
-          <div class="font-extrabold text-slate-900">Project Page</div>
-          <div class="text-slate-600 text-sm">
+          <div class="font-extrabold text-ink-900">Project Page</div>
+          <div class="text-ink-600 text-sm">
             Society-Oriented & Entrepreneurial Universities • National Policy + Stakeholder Engagement
           </div>
         </div>
@@ -612,31 +613,31 @@
 
           <!-- NRISP Page -->
           <a href="https://nrisp.ac.ir/society-oriented-and-entrepreneurship-in-universities/" target="_blank"
-            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#b91c5c] text-white font-semibold hover:bg-[#9f174d] transition">
+            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#be123c] text-white font-semibold hover:bg-[#9f1239] transition">
             NRISP Page
           </a>
 
           <!-- National Document 1 -->
           <a href="https://nrisp.ac.ir/wp-content/uploads/2021/11/bayanie.pdf" target="_blank"
-            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#c81e68] text-white font-semibold hover:bg-[#b91c5c] transition">
+            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#2a74ab] text-white font-semibold hover:bg-[#be123c] transition">
             National Document 1
           </a>
 
           <!-- National Document 2 -->
           <a href="https://nrisp.ac.ir/wp-content/uploads/2021/11/1592977890-.pdf" target="_blank"
-            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#dd2476] text-white font-semibold hover:bg-[#c81e68] transition">
+            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#2a74ab] text-white font-semibold hover:bg-[#2a74ab] transition">
             National Document 2
           </a>
 
           <!-- Article 1 -->
           <a href="https://sspp.iranjournals.ir/article_697072.html" target="_blank"
-            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#e63a86] text-white font-semibold hover:bg-[#dd2476] transition">
+            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#2a74ab] text-white font-semibold hover:bg-[#2a74ab] transition">
             Article 1
           </a>
 
           <!-- Article 2 -->
           <a href="https://journal.irphe.ac.ir/article_703054.html?lang=en" target="_blank"
-            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#f05a9b] text-white font-semibold hover:bg-[#e63a86] transition">
+            class="inline-flex items-center px-4 py-2 rounded-lg bg-[#5e9dca] text-white font-semibold hover:bg-[#2a74ab] transition">
             Article 2
           </a>
 
@@ -649,14 +650,14 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-8">
+  <footer class="bg-ink-800 text-white py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
-        <p class="text-gray-400 mb-2">&copy; 2025 Mojgan Samandar. All rights reserved.</p>
+        <p class="text-ink-400 mb-2">&copy; 2025 Mojgan Samandar. All rights reserved.</p>
 
         <div class="mt-4">
-          <a href="../index.html" class="text-teal-400 hover:text-teal-300 transition mx-3">Home</a>
-          <a href="../index.html#content-contact" class="text-teal-400 hover:text-teal-300 transition mx-3">
+          <a href="../index.html" class="text-brand-400 hover:text-brand-300 transition mx-3">Home</a>
+          <a href="../index.html#content-contact" class="text-brand-400 hover:text-brand-300 transition mx-3">
             Contact
           </a>
         </div>

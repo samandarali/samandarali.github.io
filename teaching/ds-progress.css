@@ -4,11 +4,11 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  border: 1px solid #dedad0;
+  border: 1px solid #bfdaed;
   border-radius: 999px;
   padding: 5px 10px;
   background: #ffffff;
-  color: #565f6d;
+  color: #4a5072;
   font-size: 11px;
   font-family: inherit;
   cursor: pointer;
@@ -16,7 +16,7 @@
 }
 
 .knowledge-button:hover {
-  border-color: #c1611a;
+  border-color: #b45309;
   transform: translateY(-1px);
 }
 
@@ -27,15 +27,15 @@
 }
 
 .knowledge-button.status-practice {
-  background: #ede9fe;
-  border-color: #a78bfa;
-  color: #4c1d95;
+  background: #dfedf7;
+  border-color: #5e9dca;
+  color: #074169;
 }
 
 .knowledge-button.status-dontknow {
-  background: #fce7f3;
-  border-color: #f472b6;
-  color: #9d174d;
+  background: #dfedf7;
+  border-color: #5e9dca;
+  color: #9f1239;
 }
 
 .knowledge-popup-overlay {
@@ -46,7 +46,7 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(15, 23, 42, 0.55);
+  background: rgba(11, 16, 48, 0.55);
 }
 
 .knowledge-popup-overlay.open {
@@ -59,7 +59,7 @@
   padding: 24px;
   border-radius: 14px;
   background: #ffffff;
-  color: #20242b;
+  color: #232845;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
 }
 
@@ -69,7 +69,7 @@
   right: 14px;
   border: 0;
   background: transparent;
-  color: #6b7280;
+  color: #63698b;
   font-size: 20px;
   cursor: pointer;
 }
@@ -81,7 +81,7 @@
 
 .knowledge-topic-name {
   margin-bottom: 18px;
-  color: #7a3d0f;
+  color: #78350f;
   font-weight: 700;
 }
 
@@ -108,22 +108,22 @@
 }
 
 .knowledge-status-button.practice {
-  background: #ede9fe;
-  border-color: #a78bfa;
-  color: #4c1d95;
+  background: #dfedf7;
+  border-color: #5e9dca;
+  color: #074169;
 }
 
 .knowledge-status-button.dontknow {
-  background: #fce7f3;
-  border-color: #f472b6;
-  color: #9d174d;
+  background: #dfedf7;
+  border-color: #5e9dca;
+  color: #9f1239;
 }
 
 .knowledge-login-message {
   padding: 12px;
-  border: 1px solid #f3c78a;
+  border: 1px solid #fbbf24;
   border-radius: 8px;
-  background: #fff7ed;
-  color: #7a3d0f;
+  background: #fffbeb;
+  color: #78350f;
   font-size: 14px;
 }
