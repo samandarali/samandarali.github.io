@@ -137,7 +137,11 @@ const F = {
   ISNUMBER: x => typeof x === "number", ABS: Math.abs,
   ROUND: (x, d) => Math.round(x * 10 ** d) / 10 ** d,
   PMT: (r, n, pv) => (r === 0 ? -pv / n : -pv * r / (1 - Math.pow(1 + r, -n))),
-  TEXT: (x, f) => (/%/.test(f) ? (x * 100).toFixed((f.split(".")[1] || "").replace("%", "").length) + "%" : Number(x).toFixed(1)),
+  TEXT: (x, f) => {
+    const d = (f.split(".")[1] || "").replace(/[^0#]/g, "").length;
+    if (/%/.test(f)) return (x * 100).toFixed(d) + "%";
+    return Number(x).toLocaleString("en-CA", {minimumFractionDigits: d, maximumFractionDigits: d, useGrouping: f.includes(",")});
+  },
 };
 
 function fmt(v, nf){

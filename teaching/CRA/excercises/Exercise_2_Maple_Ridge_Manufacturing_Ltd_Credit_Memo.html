@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Credit memorandum to the relationship manager and independent credit approval for Exercise 2 – Maple Ridge Manufacturing Ltd.">
+<title>Credit Memo | Maple Ridge Manufacturing Ltd.</title>
+<style>
+    :root {
+      --navy: #17324d;
+      --blue: #2f6fa3;
+      --blue-soft: #eaf3fa;
+      --green: #19705d;
+      --green-soft: #e9f6f2;
+      --amber: #9a5d00;
+      --amber-soft: #fff5dc;
+      --red: #9b3434;
+      --red-soft: #fff0f0;
+      --ink: #263442;
+      --muted: #607080;
+      --line: #d8e1e8;
+      --page: #f4f7f9;
+      --white: #fff;
+      --shadow: 0 12px 30px rgba(26, 49, 70, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--page);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .page-shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 32px auto 64px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 48px;
+      color: var(--white);
+      border-radius: 22px;
+      background: linear-gradient(135deg, #17324d 0%, #205d78 65%, #19705d 100%);
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      bottom: -130px;
+      width: 330px;
+      height: 330px;
+      border: 55px solid rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: #bfe6dc;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.08;
+      letter-spacing: -.035em;
+    }
+
+    .hero p {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 20px 0 0;
+      color: #eaf4f7;
+      font-size: 1.08rem;
+    }
+
+    .decision-pills {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .decision-pills span {
+      padding: 7px 13px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .instruction {
+      margin: 24px 0;
+      padding: 19px 22px;
+      border-left: 5px solid var(--amber);
+      border-radius: 12px;
+      background: var(--amber-soft);
+      box-shadow: var(--shadow);
+    }
+
+    .instruction strong { color: #744700; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    main { min-width: 0; }
+
+    nav {
+      position: sticky;
+      top: 20px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    nav h2 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: .82rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      display: block;
+      padding: 6px 0;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      line-height: 1.35;
+    }
+
+    nav a:hover { color: var(--blue); }
+
+    .card {
+      margin-bottom: 22px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .section-number {
+      display: inline-grid;
+      width: 32px;
+      height: 32px;
+      margin-right: 9px;
+      place-items: center;
+      border-radius: 9px;
+      color: var(--white);
+      background: var(--blue);
+      font-size: .88rem;
+      vertical-align: 3px;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      color: var(--navy);
+      font-size: 1.45rem;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 24px 0 8px;
+      color: var(--green);
+      font-size: 1.06rem;
+    }
+
+    p { margin: 10px 0; }
+    ul, ol { margin: 10px 0; padding-left: 24px; }
+    li + li { margin-top: 5px; }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0;
+    }
+
+    .fact {
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: var(--blue-soft);
+    }
+
+    .fact dt {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .fact dd {
+      margin: 2px 0 0;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0 4px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      font-variant-numeric: tabular-nums;
+    }
+
+    caption {
+      padding: 12px 15px;
+      color: var(--muted);
+      background: #f7fafc;
+      text-align: left;
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    th, td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child, td:first-child { text-align: left; }
+    thead th { color: var(--white); background: var(--navy); }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:nth-child(even) { background: #f9fbfc; }
+    .total td { color: var(--navy); background: var(--blue-soft); font-weight: 800; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .note-box {
+      padding: 17px 18px;
+      border-radius: 12px;
+      background: var(--green-soft);
+    }
+
+    .note-box.warning { background: var(--red-soft); }
+    .note-box h3 { margin-top: 0; }
+    .note-box.warning h3 { color: var(--red); }
+
+    .formula {
+      margin: 18px 0;
+      padding: 18px;
+      border: 1px dashed var(--blue);
+      border-radius: 12px;
+      color: var(--navy);
+      background: var(--blue-soft);
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+
+    .assignment {
+      border-top: 6px solid var(--green);
+    }
+
+    .assignment ol {
+      columns: 2;
+      column-gap: 40px;
+    }
+
+    .assignment li { break-inside: avoid; }
+
+    .writing-area {
+      min-height: 170px;
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px dashed #b8c5cf;
+      border-radius: 12px;
+      color: var(--muted);
+      background: #fbfcfd;
+    }
+
+    footer {
+      margin-top: 26px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .84rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: static; order: -1; }
+      nav div { columns: 2; }
+      .hero { padding: 34px 28px; }
+    }
+
+    @media (max-width: 600px) {
+      .page-shell { width: min(100% - 20px, 1120px); margin-top: 10px; }
+      .hero, .card { border-radius: 13px; }
+      .card { padding: 22px 17px; }
+      .facts, .two-col { grid-template-columns: 1fr; }
+      .assignment ol { columns: 1; }
+      nav div { columns: 1; }
+      th, td { padding: 10px 11px; font-size: .88rem; }
+    }
+
+    @media print {
+      @page { size: letter; margin: .55in; }
+      body { background: white; font-size: 10.5pt; }
+      .page-shell { width: 100%; margin: 0; }
+      .hero { padding: 28px; border-radius: 0; box-shadow: none; }
+      .hero h1 { font-size: 26pt; }
+      .layout { display: block; }
+      nav { display: none; }
+      .card, .instruction { break-inside: avoid; box-shadow: none; }
+      .table-wrap { overflow: visible; }
+      .writing-area { min-height: 130px; }
+      footer { display: none; }
+    }
+    /* Compact layout: keep the full case intact while showing more content at once. */
+    body { font-size: 14px; line-height: 1.48; }
+    .page-shell { width: min(1480px, calc(100% - 28px)); margin: 16px auto 28px; }
+    .hero { padding: 26px 30px; border-radius: 16px; }
+    .hero::after { right: -110px; bottom: -170px; width: 270px; height: 270px; border-width: 42px; }
+    .eyebrow { margin-bottom: 5px; font-size: .7rem; }
+    h1 { font-size: clamp(1.7rem, 3.6vw, 2.7rem); }
+    .hero p { margin-top: 10px; font-size: 1rem; }
+    .decision-pills { gap: 7px; margin-top: 14px; }
+    .decision-pills span { padding: 5px 10px; font-size: .8rem; }
+    .instruction { margin: 12px 0; padding: 11px 15px; border-radius: 9px; }
+    .layout { grid-template-columns: minmax(0, 1fr) 205px; gap: 14px; }
+    nav { top: 12px; padding: 14px; border-radius: 12px; }
+    nav h2 { margin-bottom: 6px; font-size: .75rem; }
+    nav a { padding: 4px 0; font-size: .82rem; }
+    .card { margin-bottom: 12px; padding: 18px; border-radius: 12px; }
+    .section-number { width: 26px; height: 26px; margin-right: 6px; border-radius: 7px; font-size: .78rem; }
+    h2 { margin-bottom: 10px; font-size: 1.2rem; }
+    h3 { margin: 14px 0 5px; font-size: .96rem; }
+    p { margin: 6px 0; }
+    ul, ol { margin: 6px 0; padding-left: 20px; }
+    li + li { margin-top: 2px; }
+    .facts { gap: 8px; }
+    .fact { padding: 8px 10px; border-radius: 8px; }
+    .fact dt { font-size: .68rem; }
+    .fact dd { margin-top: 1px; }
+    .table-wrap { margin: 9px 0 3px; border-radius: 8px; }
+    caption { padding: 7px 9px; font-size: .75rem; }
+    th, td { padding: 5px 8px; font-size: .82rem; }
+    th:first-child, td:first-child { white-space: normal; }
+    .two-col { gap: 10px; }
+    .note-box { padding: 10px 12px; border-radius: 9px; }
+    .formula { margin: 10px 0; padding: 10px; font-size: 1rem; }
+    .assignment { border-top-width: 4px; }
+    .assignment ol { column-gap: 24px; }
+    .writing-area { min-height: 105px; margin-top: 12px; padding: 12px; }
+    footer { margin-top: 14px; font-size: .76rem; }
+
+    @media (min-width: 1100px) {
+      .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 960px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: static; order: -1; }
+      nav div { columns: 3; }
+    }
+    @media (max-width: 600px) {
+      .page-shell { width: calc(100% - 16px); margin: 8px auto 18px; }
+      .hero { padding: 20px 18px; }
+      .card { padding: 14px 12px; }
+      .facts, .two-col { grid-template-columns: 1fr; }
+      .assignment ol { columns: 1; }
+      nav div { columns: 2; }
+      th, td { padding: 5px 6px; font-size: .76rem; }
+    }
+    @media print {
+      @page { size: letter; margin: .3in; }
+      body { font-size: 8.5pt; line-height: 1.28; }
+      .page-shell { width: 100%; margin: 0; }
+      .hero { padding: 14px 18px; border-radius: 0; box-shadow: none; }
+      .hero h1 { font-size: 19pt; }
+      .hero p { margin-top: 5px; font-size: 9pt; }
+      .decision-pills { margin-top: 7px; }
+      .instruction { margin: 7px 0; padding: 8px 10px; box-shadow: none; }
+      .layout { display: block; }
+      nav { display: none; }
+      .card { margin-bottom: 7px; padding: 10px; border-radius: 0; box-shadow: none; }
+      h2 { margin-bottom: 6px; font-size: 11pt; }
+      h3 { margin: 8px 0 3px; font-size: 9pt; }
+      p { margin: 4px 0; }
+      ul, ol { margin: 4px 0; }
+      li + li { margin-top: 1px; }
+      .fact, .note-box { padding: 6px 8px; }
+      .table-wrap { margin: 5px 0 2px; }
+      caption { padding: 4px 6px; }
+      th, td { padding: 3px 5px; font-size: 7.5pt; }
+      .writing-area { min-height: 70px; margin-top: 7px; padding: 8px; }
+      .card, .instruction { break-inside: avoid; }
+      footer { display: none; }
+    }
+  
+    .exec { border-top: 4px solid var(--green); }
+    .verdict { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin: 4px 0 10px; }
+    .verdict .badge { padding: 6px 14px; border-radius: 999px; background: var(--amber-soft); color: #744700;
+      border: 1px solid #e7c77a; font-weight: 800; letter-spacing:.02em; }
+    .kpis { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; margin: 10px 0; }
+    .kpi { padding: 9px 11px; border-radius: 9px; background: var(--blue-soft); }
+    .kpi .k { color: var(--muted); font-size: .68rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .kpi .v { color: var(--navy); font-size: 1.25rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .kpi .s { color: var(--muted); font-size: .76rem; }
+    td.good { color: var(--green); background: var(--green-soft) !important; font-weight: 700; }
+    td.warn { color: var(--amber); background: var(--amber-soft) !important; font-weight: 700; }
+    td.bad  { color: var(--red); background: var(--red-soft) !important; font-weight: 700; }
+    td.muted { color: var(--muted); }
+    .grid td, .grid th { text-align: center; }
+    .grid td:first-child, .grid th:first-child { text-align: left; }
+    .legend { display:flex; flex-wrap:wrap; gap:12px; font-size:.78rem; color: var(--muted); margin: 4px 0 8px; }
+    .legend span::before { content:""; display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
+    .legend .lg::before { background: var(--green-soft); border:1px solid var(--green); }
+    .legend .lw::before { background: var(--amber-soft); border:1px solid var(--amber); }
+    .legend .lb::before { background: var(--red-soft); border:1px solid var(--red); }
+    .small { font-size: .8rem; color: var(--muted); }
+    .assume li { font-size: .84rem; }
+    .risk-table td { white-space: normal; text-align: left; vertical-align: top; }
+    .risk-table td:nth-child(2) { white-space: nowrap; }
+    .cond-list li { margin-top: 4px; }
+    @media (max-width: 760px) { .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media print { .kpis { grid-template-columns: repeat(4, 1fr); } }
+
+.exnav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;padding:8px 10px;border:1px solid #d8e1e8;border-radius:12px;background:#fff;box-shadow:0 6px 18px rgba(26,49,70,.06);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.exnav .exhome{color:#607080;text-decoration:none;font-size:.8rem;font-weight:700;padding:4px 8px}
+.exnav .exhome:hover{color:#2f6fa3}
+.exnav .extitle{color:#17324d;font-weight:800;font-size:.86rem;margin-right:auto}
+.exnav ol{display:flex;gap:4px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+.exnav li{margin:0}
+.exnav a.step{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;color:#2f4255;text-decoration:none;font-size:.8rem;font-weight:700;border:1px solid #d8e1e8;background:#f7fafc}
+.exnav a.step:hover{border-color:#2f6fa3;color:#2f6fa3}
+.exnav a.step .n{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#d8e1e8;color:#17324d;font-size:.7rem}
+.exnav a.step.on{background:#17324d;border-color:#17324d;color:#fff}
+.exnav a.step.on .n{background:#19705d;color:#fff}
+@media print{.exnav{display:none}}
+@media (max-width:600px){.exnav .extitle{width:100%}}
+
+body{background:#eef2f5}
+.memo{width:min(1000px,calc(100% - 28px));margin:16px auto 32px}
+.paper{background:#fff;border:1px solid #d8e1e8;border-radius:10px;box-shadow:0 12px 30px rgba(26,49,70,.08);padding:34px 40px}
+.letterhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;border-bottom:3px solid #17324d;padding-bottom:12px;margin-bottom:14px}
+.letterhead .org{color:#17324d;font-weight:800;font-size:1.05rem;letter-spacing:.02em}
+.letterhead .org small{display:block;color:#607080;font-weight:600;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase}
+.letterhead .cls{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#9b3434;border:1px solid #e4b4b4;padding:4px 8px;border-radius:5px;background:#fff7f7}
+.memo h1{margin:4px 0 12px;color:#17324d;font-size:1.5rem;letter-spacing:-.01em}
+.mhdr{display:grid;grid-template-columns:150px 1fr 150px 1fr;border:1px solid #d8e1e8;border-radius:8px;overflow:hidden;font-size:.86rem;margin-bottom:14px}
+.mhdr div{padding:6px 10px;border-bottom:1px solid #e6ecf1}
+.mhdr .k{background:#f4f7f9;color:#607080;font-weight:700;font-size:.74rem;letter-spacing:.04em;text-transform:uppercase}
+.decision{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px 14px;border-left:5px solid #9a5d00;background:#fff5dc;border-radius:8px;margin:10px 0 16px}
+.decision strong{color:#744700;font-size:1.02rem}
+.memo h2{font-size:1.02rem;color:#17324d;border-bottom:1px solid #d8e1e8;padding-bottom:4px;margin:22px 0 8px}
+.memo h2 .num{color:#19705d;margin-right:6px}
+.memo p,.memo li{font-size:.9rem;line-height:1.55}
+.memo td{white-space:normal}
+.memo-fac td:nth-child(n+6){text-align:left;font-size:.78rem}
+.sign{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px}
+.sigbox{border:1px solid #d8e1e8;border-radius:8px;padding:12px;font-size:.84rem;background:#fbfcfd}
+.sigbox h3{margin:0 0 6px;color:#17324d;font-size:.86rem}
+.sigline{border-bottom:1px solid #9aa5b1;height:26px;margin:8px 0 2px}
+.sigcap{color:#607080;font-size:.72rem}
+.chk{display:block;margin:3px 0}
+.chk::before{content:"☐";margin-right:6px;font-size:1rem}
+.commentbox{border:1px dashed #b8c5cf;border-radius:6px;min-height:70px;margin-top:6px;padding:6px;color:#9aa5b1;font-size:.78rem}
+.printbar{display:flex;justify-content:flex-end;gap:8px;margin:0 0 10px}
+.printbar button{border:1px solid #17324d;background:#17324d;color:#fff;border-radius:7px;padding:6px 12px;font:600 .82rem inherit;cursor:pointer}
+@media (max-width:760px){.paper{padding:20px 16px}.mhdr{grid-template-columns:110px 1fr}.sign{grid-template-columns:1fr}}
+@media print{body{background:#fff}.memo{width:100%;margin:0}.paper{border:0;box-shadow:none;padding:0}.printbar{display:none}.memo h2{break-after:avoid}.sigbox,.table-wrap{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="memo">
+<nav class="exnav" aria-label="Exercise 2 pages"><a class="exhome" href="../cra_index.html#practice-section">← Exercises</a><span class="extitle">Exercise 2 · Maple Ridge Manufacturing Ltd.</span><ol><li><a class="step" href="Exercise_2_Maple_Ridge_Manufacturing_Ltd.html"><span class="n">1</span>Case</a></li><li><a class="step" href="Exercise_2_Maple_Ridge_Manufacturing_Ltd_Analysis.html"><span class="n">2</span>Credit analysis</a></li><li><a class="step" href="Exercise_2_Maple_Ridge_Manufacturing_Ltd_Dashboard.html"><span class="n">3</span>Model dashboard</a></li><li><a class="step on" href="Exercise_2_Maple_Ridge_Manufacturing_Ltd_Credit_Memo.html" aria-current="page"><span class="n">4</span>Credit memo</a></li></ol></nav>
+
+<div class="printbar"><button type="button" onclick="window.print()">Print / save as PDF</button></div>
+<article class="paper">
+<header class="letterhead"><div class="org">Commercial Banking – Credit Risk Management<small>Credit Application &amp; Approval Memorandum</small></div>
+<div class="cls">Confidential – Internal use only</div></header>
+<h1>Credit Memorandum – Maple Ridge Manufacturing Ltd.</h1>
+<div class="mhdr">
+  <div class="k">To</div><div>Relationship Manager, Commercial Banking<br>Independent Credit Approval (Credit Adjudication)</div>
+  <div class="k">From</div><div>Credit Risk Analyst</div>
+  <div class="k">Date</div><div>[dd mmm yyyy]</div><div class="k">Review type</div><div>New relationship – takeover and new money</div>
+  <div class="k">Borrower</div><div>Maple Ridge Manufacturing Ltd., Cambridge ON</div><div class="k">Industry</div><div>Printed packaging manufacturing</div>
+  <div class="k">Request</div><div>Line $1.4M; refinance $1.24M; equipment $1.5M</div><div class="k">Total requested</div><div><strong>$4,140k</strong></div>
+  <div class="k">Recommended</div><div><strong>$2,240k</strong> (line $1.0M + refinance $1.24M)</div><div class="k">Risk rating</div><div>7 – Special mention</div>
+</div>
+<div class="decision" style="border-left-color:#9b3434;background:#fff0f0"><strong style="color:#9b3434">Recommendation: DECLINE AS PROPOSED – COUNTER-OFFER</strong>
+<span>Approve a $1.0M margined line and a $1.24M refinance loan (6-year amortization) once the conditions precedent are met. Decline the $1.5M equipment loan for now.</span></div>
+
+<h2><span class="num">1.</span>Purpose and summary</h2>
+<p>Maple Ridge has asked the Bank to take over its banking from Lakeshore Commercial Bank, which is exiting after a FY2026 covenant breach
+(DSCR 1.10x against 1.25x), and to finance a C$1.8M printing line. The business has grown sales 26% in two years, but
+normalized EBITDA fell to $590k (margin 7.6%). After tax, CapEx and dividends, 2026 debt service was covered only 0.42x.
+HST and payroll remittances are overdue and the owners have taken out cash through dividends and advances.</p>
+<p>As requested, pro forma leverage would be 6.23x EBITDA and downside lender DSCR 0.75x. The line is larger than the borrowing base
+(0.82x), and term debt is 67% covered by equipment value. We do not support the request as proposed. A reduced
+facility that refinances the existing debt and provides a margined line is serviceable from current earnings (1.11x lender DSCR, 1.81x on
+EBITDA) if dividends stop and the conditions below are met.</p>
+
+<h2><span class="num">2.</span>Facilities</h2>
+<div class="table-wrap"><table class="memo-fac"><caption>Requested vs recommended ($000s)</caption><thead><tr><th>Facility</th><th>Requested</th><th>Recommended</th><th>Pricing</th><th>Term / amortization</th><th>Security</th></tr></thead><tbody><tr><td>Operating line</td><td>1,400</td><td>1,000</td><td>Prime + 2.00%</td><td>Demand; annual review</td><td>GSA; margined with concentration cap and priority reserve</td></tr><tr><td>Refinance term loan</td><td>1,240</td><td>1,240</td><td>7.25% fixed</td><td>6-yr amortization (requested 5)</td><td>GSA; existing equipment; MRM Properties guarantee</td></tr><tr><td>Equipment term loan</td><td>1,500</td><td>Declined at this time</td><td>7.25% fixed</td><td>7-yr amortization</td><td>PMSI on new line (if reconsidered)</td></tr><tr class="total"><td>Total</td><td>4,140</td><td>2,240</td><td></td><td></td><td></td></tr></tbody></table></div>
+<p class="small">Day one: the line takes out Lakeshore's $935k balance (reduced to about $755k if the $180k shareholder advances are repaid).</p>
+
+<h2><span class="num">3.</span>Borrower and management</h2>
+<p>Printed packaging manufacturer (46 employees), owned by Daniel Okafor (60%, age 66) and Elena Petrova (40%, CEO). Customer X makes up 31% of
+revenue; its contract ends in 10 months, and it is asking for a 4% price cut and 60-day terms. The plant is rented month-to-month from MRM Properties Inc.,
+which the shareholders own. Okafor plans to sell his shares to Petrova for about $1.8M from 2028. The statements are compiled, and the finance function is a part-time controller.</p>
+
+<h2><span class="num">4.</span>Financial analysis</h2>
+<div class="table-wrap"><table class=""><caption>Financial summary ($000s)</caption><thead><tr><th></th><th>FY2024</th><th>FY2025</th><th>FY2026</th><th>Pro forma (requested)</th></tr></thead><tbody><tr><td>Revenue</td><td>6,200</td><td>7,050</td><td>7,800</td><td>8,900 mgmt</td></tr><tr><td>EBITDA (normalized)</td><td>640</td><td>650</td><td>590</td><td>1,140 mgmt / 690 down</td></tr><tr><td>EBITDA margin</td><td>10.3%</td><td>9.2%</td><td>7.6%</td><td>12.8%</td></tr><tr><td>Net income (normalized)</td><td>229</td><td>196</td><td>106</td><td>302</td></tr><tr><td>Dividends</td><td>120</td><td>150</td><td>180</td><td>nil (condition)</td></tr><tr><td>Adjusted TNW</td><td>1,709</td><td>1,665</td><td>1,545</td><td>1,845</td></tr><tr><td>Current ratio</td><td>1.65x</td><td>1.36x</td><td>1.07x</td><td>1.05x</td></tr><tr><td>Quick ratio</td><td>0.93x</td><td>0.72x</td><td>0.54x</td><td class="bad">0.53x</td></tr><tr><td>Cash conversion cycle (days)</td><td>64</td><td>67</td><td>70</td><td>—</td></tr><tr><td>Funded debt / EBITDA</td><td>2.60x</td><td>3.04x</td><td>3.69x</td><td class="bad">6.23x</td></tr><tr><td>Lakeshore covenant DSCR</td><td class="good">1.56x</td><td class="good">1.42x</td><td class="warn">1.10x</td><td>—</td></tr><tr><td>Lender DSCR</td><td class="bad">0.94x</td><td class="bad">0.92x</td><td class="bad">0.42x</td><td>see below</td></tr><tr><td>Fixed-charge coverage incl. rent</td><td class="bad">0.96x</td><td class="bad">0.95x</td><td class="bad">0.62x</td><td>—</td></tr></tbody></table></div>
+<p>The analysis removes the $60k gain on sale, treats the related-party rent as a fixed charge, and deducts goodwill and amounts due from shareholders from
+net worth. Margins have fallen three years running, and working capital is absorbing the growth (DSO 62 days, DIO 74 days).
+Full detail is in the <a href="Exercise_2_Maple_Ridge_Manufacturing_Ltd_Analysis.html">credit analysis</a> and the
+<a href="Exercise_2_Maple_Ridge_Manufacturing_Ltd_Dashboard.html">model dashboard</a>.</p>
+
+<h2><span class="num">5.</span>Repayment capacity</h2>
+<div class="table-wrap"><table class=""><caption>First-year coverage (dividends suspended)</caption><thead><tr><th>Scenario</th><th>Debt service</th><th>EBITDA</th><th>EBITDA DSCR</th><th>Lender DSCR</th></tr></thead><tbody><tr><td>Requested – 2026 run-rate</td><td>675.5</td><td>590</td><td class="warn">1.01x</td><td class="bad">0.61x</td></tr><tr><td>Requested – management 2027</td><td>675.5</td><td>1,140</td><td class="good">1.95x</td><td class="good">1.26x</td></tr><tr><td>Requested – lender downside</td><td>675.5</td><td>690</td><td class="warn">1.18x</td><td class="bad">0.75x</td></tr><tr><td>Requested – loss of Customer X</td><td>675.5</td><td>564</td><td class="bad">0.96x</td><td class="bad">0.57x</td></tr><tr><td>Counter-offer – 2026 run-rate</td><td>326.7</td><td>590</td><td class="good">1.81x</td><td class="warn">1.11x</td></tr><tr><td>Counter-offer – with Customer X −4%</td><td>326.7</td><td>493</td><td>—</td><td class="bad">0.90x</td></tr></tbody></table></div>
+<p>EBITDA DSCR for the requested rows = EBITDA ÷ term debt service; lender DSCR = (EBITDA − tax − $180k maintenance CapEx) ÷ (term debt service + line interest).
+The counter-offer is serviceable on 2026 earnings but has little margin for error. That is why the Customer X renewal, a stop to dividends, and the
+MRM Properties support are conditions rather than covenants.</p>
+
+<h2><span class="num">6.</span>Security and margin</h2>
+<div class="table-wrap"><table class=""><caption>Borrowing base and collateral ($000s)</caption><thead><tr><th>Item</th><th>Value</th><th>Comment</th></tr></thead><tbody><tr><td>Borrowing base – bank standard</td><td>1,151</td><td class="bad">0.82x of $1.4M request</td></tr><tr><td>Borrowing base – conservative (30% concentration cap)</td><td>1,023</td><td class="good">1.02x of $1.0M counter-offer</td></tr><tr><td>Priority payables reserve</td><td>135</td><td>HST and source deductions – rank ahead of the Bank</td></tr><tr><td>Existing equipment OLV vs refinance loan</td><td>1,050</td><td class="warn">85%</td></tr><tr><td>New line OLV vs equipment loan (if reconsidered)</td><td>780</td><td class="bad">52%</td></tr><tr><td>MRM Properties – 2nd mortgage lending value</td><td>850</td><td>75% of $2.6M less $1.1M first mortgage</td></tr><tr><td>Personal guarantees offered</td><td>750</td><td>Recommended: unlimited joint and several</td></tr></tbody></table></div>
+<p>Security for the recommended facilities: GSA over all present and after-acquired property; specific charges on existing equipment; an MRM Properties
+guarantee limited to $750k, supported by a second collateral mortgage on the plant; landlord waiver; assignment of insurance; postponement of any
+shareholder loans. The refinance loan would then be fully covered (equipment OLV $1,050k plus real-estate lending value $850k).</p>
+
+<h2><span class="num">7.</span>Risk rating</h2>
+<div class="table-wrap"><table class="risk-table"><caption>Borrower risk rating rationale</caption><thead><tr><th>Factor</th><th>Assessment</th><th>Comment</th></tr></thead><tbody><tr><td>Repayment capacity</td><td class="bad">Very weak</td><td>Lender DSCR 0.42x in 2026; covenant breached</td></tr><tr><td>Profitability trend</td><td class="bad">Weak</td><td>EBITDA margin 10.3% → 7.6%</td></tr><tr><td>Leverage</td><td class="bad">Weak</td><td>FD/EBITDA 3.69x (2026); 6.23x as requested</td></tr><tr><td>Liquidity</td><td class="bad">Weak</td><td>Line fully drawn; government arrears</td></tr><tr><td>Management and governance</td><td class="bad">Weak</td><td>Related-party dealings; compiled statements; succession</td></tr><tr><td>Industry and position</td><td class="warn">Acceptable</td><td>Stable end market; concentrated customer base</td></tr><tr><td>Security</td><td class="warn">Acceptable with MRM support</td><td>Equipment under-secured; real-estate equity available</td></tr><tr class="total"><td>Overall borrower risk rating</td><td class="bad">7 – Special mention</td><td>New relationship; review after FY2027</td></tr></tbody></table></div>
+
+<h2><span class="num">8.</span>Key risks and mitigants</h2>
+<div class="table-wrap"><table class="risk-table"><caption>Key risks and structural responses</caption><thead><tr><th>Risk</th><th>Mitigant / response</th></tr></thead><tbody><tr><td>Thin repayment capacity</td><td>Equipment loan declined; refinance amortization extended to 6 years; dividends prohibited; FCC covenant</td></tr><tr><td>Customer X renewal and pricing</td><td>Written renewal is a condition precedent; 30% concentration cap in borrowing base</td></tr><tr><td>Government arrears (priority claims)</td><td>Arrears paid before funding; CRA confirmation; reserve in borrowing base; quarterly remittance confirmation</td></tr><tr><td>Related-party leakage</td><td>Shareholder advances repaid; no further advances, dividends or redemptions without consent; market lease</td></tr><tr><td>Adverse selection (takeover)</td><td>Lakeshore conduct report and covenant history; full underwriting; no price concession</td></tr><tr><td>Collateral shortfall</td><td>MRM Properties guarantee and second collateral mortgage; unlimited personal guarantees</td></tr><tr><td>Ownership transition</td><td>Buyout requires the Bank's consent and must be funded outside the company; key-person insurance</td></tr><tr><td>FX and input costs</td><td>Hedging policy for US$ purchases; price-adjustment clauses in new contracts</td></tr></tbody></table></div>
+
+<h2><span class="num">9.</span>Policy exceptions</h2>
+<div class="table-wrap"><table class="risk-table"><caption>Policy exceptions (counter-offer)</caption><thead><tr><th>Exception</th><th>Guideline</th><th>Proposal</th><th>Justification</th></tr></thead><tbody><tr><td>Debt service coverage</td><td>≥ 1.25x</td><td>Lender DSCR 1.11x on 2026 earnings</td><td>EBITDA coverage 1.81x; dividends stopped; real-estate support</td></tr><tr><td>Takeover of a breached credit</td><td>Avoid adverse selection</td><td>New relationship rated 7</td><td>Payment record intact; structure fixes the causes of the breach</td></tr><tr><td>Financial reporting</td><td>Review engagement for exposure > $2M</td><td>Compiled FY2026 statements</td><td>Review engagement required from FY2027</td></tr></tbody></table></div>
+
+<h2><span class="num">10.</span>Terms and conditions</h2>
+<p><strong>Conditions precedent</strong></p><ol>
+<li>HST and payroll source-deduction arrears paid in full, confirmed by CRA statements of account.</li>
+<li>$180k due from shareholders repaid; no further advances.</li>
+<li>Written 5-year market lease with MRM Properties; landlord waiver; MRM Properties guarantee ($750k) and second collateral mortgage, with the first mortgagee's consent.</li>
+<li>Customer X renewal (term, price, payment terms) confirmed in writing and acceptable to the Bank.</li>
+<li>Lakeshore payout statement, covenant compliance history and account conduct report.</li>
+<li>Unlimited joint and several guarantees from both shareholders, with net worth statements and credit bureau reports.</li>
+<li>Borrowing-base certificate at closing supporting the opening advance.</li></ol>
+<div class="table-wrap"><table class=""><caption>Financial covenants</caption><thead><tr><th>Covenant</th><th>Requirement</th><th>Testing</th></tr></thead><tbody><tr><td>Fixed-charge coverage incl. rent</td><td>≥ 1.15x</td><td>Quarterly, rolling 12 months</td></tr><tr><td>Funded debt / EBITDA</td><td>≤ 3.25x</td><td>Quarterly</td></tr><tr><td>Total liabilities / adjusted TNW</td><td>≤ 2.50x</td><td>Annual</td></tr><tr><td>Distributions</td><td>None until FCC ≥ 1.25x for 4 consecutive quarters; then ≤ 50% of prior-year net income</td><td>Ongoing</td></tr><tr><td>Shareholder buyout / redemptions</td><td>Prior written consent; funded outside the company</td><td>Ongoing</td></tr><tr><td>Government remittances</td><td>Current at all times; quarterly confirmation</td><td>Quarterly</td></tr></tbody></table></div>
+<div class="table-wrap"><table class=""><caption>Reporting requirements</caption><thead><tr><th>Report</th><th>Frequency</th><th>Due</th></tr></thead><tbody><tr><td>Borrowing-base certificate, aged A/R and A/P, inventory listing</td><td>Monthly</td><td>20 days after month-end</td></tr><tr><td>Internal financial statements and covenant certificate</td><td>Quarterly</td><td>45 days after quarter-end</td></tr><tr><td>Review-engagement annual financial statements</td><td>Annual</td><td>120 days after year-end</td></tr><tr><td>CRA remittance confirmation</td><td>Quarterly</td><td>With covenant certificate</td></tr><tr><td>Field examination of receivables and inventory</td><td>Annual</td><td>Bank to arrange</td></tr></tbody></table></div>
+
+<h2><span class="num">11.</span>Recommendation</h2>
+<p>We recommend <strong>declining the request as proposed</strong> and authorizing the RM to present a counter-offer of a <strong>$1,000,000 operating line</strong>
+(margined as above) and a <strong>$1,240,000 refinance loan</strong> (6-year amortization, 7.25%), for total authorized credit of <strong>$2,240,000</strong>.
+Approval is subject to all conditions precedent being met before closing. The $1,500,000 equipment loan is declined at this time. It may be resubmitted with a signed
+Customer X renewal, two quarters of results showing recovery, at least $500k of verified owner equity, and the MRM Properties security in place.
+Proposed borrower risk rating: <strong>7 – Special mention</strong>.</p>
+
+<h2><span class="num">12.</span>Sign-off</h2>
+<div class="sign">
+  <div class="sigbox"><h3>Prepared by – Credit Risk Analyst</h3><span class="chk">Analysis complete; recommendation as above</span>
+    <div class="sigline"></div><div class="sigcap">Name / signature</div><div class="sigline"></div><div class="sigcap">Date</div></div>
+  <div class="sigbox"><h3>Relationship Manager</h3><span class="chk">Concur – will present counter-offer</span><span class="chk">Do not concur (comments below)</span>
+    <div class="sigline"></div><div class="sigcap">Name / signature</div><div class="sigline"></div><div class="sigcap">Date</div><div class="commentbox">RM comments</div></div>
+  <div class="sigbox"><h3>Independent Credit Approval</h3><span class="chk">Decline as proposed; counter-offer approved</span>
+    <span class="chk">Counter-offer approved with amendments</span><span class="chk">Declined in full</span>
+    <div class="sigline"></div><div class="sigcap">Approver / authority level</div><div class="sigline"></div><div class="sigcap">Date</div><div class="commentbox">Approval conditions / comments</div></div>
+</div>
+<p class="small" style="margin-top:16px">Fictional case prepared for commercial credit-analysis teaching. Amounts in $000s unless stated. Assumptions not given in the case
+(prime 4.45%, tax 26.5%, 10-year depreciation, materials 70% of COGS) are listed in the credit analysis appendix.</p>
+</article>
+</div>
+</body>
+</html>

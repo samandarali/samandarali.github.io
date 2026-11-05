@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Credit analysis for Exercise 2 – Maple Ridge Manufacturing Ltd.: normalization, ratio scorecard, pro forma, sensitivity, borrowing base and counter-offer.">
+  <title>Credit Analysis | Maple Ridge Manufacturing Ltd.</title>
+  <style>
+    :root {
+      --navy: #17324d;
+      --blue: #2f6fa3;
+      --blue-soft: #eaf3fa;
+      --green: #19705d;
+      --green-soft: #e9f6f2;
+      --amber: #9a5d00;
+      --amber-soft: #fff5dc;
+      --red: #9b3434;
+      --red-soft: #fff0f0;
+      --ink: #263442;
+      --muted: #607080;
+      --line: #d8e1e8;
+      --page: #f4f7f9;
+      --white: #fff;
+      --shadow: 0 12px 30px rgba(26, 49, 70, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--page);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .page-shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 32px auto 64px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 48px;
+      color: var(--white);
+      border-radius: 22px;
+      background: linear-gradient(135deg, #17324d 0%, #205d78 65%, #19705d 100%);
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      bottom: -130px;
+      width: 330px;
+      height: 330px;
+      border: 55px solid rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: #bfe6dc;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.08;
+      letter-spacing: -.035em;
+    }
+
+    .hero p {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 20px 0 0;
+      color: #eaf4f7;
+      font-size: 1.08rem;
+    }
+
+    .decision-pills {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .decision-pills span {
+      padding: 7px 13px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .instruction {
+      margin: 24px 0;
+      padding: 19px 22px;
+      border-left: 5px solid var(--amber);
+      border-radius: 12px;
+      background: var(--amber-soft);
+      box-shadow: var(--shadow);
+    }
+
+    .instruction strong { color: #744700; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    main { min-width: 0; }
+
+    nav {
+      position: sticky;
+      top: 20px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    nav h2 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: .82rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      display: block;
+      padding: 6px 0;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      line-height: 1.35;
+    }
+
+    nav a:hover { color: var(--blue); }
+
+    .card {
+      margin-bottom: 22px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .section-number {
+      display: inline-grid;
+      width: 32px;
+      height: 32px;
+      margin-right: 9px;
+      place-items: center;
+      border-radius: 9px;
+      color: var(--white);
+      background: var(--blue);
+      font-size: .88rem;
+      vertical-align: 3px;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      color: var(--navy);
+      font-size: 1.45rem;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 24px 0 8px;
+      color: var(--green);
+      font-size: 1.06rem;
+    }
+
+    p { margin: 10px 0; }
+    ul, ol { margin: 10px 0; padding-left: 24px; }
+    li + li { margin-top: 5px; }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0;
+    }
+
+    .fact {
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: var(--blue-soft);
+    }
+
+    .fact dt {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .fact dd {
+      margin: 2px 0 0;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0 4px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      font-variant-numeric: tabular-nums;
+    }
+
+    caption {
+      padding: 12px 15px;
+      color: var(--muted);
+      background: #f7fafc;
+      text-align: left;
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    th, td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child, td:first-child { text-align: left; }
+    thead th { color: var(--white); background: var(--navy); }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:nth-child(even) { background: #f9fbfc; }
+    .total td { color: var(--navy); background: var(--blue-soft); font-weight: 800; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .note-box {
+      padding: 17px 18px;
+      border-radius: 12px;
+      background: var(--green-soft);
+    }
+
+    .note-box.warning { background: var(--red-soft); }
+    .note-box h3 { margin-top: 0; }
+    .note-box.warning h3 { color: var(--red); }
+
+    .formula {
+      margin: 18px 0;
+      padding: 18px;
+      border: 1px dashed var(--blue);
+      border-radius: 12px;
+      color: var(--navy);
+      background: var(--blue-soft);
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+
+    .assignment {
+      border-top: 6px solid var(--green);
+    }
+
+    .assignment ol {
+      columns: 2;
+      column-gap: 40px;
+    }
+
+    .assignment li { break-inside: avoid; }
+
+    .writing-area {
+      min-height: 170px;
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px dashed #b8c5cf;
+      border-radius: 12px;
+      color: var(--muted);
+      background: #fbfcfd;
+    }
+
+    footer {
+      margin-top: 26px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .84rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: static; order: -1; }
+      nav div { columns: 2; }
+      .hero { padding: 34px 28px; }
+    }
+
+    @media (max-width: 600px) {
+      .page-shell { width: min(100% - 20px, 1120px); margin-top: 10px; }
+      .hero, .card { border-radius: 13px; }
+      .card { padding: 22px 17px; }
+      .facts, .two-col { grid-template-columns: 1fr; }
+      .assignment ol { columns: 1; }
+      nav div { columns: 1; }
+      th, td { padding: 10px 11px; font-size: .88rem; }
+    }
+
+    @media print {
+      @page { size: letter; margin: .55in; }
+      body { background: white; font-size: 10.5pt; }
+      .page-shell { width: 100%; margin: 0; }
+      .hero { padding: 28px; border-radius: 0; box-shadow: none; }
+      .hero h1 { font-size: 26pt; }
+      .layout { display: block; }
+      nav { display: none; }
+      .card, .instruction { break-inside: avoid; box-shadow: none; }
+      .table-wrap { overflow: visible; }
+      .writing-area { min-height: 130px; }
+      footer { display: none; }
+    }
+    /* Compact layout: keep the full case intact while showing more content at once. */
+    body { font-size: 14px; line-height: 1.48; }
+    .page-shell { width: min(1480px, calc(100% - 28px)); margin: 16px auto 28px; }
+    .hero { padding: 26px 30px; border-radius: 16px; }
+    .hero::after { right: -110px; bottom: -170px; width: 270px; height: 270px; border-width: 42px; }
+    .eyebrow { margin-bottom: 5px; font-size: .7rem; }
+    h1 { font-size: clamp(1.7rem, 3.6vw, 2.7rem); }
+    .hero p { margin-top: 10px; font-size: 1rem; }
+    .decision-pills { gap: 7px; margin-top: 14px; }
+    .decision-pills span { padding: 5px 10px; font-size: .8rem; }
+    .instruction { margin: 12px 0; padding: 11px 15px; border-radius: 9px; }
+    .layout { grid-template-columns: minmax(0, 1fr) 205px; gap: 14px; }
+    nav { top: 12px; padding: 14px; border-radius: 12px; }
+    nav h2 { margin-bottom: 6px; font-size: .75rem; }
+    nav a { padding: 4px 0; font-size: .82rem; }
+    .card { margin-bottom: 12px; padding: 18px; border-radius: 12px; }
+    .section-number { width: 26px; height: 26px; margin-right: 6px; border-radius: 7px; font-size: .78rem; }
+    h2 { margin-bottom: 10px; font-size: 1.2rem; }
+    h3 { margin: 14px 0 5px; font-size: .96rem; }
+    p { margin: 6px 0; }
+    ul, ol { margin: 6px 0; padding-left: 20px; }
+    li + li { margin-top: 2px; }
+    .facts { gap: 8px; }
+    .fact { padding: 8px 10px; border-radius: 8px; }
+    .fact dt { font-size: .68rem; }
+    .fact dd { margin-top: 1px; }
+    .table-wrap { margin: 9px 0 3px; border-radius: 8px; }
+    caption { padding: 7px 9px; font-size: .75rem; }
+    th, td { padding: 5px 8px; font-size: .82rem; }
+    th:first-child, td:first-child { white-space: normal; }
+    .two-col { gap: 10px; }
+    .note-box { padding: 10px 12px; border-radius: 9px; }
+    .formula { margin: 10px 0; padding: 10px; font-size: 1rem; }
+    .assignment { border-top-width: 4px; }
+    .assignment ol { column-gap: 24px; }
+    .writing-area { min-height: 105px; margin-top: 12px; padding: 12px; }
+    footer { margin-top: 14px; font-size: .76rem; }
+
+    @media (min-width: 1100px) {
+      .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 960px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: static; order: -1; }
+      nav div { columns: 3; }
+    }
+    @media (max-width: 600px) {
+      .page-shell { width: calc(100% - 16px); margin: 8px auto 18px; }
+      .hero { padding: 20px 18px; }
+      .card { padding: 14px 12px; }
+      .facts, .two-col { grid-template-columns: 1fr; }
+      .assignment ol { columns: 1; }
+      nav div { columns: 2; }
+      th, td { padding: 5px 6px; font-size: .76rem; }
+    }
+    @media print {
+      @page { size: letter; margin: .3in; }
+      body { font-size: 8.5pt; line-height: 1.28; }
+      .page-shell { width: 100%; margin: 0; }
+      .hero { padding: 14px 18px; border-radius: 0; box-shadow: none; }
+      .hero h1 { font-size: 19pt; }
+      .hero p { margin-top: 5px; font-size: 9pt; }
+      .decision-pills { margin-top: 7px; }
+      .instruction { margin: 7px 0; padding: 8px 10px; box-shadow: none; }
+      .layout { display: block; }
+      nav { display: none; }
+      .card { margin-bottom: 7px; padding: 10px; border-radius: 0; box-shadow: none; }
+      h2 { margin-bottom: 6px; font-size: 11pt; }
+      h3 { margin: 8px 0 3px; font-size: 9pt; }
+      p { margin: 4px 0; }
+      ul, ol { margin: 4px 0; }
+      li + li { margin-top: 1px; }
+      .fact, .note-box { padding: 6px 8px; }
+      .table-wrap { margin: 5px 0 2px; }
+      caption { padding: 4px 6px; }
+      th, td { padding: 3px 5px; font-size: 7.5pt; }
+      .writing-area { min-height: 70px; margin-top: 7px; padding: 8px; }
+      .card, .instruction { break-inside: avoid; }
+      footer { display: none; }
+    }
+  
+    .exec { border-top: 4px solid var(--green); }
+    .verdict { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin: 4px 0 10px; }
+    .verdict .badge { padding: 6px 14px; border-radius: 999px; background: var(--amber-soft); color: #744700;
+      border: 1px solid #e7c77a; font-weight: 800; letter-spacing:.02em; }
+    .kpis { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; margin: 10px 0; }
+    .kpi { padding: 9px 11px; border-radius: 9px; background: var(--blue-soft); }
+    .kpi .k { color: var(--muted); font-size: .68rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .kpi .v { color: var(--navy); font-size: 1.25rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .kpi .s { color: var(--muted); font-size: .76rem; }
+    td.good { color: var(--green); background: var(--green-soft) !important; font-weight: 700; }
+    td.warn { color: var(--amber); background: var(--amber-soft) !important; font-weight: 700; }
+    td.bad  { color: var(--red); background: var(--red-soft) !important; font-weight: 700; }
+    td.muted { color: var(--muted); }
+    .grid td, .grid th { text-align: center; }
+    .grid td:first-child, .grid th:first-child { text-align: left; }
+    .legend { display:flex; flex-wrap:wrap; gap:12px; font-size:.78rem; color: var(--muted); margin: 4px 0 8px; }
+    .legend span::before { content:""; display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
+    .legend .lg::before { background: var(--green-soft); border:1px solid var(--green); }
+    .legend .lw::before { background: var(--amber-soft); border:1px solid var(--amber); }
+    .legend .lb::before { background: var(--red-soft); border:1px solid var(--red); }
+    .small { font-size: .8rem; color: var(--muted); }
+    .assume li { font-size: .84rem; }
+    .risk-table td { white-space: normal; text-align: left; vertical-align: top; }
+    .risk-table td:nth-child(2) { white-space: nowrap; }
+    .cond-list li { margin-top: 4px; }
+    @media (max-width: 760px) { .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media print { .kpis { grid-template-columns: repeat(4, 1fr); } }
+
+.exnav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;padding:8px 10px;border:1px solid #d8e1e8;border-radius:12px;background:#fff;box-shadow:0 6px 18px rgba(26,49,70,.06);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.exnav .exhome{color:#607080;text-decoration:none;font-size:.8rem;font-weight:700;padding:4px 8px}
+.exnav .exhome:hover{color:#2f6fa3}
+.exnav .extitle{color:#17324d;font-weight:800;font-size:.86rem;margin-right:auto}
+.exnav ol{display:flex;gap:4px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+.exnav li{margin:0}
+.exnav a.step{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;color:#2f4255;text-decoration:none;font-size:.8rem;font-weight:700;border:1px solid #d8e1e8;background:#f7fafc}
+.exnav a.step:hover{border-color:#2f6fa3;color:#2f6fa3}
+.exnav a.step .n{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#d8e1e8;color:#17324d;font-size:.7rem}
+.exnav a.step.on{background:#17324d;border-color:#17324d;color:#fff}
+.exnav a.step.on .n{background:#19705d;color:#fff}
+@media print{.exnav{display:none}}
+@media (max-width:600px){.exnav .extitle{width:100%}}
+</style>
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="exnav" aria-label="Exercise 2 pages"><a class="exhome" href="../cra_index.html#practice-section">← Exercises</a><span class="extitle">Exercise 2 · Maple Ridge Manufacturing Ltd.</span><ol><li><a class="step" href="Exercise_2_Maple_Ridge_Manufacturing_Ltd.html"><span class="n">1</span>Case</a></li><li><a class="step on" href="Exercise_2_Maple_Ridge_Manufacturing_Ltd_Analysis.html" aria-current="page"><span class="n">2</span>Credit analysis</a></li><li><a class="step" href="Exercise_2_Maple_Ridge_Manufacturing_Ltd_Dashboard.html"><span class="n">3</span>Model dashboard</a></li><li><a class="step" href="Exercise_2_Maple_Ridge_Manufacturing_Ltd_Credit_Memo.html"><span class="n">4</span>Credit memo</a></li></ol></nav>
+    <header class="hero">
+      <p class="eyebrow">Daily Commercial Credit Practice · Exercise 2 · Model Solution · Step 2 of 4</p>
+      <h1>Credit Analysis – Maple Ridge Manufacturing Ltd.</h1>
+      <p>Takeover of a breached relationship plus a $1.5M equipment loan: normalized earnings, ratio scorecard, pro forma structure, sensitivity testing, borrowing base and a counter-offer.</p>
+      <div class="decision-pills" aria-label="Recommendation"><span>Decline as proposed – counter-offer</span><span>Risk rating 7 – Special mention</span><span>Amounts in $000s</span></div>
+    </header>
+    <aside class="instruction"><strong>How to use this analysis:</strong> This is the worked analysis behind the <a href="Exercise_2_Maple_Ridge_Manufacturing_Ltd_Credit_Memo.html">credit memo</a>
+    for <a href="Exercise_2_Maple_Ridge_Manufacturing_Ltd.html">Exercise 2</a>. Every figure is read from the <a href="Exercise_2_Maple_Ridge_Manufacturing_Ltd_Dashboard.html">model dashboard</a>
+    (the same model as the downloadable Excel file). Colours show coverage that meets policy (green), is thin (amber) or falls short (red).</aside>
+    <div class="layout"><main><section class="card exec" id="summary"><h2><span class="section-number">★</span>Executive Summary</h2>
+<div class="verdict"><span class="badge" style="background:var(--red-soft);color:var(--red);border-color:#e4b4b4">Recommendation: DECLINE AS PROPOSED – COUNTER-OFFER</span>
+<span class="small">Counter-offer: refinance $1.24M (6-yr) + operating line $1.0M margined; equipment loan deferred · Risk rating 7 / Special mention on a 1–10 scale</span></div>
+<div class="kpis">
+  <div class="kpi"><div class="k">EBITDA margin</div><div class="v">7.6%</div><div class="s">from 10.3% in 2024</div></div>
+  <div class="kpi"><div class="k">Lakeshore covenant DSCR</div><div class="v">1.10x</div><div class="s">minimum 1.25x – breached</div></div>
+  <div class="kpi"><div class="k">Lender DSCR 2026</div><div class="v">0.42x</div><div class="s">after tax, CapEx, dividends</div></div>
+  <div class="kpi"><div class="k">Pro forma debt / EBITDA</div><div class="v">6.23x</div><div class="s">as requested, on 2026 EBITDA</div></div>
+  <div class="kpi"><div class="k">Downside lender DSCR</div><div class="v">0.75x</div><div class="s">as requested (1.18x on EBITDA)</div></div>
+  <div class="kpi"><div class="k">Borrowing base</div><div class="v">$1,151k</div><div class="s">0.82x of the $1.4M line</div></div>
+  <div class="kpi"><div class="k">Term debt vs equipment OLV</div><div class="v">67%</div><div class="s">shortfall $910k</div></div>
+  <div class="kpi"><div class="k">Counter-offer lender DSCR</div><div class="v">1.11x</div><div class="s">on 2026 EBITDA, no dividends</div></div>
+</div>
+<p>Maple Ridge is asking the Bank to take over a relationship its current lender is exiting after a covenant breach, and at the same time to
+lend $1.5M for new equipment. That is a total request of $4.14M against normalized 2026 EBITDA of $590k. Revenue has grown 26%
+in two years, but EBITDA and margins have fallen, the cash conversion cycle has lengthened to 70 days, government remittances are overdue,
+and the owners have taken $180k of dividends and $180k of advances while profit fell.</p>
+<p><strong>As requested the credit does not work.</strong> Pro forma funded debt is 6.23x 2026 EBITDA. Repayment depends entirely on the new line
+and on Customer X renewing at current prices. In the lender downside, coverage after tax and maintenance CapEx is 0.75x, and
+loss of Customer X takes it to 0.57x. The $1.4M line is not supported by the borrowing base (bank-standard 0.82x), and
+the term debt is 67% covered by equipment liquidation values.</p>
+<p><strong>A smaller credit may work.</strong> Refinancing the existing equipment debt over six years with a $1.0M margined line costs about
+$327k a year — coverage of 1.81x on EBITDA and 1.11x after tax and CapEx on 2026 earnings, if dividends stop.
+We recommend declining the request as proposed and offering this counter-proposal, subject to Customer X renewing, the government arrears being paid
+and the shareholder advances being repaid before closing. The equipment loan can be reconsidered once the renewal is signed and with more equity.</p>
+</section><section class="card" id="scorecard"><h2><span class="section-number">R</span>Financial Ratio Scorecard</h2><p>All five ratio groups for 2024–2026 and pro forma (requested structure). EBITDA is normalized: it excludes the 2026 gain on sale.</p><div class="table-wrap"><table class=""><caption>Scorecard summary</caption><thead><tr><th>Category</th><th>Rating</th><th>Direction</th><th>Key ratio</th></tr></thead><tbody><tr><td>Liquidity</td><td class="bad">Weak</td><td class="bad">Weakening</td><td>Quick ratio 0.54x; remittances overdue</td></tr><tr><td>Efficiency</td><td class="bad">Weak</td><td class="bad">Weakening</td><td>CCC 64 → 70 days</td></tr><tr><td>Leverage</td><td class="bad">Weak</td><td class="bad">Weakening</td><td>FD/EBITDA 6.23x pro forma</td></tr><tr><td>Coverage</td><td class="bad">Very weak</td><td class="bad">Weakening</td><td>Lender DSCR 0.42x (2026)</td></tr><tr><td>Profitability</td><td class="bad">Weak</td><td class="bad">Weakening</td><td>EBITDA margin 7.6%</td></tr></tbody></table></div><h3>1. Liquidity</h3><div class="table-wrap"><table class=""><caption>1. Liquidity ratios</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Pro forma</th><th>Typical lender guideline</th><th>Assessment*</th></tr></thead><tbody><tr><td>Current ratio</td><td>1.65x</td><td>1.36x</td><td>1.07x</td><td>1.05x</td><td class="muted">≥ 1.20x</td><td class="bad">Weak</td></tr><tr><td>Quick ratio</td><td>0.93x</td><td>0.72x</td><td>0.54x</td><td>0.53x</td><td class="muted">≥ 1.00x</td><td class="bad">Weak</td></tr><tr><td>Cash ratio</td><td>0.16x</td><td>0.04x</td><td>0.01x</td><td>0.01x</td><td class="muted">≥ 0.20x</td><td class="bad">Weak</td></tr><tr><td>Working capital ($000s)</td><td>739</td><td>575</td><td>175</td><td>118</td><td class="muted">Positive, growing with sales</td><td class="bad">Weak</td></tr></tbody></table></div><p class="small"><strong>Reading:</strong> Liquidity is weak and dependent on the line: cash is $35k, the quick ratio is 0.54x, and current liabilities include $135k of overdue government remittances.</p><h3>2. Efficiency</h3><div class="table-wrap"><table class=""><caption>2. Efficiency ratios</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Pro forma</th><th>Typical lender guideline</th><th>Assessment*</th></tr></thead><tbody><tr><td>Total asset turnover</td><td>1.48x</td><td>1.49x</td><td>1.47x</td><td>1.10x</td><td class="muted">Stable or rising</td><td class="bad">Weak</td></tr><tr><td>Fixed-asset turnover</td><td>2.88x</td><td>3.03x</td><td>3.42x</td><td>1.91x</td><td class="muted">Stable or rising</td><td class="bad">Weak</td></tr><tr><td>Receivables turnover</td><td>7.05x</td><td>6.53x</td><td>5.86x</td><td>—</td><td class="muted">≥ 8.0x (≈ 45 days)</td><td class="bad">Weak</td></tr><tr><td>Days sales outstanding</td><td>51.8</td><td>55.9</td><td>62.2</td><td>—</td><td class="muted">≤ 45 days</td><td class="bad">Weak</td></tr><tr><td>Inventory turnover</td><td>6.12x</td><td>5.66x</td><td>4.90x</td><td>—</td><td class="muted">Stable or rising</td><td class="bad">Weak</td></tr><tr><td>Days inventory outstanding</td><td>59.7</td><td>64.5</td><td>74.4</td><td>—</td><td class="muted">≤ 60 days</td><td class="bad">Weak</td></tr><tr><td>Payables turnover</td><td>7.62x</td><td>6.81x</td><td>5.50x</td><td>—</td><td class="muted">Close to supplier terms</td><td class="bad">Weak</td></tr><tr><td>Days payables outstanding</td><td>47.9</td><td>53.6</td><td>66.3</td><td>—</td><td class="muted">≈ 30–50 days</td><td class="bad">Weak</td></tr><tr><td>Cash conversion cycle (days)</td><td>63.6</td><td>66.8</td><td>70.3</td><td>—</td><td class="muted">Stable or shortening</td><td class="bad">Weak</td></tr></tbody></table></div><p class="small"><strong>Reading:</strong> Working capital is absorbing cash. DSO rose from 52 to 62 days and DIO from 60 to 74 days; suppliers are being paid more slowly (DPO 66 days).</p><h3>3. Leverage</h3><div class="table-wrap"><table class=""><caption>3. Leverage ratios</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Pro forma</th><th>Typical lender guideline</th><th>Assessment*</th></tr></thead><tbody><tr><td>Funded debt / EBITDA</td><td>2.60x</td><td>3.04x</td><td>3.69x</td><td>6.23x</td><td class="muted">≤ 3.00–3.50x</td><td class="bad">Weak</td></tr><tr><td>Lease-adjusted debt / EBITDAR</td><td>4.08x</td><td>4.38x</td><td>4.98x</td><td>6.76x</td><td class="muted">≤ 4.50x</td><td class="bad">Weak</td></tr><tr><td>Adjusted tangible net worth ($000s)</td><td>1,709</td><td>1,665</td><td>1,545</td><td>1,845</td><td class="muted">Positive and growing</td><td class="good">Strong</td></tr><tr><td>Total liabilities / adjusted TNW</td><td>1.36x</td><td>1.70x</td><td>2.21x</td><td>2.66x</td><td class="muted">≤ 2.50x</td><td class="bad">Weak</td></tr><tr><td>Equity / total assets</td><td>44.5%</td><td>40.2%</td><td>35.4%</td><td>30.7%</td><td class="muted">≥ 30%</td><td class="warn">Acceptable</td></tr></tbody></table></div><p class="small"><strong>Reading:</strong> Leverage is already 3.69x and reaches 6.23x as requested. Including the related-party rent, lease-adjusted leverage is 6.76x. Once goodwill and amounts due from the shareholders are deducted, real equity is $1,545k.</p><h3>4. Coverage</h3><div class="table-wrap"><table class=""><caption>4. Coverage ratios</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Pro forma</th><th>Typical lender guideline</th><th>Assessment*</th></tr></thead><tbody><tr><td>EBITDA interest coverage</td><td>5.42x</td><td>4.36x</td><td>3.17x</td><td>2.04x</td><td class="muted">≥ 3.00x</td><td class="bad">Weak</td></tr><tr><td>DSCR – EBITDA basis</td><td>1.79x</td><td>1.59x</td><td>1.21x</td><td>0.87x</td><td class="muted">≥ 1.25x</td><td class="bad">Weak</td></tr><tr><td>DSCR – incumbent covenant basis</td><td>1.56x</td><td>1.42x</td><td>1.10x</td><td>—</td><td class="muted">≥ 1.25x (Lakeshore)</td><td class="bad">Weak</td></tr><tr><td>DSCR – lender basis</td><td>0.94x</td><td>0.92x</td><td>0.42x</td><td>—</td><td class="muted">≥ 1.20–1.25x</td><td class="bad">Weak</td></tr><tr><td>Fixed-charge coverage incl. rent</td><td>0.96x</td><td>0.95x</td><td>0.62x</td><td>—</td><td class="muted">≥ 1.15x</td><td class="bad">Weak</td></tr></tbody></table></div><p class="small"><strong>Reading:</strong> Coverage is the decisive weakness. After tax, CapEx and dividends the company covered only 0.42x of its 2026 debt service, and 0.62x once rent is included. The pro forma figure (0.87x on EBITDA) shows that the requested structure cannot be serviced from current earnings.</p><h3>5. Profitability</h3><div class="table-wrap"><table class=""><caption>5. Profitability ratios</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Pro forma</th><th>Typical lender guideline</th><th>Assessment*</th></tr></thead><tbody><tr><td>Gross margin</td><td>25.0%</td><td>23.7%</td><td>22.1%</td><td>—</td><td class="muted">Stable or rising</td><td class="warn">Acceptable</td></tr><tr><td>EBITDA margin</td><td>10.3%</td><td>9.2%</td><td>7.6%</td><td>—</td><td class="muted">≥ 9–10% (packaging)</td><td class="bad">Weak</td></tr><tr><td>EBITDAR margin</td><td>14.2%</td><td>12.6%</td><td>10.8%</td><td>—</td><td class="muted">Stable</td><td class="warn">Acceptable</td></tr><tr><td>Net profit margin (normalized)</td><td>3.7%</td><td>2.8%</td><td>1.4%</td><td>—</td><td class="muted">≥ 3%</td><td class="bad">Weak</td></tr><tr><td>Return on equity</td><td>12.3%</td><td>10.3%</td><td>8.0%</td><td>—</td><td class="muted">≥ 12%</td><td class="warn">Acceptable</td></tr><tr><td>Dividend payout</td><td>52.4%</td><td>76.5%</td><td>120.0%</td><td>—</td><td class="muted">≤ 50%</td><td class="bad">Weak</td></tr></tbody></table></div><p class="small"><strong>Reading:</strong> Profitability is falling: gross margin 25.0% → 22.1%, EBITDA margin 10.3% → 7.6%. Excluding the $60k gain, 2026 net income is $106k, yet dividends were $180k (120% of reported income).</p><p class="small">*Assessment applies to the pro forma figure where shown, otherwise to 2026. Guidelines are teaching reference points, not a specific bank's policy.</p></section><section class="card" id="overview"><h2><span class="section-number">1</span>Borrower and Business Overview</h2>
+<dl class="facts"><div class="fact"><dt>Business</dt><dd>Printed corrugated and flexible packaging</dd></div>
+<div class="fact"><dt>History / staff</dt><dd>12 years · 46 employees</dd></div><div class="fact"><dt>Ownership</dt><dd>D. Okafor 60% (66) · E. Petrova 40% (CEO)</dd></div>
+<div class="fact"><dt>Concentration</dt><dd>Customer X 31%; top five 58%</dd></div><div class="fact"><dt>Statements</dt><dd>Notice to Reader (compiled)</dd></div>
+<div class="fact"><dt>Incumbent</dt><dd>Lakeshore – covenant breach, exit requested</dd></div></dl>
+<p>Packaging for food producers is a steady market, but it is competitive and buyers are powerful. Margins depend on passing paperboard and resin costs
+through to customers, which Maple Ridge mostly cannot do (no price-adjustment clauses). Three structural issues dominate the business risk:
+<strong>concentration</strong> (Customer X is renegotiating for a 4% price cut), <strong>governance</strong> (related-party rent with no lease, advances
+to a shareholder, compiled statements and a part-time controller), and <strong>ownership transition</strong> (a $1.8M buyout of the majority owner planned from 2028).</p></section><section class="card" id="request"><h2><span class="section-number">2</span>Financing Request and Purpose</h2>
+<div class="table-wrap"><table class=""><caption>Requested facilities ($000s)</caption><thead><tr><th>Facility</th><th>Amount</th><th>Annual cost</th><th>Purpose</th><th>Assessment</th></tr></thead><tbody><tr><td>A. Operating line</td><td>1,400</td><td>90.3 interest</td><td>Take out $935k Lakeshore line; growth</td><td class="bad">Over-sized vs borrowing base</td></tr><tr><td>B. Refinance loan (5 yr)</td><td>1,240</td><td>304.5</td><td>Take out Lakeshore equipment loans</td><td class="warn">Supportable if restructured</td></tr><tr><td>C. Equipment loan (7 yr)</td><td>1,500</td><td>280.8</td><td>New flexo/die-cut line (C$1.8M)</td><td class="bad">Not supportable now</td></tr><tr class="total"><td>Total</td><td>4,140</td><td>675.5</td><td></td><td></td></tr></tbody></table></div>
+<p>The request mixes three different credit questions, which should be judged separately. (1) <strong>The takeover:</strong> would the Bank lend to this
+business as it is today? (2) <strong>The line:</strong> how much is supported by the collateral? (3) <strong>The expansion:</strong> can the business
+carry $1.5M of new debt that depends on future savings and on Customer X?</p>
+<p>Annual debt service as requested is <strong>$675.5k</strong>, compared with 2026 EBITDA of $590k and 2026 debt service of $486k.
+The equipment is priced in US dollars, with 70% payable on delivery: a 10% fall in the Canadian dollar would add about $126k to its cost.
+The owners' $300k contribution has no stated source, while the company itself is owed $180k by one of them.</p></section><section class="card" id="normalization"><h2><span class="section-number">3</span>Quality of Earnings and Normalization</h2>
+<p>The statements do not show EBITDA. It has to be built up, and three adjustments matter:</p>
+<div class="two-col"><div><div class="table-wrap"><table class=""><caption>Normalized earnings ($000s)</caption><thead><tr><th>Item</th><th>2024</th><th>2025</th><th>2026</th></tr></thead><tbody><tr><td>Gross profit</td><td>1,550</td><td>1,670</td><td>1,720</td></tr><tr><td>− SG&amp;A (excl. depreciation, rent)</td><td>(670)</td><td>(780)</td><td>(878)</td></tr><tr><td>− Rent (related party)</td><td>(240)</td><td>(240)</td><td>(252)</td></tr><tr class="total"><td>= EBITDA (normalized)</td><td>640</td><td>650</td><td>590</td></tr><tr><td>+ Rent</td><td>240</td><td>240</td><td>252</td></tr><tr class="total"><td>= EBITDAR</td><td>880</td><td>890</td><td>842</td></tr><tr><td>Reported net income</td><td>229</td><td>196</td><td>150</td></tr><tr><td>− After-tax gain on sale</td><td>0</td><td>0</td><td>(44)</td></tr><tr class="total"><td>= Normalized net income</td><td>229</td><td>196</td><td>106</td></tr></tbody></table></div></div><div><div class="table-wrap"><table class=""><caption>Adjusted tangible net worth ($000s)</caption><thead><tr><th>Item</th><th>2024</th><th>2025</th><th>2026</th></tr></thead><tbody><tr><td>Shareholders' equity</td><td>1,859</td><td>1,905</td><td>1,875</td></tr><tr><td>− Goodwill</td><td>(150)</td><td>(150)</td><td>(150)</td></tr><tr><td>− Due from shareholders</td><td>0</td><td>(90)</td><td>(180)</td></tr><tr class="total"><td>= Adjusted TNW</td><td>1,709</td><td>1,665</td><td>1,545</td></tr></tbody></table></div></div></div>
+<ul><li><strong>Gain on sale ($60k):</strong> excluded from EBITDA because it is non-recurring. It is 29% of reported 2026 pre-tax income ($204k), so reported earnings overstate recurring pre-tax earnings ($144k) by 42%.</li>
+<li><strong>Related-party rent:</strong> $252k is paid to a company the shareholders own, with no lease. It is a real fixed charge, so coverage is shown both before rent (EBITDAR) and including it. Rent could also be cut to support the company, or raised to pay the owners.</li>
+<li><strong>Advances to shareholders and goodwill:</strong> neither would be available to repay the Bank, so both are deducted. Adjusted TNW is $1,545k, and it fell in 2026 even though the reported equity is $1,875k.</li>
+<li><strong>Reliability:</strong> the statements are compiled, not reviewed. The balance sheet, cash flow and equity reconcile, but the figures carry no assurance. A review engagement should be a condition.</li></ul></section><section class="card" id="performance"><h2><span class="section-number">4</span>Historical Financial Performance</h2><div class="table-wrap"><table class=""><caption>Profitability and growth</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Trend</th></tr></thead><tbody><tr><td>Revenue growth</td><td>—</td><td>13.7%</td><td>10.6%</td><td class="good">Strong</td></tr><tr><td>Gross margin</td><td>25.0%</td><td>23.7%</td><td>22.1%</td><td class="bad">Weakening</td></tr><tr><td>SG&amp;A / revenue</td><td>10.8%</td><td>11.1%</td><td>11.3%</td><td class="bad">Weakening</td></tr><tr><td>EBITDA margin</td><td>10.3%</td><td>9.2%</td><td>7.6%</td><td class="bad">Weakening</td></tr><tr><td>EBITDAR margin</td><td>14.2%</td><td>12.6%</td><td>10.8%</td><td class="bad">Weakening</td></tr><tr><td>Return on equity</td><td>12.3%</td><td>10.3%</td><td>8.0%</td><td class="bad">Weakening</td></tr><tr><td>Dividend payout</td><td>52%</td><td>77%</td><td>120%</td><td class="bad">Weakening</td></tr></tbody></table></div>
+<p>Sales grew 26%, but every margin fell. Gross margin dropped 2.9 points, about $230k of 2026
+gross profit, which points to input costs not passed on and price competition for volume. SG&amp;A grew faster than sales. Growth has added
+risk (receivables, inventory, debt) without adding cash. The dividend policy goes the other way: payout rose to 120% of reported
+income — more than all of the normalized income — while advances to a shareholder doubled.</p></section><section class="card" id="liquidity"><h2><span class="section-number">5</span>Liquidity, Working Capital and Priority Claims</h2>
+<div class="table-wrap"><table class=""><caption>Liquidity and working capital</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Pro forma</th></tr></thead><tbody><tr><td>Current ratio</td><td>1.65x</td><td>1.36x</td><td>1.07x</td><td>1.05x</td></tr><tr><td>Quick ratio</td><td>0.93x</td><td>0.72x</td><td>0.54x</td><td>0.53x</td></tr><tr><td>DSO (days)</td><td>51.8</td><td>55.9</td><td>62.2</td><td>—</td></tr><tr><td>DIO (days)</td><td>59.7</td><td>64.5</td><td>74.4</td><td>—</td></tr><tr><td>DPO (days)</td><td>47.9</td><td>53.6</td><td>66.3</td><td>—</td></tr><tr><td>Cash conversion cycle (days)</td><td>63.6</td><td>66.8</td><td>70.3</td><td>—</td></tr><tr><td>Line usage / A/R</td><td>25.7%</td><td>40.3%</td><td>70.3%</td><td>70.3%</td></tr><tr><td>Government remittances payable ($000s)</td><td>45</td><td>70</td><td>135</td><td>—</td></tr></tbody></table></div>
+<p>The line has been fully drawn ($935k of $950k) and cash is $35k, so the company has no liquidity buffer. Working capital grew by $360k
+over two years, paid for by the line, by stretching suppliers and — most seriously — by <strong>not remitting HST and payroll source deductions</strong>.
+Unremitted source deductions are held in a deemed trust for the Crown and rank ahead of the Bank's security. Overdue HST is a priority claim as well.
+Falling behind on government remittances is a classic sign of cash stress and must be fixed before any funding.</p>
+<p>Customer X's request for 60-day terms would add about $99k to receivables. The obsolete ($175k) and slow-moving ($90k) stock
+suggests inventory values are overstated, which would also lower gross margin if written down.</p></section><section class="card" id="leverage"><h2><span class="section-number">6</span>Leverage and Capitalization</h2>
+<div class="table-wrap"><table class=""><caption>Leverage</caption><thead><tr><th>Ratio</th><th>2024</th><th>2025</th><th>2026</th><th>Pro forma</th></tr></thead><tbody><tr><td>Funded debt ($000s)</td><td>1,666</td><td>1,975</td><td>2,175</td><td>3,675</td></tr><tr><td>Funded debt / EBITDA</td><td>2.60x</td><td>3.04x</td><td>3.69x</td><td class="bad">6.23x</td></tr><tr><td>Lease-adjusted debt / EBITDAR</td><td>4.08x</td><td>4.38x</td><td>4.98x</td><td class="bad">6.76x</td></tr><tr><td>Adjusted TNW ($000s)</td><td>1,709</td><td>1,665</td><td>1,545</td><td>1,845</td></tr><tr><td>Total liabilities / adjusted TNW</td><td>1.36x</td><td>1.70x</td><td>2.21x</td><td>2.66x</td></tr><tr><td>Total liabilities / equity (unadjusted)</td><td>1.25x</td><td>1.49x</td><td>1.82x</td><td>2.26x</td></tr></tbody></table></div>
+<p>Leverage rose from 2.60x to 3.69x in two years, and the request would take it to <strong>6.23x</strong>. It would only fall back
+to 3.22x if management's 2027 EBITDA is fully achieved. Measured against adjusted TNW, total liabilities are
+2.66x after the transaction. The balance sheet has little capacity left. The planned $1.8M shareholder buyout would remove more than the company's entire adjusted
+equity if it were funded from the company.</p></section><section class="card" id="cashflow"><h2><span class="section-number">7</span>Cash Flow and Debt-Service Capacity</h2>
+<div class="table-wrap"><table class=""><caption>Historical coverage ($000s)</caption><thead><tr><th>Item</th><th>2024</th><th>2025</th><th>2026</th></tr></thead><tbody><tr><td>EBITDA (normalized)</td><td>640</td><td>650</td><td>590</td></tr><tr><td>Cash taxes</td><td>(83)</td><td>(70)</td><td>(54)</td></tr><tr><td>Unfinanced CapEx (net of disposals)</td><td>(100)</td><td>(55)</td><td>(150)</td></tr><tr><td>Dividends</td><td>(120)</td><td>(150)</td><td>(180)</td></tr><tr><td>Debt service (interest + principal)</td><td>358</td><td>409</td><td>486</td></tr><tr><td>DSCR – EBITDA ÷ debt service</td><td class="good">1.79x</td><td class="good">1.59x</td><td class="warn">1.21x</td></tr><tr><td>DSCR – Lakeshore covenant: (EBITDA − tax) ÷ DS</td><td class="good">1.56x</td><td class="good">1.42x</td><td class="warn">1.10x</td></tr><tr><td>DSCR – lender: after tax, CapEx and dividends</td><td class="bad">0.94x</td><td class="bad">0.92x</td><td class="bad">0.42x</td></tr><tr><td>Fixed-charge coverage incl. rent</td><td class="bad">0.96x</td><td class="bad">0.95x</td><td class="bad">0.62x</td></tr><tr><td>Cash flow from operations</td><td>369</td><td>236</td><td>185</td></tr><tr><td>Free cash flow after dividends and advances</td><td class="bad">(51)</td><td class="bad">(419)</td><td class="bad">(235)</td></tr></tbody></table></div>
+<p>On Lakeshore's own definition, coverage fell from 1.56x to 1.10x, so the breach is confirmed. On a full lender basis — after tax, the CapEx
+actually spent and dividends — 2026 coverage was only <strong>0.42x</strong>. The business serviced its debt only by drawing the line,
+delaying government remittances and selling equipment. Free cash flow after dividends and shareholder advances has been negative every year.</p>
+<p>As requested, the new structure costs $675.5k a year: $304.5k + $280.8k of term payments and $90.3k of line interest.
+On 2026 earnings, coverage would be 1.01x on EBITDA and 0.61x after tax and CapEx. The existing business cannot carry it.</p></section><section class="card" id="proforma"><h2><span class="section-number">8</span>Pro Forma Analysis</h2><div class="table-wrap"><table class=""><caption>Pro forma balance sheet at closing ($000s, requested structure)</caption><thead><tr><th>Item</th><th>31 Dec 2026</th><th>Adjustment</th><th>Pro forma</th></tr></thead><tbody><tr><td>Cash</td><td>35</td><td></td><td>35</td></tr><tr><td>Accounts receivable</td><td>1,330</td><td></td><td>1,330</td></tr><tr><td>Inventory</td><td>1,240</td><td></td><td>1,240</td></tr><tr><td>Prepaid expenses</td><td>75</td><td></td><td>75</td></tr><tr class="total"><td>Total current assets</td><td>2,680</td><td></td><td>2,680</td></tr><tr><td>Property, plant and equipment</td><td>2,280</td><td>1,800</td><td>4,080</td></tr><tr><td>Due from shareholders</td><td>180</td><td></td><td>180</td></tr><tr><td>Goodwill</td><td>150</td><td></td><td>150</td></tr><tr class="total"><td>Total assets</td><td>5,290</td><td>1,800</td><td>7,090</td></tr><tr><td>Accounts payable and accruals</td><td>1,105</td><td></td><td>1,105</td></tr><tr><td>Government remittances payable</td><td>135</td><td></td><td>135</td></tr><tr><td>Operating line (taken over)</td><td>935</td><td></td><td>935</td></tr><tr><td>Current portion of LTD</td><td>330</td><td>57</td><td>387</td></tr><tr class="total"><td>Total current liabilities</td><td>2,505</td><td>57</td><td>2,562</td></tr><tr><td>Long-term debt</td><td>910</td><td>1,443</td><td>2,353</td></tr><tr class="total"><td>Total liabilities</td><td>3,415</td><td>1,500</td><td>4,915</td></tr><tr><td>Shareholders' equity</td><td>1,875</td><td>300</td><td>2,175</td></tr><tr class="total"><td>Total liabilities and equity</td><td>5,290</td><td>1,800</td><td>7,090</td></tr><tr><td>Funded debt</td><td>2,175</td><td></td><td>3,675</td></tr><tr><td>Adjusted tangible net worth</td><td>1,545</td><td></td><td>1,845</td></tr></tbody></table></div>
+<ul class="assume"><li>Closing: the Lakeshore line ($935k) moves to the Bank; Lakeshore term debt is replaced by the refinance loan; the equipment ($1.8M) is funded by the $1.5M loan and $300k of owner equity.</li>
+<li>2027 interest $288.9k (both term loans plus the line fully drawn at 6.45%); depreciation $440k; tax 26.5%; maintenance CapEx $180k; no dividends.</li></ul>
+<div class="table-wrap"><table class=""><caption>2027 pro forma coverage – requested structure, dividends suspended ($000s)</caption><thead><tr><th></th><th>2026 run-rate</th><th>Mgmt 2027</th><th>Downside 2027</th><th>Loss of Customer X</th></tr></thead><tbody><tr><td>Revenue</td><td>7,800</td><td>8,900</td><td>8,010</td><td>6,141</td></tr><tr><td>EBITDA</td><td>590</td><td>1,140</td><td>690</td><td>564</td></tr><tr><td>EBITDAR</td><td>842</td><td>1,392</td><td>942</td><td>816</td></tr><tr><td>Net income (lender estimate)</td><td>(139)</td><td>302</td><td>(39)</td><td>(165)</td></tr><tr><td>Cash available for debt service</td><td>410</td><td>851</td><td>510</td><td>384</td></tr><tr><td>Surplus / (deficit) before WC growth</td><td class="bad">(266)</td><td class="good">176</td><td class="bad">(166)</td><td class="bad">(291)</td></tr><tr><td>Surplus / (deficit) after WC growth</td><td class="bad">(266)</td><td class="bad">(31)</td><td class="bad">(205)</td><td class="bad">(291)</td></tr><tr><td>DSCR – EBITDA ÷ term DS</td><td class="warn">1.01x</td><td class="good">1.95x</td><td class="warn">1.18x</td><td class="bad">0.96x</td></tr><tr><td>DSCR – EBITDA ÷ total DS</td><td class="bad">0.87x</td><td class="good">1.69x</td><td class="warn">1.02x</td><td class="bad">0.84x</td></tr><tr><td>DSCR – lender basis</td><td class="bad">0.61x</td><td class="good">1.26x</td><td class="bad">0.75x</td><td class="bad">0.57x</td></tr><tr><td>Fixed-charge coverage incl. rent</td><td class="bad">0.71x</td><td class="warn">1.19x</td><td class="bad">0.82x</td><td class="bad">0.69x</td></tr><tr><td>Lender DSCR with 2026 dividends ($180k)</td><td class="bad">0.34x</td><td class="bad">0.99x</td><td class="bad">0.49x</td><td class="bad">0.30x</td></tr><tr><td>Funded debt ÷ EBITDA</td><td>6.23x</td><td>3.22x</td><td>5.33x</td><td>6.51x</td></tr></tbody></table></div>
+<p>Only management's plan covers the requested structure (1.26x on a lender basis, just at policy), and only with dividends suspended. Even then,
+growth needs about $207k of working capital, which leaves a $31k
+gap that a line already at its borrowing-base limit cannot fund. The downside (0.75x) and loss of Customer X (0.57x) show deficits of
+$166k and $291k a year.</p></section><section class="card" id="projections"><h2><span class="section-number">9</span>Projections and Downside</h2>
+<div class="table-wrap"><table class=""><caption>Projection assessment ($000s)</caption><thead><tr><th>Item</th><th>2025A</th><th>2026A</th><th>Mgmt 2027</th><th>Mgmt 2028</th><th>Downside 2027</th></tr></thead><tbody><tr><td>Revenue</td><td>7,050</td><td>7,800</td><td>8,900</td><td>10,200</td><td>8,010</td></tr><tr><td>Revenue growth</td><td>13.7%</td><td>10.6%</td><td>14.1%</td><td>14.6%</td><td>2.7%</td></tr><tr><td>EBITDA</td><td>650</td><td>590</td><td>1,140</td><td>1,420</td><td>690</td></tr><tr><td>EBITDA margin</td><td>9.2%</td><td>7.6%</td><td class="warn">12.8%</td><td>13.9%</td><td>8.6%</td></tr><tr><td>Net income (mgmt / lender est.)</td><td>196</td><td>150</td><td>420 / 302</td><td>590</td><td>— / (39)</td></tr></tbody></table></div>
+<p>Management projects EBITDA almost doubling (93%) in a year when the margin has fallen three years in a row, the largest customer is
+pushing for a price cut, and the new line will not run fully until about February. The $330k of savings explains only part of the uplift.
+The rest assumes volume growth at better margins, with no change in the exchange rate or material prices. Our net income estimate is
+$302k, not $420k, which suggests management has not fully reflected the new interest and depreciation.</p>
+<p>The <strong>lender downside</strong> (Customer X renews at −4%, revenue 10% below plan, half the savings) gives EBITDA of $690k.
+That is only $100k better than 2026, even with a new $1.8M line. Each 1% of revenue shortfall costs about $19k of EBITDA
+(implied contribution margin 20.9%).</p></section><section class="card" id="sensitivity"><h2><span class="section-number">10</span>Sensitivity Analysis</h2>
+<p>The sensitivity model is calibrated to the case downside: 10% revenue shortfall + 50% savings + 4% Customer X price cut = $690k.
+"Lender DSCR" deducts cash tax, $180k maintenance CapEx and line interest, with dividends suspended.</p>
+<div class="legend"><span class="lg">≥ 1.25x (meets policy)</span><span class="lw">1.00x–1.24x (thin)</span><span class="lb">&lt; 1.00x (shortfall)</span></div><div class="table-wrap"><table class="grid"><caption>A. 2027 EBITDA ($000s) – with Customer X price cut of 4%</caption><thead><tr><th>Revenue vs plan ↓ / Savings →</th><th>100%</th><th>75%</th><th>50%</th><th>25%</th><th>0%</th></tr></thead><tbody><tr><td>−0%</td><td class="good">1,030</td><td class="good">947</td><td class="good">865</td><td class="good">782</td><td class="warn">700</td></tr><tr><td>−5%</td><td class="good">942</td><td class="good">860</td><td class="good">777</td><td class="warn">695</td><td class="warn">612</td></tr><tr><td>−10%</td><td class="good">855</td><td class="good">773</td><td class="warn">690</td><td class="warn">608</td><td class="bad">525</td></tr><tr><td>−15%</td><td class="good">768</td><td class="warn">685</td><td class="warn">603</td><td class="bad">520</td><td class="bad">438</td></tr><tr><td>−20%</td><td class="warn">680</td><td class="warn">598</td><td class="bad">515</td><td class="bad">433</td><td class="bad">350</td></tr></tbody></table></div><div class="table-wrap"><table class="grid"><caption>B. DSCR – EBITDA ÷ term debt service ($585.2k)</caption><thead><tr><th>Revenue vs plan ↓ / Savings →</th><th>100%</th><th>75%</th><th>50%</th><th>25%</th><th>0%</th></tr></thead><tbody><tr><td>−0%</td><td class="good">1.76x</td><td class="good">1.62x</td><td class="good">1.48x</td><td class="good">1.34x</td><td class="warn">1.20x</td></tr><tr><td>−5%</td><td class="good">1.61x</td><td class="good">1.47x</td><td class="good">1.33x</td><td class="warn">1.19x</td><td class="warn">1.05x</td></tr><tr><td>−10%</td><td class="good">1.46x</td><td class="good">1.32x</td><td class="warn">1.18x</td><td class="warn">1.04x</td><td class="bad">0.90x</td></tr><tr><td>−15%</td><td class="good">1.31x</td><td class="warn">1.17x</td><td class="warn">1.03x</td><td class="bad">0.89x</td><td class="bad">0.75x</td></tr><tr><td>−20%</td><td class="warn">1.16x</td><td class="warn">1.02x</td><td class="bad">0.88x</td><td class="bad">0.74x</td><td class="bad">0.60x</td></tr></tbody></table></div><div class="table-wrap"><table class="grid"><caption>C. Lender DSCR – after tax, maintenance CapEx and line interest (no dividends)</caption><thead><tr><th>Revenue vs plan ↓ / Savings →</th><th>100%</th><th>75%</th><th>50%</th><th>25%</th><th>0%</th></tr></thead><tbody><tr><td>−0%</td><td class="warn">1.14x</td><td class="warn">1.05x</td><td class="bad">0.96x</td><td class="bad">0.87x</td><td class="bad">0.77x</td></tr><tr><td>−5%</td><td class="warn">1.04x</td><td class="bad">0.96x</td><td class="bad">0.87x</td><td class="bad">0.76x</td><td class="bad">0.64x</td></tr><tr><td>−10%</td><td class="bad">0.95x</td><td class="bad">0.86x</td><td class="bad">0.75x</td><td class="bad">0.63x</td><td class="bad">0.51x</td></tr><tr><td>−15%</td><td class="bad">0.85x</td><td class="bad">0.75x</td><td class="bad">0.63x</td><td class="bad">0.50x</td><td class="bad">0.38x</td></tr><tr><td>−20%</td><td class="bad">0.74x</td><td class="bad">0.62x</td><td class="bad">0.50x</td><td class="bad">0.37x</td><td class="bad">0.25x</td></tr></tbody></table></div><div class="table-wrap"><table class="grid"><caption>D. Customer X renewal pricing</caption><thead><tr><th>Price cut</th><th>EBITDA</th><th>EBITDA ÷ term DS</th><th>Lender DSCR</th><th>EBITDA lost</th></tr></thead><tbody><tr><td>0%</td><td>1,140</td><td class="good">1.95x</td><td class="good">1.26x</td><td>0</td></tr><tr><td>2%</td><td>1,085</td><td class="good">1.85x</td><td class="warn">1.20x</td><td>55</td></tr><tr><td>4%</td><td>1,030</td><td class="good">1.76x</td><td class="warn">1.14x</td><td>110</td></tr><tr><td>6%</td><td>974</td><td class="good">1.67x</td><td class="warn">1.08x</td><td>166</td></tr><tr><td>8%</td><td>919</td><td class="good">1.57x</td><td class="warn">1.02x</td><td>221</td></tr></tbody></table></div><div class="table-wrap"><table class="grid"><caption>E. Exchange rate – Canadian dollar weakens (unhedged)</caption><thead><tr><th>CAD weakening</th><th>Extra COGS</th><th>Mgmt EBITDA</th><th>Mgmt lender DSCR</th><th>Downside EBITDA</th><th>Downside lender DSCR</th><th>Extra equipment cost</th></tr></thead><tbody><tr><td>0%</td><td>0</td><td>1,140</td><td class="good">1.26x</td><td>690</td><td class="bad">0.75x</td><td>0</td></tr><tr><td>5%</td><td>85</td><td>1,055</td><td class="warn">1.17x</td><td>614</td><td class="bad">0.64x</td><td>63</td></tr><tr><td>10%</td><td>170</td><td>970</td><td class="warn">1.07x</td><td>537</td><td class="bad">0.53x</td><td>126</td></tr><tr><td>15%</td><td>255</td><td>885</td><td class="bad">0.98x</td><td>461</td><td class="bad">0.42x</td><td>189</td></tr></tbody></table></div><div class="table-wrap"><table class="grid"><caption>F. Interest-rate shock (operating line)</caption><thead><tr><th>Prime shock</th><th>Line interest</th><th>Total DS</th><th>Mgmt lender DSCR</th><th>Downside lender DSCR</th></tr></thead><tbody><tr><td>+0 bp</td><td>90.3</td><td>675.5</td><td class="good">1.26x</td><td class="bad">0.75x</td></tr><tr><td>+100 bp</td><td>104.3</td><td>689.5</td><td class="warn">1.24x</td><td class="bad">0.74x</td></tr><tr><td>+200 bp</td><td>118.3</td><td>703.5</td><td class="warn">1.22x</td><td class="bad">0.72x</td></tr><tr><td>+300 bp</td><td>132.3</td><td>717.5</td><td class="warn">1.20x</td><td class="bad">0.71x</td></tr></tbody></table></div><div class="table-wrap"><table class="grid"><caption>G. Event stresses (requested structure)</caption><thead><tr><th>Event</th><th>EBITDA</th><th>EBITDA ÷ term DS</th><th>Lender DSCR</th></tr></thead><tbody><tr><td>Management case</td><td>1,140</td><td class="good">1.95x</td><td class="good">1.26x</td></tr><tr><td>Installation delayed 3 months</td><td>941</td><td class="good">1.61x</td><td class="warn">1.04x</td></tr><tr><td>Installation delayed 6 months</td><td>743</td><td class="good">1.27x</td><td class="bad">0.83x</td></tr><tr><td>Loss of Customer X (31% of revenue)</td><td>564</td><td class="bad">0.96x</td><td class="bad">0.57x</td></tr><tr><td>No improvement – 2026 EBITDA repeats</td><td>590</td><td class="warn">1.01x</td><td class="bad">0.61x</td></tr><tr><td>2026 EBITDA with Customer X price cut</td><td>493</td><td class="bad">0.84x</td><td class="bad">0.46x</td></tr><tr><td>2028 plan with $600k/yr shareholder buyout</td><td>1,420</td><td>—</td><td class="bad">0.68x</td></tr></tbody></table></div><div class="table-wrap"><table class=""><caption>H. Break-even EBITDA (requested structure)</caption><thead><tr><th>Threshold</th><th>Target</th><th>EBITDA required</th><th>vs 2026A</th><th>vs Mgmt 2027</th></tr></thead><tbody><tr><td>EBITDA ÷ term DS</td><td>1.00x</td><td>585</td><td>(5)</td><td>(555)</td></tr><tr><td>EBITDA ÷ term DS</td><td>1.25x</td><td>732</td><td>142</td><td>(408)</td></tr><tr><td>Lender DSCR</td><td>1.00x</td><td>901</td><td>311</td><td>(239)</td></tr><tr><td>Lender DSCR</td><td>1.25x</td><td>1,131</td><td>541</td><td>(9)</td></tr></tbody></table></div><div class="table-wrap"><table class="grid"><caption>I. Structure alternatives (first full year)</caption><thead><tr><th>Structure</th><th>Total DS</th><th>Run-rate EBITDA DSCR</th><th>Run-rate lender DSCR</th><th>Run-rate + X price cut</th><th>Mgmt lender DSCR</th><th>Downside lender DSCR</th></tr></thead><tbody><tr><td>As requested</td><td>675.5</td><td class="bad">0.87x</td><td class="bad">0.61x</td><td class="bad">0.46x</td><td class="good">1.26x</td><td class="bad">0.75x</td></tr><tr><td>Counter-offer: refinance + margined line; equipment deferred</td><td>326.7</td><td class="good">1.81x</td><td class="warn">1.11x</td><td class="bad">0.90x</td><td class="">n/a</td><td class="">n/a</td></tr><tr><td>Equipment loan cut to $1.0M (+$500k equity)</td><td>513.8</td><td class="warn">1.15x</td><td class="bad">0.80x</td><td class="bad">0.61x</td><td class="good">1.62x</td><td class="bad">0.98x</td></tr><tr><td>As requested, 10-year equipment amortization</td><td>610.8</td><td class="bad">0.97x</td><td class="bad">0.67x</td><td class="bad">0.51x</td><td class="good">1.39x</td><td class="bad">0.83x</td></tr></tbody></table></div>
+<h3>What the sensitivities tell us</h3><ul>
+<li><strong>The requested structure needs management's plan to be met almost exactly.</strong> Lender DSCR reaches 1.0x only with EBITDA of about $901k
+($239k below management's plan) and 1.25x at $1,131k — at management's own projection.</li>
+<li><strong>Customer X pricing matters a lot.</strong> Each 1% price cut on the renewal costs about $28k of EBITDA. A 4% cut alone removes $110k.</li>
+<li><strong>Exchange rate:</strong> a 10% weaker Canadian dollar adds about $170k to costs and $126k to the equipment price. The company has no hedging.</li>
+<li><strong>Losing Customer X</strong> drops lender DSCR to 0.57x. Repayment would then depend on collateral that covers only 67% of term debt.</li>
+<li><strong>The buyout:</strong> paying the majority owner $600k a year from the company would take 2028 lender DSCR to 0.68x even on management's numbers.</li>
+<li><strong>Structure:</strong> the counter-offer (refinance over 6 years plus a $1.0M line) is the only alternative covered on current earnings (1.11x). It still falls to
+0.90x if Customer X's price cut hits before the equipment savings arrive, which is why the renewal is a condition.</li></ul></section><section class="card" id="repayment"><h2><span class="section-number">11</span>Primary and Secondary Repayment Sources</h2><div class="two-col">
+<div class="note-box warning"><h3>Primary – operating cash flow</h3><p>Historical cash flow after tax, CapEx and dividends covered only 0.42x of 2026
+debt service. For the requested structure, primary repayment depends on <em>future</em> savings and on Customer X renewing on acceptable terms.
+<strong>Assessment: inadequate as requested; marginal (1.11x) for the counter-offer.</strong></p></div>
+<div class="note-box warning"><h3>Secondary – collateral and guarantees</h3><ul>
+<li>Equipment liquidation value $1,830k covers 67% of $2.74M term debt (shortfall $910k).</li>
+<li>Borrowing base $1,151k after priority reserves — less than the takeover balance plus growth needs.</li>
+<li>Guarantees limited to $750k. Okafor's wealth is mainly his home and MRM Properties shares; Petrova's is ≈ $0.6M.</li>
+<li>MRM Properties equity (≈ $1.5M) is the best untapped source but is not offered.</li></ul>
+<p><strong>Assessment: insufficient without MRM Properties support.</strong></p></div></div></section><section class="card" id="collateral"><h2><span class="section-number">12</span>Borrowing Base and Collateral</h2><div class="table-wrap"><table class=""><caption>Borrowing base at 31 Dec 2026 ($000s)</caption><thead><tr><th>Component</th><th>Borrower view</th><th>Bank standard</th><th>Conservative</th><th>Severe</th></tr></thead><tbody><tr><td>Total A/R</td><td>1,330</td><td>1,330</td><td>1,330</td><td>1,330</td></tr><tr><td>− Over 90 days (incl. related party, disputed)</td><td>(165)</td><td>(165)</td><td>(165)</td><td>(165)</td></tr><tr><td>− 61–90 days</td><td>0</td><td>0</td><td>0</td><td>(165)</td></tr><tr><td>− Customer X above 30% concentration limit</td><td>0.0</td><td>0.0</td><td>-170.5</td><td>-220.0</td></tr><tr><td>Eligible A/R</td><td>1,165.0</td><td>1,165.0</td><td>994.5</td><td>780.0</td></tr><tr><td>A/R availability @ 75%</td><td>873.8</td><td>873.8</td><td>745.9</td><td>585.0</td></tr><tr><td>Eligible inventory</td><td>1,240</td><td>825</td><td>825</td><td>825</td></tr><tr><td>Inventory availability @ 50% (cap $500k)</td><td>500.0</td><td>412.5</td><td>412.5</td><td>412.5</td></tr><tr><td>− Priority payables reserve</td><td>0</td><td>(135)</td><td>(135)</td><td>(135)</td></tr><tr class="total"><td>Total borrowing base</td><td>1,373.8</td><td>1,151.2</td><td>1,023.4</td><td>862.5</td></tr><tr><td>÷ requested $1.4M line</td><td>0.98x</td><td>0.82x</td><td>0.73x</td><td>0.62x</td></tr><tr><td>Availability after $935k takeover</td><td>438.8</td><td>216.2</td><td>88.4</td><td>-72.5</td></tr><tr><td>÷ counter-offer $1.0M line</td><td>1.37x</td><td>1.15x</td><td>1.02x</td><td>0.86x</td></tr><tr><td>Availability if $180k advances repaid</td><td>245.0</td><td>245.0</td><td>245.0</td><td>107.5</td></tr></tbody></table></div>
+<p><strong>Is the $1.4M line supported? No.</strong> The borrower's own figure ($1,374k) comes from applying the advance rates to every receivable
+under 90 days and to all inventory. On the Bank's standard basis — excluding WIP, obsolete and slow-moving stock and reserving $135k for the
+priority claims — the base is <strong>$1,151k (0.82x)</strong>. Customer X alone is 45% of eligible receivables.
+With a 30% concentration limit the base is $1,023k. After taking over the $935k Lakeshore balance, there would be only
+$88k–$216k of room for growth.</p>
+<p>A <strong>$1.0M line</strong> is covered on the conservative basis (1.02x). It works only if the $180k owed by the shareholder is repaid
+at closing, which would leave $245k of availability.</p>
+<div class="table-wrap"><table class=""><caption>Term-debt collateral ($000s)</caption><thead><tr><th>Measure</th><th>Value</th><th>Coverage</th></tr></thead><tbody><tr><td>Refinance loan</td><td>1,240</td><td></td></tr><tr><td>Existing equipment OLV</td><td>1,050</td><td>85%</td></tr><tr><td>Equipment loan</td><td>1,500</td><td></td></tr><tr><td>New line OLV</td><td>780</td><td>52%</td></tr><tr><td>Total term debt</td><td>2,740</td><td></td></tr><tr><td>Total equipment OLV</td><td>1,830</td><td>67%</td></tr><tr><td>Collateral shortfall</td><td>(910)</td><td></td></tr><tr><td>OLV + limited guarantees</td><td>2,580</td><td>94%</td></tr><tr><td>MRM Properties – lending value for a 2nd collateral mortgage</td><td>850</td><td></td></tr><tr><td>OLV + guarantees + 2nd mortgage lending value</td><td>3,430</td><td>125%</td></tr></tbody></table></div><div class="table-wrap"><table class=""><caption>Equipment loan balance vs OLV (OLV declines 12% a year)</caption><thead><tr><th>Year-end</th><th>Loan balance</th><th>Est. OLV</th><th>OLV ÷ balance</th></tr></thead><tbody><tr><td>2027</td><td>1,328.0</td><td>686.4</td><td>52%</td></tr><tr><td>2028</td><td>1,143.5</td><td>604.0</td><td>53%</td></tr><tr><td>2029</td><td>945.7</td><td>531.5</td><td>56%</td></tr><tr><td>2030</td><td>733.5</td><td>467.8</td><td>64%</td></tr><tr><td>2031</td><td>505.9</td><td>411.6</td><td>81%</td></tr><tr><td>2032</td><td>261.8</td><td>362.2</td><td>138%</td></tr><tr><td>2033</td><td>0.0</td><td>318.8</td><td>Repaid</td></tr></tbody></table></div>
+<p>The new line is specialized, and its OLV ($780k, a vendor estimate) is 43% of cost. The equipment loan would stay under-secured for most of
+its life. The strongest additional security is a <strong>guarantee from MRM Properties, supported by a second collateral mortgage on the plant</strong>
+(lending value ≈ $850k after the first mortgage). It would also give the Bank a say over the related-party lease.</p></section><section class="card" id="takeover"><h2><span class="section-number">13</span>Incumbent Lender and Takeover Risk</h2>
+<p>Taking over a relationship that another bank is exiting carries <strong>adverse-selection risk</strong>. Lakeshore knows this borrower better than we do,
+has waived one breach, repriced the line and asked the company to leave. Management describes the move as looking for "a more supportive bank",
+which does not match what Lakeshore's letter says. The Bank should:</p>
+<ul><li>Obtain Lakeshore's covenant certificates and waiver letter, and the account conduct history (overdrafts, returned items, late payments).</li>
+<li>Confirm there are no other defaults, including on the MRM Properties mortgage with the other lender.</li>
+<li>Get CRA statements of account to confirm the exact HST and source-deduction arrears and any assessments.</li>
+<li>Treat the takeover as new credit and apply full underwriting standards. Pricing should not be used to win the business.</li></ul></section><section class="card" id="risks"><h2><span class="section-number">14</span>Key Risks</h2><div class="table-wrap"><table class="risk-table"><caption>Key risk register</caption><thead><tr><th>Risk</th><th>Severity</th><th>Evidence</th></tr></thead><tbody><tr><td>Repayment capacity</td><td class="bad">Critical</td><td>Lender DSCR 0.42x (2026); 0.75x downside as requested</td></tr><tr><td>Customer concentration and renewal</td><td class="bad">High</td><td>Customer X 31% of sales; contract ends in 10 months; asking for −4% and 60-day terms</td></tr><tr><td>Priority claims / government arrears</td><td class="bad">High</td><td>$85k HST and $50k source deductions overdue; deemed trust ranks ahead of the Bank</td></tr><tr><td>Leverage</td><td class="bad">High</td><td>FD/EBITDA 6.23x pro forma; lease-adjusted 6.76x</td></tr><tr><td>Governance and related parties</td><td class="bad">High</td><td>No lease; shareholder advances $180k; dividends > normalized income; compiled statements</td></tr><tr><td>Adverse selection (takeover)</td><td class="bad">High</td><td>Incumbent breach, waiver, repricing and exit request</td></tr><tr><td>Margin erosion and input costs</td><td class="bad">Medium-High</td><td>EBITDA margin 10.3% → 7.6%; no price pass-through</td></tr><tr><td>Foreign exchange</td><td class="warn">Medium</td><td>35% of materials and the equipment priced in US$; no hedging</td></tr><tr><td>Collateral shortfall</td><td class="bad">Medium-High</td><td>Equipment OLV 67% of term debt; borrowing base below the line</td></tr><tr><td>Ownership transition</td><td class="bad">Medium-High</td><td>$1.8M buyout of the 60% owner from 2028; key-person risk</td></tr><tr><td>Project execution</td><td class="warn">Medium</td><td>US$ equipment; 5-month delivery; savings not independently verified</td></tr></tbody></table></div></section><section class="card" id="mitigants"><h2><span class="section-number">15</span>Mitigants and Strengths</h2><ul>
+<li>12 years in operation; consistent revenue growth; stable end market (food packaging).</li>
+<li>The Lakeshore term debt has been paid as scheduled; there is no payment default.</li>
+<li>The new line would bring outsourced printing in-house and cut labour — a credible source of savings once proven.</li>
+<li>Significant real-estate equity in MRM Properties (≈ $1.5M) that could support the credit.</li>
+<li>Controllable cash outflows: dividends ($180k), shareholder advances ($90k a year) and related-party rent ($252k) can all be restricted.</li>
+<li>Refinancing the existing equipment debt over six years cuts annual term debt service by about $150k compared with Lakeshore's.</li></ul></section><section class="card" id="recommendation"><h2><span class="section-number">16</span>Recommendation and Counter-Offer</h2>
+<div class="verdict"><span class="badge" style="background:var(--red-soft);color:var(--red);border-color:#e4b4b4">DECLINE AS PROPOSED – COUNTER-OFFER</span></div>
+<p><strong>Decline the $4.14M request as proposed.</strong> Historical cash flow does not cover existing debt service, leverage would exceed 6x, the line is larger than
+the borrowing base, the term debt is materially under-secured, and repayment depends on an unrenewed customer contract, unhedged currency exposure and
+unproven savings. Governance issues (government arrears, shareholder advances, rising dividends, no lease) need to be corrected first.</p>
+<p><strong>Counter-offer</strong> (indicative, subject to credit approval once the conditions are met):</p>
+<ol><li><strong>Operating line $1,000,000</strong>, prime + 2.00%: 75% of eligible receivables (30% single-debtor cap; related-party, disputed and over-90 excluded),
+plus 50% of eligible raw materials and finished goods (excluding WIP, obsolete and slow-moving stock; capped at $500k), less priority payables.</li>
+<li><strong>Refinance term loan $1,240,000</strong>, 6-year amortization, 7.25%: annual service about $262.2k.</li>
+<li><strong>Equipment loan: declined at this time.</strong> It can be reconsidered when Customer X has signed a renewal of at least three years, interim results show
+EBITDA recovering, and the structure includes at least $500k of verified owner equity and an MRM Properties guarantee with a second collateral mortgage.
+At $1.0M with $500k more equity, downside lender DSCR would be about 0.98x.</li></ol>
+<h3>Conditions precedent</h3><ol>
+<li>All HST and payroll source-deduction arrears paid, confirmed by CRA statements of account.</li>
+<li>The $180k due from shareholders repaid to the company; no further advances.</li>
+<li>A written 5-year lease with MRM Properties at market rent, landlord waiver in favour of the Bank, and an MRM Properties guarantee (limited to $750k) supported by a second collateral mortgage.</li>
+<li>Customer X renewal confirmed in writing (term, pricing, payment terms), or a credible replacement plan reviewed by the Bank.</li>
+<li>Lakeshore payout statement, covenant history and account conduct report satisfactory to the Bank.</li>
+<li>Joint and several personal guarantees of both shareholders (unlimited), with personal net worth statements and credit bureau reports.</li>
+<li>Review-engagement financial statements from FY2027; monthly borrowing-base certificates.</li></ol>
+<h3>Covenants</h3><ul>
+<li>Fixed-charge coverage (including rent) ≥ 1.15x, tested quarterly on a rolling 12-month basis.</li>
+<li>Funded debt / EBITDA ≤ 3.25x; total liabilities / adjusted TNW ≤ 2.50x.</li>
+<li>No dividends, shareholder advances or share redemptions without the Bank's consent until FCC ≥ 1.25x for four consecutive quarters.</li>
+<li>Any shareholder buyout requires the Bank's prior consent and must be funded outside the company.</li>
+<li>Government remittances kept current, with a quarterly confirmation.</li>
+<li>CapEx above $200k a year requires consent; the company to adopt an FX hedging policy for US$ purchases.</li></ul>
+<p><strong>Risk rating: 7 – Special mention</strong> (on a 1–10 scale), to be reviewed after FY2027 and the Customer X renewal.</p></section><section class="card" id="appendix"><h2><span class="section-number">A</span>Appendix – Definitions and Assumptions</h2><ul class="assume">
+<li><strong>EBITDA</strong> = gross profit − SG&amp;A − rent (excludes the 2026 gain on sale). <strong>EBITDAR</strong> = EBITDA + rent.</li>
+<li><strong>Adjusted TNW</strong> = equity − goodwill − due from shareholders. <strong>Lease-adjusted debt</strong> = funded debt + 8 × rent.</li>
+<li><strong>Historical debt service</strong> = interest + principal actually repaid. <strong>Lakeshore covenant DSCR</strong> = (EBITDA − tax) ÷ debt service.</li>
+<li><strong>Lender DSCR</strong> = (EBITDA − tax − unfinanced CapEx − dividends) ÷ debt service; pro forma uses $180k maintenance CapEx and adds line interest.</li>
+<li><strong>Fixed-charge coverage</strong> = (EBITDAR − tax − unfinanced CapEx − dividends) ÷ (debt service + rent).</li>
+<li>Prime 4.45% (line 6.45%); tax 26.5%; new line depreciated over 10 years; materials 70% of COGS; OLV declines 12% a year.</li>
+<li>Sensitivity: EBITDA = 1,140 − 0.2086 × MgmtRev × shortfall − (1 − savings) × 330 − price cut × 31% × revenue; calibrated to the $690k downside.</li></ul></section></main>
+      <nav aria-label="Report contents"><h2>Report contents</h2><div><a href="#summary">Executive summary</a><a href="#scorecard">Ratio scorecard</a><a href="#overview">1. Borrower</a><a href="#request">2. Request</a><a href="#normalization">3. Normalization</a><a href="#performance">4. Performance</a><a href="#liquidity">5. Liquidity</a><a href="#leverage">6. Leverage</a><a href="#cashflow">7. Cash flow & DSCR</a><a href="#proforma">8. Pro forma</a><a href="#projections">9. Projections</a><a href="#sensitivity">10. Sensitivity</a><a href="#repayment">11. Repayment sources</a><a href="#collateral">12. Borrowing base</a><a href="#takeover">13. Takeover risk</a><a href="#risks">14. Key risks</a><a href="#mitigants">15. Mitigants</a><a href="#recommendation">16. Recommendation</a><a href="#appendix">Appendix</a></div></nav>
+    </div>
+    <footer>Fictional case created for educational commercial credit-analysis practice. Model solution prepared for teaching purposes.</footer>
+  </div>
+</body>
+</html>
