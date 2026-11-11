@@ -1031,7 +1031,7 @@
     const container = el.celebration;
     container.innerHTML = "";
 
-    const colors = ["#ffc93c", "#ff6f59", "#3dcb6c", "#8b7fd6", "#4fb3ff"];
+    const colors = ["#a8d59a", "#e9f4a6", "#f7dd8f", "#e8925f", "#c95a55", "#bd4a55", "#1c2a75", "#bde3d7"];
     const pieces = 22;
     for (let i = 0; i < pieces; i++) {
       const piece = document.createElement("div");

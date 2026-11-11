@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TIKI — the little owl who can't read clocks (yet!)
+   TIKI — the little orange owl who can't read clocks (yet!)
    An original character drawn as inline SVG and animated with CSS classes.
 
    Moods (set with Tiki.setMood(el, mood)):
@@ -29,12 +29,12 @@
 <svg class="tiki-svg" viewBox="0 0 120 140" aria-hidden="true" focusable="false">
   <defs>
     <linearGradient id="${u}-body" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ab9ff6" />
-      <stop offset="1" stop-color="#7b6ce0" />
+      <stop offset="0" stop-color="#f6b383" />
+      <stop offset="1" stop-color="#e8925f" />
     </linearGradient>
     <linearGradient id="${u}-wing" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#7b6ce0" />
-      <stop offset="1" stop-color="#5f50c9" />
+      <stop offset="0" stop-color="#d9705f" />
+      <stop offset="1" stop-color="#bd4a55" />
     </linearGradient>
   </defs>
   <g class="tk-all">
