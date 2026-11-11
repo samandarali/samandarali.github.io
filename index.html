@@ -1204,6 +1204,27 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
         }
 
+
+        /* Featured Projects: one colour per card, all from the site palette */
+        .project-card { background: var(--pc-bg); border-top-color: var(--pc-accent); }
+        .project-card h3 { color: var(--pc-title) !important; }
+        .project-card p { color: var(--pc-text) !important; }
+        .project-card a { background: var(--pc-btn) !important; color: var(--pc-btn-text) !important; }
+        .project-card a:hover { background: var(--pc-btn-hover) !important; }
+
+        .pc-blue  { --pc-bg: #dfedf7; --pc-accent: #095489; --pc-title: #063556;
+                    --pc-text: #4a5072; --pc-btn: #095489; --pc-btn-hover: #074169; --pc-btn-text: #fff; }
+        .pc-slate { --pc-bg: #e8e7e7; --pc-accent: #63698b; --pc-title: #353a5a;
+                    --pc-text: #4a5072; --pc-btn: #63698b; --pc-btn-hover: #4a5072; --pc-btn-text: #fff; }
+        .pc-navy  { --pc-bg: #063556; --pc-accent: #91bede; --pc-title: #fff;
+                    --pc-text: #bfdaed; --pc-btn: #91bede; --pc-btn-hover: #bfdaed; --pc-btn-text: #052b45; }
+
+        html[data-theme="dark"] .pc-blue  { --pc-bg: #052b45; --pc-accent: #5e9dca; --pc-title: #91bede;
+                    --pc-text: #bfdaed; --pc-btn: #2a74ab; --pc-btn-hover: #5e9dca; }
+        html[data-theme="dark"] .pc-slate { --pc-bg: #232845; --pc-accent: #b3b6b9; --pc-title: #e8e7e7;
+                    --pc-text: #c8cbcb; --pc-btn: #63698b; --pc-btn-hover: #9c9c9c; }
+        html[data-theme="dark"] .pc-navy  { --pc-bg: #074169; --pc-accent: #91bede; }
+
         html[data-theme="dark"] .project-card:hover { box-shadow: 0 20px 40px rgba(0, 0, 0, .45); }
         html[data-theme="dark"] .project-card .text-ink-600 { color: #bfdaed; }
         html[data-theme="dark"] .project-card .text-brand-800 { color: #6ee7b7; }
@@ -1269,6 +1290,14 @@
             --day-l: rgb(92, 149, 210);
             --day-m: rgb(94, 151, 213);
             --day-r: rgb(89, 151, 214);
+        }
+
+        /* --- light mode: header and tabs take the top colour of the day-sky hero --- */
+        html[data-theme="light"] body > header,
+        html[data-theme="light"] body > nav {
+            background: #f2f9fe;
+            border-bottom-color: #dfedf7;
+            box-shadow: none;
         }
 
         /* --- light mode: About Me as a bright day sky --- */
@@ -1785,7 +1814,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
                 <!-- Policy & Research -->
-                <div class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-brand-500 hover:shadow-2xl">
+                <div class="project-card pc-blue p-6 shadow-xl rounded-xl border-t-4 hover:shadow-2xl">
                     <h3 class="text-xl font-semibold mb-3 text-brand-800">Policy & Research Projects</h3>
                     <p class="text-ink-600 mb-4">
                         Published and applied research across economics, data analytics, and public policy, focused on
@@ -1799,7 +1828,7 @@
 
                 <!-- Interactive Dashboards -->
                 <div
-                    class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-brand-500 hover:shadow-2xl">
+                    class="project-card pc-slate p-6 shadow-xl rounded-xl border-t-4 hover:shadow-2xl">
                     <h3 class="text-xl font-semibold mb-3 text-brand-800">Interactive Data Dashboards</h3>
                     <p class="text-ink-600 mb-4">
                         A collection of dashboard demo videos showing healthcare and analytics projects,
@@ -1815,7 +1844,7 @@
 
                 <!-- Optional extra box -->
                 <div
-                    class="project-card bg-white p-6 shadow-xl rounded-xl border-t-4 border-brand-500 hover:shadow-2xl">
+                    class="project-card pc-navy p-6 shadow-xl rounded-xl border-t-4 hover:shadow-2xl">
                     <h3 class="text-xl font-semibold mb-3 text-brand-800">Games & Interactive Apps</h3>
                     <p class="text-ink-600 mb-4">
                         A collection of games and interactive applications built using Python, R Shiny, and JavaScript,

@@ -1,0 +1,31 @@
+/* =====================================================================
+   PROJECT PAGES — delicate typography
+   Headings: Cormorant Garamond (fine, high-contrast serif)
+   Text:     Jost (light, geometric sans)
+   Linked last in <head> of every page in /projects so it overrides
+   the fonts each page sets on its own. Code keeps its monospace font.
+   ===================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap");
+
+body,
+body :not(code, pre, kbd, samp, code *, pre *) {
+    font-family: "Jost", system-ui, sans-serif !important;
+}
+
+body {
+    font-weight: 300;
+    letter-spacing: 0.01em;
+}
+
+/* keep emphasis readable in the lighter text */
+body :is(strong, b, th, button, label, .font-semibold) { font-weight: 500; }
+body :is(.font-bold, .font-extrabold) { font-weight: 600; }
+
+body :is(h1, h2, h3, h4),
+body :is(h1, h2, h3, h4) * {
+    font-family: "Cormorant Garamond", Georgia, serif !important;
+    letter-spacing: 0 !important;
+}
+
+body :is(h1, h2, h3, h4) { font-weight: 600 !important; line-height: 1.15; }
+body h1 { font-weight: 500 !important; }
