@@ -233,12 +233,13 @@
       span.style.top = y + "%";
       numbersLayer.appendChild(span);
 
-      // Minute helper label (e.g. "05" near the "1")
+      // Minute label just outside the rim (e.g. "5" next to the "1",
+      // "0" at the top) so children can count the minutes by 5s.
       const minuteValue = (i % 12) * 5;
-      const hx = 50 + 46 * Math.sin(rad);
-      const hy = 50 - 46 * Math.cos(rad);
+      const hx = 50 + 63 * Math.sin(rad);
+      const hy = 50 - 63 * Math.cos(rad);
       const hspan = document.createElement("span");
-      hspan.textContent = pad2(minuteValue === 60 ? 0 : minuteValue);
+      hspan.textContent = String(minuteValue);
       hspan.style.left = hx + "%";
       hspan.style.top = hy + "%";
       helpersLayer.appendChild(hspan);
@@ -769,7 +770,7 @@
     // <form> — guarantees the whole card appears/disappears together.
     el.answerCard.hidden = isSet;
     el.handHelper.hidden = !isSet || !state.showHandHelper;
-    el.btnMinuteHelpers.hidden = !isTell; // minute helpers only meaningful in tell-the-time reading
+    // (the minute labels toggle is handled by updateMinuteHelperVisibility)
     el.clockFace.classList.toggle("interactive", isSet);
     el.screenPractice.classList.toggle("activity-set", isSet);
     el.screenPractice.classList.toggle("activity-tell", isTell);
@@ -1293,12 +1294,17 @@
    * ------------------------------------------------------------------ */
 
   function updateMinuteHelperVisibility() {
-    const relevant = state.currentActivity === "tell";
+    // Offered whenever a clock is on screen (every activity except the
+    // Time Challenge word problems, which hide the clock).
+    const relevant = !(state.currentActivity === "challenge" && state.challengeLevel === 3);
+    const show = relevant && state.showMinuteHelpers;
     el.btnMinuteHelpers.hidden = !relevant;
-    el.clockMinuteHelpers.hidden = !(relevant && state.showMinuteHelpers);
-    el.btnMinuteHelpers.textContent = state.showMinuteHelpers
-      ? "Hide Minute Helpers"
-      : "Show Minute Helpers";
+    el.clockMinuteHelpers.hidden = !show;
+    el.clockStage.classList.toggle("with-minutes", show);
+    el.btnMinuteHelpers.setAttribute("aria-pressed", String(show));
+    el.btnMinuteHelpers.innerHTML = state.showMinuteHelpers
+      ? '<span aria-hidden="true">🙈</span> Hide minutes'
+      : '<span aria-hidden="true">⏱️</span> Show minutes (5, 10, 15…)';
   }
 
   /* ------------------------------------------------------------------ *

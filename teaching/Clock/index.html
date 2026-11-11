@@ -112,8 +112,12 @@
       </div>
     </div>
 
+    <!-- Two columns on wide screens: clock on the left, everything else on
+         the right. On phones it is a single column in this DOM order. -->
+    <div class="practice-layout">
     <h2 id="practice-instruction" class="instruction"></h2>
 
+    <div class="practice-clock-col">
     <!-- Time Challenge (Level 3): word-problem story card. The story is
          the focus for Level 3, so the clock stage is hidden while this
          is shown (see setupPracticeUiForActivity in script.js). -->
@@ -142,13 +146,15 @@
       </div>
     </div>
 
+    <button type="button" id="btn-minute-helpers" class="btn btn-ghost btn-small" aria-pressed="false" hidden>⏱️ Show minutes (5, 10, 15…)</button>
+    </div>
+
+    <div class="practice-side">
     <div class="hand-helper" id="hand-helper">
       <span><i class="swatch swatch-hour" aria-hidden="true"></i><strong>Short hand</strong> = Hour</span>
       <span><i class="swatch swatch-minute" aria-hidden="true"></i><strong>Long hand</strong> = Minutes</span>
       <button type="button" id="btn-toggle-helper" class="link-btn">Hide this</button>
     </div>
-
-    <button type="button" id="btn-minute-helpers" class="btn btn-ghost btn-small" hidden>Show Minute Helpers</button>
 
     <!-- Tell the Time input -->
     <div class="answer-card" id="answer-card" hidden>
@@ -189,6 +195,8 @@
       <button type="button" id="btn-check" class="btn btn-primary">✓ Check</button>
       <button type="button" id="btn-next" class="btn btn-next" hidden>Next Question →</button>
     </div>
+    </div><!-- /.practice-side -->
+    </div><!-- /.practice-layout -->
 
     <div class="celebration" id="celebration" aria-hidden="true"></div>
   </section>
