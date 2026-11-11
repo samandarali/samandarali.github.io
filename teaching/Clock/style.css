@@ -399,11 +399,14 @@ input:focus-visible,
 }
 .btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
 .btn:active { transform: translateY(3px); }
+/* inactive buttons: flat grey, no raised edge, so they never look pressable */
 .btn:disabled {
-  opacity: 0.45;
+  background: #eceff5;
+  color: #a3a9c2;
+  box-shadow: none;
   cursor: not-allowed;
   transform: none !important;
-  filter: none;
+  filter: grayscale(1);
 }
 
 .btn-primary {
@@ -432,11 +435,33 @@ input:focus-visible,
 }
 .btn-next:active { box-shadow: 0 1px 0 var(--coral-deep); }
 
-.btn-ghost {
+/* ---------- clickable secondary buttons ----------
+   Everything a child can press (ghost buttons, Back, music, sound) has the
+   same look: white, purple border, a raised bottom edge, lift on hover and
+   press-down on click. Information-only elements stay flat (see below). */
+.btn-ghost,
+.sound-toggle,
+.btn-icon {
   background: var(--white);
-  color: var(--navy);
-  border: 2px solid var(--line);
-  box-shadow: var(--shadow-sm);
+  color: var(--grape-deep);
+  border: 2px solid #d9d2ff;
+  box-shadow: 0 3px 0 #e2ddff, 0 8px 16px -10px rgba(99, 82, 209, 0.55);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+}
+.btn-ghost:hover,
+.sound-toggle:hover,
+.btn-icon:hover {
+  background: var(--grape-soft);
+  border-color: var(--grape);
+  transform: translateY(-1px);
+  filter: none;
+}
+.btn-ghost:active,
+.sound-toggle:active,
+.btn-icon:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #e2ddff;
 }
 .btn-small {
   display: inline-flex;
@@ -462,8 +487,6 @@ input:focus-visible,
 }
 
 .sound-toggle {
-  background: var(--white);
-  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 8px 16px;
   display: inline-flex;
@@ -472,24 +495,31 @@ input:focus-visible,
   font-family: var(--font-body);
   font-weight: 800;
   font-size: 13px;
-  color: var(--navy-soft);
-  cursor: pointer;
-  box-shadow: var(--shadow-sm);
+}
+
+.toggle-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+/* switched-off toggles stay pressable: grey border, still raised */
+.sound-toggle.is-off,
+.btn-icon.is-off {
+  color: #7d84a3;
+  border-color: #dfe3ee;
+  box-shadow: 0 3px 0 #e6e9f1, 0 8px 16px -10px rgba(43, 48, 82, 0.35);
 }
 
 .btn-icon {
-  background: var(--white);
-  border: 1px solid var(--line);
   border-radius: 50%;
   width: 46px;
   height: 46px;
   font-size: 20px;
-  cursor: pointer;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-sm);
 }
 .btn-icon-labeled {
   width: auto;
@@ -503,10 +533,8 @@ input:focus-visible,
 .btn-icon-label {
   font-weight: 800;
   font-size: 14px;
-  color: var(--navy-soft);
+  color: var(--grape-deep);
 }
-.btn-icon-labeled:hover { border-color: var(--grape); }
-.btn-icon-labeled:hover .btn-icon-label { color: var(--grape-deep); }
 
 /* ---------- practice screen ---------- */
 .practice-topbar {
@@ -691,12 +719,11 @@ input:focus-visible,
   font-size: 14px;
   font-weight: 700;
   color: var(--navy-soft);
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 6px 10px 6px 18px;
-  margin-bottom: 6px;
-  box-shadow: var(--shadow-sm);
+  /* information only: flat text, no button look */
+  background: none;
+  border: none;
+  padding: 2px 0;
+  margin-bottom: 8px;
 }
 .hand-helper span { display: inline-flex; align-items: center; gap: 7px; }
 .hand-helper strong { color: var(--navy); }
@@ -736,10 +763,7 @@ input:focus-visible,
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 15px;
-  color: var(--grape-deep);
-  background: var(--grape-soft);
-  border-radius: 999px;
-  padding: 4px 14px;
+  color: var(--navy-soft);
   margin: -6px 0 14px;
 }
 
@@ -1215,7 +1239,6 @@ input:focus-visible,
 }
 .stat {
   background: var(--sky);
-  border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: 14px 8px;
 }

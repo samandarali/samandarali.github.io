@@ -88,10 +88,16 @@
       Let's Go! <span aria-hidden="true">▶</span>
     </button>
 
-    <button type="button" id="btn-sound" class="sound-toggle" aria-pressed="true">
-      <span class="sound-icon" aria-hidden="true">🔊</span>
-      <span class="sound-text">Sound On</span>
-    </button>
+    <div class="toggle-row">
+      <button type="button" id="btn-sound" class="sound-toggle" aria-pressed="true">
+        <span class="sound-icon" aria-hidden="true">🔊</span>
+        <span class="sound-text">Sound On</span>
+      </button>
+      <button type="button" id="btn-music" class="sound-toggle music-toggle" aria-pressed="true">
+        <span class="music-icon" aria-hidden="true">🎵</span>
+        <span class="music-text">Music On</span>
+      </button>
+    </div>
   </section>
 
   <!-- ============ PRACTICE SCREEN ============ -->
@@ -100,6 +106,9 @@
       <button type="button" id="btn-home" class="btn-icon btn-icon-labeled" aria-label="Exit practice and go back to the home screen">
         <span aria-hidden="true">🏠</span>
         <span class="btn-icon-label">Back</span>
+      </button>
+      <button type="button" id="btn-music-top" class="btn-icon music-top" aria-pressed="true" aria-label="Turn music off">
+        <span class="music-icon" aria-hidden="true">🎵</span>
       </button>
       <div class="progress-wrap">
         <div class="progress-text">
@@ -241,6 +250,7 @@
 </footer>
 
 <script src="tiki.js"></script>
+<script src="music.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

@@ -65,6 +65,7 @@
     questions: [],                // [{hour, minute}, ...]
     currentQuestion: null,        // {hour, minute}
     soundOn: true,
+    musicOn: loadMusicPref(),     // background music (music.js), remembered per browser
     showMinuteHelpers: false,
     showHandHelper: true,
     answeredCorrectly: false,
@@ -90,7 +91,7 @@
       "level-group", "level-group-challenge",
       "setup-group-standard-levels", "setup-group-challenge-levels",
       "count-group",
-      "btn-start", "btn-sound",
+      "btn-start", "btn-sound", "btn-music", "btn-music-top",
       "btn-home", "question-counter", "score-display",
       "progress-bar-track", "progress-bar-fill", "practice-instruction",
       "clock-stage", "clock-face", "clock-ticks", "clock-numbers", "clock-minute-helpers",
@@ -520,7 +521,9 @@
   // Level 1: single 15/30/45-minute add. No AM/PM needed.
   function generateChallengeLevel1() {
     const startHour = randInt(1, 12);
-    const startMinute = randInt(0, 59);
+    // Round starting minutes only (0, 5, 10 … 55) so beginners can count
+    // on by 5s; with 15/30/45-minute durations the answer is round too.
+    const startMinute = randInt(0, 11) * 5;
     const duration = CHALLENGE_L1_DURATIONS[randInt(0, CHALLENGE_L1_DURATIONS.length - 1)];
 
     const startTotal = to12HourTotal(startHour, startMinute);
@@ -1419,9 +1422,57 @@
     });
   }
 
+  /* ------------------------------------------------------------------ *
+   *  BACKGROUND MUSIC (see music.js). The choice is remembered in this
+   *  browser; music only starts after a click, as browsers require.
+   * ------------------------------------------------------------------ */
+
+  function loadMusicPref() {
+    try {
+      return localStorage.getItem("clockMusic") !== "off";
+    } catch (err) {
+      return true;
+    }
+  }
+
+  function saveMusicPref(on) {
+    try {
+      localStorage.setItem("clockMusic", on ? "on" : "off");
+    } catch (err) {
+      /* storage unavailable: preference just isn't remembered */
+    }
+  }
+
+  function updateMusicButtons() {
+    const on = state.musicOn;
+    [el.btnMusic, el.btnMusicTop].forEach((btn) => {
+      if (!btn) return;
+      btn.setAttribute("aria-pressed", String(on));
+      btn.classList.toggle("is-off", !on);
+      const icon = btn.querySelector(".music-icon");
+      if (icon) icon.textContent = on ? "🎵" : "🔇";
+    });
+    if (el.btnMusic) el.btnMusic.querySelector(".music-text").textContent = on ? "Music On" : "Music Off";
+    if (el.btnMusicTop) el.btnMusicTop.setAttribute("aria-label", on ? "Turn music off" : "Turn music on");
+  }
+
+  function playMusicIfOn() {
+    if (state.musicOn && window.ClockMusic) window.ClockMusic.start();
+  }
+
+  function toggleMusic() {
+    state.musicOn = !state.musicOn;
+    saveMusicPref(state.musicOn);
+    updateMusicButtons();
+    if (!window.ClockMusic) return;
+    if (state.musicOn) window.ClockMusic.start();
+    else window.ClockMusic.stop();
+  }
+
   function toggleSound() {
     state.soundOn = !state.soundOn;
     el.btnSound.setAttribute("aria-pressed", String(state.soundOn));
+    el.btnSound.classList.toggle("is-off", !state.soundOn);
     el.btnSound.querySelector(".sound-icon").textContent = state.soundOn ? "🔊" : "🔇";
     el.btnSound.querySelector(".sound-text").textContent = state.soundOn ? "Sound On" : "Sound Off";
   }
@@ -1449,7 +1500,12 @@
     });
 
     el.btnSound.addEventListener("click", toggleSound);
-    el.btnStart.addEventListener("click", startSession);
+    el.btnMusic.addEventListener("click", toggleMusic);
+    el.btnMusicTop.addEventListener("click", toggleMusic);
+    el.btnStart.addEventListener("click", () => {
+      playMusicIfOn();
+      startSession();
+    });
 
     el.btnHome.addEventListener("click", () => {
       // Only ask for confirmation if the child is mid-session (has
@@ -1472,7 +1528,10 @@
     el.btnCheck.addEventListener("click", checkAnswer);
     el.btnNext.addEventListener("click", nextQuestion);
     el.btnHint.addEventListener("click", showHint);
-    el.btnAgain.addEventListener("click", startSession);
+    el.btnAgain.addEventListener("click", () => {
+      playMusicIfOn();
+      startSession();
+    });
 
     el.tellTimeForm.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -1518,6 +1577,7 @@
     setLevel(state.difficultyLevel);
     setChallengeLevel(state.challengeLevel);
     setCount(state.totalQuestions);
+    updateMusicButtons();
     updateMinuteHelperVisibility();
     setClockTime(12, 0);
     initEventListeners();
