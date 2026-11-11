@@ -154,12 +154,17 @@
             line-height: 1.6;
         }
     </style>
+  <link rel="stylesheet" href="styles/home-btn.css" />
 </head>
 
 <body>
 
     <header class="top-header">
-        <a href="index.html">&larr; Back to Home</a>
+        <a href="index.html" class="home-btn" aria-label="Back to the home page">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7M5 10v10h5v-6h4v6h5V10" /></svg>
+            <span>Home</span>
+        </a>
         <div class="header-title">Interactive Dashboard Videos</div>
         <div class="header-subtitle">Dashboard summaries with direct links to YouTube</div>
     </header>

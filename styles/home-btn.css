@@ -1,0 +1,59 @@
+/* =====================================================================
+   HOME BUTTON — the "‹ house Home" pill used at the top of inner pages.
+   Doubled class raises specificity so page rules such as
+   ".top-header a" or ".site-header-inner a" cannot restyle it.
+   Add "home-btn--on-dark" when the button sits on a dark background.
+   ===================================================================== */
+a.home-btn.home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: auto;
+    margin: 0;
+    padding: 9px 16px 9px 10px;
+    border: 1.5px solid #095489;
+    border-radius: 9999px;
+    background: transparent;
+    color: #095489;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    transition: background .2s, color .2s, border-color .2s, transform .2s;
+}
+
+a.home-btn.home-btn svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+a.home-btn.home-btn:hover,
+a.home-btn.home-btn:focus-visible {
+    background: #095489;
+    color: #fff;
+    transform: translateX(-2px);
+}
+
+a.home-btn.home-btn:focus-visible {
+    outline: 3px solid #91bede;
+    outline-offset: 2px;
+}
+
+/* on dark backgrounds */
+a.home-btn.home-btn--on-dark {
+    border-color: rgba(255, 255, 255, .7);
+    color: #fff;
+}
+
+a.home-btn.home-btn--on-dark:hover,
+a.home-btn.home-btn--on-dark:focus-visible {
+    background: #fff;
+    border-color: #fff;
+    color: #095489;
+}

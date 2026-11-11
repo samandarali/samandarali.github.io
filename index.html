@@ -552,7 +552,7 @@
 
         .svc-stage {
             position: relative;
-            height: 340px;
+            height: 400px;
             perspective: 1100px;
             touch-action: pan-y;
         }
@@ -562,7 +562,7 @@
             top: 18px;
             left: 50%;
             width: 260px;
-            height: 290px;
+            height: 350px;
             margin-left: -130px;
             display: flex;
             flex-direction: column;
@@ -750,13 +750,13 @@
 
         @media (max-width: 640px) {
             .svc-stage {
-                height: 330px;
+                height: 390px;
             }
 
             .svc-card {
                 width: 232px;
                 margin-left: -116px;
-                height: 280px;
+                height: 340px;
             }
 
             .svc-arrow {
@@ -1225,6 +1225,17 @@
                     --pc-text: #c8cbcb; --pc-btn: #63698b; --pc-btn-hover: #9c9c9c; }
         html[data-theme="dark"] .pc-navy  { --pc-bg: #074169; --pc-accent: #91bede; }
 
+
+        /* forthcoming card: dimmed, no hover lift, no link (matches Knowledge Sharing "coming soon" cards) */
+        .project-card.pc-soon { opacity: .85; cursor: default; }
+        .project-card.pc-soon:hover { transform: none; box-shadow: 0 20px 25px -5px rgba(0,0,0,.1), 0 8px 10px -6px rgba(0,0,0,.1); }
+        .pc-soon-chip {
+            display: inline-flex; align-items: center; gap: .45rem; padding: .45rem 1rem; border-radius: 9999px;
+            font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+            border: 1.5px dashed var(--pc-accent); background: rgba(145,190,222,.16); color: #fff;
+        }
+        .pc-soon-chip svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
         html[data-theme="dark"] .project-card:hover { box-shadow: 0 20px 40px rgba(0, 0, 0, .45); }
         html[data-theme="dark"] .project-card .text-ink-600 { color: #bfdaed; }
         html[data-theme="dark"] .project-card .text-brand-800 { color: #6ee7b7; }
@@ -1377,6 +1388,49 @@
 
         html[data-theme="light"] .services-band .svc-arrow:hover { background: #fff; }
         html[data-theme="light"] .services-band .svc-arrow svg { stroke: #151a3d; }
+
+
+        /* ---- What I Can Help With: a photo and a palette colour per card (both modes) ---- */
+        .svc-img {
+            width: 100%;
+            height: 110px;
+            flex: none;
+            object-fit: cover;
+            border-radius: 14px;
+            box-shadow: 0 6px 16px rgba(3, 28, 45, .35);
+        }
+
+        /* card colour (--t), heading (--fg), text (--sub); dark and light cards alternate for contrast */
+        .svc-c1 { --t: 9, 84, 137;    --fg: #fff;    --sub: #dfedf7; }  /* #095489 brand-600 */
+        .svc-c2 { --t: 232, 231, 231; --fg: #151a3d; --sub: #353a5a; }  /* #e8e7e7 ink-100 */
+        .svc-c3 { --t: 94, 157, 202;  --fg: #031c2d; --sub: #052b45; }  /* #5e9dca brand-400 */
+        .svc-c4 { --t: 99, 105, 139;  --fg: #fff;    --sub: #f4f4f4; }  /* #63698b ink-500 */
+        .svc-c5 { --t: 223, 237, 247; --fg: #063556; --sub: #074169; }  /* #dfedf7 brand-100 */
+
+        html[data-theme] .services-band .svc-card[class*="svc-c"] {
+            background: rgb(var(--t));
+            border-color: rgba(255, 255, 255, .35);
+        }
+
+        html[data-theme] .services-band .svc-card[class*="svc-c"].is-active {
+            background: rgb(var(--t));
+            border-color: rgba(255, 255, 255, .6);
+        }
+
+        html[data-theme] .services-band .svc-card[class*="svc-c"] h3 { color: var(--fg); text-shadow: none; }
+        html[data-theme] .services-band .svc-card[class*="svc-c"] p { color: var(--sub); text-shadow: none; }
+        html[data-theme] .services-band .svc-card[class*="svc-c"]::after { background: var(--sub); opacity: .45; }
+
+        html[data-theme] .services-band .svc-card[class*="svc-c"] .svc-card-link {
+            background: var(--fg);
+            border-color: var(--fg);
+            color: rgb(var(--t));
+        }
+
+        html[data-theme] .services-band .svc-card[class*="svc-c"] .svc-card-link:hover {
+            background: var(--sub);
+            border-color: var(--sub);
+        }
 
         /* --- light mode: daytime Toronto photo in the contact section --- */
         html[data-theme="light"] #content-contact.contact-section-bg {
@@ -1613,11 +1667,8 @@
                         </button>
 
                         <div class="svc-stage" id="svc-stage">
-                            <article class="svc-card" role="group" aria-roledescription="slide" aria-label="1 of 5" ">
-                                <svg class=" svc-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                <path
-                                    d="M6 42h36M10 42V30h6v12M21 42V22h6v20M32 42V12h6v30M10 20l10-8 8 4 12-10M34 6h6v6" />
-                                </svg>
+                            <article class="svc-card svc-c1" role="group" aria-roledescription="slide" aria-label="1 of 5">
+                                <img class="svc-img" src="images/services/credit.jpg" alt="Calculator on financial report charts" loading="lazy" width="640" height="400" />
                                 <h3>Commercial Credit Analysis</h3>
                                 <p>Financial statement analysis, credit risk assessment, and lending analysis.</p>
 
@@ -1627,11 +1678,8 @@
                                 </a>
 
                             </article>
-                            <article class="svc-card" role="group" aria-roledescription="slide" aria-label="2 of 5">
-                                <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                    <rect x="5" y="6" width="38" height="26" rx="3" />
-                                    <path d="M24 32v8M16 41h16M11 25l8-8 6 5 10-10M30 12h5v5" />
-                                </svg>
+                            <article class="svc-card svc-c2" role="group" aria-roledescription="slide" aria-label="2 of 5">
+                                <img class="svc-img" src="images/services/data.jpg" alt="Analytics charts on a laptop screen" loading="lazy" width="640" height="400" />
                                 <h3>Data Analysis &amp; Dashboards</h3>
                                 <p>Turn business data into useful reports, dashboards, and insights.</p>
                                 <a class="svc-card-link" href="https://pratechdigital.com/dashboards-insights"
@@ -1640,13 +1688,8 @@
                                     <span aria-hidden="true">→</span>
                                 </a>
                             </article>
-                            <article class="svc-card" role="group" aria-roledescription="slide" aria-label="3 of 5">
-                                <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                    <rect x="9" y="8" width="30" height="22" rx="3" />
-                                    <path d="M4 36h40l-3 4H7z" />
-                                    <circle cx="24" cy="19" r="8" />
-                                    <path d="M16 19h16M24 11c-4 4-4 12 0 16M24 11c4 4 4 12 0 16" />
-                                </svg>
+                            <article class="svc-card svc-c3" role="group" aria-roledescription="slide" aria-label="3 of 5">
+                                <img class="svc-img" src="images/services/websites.jpg" alt="Website open on a desktop computer" loading="lazy" width="640" height="400" />
                                 <h3>Websites</h3>
                                 <p>Clear, mobile-friendly websites for small businesses and professionals.</p>
                                 <a class="svc-card-link" href="https://pratechdigital.com/websites-digital-presence"
@@ -1655,14 +1698,8 @@
                                     <span aria-hidden="true">→</span>
                                 </a>
                             </article>
-                            <article class="svc-card" role="group" aria-roledescription="slide" aria-label="4 of 5">
-                                <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                    <circle cx="19" cy="19" r="5" />
-                                    <path
-                                        d="M19 7v4M19 27v4M7 19h4M27 19h4M10.5 10.5l3 3M24.5 24.5l3 3M27.5 10.5l-3 3M13.5 24.5l-3 3" />
-                                    <circle cx="34" cy="34" r="4" />
-                                    <path d="M34 26v3M34 39v3M26 34h3M39 34h3M28.3 28.3l2.1 2.1M37.6 37.6l2.1 2.1" />
-                                </svg>
+                            <article class="svc-card svc-c4" role="group" aria-roledescription="slide" aria-label="4 of 5">
+                                <img class="svc-img" src="images/services/apps.jpg" alt="Code on a laptop screen" loading="lazy" width="640" height="400" />
                                 <h3>Simple Apps &amp; Automation</h3>
                                 <p>Practical tools that reduce repetitive manual work and improve business processes.
                                 </p>
@@ -1672,11 +1709,8 @@
                                     <span aria-hidden="true">→</span>
                                 </a>
                             </article>
-                            <article class="svc-card" role="group" aria-roledescription="slide" aria-label="5 of 5">
-                                <svg class="svc-icon" viewBox="0 0 48 48" aria-hidden="true">
-                                    <path
-                                        d="M24 12c-4-3-10-4-17-4v28c7 0 13 1 17 4 4-3 10-4 17-4V8c-7 0-13 1-17 4zM24 12v28M12 15h7M12 21h7M12 27h7M29 15h7M29 21h7M29 27h7" />
-                                </svg>
+                            <article class="svc-card svc-c5" role="group" aria-roledescription="slide" aria-label="5 of 5">
+                                <img class="svc-img" src="images/services/teaching.jpg" alt="Books with an apple and alphabet blocks" loading="lazy" width="640" height="400" />
                                 <h3>Teaching &amp; Learning Resources</h3>
                                 <p>Interactive learning tools and practical educational resources.</p>
                                 <a class="svc-card-link" href="#teaching">
@@ -1844,16 +1878,16 @@
 
                 <!-- Optional extra box -->
                 <div
-                    class="project-card pc-navy p-6 shadow-xl rounded-xl border-t-4 hover:shadow-2xl">
+                    class="project-card pc-navy pc-soon p-6 shadow-xl rounded-xl border-t-4" aria-disabled="true">
                     <h3 class="text-xl font-semibold mb-3 text-brand-800">Games & Interactive Apps</h3>
                     <p class="text-ink-600 mb-4">
                         A collection of games and interactive applications built using Python, R Shiny, and JavaScript,
                         ranging from small tools to data-driven projects.
                     </p>
-                    <a href="projects-apps.html" target="_blank"
-                        class="inline-block bg-brand-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-brand-700 transition">
-                        View Apps &rarr;
-                    </a>
+                    <span class="pc-soon-chip">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                        Forthcoming
+                    </span>
                 </div>
             </div>
         </section>

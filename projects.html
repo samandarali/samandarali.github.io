@@ -68,9 +68,12 @@
 
         /* Sidebar */
         .sidebar {
-            position: fixed;
-            left: 0;
-            /* top:0; */
+            /* starts under the header, then sticks to the top of the window while scrolling */
+            position: sticky;
+            top: 0;
+            float: left;
+            z-index: 40;
+            box-sizing: border-box;
             width: 80px;
             background-color: #151a3d;
             height: 100vh;
@@ -414,13 +417,20 @@
             margin-top: 0px;
         }
     </style>
+  <link rel="stylesheet" href="styles/home-btn.css" />
 </head>
 
 <body>
     <!-- Top header bar -->
     <header class="top-header">
         <div class="header-grid">
-            <div> <a href="index.html">⌂</a> </div>
+            <div>
+                <a href="index.html" class="home-btn" aria-label="Back to the home page">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7M5 10v10h5v-6h4v6h5V10" /></svg>
+                    <span>Home</span>
+                </a>
+            </div>
             <div class="header-inner">
                 <h1 class="site-name">Mojgan Samandar</h1>
                 <p class="site-role">Economist & Data Analyst</p>
