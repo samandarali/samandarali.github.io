@@ -109,6 +109,10 @@
         <span class="music-icon" aria-hidden="true">🎵</span>
         <span class="music-text">Music On</span>
       </button>
+      <button type="button" id="btn-voice" class="sound-toggle voice-toggle" aria-pressed="true">
+        <span class="voice-icon" aria-hidden="true">🗣️</span>
+        <span class="voice-text">Voice On</span>
+      </button>
     </div>
     </div><!-- /.home-setup -->
     </div><!-- /.home-layout -->
@@ -123,6 +127,9 @@
       </button>
       <button type="button" id="btn-music-top" class="btn-icon music-top" aria-pressed="true" aria-label="Turn music off">
         <span class="music-icon" aria-hidden="true">🎵</span>
+      </button>
+      <button type="button" id="btn-voice-top" class="btn-icon voice-top" aria-pressed="true" aria-label="Turn Tiki's voice off">
+        <span class="voice-icon" aria-hidden="true">🗣️</span>
       </button>
       <div class="progress-wrap">
         <div class="progress-text">
@@ -205,6 +212,7 @@
         <div class="tiki" id="tiki-practice"></div>
       </div>
       <div class="speech tiki-bubble" id="tiki-bubble">
+        <button type="button" id="btn-speak" class="speak-btn" aria-label="Hear the question again">🔊</button>
         <p class="tiki-line" id="tiki-line"></p>
         <p class="feedback-message" id="feedback-message" role="status" aria-live="polite"></p>
         <p class="hint-message" id="hint-message" role="status" aria-live="polite"></p>
@@ -265,6 +273,7 @@
 
 <script src="tiki.js"></script>
 <script src="music.js"></script>
+<script src="voice.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

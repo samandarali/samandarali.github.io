@@ -962,6 +962,29 @@ input:focus-visible,
 }
 .hint-message:empty { display: none; }
 
+/* 🔊 replay button on the bubble (clickable: raised, like other buttons) */
+.tiki-bubble { padding-right: 52px; }
+.speak-btn {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid #f1c9cc;
+  background: var(--white);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #f3d3d5, 0 6px 12px -8px rgba(156, 52, 65, 0.55);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+}
+.speak-btn:hover { background: var(--grape-soft); border-color: var(--grape); transform: translateY(calc(-50% - 1px)); }
+.speak-btn:active { transform: translateY(calc(-50% + 2px)); box-shadow: 0 1px 0 #f3d3d5; }
+.tiki-stage.is-arrived .tiki-bubble { padding-right: 16px; }
+.tiki-stage.is-arrived .speak-btn { display: none; }
+
 /* while walking: bubble steps aside */
 .tiki-stage.is-walking .tiki-bubble { opacity: 0; transform: translateY(6px); }
 

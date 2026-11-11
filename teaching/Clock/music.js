@@ -143,6 +143,15 @@
     master.gain.linearRampToValueAtTime(0, now + 0.5);
   }
 
+  // quieter while Tiki is talking (called by voice.js)
+  function duck(on) {
+    if (!ctx || !playing) return;
+    const now = ctx.currentTime;
+    master.gain.cancelScheduledValues(now);
+    master.gain.setValueAtTime(master.gain.value, now);
+    master.gain.linearRampToValueAtTime(on ? VOLUME * 0.3 : VOLUME, now + 0.3);
+  }
+
   // pause quietly while the tab is in the background
   document.addEventListener("visibilitychange", () => {
     if (!ctx) return;
@@ -150,5 +159,5 @@
     else if (playing) ctx.resume();
   });
 
-  window.ClockMusic = { start, stop, isPlaying: () => playing };
+  window.ClockMusic = { start, stop, duck, isPlaying: () => playing };
 })();

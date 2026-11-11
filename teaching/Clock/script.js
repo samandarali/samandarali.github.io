@@ -66,6 +66,7 @@
     currentQuestion: null,        // {hour, minute}
     soundOn: true,
     musicOn: loadMusicPref(),     // background music (music.js), remembered per browser
+    voiceOn: loadVoicePref(),     // Tiki reads lines aloud (voice.js), remembered per browser
     showMinuteHelpers: false,
     showHandHelper: true,
     answeredCorrectly: false,
@@ -91,7 +92,7 @@
       "level-group", "level-group-challenge",
       "setup-group-standard-levels", "setup-group-challenge-levels",
       "count-group",
-      "btn-start", "btn-sound", "btn-music", "btn-music-top",
+      "btn-start", "btn-sound", "btn-music", "btn-music-top", "btn-voice", "btn-voice-top", "btn-speak",
       "btn-home", "question-counter", "score-display",
       "progress-bar-track", "progress-bar-fill", "practice-instruction",
       "clock-stage", "clock-face", "clock-ticks", "clock-numbers", "clock-minute-helpers",
@@ -873,6 +874,7 @@
     el.statCompleted.textContent = String(state.correctAnswers);
     el.statFirsttry.textContent = `${state.firstTryCorrect} / ${state.totalQuestions}`;
     el.statHints.textContent = String(state.hintsUsed);
+    say("Practice complete! Thank you for helping me. Now I can tell time too!");
   }
 
   /* ------------------------------------------------------------------ *
@@ -979,7 +981,6 @@
    * ------------------------------------------------------------------ */
 
   const CORRECT_MESSAGES = ["🎉 Hooray, you got it!", "⭐ You did it!", "🎉 Fantastic!", "🌟 Brilliant!"];
-  const TRYAGAIN_MESSAGES = ["🙂 Almost! Try again.", "😕 Almost! Look at the clock again."];
 
   function showCorrectFeedback() {
     const q = state.currentQuestion;
@@ -1004,26 +1005,79 @@
     playSound("correct");
     celebrate();
     tikiCelebrate(scene);
+    say(msg);
     announce(msg);
   }
 
-  function showTryAgainFeedback() {
-    let msg;
-    if (state.currentActivity === "tell") {
-      msg = "🙂 Almost! Look carefully at both hands and try again.";
-    } else if (state.currentActivity === "challenge") {
-      const q = state.currentQuestion;
-      msg =
-        q.level === 3 && !state.answerAmPm
-          ? "🙂 Almost! Don't forget to pick AM or PM too."
-          : "🙂 Almost! Check your math and try again.";
-    } else {
-      msg = TRYAGAIN_MESSAGES[randInt(0, TRYAGAIN_MESSAGES.length - 1)];
+  /* "Almost!" only when the answer really is close. Otherwise say what is
+     off (hour, minutes, AM/PM) or that it's a different time altogether. */
+  const FAR_MESSAGES = [
+    "🤔 Hmm, that's a different time. Let's look again!",
+    "🤔 Not quite — that time is far away. Try again!",
+  ];
+  const CLOSE_MINUTES = 5; // within 5 minutes counts as "almost"
+
+  // Minutes between two 12-hour times, the short way round the clock.
+  function minutesApart(h1, m1, h2, m2) {
+    const a = to12HourTotal(h1, m1);
+    const b = to12HourTotal(h2, m2);
+    const d = Math.abs(a - b) % 720;
+    return Math.min(d, 720 - d);
+  }
+
+  function minuteGap(m1, m2) {
+    const d = Math.abs(m1 - m2) % 60;
+    return Math.min(d, 60 - d);
+  }
+
+  function setClockWrongMessage() {
+    const { hour, minute } = state.currentQuestion;
+    const hourRight = state.handHour === hour;
+    const minuteRight = state.handMinute === minute;
+    if (hourRight && !minuteRight) {
+      return minuteGap(state.handMinute, minute) <= CLOSE_MINUTES
+        ? "🙂 Almost! Nudge the long hand just a little."
+        : "👍 The short hand is right! Now move the long hand for the minutes.";
     }
+    if (minuteRight && !hourRight) {
+      const oneAway = (state.handHour - hour + 12) % 12 === 1 || (hour - state.handHour + 12) % 12 === 1;
+      return oneAway
+        ?"🙂 Almost! The short hand is one number away."
+        : "👍 The long hand is right! Now point the short hand at the hour.";
+    }
+    return FAR_MESSAGES[randInt(0, FAR_MESSAGES.length - 1)] + " Look at both hands.";
+  }
+
+  function typedWrongMessage() {
+    const parsed = parseTypedTime(el.timeInput.value);
+    if (!parsed) return "✏️ Type the time with numbers, like 3:30.";
+    const q = state.currentQuestion;
+    const target = targetTimeOf(q);
+    const hourRight = parsed.hour === target.hour;
+    const minuteRight = parsed.minute === target.minute;
+
+    if (target.isPM !== null) {
+      if (hourRight && minuteRight) {
+        return state.answerAmPm
+          ? "🙂 So close! The time is right — check AM or PM."
+          : "🙂 Almost! Don't forget to pick AM or PM.";
+      }
+    }
+    const gap = minutesApart(parsed.hour, parsed.minute, target.hour, target.minute);
+    if (gap <= CLOSE_MINUTES) return "🙂 Almost! You're very close — check the minutes again.";
+    if (hourRight) return "👍 The hour is right! Now check the minutes.";
+    if (minuteRight) return "👍 The minutes are right! Now check the hour.";
+    if (state.currentActivity === "challenge") return "🤔 Not quite — let's add the time again, step by step.";
+    return FAR_MESSAGES[randInt(0, FAR_MESSAGES.length - 1)] + " Short hand = hour, long hand = minutes.";
+  }
+
+  function showTryAgainFeedback() {
+    const msg = state.currentActivity === "set" ? setClockWrongMessage() : typedWrongMessage();
     el.feedbackMessage.textContent = msg;
     el.feedbackMessage.classList.add("is-error");
     playSound("tryagain");
     tikiOops();
+    say(msg);
     announce(msg);
   }
 
@@ -1176,6 +1230,7 @@
     }
     state.hintsUsed++;
     tikiHint();
+    say(hints[idx]);
     announce(hints[idx]);
   }
 
@@ -1240,6 +1295,7 @@
     el.tikiLine.textContent = window.Tiki.waitingLine(state.currentActivity, time);
     tikiMood("confused");
     refreshTikiBubble();
+    tikiLater(() => say(questionSpeech()), 350);
   }
 
   function tikiWatch(isDragging) {
@@ -1289,6 +1345,7 @@
       el.tikiStage.classList.add("is-arrived");
       tikiMood("activity");
       playSound("arrive");
+      say(el.tikiCaption.textContent);
     }, TIKI_HOP_MS + TIKI_WALK_MS);
   }
 
@@ -1469,6 +1526,67 @@
     else window.ClockMusic.stop();
   }
 
+  /* ------------------------------------------------------------------ *
+   *  TIKI'S VOICE (see voice.js)
+   * ------------------------------------------------------------------ */
+
+  function loadVoicePref() {
+    try {
+      return localStorage.getItem("clockVoice") !== "off";
+    } catch (err) {
+      return true;
+    }
+  }
+
+  function saveVoicePref(on) {
+    try {
+      localStorage.setItem("clockVoice", on ? "on" : "off");
+    } catch (err) {
+      /* storage unavailable: preference just isn't remembered */
+    }
+  }
+
+  // What Tiki reads when a question appears (and when 🔊 is pressed).
+  function questionSpeech() {
+    const q = state.currentQuestion;
+    if (!q) return "";
+    if (state.currentActivity === "challenge") {
+      return q.level === 3 ? `${q.storyText} What time is it now?` : el.practiceInstruction.textContent;
+    }
+    return el.tikiLine.textContent;
+  }
+
+  function say(text) {
+    if (state.voiceOn && window.ClockVoice) window.ClockVoice.speak(text);
+  }
+
+  function updateVoiceButtons() {
+    const on = state.voiceOn;
+    [el.btnVoice, el.btnVoiceTop].forEach((btn) => {
+      if (!btn) return;
+      btn.setAttribute("aria-pressed", String(on));
+      btn.classList.toggle("is-off", !on);
+      const icon = btn.querySelector(".voice-icon");
+      if (icon) icon.textContent = on ? "🗣️" : "🤐";
+    });
+    if (el.btnVoice) el.btnVoice.querySelector(".voice-text").textContent = on ? "Voice On" : "Voice Off";
+    if (el.btnVoiceTop) el.btnVoiceTop.setAttribute("aria-label", on ? "Turn Tiki's voice off" : "Turn Tiki's voice on");
+  }
+
+  function toggleVoice() {
+    state.voiceOn = !state.voiceOn;
+    saveVoicePref(state.voiceOn);
+    updateVoiceButtons();
+    if (!window.ClockVoice) return;
+    if (!state.voiceOn) {
+      window.ClockVoice.stop();
+    } else if (el.screenPractice.classList.contains("active-screen")) {
+      window.ClockVoice.speak(questionSpeech());
+    } else {
+      window.ClockVoice.speak("Hi, I'm Tiki! I'll read the questions for you.");
+    }
+  }
+
   function toggleSound() {
     state.soundOn = !state.soundOn;
     el.btnSound.setAttribute("aria-pressed", String(state.soundOn));
@@ -1502,6 +1620,12 @@
     el.btnSound.addEventListener("click", toggleSound);
     el.btnMusic.addEventListener("click", toggleMusic);
     el.btnMusicTop.addEventListener("click", toggleMusic);
+    el.btnVoice.addEventListener("click", toggleVoice);
+    el.btnVoiceTop.addEventListener("click", toggleVoice);
+    // 🔊 always replays the question, even with automatic reading off
+    el.btnSpeak.addEventListener("click", () => {
+      if (window.ClockVoice) window.ClockVoice.speak(questionSpeech());
+    });
     el.btnStart.addEventListener("click", () => {
       playMusicIfOn();
       startSession();
@@ -1517,6 +1641,7 @@
       endDrag(el.hourGrabber);
       endDrag(el.minuteGrabber);
       clearTikiTimers();
+      if (window.ClockVoice) window.ClockVoice.stop();
       resetSession();
       showScreen("home");
     });
@@ -1578,6 +1703,11 @@
     setChallengeLevel(state.challengeLevel);
     setCount(state.totalQuestions);
     updateMusicButtons();
+    updateVoiceButtons();
+    if (!window.ClockVoice || !window.ClockVoice.supported) {
+      // no speech in this browser: hide the voice controls
+      [el.btnVoice, el.btnVoiceTop, el.btnSpeak].forEach((b) => b && (b.hidden = true));
+    }
     updateMinuteHelperVisibility();
     setClockTime(12, 0);
     initEventListeners();
