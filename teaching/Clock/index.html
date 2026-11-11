@@ -8,17 +8,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-
-
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>/* site palette: ink = navy-tinted neutral (see styles/palette.css) */ tailwind.config = { theme: { extend: { colors: { ink: { 50: '#f6f7fb', 100: '#eceef6', 200: '#d9dcea', 300: '#b9bed6', 400: '#8d93b3', 500: '#636a8e', 600: '#4a5072', 700: '#353a5a', 800: '#232845', 900: '#151a3d', 950: '#0b1030' } } } } };</script>
 </head>
 <body>
 
 <div class="sky" aria-hidden="true">
+  <div class="sun-glow"></div>
   <div class="cloud cloud-a"></div>
   <div class="cloud cloud-b"></div>
   <div class="cloud cloud-c"></div>
@@ -29,7 +23,10 @@
   <!-- ============ HOME SCREEN ============ -->
   <section id="screen-home" class="screen active-screen" aria-labelledby="home-title">
     <header class="brand">
-      <div class="brand-clock" aria-hidden="true"><img src="images\Alarm Clock.svg" width="100"></div>
+      <div class="home-tiki">
+        <div class="tiki tiki-home" id="tiki-home"></div>
+        <p class="speech home-speech">Hi, I'm <strong>Tiki</strong>! I always mix up my clocks. Will you help me learn?</p>
+      </div>
       <h1 id="home-title">Clock Practice</h1>
       <p class="subtitle">Learn to tell time while you play!</p>
     </header>
@@ -37,19 +34,19 @@
     <div class="card-row" role="radiogroup" aria-label="Choose an activity">
       <button type="button" class="choice-card" id="choice-set" data-activity="set" aria-pressed="false">
         <span class="choice-check" aria-hidden="true">✓</span>
-        <span class="choice-emoji" aria-hidden="true"><img src="images\set_clock.png" width="100"></span>
+        <span class="choice-emoji" aria-hidden="true"><img src="images/set_clock.png" alt="" width="88" height="88"></span>
         <span class="choice-title">Set the Clock</span>
         <span class="choice-desc">Move the hands to show the time</span>
       </button>
       <button type="button" class="choice-card" id="choice-tell" data-activity="tell" aria-pressed="false">
         <span class="choice-check" aria-hidden="true">✓</span>
-        <span class="choice-emoji" aria-hidden="true"><img src="images\tell-time.png" width="100"></span>
+        <span class="choice-emoji" aria-hidden="true"><img src="images/tell-time.png" alt="" width="88" height="88"></span>
         <span class="choice-title">Tell the Time</span>
         <span class="choice-desc">Look at the clock and type the time</span>
       </button>
       <button type="button" class="choice-card" id="choice-challenge" data-activity="challenge" aria-pressed="false">
         <span class="choice-check" aria-hidden="true">✓</span>
-        <span class="choice-emoji" aria-hidden="true"><img src="images\time-after.png" width="100"></span>
+        <span class="choice-emoji" aria-hidden="true"><img src="images/time-after.png" alt="" width="88" height="88"></span>
         <span class="choice-title">Time Challenge</span>
         <span class="choice-desc">Work out what time comes next</span>
       </button>
@@ -88,7 +85,7 @@
     </div>
 
     <button type="button" id="btn-start" class="btn btn-primary btn-huge">
-      Start Practice <span aria-hidden="true">▶</span>
+      Let's Go! <span aria-hidden="true">▶</span>
     </button>
 
     <button type="button" id="btn-sound" class="sound-toggle" aria-pressed="true">
@@ -146,12 +143,12 @@
     </div>
 
     <div class="hand-helper" id="hand-helper">
-      <span>🕓 <strong>Short hand</strong> = Hour</span>
-      <span>🕐 <strong>Long hand</strong> = Minutes</span>
+      <span><i class="swatch swatch-hour" aria-hidden="true"></i><strong>Short hand</strong> = Hour</span>
+      <span><i class="swatch swatch-minute" aria-hidden="true"></i><strong>Long hand</strong> = Minutes</span>
       <button type="button" id="btn-toggle-helper" class="link-btn">Hide this</button>
     </div>
 
-    <button type="button" id="btn-minute-helpers" class="btn btn-ghost" hidden>Show Minute Helpers</button>
+    <button type="button" id="btn-minute-helpers" class="btn btn-ghost btn-small" hidden>Show Minute Helpers</button>
 
     <!-- Tell the Time input -->
     <div class="answer-card" id="answer-card" hidden>
@@ -160,8 +157,7 @@
         <label for="time-input" class="visually-hidden">What time is it? Type the hour and minutes, like 3:30</label>
         <input type="text" id="time-input" class="time-input" inputmode="numeric" placeholder="--:--" aria-describedby="time-input-hint" autocomplete="off">
       </form>
-      <p id="time-input-hint" class="answer-card-example">Example: 03:30</p>
-      <p id="time-input-hint" class="answer-card-example">   Just type the numbers - we'll add the : for you!</p>
+      <p id="time-input-hint" class="answer-card-example">Just type the numbers, like 0330 — we'll add the : for you!</p>
 
       <!-- AM/PM selector: only shown for Time Challenge Level 3, where the
            story can cross from morning to afternoon/evening. -->
@@ -171,11 +167,25 @@
       </div>
     </div>
 
-    <p class="feedback-message" id="feedback-message" role="status" aria-live="polite"></p>
-    <p class="hint-message" id="hint-message" role="status" aria-live="polite"></p>
+    <!-- Tiki's stage: Tiki talks through the speech bubble (feedback and
+         hints live inside it) and walks off to the activity for the time
+         once the child answers correctly. -->
+    <div class="tiki-stage" id="tiki-stage">
+      <div class="tiki-scene" id="tiki-scene" aria-hidden="true"><span id="tiki-scene-emoji">🥞</span></div>
+      <div class="tiki-walker" id="tiki-walker">
+        <div class="tiki" id="tiki-practice"></div>
+      </div>
+      <div class="speech tiki-bubble" id="tiki-bubble">
+        <p class="tiki-line" id="tiki-line"></p>
+        <p class="feedback-message" id="feedback-message" role="status" aria-live="polite"></p>
+        <p class="hint-message" id="hint-message" role="status" aria-live="polite"></p>
+        <p class="tiki-caption" id="tiki-caption"></p>
+      </div>
+      <div class="tiki-ground" aria-hidden="true"></div>
+    </div>
 
     <div class="action-row">
-      <button type="button" id="btn-hint" class="btn btn-hint">💡 Hint</button>
+      <button type="button" id="btn-hint" class="btn btn-hint">💡 Ask Tiki for a hint</button>
       <button type="button" id="btn-check" class="btn btn-primary">✓ Check</button>
       <button type="button" id="btn-next" class="btn btn-next" hidden>Next Question →</button>
     </div>
@@ -186,7 +196,9 @@
   <!-- ============ RESULTS SCREEN ============ -->
   <section id="screen-results" class="screen" aria-labelledby="results-title">
     <div class="results-card">
-      <h2 id="results-title">🎉 Practice Complete!</h2>
+      <div class="tiki tiki-results" id="tiki-results"></div>
+      <h2 id="results-title">Practice Complete!</h2>
+      <p class="results-thanks">Thank you for helping me — now I can tell time too!</p>
       <p class="results-stars" id="results-stars"></p>
       <p class="results-summary" id="results-summary"></p>
 
@@ -206,7 +218,7 @@
       </dl>
 
       <div class="action-row">
-        <button type="button" id="btn-again" class="btn btn-primary">🔄 Practice Again</button>
+        <button type="button" id="btn-again" class="btn btn-primary">🔄 Play Again</button>
         <button type="button" id="btn-home2" class="btn btn-ghost">🏠 Back to Home</button>
       </div>
     </div>
@@ -216,13 +228,11 @@
 
 <div id="sr-live" class="visually-hidden" aria-live="polite"></div>
 
-    <!-- Footer -->
-    <footer class="bg-ink-800 text-white mt-12">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
-            <p class="text-sm">&copy; 2026 Mojgan Samandar. All rights reserved.</p>
-        </div>
-    </footer>
+<footer class="site-footer">
+  <p>&copy; 2026 Mojgan Samandar. All rights reserved.</p>
+</footer>
 
+<script src="tiki.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

@@ -103,6 +103,9 @@
       "screen-results", "results-stars", "results-summary",
       "stat-completed", "stat-firsttry", "stat-hints",
       "btn-again", "btn-home2", "sr-live",
+      "tiki-home", "tiki-practice", "tiki-results",
+      "tiki-stage", "tiki-walker", "tiki-scene-emoji",
+      "tiki-bubble", "tiki-line", "tiki-caption",
     ].forEach((id) => {
       el[toCamel(id)] = document.getElementById(id);
     });
@@ -363,6 +366,7 @@
     state.activeHand = hand;
     state.clockRect = el.clockFace.getBoundingClientRect();
     target.classList.add("dragging");
+    tikiWatch(true);
     try {
       target.setPointerCapture(pointerId);
     } catch (err) {
@@ -371,8 +375,10 @@
   }
 
   function endDrag(target) {
+    const wasDragging = state.activeHand !== null;
     state.activeHand = null;
     if (target) target.classList.remove("dragging");
+    if (wasDragging) tikiWatch(false);
   }
 
   function initDragHandlers() {
@@ -822,6 +828,7 @@
     updateMinuteHelperVisibility();
     updateProgress();
     updateScore();
+    tikiReset();
   }
 
   // Populates the instruction, story card / starting-time text, and
@@ -848,6 +855,7 @@
   }
 
   function endSession() {
+    clearTikiTimers();
     showScreen("results");
 
     const pct = state.totalQuestions > 0 ? state.firstTryCorrect / state.totalQuestions : 0;
@@ -966,23 +974,19 @@
    *  FEEDBACK
    * ------------------------------------------------------------------ */
 
-  const CORRECT_MESSAGES = ["🎉 Hooray! You got it!", "⭐ Great job!", "🎉 Fantastic!"];
+  const CORRECT_MESSAGES = ["🎉 Hooray, you got it!", "⭐ You did it!", "🎉 Fantastic!", "🌟 Brilliant!"];
   const TRYAGAIN_MESSAGES = ["🙂 Almost! Try again.", "😕 Almost! Look at the clock again."];
 
   function showCorrectFeedback() {
     const q = state.currentQuestion;
-    let msg;
-    if (state.currentActivity === "tell") {
-      msg = `🎉 Great job! ${formatTime(q.hour, q.minute)} is correct!`;
-    } else if (state.currentActivity === "challenge") {
-      const timeStr =
-        q.level === 3
-          ? formatTimeAmPm(q.correctHour, q.correctMinute, q.correctIsPM)
-          : formatTime(q.correctHour, q.correctMinute);
-      msg = `🎉 Great job! ${timeStr} is correct!`;
-    } else {
-      msg = CORRECT_MESSAGES[randInt(0, CORRECT_MESSAGES.length - 1)];
-    }
+    const target = targetTimeOf(q);
+    const scene = window.Tiki.sceneFor(target.hour, target.minute, target.isPM);
+    const timeStr =
+      target.isPM === null
+        ? formatTime(target.hour, target.minute)
+        : formatTimeAmPm(target.hour, target.minute, target.isPM);
+    const cheer = CORRECT_MESSAGES[randInt(0, CORRECT_MESSAGES.length - 1)];
+    const msg = `${cheer} ${timeStr} is ${scene.place}!`;
 
     el.feedbackMessage.textContent = msg;
     el.feedbackMessage.classList.remove("is-error");
@@ -995,6 +999,7 @@
 
     playSound("correct");
     celebrate();
+    tikiCelebrate(scene);
     announce(msg);
   }
 
@@ -1014,6 +1019,7 @@
     el.feedbackMessage.textContent = msg;
     el.feedbackMessage.classList.add("is-error");
     playSound("tryagain");
+    tikiOops();
     announce(msg);
   }
 
@@ -1033,11 +1039,7 @@
       container.appendChild(piece);
     }
 
-    const mascot = document.createElement("div");
-    mascot.className = "mascot-star";
-    mascot.textContent = "🌟";
-    container.appendChild(mascot);
-
+    // (Tiki does the celebrating now, so no separate star mascot.)
     setTimeout(() => {
       container.innerHTML = "";
     }, 1600);
@@ -1169,7 +1171,121 @@
       state.hintsShownForCurrentQuestion++;
     }
     state.hintsUsed++;
+    tikiHint();
     announce(hints[idx]);
+  }
+
+  /* ------------------------------------------------------------------ *
+   *  TIKI (see tiki.js for the character itself)
+   *  Waiting -> confused. Dragging -> watches the clock. Wrong -> "oops".
+   *  Hint -> points at a light bulb. Correct -> hops for joy, then walks
+   *  off to the activity that happens at that time (e.g. 7:00 breakfast).
+   * ------------------------------------------------------------------ */
+
+  const TIKI_HOP_MS = 1300;   // happy hop before walking off
+  const TIKI_WALK_MS = 1600;  // must match .tiki-walker transition in style.css
+  let tikiTimers = [];
+
+  function clearTikiTimers() {
+    tikiTimers.forEach(clearTimeout);
+    tikiTimers = [];
+  }
+
+  function tikiLater(fn, ms) {
+    tikiTimers.push(setTimeout(fn, ms));
+  }
+
+  function tikiMood(mood) {
+    if (window.Tiki) window.Tiki.setMood(el.tikiPractice, mood);
+  }
+
+  // The time the child has to find, plus AM/PM when the question has one.
+  function targetTimeOf(q) {
+    if (state.currentActivity === "challenge") {
+      return {
+        hour: q.correctHour,
+        minute: q.correctMinute,
+        isPM: q.level === 3 ? q.correctIsPM : null,
+      };
+    }
+    return { hour: q.hour, minute: q.minute, isPM: null };
+  }
+
+  // Tiki's own waiting line is shown only while there is no feedback or hint.
+  function refreshTikiBubble() {
+    const hasMessage = el.feedbackMessage.textContent !== "" || el.hintMessage.textContent !== "";
+    el.tikiBubble.classList.toggle("has-message", hasMessage);
+  }
+
+  function tikiReset() {
+    if (!window.Tiki || !el.tikiStage) return;
+    clearTikiTimers();
+    const stage = el.tikiStage;
+    // Jump back to the start instantly (no walking backwards), then hop in.
+    stage.classList.add("no-anim");
+    stage.classList.remove("is-walking", "is-arrived");
+    void stage.offsetWidth;
+    stage.classList.remove("no-anim");
+    el.tikiWalker.classList.remove("enter");
+    void el.tikiWalker.offsetWidth;
+    el.tikiWalker.classList.add("enter");
+
+    el.tikiCaption.textContent = "";
+    const q = state.currentQuestion;
+    const time = state.currentActivity === "set" && q ? formatTime(q.hour, q.minute) : "";
+    el.tikiLine.textContent = window.Tiki.waitingLine(state.currentActivity, time);
+    tikiMood("confused");
+    refreshTikiBubble();
+  }
+
+  function tikiWatch(isDragging) {
+    if (state.currentActivity !== "set" || state.answeredCorrectly) return;
+    clearTikiTimers();
+    if (isDragging) {
+      tikiMood("watching");
+    } else {
+      tikiLater(() => {
+        if (!state.answeredCorrectly) tikiMood("confused");
+      }, 700);
+    }
+  }
+
+  function tikiOops() {
+    clearTikiTimers();
+    tikiMood("oops");
+    refreshTikiBubble();
+    tikiLater(() => {
+      if (!state.answeredCorrectly) tikiMood("confused");
+    }, 1700);
+  }
+
+  function tikiHint() {
+    clearTikiTimers();
+    tikiMood("hint");
+    refreshTikiBubble();
+    tikiLater(() => {
+      if (!state.answeredCorrectly) tikiMood("confused");
+    }, 3000);
+  }
+
+  function tikiCelebrate(scene) {
+    clearTikiTimers();
+    el.tikiSceneEmoji.textContent = scene.emoji;
+    const place = scene.place.charAt(0).toUpperCase() + scene.place.slice(1);
+    el.tikiCaption.textContent = `${place}! ${scene.line} ${scene.emoji}`;
+    tikiMood("happy");
+    refreshTikiBubble();
+
+    tikiLater(() => {
+      el.tikiStage.classList.add("is-walking");
+      tikiMood("walking");
+    }, TIKI_HOP_MS);
+
+    tikiLater(() => {
+      el.tikiStage.classList.add("is-arrived");
+      tikiMood("activity");
+      playSound("arrive");
+    }, TIKI_HOP_MS + TIKI_WALK_MS);
   }
 
   /* ------------------------------------------------------------------ *
@@ -1205,7 +1321,12 @@
     if (ctx.state === "suspended") ctx.resume();
 
     const now = ctx.currentTime;
-    const notes = type === "correct" ? [523.25, 659.25, 783.99] : [392, 349.23];
+    const NOTES = {
+      correct: [523.25, 659.25, 783.99],
+      tryagain: [392, 349.23],
+      arrive: [783.99, 1046.5],
+    };
+    const notes = NOTES[type] || NOTES.correct;
 
     notes.forEach((freq, i) => {
       const osc = ctx.createOscillator();
@@ -1333,6 +1454,7 @@
       }
       endDrag(el.hourGrabber);
       endDrag(el.minuteGrabber);
+      clearTikiTimers();
       resetSession();
       showScreen("home");
     });
@@ -1380,6 +1502,11 @@
 
   function init() {
     cacheDom();
+    if (window.Tiki) {
+      window.Tiki.mount(el.tikiHome, "wave");
+      window.Tiki.mount(el.tikiPractice, "confused");
+      window.Tiki.mount(el.tikiResults, "proud");
+    }
     buildClockFace();
     setActivity(state.currentActivity);
     setLevel(state.difficultyLevel);
