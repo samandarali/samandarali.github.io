@@ -1260,6 +1260,160 @@ input:focus-visible,
 }
 
 /* ==========================================================================
+   HOME SCREEN LAYOUT
+   Phones: welcome card, then the three numbered steps, then Let's Go.
+   Wide screens: welcome card on the left, steps on the right, one screen.
+   ========================================================================== */
+
+.home-layout,
+.home-setup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* welcome card */
+.home-hero {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 22px 20px 20px;
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background:
+    radial-gradient(260px 200px at 85% 10%, rgba(255, 211, 107, 0.35), transparent 70%),
+    radial-gradient(300px 240px at 10% 95%, rgba(63, 207, 148, 0.18), transparent 70%),
+    linear-gradient(160deg, #f3efff 0%, #e8f2ff 60%, #fdf7ea 100%);
+  box-shadow: var(--shadow-card);
+}
+.home-hero > * { position: relative; z-index: 1; }
+.home-hero h1 span { color: var(--grape); }
+
+.hero-deco { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.deco {
+  position: absolute;
+  font-size: 26px;
+  opacity: 0.35;
+  animation: deco-float 6s ease-in-out infinite;
+}
+.deco-1 { top: 8%; left: 7%; }
+.deco-2 { top: 12%; right: 9%; animation-delay: -1.5s; font-size: 22px; }
+.deco-3 { bottom: 10%; right: 8%; animation-delay: -3s; }
+.deco-4 { bottom: 16%; left: 9%; animation-delay: -4.5s; font-size: 20px; }
+@keyframes deco-float {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50% { transform: translateY(-8px) rotate(6deg); }
+}
+
+/* small info chips (not buttons: flat, no border or shadow) */
+.hero-chips {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.hero-chips li {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--navy-soft);
+}
+
+/* numbered steps */
+.step-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.step-num {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--grape);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 4px 10px -4px rgba(99, 82, 209, 0.7);
+}
+
+/* phones: the three games sit side by side as compact cards */
+@media (max-width: 600px) {
+  .home-setup .card-row { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+  .home-setup .choice-card { padding: 12px 6px 10px; gap: 4px; border-radius: 20px; }
+  .home-setup .choice-emoji img { width: 52px; height: 52px; }
+  .home-setup .choice-title { font-size: 14px; line-height: 1.15; }
+  .home-setup .choice-desc { display: none; }
+  .home-setup .choice-check { width: 24px; height: 24px; font-size: 12px; top: -8px; right: -6px; }
+  .home-setup .setup-panel { padding: 14px 14px; }
+  .home-setup .pill-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .home-setup #level-group-challenge { grid-template-columns: repeat(3, 1fr); }
+  .home-setup .pill { min-width: 0; padding: 7px 4px; font-size: 13px; }
+  .home-setup .pill span { font-size: 10px; }
+  .home-setup .setup-group + .setup-group { margin-top: 12px; padding-top: 12px; }
+  .home-hero { padding: 16px 16px 14px; margin-bottom: 14px; }
+  .home-hero .hero-chips { display: none; }
+}
+
+@media (min-width: 860px) {
+  #screen-home { width: 100%; max-width: 1120px; margin: 0 auto; }
+
+  .home-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    column-gap: clamp(24px, 3.5vw, 44px);
+    align-items: center;
+    min-height: calc(100vh - 70px);
+  }
+
+  .home-hero {
+    margin: 0;
+    padding: clamp(26px, 4vh, 44px) 28px;
+    min-height: min(560px, calc(100vh - 120px));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .home-hero .home-tiki { flex-direction: column; gap: 14px; margin-bottom: 4px; }
+  .home-hero .tiki.tiki-home { width: clamp(130px, 22vh, 190px); }
+  .home-hero .home-speech { max-width: 300px; text-align: center; }
+  .home-hero .home-speech::before {
+    left: 50%;
+    top: -9px;
+    transform: translateX(-50%) rotate(135deg);
+  }
+  .home-hero h1 { font-size: clamp(40px, 4.4vw, 58px); margin-top: 10px; }
+
+  .home-setup { align-items: stretch; }
+  .home-setup .card-row { gap: 12px; margin-bottom: 14px; }
+  .home-setup .choice-card { padding: 14px 10px 12px; gap: 4px; }
+  .home-setup .choice-emoji img { width: clamp(52px, 8vh, 72px); height: clamp(52px, 8vh, 72px); }
+  .home-setup .choice-title { font-size: 17px; }
+  .home-setup .choice-desc { font-size: 12.5px; }
+  .home-setup .setup-panel { padding: 16px 18px; margin-bottom: 14px; }
+  .home-setup .setup-group + .setup-group { margin-top: 12px; padding-top: 12px; }
+  .home-setup .pill { padding: 8px 12px; }
+  .home-setup .btn-huge { margin-bottom: 10px; padding: 14px 28px; }
+}
+
+/* ==========================================================================
    PRACTICE LAYOUT
    Phones: one column (question, clock, helpers, Tiki, buttons).
    Wide screens: clock on the left, everything else on the right, sized
@@ -1275,8 +1429,7 @@ input:focus-visible,
   align-items: center;
 }
 
-/* home and results stay a comfortable reading width */
-#screen-home,
+/* results stays a comfortable reading width */
 #screen-results {
   width: 100%;
   max-width: 720px;

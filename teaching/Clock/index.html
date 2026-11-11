@@ -22,15 +22,27 @@
 
   <!-- ============ HOME SCREEN ============ -->
   <section id="screen-home" class="screen active-screen" aria-labelledby="home-title">
-    <header class="brand">
+    <!-- Two columns on wide screens: welcome card left, setup steps right. -->
+    <div class="home-layout">
+    <header class="brand home-hero">
+      <div class="hero-deco" aria-hidden="true">
+        <span class="deco deco-1">🕐</span><span class="deco deco-2">⭐</span><span class="deco deco-3">🕒</span><span class="deco deco-4">✨</span>
+      </div>
       <div class="home-tiki">
         <div class="tiki tiki-home" id="tiki-home"></div>
         <p class="speech home-speech">Hi, I'm <strong>Tiki</strong>! I always mix up my clocks. Will you help me learn?</p>
       </div>
-      <h1 id="home-title">Clock Practice</h1>
+      <h1 id="home-title">Clock <span>Practice</span></h1>
       <p class="subtitle">Learn to tell time while you play!</p>
+      <ul class="hero-chips" aria-label="What you can do">
+        <li>🕹️ 3 games</li>
+        <li>🪜 Easy to tricky levels</li>
+        <li>🦉 Tiki helps with hints</li>
+      </ul>
     </header>
 
+    <div class="home-setup">
+    <h2 class="step-label"><span class="step-num" aria-hidden="true">1</span> Choose a game</h2>
     <div class="card-row" role="radiogroup" aria-label="Choose an activity">
       <button type="button" class="choice-card" id="choice-set" data-activity="set" aria-pressed="false">
         <span class="choice-check" aria-hidden="true">✓</span>
@@ -54,7 +66,7 @@
 
     <div class="setup-panel">
       <div class="setup-group" id="setup-group-standard-levels">
-        <h2 class="setup-label">Difficulty</h2>
+        <h2 class="setup-label step-label"><span class="step-num" aria-hidden="true">2</span> Pick a level</h2>
         <div class="pill-row" role="radiogroup" aria-label="Choose difficulty level" id="level-group">
           <button type="button" class="pill" data-level="1" aria-pressed="false">Level 1<span>O'Clock</span></button>
           <button type="button" class="pill" data-level="2" aria-pressed="false">Level 2<span>Half Hours</span></button>
@@ -65,7 +77,7 @@
 
       <!-- Difficulty levels shown only for the Time Challenge activity. -->
       <div class="setup-group" id="setup-group-challenge-levels" hidden>
-        <h2 class="setup-label">Difficulty</h2>
+        <h2 class="setup-label step-label"><span class="step-num" aria-hidden="true">2</span> Pick a level</h2>
         <div class="pill-row" role="radiogroup" aria-label="Choose Time Challenge difficulty level" id="level-group-challenge">
           <button type="button" class="pill" data-clevel="1" aria-pressed="false">Level 1<span>15, 30 &amp; 45 Min</span></button>
           <button type="button" class="pill" data-clevel="2" aria-pressed="false">Level 2<span>Hours &amp; Minutes</span></button>
@@ -74,7 +86,7 @@
       </div>
 
       <div class="setup-group">
-        <h2 class="setup-label">How many questions?</h2>
+        <h2 class="setup-label step-label"><span class="step-num" aria-hidden="true">3</span> How many questions?</h2>
         <div class="pill-row" role="radiogroup" aria-label="Choose number of questions" id="count-group">
           <button type="button" class="pill pill-num" data-count="5" aria-pressed="false">5</button>
           <button type="button" class="pill pill-num" data-count="10" aria-pressed="false">10</button>
@@ -98,6 +110,8 @@
         <span class="music-text">Music On</span>
       </button>
     </div>
+    </div><!-- /.home-setup -->
+    </div><!-- /.home-layout -->
   </section>
 
   <!-- ============ PRACTICE SCREEN ============ -->
