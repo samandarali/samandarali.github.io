@@ -190,16 +190,6 @@
       tags: ['Commercial credit', 'Financial statements', 'Collateral']
     },
     {
-      id: 'alzahra', type: 'study', glyph: 'cap',
-      img: { src: 'images/journey/alzahra.jpg', kind: 'logo', alt: 'Alzahra University logo' },
-      role: 'M.Sc., Economics', short: 'Alzahra M.Sc.',
-      org: 'Alzahra University', place: 'Tehran, Iran', start: [2003, 9], end: [2006, 12],
-      points: [
-        'Thesis: Moral Hazard as a Structural Flaw in Cooperatives (supervisor: Hossein Raghfar).'
-      ],
-      tags: ['Economics', 'Cooperatives']
-    },
-    {
       id: 'research-assistant', type: 'work', glyph: 'research', approx: true, during: 'Until I moved to Sweden',
       img: { src: 'images/journey/alzahra.jpg', kind: 'logo', alt: 'Alzahra University logo' },
       role: 'Research Assistant & Excel Instructor', short: 'Research Asst. & Excel',
@@ -211,6 +201,16 @@
       tags: ['Research', 'Excel', 'Teaching']
     },
     {
+      id: 'alzahra', type: 'study', glyph: 'cap',
+      img: { src: 'images/journey/alzahra.jpg', kind: 'logo', alt: 'Alzahra University logo' },
+      role: 'M.Sc., Economics', short: 'Alzahra M.Sc.',
+      org: 'Alzahra University', place: 'Tehran, Iran', start: [2003, 9], end: [2006, 12],
+      points: [
+        'Thesis: Moral Hazard as a Structural Flaw in Cooperatives (supervisor: Hossein Raghfar).'
+      ],
+      tags: ['Economics', 'Cooperatives']
+    },
+    {
       id: 'council-secretary', type: 'lead', glyph: 'people',
       img: { src: 'images/journey/alzahra.jpg', kind: 'logo', alt: 'Alzahra University logo' },
       role: 'Secretary, Economy Scientific Council', short: 'Council Secretary',
@@ -219,6 +219,16 @@
         'Served as secretary of the economics scientific council while studying for my M.Sc.'
       ],
       tags: ['Leadership', 'Organizing']
+    },
+    {
+      id: 'typist', type: 'work', glyph: 'keys', approx: true, during: 'Final B.A. year → first M.Sc. year',
+      role: 'Typist & Excel Data Analyst', short: 'Typist & Excel',
+      org: 'Part-time job while studying', place: 'Tehran, Iran', start: [2002, 9], end: [2004, 6],
+      points: [
+        'My very first job, from the final year of my B.A. through the first year of my M.Sc.: typing documents quickly and accurately.',
+        'Entered, organized and analyzed data in Excel — my first hands-on data analysis work.'
+      ],
+      tags: ['First job', 'Excel', 'Data entry', 'Data analysis']
     },
     {
       id: 'council-member', type: 'lead', glyph: 'people',
@@ -240,16 +250,6 @@
         'Graduated in July 2003, majoring in Business Economics.'
       ],
       tags: ['Economics', 'Business']
-    },
-    {
-      id: 'typist', type: 'work', glyph: 'keys', approx: true, during: 'During my B.A.',
-      role: 'Typist & Excel Data Analyst', short: 'Typist & Excel',
-      org: 'Part-time job while studying', place: 'Tehran, Iran', start: [1999, 9], end: [2003, 7],
-      points: [
-        'My very first job, alongside my B.A.: typing documents quickly and accurately.',
-        'Entered, organized and analyzed data in Excel — my first hands-on data analysis work.'
-      ],
-      tags: ['First job', 'Excel', 'Data entry', 'Data analysis']
     }
   ];
 
