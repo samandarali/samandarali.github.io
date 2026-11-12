@@ -6,6 +6,8 @@
    timeline ribbon underneath shows which roles overlapped.
 
    To edit the content, change the JOURNEY list below.
+   After changing this file or styles/journey.css, bump the ?v=… number on
+   their links in index.html so browsers load the new version, not a cached one.
    start / end are [year, month]; end: null means "Present".
    approx: true means the exact months are unknown; the years still show,
    with the 'during' label underneath (used for the typist job).
@@ -14,6 +16,7 @@
   const JOURNEY = [
     {
       id: 'pratech', type: 'work', glyph: 'spark', now: true,
+      img: { src: 'images/journey/pratech.webp', kind: 'logo', alt: 'PraTech Digital logo' },
       role: 'Independent Researcher and Data Science Consultant', short: 'PraTech',
       org: 'PraTech Digital (self-employed)', url: 'https://pratechdigital.com/',
       place: 'Remote, Canada', start: [2025, 10], end: null,
