@@ -193,6 +193,17 @@ html[data-theme="dark"] .journey {
     background: #fff;
     box-shadow: 0 .8em 2em rgba(0, 0, 0, .28);
 }
+/* several logos side by side (e.g. the three universities I lectured at) */
+.jr-c-media.multi { display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: .7em; }
+.jr-c-media.multi img {
+    width: 28%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    padding: .45em;
+    border-radius: .7em;
+    background: #fff;
+    box-shadow: 0 .6em 1.6em rgba(0, 0, 0, .28);
+}
 .jr-c-media.bare img { max-width: 80%; max-height: 60%; }
 .jr-c-media.photo { place-items: stretch; }
 .jr-c-media.photo > img {

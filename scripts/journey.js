@@ -54,6 +54,7 @@
     },
     {
       id: 'dollarama', type: 'work', glyph: 'store',
+      img: { src: 'images/journey/dollarama.jpg', kind: 'photo', alt: 'A Dollarama store entrance' },
       role: 'Team Leader', short: 'Dollarama',
       org: 'Dollarama', place: 'Ontario, Canada', start: [2023, 10], end: [2025, 6],
       points: [
@@ -88,6 +89,7 @@
     },
     {
       id: 'head', type: 'lead', glyph: 'compass',
+      img: { src: 'images/journey/nrisp.png', kind: 'logo', alt: 'National Research Institute for Science Policy (NRISP)' },
       role: 'Department Head, Policy Evaluation and STI Monitoring', short: 'Head of Dept.',
       org: 'National Research Institute for Science Policy (NRISP)', place: 'Tehran, Iran',
       start: [2020, 11], end: [2021, 11],
@@ -100,6 +102,7 @@
     },
     {
       id: 'nrisp', type: 'work', glyph: 'research',
+      img: { src: 'images/journey/nrisp.png', kind: 'logo', alt: 'National Research Institute for Science Policy (NRISP)' },
       role: 'Research Faculty Member', short: 'NRISP',
       org: 'National Research Institute for Science Policy (NRISP)', place: 'Tehran, Iran',
       start: [2018, 11], end: [2022, 12],
@@ -114,6 +117,7 @@
     },
     {
       id: 'lecturer', type: 'teach', glyph: 'board',
+      img: { kind: 'logos', alt: 'University logos', srcs: ['images/journey/allameh-tabatabai.jpg', 'images/journey/amirkabir.png', 'images/journey/alzahra.jpg'] },
       role: 'University Lecturer', short: 'Lecturer',
       org: 'Allameh Tabataba’i, Amirkabir & Alzahra Universities', place: 'Tehran, Iran',
       start: [2017, 12], end: [2022, 11],
@@ -171,6 +175,7 @@
     },
     {
       id: 'tehranfanavari', type: 'work', glyph: 'briefcase',
+      img: { src: 'images/journey/tehran-fanavari.jpg', kind: 'logo', alt: 'Tehran Fanavari Trade office (TFT) logo' },
       role: 'Commercial Manager', short: 'Tehran Fanavari',
       org: 'Tehran Fanavari Trading Co.', place: 'Tehran, Iran', start: [2011, 4], end: [2011, 7],
       points: [
@@ -361,6 +366,7 @@
     const m = e.img;
     if (!m) return `<div class="jr-c-glyph">${svgIcon(e.glyph)}</div>`;
     const img = `<img src="${m.src}" alt="${esc(m.alt || '')}" loading="lazy" decoding="async" draggable="false">`;
+    if (m.kind === 'logos') return `<div class="jr-c-media multi">${m.srcs.map(src => `<img src="${src}" alt="" loading="lazy" decoding="async" draggable="false">`).join('')}</div>`;
     if (m.kind === 'photo') return `<div class="jr-c-media photo">${img}${m.badge ? `<span class="jr-c-badge"><img src="${m.badge}" alt="" draggable="false"></span>` : ''}</div>`;
     return `<div class="jr-c-media ${m.kind === 'logo-light' ? 'bare' : 'tile'}">${img}</div>`;
   }
