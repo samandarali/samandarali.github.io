@@ -129,6 +129,7 @@
     },
     {
       id: 'elites', type: 'work', glyph: 'research',
+      img: { src: 'images/journey/elites-foundation.jpg', kind: 'logo', alt: 'Iran’s National Elites Foundation logo' },
       role: 'Senior Researcher and Policy Analyst', short: 'Elites Foundation',
       org: 'Iran’s National Elites Foundation', place: 'Tehran, Iran',
       start: [2016, 12], end: [2017, 12],
@@ -140,6 +141,8 @@
     },
     {
       id: 'jofreh', type: 'work', glyph: 'chart',
+      // photo: StockSnap, CC0 public domain (stocksnap.io/photo/business-working-PHE63L27S6)
+      img: { src: 'images/journey/jofreh-market-research.jpg', kind: 'photo', alt: 'Laptop showing sales charts' },
       role: 'Market Analyst', short: 'Jofreh',
       org: 'Jofreh United Industries', place: 'Tehran, Iran', start: [2015, 9], end: [2016, 11],
       points: [
@@ -185,7 +188,7 @@
     },
     {
       id: 'gothenburg', type: 'study', glyph: 'cap',
-      img: { src: 'images/journey/gothenburg.svg', kind: 'logo', alt: 'University of Gothenburg seal' },
+      img: { src: 'images/journey/gothenburg-university-building.jpg', kind: 'photo', badge: 'images/journey/gothenburg.svg', alt: 'The University of Gothenburg main building at Vasaparken' },
       role: 'M.Sc., Industrial Economics', short: 'Gothenburg M.Sc.',
       org: 'University of Gothenburg', place: 'Gothenburg, Sweden', start: [2008, 10], end: [2011, 5],
       points: [
