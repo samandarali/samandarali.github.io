@@ -37,6 +37,8 @@
 
 
     <link rel="stylesheet" href="styles/style-teaching.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/journey.css" />
     <style>
         :root {
             --teal-deep: #2a74ab;
@@ -88,6 +90,17 @@
 
         .tab-button:not(.active):hover {
             color: var(--teal-mid);
+        }
+
+        /* on narrow screens the tab row scrolls sideways instead of widening the page */
+        body > nav .flex {
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        body > nav .flex::-webkit-scrollbar { display: none; }
+        .tab-button {
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         /* ── HEADER ── */
@@ -1568,6 +1581,9 @@
                 <button id="tab-about" data-target="content-about" class="tab-button active py-3 px-2 text-ink-600">
                     About Me
                 </button>
+                <button id="tab-journey" data-target="content-journey" class="tab-button py-3 px-2 text-ink-600">
+                    My Journey
+                </button>
                 <button id="tab-projects" data-target="content-projects" class="tab-button py-3 px-2 text-ink-600">
                     Projects
                 </button>
@@ -2262,6 +2278,57 @@
 
         </section>
 
+        <!-- My Journey: career runway (styles/journey.css, scripts/journey.js) -->
+        <section id="content-journey" class="tab-content hidden journey" aria-labelledby="journey-heading">
+            <div class="jr-frame">
+                <div class="jr-main">
+                    <div class="jr-stage" id="jr-stage" tabindex="0"
+                        aria-label="Career timeline. Drag, scroll or use the arrow keys to move through the years.">
+                        <div class="jr-line" id="jr-line"></div>
+                        <div class="jr-intro">
+                            <p class="jr-eyebrow wide">Newest first</p>
+                            <h2 id="journey-heading" class="wide">My Journey</h2>
+                            <p>From typing and Excel analysis as a bachelor&rsquo;s student, to credit risk, research and
+                                teaching, to data science today. Each step forward takes you one step back in time.</p>
+                        </div>
+                        <div class="jr-tag">
+                            <div class="jr-look wide"><span class="jr-win"><span class="jr-roll" id="jr-roll"></span></span></div>
+                            <div class="jr-tag-row">
+                                <button type="button" class="jr-arrow" id="jr-prev" aria-label="More recent">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+                                </button>
+                                <button type="button" class="jr-arrow" id="jr-next" aria-label="Further back">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+                                </button>
+                                <span class="jr-count wide"><span id="jr-idx">01</span> / <span id="jr-total">15</span></span>
+                                <span class="jr-hint wide">Drag &middot; scroll &middot; &larr; &rarr;</span>
+                            </div>
+                        </div>
+                        <div class="jr-ring" id="jr-ring"></div>
+                        <p class="jr-sr" id="jr-live" aria-live="polite"></p>
+                    </div>
+                    <aside class="jr-rail" id="jr-rail" aria-label="Details of the selected role"></aside>
+                </div>
+                <div class="jr-ribbon-wrap">
+                    <div class="jr-ribbon-head">
+                        <div>
+                            <h3 class="wide">Timeline</h3>
+                            <p>Bars stacked above each other ran at the same time. Click a bar, or drag the orange line through time.</p>
+                        </div>
+                        <div class="jr-legend">
+                            <span><i class="k-pick"></i>Selected</span>
+                            <span><i class="k-along"></i>At the same time</span>
+                            <span><i class="k-bar"></i>Work</span>
+                            <span><i class="k-edu"></i>Education</span>
+                            <span><i class="k-approx"></i>Exact months unknown</span>
+                        </div>
+                    </div>
+                    <div class="jr-ribbon-scroll" id="jr-ribbon-scroll">
+                        <div class="jr-ribbon" id="jr-ribbon"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -2385,6 +2452,9 @@
         if (window.location.hash === '#teaching') {
             switchTab('content-teaching');
         }
+        if (window.location.hash === '#journey') {
+            switchTab('content-journey');
+        }
 
         // ── Services 3D carousel ──
         (function () {
@@ -2506,6 +2576,7 @@
 
     </script>
 
+    <script src="scripts/journey.js"></script>
 </body>
 
 </html>
