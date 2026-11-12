@@ -147,6 +147,7 @@
     },
     {
       id: 'phd', type: 'study', glyph: 'cap',
+      img: { src: 'images/journey/santanna-campus.jpg', kind: 'photo', badge: 'images/journey/santanna-logo.jpg', alt: 'Campus of the Sant’Anna School of Advanced Studies, Pisa' },
       role: 'Ph.D., Economics', short: 'Sant’Anna Ph.D.',
       org: 'Sant’Anna School of Advanced Studies', place: 'Pisa, Italy', start: [2011, 10], end: [2015, 5],
       points: [
