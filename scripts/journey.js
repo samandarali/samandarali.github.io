@@ -27,8 +27,10 @@
     },
     {
       id: 'iehps', type: 'teach', glyph: 'pipeline',
+      img: { src: 'images/journey/iehps-workshop.jpg', kind: 'photo', badge: 'images/journey/iehps-logo.png', alt: 'Workshop with IEHPs-CAN participants' },
       role: 'Data Analytics Lead Facilitator', short: 'IEHPs-CAN',
       org: 'IEHPs-CAN, Internationally Educated Health Professionals', place: 'Canada',
+      url: 'https://internationalhealthprofessionals.ca/',
       start: [2026, 3], end: [2026, 4],
       points: [
         'Delivered a 9-week healthcare analytics program for internationally educated health professionals using SQL, Excel and Power BI.',
@@ -40,6 +42,7 @@
     },
     {
       id: 'spirit', type: 'teach', glyph: 'board',
+      img: { src: 'images/journey/spirit-of-math.webp', kind: 'logo', alt: 'Spirit of Math logo' },
       role: 'Mathematics Teacher', short: 'Spirit of Math',
       org: 'Spirit of Math Schools', place: 'Markham, ON', start: [2025, 8], end: [2026, 7],
       points: [
@@ -60,6 +63,7 @@
     },
     {
       id: 'trent', type: 'study', glyph: 'cap',
+      img: { src: 'images/journey/trent.png', kind: 'logo-light', alt: 'Trent University logo' },
       role: 'M.Sc., Big Data Analytics', short: 'Trent M.Sc.',
       org: 'Trent University', place: 'Peterborough, ON', start: [2023, 1], end: [2024, 5],
       points: [
@@ -162,6 +166,7 @@
     },
     {
       id: 'gothenburg', type: 'study', glyph: 'cap',
+      img: { src: 'images/journey/gothenburg.svg', kind: 'logo', alt: 'University of Gothenburg seal' },
       role: 'M.Sc., Industrial Economics', short: 'Gothenburg M.Sc.',
       org: 'University of Gothenburg', place: 'Gothenburg, Sweden', start: [2008, 10], end: [2011, 5],
       points: [
@@ -183,6 +188,7 @@
     },
     {
       id: 'alzahra', type: 'study', glyph: 'cap',
+      img: { src: 'images/journey/alzahra.jpg', kind: 'logo', alt: 'Alzahra University logo' },
       role: 'M.Sc., Economics', short: 'Alzahra M.Sc.',
       org: 'Alzahra University', place: 'Tehran, Iran', start: [2003, 9], end: [2006, 12],
       points: [
@@ -192,6 +198,7 @@
     },
     {
       id: 'research-assistant', type: 'work', glyph: 'research', approx: true, during: 'During my M.Sc.',
+      img: { src: 'images/journey/alzahra.jpg', kind: 'logo', alt: 'Alzahra University logo' },
       role: 'Research Assistant & Excel Instructor', short: 'Research Asst. & Excel',
       org: 'Alzahra University', place: 'Tehran, Iran', start: [2003, 9], end: [2006, 12],
       points: [
@@ -202,6 +209,7 @@
     },
     {
       id: 'council-secretary', type: 'lead', glyph: 'people',
+      img: { src: 'images/journey/alzahra.jpg', kind: 'logo', alt: 'Alzahra University logo' },
       role: 'Secretary, Economy Scientific Council', short: 'Council Secretary',
       org: 'Alzahra University', place: 'Tehran, Iran', start: [2003, 9], end: [2005, 6],
       points: [
@@ -211,6 +219,7 @@
     },
     {
       id: 'council-member', type: 'lead', glyph: 'people',
+      img: { src: 'images/journey/allameh-tabatabai.jpg', kind: 'logo', alt: 'Allameh Tabataba’i University logo' },
       role: 'Member, Economy Scientific Council', short: 'Council Member',
       org: 'Allameh Tabataba’i University', place: 'Tehran, Iran', start: [2002, 9], end: [2003, 6],
       points: [
@@ -220,6 +229,7 @@
     },
     {
       id: 'ba', type: 'study', glyph: 'cap',
+      img: { src: 'images/journey/allameh-tabatabai.jpg', kind: 'logo', alt: 'Allameh Tabataba’i University logo' },
       role: 'B.A., Business Economics', short: 'B.A.',
       org: 'Allameh Tabataba’i University', place: 'Tehran, Iran', start: [1999, 9], end: [2003, 7],
       points: [
@@ -319,6 +329,15 @@
       return `--c1:${c(-6)};--c2:${c(4)};--c3:${c(18)}`;
     };
   })();
+  // picture area on each card: a photo, a logo (on a white tile, or straight on the card
+  // for light-coloured logos), or the line icon when there is no image
+  function media(e) {
+    const m = e.img;
+    if (!m) return `<div class="jr-c-glyph">${svgIcon(e.glyph)}</div>`;
+    const img = `<img src="${m.src}" alt="${esc(m.alt || '')}" loading="lazy" decoding="async" draggable="false">`;
+    if (m.kind === 'photo') return `<div class="jr-c-media photo">${img}${m.badge ? `<span class="jr-c-badge"><img src="${m.badge}" alt="" draggable="false"></span>` : ''}</div>`;
+    return `<div class="jr-c-media ${m.kind === 'logo-light' ? 'bare' : 'tile'}">${img}</div>`;
+  }
   const people = JOURNEY.map((e, i) => {
     const el = document.createElement('div');
     el.className = 'jr-m';
@@ -331,7 +350,7 @@
           <b>${e.start[0]}</b>
           <span>${e.approx ? esc(e.during) : monthSpan(e)}</span>
         </div>
-        <div class="jr-c-glyph">${svgIcon(e.glyph)}</div>
+        ${media(e)}
         <div class="jr-c-foot">
           <h3>${esc(e.role)}</h3>
           <p>${esc(e.org)}</p>
@@ -371,8 +390,8 @@
   // label: inside the bar when it fits, just after it when it doesn't.
   const T0 = Math.min(...JOURNEY.map(e => e.start[0])), T1 = NOW[0] + 1, span = T1 - T0;
   const fmt = ([y, m]) => `${MONTHS[m - 1]} ${y}`;
-  let LANE_H = 24, LANE_GAP = 6;
-  const TOP = 26, AXIS_H = 40;
+  let LANE_H = 21, LANE_GAP = 4;
+  const TOP = 22, AXIS_H = 32;
   const bars = JOURNEY.map((e, i) => {
     const el = document.createElement('button');
     el.type = 'button';
@@ -411,7 +430,7 @@
     ribW = Math.max(avail - 1, innerWidth <= 820 ? 1500 : 980);
     // shorter windows get slimmer rows so cards + timeline still fit together
     const compact = innerHeight < 820 && innerWidth > 820;
-    LANE_H = compact ? 19 : 24; LANE_GAP = compact ? 4 : 6;
+    LANE_H = compact ? 18 : 21; LANE_GAP = compact ? 3 : 4;
     ribbon.style.setProperty('--lane-h', LANE_H + 'px');
     pxYear = ribW / span;
     ribbon.style.width = ribW + 'px';
@@ -565,7 +584,7 @@
       flagB.textContent = e.end ? fmt(e.end) : 'Now';
       const same = e.end && e.end[0] === e.start[0] && e.end[1] === e.start[1];
       flagB.hidden = same;
-      const top = (parseFloat(axis.style.top) || 0) + 20 + 'px';
+      const top = (parseFloat(axis.style.top) || 0) + 17 + 'px';
       // centre each flag under its end of the bar, but keep both readable and inside the timeline
       const wA = flagA.offsetWidth, wB = flagB.hidden ? 0 : flagB.offsetWidth;
       let la = r.x0 - wA / 2, lb = r.x1 - wB / 2;

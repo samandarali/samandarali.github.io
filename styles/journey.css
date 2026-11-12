@@ -176,6 +176,47 @@ html[data-theme="dark"] .journey {
     opacity: .9;
 }
 
+.jr-c-media {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    place-items: center;
+    margin: 1.2em 0 1.1em;
+    position: relative;
+}
+.jr-c-media img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; user-select: none; -webkit-user-drag: none; }
+.jr-c-media.tile img {
+    max-width: 78%;
+    max-height: 74%;
+    padding: 1.1em 1.3em;
+    border-radius: .9em;
+    background: #fff;
+    box-shadow: 0 .8em 2em rgba(0, 0, 0, .28);
+}
+.jr-c-media.bare img { max-width: 80%; max-height: 60%; }
+.jr-c-media.photo { place-items: stretch; }
+.jr-c-media.photo > img {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: center 35%;
+    border-radius: .8em;
+    box-shadow: 0 .8em 2em rgba(0, 0, 0, .3);
+}
+.jr-c-badge {
+    position: absolute;
+    right: .7em;
+    bottom: .7em;
+    width: 3.4em;
+    height: 3.4em;
+    padding: .35em;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 .3em .9em rgba(0, 0, 0, .3);
+}
+.jr-c-badge img { width: 100%; height: 100%; object-fit: contain; }
+
 .jr-c-foot h3 { font-weight: 600; font-size: 1.32em; line-height: 1.22; letter-spacing: -.005em; }
 .jr-c-foot p { margin-top: .45em; font-size: .86em; line-height: 1.35; opacity: .85; }
 .jr-c-foot .jr-c-place { font-size: .72em; opacity: .65; letter-spacing: .04em; }
@@ -313,8 +354,8 @@ html[data-theme="dark"] .journey {
 .jr-links a { color: var(--jr-accent); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ── timeline ribbon ── */
-.jr-ribbon-wrap { border-top: 1px solid var(--jr-line); padding: 14px 24px 10px; user-select: none; -webkit-user-select: none; }
-.jr-ribbon-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 18px; margin-bottom: 4px; }
+.jr-ribbon-wrap { border-top: 1px solid var(--jr-line); padding: 9px 24px 4px; user-select: none; -webkit-user-select: none; }
+.jr-ribbon-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 18px; margin-bottom: 0; }
 .jr-ribbon-head > div { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
 .jr-ribbon-head h3 { font-size: 11px; font-weight: 400; letter-spacing: .2em; color: var(--jr-ink); }
 .jr-ribbon-head p { font-size: 12px; color: var(--jr-mid); }
@@ -372,8 +413,8 @@ html[data-theme="dark"] .journey {
     position: absolute;
     height: var(--lane-h, 24px);
     line-height: var(--lane-h, 24px);
-    padding: 0 8px;
-    font-size: 11px;
+    padding: 0 7px;
+    font-size: 10.5px;
     font-weight: 600;
     white-space: nowrap;
     color: var(--jr-bar-ink);
@@ -389,10 +430,10 @@ html[data-theme="dark"] .jr-bar-label.outside.edu { color: #7fdccb; }
 html[data-theme="dark"] .jr-bar-label.outside.on { color: var(--jr-pick); }
 
 /* axis: month ticks, year ticks and labels */
-.jr-axis { position: absolute; left: 0; right: 0; height: 36px; border-top: 1px solid var(--jr-line); }
+.jr-axis { position: absolute; left: 0; right: 0; height: 30px; border-top: 1px solid var(--jr-line); }
 .jr-axis i { position: absolute; top: 0; width: 1px; height: 4px; background: var(--jr-dim); opacity: .5; }
 .jr-axis i.yr { height: 9px; opacity: 1; }
-.jr-axis span { position: absolute; top: 9px; transform: translateX(-50%); font-size: 10.5px; color: var(--jr-mid); font-variant-numeric: tabular-nums; }
+.jr-axis span { position: absolute; top: 7px; transform: translateX(-50%); font-size: 10.5px; color: var(--jr-mid); font-variant-numeric: tabular-nums; }
 
 .jr-span { position: absolute; height: 4px; margin-top: -2px; border-radius: 2px; background: var(--jr-pick); z-index: 2; transition: left .3s, width .3s; }
 .jr-flag {
@@ -411,8 +452,8 @@ html[data-theme="dark"] .jr-bar-label.outside.on { color: var(--jr-pick); }
 
 .jr-cursor {
     position: absolute;
-    top: 18px;
-    bottom: 36px;
+    top: 15px;
+    bottom: 28px;
     width: 0;
     border-left: 2px solid var(--jr-pick);
     z-index: 5;
