@@ -9,8 +9,6 @@
    After changing this file or styles/journey.css, bump the ?v=… number on
    their links in index.html so browsers load the new version, not a cached one.
    start / end are [year, month]; end: null means "Present".
-   approx: true means the exact months are unknown; the years still show,
-   with the 'during' label underneath (used for the typist job).
    ───────────────────────────────────────────────────────────── */
 (function () {
   const JOURNEY = [
@@ -77,7 +75,7 @@
       links: [['Read the article', 'https://doi.org/10.3138/cpp.2024-023']]
     },
     {
-      id: 'wageningen', type: 'work', glyph: 'globe', approx: true, during: 'Research affiliate',
+      id: 'wageningen', type: 'work', glyph: 'globe',
       role: 'Research Affiliate', short: 'Wageningen',
       org: 'Wageningen University, Business Management & Organisation group', place: 'Wageningen, Netherlands (remote)',
       start: [2022, 1], end: [2022, 12],
@@ -201,7 +199,7 @@
       tags: ['Commercial credit', 'Financial statements', 'Collateral']
     },
     {
-      id: 'research-assistant', type: 'work', glyph: 'research', approx: true, during: 'Until I moved to Sweden',
+      id: 'research-assistant', type: 'work', glyph: 'research',
       img: { src: 'images/journey/alzahra.jpg', kind: 'logo', alt: 'Alzahra University logo' },
       role: 'Research Assistant & Excel Instructor', short: 'Research Asst. & Excel',
       org: 'Alzahra University', place: 'Tehran, Iran', start: [2004, 2], end: [2008, 8],
@@ -232,7 +230,7 @@
       tags: ['Leadership', 'Organizing']
     },
     {
-      id: 'typist', type: 'work', glyph: 'keys', approx: true, during: 'Final B.A. year → first M.Sc. year',
+      id: 'typist', type: 'work', glyph: 'keys',
       role: 'Typist & Excel Data Analyst', short: 'Typist & Excel',
       org: 'Part-time job while studying', place: 'Tehran, Iran', start: [2002, 9], end: [2004, 6],
       points: [
