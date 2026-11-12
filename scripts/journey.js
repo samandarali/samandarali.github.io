@@ -56,11 +56,11 @@
     },
     {
       id: 'dollarama', type: 'work', glyph: 'store',
-      role: 'Assistant Team Leader', short: 'Dollarama',
+      role: 'Team Leader', short: 'Dollarama',
       org: 'Dollarama', place: 'Ontario, Canada', start: [2023, 10], end: [2025, 6],
       points: [
         'Supported daily operations and customer service in a high-volume retail store, resolving customer concerns and coordinating priorities with the team.',
-        'Helped with staff supervision, task allocation, inventory control and cash handling while keeping accuracy and compliance.'
+        'Supervised staff and handled task allocation, inventory control and cash handling while keeping accuracy and compliance.'
       ],
       tags: ['Team leadership', 'Operations', 'Customer service']
     },
