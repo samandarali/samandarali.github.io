@@ -159,6 +159,18 @@
       tags: ['Econometrics', 'Innovation economics', 'Stata']
     },
     {
+      id: 'maxplanck', type: 'study', glyph: 'cap',
+      img: { src: 'images/journey/max-planck-certificate.jpg', kind: 'logo', alt: 'Certificate of the 5th IMPRS Summer School 2011, Max Planck Research School' },
+      role: 'Summer School: Adapting Behavior in a Fundamentally Uncertain World', short: 'Max Planck Summer School',
+      org: 'International Max Planck Research School (IMPRS Uncertainty), Max Planck Institute of Economics',
+      place: 'Jena, Germany', start: [2011, 7], end: [2011, 8],
+      points: [
+        'Summer camp in Jena between my M.Sc. in Sweden and my PhD in Italy; earned 24 credits.',
+        'Courses: Advanced Microeconomics, Analysis of Experimental Data, Practical Experimental Economics, and The Human Brain: Its Structures, Functions and Measurement, plus a group assignment.'
+      ],
+      tags: ['Experimental economics', 'Microeconomics', 'Decision-making under uncertainty']
+    },
+    {
       id: 'tehranfanavari', type: 'work', glyph: 'briefcase',
       role: 'Commercial Manager', short: 'Tehran Fanavari',
       org: 'Tehran Fanavari Trading Co.', place: 'Tehran, Iran', start: [2011, 4], end: [2011, 7],
@@ -173,8 +185,7 @@
       role: 'M.Sc., Industrial Economics', short: 'Gothenburg M.Sc.',
       org: 'University of Gothenburg', place: 'Gothenburg, Sweden', start: [2008, 10], end: [2011, 5],
       points: [
-        'Thesis: Corporate Governance and Default Risk — a bridge from my credit-risk work into research.',
-        'Max Planck Institute of Economics, IMPRS Uncertainty School (Jena, Germany, 2011).'
+        'Thesis: Corporate Governance and Default Risk — a bridge from my credit-risk work into research.'
       ],
       tags: ['Industrial economics', 'Default risk']
     },
