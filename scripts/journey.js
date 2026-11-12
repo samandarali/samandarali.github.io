@@ -312,23 +312,36 @@
 
   // ── the runway cards ──
   const svgIcon = g => `<svg viewBox="0 0 24 24" aria-hidden="true">${GLYPH[g] || GLYPH.chart}</svg>`;
-  // card colours: work roles step through a blue range, education through a teal
-  // range, so each card has its own shade but the two groups stay easy to tell apart
+  // card colours, taken straight from two palettes: education cards use the teal
+  // palette (one shade each), work cards cycle through the warm palette, newest first.
+  // Light shades get dark text so every card stays readable.
   const isEdu = e => e.type === 'study';
+  const PALETTE = {
+    edu: ['#003333', '#006666', '#009999', '#00cccc', '#00ffff'],
+    work: ['#9a2328', '#ad3b25', '#bc6029', '#eb9d21', '#f6c299', '#efe1bc', '#e8d69e']
+  };
   const shade = (() => {
     const groups = { work: JOURNEY.filter(e => !isEdu(e)), edu: JOURNEY.filter(isEdu) };
-    const RANGE = {                     // [hue, saturation, lightness] at the two ends of each range
-      work: [[218, 62, 16], [203, 58, 31]],
-      edu: [[182, 70, 13], [162, 52, 28]]
-    };
-    return e => {
-      const g = isEdu(e) ? 'edu' : 'work', list = groups[g], k = list.length > 1 ? list.indexOf(e) / (list.length - 1) : 0;
-      const [[h0, s0, l0], [h1, s1, l1]] = RANGE[g];
-      const h = h0 + (h1 - h0) * k, sat = s0 + (s1 - s0) * k, l = l0 + (l1 - l0) * k;
-      const c = dl => `hsl(${h.toFixed(0)} ${sat.toFixed(0)}% ${(l + dl).toFixed(1)}%)`;
-      return `--c1:${c(-6)};--c2:${c(4)};--c3:${c(18)}`;
-    };
+    const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+    const hex = c => '#' + c.map(v => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('');
+    const mix = (c, t, k) => c.map((v, i) => v + (t[i] - v) * k);           // blend c toward t by k
+    const lum = c => { const [r, g, b] = c.map(v => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }); return .2126 * r + .7152 * g + .0722 * b; };
+    const info = JOURNEY.map(e => {
+      const g = isEdu(e) ? 'edu' : 'work', list = PALETTE[g];
+      const base = rgb(list[groups[g].indexOf(e) % list.length]);
+      const light = lum(base) > .3;
+      return {
+        base: hex(base),
+        ink: light ? (g === 'edu' ? '#002626' : '#3a1a08') : '#ffffff',
+        // readable version of the colour for text on the page background (timeline labels)
+        text: hex(mix(base, [0, 0, 0], light ? .55 : .05)),
+        c1: hex(mix(base, [0, 0, 0], .16)), c3: hex(mix(base, [255, 255, 255], .14))
+      };
+    });
+    return e => info[JOURNEY.indexOf(e)];
   })();
+  // a gentle gradient around the palette colour: a touch deeper at the top, a touch lighter at the bottom
+  const cardStyle = e => { const c = shade(e); return `--c1:${c.c1};--c2:${c.base};--c3:${c.c3};color:${c.ink}`; };
   // picture area on each card: a photo, a logo (on a white tile, or straight on the card
   // for light-coloured logos), or the line icon when there is no image
   function media(e) {
@@ -343,7 +356,7 @@
     el.className = 'jr-m';
     el.dataset.i = i;
     el.innerHTML = `
-      <div class="jr-card t-${e.type}${e.now ? ' is-now' : ''}" style="${shade(e)}">
+      <div class="jr-card t-${e.type}${e.now ? ' is-now' : ''}" style="${cardStyle(e)}">
         <div class="jr-c-grid" aria-hidden="true"></div>
         <div class="jr-c-top wide"><span>${pad(i + 1)}</span><span>${e.now ? '<i class="jr-dot"></i>Current' : TYPE[e.type]}</span></div>
         <div class="jr-c-year wide">
@@ -402,6 +415,11 @@
     el.setAttribute('aria-label', `${e.short}, ${range(e, true)}`);
     const label = document.createElement('span');
     label.className = 'jr-bar-label' + kind;
+    // each bar takes its card's colour
+    const c = shade(e);
+    el.style.setProperty('--bar', c.base);
+    label.style.setProperty('--bar-ink', c.ink);
+    label.style.setProperty('--bar-text', c.text);
     label.textContent = e.short;
     // a current role runs up to today's date, not to the end of this month
     const b = e.end ? t(e.end) + 1 / 12 : TODAY;
