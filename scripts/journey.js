@@ -200,12 +200,12 @@
       tags: ['Economics', 'Cooperatives']
     },
     {
-      id: 'research-assistant', type: 'work', glyph: 'research', approx: true, during: 'During my M.Sc.',
+      id: 'research-assistant', type: 'work', glyph: 'research', approx: true, during: 'Until I moved to Sweden',
       img: { src: 'images/journey/alzahra.jpg', kind: 'logo', alt: 'Alzahra University logo' },
       role: 'Research Assistant & Excel Instructor', short: 'Research Asst. & Excel',
-      org: 'Alzahra University', place: 'Tehran, Iran', start: [2003, 9], end: [2006, 12],
+      org: 'Alzahra University', place: 'Tehran, Iran', start: [2004, 2], end: [2008, 8],
       points: [
-        'Worked as a research assistant while studying for my M.Sc. in Economics.',
+        'Started as a research assistant in the second semester of my M.Sc. in Economics and continued until I moved to Sweden in 2008.',
         'Taught Excel classes.'
       ],
       tags: ['Research', 'Excel', 'Teaching']
