@@ -381,7 +381,7 @@ html[data-theme="dark"] .journey {
 .jr-legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 11px; color: var(--jr-mid); }
 .jr-legend i { display: inline-block; width: 12px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
 .jr-legend .k-bar { width: 22px; background: linear-gradient(90deg, #9a2328, #bc6029, #eb9d21, #f6c299, #e8d69e); }
-.jr-legend .k-edu { width: 22px; background: linear-gradient(90deg, #003333, #009999, #00ffff); }
+.jr-legend .k-edu { background: #006666; }
 .jr-legend .k-pick { background: #eb9d21; box-shadow: 0 0 0 1.5px var(--jr-frame), 0 0 0 3px var(--jr-pick); }
 .jr-legend .k-along { background: #bc6029; outline: 1.5px dashed var(--jr-pick); outline-offset: 1.5px; }
 .jr-legend .k-approx { background: #bc6029 repeating-linear-gradient(135deg, rgba(255, 255, 255, .45) 0 3px, transparent 3px 6px); }

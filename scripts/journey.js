@@ -149,7 +149,7 @@
     },
     {
       id: 'phd', type: 'study', glyph: 'cap',
-      role: 'Ph.D., Economics', short: 'Ph.D.',
+      role: 'Ph.D., Economics', short: 'Sant’Anna Ph.D.',
       org: 'Sant’Anna School of Advanced Studies', place: 'Pisa, Italy', start: [2011, 10], end: [2015, 5],
       points: [
         'Full scholarship, plus an Erasmus scholarship (2014). Thesis: Essays in Economics of Innovation.',
@@ -243,7 +243,7 @@
     {
       id: 'ba', type: 'study', glyph: 'cap',
       img: { src: 'images/journey/allameh-tabatabai.jpg', kind: 'logo', alt: 'Allameh Tabataba’i University logo' },
-      role: 'B.A., Business Economics', short: 'B.A.',
+      role: 'B.A., Business Economics', short: 'Allameh Tabataba’i B.A.',
       org: 'Allameh Tabataba’i University', place: 'Tehran, Iran', start: [1999, 9], end: [2003, 7],
       points: [
         'Where it started: economics, business and my first quantitative courses.',
@@ -315,12 +315,12 @@
 
   // ── the runway cards ──
   const svgIcon = g => `<svg viewBox="0 0 24 24" aria-hidden="true">${GLYPH[g] || GLYPH.chart}</svg>`;
-  // card colours, taken straight from two palettes: education cards use the teal
-  // palette (one shade each), work cards cycle through the warm palette, newest first.
+  // card colours: every education card uses one teal, work cards cycle through the
+  // warm palette, newest first.
   // Light shades get dark text so every card stays readable.
   const isEdu = e => e.type === 'study';
   const PALETTE = {
-    edu: ['#003333', '#006666', '#009999', '#00cccc', '#00ffff'],
+    edu: ['#006666'],                  // every education card uses the same teal
     work: ['#9a2328', '#ad3b25', '#bc6029', '#eb9d21', '#f6c299', '#efe1bc', '#e8d69e']
   };
   const shade = (() => {
