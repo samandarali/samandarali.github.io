@@ -77,6 +77,7 @@
     },
     {
       id: 'wageningen', type: 'work', glyph: 'globe',
+      img: { src: 'images/journey/wageningen-seminar.jpg', kind: 'photo', badge: 'images/journey/wageningen-logo.jpg', badgeWide: true, alt: 'Online scientometrics seminar with Wageningen University & Research' },
       role: 'Research Affiliate', short: 'Wageningen',
       org: 'Wageningen University, Business Management & Organisation group', place: 'Wageningen, Netherlands (remote)',
       start: [2022, 1], end: [2022, 12],
@@ -89,7 +90,7 @@
     },
     {
       id: 'head', type: 'lead', glyph: 'compass',
-      img: { src: 'images/journey/nrisp.png', kind: 'logo', alt: 'National Research Institute for Science Policy (NRISP)' },
+      img: { src: 'images/journey/nrisp-building.jpg', kind: 'photo', alt: 'The NRISP building in Tehran' },
       role: 'Department Head, Policy Evaluation and STI Monitoring', short: 'Head of Dept.',
       org: 'National Research Institute for Science Policy (NRISP)', place: 'Tehran, Iran',
       start: [2020, 11], end: [2021, 11],
@@ -102,7 +103,7 @@
     },
     {
       id: 'nrisp', type: 'work', glyph: 'research',
-      img: { src: 'images/journey/nrisp.png', kind: 'logo', alt: 'National Research Institute for Science Policy (NRISP)' },
+      img: { src: 'images/journey/economics-of-innovation-book.jpg', kind: 'logo', alt: 'Cover of the Persian translation of The Economics of Innovation: An Introduction' },
       role: 'Research Faculty Member', short: 'NRISP',
       org: 'National Research Institute for Science Policy (NRISP)', place: 'Tehran, Iran',
       start: [2018, 11], end: [2022, 12],
@@ -111,7 +112,8 @@
         'Wrote proposals and secured funding for four research projects, then led them from scoping to final report.',
         'Built a 17-country dataset (World Bank, UNESCO, WIPO, ILOSTAT) and used efficiency analysis and regression to assess national innovation systems.',
         'Analyzed 100,000+ retail transactions for an industry partner, pointing to a projected 10–15% cut in spoilage.',
-        'Facilitated 5+ national workshops and focus groups with university leaders, ministries and industry.'
+        'Facilitated 5+ national workshops and focus groups with university leaders, ministries and industry.',
+        'Co-translated The Economics of Innovation: An Introduction (G. M. P. Swann) into Persian, with Hossein Raghfar and Mehdi Goodarzi.'
       ],
       tags: ['Econometrics', 'R', 'Python', 'SQL', 'Policy research']
     },
@@ -166,7 +168,7 @@
     },
     {
       id: 'maxplanck', type: 'study', glyph: 'cap',
-      img: { src: 'images/journey/max-planck-certificate.jpg', kind: 'logo', alt: 'Certificate of the 5th IMPRS Summer School 2011, Max Planck Research School' },
+      img: { src: 'images/journey/max-planck-certificate.jpg', kind: 'logo', badge: 'images/journey/max-planck-logo.jpg', alt: 'Certificate of the 5th IMPRS Summer School 2011, Max Planck Research School' },
       role: 'Summer School: Adapting Behavior in a Fundamentally Uncertain World', short: 'Max Planck Summer School',
       org: 'International Max Planck Research School (IMPRS Uncertainty), Max Planck Institute of Economics',
       place: 'Jena, Germany', start: [2011, 7], end: [2011, 8],
@@ -198,6 +200,7 @@
     },
     {
       id: 'leasing', type: 'work', glyph: 'bank',
+      img: { src: 'images/journey/leasing-iran-building.jpg', kind: 'photo', badge: 'images/journey/leasing-iran-emblem.jpg', alt: 'The Leasing Iran building in Tehran' },
       role: 'Credit Risk Analyst', short: 'Leasing Iran',
       org: 'Leasing Iran Public Company', place: 'Tehran, Iran', start: [2006, 5], end: [2008, 5],
       points: [
@@ -368,10 +371,13 @@
   function media(e) {
     const m = e.img;
     if (!m) return `<div class="jr-c-glyph">${svgIcon(e.glyph)}</div>`;
+    const pic = src => `<img src="${src}" alt="" loading="lazy" decoding="async" draggable="false">`;
     const img = `<img src="${m.src}" alt="${esc(m.alt || '')}" loading="lazy" decoding="async" draggable="false">`;
-    if (m.kind === 'logos') return `<div class="jr-c-media multi">${m.srcs.map(src => `<img src="${src}" alt="" loading="lazy" decoding="async" draggable="false">`).join('')}</div>`;
-    if (m.kind === 'photo') return `<div class="jr-c-media photo">${img}${m.badge ? `<span class="jr-c-badge"><img src="${m.badge}" alt="" draggable="false"></span>` : ''}</div>`;
-    return `<div class="jr-c-media ${m.kind === 'logo-light' ? 'bare' : 'tile'}">${img}</div>`;
+    // optional organisation logo in the corner (round, or a wide pill for wide logos)
+    const badge = m.badge ? `<span class="jr-c-badge${m.badgeWide ? ' wide' : ''}">${pic(m.badge)}</span>` : '';
+    if (m.kind === 'logos') return `<div class="jr-c-media multi">${m.srcs.map(pic).join('')}</div>`;
+    if (m.kind === 'photo') return `<div class="jr-c-media photo">${img}${badge}</div>`;
+    return `<div class="jr-c-media ${m.kind === 'logo-light' ? 'bare' : 'tile'}">${img}${badge}</div>`;
   }
   const people = JOURNEY.map((e, i) => {
     const el = document.createElement('div');
