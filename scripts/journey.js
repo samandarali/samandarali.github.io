@@ -65,7 +65,7 @@
     },
     {
       id: 'trent', type: 'study', glyph: 'cap',
-      img: { src: 'images/journey/trent.png', kind: 'logo-light', alt: 'Trent University logo' },
+      img: { src: 'images/journey/trent-campus.jpg', kind: 'photo', badge: 'images/journey/trent.png', badgeWide: true, badgeBg: '#004d4d', alt: 'Trent University campus on the Otonabee River, Peterborough' },
       role: 'M.Sc., Big Data Analytics', short: 'Trent M.Sc.',
       org: 'Trent University', place: 'Peterborough, ON', start: [2023, 1], end: [2024, 5],
       points: [
@@ -376,7 +376,8 @@
     const pic = src => `<img src="${src}" alt="" loading="lazy" decoding="async" draggable="false">`;
     const img = `<img src="${m.src}" alt="${esc(m.alt || '')}" loading="lazy" decoding="async" draggable="false">`;
     // optional organisation logo in the corner (round, or a wide pill for wide logos)
-    const badge = m.badge ? `<span class="jr-c-badge${m.badgeWide ? ' wide' : ''}">${pic(m.badge)}</span>` : '';
+    // badgeBg: a background for light-coloured logos (e.g. Trent's white logo)
+    const badge = m.badge ? `<span class="jr-c-badge${m.badgeWide ? ' wide' : ''}"${m.badgeBg ? ` style="background:${m.badgeBg}"` : ''}>${pic(m.badge)}</span>` : '';
     if (m.kind === 'logos') return `<div class="jr-c-media multi">${m.srcs.map(pic).join('')}</div>`;
     if (m.kind === 'photo') return `<div class="jr-c-media photo">${img}${badge}</div>`;
     return `<div class="jr-c-media ${m.kind === 'logo-light' ? 'bare' : 'tile'}">${img}${badge}</div>`;
