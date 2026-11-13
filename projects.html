@@ -759,12 +759,11 @@
     function filterProjects(projects, type) {
     projects.forEach(project => {
         const types = project.dataset.type.split(",").map(t => t.trim());
-
-        if (type === "" || types.includes(type)) {
-        project.style.display = "flex";
-        } else {
-        project.style.display = "none";
-        }
+        const show = type === "" || types.includes(type);
+        // hide the whole link around the card: it is the grid/list item, so hiding
+        // only the card inside it would leave an empty gap where the card was
+        const item = project.closest("a") || project;
+        item.style.display = show ? "" : "none";
     });
     }
     </script>
