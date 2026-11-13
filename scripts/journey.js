@@ -243,6 +243,8 @@
     },
     {
       id: 'typist', type: 'work', glyph: 'keys',
+      // photo: StockSnap, CC0 public domain (stocksnap.io/photo/accounting-finance-JONMP7TPGK)
+      img: { src: 'images/journey/typist-excel-data.jpg', kind: 'photo', alt: 'Working with data on a laptop and calculator' },
       role: 'Typist & Excel Data Analyst', short: 'Typist & Excel',
       org: 'Part-time job while studying', place: 'Tehran, Iran', start: [2002, 9], end: [2004, 6],
       points: [
@@ -263,7 +265,7 @@
     },
     {
       id: 'ba', type: 'study', glyph: 'cap',
-      img: { src: 'images/journey/allameh-tabatabai.jpg', kind: 'logo', alt: 'Allameh Tabataba’i University logo' },
+      img: { src: 'images/journey/atu-faculty-of-economics.jpg', kind: 'photo', badge: 'images/journey/allameh-tabatabai.jpg', alt: 'Entrance of the Faculty of Economics, Allameh Tabataba’i University' },
       role: 'B.A., Business Economics', short: 'Allameh Tabataba’i B.A.',
       org: 'Allameh Tabataba’i University', place: 'Tehran, Iran', start: [1999, 9], end: [2003, 7],
       points: [
