@@ -15,10 +15,13 @@
   // Which minute values are allowed to be *asked* / *snapped to* per level.
   const LEVEL_MINUTES = {
     1: [0],
-    2: [0, 30],
-    3: [0, 15, 30, 45],
+    2: [30],
+    3: [15, 45],
     4: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55],
   };
+  // Level 5 ("Mix It Up!") takes turns between Levels 1-4.
+  const MIXED_LEVEL = 5;
+  const MIXED_FROM = [1, 2, 3, 4];
 
   // Tolerance (in degrees) allowed when checking a dragged hand position.
   const MINUTE_TOLERANCE_DEG = 7;
@@ -52,7 +55,7 @@
 
   const state = {
     currentActivity: "set",       // 'set' | 'tell' | 'challenge'
-    difficultyLevel: 1,           // 1-4, used by 'set' and 'tell'
+    difficultyLevel: 1,           // 1-5 (5 = mixed), used by 'set' and 'tell'
     challengeLevel: 1,            // 1-3, used only by 'challenge'
     answerAmPm: null,             // 'AM' | 'PM' | null — Time Challenge Level 3 answer
     totalQuestions: 10,
@@ -104,7 +107,7 @@
       "btn-hint", "btn-check", "btn-next", "celebration",
       "screen-results", "results-stars", "results-summary",
       "stat-completed", "stat-firsttry", "stat-hints",
-      "btn-again", "btn-home2", "sr-live",
+      "btn-next-level", "btn-again", "btn-home2", "sr-live",
       "tiki-home", "tiki-practice", "tiki-results",
       "tiki-stage", "tiki-walker", "tiki-scene-emoji",
       "tiki-bubble", "tiki-line", "tiki-caption",
@@ -130,6 +133,21 @@
 
   function formatTime(hour, minute) {
     return `${hour}:${pad2(minute)}`;
+  }
+
+  // 3:15 -> "quarter past 3", 3:30 -> "half past 3", 3:45 -> "quarter to 4";
+  // null for other minutes.
+  function timeInWords(hour, minute) {
+    if (minute === 15) return `quarter past ${hour}`;
+    if (minute === 30) return `half past ${hour}`;
+    if (minute === 45) return `quarter to ${(hour % 12) + 1}`;
+    return null;
+  }
+
+  // "3:30 (half past 3)" when there is a word form, otherwise just "3:30"
+  function formatTimeWithWords(hour, minute) {
+    const words = timeInWords(hour, minute);
+    return words ? `${formatTime(hour, minute)} (${words})` : formatTime(hour, minute);
   }
 
   // Shortest distance between two angles on a 0-360 circle.
@@ -480,6 +498,7 @@
   // Builds `count` questions for the session, avoiding duplicates while
   // enough unique hour/minute combinations remain.
   function generateQuestionSet(count, level) {
+    if (level === MIXED_LEVEL) return generateMixedQuestionSet(count);
     const minutes = LEVEL_MINUTES[level];
     const pool = [];
     for (let h = 1; h <= 12; h++) {
@@ -510,6 +529,34 @@
       }
     }
     return result;
+  }
+
+  // Mixed practice: each run of 4 questions has one from every level
+  // (o'clock, half past, quarter past/to, 5 minutes) in a random order,
+  // without repeating a time while unused ones remain.
+  function generateMixedQuestionSet(count) {
+    const result = [];
+    const used = new Set();
+    let order = [];
+    while (result.length < count) {
+      if (!order.length) order = shuffle(MIXED_FROM.slice());
+      const level = order.pop();
+      let q = generateRandomTime(level);
+      for (let guard = 0; used.has(`${q.hour}:${q.minute}`) && guard < 20; guard++) {
+        q = generateRandomTime(level);
+      }
+      used.add(`${q.hour}:${q.minute}`);
+      result.push(q);
+    }
+    return result;
+  }
+
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = randInt(0, i);
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
   }
 
   /* ------------------------------------------------------------------ *
@@ -812,15 +859,11 @@
 
     if (state.currentActivity === "set") {
       const { hour, minute } = q;
-      el.practiceInstruction.textContent = `Show ${formatTime(hour, minute)} on the clock.`;
-      // Start the hands somewhere clearly different from the target so
-      // the child has to actually move them.
-      let startHour = randInt(1, 12);
-      let startMinute = LEVEL_MINUTES[state.difficultyLevel][0];
-      if (startHour === hour && startMinute === minute) {
-        startHour = ((hour + 5) % 12) + 1;
-      }
-      setClockTime(startHour, startMinute);
+      el.practiceInstruction.textContent = `Show ${formatTimeWithWords(hour, minute)} on the clock.`;
+      // Every question starts with the hands back at 12:00. If 12:00 is
+      // itself the answer, start at 6:00 so the child still moves them.
+      const atTwelve = hour === 12 && minute === 0;
+      setClockTime(atTwelve ? 6 : 12, 0);
     } else if (state.currentActivity === "tell") {
       const { hour, minute } = q;
       el.practiceInstruction.textContent = "What time is it?";
@@ -859,9 +902,27 @@
     }
   }
 
+  // The level after the current one, or null when it is already the hardest
+  // (Set/Tell have 4 levels, Time Challenge has 3).
+  function nextLevelNumber() {
+    const isChallenge = state.currentActivity === "challenge";
+    const current = isChallenge ? state.challengeLevel : state.difficultyLevel;
+    const max = isChallenge ? 3 : MIXED_LEVEL;
+    return current < max ? current + 1 : null;
+  }
+
+  function updateNextLevelButton() {
+    const hasNext = nextLevelNumber() !== null;
+    el.btnNextLevel.hidden = !hasNext;
+    // keep a single main button: Play Again steps back when Next Level shows
+    el.btnAgain.classList.toggle("btn-primary", !hasNext);
+    el.btnAgain.classList.toggle("btn-ghost", hasNext);
+  }
+
   function endSession() {
     clearTikiTimers();
     showScreen("results");
+    updateNextLevelButton();
 
     const pct = state.totalQuestions > 0 ? state.firstTryCorrect / state.totalQuestions : 0;
     let stars = "⭐";
@@ -988,7 +1049,7 @@
     const scene = window.Tiki.sceneFor(target.hour, target.minute, target.isPM);
     const timeStr =
       target.isPM === null
-        ? formatTime(target.hour, target.minute)
+        ? formatTimeWithWords(target.hour, target.minute)
         : formatTimeAmPm(target.hour, target.minute, target.isPM);
     const cheer = CORRECT_MESSAGES[randInt(0, CORRECT_MESSAGES.length - 1)];
     const msg = `${cheer} ${timeStr} is ${scene.place}!`;
@@ -1132,7 +1193,8 @@
     } else {
       hints.push(`💡 The short hand should be between ${hour} and ${nextHour}.`);
     }
-    if (state.difficultyLevel === 4 && minute % 5 === 0 && minute !== 0) {
+    const fiveMinuteLevel = state.difficultyLevel === 4 || state.difficultyLevel === MIXED_LEVEL;
+    if (fiveMinuteLevel && minute % 5 === 0 && minute !== 0) {
       hints.push(`💡 ${countBy5sPhrase(minute)}`);
     }
     return hints;
@@ -1291,7 +1353,7 @@
 
     el.tikiCaption.textContent = "";
     const q = state.currentQuestion;
-    const time = state.currentActivity === "set" && q ? formatTime(q.hour, q.minute) : "";
+    const time = state.currentActivity === "set" && q ? formatTimeWithWords(q.hour, q.minute) : "";
     el.tikiLine.textContent = window.Tiki.waitingLine(state.currentActivity, time);
     tikiMood("confused");
     refreshTikiBubble();
@@ -1655,6 +1717,14 @@
     el.btnNext.addEventListener("click", nextQuestion);
     el.btnHint.addEventListener("click", showHint);
     el.btnAgain.addEventListener("click", () => {
+      playMusicIfOn();
+      startSession();
+    });
+    el.btnNextLevel.addEventListener("click", () => {
+      const next = nextLevelNumber();
+      if (next === null) return;
+      if (state.currentActivity === "challenge") setChallengeLevel(next);
+      else setLevel(next);
       playMusicIfOn();
       startSession();
     });

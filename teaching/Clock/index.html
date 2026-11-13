@@ -72,6 +72,7 @@
           <button type="button" class="pill" data-level="2" aria-pressed="false">Level 2<span>Half Hours</span></button>
           <button type="button" class="pill" data-level="3" aria-pressed="false">Level 3<span>Quarter Hours</span></button>
           <button type="button" class="pill" data-level="4" aria-pressed="false">Level 4<span>5 Minutes</span></button>
+          <button type="button" class="pill pill-mixed" data-level="5" aria-pressed="false">Level 5<span>Mix It Up!</span></button>
         </div>
       </div>
 
@@ -257,6 +258,8 @@
       </dl>
 
       <div class="action-row">
+        <!-- Shown only when there is a harder level to move on to. -->
+        <button type="button" id="btn-next-level" class="btn btn-primary" hidden>⏭️ Next Level</button>
         <button type="button" id="btn-again" class="btn btn-primary">🔄 Play Again</button>
         <button type="button" id="btn-home2" class="btn btn-ghost">🏠 Back to Home</button>
       </div>

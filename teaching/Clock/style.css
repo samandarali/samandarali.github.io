@@ -671,13 +671,17 @@ input:focus-visible,
   z-index: 3;
   box-shadow: 0 2px 6px rgba(28, 42, 117, 0.25);
 }
+/* The hour hand sits on top of the minute hand, so when they overlap
+   (e.g. at 12:00) the short hand stays visible and can be picked up. */
 .hour-hand {
+  z-index: 3;
   width: clamp(8px, 2.4vw, 11px);
   height: 26%;
   background: linear-gradient(90deg, #2c3b8f, var(--navy));
   transform: translate(-50%, -100%) rotate(0deg);
 }
 .minute-hand {
+  z-index: 2;
   width: clamp(5px, 1.6vw, 7px);
   height: 38%;
   background: linear-gradient(90deg, var(--coral), var(--coral-deep));
@@ -708,7 +712,9 @@ input:focus-visible,
   cursor: grab;
   background: transparent;
 }
-#hour-grabber { width: 34px; height: 26%; transform: translate(-50%, -100%) rotate(0deg); }
+/* hour grabber above the minute grabber; the minute hand stays grabbable
+   by its longer tip, which reaches past the hour hand */
+#hour-grabber { z-index: 6; width: 34px; height: 26%; transform: translate(-50%, -100%) rotate(0deg); }
 #minute-grabber { width: 30px; height: 38%; transform: translate(-50%, -100%) rotate(0deg); }
 .drag-grabber.dragging { cursor: grabbing; }
 .clock-face.interactive .drag-grabber { pointer-events: auto; }
@@ -1410,6 +1416,7 @@ input:focus-visible,
   .home-setup .setup-panel { padding: 14px 14px; }
   .home-setup .pill-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
   .home-setup #level-group-challenge { grid-template-columns: repeat(3, 1fr); }
+  .home-setup .pill-mixed { grid-column: 1 / -1; }
   .home-setup .pill { min-width: 0; padding: 7px 4px; font-size: 13px; }
   .home-setup .pill span { font-size: 10px; }
   .home-setup .setup-group + .setup-group { margin-top: 12px; padding-top: 12px; }

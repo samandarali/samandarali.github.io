@@ -98,6 +98,8 @@
     for (let h = 1; h <= 12; h++) for (let m = 0; m < 60; m += 5) add(`${h}:${pad2(m)}`);
     for (let n = 0; n <= 60; n++) add(String(n));
     ["oh", "AM", "PM", "minutes", "minute", "hour", "hours"].forEach(add);
+    // "3:30 (half past 3)" etc. (script.js timeInWords)
+    ["half past", "quarter past", "quarter to"].forEach(add);
 
     // waiting lines (tiki.js WAITING_LINES)
     add("Hmm… which way do the hands go? Can you show me");
