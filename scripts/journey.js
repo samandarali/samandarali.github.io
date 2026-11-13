@@ -212,7 +212,7 @@
     },
     {
       id: 'research-assistant', type: 'work', glyph: 'research',
-      img: { src: 'images/journey/alzahra.jpg', kind: 'logo', alt: 'Alzahra University logo' },
+      img: { src: 'images/journey/alzahra-campus-gate.jpg', kind: 'photo', badge: 'images/journey/alzahra.jpg', alt: 'The entrance gate of Alzahra University' },
       role: 'Research Assistant & Excel Instructor', short: 'Research Asst. & Excel',
       org: 'Alzahra University', place: 'Tehran, Iran', start: [2004, 2], end: [2008, 8],
       points: [
@@ -223,7 +223,7 @@
     },
     {
       id: 'alzahra', type: 'study', glyph: 'cap',
-      img: { src: 'images/journey/alzahra.jpg', kind: 'logo', alt: 'Alzahra University logo' },
+      img: { src: 'images/journey/alzahra-faculty-of-economics.jpg', kind: 'photo', badge: 'images/journey/alzahra.jpg', alt: 'Faculty of Social Sciences and Economics, Alzahra University' },
       role: 'M.Sc., Economics', short: 'Alzahra M.Sc.',
       org: 'Alzahra University', place: 'Tehran, Iran', start: [2003, 9], end: [2006, 12],
       points: [
