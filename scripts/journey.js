@@ -276,6 +276,18 @@
     }
   ];
 
+  // filter groups (a role can be in more than one)
+  const FILTERS = [
+    ['all', 'All'], ['edu', 'Education'], ['data', 'Economics & data analysis'], ['teach', 'Teaching'], ['other', 'Other jobs']
+  ];
+  const GROUPS = {
+    pratech: ['data'], iehps: ['teach', 'data'], spirit: ['teach'], dollarama: ['other'],
+    trent: ['edu'], wageningen: ['data'], head: ['data'], nrisp: ['data'], lecturer: ['teach'],
+    elites: ['data'], jofreh: ['data'], phd: ['edu'], maxplanck: ['edu'], tehranfanavari: ['other'],
+    gothenburg: ['edu'], leasing: ['data'], 'research-assistant': ['data', 'teach'], alzahra: ['edu'],
+    'council-secretary': ['other'], typist: ['data', 'other'], 'council-member': ['other'], ba: ['edu']
+  };
+
   const TYPE = { work: 'Work', lead: 'Leadership', teach: 'Teaching', study: 'Study' };
   const GLYPH = {
     spark: '<path d="M3 20h18"/><path d="M5 16l4-5 4 3 6-8"/><circle cx="19" cy="6" r="1.4"/><path d="M5 20v-2M9 20v-4M13 20v-3M17 20v-6"/>',
@@ -304,6 +316,8 @@
 
   const N = JOURNEY.length;
   const pad = n => String(n).padStart(2, '0');
+  // the cards currently on the runway (indexes into JOURNEY), in order, and where each sits
+  let view = JOURNEY.map((e, i) => i), V = N, posOf = view.slice();
   if ($('jr-total')) $('jr-total').textContent = pad(N);
   const t = ([y, m]) => y + (m - 1) / 12;               // [year, month] -> decimal year
   const endOf = e => e.end || NOW;
@@ -427,7 +441,11 @@
   });
 
   // ── rolling date label (like a counter that rolls between values) ──
-  JOURNEY.forEach(e => { const b = document.createElement('b'); b.textContent = range(e, false); roll.append(b); });
+  function buildRoll() {
+    roll.textContent = '';
+    view.forEach(i => { const b = document.createElement('b'); b.textContent = range(JOURNEY[i], false); roll.append(b); });
+  }
+  buildRoll();
 
   // ── timeline ribbon: oldest on the left, newest on the right ──
   // Laid out in pixels (re-run on resize) so every bar keeps a readable
@@ -535,7 +553,8 @@
   function fit() {
     const main = stage.parentElement;
     if (innerWidth <= 820) { main.style.height = ''; return; }
-    const h = innerHeight - navH() - ribWrap.offsetHeight - 30;
+    const bar = document.getElementById('jr-filters');
+    const h = innerHeight - navH() - ribWrap.offsetHeight - (bar ? bar.offsetHeight : 0) - 30;
     main.style.height = Math.round(Math.min(720, Math.max(340, h))) + 'px';
   }
   addEventListener('resize', fit);
@@ -579,7 +598,7 @@
   function paint() {
     if (!W) return;
     people.forEach((m, i) => {
-      const d = i - p;
+      const d = posOf[i] < 0 ? 99 : posOf[i] - p;     // filtered-out cards sit far back, invisible
       const k = clamp(d + 1, 0, 6), a = Math.floor(k), b = Math.min(6, a + 1), f = k - a,
         mix = A => A[a] + (A[b] - A[a]) * f;
       // phones: smaller cards that stop above the date label
@@ -598,20 +617,22 @@
     // rail panels slide up in step with the runway
     if (!small) {
       const rh = rail.clientHeight;
-      panels.forEach((el, i) => { el.style.transform = `translate3d(0,${((i - p) * rh).toFixed(1)}px,0)`; });
+      panels.forEach((el, i) => {
+        el.style.transform = `translate3d(0,${(((posOf[i] < 0 ? -9 : posOf[i]) - p) * rh).toFixed(1)}px,0)`;
+      });
     }
     const rh = roll.firstChild ? roll.firstChild.offsetHeight : 0;
     roll.style.transform = `translate3d(0,${(-p * rh).toFixed(1)}px,0)`;
     // ribbon cursor glides between the entries
-    const a = Math.floor(clamp(p, 0, N - 1)), b = Math.min(N - 1, a + 1), f = clamp(p, 0, N - 1) - a;
-    if (!scrubbing) cursor.style.left = (bars[a].end + (bars[b].end - bars[a].end) * f).toFixed(1) + 'px';
-    const now = clamp(Math.round(p), 0, N - 1);
+    const a = Math.floor(clamp(p, 0, V - 1)), b = Math.min(V - 1, a + 1), f = clamp(p, 0, V - 1) - a;
+    if (!scrubbing) cursor.style.left = (bars[view[a]].end + (bars[view[b]].end - bars[view[a]].end) * f).toFixed(1) + 'px';
+    const now = view[clamp(Math.round(p), 0, V - 1)];
     if (now !== active) setActive(now);
   }
 
   function setActive(i, quiet) {
     active = i;
-    idxEl.textContent = pad(i + 1);
+    idxEl.textContent = pad(posOf[i] + 1);
     panels.forEach((el, j) => {
       el.classList.toggle('on', j === i);
       el.setAttribute('aria-hidden', j === i ? 'false' : 'true');
@@ -646,8 +667,8 @@
     }
     if (quiet) return;
     $('jr-live').textContent = `${e.role}, ${e.org}, ${range(e, true)}`;
-    $('jr-prev').disabled = i === 0;
-    $('jr-next').disabled = i === N - 1;
+    $('jr-prev').disabled = posOf[i] === 0;
+    $('jr-next').disabled = posOf[i] === V - 1;
     // keep the selected bar in view when the timeline scrolls sideways
     if (ribScroll.scrollWidth > ribScroll.clientWidth + 2) {
       ribScroll.scrollTo({ left: r.mid - ribScroll.clientWidth / 2, behavior: calm ? 'auto' : 'smooth' });
@@ -665,7 +686,36 @@
     requestAnimationFrame(frame);
   }
 
-  const go = i => { target = clamp(Math.round(i), 0, N - 1); };
+  // go: move to a position on the (filtered) runway; goRole: bring a particular role forward,
+  // switching back to "All" first if the current filter hides it
+  const go = pos => { target = clamp(Math.round(pos), 0, V - 1); };
+  const goRole = i => { if (posOf[i] < 0) setFilter('all', i); go(posOf[i]); };
+
+  // ── filter buttons ──
+  const filterBar = $('jr-filters');
+  let filter = 'all';
+  function setFilter(key, keep) {
+    filter = key;
+    const keepRole = keep !== undefined ? keep : active;
+    view = JOURNEY.map((e, i) => i).filter(i => key === 'all' || (GROUPS[JOURNEY[i].id] || []).includes(key));
+    V = view.length;
+    posOf = JOURNEY.map((e, i) => view.indexOf(i));
+    if ($('jr-total')) $('jr-total').textContent = pad(V);
+    buildRoll();
+    // stay on the same role if it is still shown, otherwise start from the newest
+    p = target = posOf[keepRole] >= 0 ? posOf[keepRole] : 0;
+    active = -1;
+    bars.forEach((r, j) => { const out = posOf[j] < 0; r.el.classList.toggle('dim', out); r.label.classList.toggle('dim', out); });
+    if (filterBar) filterBar.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === key)));
+    dirty = true;
+  }
+  if (filterBar) {
+    filterBar.innerHTML = FILTERS.map(([k, label]) => {
+      const n = k === 'all' ? N : JOURNEY.filter(e => (GROUPS[e.id] || []).includes(k)).length;
+      return `<button type="button" data-filter="${k}" aria-pressed="${k === 'all'}">${label}<span>${n}</span></button>`;
+    }).join('');
+    filterBar.addEventListener('click', e => { const b = e.target.closest('[data-filter]'); if (b && b.dataset.filter !== filter) setFilter(b.dataset.filter); });
+  }
 
   // ── dragging the orange line along the timeline ──
   // The line follows the pointer; the role under it (or the one ending nearest)
@@ -673,14 +723,14 @@
   let scrubbing = false;
   function roleAt(x) {
     const near = (list) => list.reduce((best, k) => Math.abs(bars[k].end - x) < Math.abs(bars[best].end - x) ? k : best, list[0]);
-    const all = bars.map((r, k) => k);
+    const all = view.slice();                      // only roles in the current filter
     const covering = all.filter(k => bars[k].x0 - 2 <= x && x <= bars[k].x1 + 2);
     return near(covering.length ? covering : all);
   }
   function scrubTo(clientX) {
     const x = clamp(clientX - ribbon.getBoundingClientRect().left, 0, ribW);
     cursor.style.left = x.toFixed(1) + 'px';
-    go(roleAt(x));
+    go(posOf[roleAt(x)]);
   }
   cursor.addEventListener('pointerdown', e => {
     e.preventDefault();
@@ -709,7 +759,7 @@
     const r = stage.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top;
     if (!down) return;
     const dx = e.clientX - sx; moved = Math.max(moved, Math.abs(dx));
-    target = clamp(st + dx / PULL(), -.35, N - .65);
+    target = clamp(st + dx / PULL(), -.35, V - .65);
   });
   stage.addEventListener('pointerdown', e => {
     if (e.target.closest('a,button')) return;
@@ -720,7 +770,7 @@
     if (!down) return; down = false; ring.classList.remove('drag');
     if (moved < 6) {
       const hit = document.elementsFromPoint(e.clientX, e.clientY).find(x => x.classList && x.classList.contains('jr-m'));
-      if (hit) go(+hit.dataset.i);
+      if (hit) goRole(+hit.dataset.i);
     } else go(target);
   }
   stage.addEventListener('pointerup', release);
@@ -728,9 +778,9 @@
   stage.addEventListener('wheel', e => {
     const dir = Math.sign(e.deltaY + e.deltaX);
     // at either end, let the page scroll on instead of trapping the wheel
-    if ((dir < 0 && target <= 0) || (dir > 0 && target >= N - 1)) return;
+    if ((dir < 0 && target <= 0) || (dir > 0 && target >= V - 1)) return;
     e.preventDefault();
-    target = clamp(target + clamp(e.deltaY + e.deltaX, -120, 120) / 420, 0, N - 1);
+    target = clamp(target + clamp(e.deltaY + e.deltaX, -120, 120) / 420, 0, V - 1);
     clearTimeout(wheelT); wheelT = setTimeout(() => go(target), 150);
   }, { passive: false });
   addEventListener('keydown', e => {
@@ -744,7 +794,7 @@
   $('jr-next').addEventListener('click', () => go(Math.round(target) + 1));
   document.getElementById('content-journey').addEventListener('click', e => {
     const b = e.target.closest('[data-go]');
-    if (b) go(+b.dataset.go);
+    if (b) goRole(+b.dataset.go);
   });
 
   size();
