@@ -82,7 +82,7 @@
       org: 'Wageningen University, Business Management & Organisation group', place: 'Wageningen, Netherlands (remote)',
       start: [2022, 1], end: [2022, 12],
       points: [
-        'Collaborated on research on IoT use in the agri-food industry and on a paper about grassroots innovation.',
+        'Collaborated on research on IoT use in the agri-food industry.',
         'Prepared a joint proposal on the role of context in innovation ecosystems.',
         'Ran a workshop on scientometrics and bibliometrics in social science (June 2022).'
       ],
@@ -160,9 +160,9 @@
       role: 'Ph.D., Economics', short: 'Sant’Anna Ph.D.',
       org: 'Sant’Anna School of Advanced Studies', place: 'Pisa, Italy', start: [2011, 10], end: [2015, 5],
       points: [
-        'Full scholarship, plus an Erasmus scholarship (2014). Thesis: Essays in Economics of Innovation.',
-        'Time Series Analysis at CIDE, University of Torino (2012); Best Paper Award, International Conference on Management of Technology (2015).',
-        'Alongside the PhD, taught Principles of Economics to bachelor students in Tehran (2012–2013).'
+        'Full scholarship, plus an Erasmus scholarship (2014).',
+        'Thesis: Essays on Economics of Innovation; its chapters were published in World Patent Information and R&D Management.',
+        'Time Series Analysis at CIDE, University of Torino (2012); Best Paper Award, International Conference on Management of Technology (2015).'
       ],
       tags: ['Econometrics', 'Innovation economics', 'Stata']
     },
@@ -213,13 +213,13 @@
     {
       id: 'research-assistant', type: 'work', glyph: 'research',
       img: { src: 'images/journey/alzahra-campus-gate.jpg', kind: 'photo', badge: 'images/journey/alzahra.jpg', alt: 'The entrance gate of Alzahra University' },
-      role: 'Research Assistant & Excel Instructor', short: 'Research Asst. & Excel',
+      role: 'Research Assistant & EViews Instructor', short: 'Research Asst. & EViews',
       org: 'Alzahra University', place: 'Tehran, Iran', start: [2004, 2], end: [2008, 8],
       points: [
         'Started as a research assistant in the second semester of my M.Sc. in Economics and continued until I moved to Sweden in 2008.',
-        'Taught Excel classes.'
+        'Taught EViews classes.'
       ],
-      tags: ['Research', 'Excel', 'Teaching']
+      tags: ['Research', 'EViews', 'Teaching']
     },
     {
       id: 'alzahra', type: 'study', glyph: 'cap',
@@ -237,9 +237,12 @@
       role: 'Secretary, Economy Scientific Council', short: 'Council Secretary',
       org: 'Alzahra University', place: 'Tehran, Iran', start: [2003, 9], end: [2005, 6],
       points: [
-        'Served as secretary of the economics scientific council while studying for my M.Sc.'
+        'Served as secretary of the economics scientific council while studying for my M.Sc., managing the other council members.',
+        'Organized workshops and seminars from start to finish: approached professors and faculty members to invite speakers, designed the banners, sent the invitations, facilitated the sessions and looked after participants.',
+        'Gathered feedback from students on what they needed, then invited lecturers to teach the topics students requested most.',
+        'Taught Stata classes in response to student demand.'
       ],
-      tags: ['Leadership', 'Organizing']
+      tags: ['Leadership', 'Event organizing', 'Stata', 'Teaching']
     },
     {
       id: 'typist', type: 'work', glyph: 'keys',
