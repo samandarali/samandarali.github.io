@@ -1,120 +1,157 @@
 /* ==========================================================================
-   TIKI'S VOICE — reads lines aloud with the browser's built-in speech
-   (Web Speech API). Free, no files, nothing leaves the device.
+   TIKI'S VOICE — plays pre-made child-voice clips (voice/clips/*.mp3).
+   Lines that change (times, numbers) are joined from several clips; the
+   silence around each clip is trimmed so the joins sound natural.
+   Clips are made once with tools/make-voice.mjs (see tools/README-voice.md).
+   Until the clips exist the voice controls stay hidden.
 
-   ClockVoice.speak(text)  say a line (stops anything already being said)
+   ClockVoice.speak(text)    say a line (stops anything already playing)
    ClockVoice.stop()
-   ClockVoice.supported    false on browsers without speech
+   ClockVoice.whenReady(fn)  runs fn once the clips are available
    ========================================================================== */
 
 (function () {
   "use strict";
 
-  const synth = window.speechSynthesis;
-  const supported = !!(synth && window.SpeechSynthesisUtterance);
+  const L = window.ClockVoiceLines;
+  const BASE = "voice/";
+  const WORD_GAP = 0.04;      // seconds between joined pieces of one sentence
+  const SENTENCE_GAP = 0.28;  // seconds after a full sentence
+  const VOLUME = 1.0;
 
-  // Tiki should sound like a child. "Microsoft Ana" (in Microsoft Edge) is a
-  // real child voice; elsewhere a female voice is pitched up so it sounds
-  // young. Deep male voices are avoided. pitch: 0-2 (1 = normal).
-  const VOICE_PROFILES = [
-    { name: "Microsoft Ana", pitch: 1.15, rate: 1.0 },          // real child voice (Edge)
-    { name: "Google US English", pitch: 1.6, rate: 1.0 },
-    { name: "Samantha", pitch: 1.7, rate: 1.0 },                // macOS / iOS
-    { name: "Microsoft Jenny", pitch: 1.6, rate: 1.0 },
-    { name: "Microsoft Aria", pitch: 1.6, rate: 1.0 },
-    { name: "Google UK English Female", pitch: 1.6, rate: 1.0 },
-    { name: "Karen", pitch: 1.7, rate: 1.0 },
-    { name: "Microsoft Zira", pitch: 1.85, rate: 1.0 },          // Windows
-  ];
-  const MALE = /david|mark|guy|ryan|george|james|daniel|fred|alex|tom\b|male/i;
-  let voice = null;
-  let pitch = 1.8;
-  let rate = 1.0;
+  let table = null;
+  const endsSentence = new Map();
+  let ready = false;
+  const readyCallbacks = [];
 
-  function pickVoice() {
-    if (!supported) return;
-    const voices = synth.getVoices();
-    if (!voices.length) return;
-    for (const p of VOICE_PROFILES) {
-      const v = voices.find((x) => x.name.indexOf(p.name) === 0);
-      if (v) { voice = v; pitch = p.pitch; rate = p.rate; return; }
+  if (L && window.fetch) {
+    fetch(BASE + "manifest.json", { cache: "no-cache" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((m) => {
+        if (!m || !Array.isArray(m.clips) || !m.clips.length) return;
+        table = L.buildTable(m.clips);
+        m.clips.forEach((c) => endsSentence.set(c.f, /[.!?…]\s*$/.test(c.t)));
+        ready = true;
+        readyCallbacks.splice(0).forEach((fn) => fn());
+      })
+      .catch(() => { /* no clips yet: voice stays off */ });
+  }
+
+  function whenReady(fn) {
+    if (ready) fn();
+    else readyCallbacks.push(fn);
+  }
+
+  /* ---------------- audio ---------------- */
+
+  let ctx = null;
+  let out = null;
+  const buffers = new Map(); // file -> Promise<AudioBuffer>
+
+  function audio() {
+    if (ctx) return ctx;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    ctx = new AC();
+    out = ctx.createGain();
+    out.gain.value = VOLUME;
+    out.connect(ctx.destination);
+    return ctx;
+  }
+
+  // cut the quiet start and end of a clip (keeps a few ms so it isn't clipped)
+  function trim(buf) {
+    const data = buf.getChannelData(0);
+    const threshold = 0.012;
+    let start = 0;
+    let end = data.length - 1;
+    while (start < end && Math.abs(data[start]) < threshold) start++;
+    while (end > start && Math.abs(data[end]) < threshold) end--;
+    const pad = Math.floor(buf.sampleRate * 0.03);
+    start = Math.max(0, start - pad);
+    end = Math.min(data.length - 1, end + pad);
+    const out2 = ctx.createBuffer(1, end - start + 1, buf.sampleRate);
+    out2.copyToChannel(data.subarray(start, end + 1), 0);
+    return out2;
+  }
+
+  function load(file) {
+    if (!buffers.has(file)) {
+      buffers.set(
+        file,
+        fetch(BASE + "clips/" + file)
+          .then((r) => r.arrayBuffer())
+          .then((ab) => new Promise((ok, fail) => ctx.decodeAudioData(ab, ok, fail)))
+          .then(trim)
+      );
     }
-    const english = voices.filter((x) => /^en(-|_|$)/i.test(x.lang));
-    voice = english.find((x) => !MALE.test(x.name)) || english[0] || null;
-    pitch = 1.8;
-    rate = 1.0;
-  }
-  if (supported) {
-    pickVoice();
-    synth.addEventListener ? synth.addEventListener("voiceschanged", pickVoice) : (synth.onvoiceschanged = pickVoice);
-  }
-
-  /* ---------------- making lines sound natural ---------------- */
-
-  const ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-    "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
-  const TENS = ["", "", "twenty", "thirty", "forty", "fifty"];
-
-  function numberWords(n) {
-    if (n < 20) return ONES[n];
-    const t = Math.floor(n / 10);
-    const o = n % 10;
-    return TENS[t] + (o ? "-" + ONES[o] : "");
-  }
-
-  // 11:00 -> "eleven o'clock", 7:30 -> "seven thirty", 7:05 -> "seven oh five"
-  function timeWords(h, m, ampm) {
-    const hour = numberWords(h);
-    let words;
-    if (m === 0) words = hour + " o'clock";
-    else if (m < 10) words = hour + " oh " + ONES[m];
-    else words = hour + " " + numberWords(m);
-    if (ampm) words += ampm.toUpperCase() === "AM" ? " A M" : " P M";
-    return words;
-  }
-
-  function toSpeech(text) {
-    return String(text)
-      // emoji and their joiners are not read out
-      .replace(/[\p{Extended_Pictographic}️‍]/gu, "")
-      // clock times, with optional AM/PM
-      .replace(/\b(\d{1,2}):(\d{2})(?:\s*(AM|PM))?\b/gi, (_, h, m, ap) => timeWords(+h, +m, ap))
-      // durations used in the stories: "1 h 50 min"
-      .replace(/\b(\d+)\s*h\b/g, (_, n) => n + (n === "1" ? " hour" : " hours"))
-      .replace(/\b(\d+)\s*min\b/g, (_, n) => n + " minutes")
-      .replace(/…/g, ", ")
-      .replace(/\s+/g, " ")
-      .trim();
+    return buffers.get(file);
   }
 
   /* ---------------- speaking ---------------- */
 
-  let pending = null;
+  let playId = 0;
+  let sources = [];
+  let duckTimer = null;
 
-  function speak(text) {
-    if (!supported) return;
-    const line = toSpeech(text);
-    if (!line) return;
-    synth.cancel();
-    const u = new SpeechSynthesisUtterance(line);
-    if (voice) u.voice = voice;
-    u.lang = voice ? voice.lang : "en-US";
-    u.rate = rate;
-    u.pitch = pitch; // high and bright: Tiki is a little owl
-    u.volume = 1;
-    u.onstart = () => window.ClockMusic && window.ClockMusic.duck && window.ClockMusic.duck(true);
-    u.onend = u.onerror = () => window.ClockMusic && window.ClockMusic.duck && window.ClockMusic.duck(false);
-    // Chrome sometimes ignores speak() right after cancel(); a tiny delay fixes it.
-    clearTimeout(pending);
-    pending = setTimeout(() => synth.speak(u), 60);
+  function duck(on) {
+    if (window.ClockMusic && window.ClockMusic.duck) window.ClockMusic.duck(on);
+  }
+
+  function stopSources() {
+    sources.forEach((s) => { try { s.stop(); } catch (e) { /* already stopped */ } });
+    sources = [];
+    clearTimeout(duckTimer);
+  }
+
+  async function speak(text) {
+    if (!ready || !audio()) return;
+    const p = L.plan(text, table);
+    if (!p.files.length) return;
+    if (p.missing.length) {
+      // no clip for part of this line: stay quiet rather than say half of it
+      console.debug("[Tiki voice] no clip for:", p.missing.join(" "), "|", text);
+      return;
+    }
+    const id = ++playId;
+    stopSources();
+    if (ctx.state === "suspended") ctx.resume();
+
+    let bufs;
+    try {
+      bufs = await Promise.all(p.files.map(load));
+    } catch (e) {
+      console.debug("[Tiki voice] could not load clips", e);
+      return;
+    }
+    if (id !== playId) return; // something newer started meanwhile
+
+    let t = ctx.currentTime + 0.05;
+    bufs.forEach((buf, i) => {
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      src.connect(out);
+      src.start(t);
+      sources.push(src);
+      t += buf.duration + (endsSentence.get(p.files[i]) ? SENTENCE_GAP : WORD_GAP);
+    });
+    duck(true);
+    duckTimer = setTimeout(() => {
+      if (id === playId) duck(false);
+    }, (t - ctx.currentTime) * 1000);
   }
 
   function stop() {
-    if (!supported) return;
-    clearTimeout(pending); // a line queued a moment ago must not play after "off"
-    synth.cancel();
-    if (window.ClockMusic && window.ClockMusic.duck) window.ClockMusic.duck(false);
+    playId++;
+    stopSources();
+    duck(false);
   }
 
-  window.ClockVoice = { speak, stop, supported, toSpeech };
+  window.ClockVoice = {
+    speak,
+    stop,
+    whenReady,
+    get supported() { return ready; },
+    toSpeech: L ? L.toSpeech : (s) => s,
+  };
 })();

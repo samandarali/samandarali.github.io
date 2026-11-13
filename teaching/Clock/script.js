@@ -1068,7 +1068,7 @@
     if (hourRight) return "👍 The hour is right! Now check the minutes.";
     if (minuteRight) return "👍 The minutes are right! Now check the hour.";
     if (state.currentActivity === "challenge") return "🤔 Not quite — let's add the time again, step by step.";
-    return FAR_MESSAGES[randInt(0, FAR_MESSAGES.length - 1)] + " Short hand = hour, long hand = minutes.";
+    return FAR_MESSAGES[randInt(0, FAR_MESSAGES.length - 1)] + " Remember: the short hand shows the hour and the long hand shows the minutes.";
   }
 
   function showTryAgainFeedback() {
@@ -1551,7 +1551,8 @@
     const q = state.currentQuestion;
     if (!q) return "";
     if (state.currentActivity === "challenge") {
-      return q.level === 3 ? `${q.storyText} What time is it now?` : el.practiceInstruction.textContent;
+      // word problems are read on screen; Tiki just introduces them
+      return q.level === 3 ? "Read the story and work out the time." : el.practiceInstruction.textContent;
     }
     return el.tikiLine.textContent;
   }
@@ -1704,9 +1705,12 @@
     setCount(state.totalQuestions);
     updateMusicButtons();
     updateVoiceButtons();
-    if (!window.ClockVoice || !window.ClockVoice.supported) {
-      // no speech in this browser: hide the voice controls
-      [el.btnVoice, el.btnVoiceTop, el.btnSpeak].forEach((b) => b && (b.hidden = true));
+    // Voice controls appear only once Tiki's recorded clips are available
+    // (voice/manifest.json); without clips the game simply stays silent.
+    const voiceControls = [el.btnVoice, el.btnVoiceTop, el.btnSpeak];
+    voiceControls.forEach((b) => b && (b.hidden = true));
+    if (window.ClockVoice) {
+      window.ClockVoice.whenReady(() => voiceControls.forEach((b) => b && (b.hidden = false)));
     }
     updateMinuteHelperVisibility();
     setClockTime(12, 0);
