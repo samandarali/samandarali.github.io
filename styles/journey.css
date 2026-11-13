@@ -154,7 +154,7 @@ html[data-theme="dark"] .journey {
     100% { box-shadow: 0 0 0 0 rgba(110, 231, 183, 0); }
 }
 
-.jr-c-year { margin-top: 1.4em; line-height: 1; }
+.jr-c-year { margin-top: 1.4em; line-height: 1; flex-shrink: 0; }
 .jr-c-year b { display: block; font-weight: 400; font-size: 3.1em; letter-spacing: .04em; }
 .jr-c-year span { display: block; margin-top: .7em; font-size: .78em; letter-spacing: .2em; opacity: .75; }
 
@@ -177,12 +177,18 @@ html[data-theme="dark"] .journey {
 }
 
 .jr-c-media {
-    flex: 1;
+    flex: 1 1 0;
     min-height: 0;
     display: grid;
+    /* one cell exactly the size of the space left between the year and the text,
+       so a tall photo or logo is scaled down instead of spilling over the text */
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     place-items: center;
     margin: 1.2em 0 1.1em;
     position: relative;
+    overflow: hidden;
+    border-radius: .8em;
 }
 .jr-c-media img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; user-select: none; -webkit-user-drag: none; }
 .jr-c-media.tile > img {
@@ -194,7 +200,7 @@ html[data-theme="dark"] .journey {
     box-shadow: 0 .8em 2em rgba(0, 0, 0, .28);
 }
 /* several logos side by side (e.g. the three universities I lectured at) */
-.jr-c-media.multi { display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: .7em; }
+.jr-c-media.multi { display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: .7em; overflow: visible; }
 .jr-c-media.multi img {
     width: 28%;
     aspect-ratio: 1;
@@ -205,15 +211,13 @@ html[data-theme="dark"] .journey {
     box-shadow: 0 .6em 1.6em rgba(0, 0, 0, .28);
 }
 .jr-c-media.bare > img { max-width: 80%; max-height: 60%; }
-.jr-c-media.photo { place-items: stretch; }
+.jr-c-media.photo { place-items: stretch; box-shadow: 0 .8em 2em rgba(0, 0, 0, .3); }
 .jr-c-media.photo > img {
     width: 100%;
     height: 100%;
     max-height: none;
     object-fit: cover;
     object-position: center 35%;
-    border-radius: .8em;
-    box-shadow: 0 .8em 2em rgba(0, 0, 0, .3);
 }
 .jr-c-badge {
     position: absolute;
@@ -231,6 +235,7 @@ html[data-theme="dark"] .journey {
 /* on a logo tile the badge sits on the tile's corner */
 .jr-c-media.tile .jr-c-badge { right: 4%; bottom: 6%; }
 
+.jr-c-foot { flex-shrink: 0; }
 .jr-c-foot h3 { font-weight: 600; font-size: 1.32em; line-height: 1.22; letter-spacing: -.005em; }
 .jr-c-foot p { margin-top: .45em; font-size: .86em; line-height: 1.35; opacity: .85; }
 .jr-c-foot .jr-c-place { font-size: .72em; opacity: .65; letter-spacing: .04em; }
