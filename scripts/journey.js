@@ -194,6 +194,7 @@
       role: 'M.Sc., Industrial Economics', short: 'Gothenburg M.Sc.',
       org: 'University of Gothenburg', place: 'Gothenburg, Sweden', start: [2008, 10], end: [2011, 5],
       points: [
+        'Graduated with Pass with Distinction (95/100).',
         'Thesis: Corporate Governance and Default Risk — a bridge from my credit-risk work into research.'
       ],
       tags: ['Industrial economics', 'Default risk']
