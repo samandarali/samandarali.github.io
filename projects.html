@@ -261,6 +261,13 @@
             margin-bottom: 12px;
         }
 
+        .project-year {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            opacity: 0.85;
+        }
+
         .project-skills {
             font-size: 12px;
             opacity: 0.7;
@@ -401,6 +408,11 @@
             color: white;
         }
 
+        .color-toronto {
+            background: linear-gradient(135deg, #012265 0%, #2a74ab 60%, #d3810d 100%);
+            color: white;
+        }
+
         .hyberlink_non {
             text-decoration: none;
         }
@@ -466,6 +478,7 @@
             <select id="targetTypeFilter" class="filter-select">
                 <option value="">All Project Types</option>
                 <option value="Research Project">Research Project</option>
+                <option value="Policy Data Briefing">Policy Data Briefing</option>
                 <option value="Ministry-Commissioned Project">Ministry-Commissioned Project</option>
                 <option value="Funded Project">Funded Project</option>
                 <option value="Exploratory Research">Exploratory Research</option>
@@ -486,6 +499,23 @@
         <!-- Grid View --> 
 
         <div class="projects-grid " id="gridView">
+            <a class="hyberlink_non" href="projects/toronto_business_licences.html" rel="noopener noreferrer">
+                <div class="project-card color-toronto" data-type="Policy Data Briefing, Research Project">
+                    <div style="position: relative;">
+                        <img src="images/toronto-licences/trend-cover.webp" alt="Toronto business licences trend" class="project-image" style="object-position: center 65%;">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-category">Policy Data Briefing</div>
+                        <div class="project-title">From Growth to Plateau: Toronto's Business Licences, 1946–2025</div>
+                        <div class="project-year">📅 2026</div>
+                        <div class="project-skills">
+                            <div class="emoji_skills">🛠️ </div>
+                            <div class="skills-lists">R, Joinpoint Regression, Structural Break Tests (Bai–Perron, CUSUM),
+                                Negative-Binomial Models, Toronto Open Data</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
             <a class="hyberlink_non" href="projects/labor_market.html" rel="noopener noreferrer" class="project-link">
                 <div class="project-card color-purple" data-type="Research Project">
                     <div style="position: relative;">
@@ -496,6 +526,7 @@
                         <div class="project-category">Research Project</div>
                         <div class="project-title">Skills in Demand: Analyzing the Labor Market for Economics
                             Graduates in Canada</div>
+                        <div class="project-year">📅 2025</div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
                             <div class="skills-lists">Python, Web Scraping, Natural Language Processing (NLP),
@@ -515,6 +546,7 @@
                     <div class="project-info">
                         <div class="project-category"> Ministry-Commissioned Project</div>
                         <div class="project-title">Educational Strategies for Entrepreneurial Universities </div>
+                        <div class="project-year">📅 2018–2021</div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
                             <div class="skills-lists">Systematic Literature Review and Framework Synthesis, Focus group,
@@ -534,6 +566,7 @@
                     <div class="project-info">
                         <div class="project-category">Funded Project</div>
                         <div class="project-title">Enhancing Efficiency of National Innovation System </div>
+                        <div class="project-year">📅 2018–2019</div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
                             <div class="skills-lists">Two-Stage Network Data Envelopment Analysis (DEA),Tobit Regression
@@ -552,6 +585,7 @@
                         <div class="project-category">Industry-Collaborative Research Project</div>
                         <div class="project-title">Using the crowd for business model innovation: the case of Digikala
                         </div>
+                        <div class="project-year">📅 2020</div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
                             <div class="skills-lists">Excel(Pivot Tables, Power Query, Data Auditing), Stata, Regression
@@ -571,6 +605,7 @@
                     <div class="project-info">
                         <div class="project-category">Research Project</div>
                         <div class="project-title">Regional Innovative Behaviour: Evidence from Iran</div>
+                        <div class="project-year">📅 2017</div>
                         <!-- <div class="project-subtitle">Theater</div> -->
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
@@ -590,6 +625,7 @@
                     <div class="project-info">
                         <div class="project-category">Exploratory Research</div>
                         <div class="project-title">Discover the best of Europe with Airbnb (value + satisfaction)</div>
+                        <div class="project-year">📅 2023</div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
                             <div class="skills-lists">R, Exploratory Data Analysis (EDA), Data Visualization </div>
@@ -602,6 +638,21 @@
 
         <!-- List View -->
         <div class="projects-list hidden" id="listView">
+            <a class="hyberlink_non" href="projects/toronto_business_licences.html" rel="noopener noreferrer">
+                <div class="project-list-item color-toronto" data-type="Policy Data Briefing, Research Project">
+                    <img src="images/toronto-licences/trend-cover.webp" alt="Toronto business licences trend" class="list-thumbnail" style="object-position: 60% 50%;">
+                    <div class="list-info">
+                        <div class="project-category">Policy Data Briefing</div>
+                        <div class="project-title">From Growth to Plateau: Toronto's Business Licences, 1946–2025</div>
+                        <div class="project-year">📅 2026</div>
+                        <div class="project-skills">
+                            <div class="emoji_skills">🛠️ </div>
+                            <div class="skills-lists">R, Joinpoint Regression, Structural Break Tests (Bai–Perron, CUSUM),
+                                Negative-Binomial Models, Toronto Open Data</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
             <a class="hyberlink_non" href="projects/labor_market.html" rel="noopener noreferrer" class="project-link">
                 <div class="project-list-item color-purple" data-type="Research Project">
                     <img src="images/canadaLaborMarket1.png" alt="Project 2" class="list-thumbnail">
@@ -609,6 +660,7 @@
                         <div class="project-category">Research Project</div>
                         <div class="project-title">Skills in Demand: Analyzing the Labor Market for Economics
                             Graduates in Canada</div>
+                        <div class="project-year">📅 2025</div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️</div>
                             <div class="skills-lists">
@@ -626,6 +678,7 @@
                     <div class="list-info">
                         <div class="project-category">Ministry-commissioned Project</div>
                         <div class="project-title">Educational Strategies for Entrepreneurial Universities</div>
+                        <div class="project-year">📅 2018–2021</div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
                             <div class="skills-lists">Systematic Literature Review and Framework Synthesis, Focus group,
@@ -643,6 +696,7 @@
                     <div class="list-info">
                         <div class="list-category">Funded Project</div>
                         <div class="project-title">Enhancing Efficiency of National Innovation System </div>
+                        <div class="project-year">📅 2018–2019</div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
                             <div class="skills-lists">Two-Stage Network Data Envelopment Analysis (DEA),Tobit Regression
@@ -660,6 +714,7 @@
                         <div class="project-category">Industry-Collaborative Research Project</div>
                         <div class="project-title">Using the crowd for business model innovation: the case of Digikala
                         </div>
+                        <div class="project-year">📅 2020</div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
                             <div class="skills-lists">Excel(Pivot Tables, Power Query, Data Auditing), Stata, Regression
@@ -677,6 +732,7 @@
                     <div class="list-info">
                         <div class="list-category">Research Project</div>
                         <div class="project-title">Regional Innovative Behaviour: Evidence from Iran</div>
+                        <div class="project-year">📅 2017</div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
                             <div class="skills-lists">Principal Components Analysis (PCA), Spatial Analysis, Stata,
@@ -694,6 +750,7 @@
                     <div class="list-info">
                         <div class="list-category">Exploratory Research</div>
                         <div class="project-title">Discover the best of Europe with Airbnb (value + satisfaction)</div>
+                        <div class="project-year">📅 2023</div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
                             <div class="skills-lists">R, Exploratory Data Analysis (EDA), Data Visualization </div>
@@ -767,6 +824,8 @@
     });
     }
     </script>
+
+<footer class="site-footnote" style="clear:both;position:relative;z-index:1;text-align:center;padding:24px 16px;font-family:Inter,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:13px;color:#63698b;">&copy; 2026 Mojgan Samandar. All rights reserved.</footer>
 </body>
 
 </html>
