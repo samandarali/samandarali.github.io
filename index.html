@@ -1337,6 +1337,11 @@
         html[data-theme="light"] .about-page .about-card .about-text .about-lead { color: #151a3d; }
         html[data-theme="light"] .about-page .about-card .about-lead span { color: #095489; }
         html[data-theme="light"] .about-page .about-card .about-text > div { color: #074169; }
+        /* "PraTech Digital" link in the About intro: gold on the dark card, blue on the light card */
+        .about-text a.pratech-link { color: #f2c46d; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+        .about-text a.pratech-link:hover { color: #ffd98a; }
+        html[data-theme="light"] .about-page .about-card .about-text a.pratech-link { color: #2a74ab; }
+        html[data-theme="light"] .about-page .about-card .about-text a.pratech-link:hover { color: #074169; }
         html[data-theme="light"] .about-page .about-card #typed-text { color: #2a74ab; }
         html[data-theme="light"] .about-page .about-card .typewriter-cursor { background-color: #2a74ab; }
         html[data-theme="light"] .about-page .about-card .about-text p { color: #353a5a; }
@@ -1631,8 +1636,12 @@
                         </p>
                         <p>
                             This site brings together selected policy, research, and analytics projects, along with
-                            practical learning resources. I also help small businesses with websites, reporting, data
-                            analysis, and simple tools that reduce manual work.
+                            practical learning resources.
+                        </p>
+                        <p>
+                            I also run <a class="pratech-link" href="https://pratechdigital.com/" target="_blank"
+                                rel="noopener">PraTech Digital</a>, where I help small businesses with websites,
+                            reporting, data analysis, and simple tools that reduce manual work.
                         </p>
                     </div>
 
@@ -1897,12 +1906,12 @@
                     <h3 class="text-xl font-semibold mb-3 text-brand-800">Games & Interactive Apps</h3>
                     <p class="text-ink-600 mb-4">
                         A collection of games and interactive applications built using Python, R Shiny, and JavaScript,
-                        ranging from small tools to data-driven projects. First up: Clock Practice, a game that helps
-                        children learn to tell time.
+                        ranging from small tools to data-driven projects, such as Clock Practice, a game that helps
+                        children learn to tell time, and LicensedTO, a searchable map of Toronto&rsquo;s licensed businesses.
                     </p>
-                    <a href="teaching/Clock/index.html"
+                    <a href="games-apps.html"
                         class="inline-block bg-brand-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-brand-700 transition">
-                        Play Clock Practice &rarr;
+                        View Games &amp; Apps &rarr;
                     </a>
                 </div>
             </div>
