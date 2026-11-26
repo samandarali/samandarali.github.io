@@ -2,6 +2,18 @@
 <html lang="en">
 
 <head>
+    <!-- Light/dark theme, shared with the home page: the visitor's saved choice ("theme" in localStorage),
+         otherwise their device setting. Runs first so the page never flashes the wrong colours. -->
+    <script>
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('theme'); } catch (e) { }
+            if (t !== 'light' && t !== 'dark') {
+                t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9E4B200372"></script>
     <script>
@@ -40,7 +52,7 @@
 
         .header-grid {
             display: grid;
-            grid-template-columns: auto 1fr;
+            grid-template-columns: auto 1fr auto;
             align-items: center;
             font-size: 28px;
 
@@ -450,6 +462,50 @@
             max-width: 60ch;
         }
 
+        /* ---------- light / dark toggle (same button as the home page) ---------- */
+        .theme-toggle {
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid #bfdaed;
+            background: #fff;
+            cursor: pointer;
+            transition: background .2s, border-color .2s, transform .2s;
+        }
+        .theme-toggle:hover { transform: scale(1.06); background: #f1f7fb; }
+        .theme-toggle:focus-visible { outline: 3px solid #2a74ab; outline-offset: 3px; }
+        .theme-toggle svg { width: 22px; height: 22px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+        .theme-toggle .icon-sun { stroke: #fbbf24; display: none; }
+        .theme-toggle .icon-moon { stroke: #095489; fill: rgba(9, 84, 137, .12); }
+        html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+        html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+        /* ---------- dark mode: the home page's night-sky colours ---------- */
+        html[data-theme="dark"] body { background-color: #0b1030; color: #dfedf7; }
+        html[data-theme="dark"] .top-header { background-color: #0e1440; border-bottom-color: rgba(255, 255, 255, .08); }
+        html[data-theme="dark"] .site-name { color: #fff; }
+        html[data-theme="dark"] .site-role { color: #91bede; }
+        html[data-theme="dark"] .theme-toggle { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .22); }
+        html[data-theme="dark"] .theme-toggle:hover { background: rgba(255, 255, 255, .16); }
+        html[data-theme="dark"] a.home-btn.home-btn { border-color: #91bede; color: #91bede; }
+        html[data-theme="dark"] a.home-btn.home-btn:hover,
+        html[data-theme="dark"] a.home-btn.home-btn:focus-visible { background: #91bede; color: #0b1030; }
+        html[data-theme="dark"] .sidebar { background-color: #0e1440; border-right: 1px solid rgba(255, 255, 255, .06); }
+        html[data-theme="dark"] .logo { color: #bfdaed; }
+        html[data-theme="dark"] h1 { color: #f1f7fb; }
+        html[data-theme="dark"] .page-lead { color: #bfdaed; }
+        html[data-theme="dark"] .toggle-btn { background-color: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .2); color: #dfedf7; }
+        html[data-theme="dark"] .toggle-btn:hover { background-color: rgba(255, 255, 255, .14); }
+        html[data-theme="dark"] .toggle-btn.active { background-color: #5e9dca; border-color: #5e9dca; color: #0b1030; }
+        html[data-theme="dark"] .filter-select { background: #141a45; border-color: rgba(255, 255, 255, .2); color: #dfedf7; }
+        html[data-theme="dark"] .project-card,
+        html[data-theme="dark"] .project-list-item { box-shadow: 0 2px 10px rgba(0, 0, 0, .45); }
+        html[data-theme="dark"] .project-card:hover,
+        html[data-theme="dark"] .project-list-item:hover { box-shadow: 0 10px 28px rgba(0, 0, 0, .6); }
+        html[data-theme="dark"] .site-footnote { color: #91bede !important; }
+
         .hyberlink_non {
             text-decoration: none;
         }
@@ -484,6 +540,17 @@
                 <h1 class="site-name">Mojgan Samandar</h1>
                 <p class="site-role">Economist & Data Analyst</p>
             </div>
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode">
+                <!-- sun: shown in dark mode (switches to light) -->
+                <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4.5" />
+                    <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" />
+                </svg>
+                <!-- moon: shown in light mode (switches to dark) -->
+                <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" />
+                </svg>
+            </button>
         </div>
     </header>
 
@@ -608,6 +675,22 @@
     </div><!-- /.main-content -->
 
     <script>
+        // Light/dark toggle (the theme itself is applied by the script in <head>; the choice is shared with the home page)
+        (function () {
+            const btn = document.getElementById('theme-toggle');
+            if (!btn) return;
+            const root = document.documentElement;
+            const label = () => btn.setAttribute('aria-label',
+                root.getAttribute('data-theme') === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+            label();
+            btn.addEventListener('click', () => {
+                const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', next);
+                try { localStorage.setItem('theme', next); } catch (e) { }
+                label();
+            });
+        })();
+
         // Get elements
         const gridBtn = document.getElementById('gridBtn');
         const listBtn = document.getElementById('listBtn');
