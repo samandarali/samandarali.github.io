@@ -431,10 +431,45 @@
             color: white;
         }
 
+        /* Clock Practice: the Math Adventure look (deep purple, rose accent, Tucky on a starry night) */
         .color-clock {
-            background: linear-gradient(135deg, #2a74ab 0%, #91bede 55%, #fcd34d 100%);
-            color: #151a3d;
+            position: relative;
+            background: linear-gradient(160deg, #2e1065 0%, #3b0764 55%, #4c1d95 100%);
+            color: #fff;
+            border: 2px solid #e11d48;
+            box-shadow: 0 8px 32px rgba(225, 29, 72, .22);
         }
+        .color-clock:hover { box-shadow: 0 16px 48px rgba(225, 29, 72, .42); }
+        .project-card.color-clock::before {
+            content: "";
+            position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 2;
+            background: linear-gradient(90deg, #9f1239, #e11d48);
+        }
+        .color-clock .project-category {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: rgba(225, 29, 72, .18);
+            color: #fb7185;
+            font-weight: 800;
+            letter-spacing: 1px;
+            opacity: 1;
+        }
+        .color-clock .project-title { font-size: 17px; }
+        .color-clock .skills-lists { color: rgba(255, 255, 255, .75); }
+        .color-clock .app-note { color: #fde68a; }
+        .tucky-stage {
+            background:
+                radial-gradient(1.5px 1.5px at 12% 20%, rgba(255,255,255,.8) 0, transparent 100%),
+                radial-gradient(1px 1px at 30% 75%, rgba(255,255,255,.6) 0, transparent 100%),
+                radial-gradient(1.5px 1.5px at 78% 18%, rgba(255,255,255,.8) 0, transparent 100%),
+                radial-gradient(1px 1px at 88% 62%, rgba(255,255,255,.5) 0, transparent 100%),
+                radial-gradient(ellipse at 50% 60%, rgba(124, 58, 237, .35), transparent 65%),
+                #0f1033;
+        }
+        .project-image.tucky-img,
+        .list-thumbnail.tucky-img { object-fit: contain; padding: 6px; transition: transform .35s cubic-bezier(.34,1.56,.64,1); }
+        .project-card.color-clock:hover .tucky-img { transform: scale(1.06) translateY(-3px); }
 
         /* pictures with a transparent background (e.g. the Clock Practice mascot) sit whole on white */
         .project-image.contain,
@@ -631,11 +666,11 @@
             <a class="hyberlink_non" href="teaching/Clock/index.html" rel="noopener noreferrer">
                 <div class="project-card color-clock" data-type="Educational Game">
                     <div style="position: relative;">
-                        <img src="teaching/Clock/images/tell-time.png" alt="Smiling cartoon alarm clock showing 3:00" class="project-image contain">
+                        <div class="tucky-stage"><img src="images/apps/tucky-card.webp" alt="Tucky the Time Teacher holding an alarm clock and a star wand" class="project-image tucky-img"></div>
                     </div>
                     <div class="project-info">
                         <div class="project-category">Educational Game</div>
-                        <div class="project-title">Clock Practice: Learn to Tell Time</div>
+                        <div class="project-title">Clock Practice with Tucky: Learn to Tell Time</div>
                         <div class="project-year">📅 2026</div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
@@ -668,10 +703,10 @@
             </a>
             <a class="hyberlink_non" href="teaching/Clock/index.html" rel="noopener noreferrer">
                 <div class="project-list-item color-clock" data-type="Educational Game">
-                    <img src="teaching/Clock/images/tell-time.png" alt="Smiling cartoon alarm clock" class="list-thumbnail contain">
+                    <img src="images/apps/tucky-card.webp" alt="Tucky the Time Teacher" class="list-thumbnail tucky-img tucky-stage">
                     <div class="list-info">
                         <div class="list-category">Educational Game</div>
-                        <div class="project-title">Clock Practice: Learn to Tell Time</div>
+                        <div class="project-title">Clock Practice with Tucky: Learn to Tell Time</div>
                         <div class="project-year">📅 2026</div>
                         <div class="project-skills">
                             <div class="emoji_skills">🛠️ </div>
