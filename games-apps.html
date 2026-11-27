@@ -530,6 +530,25 @@
             .projects-list .skills-lists { font-size: 12px; }
         }
 
+        /* ---------- light mode contrast ---------- */
+        /* LicensedTO: a green frame and shadow so its light screenshot stands out from the light page */
+        html[data-theme="light"] .color-licensedto {
+            border: 2px solid #2b7a58;
+            box-shadow: 0 8px 28px rgba(11, 58, 44, .22);
+        }
+        html[data-theme="light"] .color-licensedto:hover { box-shadow: 0 16px 40px rgba(11, 58, 44, .32); }
+        html[data-theme="light"] .project-card.color-licensedto .project-image { border-bottom: 1px solid rgba(11, 58, 44, .25); }
+        /* Clock Practice: soft lavender instead of deep purple, with dark purple text (rose accents stay) */
+        html[data-theme="light"] .color-clock {
+            background: linear-gradient(160deg, #faf5ff 0%, #f3e8ff 55%, #ede9fe 100%);
+            color: #2e1065;
+            box-shadow: 0 8px 28px rgba(225, 29, 72, .16);
+        }
+        html[data-theme="light"] .color-clock .project-category { background: rgba(225, 29, 72, .12); color: #be123c; }
+        html[data-theme="light"] .color-clock .skills-lists { color: #5b4b7a; }
+        html[data-theme="light"] .color-clock .app-note { color: #b45309; }
+        html[data-theme="light"] .project-card.color-clock .tucky-stage { border-bottom: 1px solid rgba(225, 29, 72, .18); }
+
         /* light mode: Tucky on plain white */
         html[data-theme="light"] .tucky-stage { background: #ffffff; }
         .project-image.tucky-img,
