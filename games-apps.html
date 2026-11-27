@@ -545,7 +545,14 @@
         html[data-theme="light"] .project-card.color-clock .tucky-stage { border-bottom: 1px solid rgba(225, 29, 72, .18); }
 
         /* light mode: Tucky on plain white */
-        html[data-theme="light"] .tucky-stage { background: #ffffff; }
+        /* light mode: Tucky on white with pastel sparkles and dots (the daytime version of the dark-mode stars) */
+        html[data-theme="light"] .tucky-stage {
+            background:
+                url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20280%22%20preserveAspectRatio%3D%22xMidYMid%20slice%22%3E%3Cpath%20d%3D%22M140%2042Q142.34%2052.66%20153%2055Q142.34%2057.34%20140%2068Q137.66%2057.34%20127%2055Q137.66%2052.66%20140%2042Z%22%20fill%3D%22%23fbbf24%22%20opacity%3D%220.9%22/%3E%3Cpath%20d%3D%22M462%2051Q463.98%2060.02%20473%2062Q463.98%2063.98%20462%2073Q460.02%2063.98%20451%2062Q460.02%2060.02%20462%2051Z%22%20fill%3D%22%23f472b6%22%20opacity%3D%220.85%22/%3E%3Cpath%20d%3D%22M150%20213Q151.62%20220.38%20159%20222Q151.62%20223.62%20150%20231Q148.38%20223.62%20141%20222Q148.38%20220.38%20150%20213Z%22%20fill%3D%22%23a78bfa%22%20opacity%3D%220.85%22/%3E%3Cpath%20d%3D%22M455%20206Q457.16%20215.84%20467%20218Q457.16%20220.16%20455%20230Q452.84%20220.16%20443%20218Q452.84%20215.84%20455%20206Z%22%20fill%3D%22%2360a5fa%22%20opacity%3D%220.8%22/%3E%3Cpath%20d%3D%22M300%2017Q301.26%2022.74%20307%2024Q301.26%2025.26%20300%2031Q298.74%2025.26%20293%2024Q298.74%2022.74%20300%2017Z%22%20fill%3D%22%23f9a8d4%22%20opacity%3D%220.9%22/%3E%3Cpath%20d%3D%22M430%20139Q431.08%20143.92%20436%20145Q431.08%20146.08%20430%20151Q428.92%20146.08%20424%20145Q428.92%20143.92%20430%20139Z%22%20fill%3D%22%23fbbf24%22%20opacity%3D%220.8%22/%3E%3Cpath%20d%3D%22M180%20134Q181.08%20138.92%20186%20140Q181.08%20141.08%20180%20146Q178.92%20141.08%20174%20140Q178.92%20138.92%20180%20134Z%22%20fill%3D%22%2360a5fa%22%20opacity%3D%220.7%22/%3E%3Ccircle%20cx%3D%22225%22%20cy%3D%2248%22%20r%3D%224%22%20fill%3D%22%23c4b5fd%22%20opacity%3D%220.8%22/%3E%3Ccircle%20cx%3D%22385%22%20cy%3D%22252%22%20r%3D%225%22%20fill%3D%22%23fde68a%22%20opacity%3D%220.9%22/%3E%3Ccircle%20cx%3D%22128%22%20cy%3D%22150%22%20r%3D%224%22%20fill%3D%22%23f9a8d4%22%20opacity%3D%220.8%22/%3E%3Ccircle%20cx%3D%22475%22%20cy%3D%22118%22%20r%3D%224%22%20fill%3D%22%23a5f3fc%22%20opacity%3D%220.9%22/%3E%3Ccircle%20cx%3D%22240%22%20cy%3D%22252%22%20r%3D%223%22%20fill%3D%22%23f472b6%22%20opacity%3D%220.6%22/%3E%3Ccircle%20cx%3D%22410%22%20cy%3D%2236%22%20r%3D%223%22%20fill%3D%22%23a78bfa%22%20opacity%3D%220.7%22/%3E%3C/svg%3E") center / cover no-repeat,
+                radial-gradient(ellipse at 50% 58%, rgba(236, 72, 153, .10), transparent 62%),
+                radial-gradient(ellipse at 50% 58%, rgba(167, 139, 250, .14), transparent 75%),
+                #ffffff;
+        }
         .project-image.tucky-img,
         .list-thumbnail.tucky-img { object-fit: contain; padding: 6px; transition: transform .35s cubic-bezier(.34,1.56,.64,1); }
         .project-card.color-clock:hover .tucky-img { transform: scale(1.06) translateY(-3px); }
