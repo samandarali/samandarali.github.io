@@ -506,6 +506,14 @@
         html[data-theme="dark"] .project-list-item:hover { box-shadow: 0 10px 28px rgba(0, 0, 0, .6); }
         html[data-theme="dark"] .site-footnote { color: #91bede !important; }
 
+        /* pictures that change with the theme: LicensedTO's light or dark screenshot */
+        .only-dark { display: none; }
+        html[data-theme="dark"] .only-light { display: none; }
+        html[data-theme="dark"] .only-dark { display: block; }
+        /* the Clock Practice mascot (transparent background) sits on dark navy in dark mode */
+        html[data-theme="dark"] .project-image.contain,
+        html[data-theme="dark"] .list-thumbnail.contain { background: #151a3d; }
+
         .hyberlink_non {
             text-decoration: none;
         }
@@ -603,7 +611,8 @@
             <a class="hyberlink_non" href="https://samandarali.github.io/LicensedTo/" target="_blank" rel="noopener noreferrer">
                 <div class="project-card color-licensedto" data-type="Web App">
                     <div style="position: relative;">
-                        <img src="images/apps/licensedto-screen.webp" alt="LicensedTO search page with filters, a business list and a map of Toronto" class="project-image" style="object-position: top center;">
+                        <img src="images/apps/licensedto-screen.webp" alt="LicensedTO search page with filters, a business list and a map of Toronto" class="project-image only-light" style="object-position: top center;">
+                        <img src="images/apps/licensedto-screen-dark.webp" alt="LicensedTO search page in dark mode, with filters, a business list and a map of Toronto" class="project-image only-dark" style="object-position: top center;">
                     </div>
                     <div class="project-info">
                         <div class="project-category">Web App</div>
@@ -641,7 +650,8 @@
         <div class="projects-list hidden" id="listView">
             <a class="hyberlink_non" href="https://samandarali.github.io/LicensedTo/" target="_blank" rel="noopener noreferrer">
                 <div class="project-list-item color-licensedto" data-type="Web App">
-                    <img src="images/apps/licensedto-screen.webp" alt="LicensedTO search page" class="list-thumbnail" style="object-position: top left;">
+                    <img src="images/apps/licensedto-screen.webp" alt="LicensedTO search page" class="list-thumbnail only-light" style="object-position: top left;">
+                    <img src="images/apps/licensedto-screen-dark.webp" alt="LicensedTO search page in dark mode" class="list-thumbnail only-dark" style="object-position: top left;">
                     <div class="list-info">
                         <div class="list-category">Web App</div>
                         <div class="project-title">LicensedTO: Explore Toronto&rsquo;s Licensed Businesses</div>
