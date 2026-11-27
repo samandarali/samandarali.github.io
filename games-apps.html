@@ -467,23 +467,68 @@
                 radial-gradient(ellipse at 50% 60%, rgba(124, 58, 237, .35), transparent 65%),
                 #0f1033;
         }
-        /* bigger cards on this page: two wide cards side by side, taller pictures, larger text */
+        /* ---------- card sizes: the desktop layout (two cards side by side) on computers AND tablets,
+           just scaled down on smaller screens; phones get one card per row (see the phone block below) ---------- */
         .projects-grid {
-            grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
-            gap: 28px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: clamp(14px, 2.4vw, 28px);
             max-width: 1100px;
         }
-        .projects-grid .project-image { height: 280px; }
-        .projects-grid .project-info { padding: 20px 24px 24px; }
-        .projects-grid .project-category { font-size: 12px; }
-        .projects-grid .project-title { font-size: 20px; margin-bottom: 8px; }
-        .projects-grid .project-year { font-size: 14px; }
-        .projects-grid .skills-lists { font-size: 14px; }
-        .projects-grid .app-note { font-size: 14px; }
+        .projects-grid .project-image { height: clamp(150px, 24vw, 280px); }
+        .projects-grid .project-info { padding: clamp(12px, 1.8vw, 20px) clamp(14px, 2vw, 24px) clamp(14px, 2.2vw, 24px); }
+        .projects-grid .project-category { font-size: clamp(10px, 1.1vw, 12px); }
+        .projects-grid .project-title { font-size: clamp(15px, 1.9vw, 20px); margin-bottom: 8px; }
+        .projects-grid .project-year,
+        .projects-grid .skills-lists,
+        .projects-grid .app-note { font-size: clamp(12px, 1.35vw, 14px); }
+        .projects-grid .emoji_skills { font-size: clamp(18px, 2.2vw, 25px); }
         .projects-list { max-width: 1100px; }
-        .projects-list .list-thumbnail { width: 96px; height: 96px; }
-        .projects-list .project-list-item { padding: 24px 28px; gap: 24px; }
-        .projects-list .project-title { font-size: 18px; }
+        .projects-list .list-thumbnail { width: clamp(64px, 9vw, 96px); height: clamp(64px, 9vw, 96px); }
+        .projects-list .project-list-item { padding: clamp(14px, 2.2vw, 24px) clamp(16px, 2.6vw, 28px); gap: clamp(14px, 2.2vw, 24px); }
+        .projects-list .project-title { font-size: clamp(15px, 1.8vw, 18px); }
+
+        /* tablets: the same desktop layout, everything a little smaller */
+        @media (max-width: 1024px) {
+            .top-header { padding: 20px 24px; }
+            .site-name { font-size: 26px; }
+            .site-role { font-size: 14px; }
+            .sidebar { width: 64px; }
+            .sidebar-icon { width: 42px; height: 42px; }
+            .main-content { margin-left: 64px; padding: 28px 24px; }
+            h1 { font-size: 26px; }
+            .page-lead { font-size: 14px; }
+            .toggle-btn { padding: 8px 16px; font-size: 13px; }
+        }
+
+        /* phones: no side bar (the Grid / List buttons stay), header on two rows, one full-width card per row */
+        @media (max-width: 640px) {
+            .top-header { padding: 14px 16px; }
+            .header-grid {
+                grid-template-columns: auto 1fr auto;
+                grid-template-areas: "home . theme" "name name name";
+                row-gap: 12px;
+            }
+            .header-grid > div:first-child { grid-area: home; }
+            .header-inner { grid-area: name; margin-left: 0; }
+            .theme-toggle { grid-area: theme; width: 40px; height: 40px; }
+            .site-name { font-size: 24px; margin-bottom: 2px; }
+            .site-role { font-size: 14px; }
+            .sidebar { display: none; }
+            .main-content { margin-left: 0; padding: 18px 16px 24px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 22px; }
+            h1 { font-size: 24px; }
+            .page-lead { margin: -8px 0 20px; font-size: 14px; }
+            .filter-select { width: 100%; margin-bottom: 14px; }
+            .projects-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+            .projects-grid .project-image { height: 190px; }
+            .projects-grid .project-title { font-size: 17px; }
+            .projects-grid .project-year,
+            .projects-grid .skills-lists,
+            .projects-grid .app-note { font-size: 13px; }
+            .project-list-item { align-items: flex-start; }
+            .projects-list .list-thumbnail { width: 64px; height: 64px; }
+            .projects-list .skills-lists { font-size: 12px; }
+        }
 
         /* light mode: Tucky on plain white */
         html[data-theme="light"] .tucky-stage { background: #ffffff; }
