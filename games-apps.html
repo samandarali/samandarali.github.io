@@ -636,6 +636,63 @@
         html[data-theme="dark"] .project-image.contain,
         html[data-theme="dark"] .list-thumbnail.contain { background: #151a3d; }
 
+        /* ---------- light mode cards (mockup 2026-11-27): white cards with a soft grey frame, a tinted picture
+           area, a coloured tag, dark navy titles and a solid "Free to ..." button in each app's colour ---------- */
+        html[data-theme="light"] .project-card.color-licensedto,
+        html[data-theme="light"] .project-card.color-clock,
+        html[data-theme="light"] .project-list-item.color-licensedto,
+        html[data-theme="light"] .project-list-item.color-clock {
+            background: #ffffff;
+            color: #151a3d;
+            border: 1px solid #e2e7ee;
+            box-shadow: 0 6px 22px rgba(21, 26, 61, .08);
+        }
+        html[data-theme="light"] .project-card.color-licensedto:hover,
+        html[data-theme="light"] .project-card.color-clock:hover,
+        html[data-theme="light"] .project-list-item.color-licensedto:hover,
+        html[data-theme="light"] .project-list-item.color-clock:hover { box-shadow: 0 14px 34px rgba(21, 26, 61, .14); }
+        /* LicensedTO screenshot sits inset on a pale grey-green panel */
+        html[data-theme="light"] .project-card.color-licensedto .project-image {
+            padding: 14px 18px 0;
+            background: #eef3f1;
+            border-bottom: 1px solid #e2e7ee;
+            object-fit: cover;
+            object-position: top center;
+        }
+        html[data-theme="light"] .project-card.color-clock .tucky-stage { border-bottom: 1px solid #e2e7ee; }
+        /* type tags */
+        html[data-theme="light"] .color-licensedto .project-category,
+        html[data-theme="light"] .color-clock .project-category {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            opacity: 1;
+        }
+        html[data-theme="light"] .color-licensedto .project-category { background: #dcefe5; color: #1f6b49; }
+        html[data-theme="light"] .color-clock .project-category { background: #ede4fb; color: #6d28d9; }
+        /* text */
+        html[data-theme="light"] .color-licensedto .project-title,
+        html[data-theme="light"] .color-clock .project-title { color: #151a3d; font-weight: 700; }
+        html[data-theme="light"] .color-licensedto .project-year,
+        html[data-theme="light"] .color-clock .project-year,
+        html[data-theme="light"] .color-licensedto .skills-lists,
+        html[data-theme="light"] .color-clock .skills-lists { color: #353a5a; opacity: 1; }
+        /* "Free to use" / "Free to play" as solid buttons */
+        html[data-theme="light"] .color-licensedto .app-note,
+        html[data-theme="light"] .color-clock .app-note {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 8px 18px;
+            border-radius: 8px;
+            color: #ffffff;
+            font-weight: 700;
+            opacity: 1;
+        }
+        html[data-theme="light"] .color-licensedto .app-note { background: #1f6b49; }
+        html[data-theme="light"] .color-clock .app-note { background: #6d28d9; }
+
         .hyberlink_non {
             text-decoration: none;
         }
