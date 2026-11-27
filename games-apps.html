@@ -430,16 +430,11 @@
             position: relative;
             background: linear-gradient(135deg, #0b3a2c 0%, #145740 55%, #2b7a58 100%);
             color: white;
-            /* same frame as the Clock Practice card: 2px border, coloured glow and a bar across the top */
-            border: 2px solid #34a874;
-            box-shadow: 0 8px 32px rgba(52, 168, 116, .22);
+            /* a thin forest-green frame, the same thickness all round (like the Clock Practice card) */
+            border: 2px solid #2b7a58;
+            box-shadow: 0 8px 28px rgba(11, 58, 44, .22);
         }
-        .color-licensedto:hover { box-shadow: 0 16px 48px rgba(52, 168, 116, .42); }
-        .project-card.color-licensedto::before {
-            content: "";
-            position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 2;
-            background: linear-gradient(90deg, #0b3a2c, #34a874);
-        }
+        .color-licensedto:hover { box-shadow: 0 16px 40px rgba(11, 58, 44, .32); }
 
         /* Clock Practice: the Math Adventure look (deep purple, rose accent, Tucky on a starry night) */
         .color-clock {
@@ -450,11 +445,6 @@
             box-shadow: 0 8px 32px rgba(225, 29, 72, .22);
         }
         .color-clock:hover { box-shadow: 0 16px 48px rgba(225, 29, 72, .42); }
-        .project-card.color-clock::before {
-            content: "";
-            position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 2;
-            background: linear-gradient(90deg, #9f1239, #e11d48);
-        }
         .color-clock .project-category {
             display: inline-block;
             padding: 3px 10px;
@@ -542,11 +532,6 @@
 
         /* ---------- light mode contrast ---------- */
         /* LicensedTO: a green frame and shadow so its light screenshot stands out from the light page */
-        html[data-theme="light"] .color-licensedto {
-            border-color: #2b7a58;
-            box-shadow: 0 8px 28px rgba(11, 58, 44, .22);
-        }
-        html[data-theme="light"] .color-licensedto:hover { box-shadow: 0 16px 40px rgba(11, 58, 44, .32); }
         html[data-theme="light"] .project-card.color-licensedto .project-image { border-bottom: 1px solid rgba(11, 58, 44, .25); }
         /* Clock Practice: soft lavender instead of deep purple, with dark purple text (rose accents stay) */
         html[data-theme="light"] .color-clock {
