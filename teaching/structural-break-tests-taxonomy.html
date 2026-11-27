@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A plain-language guide to structural breaks and a taxonomy of tests and models for known, unknown, and multiple break dates.">
+<title>Structural Break Tests | A Plain-Language Taxonomy</title>
+<style>
+:root{--ink:#183337;--muted:#5a7073;--paper:#f5f8f6;--card:#fff;--line:#dce7e3;--green:#0b7e72;--deep:#124c4b;--mint:#e5f4ef;--blue:#eaf3f8;--gold:#a86d18;--shadow:0 16px 40px rgba(18,76,75,.08);--radius:20px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--green);text-underline-offset:3px}a:hover{color:var(--deep)}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}.hero{background:radial-gradient(ellipse at 88% 12%,rgba(148,208,183,.25),transparent 33%),linear-gradient(135deg,#103f40,#145f59 58%,#138477);color:#f5fbf8;padding:56px 0 48px}.eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:.76rem;font-weight:750;color:#bde5d4;margin:0 0 12px}.hero h1{font:600 clamp(2.3rem,5vw,4rem)/1.08 Georgia,"Times New Roman",serif;letter-spacing:-.035em;max-width:850px;margin:0}.hero .lead{max-width:770px;color:#e1f1eb;font-size:1.1rem;margin:20px 0 26px}.hero-nav{display:flex;flex-wrap:wrap;gap:10px}.hero-nav a{color:#f5fbf8;text-decoration:none;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:8px 13px;font-size:.9rem}.hero-nav a:hover{background:rgba(255,255,255,.12)}main{padding:36px 0 70px}.section{margin:0 0 48px;scroll-margin-top:20px}.section-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:0 0 18px}.section-heading h2{font:600 clamp(1.8rem,3vw,2.5rem)/1.16 Georgia,"Times New Roman",serif;letter-spacing:-.025em;margin:0}.section-heading p{max-width:610px;color:var(--muted);margin:8px 0 0}.intro-grid{display:grid;grid-template-columns:1.45fr .85fr;gap:18px}.panel,.choice,.method-card,.note{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.panel{padding:25px}.panel h3{font-size:1.05rem;margin:0 0 8px}.panel p{margin:0 0 12px}.panel p:last-child{margin-bottom:0}.definition{font-size:1.12rem;line-height:1.75}.definition strong{color:var(--deep)}.callout{background:#fff8eb;border-color:#f0dfbd}.callout h3{color:#755018}.callout p{font-size:.95rem}.mini-label{display:inline-block;color:var(--green);font-weight:750;font-size:.76rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}.chooser{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.choice{padding:21px;text-decoration:none;color:inherit;transition:transform .18s,border-color .18s}.choice:hover{transform:translateY(-3px);border-color:#91c7b6;color:inherit}.choice .num{font-weight:800;color:var(--green);font-size:.8rem;letter-spacing:.08em}.choice h3{font:600 1.22rem/1.25 Georgia,serif;margin:8px 0}.choice p{margin:0;color:var(--muted);font-size:.93rem}.category{margin:26px 0 0}.category-title{display:flex;gap:14px;align-items:flex-start;margin:0 0 14px}.category-title .badge{flex:none;background:var(--mint);color:var(--deep);border-radius:12px;padding:8px 11px;font-size:.8rem;font-weight:800}.category-title h3{font:600 1.48rem/1.2 Georgia,serif;margin:2px 0 4px}.category-title p{margin:0;color:var(--muted);font-size:.95rem}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.method-card{overflow:hidden;box-shadow:0 8px 22px rgba(18,76,75,.045)}.method-card summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;font-weight:750}.method-card summary::-webkit-details-marker{display:none}.method-card summary:after{content:"+";font-size:1.3rem;line-height:1;color:var(--green);font-weight:500}.method-card[open] summary:after{content:"−"}.method-card summary:hover{background:#f7fbf9}.method-card .content{padding:0 20px 19px;color:#435c5e;font-size:.94rem}.method-card .content p{margin:0 0 10px}.method-card .content p:last-child{margin:0}.method-card .content strong{color:var(--ink)}.tag{display:inline-block;background:var(--blue);color:#315e70;border-radius:999px;padding:3px 9px;margin:1px 4px 6px 0;font-size:.72rem;font-weight:750}.caution{border-left:3px solid #dfb761;padding:10px 13px;background:#fffaf0;border-radius:0 9px 9px 0;color:#66512c!important}.workflow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;counter-reset:steps}.step{background:#edf5f1;border-radius:16px;padding:18px;counter-increment:steps}.step:before{content:"0" counter(steps);display:block;color:var(--green);font-size:.78rem;font-weight:850;letter-spacing:.08em;margin-bottom:7px}.step h3{font-size:1rem;margin:0 0 6px}.step p{margin:0;color:var(--muted);font-size:.9rem}.notes{display:grid;grid-template-columns:1fr 1fr;gap:14px}.note{padding:21px}.note h3{margin:0 0 8px;font-size:1rem}.note p,.note li{color:var(--muted);font-size:.93rem}.note p{margin:0}.note ul{padding-left:19px;margin:8px 0 0}.sources{background:#173f40;color:#e6f2ee;padding:32px 0}.sources h2{font:600 1.65rem Georgia,serif;margin:0 0 14px}.sources p{color:#c5dbd3;font-size:.9rem}.source-list{display:flex;flex-wrap:wrap;gap:9px}.source-list a{color:#edfaf4;text-decoration:none;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 11px;font-size:.84rem}.source-list a:hover{background:rgba(255,255,255,.1)}footer{background:#173f40;color:#b6d1c8;font-size:.82rem;padding:0 0 26px}.toplink{position:fixed;right:18px;bottom:18px;border-radius:999px;background:#0b7e72;color:white;text-decoration:none;padding:9px 14px;box-shadow:0 5px 18px #18333733;font-size:.85rem}
+@media(max-width:800px){.intro-grid{grid-template-columns:1fr}.chooser{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.workflow{grid-template-columns:repeat(2,1fr)}.notes{grid-template-columns:1fr}.hero{padding-top:42px}.section-heading{display:block}}
+@media(max-width:480px){.wrap{width:min(100% - 28px,1120px)}.workflow{grid-template-columns:1fr}.panel{padding:20px}.hero-nav{gap:7px}.hero-nav a{font-size:.82rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+</style>
+</head>
+<body id="top">
+<header class="hero">
+ <div class="wrap">
+  <p class="eyebrow">A plain-language guide</p>
+  <h1>Structural Break Tests</h1>
+  <p class="lead">A structural break is a change in the pattern that generated a time series or regression relationship. This guide helps you match the research question to a suitable test or model.</p>
+  <nav class="hero-nav" aria-label="Page sections">
+   <a href="#basics">What it means</a><a href="#choose">Choose a method</a><a href="#taxonomy">Method taxonomy</a><a href="#workflow">Practical workflow</a><a href="#sources">References</a>
+  </nav>
+ </div>
+</header>
+<main class="wrap">
+<section class="section" id="basics">
+ <div class="section-heading"><div><span class="mini-label">Start here</span><h2>What is a structural break test?</h2><p>It asks whether the process behind the data stayed stable over time.</p></div></div>
+ <div class="intro-grid">
+  <article class="panel">
+   <p class="definition">A <strong>structural break</strong> happens when one or more features of a data-generating process change. For example, the average level, trend, regression slopes, volatility, or dynamic relationships may differ after a point in time.</p>
+   <p>A test compares a stable-process explanation with one that allows a change. Some tests use a date chosen in advance; others search the data for a likely date. The appropriate method depends on what changed, what is known about timing, and the data structure.</p>
+  </article>
+  <aside class="panel callout">
+   <h3>Break detection is not causal proof</h3>
+   <p>A detected break says the statistical pattern changed. By itself, it does not prove that a particular policy, law, or crisis caused the change. Causal attribution needs a design and assumptions that address other events, trends, and confounders.</p>
+  </aside>
+ </div>
+</section>
+<section class="section" id="choose">
+ <div class="section-heading"><div><span class="mini-label">A quick guide</span><h2>Choose by your question</h2><p>Begin with timing, then decide whether you are testing stability or modelling changing regimes.</p></div></div>
+ <div class="chooser">
+  <a class="choice" href="#known"><span class="num">01 · DATE SET IN ADVANCE</span><h3>Do I have a specific break date?</h3><p>Use a known-date test when an external event gives you a date before looking for one in the outcome data.</p></a>
+  <a class="choice" href="#unknown"><span class="num">02 · DATE NOT KNOWN</span><h3>Should the data locate one break?</h3><p>Use an unknown-date test when timing is uncertain. Searching across dates changes the test’s critical values.</p></a>
+  <a class="choice" href="#multiple"><span class="num">03 · SEVERAL BREAKS</span><h3>Could there be multiple regimes?</h3><p>Use multiple-break methods when the process may change more than once and you need to estimate the number and dates.</p></a>
+ </div>
+</section>
+<section class="section" id="taxonomy">
+ <div class="section-heading"><div><span class="mini-label">The taxonomy</span><h2>Tests and models by setting</h2><p>Open each item for a short explanation, when it fits, and a key limitation.</p></div></div>
+ <div class="category" id="known">
+  <div class="category-title"><span class="badge">A</span><div><h3>One break at a known date</h3><p>The date comes from external information or a pre-specified research design.</p></div></div>
+  <div class="cards">
+   <details class="method-card"><summary>Chow test</summary><div class="content"><span class="tag">Known date</span><span class="tag">Regression coefficients</span><p><strong>What it does:</strong> Compares a pooled regression with separate regressions before and after the specified date. The null is that the tested coefficients are equal across the two periods.</p><p><strong>Use it when:</strong> You have a single, defensible date specified independently of the outcome data and a regression model.</p><p class="caution"><strong>Watch out:</strong> The classic Chow test assumes equal error variance across regimes. If variance may differ, use a heteroskedasticity-robust Wald test. If you selected the date by searching the data, use an unknown-date procedure instead.</p></div></details>
+   <details class="method-card"><summary>Robust Wald test for a known break</summary><div class="content"><span class="tag">Known date</span><span class="tag">Unequal variance allowed</span><p><strong>What it does:</strong> Tests whether specified regression parameters differ across periods, using standard errors robust to heteroskedasticity.</p><p><strong>Use it when:</strong> The date is known in advance and unequal error variance is plausible.</p><p class="caution"><strong>Watch out:</strong> Robust standard errors do not fix a misspecified model, serial correlation, or a date chosen after inspecting the data. Choose a covariance estimator that fits the time-series errors.</p></div></details>
+   <details class="method-card"><summary>MZ test (mean and variance jointly)</summary><div class="content"><span class="tag">Known date</span><span class="tag">Mean and variance</span><p><strong>What it does:</strong> In the Maasoumi–Zaman–Ahmed framework, the MZ likelihood-ratio statistic tests joint homogeneity of regression coefficients and error variance across regimes.</p><p><strong>Use it when:</strong> You want to test a joint change in the conditional mean relationship and variance at a specified date.</p><p class="caution"><strong>Watch out:</strong> State the model and version you are using. MZ is a particular test, not a generic label for every test of mean and variance shifts.</p></div></details>
+  </div>
+ </div>
+ <div class="category" id="unknown">
+  <div class="category-title"><span class="badge">B</span><div><h3>One break at an unknown date</h3><p>The date is estimated by searching a range of candidate dates.</p></div></div>
+  <div class="cards">
+   <details class="method-card"><summary>Sup-Wald / sup-LR / sup-LM (QLR or sup-F)</summary><div class="content"><span class="tag">Unknown date</span><span class="tag">One break</span><p><strong>What it does:</strong> Computes a Wald, likelihood-ratio, or Lagrange-multiplier statistic at each candidate date, then uses the largest value. In a linear regression, this is often described as a sup-F or Quandt likelihood-ratio (QLR) test.</p><p><strong>Use it when:</strong> You want a formal test for one break but do not know its date.</p><p class="caution"><strong>Watch out:</strong> The date is unidentified when there is no break, so ordinary single-date critical values do not apply. Use the test’s nonstandard critical values, allow a minimum segment length, and account for heteroskedasticity or serial correlation as appropriate.</p></div></details>
+   <details class="method-card"><summary>CUSUM and CUSUM of squares</summary><div class="content"><span class="tag">Stability diagnostics</span><span class="tag">Recursive residuals</span><p><strong>What they do:</strong> CUSUM tracks cumulative recursive residuals to assess regression-parameter stability. CUSUM-SQ tracks cumulative squared recursive residuals and is particularly sensitive to variance instability.</p><p><strong>Use them when:</strong> You want a visual and formal diagnostic for instability over time, especially in a regression estimated recursively.</p><p class="caution"><strong>Watch out:</strong> They do not usually report a precise break date, and their power depends on how the parameters change. CUSUM is not limited to intercept or mean changes.</p></div></details>
+   <details class="method-card"><summary>Sup-MZ</summary><div class="content"><span class="tag">Unknown date</span><span class="tag">Mean and variance</span><p><strong>What it does:</strong> Searches candidate dates using an MZ-type statistic, allowing a joint change in regression coefficients and error variance.</p><p><strong>Use it when:</strong> You suspect a break may affect both the conditional mean relationship and volatility.</p><p class="caution"><strong>Watch out:</strong> Check the method’s assumptions and finite-sample guidance. It is a specialized alternative, not automatically the best choice for every regression.</p></div></details>
+   <details class="method-card"><summary>Zivot–Andrews test</summary><div class="content"><span class="tag">Unit root</span><span class="tag">One unknown break</span><p><strong>What it does:</strong> Tests a unit-root null against a trend-stationary alternative that allows one break in the intercept, trend, or both, depending on the specification.</p><p><strong>Use it when:</strong> The research question is whether a single time series has a unit root when a one-time structural break may be present.</p><p class="caution"><strong>Watch out:</strong> This is a unit-root test, not a general regression-break test. The break is allowed under the alternative in the standard setup; this affects interpretation.</p></div></details>
+  </div>
+ </div>
+ <div class="category" id="multiple">
+  <div class="category-title"><span class="badge">C</span><div><h3>Several unknown breaks</h3><p>Estimate multiple break dates and, in some procedures, determine how many are supported.</p></div></div>
+  <div class="cards">
+   <details class="method-card"><summary>Bai–Perron framework</summary><div class="content"><span class="tag">Multiple breaks</span><span class="tag">Regression</span><p><strong>What it does:</strong> Estimates break dates by globally minimizing the sum of squared residuals across regimes, using dynamic programming. Testing and information criteria can help choose the number of breaks.</p><p><strong>Use it when:</strong> You need to identify several changes in regression relationships over a sufficiently long series.</p><p class="caution"><strong>Watch out:</strong> Results depend on the minimum regime length, model specification, and assumptions about errors. The often-cited (O(T^2)) refers to the order of least-squares computations for the algorithm, not a universal wall-clock runtime guarantee.</p></div></details>
+   <details class="method-card"><summary>Panel structural-break methods</summary><div class="content"><span class="tag">Panel data</span><span class="tag">Group or common breaks</span><p><strong>What they do:</strong> Extend break analysis to observations across units and time. Methods differ in whether they allow common break dates, unit-specific dates, or changing coefficients across groups.</p><p><strong>Examples:</strong> Stata commands such as <code>xtbreak</code> implement panel break-testing approaches. Select the method based on whether breaks are expected to be common or heterogeneous across units.</p><p class="caution"><strong>Watch out:</strong> Panel methods are not interchangeable. Check the command’s exact model, supported break pattern, and inference assumptions.</p></div></details>
+  </div>
+ </div>
+ <div class="category" id="cointegration">
+  <div class="category-title"><span class="badge">D</span><div><h3>Unit roots and cointegration with breaks</h3><p>Use these only when the question concerns nonstationary series or a long-run relationship.</p></div></div>
+  <div class="cards">
+   <details class="method-card"><summary>Gregory–Hansen test</summary><div class="content"><span class="tag">Cointegration</span><span class="tag">One unknown break</span><p><strong>What it does:</strong> Tests for cointegration while allowing one unknown regime shift in the long-run relationship. Specifications can allow a level shift and, in some versions, a shift in slopes.</p><p><strong>Use it when:</strong> The variables are nonstationary and you want to test whether a cointegrating relationship exists despite one possible break.</p><p class="caution"><strong>Watch out:</strong> Select the model form to match the type of shift you consider plausible. It is not a general test for any time-series break.</p></div></details>
+   <details class="method-card"><summary>Hatemi-J and Maki tests</summary><div class="content"><span class="tag">Cointegration</span><span class="tag">Multiple breaks</span><p><strong>What they do:</strong> Cointegration-test extensions that permit more than one unknown break, with the number and placement allowed depending on the particular method.</p><p><strong>Use them when:</strong> A long-run relationship is the focus and one break may be too restrictive.</p><p class="caution"><strong>Watch out:</strong> Check the exact variant and its assumptions; the names cover different specifications, and extra break flexibility requires enough data.</p></div></details>
+  </div>
+ </div>
+ <div class="category" id="alternatives">
+  <div class="category-title"><span class="badge">E</span><div><h3>Flexible ways to represent change</h3><p>These approaches search for or model changing patterns; they are not all conventional break tests.</p></div></div>
+  <div class="cards">
+   <details class="method-card"><summary>GETS / indicator saturation</summary><div class="content"><span class="tag">Automated search</span><span class="tag">Outliers and shifts</span><p><strong>What it does:</strong> General-to-specific methods add and test indicator variables. Impulse indicators can flag unusual observations, while step or trend indicators can represent shifts or changing trends.</p><p><strong>Use it when:</strong> You want a systematic search for outliers, level shifts, or trend changes in a specified model.</p><p class="caution"><strong>Watch out:</strong> Results depend on the search procedure, selection settings, and model. Treat selected dates as evidence to investigate, not automatic causal explanations.</p></div></details>
+   <details class="method-card"><summary>Threshold and Markov-switching models</summary><div class="content"><span class="tag">Regime models</span><span class="tag">Switching dynamics</span><p><strong>What they do:</strong> Threshold models let parameters change when an observed variable crosses a threshold. Markov-switching models let an unobserved state govern probabilistic transitions between regimes.</p><p><strong>Use them when:</strong> You want to describe recurring or state-dependent regimes rather than test for one isolated break.</p><p class="caution"><strong>Watch out:</strong> Regime labels and transition probabilities need careful interpretation; model complexity can be hard to identify in short samples.</p></div></details>
+   <details class="method-card"><summary>Time-varying parameter models</summary><div class="content"><span class="tag">Gradual change</span><span class="tag">State space</span><p><strong>What they do:</strong> Let parameters evolve over time, often in a state-space model estimated with a Kalman filter.</p><p><strong>Use them when:</strong> Change is expected to be gradual or continuous rather than a sudden jump at one date.</p><p class="caution"><strong>Watch out:</strong> They describe evolving parameters rather than identify a discrete break. Results depend on how parameter evolution and noise are specified.</p></div></details>
+  </div>
+ </div>
+</section>
+<section class="section" id="workflow">
+ <div class="section-heading"><div><span class="mini-label">Before you run a test</span><h2>A practical workflow</h2><p>These checks make results easier to interpret and less likely to reflect modelling choices.</p></div></div>
+ <div class="workflow">
+  <article class="step"><h3>Define the change</h3><p>Specify whether you expect a shift in level, trend, slope, variance, or a long-run relationship.</p></article>
+  <article class="step"><h3>Choose the timing setup</h3><p>Decide whether the date is externally known, must be estimated, or there may be several dates.</p></article>
+  <article class="step"><h3>Check the data and model</h3><p>Consider frequency, sample length, seasonality, autocorrelation, outliers, and transformations.</p></article>
+  <article class="step"><h3>Report uncertainty</h3><p>State the null, specification, search range, critical values, estimated dates, and sensitivity checks.</p></article>
+ </div>
+ <div class="notes" style="margin-top:14px">
+  <article class="note"><h3>Multiple searching raises false positives</h3><p>Trying many dates, outcomes, model forms, or break counts and reporting only the strongest result makes evidence look stronger than it is. Pre-specify what you can, use the appropriate multiple-search inference, and report sensitivity analyses.</p></article>
+  <article class="note"><h3>Small samples limit break detection</h3><p>Each regime needs enough observations to estimate its parameters. Annual data can be especially limiting because even a long calendar span may contain few observations. No test can reliably recover several breaks from a short series.</p></article>
+ </div>
+</section>
+</main>
+<section class="sources" id="sources">
+ <div class="wrap">
+  <h2>Selected references and documentation</h2>
+  <p>These sources describe core procedures. Consult the original paper or software documentation for assumptions, test variants, and critical values.</p>
+  <div class="source-list">
+   <a href="https://doi.org/10.1111/j.2517-6161.1975.tb01532.x" target="_blank" rel="noopener">Brown, Durbin &amp; Evans (1975): CUSUM</a>
+   <a href="https://users.ssc.wisc.edu/~behansen/718/Andrews1993.pdf" target="_blank" rel="noopener">Andrews (1993): unknown break tests</a>
+   <a href="https://doi.org/10.1002/jae.659" target="_blank" rel="noopener">Bai &amp; Perron (2003): multiple breaks</a>
+   <a href="https://www.stata.com/features/overview/structural-breaks/" target="_blank" rel="noopener">Stata: structural-break procedures</a>
+   <a href="https://www.aptech.com/structural-breaks/" target="_blank" rel="noopener">Structural-break overview</a>
+  </div>
+ </div>
+</section>
+<footer><div class="wrap">Educational overview. The correct test depends on the data, model, and research question.</div>  <p class="site-footnote" style="margin:8px 0 0;font-size:13px;opacity:.85;">&copy; 2026 Mojgan Samandar. All rights reserved.</p>
+</footer>
+<a class="toplink" href="#top" aria-label="Back to top">↑ Top</a>
+</body>
+</html>

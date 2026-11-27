@@ -1,3 +1,6 @@
 .vscode/
 test/
 
+
+# local Claude Code settings (preview server), not part of the website
+.claude/
